@@ -1,0 +1,775 @@
+<mujoco model="ur5e">
+
+  <compiler
+      angle="radian"
+      meshdir="assets"
+      autolimits="true"/>
+
+  <option integrator="implicitfast"/>
+
+
+  <!-- ================================================== -->
+  <!-- DEFAULT -->
+  <!-- ================================================== -->
+
+  <default>
+
+    <default class="ur5e">
+
+      <material
+          specular="0.5"
+          shininess="0.25"/>
+
+      <joint
+          axis="0 1 0"
+          range="-6.28319 6.28319"
+          armature="0.1"/>
+
+      <general
+          gaintype="fixed"
+          biastype="affine"
+          ctrlrange="-6.2831 6.2831"
+          gainprm="2000"
+          biasprm="0 -2000 -400"
+          forcerange="-150 150"/>
+
+
+      <default class="size3">
+
+        <default class="size3_limited">
+
+          <joint
+              range="-3.1415 3.1415"/>
+
+          <general
+              ctrlrange="-3.1415 3.1415"/>
+
+        </default>
+
+      </default>
+
+
+      <default class="size1">
+
+        <general
+            gainprm="500"
+            biasprm="0 -500 -100"
+            forcerange="-28 28"/>
+
+      </default>
+
+
+      <default class="visual">
+
+        <geom
+            type="mesh"
+            contype="0"
+            conaffinity="0"
+            group="2"/>
+
+      </default>
+
+
+      <default class="collision">
+
+        <geom
+            type="capsule"
+            group="3"/>
+
+        <default class="eef_collision">
+
+          <geom
+              type="cylinder"/>
+
+        </default>
+
+      </default>
+
+
+      <site
+          size="0.001"
+          rgba="0.5 0.5 0.5 0.3"
+          group="4"/>
+
+    </default>
+
+  </default>
+
+
+  <!-- ================================================== -->
+  <!-- ASSETS -->
+  <!-- ================================================== -->
+
+  <asset>
+
+    <material
+        class="ur5e"
+        name="black"
+        rgba="0.033 0.033 0.033 1"/>
+
+    <material
+        class="ur5e"
+        name="jointgray"
+        rgba="0.278 0.278 0.278 1"/>
+
+    <material
+        class="ur5e"
+        name="linkgray"
+        rgba="0.82 0.82 0.82 1"/>
+
+    <material
+        class="ur5e"
+        name="urblue"
+        rgba="0.49 0.678 0.8 1"/>
+
+
+    <mesh file="base_0.obj"/>
+    <mesh file="base_1.obj"/>
+
+    <mesh file="shoulder_0.obj"/>
+    <mesh file="shoulder_1.obj"/>
+    <mesh file="shoulder_2.obj"/>
+
+    <mesh file="upperarm_0.obj"/>
+    <mesh file="upperarm_1.obj"/>
+    <mesh file="upperarm_2.obj"/>
+    <mesh file="upperarm_3.obj"/>
+
+    <mesh file="forearm_0.obj"/>
+    <mesh file="forearm_1.obj"/>
+    <mesh file="forearm_2.obj"/>
+    <mesh file="forearm_3.obj"/>
+
+    <mesh file="wrist1_0.obj"/>
+    <mesh file="wrist1_1.obj"/>
+    <mesh file="wrist1_2.obj"/>
+
+    <mesh file="wrist2_0.obj"/>
+    <mesh file="wrist2_1.obj"/>
+    <mesh file="wrist2_2.obj"/>
+
+    <mesh file="wrist3.obj"/>
+
+    <!-- OnRobot RG6 meshes, MIT licensed; see onrobot_rg6/SOURCE.md. -->
+    <mesh name="rg6_base_visual" file="onrobot_rg6/visual/base_link.stl"/>
+    <mesh name="rg6_outer_visual" file="onrobot_rg6/visual/outer_knuckle.stl"/>
+    <mesh name="rg6_inner_knuckle_visual" file="onrobot_rg6/visual/inner_knuckle.stl"/>
+    <mesh name="rg6_inner_finger_visual" file="onrobot_rg6/visual/inner_finger.stl"/>
+    <mesh name="rg6_base_collision" file="onrobot_rg6/collision/base_link.stl"/>
+    <mesh name="rg6_outer_collision" file="onrobot_rg6/collision/outer_knuckle.stl"/>
+    <mesh name="rg6_inner_knuckle_collision" file="onrobot_rg6/collision/inner_knuckle.stl"/>
+    <mesh name="rg6_inner_finger_collision" file="onrobot_rg6/collision/inner_finger.stl"/>
+
+  </asset>
+
+
+  <!-- ================================================== -->
+  <!-- WORLD -->
+  <!-- ================================================== -->
+
+  <worldbody>
+
+
+    <light
+        name="spotlight"
+        mode="targetbodycom"
+        target="wrist_2_link"
+        pos="0 -1 2"/>
+
+
+    <!-- ================================================= -->
+    <!-- BASE -->
+    <!-- ================================================= -->
+
+    <body
+        name="base"
+        quat="0 0 0 -1"
+        childclass="ur5e">
+
+      <inertial
+          mass="4.0"
+          pos="0 0 0"
+          diaginertia="0.00443333156 0.00443333156 0.0072"/>
+
+      <geom
+          mesh="base_0"
+          material="black"
+          class="visual"/>
+
+      <geom
+          mesh="base_1"
+          material="jointgray"
+          class="visual"/>
+
+
+      <!-- ================================================= -->
+      <!-- SHOULDER -->
+      <!-- ================================================= -->
+
+      <body
+          name="shoulder_link"
+          pos="0 0 0.163">
+
+        <inertial
+            mass="3.7"
+            pos="0 0 0"
+            diaginertia="0.0102675 0.0102675 0.00666"/>
+
+        <joint
+            name="shoulder_pan_joint"
+            class="size3"
+            axis="0 0 1"/>
+
+        <geom
+            mesh="shoulder_0"
+            material="urblue"
+            class="visual"/>
+
+        <geom
+            mesh="shoulder_1"
+            material="black"
+            class="visual"/>
+
+        <geom
+            mesh="shoulder_2"
+            material="jointgray"
+            class="visual"/>
+
+        <geom
+            class="collision"
+            size="0.06 0.06"
+            pos="0 0 -0.04"/>
+
+
+        <!-- ================================================= -->
+        <!-- UPPER ARM -->
+        <!-- ================================================= -->
+
+        <body
+            name="upper_arm_link"
+            pos="0 0.138 0"
+            quat="1 0 1 0">
+
+          <inertial
+              mass="8.393"
+              pos="0 0 0.2125"
+              diaginertia="0.133886 0.133886 0.0151074"/>
+
+          <joint
+              name="shoulder_lift_joint"
+              class="size3"/>
+
+          <geom
+              mesh="upperarm_0"
+              material="linkgray"
+              class="visual"/>
+
+          <geom
+              mesh="upperarm_1"
+              material="black"
+              class="visual"/>
+
+          <geom
+              mesh="upperarm_2"
+              material="jointgray"
+              class="visual"/>
+
+          <geom
+              mesh="upperarm_3"
+              material="urblue"
+              class="visual"/>
+
+          <geom
+              class="collision"
+              pos="0 -0.04 0"
+              quat="1 1 0 0"
+              size="0.06 0.06"/>
+
+          <geom
+              class="collision"
+              size="0.05 0.2"
+              pos="0 0 0.2"/>
+
+
+          <!-- ================================================= -->
+          <!-- FOREARM -->
+          <!-- ================================================= -->
+
+          <body
+              name="forearm_link"
+              pos="0 -0.131 0.425">
+
+            <inertial
+                mass="2.275"
+                pos="0 0 0.196"
+                diaginertia="0.0311796 0.0311796 0.004095"/>
+
+            <joint
+                name="elbow_joint"
+                class="size3_limited"/>
+
+            <geom
+                mesh="forearm_0"
+                material="urblue"
+                class="visual"/>
+
+            <geom
+                mesh="forearm_1"
+                material="linkgray"
+                class="visual"/>
+
+            <geom
+                mesh="forearm_2"
+                material="black"
+                class="visual"/>
+
+            <geom
+                mesh="forearm_3"
+                material="jointgray"
+                class="visual"/>
+
+            <geom
+                class="collision"
+                pos="0 0.08 0"
+                quat="1 1 0 0"
+                size="0.055 0.06"/>
+
+            <geom
+                class="collision"
+                size="0.038 0.19"
+                pos="0 0 0.2"/>
+
+
+            <!-- ================================================= -->
+            <!-- WRIST 1 -->
+            <!-- ================================================= -->
+
+            <body
+                name="wrist_1_link"
+                pos="0 0 0.392"
+                quat="1 0 1 0">
+
+              <inertial
+                  mass="1.219"
+                  pos="0 0.127 0"
+                  diaginertia="0.0025599 0.0025599 0.0021942"/>
+
+              <joint
+                  name="wrist_1_joint"
+                  class="size1"/>
+
+              <geom
+                  mesh="wrist1_0"
+                  material="black"
+                  class="visual"/>
+
+              <geom
+                  mesh="wrist1_1"
+                  material="urblue"
+                  class="visual"/>
+
+              <geom
+                  mesh="wrist1_2"
+                  material="jointgray"
+                  class="visual"/>
+
+              <geom
+                  class="collision"
+                  pos="0 0.05 0"
+                  quat="1 1 0 0"
+                  size="0.04 0.07"/>
+
+
+              <!-- ================================================= -->
+              <!-- WRIST 2 -->
+              <!-- ================================================= -->
+
+              <body
+                  name="wrist_2_link"
+                  pos="0 0.127 0">
+
+                <inertial
+                    mass="1.219"
+                    pos="0 0 0.1"
+                    diaginertia="0.0025599 0.0025599 0.0021942"/>
+
+                <joint
+                    name="wrist_2_joint"
+                    axis="0 0 1"
+                    class="size1"/>
+
+                <geom
+                    mesh="wrist2_0"
+                    material="black"
+                    class="visual"/>
+
+                <geom
+                    mesh="wrist2_1"
+                    material="urblue"
+                    class="visual"/>
+
+                <geom
+                    mesh="wrist2_2"
+                    material="jointgray"
+                    class="visual"/>
+
+                <geom
+                    class="collision"
+                    size="0.04 0.06"
+                    pos="0 0 0.04"/>
+
+                <geom
+                    class="collision"
+                    pos="0 0.02 0.1"
+                    quat="1 1 0 0"
+                    size="0.04 0.04"/>
+
+
+                <!-- ================================================= -->
+                <!-- WRIST 3 -->
+                <!-- ================================================= -->
+
+                <body
+                    name="wrist_3_link"
+                    pos="0 0 0.1">
+
+                  <inertial
+                      mass="0.1889"
+                      pos="0 0.0771683 0"
+                      quat="1 0 0 1"
+                      diaginertia="0.000132134 9.90863e-05 9.90863e-05"/>
+
+                  <joint
+                      name="wrist_3_joint"
+                      class="size1"/>
+
+                  <geom
+                      material="linkgray"
+                      mesh="wrist3"
+                      class="visual"/>
+
+                  <geom
+                      class="eef_collision"
+                      pos="0 0.08 0"
+                      quat="1 1 0 0"
+                      size="0.04 0.02"/>
+
+
+                  <!-- ================================================= -->
+                  <!-- UR5e ATTACHMENT -->
+                  <!-- ================================================= -->
+
+                  <site
+                      name="attachment_site"
+                      pos="0 0.1 0"
+                      quat="-1 1 0 0"/>
+
+
+                  <!-- ================================================= -->
+                  <!-- ONROBOT RG6 -->
+                  <!--
+                      Kinematics and mesh placement follow the MIT-licensed
+                      OnRobot ROS2 description. The physical RG6 frame is
+                      rotated 90 degrees about local Z so its fingers close
+                      across the process plate's X dimension.
+
+                      Master angle theta:
+                          open 160 mm  ~= -0.4775 rad
+                          plate 128 mm ~= -0.2563 rad
+
+                      Tool TCP:
+                          attachment -> local +Z 268 mm
+                  -->
+                  <!-- ================================================= -->
+
+                  <body
+                      name="gripper_mount"
+                      pos="0 0.1 0"
+                      quat="-0.70710678 0.70710678 0 0">
+
+
+                    <!-- Wrist RGB-D viewpoint beside the RG6 base. -->
+                    <camera
+                        name="wrist_camera"
+                        pos="0 -0.060 0.175"
+                        quat="0 1 0 0"
+                        fovy="60"/>
+
+
+                    <!-- Attachment-frame verification -->
+
+                    <site
+                        name="gripper_mount_site"
+                        type="sphere"
+                        pos="0 0 0"
+                        size="0.006"
+                        rgba="1 0 0 1"/>
+
+
+                    <body name="rg6_frame" quat="0.70710678 0 0 0.70710678">
+
+                      <geom name="rg6_base_visual_geom"
+                            type="mesh" mesh="rg6_base_visual"
+                            rgba="0.72 0.72 0.75 1" group="2"
+                            contype="0" conaffinity="0" mass="0"/>
+                      <geom name="rg6_base_collision_geom"
+                            type="mesh" mesh="rg6_base_collision"
+                            rgba="0.72 0.72 0.75 0" group="3"
+                            contype="1" conaffinity="1" mass="0.95"/>
+
+                      <body name="left_outer_knuckle" pos="0 -0.024112 0.136813">
+                        <joint name="left_jaw_slide_joint" type="hinge"
+                               axis="-1 0 0" range="-0.628319 0.628319"
+                               damping="2" armature="0.002"/>
+                        <geom name="left_outer_visual_geom" type="mesh"
+                              mesh="rg6_outer_visual" rgba="0.72 0.72 0.75 1"
+                              group="2" contype="0" conaffinity="0" mass="0"/>
+                        <geom name="left_outer_collision_geom" type="mesh"
+                              mesh="rg6_outer_collision" rgba="0.72 0.72 0.75 0"
+                              group="3" contype="1" conaffinity="1" mass="0.05"/>
+
+                        <body name="left_inner_finger"
+                              pos="0 -0.047335 0.064495">
+                          <joint name="left_inner_finger_joint" type="hinge"
+                                 axis="1 0 0" range="-0.872665 0.872665"
+                                 damping="1" armature="0.001"/>
+                          <geom name="left_finger_visual_geom" type="mesh"
+                                mesh="rg6_inner_finger_visual" rgba="0.10 0.10 0.10 1"
+                                group="2" contype="0" conaffinity="0" mass="0"/>
+                          <geom name="left_finger_collision_geom" type="mesh"
+                                mesh="rg6_inner_finger_collision" rgba="0.10 0.10 0.10 0"
+                                group="3" contype="1" conaffinity="1" mass="0.05"
+                                friction="1.0 0.02 0.002"/>
+                        </body>
+                      </body>
+
+                      <body name="left_inner_knuckle" pos="0 -0.012720 0.159500">
+                        <joint name="left_inner_knuckle_joint" type="hinge"
+                               axis="1 0 0" range="-0.628319 0.628319"
+                               damping="1" armature="0.001"/>
+                        <geom name="left_inner_knuckle_visual_geom" type="mesh"
+                              mesh="rg6_inner_knuckle_visual" rgba="0.72 0.72 0.75 1"
+                              group="2" contype="0" conaffinity="0" mass="0"/>
+                        <geom name="left_inner_knuckle_collision_geom" type="mesh"
+                              mesh="rg6_inner_knuckle_collision" rgba="0.72 0.72 0.75 0"
+                              group="3" contype="1" conaffinity="1" mass="0.05"/>
+                      </body>
+
+                      <body name="right_outer_knuckle"
+                            pos="0 0.024112 0.136813" quat="0 0 0 1">
+                        <joint name="right_jaw_slide_joint" type="hinge"
+                               axis="1 0 0" range="-0.628319 0.628319"
+                               damping="2" armature="0.002"/>
+                        <geom name="right_outer_visual_geom" type="mesh"
+                              mesh="rg6_outer_visual" rgba="0.72 0.72 0.75 1"
+                              group="2" contype="0" conaffinity="0" mass="0"/>
+                        <geom name="right_outer_collision_geom" type="mesh"
+                              mesh="rg6_outer_collision" rgba="0.72 0.72 0.75 0"
+                              group="3" contype="1" conaffinity="1" mass="0.05"/>
+
+                        <body name="right_inner_finger"
+                              pos="0 -0.047335 0.064495">
+                          <joint name="right_inner_finger_joint" type="hinge"
+                                 axis="1 0 0" range="-0.872665 0.872665"
+                                 damping="1" armature="0.001"/>
+                          <geom name="right_finger_visual_geom" type="mesh"
+                                mesh="rg6_inner_finger_visual" rgba="0.10 0.10 0.10 1"
+                                group="2" contype="0" conaffinity="0" mass="0"/>
+                          <geom name="right_finger_collision_geom" type="mesh"
+                                mesh="rg6_inner_finger_collision" rgba="0.10 0.10 0.10 0"
+                                group="3" contype="1" conaffinity="1" mass="0.05"
+                                friction="1.0 0.02 0.002"/>
+                        </body>
+                      </body>
+
+                      <body name="right_inner_knuckle"
+                            pos="0 0.012720 0.159500" quat="0 0 0 1">
+                        <joint name="right_inner_knuckle_joint" type="hinge"
+                               axis="1 0 0" range="-0.628319 0.628319"
+                               damping="1" armature="0.001"/>
+                        <geom name="right_inner_knuckle_visual_geom" type="mesh"
+                              mesh="rg6_inner_knuckle_visual" rgba="0.72 0.72 0.75 1"
+                              group="2" contype="0" conaffinity="0" mass="0"/>
+                        <geom name="right_inner_knuckle_collision_geom" type="mesh"
+                              mesh="rg6_inner_knuckle_collision" rgba="0.72 0.72 0.75 0"
+                              group="3" contype="1" conaffinity="1" mass="0.05"/>
+                      </body>
+
+                    </body>
+
+
+                    <!-- RG6 TCP / PLATE CENTER -->
+
+                    <site
+                        name="tool_tcp_site"
+                        type="sphere"
+                        pos="0 0 0.268"
+                        size="0.008"
+                        rgba="0 1 0 1"/>
+
+                  </body>
+
+                </body>
+
+              </body>
+
+            </body>
+
+          </body>
+
+        </body>
+
+      </body>
+
+    </body>
+
+  </worldbody>
+
+
+  <contact>
+
+    <!-- Adjacent RG6 four-bar members overlap at their modeled pivots. -->
+    <exclude body1="left_inner_finger" body2="left_inner_knuckle"/>
+    <exclude body1="right_inner_finger" body2="right_inner_knuckle"/>
+
+  </contact>
+
+
+  <!-- ================================================== -->
+  <!-- ACTUATORS -->
+  <!-- ================================================== -->
+
+  <actuator>
+
+
+    <!-- ================================================= -->
+    <!-- UR5e -->
+    <!-- ================================================= -->
+
+    <general
+        class="size3"
+        name="shoulder_pan"
+        joint="shoulder_pan_joint"/>
+
+    <general
+        class="size3"
+        name="shoulder_lift"
+        joint="shoulder_lift_joint"/>
+
+    <general
+        class="size3_limited"
+        name="elbow"
+        joint="elbow_joint"/>
+
+    <general
+        class="size1"
+        name="wrist_1"
+        joint="wrist_1_joint"/>
+
+    <general
+        class="size1"
+        name="wrist_2"
+        joint="wrist_2_joint"/>
+
+    <general
+        class="size1"
+        name="wrist_3"
+        joint="wrist_3_joint"/>
+
+
+    <!-- ================================================= -->
+    <!-- GRIPPER -->
+    <!-- ================================================= -->
+
+    <position
+        name="left_jaw_actuator"
+        joint="left_jaw_slide_joint"
+        kp="300"
+        ctrlrange="-0.628319 0.628319"
+        forcerange="-120 120"/>
+
+    <position
+        name="right_jaw_actuator"
+        joint="right_jaw_slide_joint"
+        kp="300"
+        ctrlrange="-0.628319 0.628319"
+        forcerange="-120 120"/>
+
+    <position
+        name="left_inner_finger_actuator"
+        joint="left_inner_finger_joint"
+        kp="300"
+        ctrlrange="-0.872665 0.872665"
+        forcerange="-120 120"/>
+
+    <position
+        name="left_inner_knuckle_actuator"
+        joint="left_inner_knuckle_joint"
+        kp="300"
+        ctrlrange="-0.628319 0.628319"
+        forcerange="-120 120"/>
+
+    <position
+        name="right_inner_finger_actuator"
+        joint="right_inner_finger_joint"
+        kp="300"
+        ctrlrange="-0.872665 0.872665"
+        forcerange="-120 120"/>
+
+    <position
+        name="right_inner_knuckle_actuator"
+        joint="right_inner_knuckle_joint"
+        kp="300"
+        ctrlrange="-0.628319 0.628319"
+        forcerange="-120 120"/>
+
+  </actuator>
+
+
+  <!-- ================================================== -->
+  <!-- KEYFRAME -->
+  <!--
+      qpos:
+        6 x UR5e
+        6 x RG6 linkage joints
+
+      ctrl:
+        6 x UR5e
+        6 x RG6 linkage actuators
+  -->
+  <!-- ================================================== -->
+
+  <keyframe>
+
+    <key
+        name="home"
+        qpos="
+            -1.5708
+            -1.5708
+             1.5708
+            -1.5708
+            -1.5708
+             0
+            -0.4775
+            -0.4775
+             0.4775
+             0.4775
+            -0.4775
+             0.4775"
+        ctrl="
+            -1.5708
+            -1.5708
+             1.5708
+            -1.5708
+            -1.5708
+             0
+            -0.4775
+             0.4775
+            -0.4775
+             0.4775
+            -0.4775
+             0.4775"/>
+
+  </keyframe>
+
+</mujoco>

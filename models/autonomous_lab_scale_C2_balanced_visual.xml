@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="autonomous_lab_scale_c2_balanced_visual">
+  <compiler angle="radian" autolimits="true" />
+  <option timestep="0.002" integrator="implicitfast" gravity="0 0 -9.81" />
+  <asset>
+    <mesh name="reader_body_mesh" file="../assets/reader/reader_body.obj" />
+    <mesh name="reader_tray_mesh" file="../assets/reader/reader_tray.obj" />
+    <mesh name="stx44_body_mesh" file="../assets/stx44/stx44_body.obj" />
+    <mesh name="sh800_body_mesh" file="../assets/sh800/sh800_body.obj" />
+    <mesh name="sh800_collection_door_mesh" file="../assets/sh800/sh800_collection_door.obj" />
+    <mesh name="sh800_sample_door_mesh" file="../assets/sh800/sh800_sample_door.obj" />
+    <mesh name="fluent_body_mesh" file="../assets/fluent/fluent_body.obj" />
+    <mesh name="plate_hotel_body_mesh" file="../assets/plate_hotel/plate_hotel_body.obj" />
+    <mesh name="waste_body_mesh" file="../assets/waste/waste_body.obj" />
+    <model name="ur5e_model" file="../assets/ur5e/ur5e.xml" />
+  </asset>
+  <worldbody>
+    <camera name="lab_overview_camera" pos="0 -3.0 2.5" xyaxes="1 0 0 0 0.65 0.76" fovy="55" />
+    <geom name="floor" type="plane" pos="0 0 0" size="10 10 0.1" rgba="0.88 0.88 0.88 1" contype="1" conaffinity="1" />
+    <geom name="rail_base" type="box" pos="0 0.125 0.05" size="2.30 0.10 0.05" rgba="0.18 0.18 0.20 1" contype="0" conaffinity="0" />
+    <geom name="rail_guide_1" type="box" pos="0 0.055 0.12" size="2.30 0.015 0.02" rgba="0.35 0.35 0.38 1" contype="0" conaffinity="0" />
+    <geom name="rail_guide_2" type="box" pos="0 0.195 0.12" size="2.30 0.015 0.02" rgba="0.35 0.35 0.38 1" contype="0" conaffinity="0" />
+    <body name="rail_carriage" pos="0 0.125 0.17">
+      <joint name="rail_slide_joint" type="slide" axis="1 0 0" range="-2.0 2.0" damping="50" />
+      <geom name="rail_carriage_geom" type="box" pos="0 0 0" size="0.15 0.12 0.03" rgba="0.12 0.25 0.55 1" contype="0" conaffinity="0" />
+      <site name="rail_robot_mount_site" type="sphere" pos="0 0 0.035" size="0.018" rgba="1 0 0 1" />
+      <body name="ur5e_mount" pos="0 0 0.035">
+        <attach model="ur5e_model" prefix="ur5e_" />
+      </body>
+    </body>
+    <body name="plate_hotel_module" pos="8.068 0.0815 -0.880">
+      <geom name="plate_hotel_body_geom" type="mesh" mesh="plate_hotel_body_mesh" rgba="0.60 0.60 0.65 0.10" contype="0" conaffinity="0" />
+      <geom name="col_plate_hotel_rear" type="box" pos="-9.9175 -0.6875 0.9825" size="0.0625 0.0075 0.1025" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <site name="plate_hotel_site" type="sphere" pos="-9.918 -0.6315 0.985" size="0.018" rgba="0 1 0 1" />
+    </body>
+    <body name="stx44_module" pos="4.549 -0.45226 0">
+      <geom name="stx44_body_geom" type="mesh" mesh="stx44_body_mesh" rgba="0.65 0.65 0.68 0.10" contype="0" conaffinity="0" />
+      <geom name="col_stx44_main" type="box" pos="-5.934646500 -0.027486700 1.005770000" size="0.184646500 0.169750700 0.567500000" rgba="0.95 0.35 0.08 0.58" contype="1" conaffinity="1" />
+      <geom name="col_stx44_upper_right" type="box" pos="-5.591396000 -0.027486700 1.236635000" size="0.158604000 0.169750700 0.336635000" rgba="0.95 0.35 0.08 0.58" contype="1" conaffinity="1" />
+      <site name="stx44_plate_site" type="sphere" pos="-5.499 -0.09774 0.6383" size="0.018" rgba="0 1 0 1" />
+    </body>
+    <body name="reader_module" pos="1.344 -0.545 0">
+      <geom name="reader_body_geom" type="mesh" mesh="reader_body_mesh" rgba="0.65 0.65 0.68 0.10" contype="0" conaffinity="0" />
+      <geom name="col_reader_rear" type="box" pos="-1.247000000 -0.226150000 0.497500000" size="0.247000000 0.178150000 0.197500000" rgba="0.95 0.35 0.08 0.58" contype="1" conaffinity="1" />
+      <geom name="col_reader_front_left" type="box" pos="-1.454 -0.023 0.4975" size="0.040 0.025 0.1975" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <geom name="col_reader_front_right" type="box" pos="-1.137 -0.023 0.4975" size="0.137 0.025 0.1975" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <geom name="col_reader_front_bottom" type="box" pos="-1.344 -0.023 0.350" size="0.070 0.025 0.050" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <geom name="col_reader_front_top" type="box" pos="-1.344 -0.023 0.5675" size="0.070 0.025 0.1275" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <site name="reader_aperture_center_site" type="sphere" pos="-1.344 0.002 0.420" size="0.008" rgba="1 0 1 1" />
+      <body name="reader_tray" pos="-1.344 -0.005 0.420">
+        <joint name="reader_tray_joint" type="hinge" axis="1 0 0" range="-1.5708 0" damping="3" />
+        <geom name="reader_tray_geom" type="mesh" mesh="reader_tray_mesh" pos="1.344 0.005 -0.420" rgba="0.20 0.40 0.85 1" contype="0" conaffinity="0" />
+        <site name="reader_plate_site" type="sphere" pos="0 0 0.020" size="0.015" rgba="0 1 0 1" />
+      </body>
+    </body>
+    <body name="waste_module" pos="3.050 -0.050 -0.300">
+      <geom name="waste_body_geom" type="mesh" mesh="waste_body_mesh" rgba="0.45 0.45 0.50 0.10" contype="0" conaffinity="0" />
+      <geom name="col_waste_body" type="box" pos="-2.000 -0.500 0.500" size="0.150 0.150 0.200" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <site name="waste_drop_site" type="sphere" pos="-2.000 -0.500 0.710" size="0.020" rgba="1 0 1 1" />
+      <site name="waste_pre_drop_site" type="sphere" pos="-2.000 -0.500 0.810" size="0.015" rgba="0 1 1 1" />
+    </body>
+    <body name="sh800_module" pos="1.880 0.240 0">
+      <geom name="sh800_body_geom" type="mesh" mesh="sh800_body_mesh" rgba="0.45 0.45 0.48 1" contype="0" conaffinity="0" />
+      <site name="sh800_collection_button_site" type="sphere" pos="-0.127 -0.700 0.4945" size="0.012" rgba="1 0 0 1" />
+      <site name="sh800_sample_button_site" type="sphere" pos="-0.465 -0.690 0.445" size="0.012" rgba="1 0.5 0 1" />
+      <site name="sh800_plate_site" type="sphere" pos="-0.130 -0.790 0.410" size="0.015" rgba="0 1 0 1" />
+      <site name="sh800_tube_site" type="sphere" pos="-0.3579 -0.7502 0.395" size="0.015" rgba="1 0 1 1" />
+      <body name="sh800_collection_door" pos="-0.010 -0.705 0.4945">
+        <joint name="sh800_collection_door_joint" type="hinge" axis="0 0 1" range="-1.5708 0" damping="3" />
+        <geom name="sh800_collection_door_geom" type="mesh" mesh="sh800_collection_door_mesh" pos="0.010 0.705 -0.4945" rgba="0.20 0.35 0.80 1" contype="0" conaffinity="0" />
+      </body>
+      <body name="sh800_sample_door" pos="0 0 0">
+        <joint name="sh800_sample_door_joint" type="slide" axis="0 0 1" range="0 0.16" damping="5" />
+        <geom name="sh800_sample_door_geom" type="mesh" mesh="sh800_sample_door_mesh" rgba="0.20 0.75 0.30 1" contype="0" conaffinity="0" />
+      </body>
+    </body>
+    <body name="fluent_module" pos="0.25 0.80 0.915" euler="0 0 3.14159265">
+      <geom name="fluent_body_geom" type="mesh" mesh="fluent_body_mesh" pos="3.595 1.850 -0.915" rgba="0.65 0.65 0.68 0.10" contype="0" conaffinity="0" />
+      <geom name="col_fluent_rear" type="box" pos="0.770000000 -0.294250000 0.003000000" size="0.845000000 0.194250000 0.618000000" rgba="0.95 0.35 0.08 0.58" contype="1" conaffinity="1" />
+      <geom name="col_fluent_front_left_frame" type="box" pos="1.5075 0.482 0.003" size="0.1075 0.015 0.618" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <geom name="col_fluent_front_bottom_frame" type="box" pos="0.770 0.482 -0.525" size="0.845 0.015 0.090" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <geom name="col_fluent_front_top_frame" type="box" pos="0.770 0.482 0.478" size="0.845 0.015 0.143" rgba="0.10 0.50 0.95 0.42" contype="1" conaffinity="1" />
+      <site name="fluent_glass_door_center_site" type="sphere" pos="0.770 0.497 0" size="0.025" rgba="1 0.8 0 1" />
+      <site name="fluent_input_plate_site" type="sphere" pos="0.770 0 0" size="0.020" rgba="0 0.5 1 1" />
+      <site name="fluent_handoff_site" type="sphere" pos="0.770 0 0" size="0.020" rgba="0 1 0 1" />
+    </body>
+    <body name="process_plate" mocap="true" pos="-1.85 -0.55 0.105">
+      <geom name="process_plate_geom" type="box" size="0.064 0.043 0.007" rgba="0.85 0.90 1.00 1" contype="0" conaffinity="0" />
+      <site name="process_plate_center_site" type="sphere" pos="0 0 0" size="0.008" rgba="1 1 0 1" />
+    </body>
+    <body name="rl_process_plate" pos="0 0 -2">
+      <freejoint name="rl_process_plate_freejoint" />
+      <geom name="rl_process_plate_geom" type="box" size="0.064 0.043 0.007" density="500" friction="0.8 0.02 0.002" rgba="0.20 0.75 1.00 1" contype="1" conaffinity="1" />
+      <geom name="rl_process_plate_liquid_surface" type="box" pos="0 0 0.0085" size="0.055 0.034 0.001" rgba="0.10 0.60 1.00 0.65" contype="0" conaffinity="0" />
+      <geom name="rl_process_plate_a1_marker" type="sphere" pos="-0.052 0.032 0.011" size="0.006" rgba="1.00 0.10 0.05 1.00" contype="0" conaffinity="0" />
+      <site name="rl_process_plate_center_site" type="sphere" size="0.006" rgba="1 1 0 1" />
+    </body>
+    <body name="rl_plate_grasp_target" mocap="true" pos="0 0 -2">
+      <site name="rl_plate_grasp_target_site" type="sphere" size="0.004" rgba="1 0.5 0 0.25" />
+    </body>
+    <geom name="col_plate_hotel_plate_support" type="box" pos="-1.85 -0.55 0.088" size="0.015 0.025 0.010" rgba="0.10 0.85 0.30 0.72" contype="1" conaffinity="1" />
+    <geom name="col_fluent_input_plate_support" type="box" pos="-0.52 0.80 0.898" size="0.015 0.025 0.010" rgba="0.10 0.85 0.30 0.72" contype="1" conaffinity="1" />
+    <geom name="col_stx44_plate_support" type="box" pos="-0.95 -0.55 0.6213" size="0.015 0.025 0.010" rgba="0.10 0.85 0.30 0.72" contype="1" conaffinity="1" />
+    <geom name="col_reader_plate_support" type="box" pos="0 -0.55 0.423" size="0.015 0.025 0.010" rgba="0.10 0.85 0.30 0.72" contype="1" conaffinity="1" />
+  </worldbody>
+  <equality>
+    <weld name="rl_plate_grasp_weld" body1="rl_plate_grasp_target" body2="rl_process_plate" active="false" solref="0.002 1" solimp="0.99 0.999 0.0001" />
+  </equality>
+  <actuator>
+    <position name="rail_slide_actuator" joint="rail_slide_joint" kp="1200" ctrlrange="-2.0 2.0" />
+    <position name="reader_tray_actuator" joint="reader_tray_joint" kp="50" ctrlrange="-1.5708 0" />
+    <position name="sh800_collection_door_actuator" joint="sh800_collection_door_joint" kp="50" ctrlrange="-1.5708 0" />
+    <position name="sh800_sample_door_actuator" joint="sh800_sample_door_joint" kp="200" ctrlrange="0 0.16" />
+  </actuator>
+</mujoco>

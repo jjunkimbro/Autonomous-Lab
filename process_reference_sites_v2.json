@@ -1,0 +1,214 @@
+{
+  "schema": "autonomous_lab_process_references_v2",
+  "source_manifest": "environment_v2_export/scene_manifest_v2.json",
+  "source_blend": "biofinalbackup.blend",
+  "source_sha256": "03f1aaf8e5ee4aed475eff348e001f06c4d23c269b7d7b9f901f40b45bcff016",
+  "coordinate_system": "Blender/MuJoCo world XYZ, Z-up, meters",
+  "warning": "Sites are geometric references, not calibrated TCP, grasp, approach, or insertion poses.",
+  "references": [
+    {
+      "site": "ref_780_plateholder1",
+      "source_object": "780_plateholder1",
+      "category": "fluent",
+      "position_xyz_m": [
+        0.44500023126602173,
+        0.2640000283718109,
+        0.5649999976158142
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_780_plateholder2",
+      "source_object": "780_plateholder2",
+      "category": "fluent",
+      "position_xyz_m": [
+        0.11500021815299988,
+        0.2640000581741333,
+        0.5650001168251038
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_780_plateholder3",
+      "source_object": "780_plateholder3",
+      "category": "fluent",
+      "position_xyz_m": [
+        0.2150001972913742,
+        0.2640000581741333,
+        0.5650001168251038
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_780_plateholder4",
+      "source_object": "780_plateholder4",
+      "category": "fluent",
+      "position_xyz_m": [
+        0.3450002074241638,
+        0.2640000283718109,
+        0.5649999976158142
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platehotel",
+      "source_object": "platehotel",
+      "category": "plate_hotel",
+      "position_xyz_m": [
+        0.8724998235702515,
+        0.10500000417232513,
+        0.6800000369548798
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell1",
+      "source_object": "platewell1",
+      "category": "plate",
+      "position_xyz_m": [
+        0.8707727789878845,
+        0.11649999022483826,
+        0.5189999341964722
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell2",
+      "source_object": "platewell2",
+      "category": "plate",
+      "position_xyz_m": [
+        0.8707727789878845,
+        0.11649999022483826,
+        0.5539999604225159
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell3",
+      "source_object": "platewell3",
+      "category": "plate",
+      "position_xyz_m": [
+        0.8707727789878845,
+        0.11649999022483826,
+        0.5889999270439148
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell4",
+      "source_object": "platewell4",
+      "category": "plate",
+      "position_xyz_m": [
+        0.8707728385925293,
+        0.11649999022483826,
+        0.6239999532699585
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_reader_plateholder",
+      "source_object": "reader_plateholder",
+      "category": "reader",
+      "position_xyz_m": [
+        0.12350001186132431,
+        1.662500023841858,
+        0.5500000715255737
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_stx44_plateholder",
+      "source_object": "stx44_plateholder",
+      "category": "stx44",
+      "position_xyz_m": [
+        1.14400053024292,
+        0.9915003180503845,
+        0.690000057220459
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube1",
+      "source_object": "tube1",
+      "category": "tube",
+      "position_xyz_m": [
+        0.7000000476837158,
+        0.17000000178813934,
+        0.5850000381469727
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube2",
+      "source_object": "tube2",
+      "category": "tube",
+      "position_xyz_m": [
+        0.7000000476837158,
+        0.14000000059604645,
+        0.5850000381469727
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube3",
+      "source_object": "tube3",
+      "category": "tube",
+      "position_xyz_m": [
+        0.7000000476837158,
+        0.10999999940395355,
+        0.5850000381469727
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube4",
+      "source_object": "tube4",
+      "category": "tube",
+      "position_xyz_m": [
+        0.7000000476837158,
+        0.07999999821186066,
+        0.5850000381469727
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tubehotel",
+      "source_object": "tubehotel",
+      "category": "tube",
+      "position_xyz_m": [
+        0.7000001668930054,
+        0.10999999195337296,
+        0.5150000154972076
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_waste",
+      "source_object": "waste",
+      "category": "waste",
+      "position_xyz_m": [
+        1.0800002813339233,
+        0.25,
+        0.7000000178813934
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    }
+  ]
+}

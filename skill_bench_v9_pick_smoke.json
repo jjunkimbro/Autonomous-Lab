@@ -1,0 +1,206 @@
+[
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.37,
+   -2.3,
+   -1.84,
+   -1.93
+  ],
+  "plate_offset_mm_deg": [
+   0.38,
+   0.5,
+   0.06
+  ],
+  "measure_error_mm_deg": [
+   0.01,
+   0.01,
+   0.06,
+   -0.0
+  ],
+  "plate_measured_mm": [
+   0.33,
+   0.41
+  ],
+  "success": true,
+  "failure": null,
+  "in_hand_mm": [
+   0.13,
+   0.3,
+   0.1
+  ],
+  "tilt_deg": 0.24,
+  "max_force_object_env_N": 9.32,
+  "max_force_finger_env_N": 0.0,
+  "wall_s": 11.0,
+  "trial": 0
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   2.29,
+   0.44,
+   1.74,
+   1.26
+  ],
+  "plate_offset_mm_deg": [
+   -0.6,
+   0.43,
+   -0.28
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   -0.03,
+   0.0,
+   0.02
+  ],
+  "plate_measured_mm": [
+   -0.74,
+   0.48
+  ],
+  "success": false,
+  "failure": "in-hand offset",
+  "in_hand_mm": [
+   0.06,
+   2.55,
+   9.67
+  ],
+  "tilt_deg": 3.18,
+  "max_force_object_env_N": 97.3,
+  "max_force_finger_env_N": 0.0,
+  "wall_s": 11.5,
+  "trial": 1
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   2.3,
+   -3.24,
+   1.45,
+   0.17
+  ],
+  "plate_offset_mm_deg": [
+   -0.24,
+   -0.09,
+   -0.28
+  ],
+  "measure_error_mm_deg": [
+   -0.07,
+   0.36,
+   0.24,
+   -0.01
+  ],
+  "plate_measured_mm": [
+   0.1,
+   0.19
+  ],
+  "success": true,
+  "failure": null,
+  "in_hand_mm": [
+   -0.12,
+   -0.16,
+   0.03
+  ],
+  "tilt_deg": 0.12,
+  "max_force_object_env_N": 6.2,
+  "max_force_finger_env_N": 0.0,
+  "wall_s": 10.8,
+  "trial": 2
+ },
+ {
+  "station": "plate_hotel_4",
+  "delta_mm_deg": [
+   -3.76,
+   1.71,
+   0.59,
+   0.46
+  ],
+  "plate_offset_mm_deg": [
+   -0.47,
+   1.49,
+   0.96
+  ],
+  "measure_error_mm_deg": [
+   -0.27,
+   -0.45,
+   -0.08,
+   -0.2
+  ],
+  "success": false,
+  "failure": "in-hand offset",
+  "in_hand_mm": [
+   1.37,
+   1.16,
+   -0.7
+  ],
+  "tilt_deg": 0.11,
+  "max_force_object_env_N": 6.31,
+  "max_force_finger_env_N": 0.0,
+  "wall_s": 7.5,
+  "trial": 0
+ },
+ {
+  "station": "plate_hotel_4",
+  "delta_mm_deg": [
+   1.86,
+   1.5,
+   0.75,
+   -0.44
+  ],
+  "plate_offset_mm_deg": [
+   -1.46,
+   0.66,
+   0.05
+  ],
+  "measure_error_mm_deg": [
+   0.16,
+   -0.18,
+   -0.2,
+   0.31
+  ],
+  "success": false,
+  "failure": "in-hand offset",
+  "in_hand_mm": [
+   0.16,
+   1.4,
+   -1.43
+  ],
+  "tilt_deg": 0.18,
+  "max_force_object_env_N": 7.94,
+  "max_force_finger_env_N": 0.0,
+  "wall_s": 8.8,
+  "trial": 1
+ },
+ {
+  "station": "plate_hotel_4",
+  "delta_mm_deg": [
+   -1.9,
+   -0.14,
+   1.56,
+   1.74
+  ],
+  "plate_offset_mm_deg": [
+   -0.57,
+   0.21,
+   -0.36
+  ],
+  "measure_error_mm_deg": [
+   -0.45,
+   -0.17,
+   -0.07,
+   -0.11
+  ],
+  "success": true,
+  "failure": null,
+  "in_hand_mm": [
+   0.23,
+   0.53,
+   -0.47
+  ],
+  "tilt_deg": 0.54,
+  "max_force_object_env_N": 15.49,
+  "max_force_finger_env_N": 0.0,
+  "wall_s": 7.4,
+  "trial": 2
+ }
+]

@@ -1,0 +1,21 @@
+# 실행 · 학습 결과 (크다, 다시 만들 수 있다)
+rl_runs/
+vision_workflow_frames_v8/
+d405_gripper_backup/
+scale_down_lab/
+
+# 외부 저장소 (코드에서 쓰지 않음, 필요하면 따로 받는다)
+onrobot-isaacsim/
+
+# 임시 파일
+__pycache__/
+*.pyc
+*.log
+*.bak
+*.prof
+MUJOCO_LOG.TXT
+
+# mujoco_menagerie 는 UR5e 폴더(프로젝트에서 만든 로봇 XML 포함)와 LICENSE 만 넣는다
+mujoco_menagerie/*
+!mujoco_menagerie/LICENSE
+!mujoco_menagerie/universal_robots_ur5e/

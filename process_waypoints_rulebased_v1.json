@@ -1,0 +1,193 @@
+{
+  "schema": "autonomous_lab_rulebased_waypoints_v1",
+  "status": "candidate_visual_validation_required",
+  "source_environment": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_fluent.xml",
+  "debug_environment": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_waypoints_v1.xml",
+  "coordinate_system": "MuJoCo world XYZ, Z-up, meters",
+  "orientation_policy": {
+    "plate": "horizontal throughout transfer",
+    "tcp_orientation": "not calibrated",
+    "yaw": "not assigned"
+  },
+  "global_policy": {
+    "safe_transport_z_m": 0.9,
+    "plate_clearance_z_m": 0.001,
+    "ik": "not included",
+    "collision_check": "not included",
+    "interpolation": "not included"
+  },
+  "plate": {
+    "dimensions_xyz_m": [
+      0.08500004173645032,
+      0.12700003879624513,
+      0.013999939357886015
+    ],
+    "initial_grasp_position_xyz_m": [
+      0.445000231472,
+      0.264000028513,
+      0.5799999368551
+    ]
+  },
+  "stations": {
+    "fluent": {
+      "reference_site": "ref_780_plateholder1",
+      "outward_direction": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "waypoints": {
+        "staging": [
+          0.445000231472,
+          0.424000028513,
+          0.6599999368551
+        ],
+        "approach": [
+          0.445000231472,
+          0.344000028513,
+          0.5799999368551
+        ],
+        "target": [
+          0.445000231472,
+          0.264000028513,
+          0.5799999368551
+        ],
+        "extract": [
+          0.445000231472,
+          0.36400002851299995,
+          0.5799999368551
+        ],
+        "lift": [
+          0.445000231472,
+          0.36400002851299995,
+          0.9
+        ],
+        "transport_entry": [
+          0.445000231472,
+          0.344000028513,
+          0.9
+        ]
+      }
+    },
+    "incubator": {
+      "reference_site": "ref_stx44_plateholder",
+      "outward_direction": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "waypoints": {
+        "staging": [
+          0.9640005300000001,
+          0.991500318,
+          0.784999996357886
+        ],
+        "approach": [
+          1.04400053,
+          0.991500318,
+          0.704999996357886
+        ],
+        "target": [
+          1.14400053,
+          0.991500318,
+          0.704999996357886
+        ],
+        "extract": [
+          1.02400053,
+          0.991500318,
+          0.704999996357886
+        ],
+        "lift": [
+          1.02400053,
+          0.991500318,
+          0.9
+        ],
+        "transport_entry": [
+          1.04400053,
+          0.991500318,
+          0.9
+        ]
+      }
+    },
+    "reader": {
+      "reference_site": "ref_reader_plateholder",
+      "outward_direction": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "waypoints": {
+        "staging": [
+          0.123500012,
+          1.48250002,
+          0.645000011357886
+        ],
+        "approach": [
+          0.123500012,
+          1.5625000199999999,
+          0.565000011357886
+        ],
+        "target": [
+          0.123500012,
+          1.66250002,
+          0.565000011357886
+        ],
+        "extract": [
+          0.123500012,
+          1.5425000199999999,
+          0.565000011357886
+        ],
+        "lift": [
+          0.123500012,
+          1.5425000199999999,
+          0.9
+        ],
+        "transport_entry": [
+          0.123500012,
+          1.5625000199999999,
+          0.9
+        ]
+      }
+    },
+    "waste": {
+      "reference_site": "ref_waste",
+      "outward_direction": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "waypoints": {
+        "staging": [
+          1.08000028,
+          0.25,
+          0.9500000180000001
+        ],
+        "approach": [
+          1.08000028,
+          0.25,
+          0.850000018
+        ],
+        "target": [
+          1.08000028,
+          0.25,
+          0.750000018
+        ],
+        "extract": [
+          1.08000028,
+          0.25,
+          0.870000018
+        ],
+        "lift": [
+          1.08000028,
+          0.25,
+          0.9
+        ],
+        "transport_entry": [
+          1.08000028,
+          0.25,
+          0.9
+        ]
+      }
+    }
+  }
+}

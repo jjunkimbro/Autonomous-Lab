@@ -1,0 +1,6402 @@
+[
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   0.12,
+   4.5,
+   -1.42,
+   1.79
+  ],
+  "in_hand_mm_deg": [
+   -0.75,
+   -0.15
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   0.15,
+   0.17,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.73,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.03,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 11.42,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.8,
+  "trial": 0
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   3.28,
+   -0.91,
+   0.2,
+   -1.89
+  ],
+  "in_hand_mm_deg": [
+   1.01,
+   0.08
+  ],
+  "measure_error_mm_deg": [
+   0.01,
+   0.02,
+   0.05,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.56,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.02,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 5.95,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 13.1,
+  "trial": 1
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -1.7,
+   2.88,
+   -0.79,
+   -0.19
+  ],
+  "in_hand_mm_deg": [
+   -1.46,
+   -0.19
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   -0.41,
+   -0.24,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.04,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.85,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 12.9,
+  "trial": 2
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -2.97,
+   -2.38,
+   1.0,
+   -0.88
+  ],
+  "in_hand_mm_deg": [
+   -0.06,
+   0.96
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   0.15,
+   0.19,
+   0.03
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.67,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.68,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.67,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.6,
+  "trial": 3
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   4.62,
+   2.25,
+   0.16,
+   -0.89
+  ],
+  "in_hand_mm_deg": [
+   -1.36,
+   0.94
+  ],
+  "measure_error_mm_deg": [
+   0.05,
+   0.07,
+   0.1,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.68,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.19,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.69,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.9,
+  "trial": 4
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   0.16,
+   -3.84,
+   0.49,
+   1.11
+  ],
+  "in_hand_mm_deg": [
+   0.45,
+   0.83
+  ],
+  "measure_error_mm_deg": [
+   0.01,
+   -0.11,
+   -0.07,
+   0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.62,
+   "z_error_mm": 0.77,
+   "yaw_error_deg": 0.34,
+   "tilt_deg": 0.68
+  },
+  "max_force_object_env_N": 10.35,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.0,
+  "trial": 5
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -4.6,
+   0.29,
+   -0.16,
+   -1.75
+  ],
+  "in_hand_mm_deg": [
+   0.57,
+   0.71
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   -0.03,
+   0.02,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.6,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.26,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.46,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.3,
+  "trial": 6
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   0.93,
+   -2.4,
+   1.36,
+   0.04
+  ],
+  "in_hand_mm_deg": [
+   0.04,
+   0.51
+  ],
+  "measure_error_mm_deg": [
+   0.06,
+   -0.03,
+   0.05,
+   0.03
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.33,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.31,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.55,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.1,
+  "trial": 7
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.52,
+   3.2,
+   0.73,
+   1.15
+  ],
+  "in_hand_mm_deg": [
+   -1.23,
+   0.6
+  ],
+  "measure_error_mm_deg": [
+   -0.08,
+   0.19,
+   0.19,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.33,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.17,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.63,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.2,
+  "trial": 8
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.09,
+   -4.18,
+   1.42,
+   1.45
+  ],
+  "in_hand_mm_deg": [
+   1.51,
+   -0.06
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.01,
+   0.03,
+   0.02
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.01,
+   "z_error_mm": 0.91,
+   "yaw_error_deg": 0.01,
+   "tilt_deg": 0.85
+  },
+  "max_force_object_env_N": 6.88,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 14.1,
+  "trial": 9
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -2.26,
+   -4.93,
+   0.58,
+   0.88
+  ],
+  "in_hand_mm_deg": [
+   1.34,
+   -0.44
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.03,
+   0.08,
+   0.02
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.1,
+   "z_error_mm": 1.0,
+   "yaw_error_deg": -0.14,
+   "tilt_deg": 0.85
+  },
+  "max_force_object_env_N": 10.75,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 12.6,
+  "trial": 10
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -2.85,
+   1.39,
+   1.22,
+   1.85
+  ],
+  "in_hand_mm_deg": [
+   -1.4,
+   -0.04
+  ],
+  "measure_error_mm_deg": [
+   -0.04,
+   0.08,
+   0.11,
+   -0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.53,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.0,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 13.75,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 14.4,
+  "trial": 11
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   3.95,
+   -0.77,
+   0.36,
+   -1.9
+  ],
+  "in_hand_mm_deg": [
+   0.69,
+   0.84
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   -0.06,
+   -0.02,
+   -0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.81,
+   "z_error_mm": 0.89,
+   "yaw_error_deg": 0.35,
+   "tilt_deg": 0.8
+  },
+  "max_force_object_env_N": 9.55,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 13.5,
+  "trial": 12
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   3.27,
+   3.86,
+   0.64,
+   -1.02
+  ],
+  "in_hand_mm_deg": [
+   1.07,
+   -0.58
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   -0.01,
+   0.01,
+   -0.0
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.94,
+   "z_error_mm": 0.94,
+   "yaw_error_deg": -0.26,
+   "tilt_deg": 0.78
+  },
+  "max_force_object_env_N": 10.46,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 7.0,
+  "trial": 13
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   3.31,
+   -4.37,
+   1.3,
+   -1.34
+  ],
+  "in_hand_mm_deg": [
+   -0.5,
+   -0.37
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.1,
+   0.13,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.58,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.21,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 14.66,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 4.0,
+  "trial": 14
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.91,
+   -3.21,
+   -0.41,
+   -1.98
+  ],
+  "in_hand_mm_deg": [
+   -0.95,
+   -0.16
+  ],
+  "measure_error_mm_deg": [
+   0.04,
+   -0.0,
+   0.04,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.74,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.04,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.74,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 4.0,
+  "trial": 15
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.94,
+   1.33,
+   -0.48,
+   0.9
+  ],
+  "in_hand_mm_deg": [
+   0.62,
+   -0.14
+  ],
+  "measure_error_mm_deg": [
+   -0.06,
+   -0.02,
+   -0.0,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.57,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.1,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.92,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 4.0,
+  "trial": 16
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   3.67,
+   1.32,
+   1.24,
+   -0.63
+  ],
+  "in_hand_mm_deg": [
+   0.17,
+   -0.61
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   0.14,
+   0.13,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.26,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.36,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.91,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.9,
+  "trial": 17
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   4.96,
+   -2.57,
+   -0.97,
+   -1.71
+  ],
+  "in_hand_mm_deg": [
+   -0.97,
+   0.53
+  ],
+  "measure_error_mm_deg": [
+   0.07,
+   -0.03,
+   0.02,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.74,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.29,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.64,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.5,
+  "trial": 18
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.98,
+   -3.71,
+   -0.5,
+   -0.32
+  ],
+  "in_hand_mm_deg": [
+   0.66,
+   -0.09
+  ],
+  "measure_error_mm_deg": [
+   -0.01,
+   -0.09,
+   -0.04,
+   -0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.69,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -0.05,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 8.56,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.5,
+  "trial": 19
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   0.87,
+   3.4,
+   0.91,
+   -0.54
+  ],
+  "in_hand_mm_deg": [
+   -0.21,
+   -0.26
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   0.24,
+   0.32,
+   -0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.55,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.19,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 6.97,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.4,
+  "trial": 20
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.9,
+   -2.97,
+   -0.86,
+   -0.74
+  ],
+  "in_hand_mm_deg": [
+   -0.75,
+   0.15
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.1,
+   0.12,
+   0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.73,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.08,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.05,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.4,
+  "trial": 21
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   4.72,
+   2.75,
+   1.16,
+   1.04
+  ],
+  "in_hand_mm_deg": [
+   0.39,
+   0.84
+  ],
+  "measure_error_mm_deg": [
+   0.05,
+   -0.3,
+   -0.26,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.47,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.1,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.29,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.8,
+  "trial": 22
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.9,
+   0.0,
+   -1.69,
+   -0.05
+  ],
+  "in_hand_mm_deg": [
+   -1.15,
+   -0.73
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   0.02,
+   0.06,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.7,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.34,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.01,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.5,
+  "trial": 23
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   0.06,
+   2.85,
+   -0.82,
+   1.08
+  ],
+  "in_hand_mm_deg": [
+   0.1,
+   -0.7
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   -0.11,
+   -0.1,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.46,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.46,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.36,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.5,
+  "trial": 24
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   4.65,
+   -0.98,
+   -0.82,
+   1.39
+  ],
+  "in_hand_mm_deg": [
+   -1.5,
+   0.47
+  ],
+  "measure_error_mm_deg": [
+   0.04,
+   -0.0,
+   0.03,
+   0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.82,
+   "z_error_mm": 0.81,
+   "yaw_error_deg": 0.18,
+   "tilt_deg": 0.76
+  },
+  "max_force_object_env_N": 10.36,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.6,
+  "trial": 25
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.12,
+   -1.08,
+   -1.07,
+   1.36
+  ],
+  "in_hand_mm_deg": [
+   -0.44,
+   0.95
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.01,
+   0.05,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.68,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.62,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.48,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.7,
+  "trial": 26
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.25,
+   1.94,
+   0.09,
+   -0.76
+  ],
+  "in_hand_mm_deg": [
+   -0.42,
+   0.88
+  ],
+  "measure_error_mm_deg": [
+   -0.04,
+   0.05,
+   0.12,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.27,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.5,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.91,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 12.0,
+  "trial": 27
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -2.99,
+   4.88,
+   1.03,
+   -0.56
+  ],
+  "in_hand_mm_deg": [
+   0.57,
+   -0.24
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   -0.25,
+   -0.19,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.57,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.05,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.01,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.9,
+  "trial": 28
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -1.19,
+   0.04,
+   -1.93,
+   -0.03
+  ],
+  "in_hand_mm_deg": [
+   1.89,
+   -0.43
+  ],
+  "measure_error_mm_deg": [
+   0.01,
+   -0.2,
+   -0.13,
+   -0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.91,
+   "z_error_mm": 1.43,
+   "yaw_error_deg": -0.17,
+   "tilt_deg": 1.23
+  },
+  "max_force_object_env_N": 10.38,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.7,
+  "trial": 29
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   2.48,
+   -0.57,
+   -1.16,
+   1.62
+  ],
+  "in_hand_mm_deg": [
+   -1.93,
+   -0.39
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   -0.02,
+   0.01,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.59,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": 0.05,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 10.49,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.7,
+  "trial": 30
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   4.99,
+   -2.38,
+   1.4,
+   0.42
+  ],
+  "in_hand_mm_deg": [
+   1.22,
+   0.26
+  ],
+  "measure_error_mm_deg": [
+   0.05,
+   -0.14,
+   -0.01,
+   0.02
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.11,
+   "z_error_mm": 0.96,
+   "yaw_error_deg": 0.06,
+   "tilt_deg": 0.86
+  },
+  "max_force_object_env_N": 7.37,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.3,
+  "trial": 31
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -1.37,
+   2.61,
+   -1.89,
+   -0.21
+  ],
+  "in_hand_mm_deg": [
+   -0.51,
+   -0.05
+  ],
+  "measure_error_mm_deg": [
+   0.0,
+   0.33,
+   0.29,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.74,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.05,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 12.51,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.4,
+  "trial": 32
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.72,
+   -2.77,
+   0.25,
+   -0.45
+  ],
+  "in_hand_mm_deg": [
+   1.17,
+   0.21
+  ],
+  "measure_error_mm_deg": [
+   -0.01,
+   0.2,
+   0.19,
+   0.0
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.77,
+   "z_error_mm": 0.8,
+   "yaw_error_deg": 0.12,
+   "tilt_deg": 0.68
+  },
+  "max_force_object_env_N": 10.08,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 2.7,
+  "trial": 33
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   3.61,
+   2.32,
+   0.41,
+   -0.85
+  ],
+  "in_hand_mm_deg": [
+   1.13,
+   -0.5
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   -0.21,
+   -0.16,
+   -0.03
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.22,
+   "z_error_mm": 1.08,
+   "yaw_error_deg": -0.23,
+   "tilt_deg": 0.9
+  },
+  "max_force_object_env_N": 10.37,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 2.8,
+  "trial": 34
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -4.25,
+   4.63,
+   0.16,
+   1.1
+  ],
+  "in_hand_mm_deg": [
+   0.12,
+   0.22
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   -0.16,
+   -0.11,
+   0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.34,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.16,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.96,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.2,
+  "trial": 35
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -4.66,
+   -3.13,
+   0.7,
+   0.28
+  ],
+  "in_hand_mm_deg": [
+   -1.37,
+   0.9
+  ],
+  "measure_error_mm_deg": [
+   0.04,
+   -0.25,
+   -0.17,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.81,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.53,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 11.87,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 2.9,
+  "trial": 36
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.46,
+   0.1,
+   -1.42,
+   0.87
+  ],
+  "in_hand_mm_deg": [
+   -0.89,
+   -0.73
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.05,
+   0.07,
+   0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.69,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.4,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.28,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.1,
+  "trial": 37
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -4.54,
+   -3.25,
+   -1.23,
+   0.15
+  ],
+  "in_hand_mm_deg": [
+   -0.2,
+   0.91
+  ],
+  "measure_error_mm_deg": [
+   -0.06,
+   -0.03,
+   0.08,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.55,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.6,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.47,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.4,
+  "trial": 38
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   4.54,
+   2.97,
+   0.69,
+   1.38
+  ],
+  "in_hand_mm_deg": [
+   1.76,
+   -0.95
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.09,
+   0.14,
+   0.02
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.64,
+   "z_error_mm": 1.36,
+   "yaw_error_deg": -0.5,
+   "tilt_deg": 1.11
+  },
+  "max_force_object_env_N": 10.53,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 4.1,
+  "trial": 39
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.82,
+   -1.4,
+   -1.63,
+   0.4
+  ],
+  "in_hand_mm_deg": [
+   -0.96,
+   -0.47
+  ],
+  "measure_error_mm_deg": [
+   0.05,
+   -0.18,
+   -0.12,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.67,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.23,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.93,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 4.1,
+  "trial": 40
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -2.12,
+   -4.02,
+   0.96,
+   0.6
+  ],
+  "in_hand_mm_deg": [
+   0.43,
+   -0.93
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.02,
+   0.08,
+   -0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.49,
+   "z_error_mm": 0.75,
+   "yaw_error_deg": -0.41,
+   "tilt_deg": 0.69
+  },
+  "max_force_object_env_N": 9.15,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 4.0,
+  "trial": 41
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -0.71,
+   1.85,
+   -1.37,
+   -0.46
+  ],
+  "in_hand_mm_deg": [
+   -1.92,
+   -0.84
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.27,
+   0.24,
+   -0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.94,
+   "z_error_mm": 0.89,
+   "yaw_error_deg": -0.28,
+   "tilt_deg": 0.83
+  },
+  "max_force_object_env_N": 10.08,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.5,
+  "trial": 42
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -2.84,
+   -0.85,
+   -0.15,
+   1.54
+  ],
+  "in_hand_mm_deg": [
+   -0.73,
+   -0.96
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.02,
+   0.06,
+   0.03
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.6,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.55,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.79,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.4,
+  "trial": 43
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   3.26,
+   -4.38,
+   -1.63,
+   1.85
+  ],
+  "in_hand_mm_deg": [
+   1.01,
+   -0.32
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   -0.14,
+   -0.11,
+   -0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.98,
+   "z_error_mm": 0.92,
+   "yaw_error_deg": -0.09,
+   "tilt_deg": 0.81
+  },
+  "max_force_object_env_N": 10.03,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.8,
+  "trial": 44
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   -3.68,
+   -1.13,
+   -0.64,
+   1.5
+  ],
+  "in_hand_mm_deg": [
+   -0.32,
+   -0.84
+  ],
+  "measure_error_mm_deg": [
+   -0.04,
+   -0.0,
+   0.02,
+   0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.26,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.51,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.42,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 2.9,
+  "trial": 45
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   4.27,
+   1.22,
+   -1.53,
+   -1.55
+  ],
+  "in_hand_mm_deg": [
+   -0.14,
+   -0.82
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   0.08,
+   0.11,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.44,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.56,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.69,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 3.4,
+  "trial": 46
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.32,
+   1.16,
+   -1.87,
+   1.23
+  ],
+  "in_hand_mm_deg": [
+   1.15,
+   0.83
+  ],
+  "measure_error_mm_deg": [
+   0.0,
+   0.03,
+   0.05,
+   0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.15,
+   "z_error_mm": 1.04,
+   "yaw_error_deg": 0.41,
+   "tilt_deg": 0.95
+  },
+  "max_force_object_env_N": 10.87,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 11.8,
+  "trial": 47
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.7,
+   1.93,
+   -1.35,
+   -1.9
+  ],
+  "in_hand_mm_deg": [
+   -1.74,
+   0.93
+  ],
+  "measure_error_mm_deg": [
+   0.05,
+   0.08,
+   0.12,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.6,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.14,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.23,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 12.3,
+  "trial": 48
+ },
+ {
+  "station": "fluent_plate",
+  "delta_mm_deg": [
+   1.46,
+   4.47,
+   -0.6,
+   1.02
+  ],
+  "in_hand_mm_deg": [
+   -1.74,
+   -0.67
+  ],
+  "measure_error_mm_deg": [
+   0.01,
+   -0.07,
+   -0.03,
+   0.0
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.66,
+   "z_error_mm": 0.75,
+   "yaw_error_deg": -0.17,
+   "tilt_deg": 0.7
+  },
+  "max_force_object_env_N": 10.56,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 8.15,
+  "wall_s": 12.3,
+  "trial": 49
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -2.23,
+   0.5,
+   0.23,
+   -0.0
+  ],
+  "in_hand_mm_deg": [
+   -0.3,
+   0.15
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.24,
+   0.4,
+   -0.07
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.56,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.06,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 5.74,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.1,
+  "trial": 0
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   4.67,
+   -0.42,
+   1.35,
+   -1.78
+  ],
+  "in_hand_mm_deg": [
+   -0.46,
+   0.12
+  ],
+  "measure_error_mm_deg": [
+   0.9,
+   0.84,
+   -0.02,
+   -0.31
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.75,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.26,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.93,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 8.4,
+  "trial": 1
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   1.2,
+   -2.5,
+   -0.4,
+   1.79
+  ],
+  "in_hand_mm_deg": [
+   0.6,
+   0.17
+  ],
+  "measure_error_mm_deg": [
+   -0.43,
+   0.76,
+   0.39,
+   -0.23
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.11,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.07,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 4.07,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.0,
+  "trial": 2
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -4.35,
+   -4.48,
+   -1.15,
+   -1.45
+  ],
+  "in_hand_mm_deg": [
+   1.93,
+   -0.99
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   0.48,
+   0.37,
+   -0.14
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.99,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.77,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 6.41,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 8.7,
+  "trial": 3
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -1.34,
+   -4.42,
+   0.56,
+   -1.81
+  ],
+  "in_hand_mm_deg": [
+   -1.73,
+   -0.84
+  ],
+  "measure_error_mm_deg": [
+   0.27,
+   -0.09,
+   0.15,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.33,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.09,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.82,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.7,
+  "trial": 4
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -2.28,
+   0.76,
+   1.22,
+   -0.93
+  ],
+  "in_hand_mm_deg": [
+   -0.87,
+   0.65
+  ],
+  "measure_error_mm_deg": [
+   0.01,
+   0.89,
+   0.31,
+   -0.28
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.92,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.21,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.19,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.8,
+  "trial": 5
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   2.46,
+   -3.73,
+   1.23,
+   1.33
+  ],
+  "in_hand_mm_deg": [
+   -1.29,
+   0.25
+  ],
+  "measure_error_mm_deg": [
+   -0.09,
+   -0.14,
+   0.16,
+   0.04
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.0,
+   "z_error_mm": 0.92,
+   "yaw_error_deg": 0.19,
+   "tilt_deg": 0.86
+  },
+  "max_force_object_env_N": 13.19,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.4,
+  "trial": 6
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.03,
+   -2.57,
+   -0.02,
+   0.09
+  ],
+  "in_hand_mm_deg": [
+   -0.08,
+   0.08
+  ],
+  "measure_error_mm_deg": [
+   0.23,
+   0.48,
+   0.26,
+   -0.17
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.6,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.1,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.9,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 11.3,
+  "trial": 7
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -2.87,
+   2.79,
+   -0.89,
+   1.65
+  ],
+  "in_hand_mm_deg": [
+   0.06,
+   -0.39
+  ],
+  "measure_error_mm_deg": [
+   0.35,
+   1.27,
+   0.17,
+   -0.45
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.92,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -0.63,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 6.99,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.5,
+  "trial": 8
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.26,
+   -0.15,
+   -0.49,
+   0.49
+  ],
+  "in_hand_mm_deg": [
+   -0.01,
+   -0.93
+  ],
+  "measure_error_mm_deg": [
+   0.53,
+   1.42,
+   0.12,
+   -0.5
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.84,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -1.15,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 7.64,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.0,
+  "trial": 9
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.33,
+   -4.48,
+   1.31,
+   1.25
+  ],
+  "in_hand_mm_deg": [
+   1.7,
+   0.33
+  ],
+  "measure_error_mm_deg": [
+   0.29,
+   0.12,
+   0.25,
+   -0.08
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.74,
+   "z_error_mm": 1.31,
+   "yaw_error_deg": 0.09,
+   "tilt_deg": 1.17
+  },
+  "max_force_object_env_N": 8.48,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.8,
+  "trial": 10
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.39,
+   -0.58,
+   -0.24,
+   0.53
+  ],
+  "in_hand_mm_deg": [
+   -0.48,
+   0.35
+  ],
+  "measure_error_mm_deg": [
+   -0.5,
+   -0.15,
+   0.36,
+   0.07
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": 0.2,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 9.53,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.1,
+  "trial": 11
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -2.96,
+   -1.47,
+   0.17,
+   -0.29
+  ],
+  "in_hand_mm_deg": [
+   -1.51,
+   0.93
+  ],
+  "measure_error_mm_deg": [
+   0.1,
+   -0.57,
+   0.08,
+   0.19
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.36,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.73,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.87,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.7,
+  "trial": 12
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   1.91,
+   3.33,
+   -0.57,
+   1.78
+  ],
+  "in_hand_mm_deg": [
+   1.25,
+   0.96
+  ],
+  "measure_error_mm_deg": [
+   -0.17,
+   1.2,
+   0.3,
+   -0.39
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.53,
+   "z_error_mm": 1.44,
+   "yaw_error_deg": -0.01,
+   "tilt_deg": 1.12
+  },
+  "max_force_object_env_N": 7.52,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.4,
+  "trial": 13
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.03,
+   -0.23,
+   -0.46,
+   0.46
+  ],
+  "in_hand_mm_deg": [
+   -1.0,
+   -0.8
+  ],
+  "measure_error_mm_deg": [
+   0.39,
+   1.52,
+   0.06,
+   -0.52
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.67,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.94,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.14,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 8.2,
+  "trial": 14
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -0.23,
+   1.39,
+   -0.46,
+   1.95
+  ],
+  "in_hand_mm_deg": [
+   -0.38,
+   -0.4
+  ],
+  "measure_error_mm_deg": [
+   0.38,
+   0.98,
+   0.14,
+   -0.35
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.63,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.58,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.14,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.03,
+  "wall_s": 8.7,
+  "trial": 15
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.14,
+   -0.33,
+   -0.91,
+   -0.85
+  ],
+  "in_hand_mm_deg": [
+   1.79,
+   0.92
+  ],
+  "measure_error_mm_deg": [
+   0.0,
+   0.7,
+   0.24,
+   -0.24
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.8,
+   "z_error_mm": 1.58,
+   "yaw_error_deg": 0.11,
+   "tilt_deg": 1.23
+  },
+  "max_force_object_env_N": 10.46,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.8,
+  "trial": 16
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   1.46,
+   -2.21,
+   0.85,
+   -1.13
+  ],
+  "in_hand_mm_deg": [
+   -0.71,
+   0.08
+  ],
+  "measure_error_mm_deg": [
+   0.26,
+   0.13,
+   0.11,
+   -0.06
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.6,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.01,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.41,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.0,
+  "trial": 17
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -0.99,
+   -1.49,
+   1.9,
+   -1.32
+  ],
+  "in_hand_mm_deg": [
+   0.46,
+   -0.92
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   0.55,
+   0.39,
+   -0.16
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.36,
+   "z_error_mm": 0.82,
+   "yaw_error_deg": -0.69,
+   "tilt_deg": 0.68
+  },
+  "max_force_object_env_N": 9.34,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 8.5,
+  "trial": 18
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -4.08,
+   -2.9,
+   1.97,
+   0.91
+  ],
+  "in_hand_mm_deg": [
+   1.47,
+   -0.9
+  ],
+  "measure_error_mm_deg": [
+   0.49,
+   0.73,
+   0.08,
+   -0.28
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 2.07,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.86,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.05,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.4,
+  "trial": 19
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   1.81,
+   -0.6,
+   -0.33,
+   0.83
+  ],
+  "in_hand_mm_deg": [
+   -0.77,
+   0.03
+  ],
+  "measure_error_mm_deg": [
+   0.22,
+   0.15,
+   0.12,
+   -0.07
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.66,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.04,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 11.58,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.6,
+  "trial": 20
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -2.39,
+   -1.09,
+   0.13,
+   -1.37
+  ],
+  "in_hand_mm_deg": [
+   -0.9,
+   -0.16
+  ],
+  "measure_error_mm_deg": [
+   0.29,
+   -0.55,
+   0.19,
+   0.17
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.86,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.1,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 14.16,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.7,
+  "trial": 21
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -0.27,
+   3.0,
+   0.57,
+   0.25
+  ],
+  "in_hand_mm_deg": [
+   1.48,
+   -0.61
+  ],
+  "measure_error_mm_deg": [
+   0.13,
+   0.87,
+   0.05,
+   -0.29
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.43,
+   "z_error_mm": 1.27,
+   "yaw_error_deg": -0.52,
+   "tilt_deg": 1.05
+  },
+  "max_force_object_env_N": 9.73,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.5,
+  "trial": 22
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.96,
+   -1.06,
+   -1.45,
+   0.22
+  ],
+  "in_hand_mm_deg": [
+   0.29,
+   -0.74
+  ],
+  "measure_error_mm_deg": [
+   0.33,
+   0.66,
+   0.19,
+   -0.24
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.74,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -0.7,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.86,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.1,
+  "trial": 23
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   2.16,
+   0.57,
+   -0.31,
+   1.67
+  ],
+  "in_hand_mm_deg": [
+   1.42,
+   -0.56
+  ],
+  "measure_error_mm_deg": [
+   0.26,
+   -0.78,
+   0.14,
+   0.24
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.57,
+   "z_error_mm": 1.08,
+   "yaw_error_deg": -0.01,
+   "tilt_deg": 1.0
+  },
+  "max_force_object_env_N": 8.53,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.8,
+  "trial": 24
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.33,
+   4.16,
+   -1.37,
+   1.03
+  ],
+  "in_hand_mm_deg": [
+   -0.75,
+   -0.28
+  ],
+  "measure_error_mm_deg": [
+   -0.19,
+   -0.05,
+   0.38,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.7,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.09,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.81,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.7,
+  "trial": 25
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   0.54,
+   4.26,
+   -1.99,
+   -1.35
+  ],
+  "in_hand_mm_deg": [
+   0.88,
+   -0.21
+  ],
+  "measure_error_mm_deg": [
+   -0.11,
+   0.21,
+   0.34,
+   -0.04
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.63,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -0.17,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 7.95,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.9,
+  "trial": 26
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -2.12,
+   4.63,
+   -0.94,
+   0.86
+  ],
+  "in_hand_mm_deg": [
+   1.86,
+   0.53
+  ],
+  "measure_error_mm_deg": [
+   -0.14,
+   -0.64,
+   0.16,
+   0.21
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.75,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.54,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 5.98,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.9,
+  "trial": 27
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   2.09,
+   2.23,
+   1.22,
+   -0.92
+  ],
+  "in_hand_mm_deg": [
+   0.51,
+   0.61
+  ],
+  "measure_error_mm_deg": [
+   0.54,
+   0.67,
+   0.05,
+   -0.25
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.13,
+   "z_error_mm": 1.21,
+   "yaw_error_deg": -0.05,
+   "tilt_deg": 0.94
+  },
+  "max_force_object_env_N": 8.24,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.2,
+  "trial": 28
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.88,
+   4.06,
+   1.62,
+   -1.61
+  ],
+  "in_hand_mm_deg": [
+   -0.49,
+   -0.09
+  ],
+  "measure_error_mm_deg": [
+   0.5,
+   0.92,
+   0.14,
+   -0.31
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.61,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.38,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.19,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.1,
+  "trial": 29
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.92,
+   -0.81,
+   -0.94,
+   -1.92
+  ],
+  "in_hand_mm_deg": [
+   -0.84,
+   0.56
+  ],
+  "measure_error_mm_deg": [
+   0.19,
+   -0.32,
+   0.2,
+   0.11
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.56,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.45,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.49,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 10.1,
+  "trial": 30
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -4.8,
+   -3.35,
+   -0.76,
+   0.13
+  ],
+  "in_hand_mm_deg": [
+   -0.55,
+   0.77
+  ],
+  "measure_error_mm_deg": [
+   0.11,
+   0.68,
+   0.39,
+   -0.22
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.23,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.29,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 5.89,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.9,
+  "trial": 31
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -2.93,
+   0.62,
+   1.11,
+   1.72
+  ],
+  "in_hand_mm_deg": [
+   1.49,
+   -0.73
+  ],
+  "measure_error_mm_deg": [
+   -0.5,
+   -0.63,
+   0.37,
+   0.23
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.2,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.21,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 5.56,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.2,
+  "trial": 32
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   2.92,
+   1.75,
+   -0.31,
+   -1.9
+  ],
+  "in_hand_mm_deg": [
+   -1.33,
+   0.5
+  ],
+  "measure_error_mm_deg": [
+   0.19,
+   -0.06,
+   0.2,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.62,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.08,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.39,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.9,
+  "trial": 33
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -4.16,
+   -1.87,
+   -0.98,
+   0.98
+  ],
+  "in_hand_mm_deg": [
+   -0.56,
+   -0.83
+  ],
+  "measure_error_mm_deg": [
+   -0.23,
+   0.02,
+   0.25,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.68,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.46,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.33,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.8,
+  "trial": 34
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -1.3,
+   -1.73,
+   0.87,
+   -0.72
+  ],
+  "in_hand_mm_deg": [
+   0.77,
+   0.08
+  ],
+  "measure_error_mm_deg": [
+   0.56,
+   0.82,
+   0.15,
+   -0.3
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.55,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.24,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.96,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 11.0,
+  "trial": 35
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.88,
+   2.33,
+   -0.37,
+   -0.06
+  ],
+  "in_hand_mm_deg": [
+   -0.11,
+   0.74
+  ],
+  "measure_error_mm_deg": [
+   -0.16,
+   0.77,
+   0.36,
+   -0.24
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.67,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.0,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.25,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.8,
+  "trial": 36
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.62,
+   -0.76,
+   0.14,
+   -0.26
+  ],
+  "in_hand_mm_deg": [
+   0.39,
+   -0.0
+  ],
+  "measure_error_mm_deg": [
+   0.22,
+   -0.67,
+   0.27,
+   0.21
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.86,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.19,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.82,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 11.2,
+  "trial": 37
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -0.86,
+   1.87,
+   -0.68,
+   0.43
+  ],
+  "in_hand_mm_deg": [
+   0.91,
+   -0.74
+  ],
+  "measure_error_mm_deg": [
+   0.56,
+   1.13,
+   0.18,
+   -0.41
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.45,
+   "z_error_mm": 1.34,
+   "yaw_error_deg": -0.75,
+   "tilt_deg": 1.09
+  },
+  "max_force_object_env_N": 9.63,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 9.6,
+  "trial": 38
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -1.74,
+   4.45,
+   1.86,
+   1.97
+  ],
+  "in_hand_mm_deg": [
+   -1.83,
+   0.65
+  ],
+  "measure_error_mm_deg": [
+   -0.21,
+   0.14,
+   0.32,
+   -0.03
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.21,
+   "z_error_mm": 0.91,
+   "yaw_error_deg": -0.13,
+   "tilt_deg": 0.85
+  },
+  "max_force_object_env_N": 60.13,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.03,
+  "wall_s": 2.9,
+  "trial": 39
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   4.35,
+   4.02,
+   0.86,
+   0.7
+  ],
+  "in_hand_mm_deg": [
+   0.88,
+   0.15
+  ],
+  "measure_error_mm_deg": [
+   0.15,
+   0.44,
+   0.26,
+   -0.15
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.79,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.01,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 6.75,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 3.1,
+  "trial": 40
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   2.88,
+   0.02,
+   -1.1,
+   -1.62
+  ],
+  "in_hand_mm_deg": [
+   1.63,
+   0.51
+  ],
+  "measure_error_mm_deg": [
+   0.56,
+   0.47,
+   0.04,
+   -0.17
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.94,
+   "z_error_mm": 1.34,
+   "yaw_error_deg": -0.01,
+   "tilt_deg": 1.23
+  },
+  "max_force_object_env_N": 8.86,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 3.1,
+  "trial": 41
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.23,
+   3.22,
+   -0.8,
+   0.54
+  ],
+  "in_hand_mm_deg": [
+   -0.58,
+   -0.57
+  ],
+  "measure_error_mm_deg": [
+   -0.13,
+   -1.54,
+   0.33,
+   0.51
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.9,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.19,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 11.24,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 3.2,
+  "trial": 42
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -3.24,
+   -4.29,
+   -1.7,
+   -1.72
+  ],
+  "in_hand_mm_deg": [
+   -1.64,
+   0.67
+  ],
+  "measure_error_mm_deg": [
+   0.04,
+   0.84,
+   0.21,
+   -0.27
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.35,
+   "z_error_mm": 0.79,
+   "yaw_error_deg": 0.02,
+   "tilt_deg": 0.74
+  },
+  "max_force_object_env_N": 10.56,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 2.4,
+  "trial": 43
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   0.18,
+   -3.71,
+   0.1,
+   0.17
+  ],
+  "in_hand_mm_deg": [
+   -0.01,
+   -0.59
+  ],
+  "measure_error_mm_deg": [
+   0.47,
+   0.42,
+   0.28,
+   -0.17
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.24,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.31,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.36,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 2.1,
+  "trial": 44
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   -0.66,
+   3.71,
+   -0.47,
+   0.02
+  ],
+  "in_hand_mm_deg": [
+   1.72,
+   -0.53
+  ],
+  "measure_error_mm_deg": [
+   -0.26,
+   0.33,
+   0.15,
+   -0.09
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.23,
+   "z_error_mm": 1.13,
+   "yaw_error_deg": -0.29,
+   "tilt_deg": 0.92
+  },
+  "max_force_object_env_N": 9.54,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 2.4,
+  "trial": 45
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   2.26,
+   -0.16,
+   1.15,
+   -0.56
+  ],
+  "in_hand_mm_deg": [
+   0.17,
+   -0.26
+  ],
+  "measure_error_mm_deg": [
+   0.14,
+   1.76,
+   0.19,
+   -0.58
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.85,
+   "z_error_mm": 0.86,
+   "yaw_error_deg": -0.82,
+   "tilt_deg": 1.22
+  },
+  "max_force_object_env_N": 8.2,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 3.1,
+  "trial": 46
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.66,
+   4.15,
+   0.53,
+   1.92
+  ],
+  "in_hand_mm_deg": [
+   0.93,
+   0.66
+  ],
+  "measure_error_mm_deg": [
+   -0.36,
+   -0.43,
+   0.33,
+   0.16
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.31,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.4,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.58,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 3.1,
+  "trial": 47
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.95,
+   -2.28,
+   1.95,
+   -0.44
+  ],
+  "in_hand_mm_deg": [
+   -0.01,
+   -0.64
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.14,
+   0.32,
+   -0.04
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.18,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.42,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.86,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 2.1,
+  "trial": 48
+ },
+ {
+  "station": "incubator_plate",
+  "delta_mm_deg": [
+   3.21,
+   -1.63,
+   0.76,
+   -1.13
+  ],
+  "in_hand_mm_deg": [
+   -0.59,
+   -0.23
+  ],
+  "measure_error_mm_deg": [
+   0.0,
+   0.14,
+   0.32,
+   -0.05
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.65,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.18,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.16,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.04,
+  "wall_s": 2.5,
+  "trial": 49
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.63,
+   -4.65,
+   1.08,
+   1.8
+  ],
+  "in_hand_mm_deg": [
+   -1.1,
+   -0.67
+  ],
+  "measure_error_mm_deg": [
+   0.75,
+   0.19,
+   0.08,
+   0.57
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.11,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.2,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.53,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.2,
+  "trial": 0
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -1.52,
+   -4.17,
+   0.6,
+   -0.53
+  ],
+  "in_hand_mm_deg": [
+   0.25,
+   0.81
+  ],
+  "measure_error_mm_deg": [
+   0.11,
+   -0.29,
+   0.31,
+   0.09
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.13,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.56,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.29,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.1,
+  "trial": 1
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   3.62,
+   4.22,
+   1.74,
+   0.36
+  ],
+  "in_hand_mm_deg": [
+   0.01,
+   -0.92
+  ],
+  "measure_error_mm_deg": [
+   -0.51,
+   1.41,
+   -0.4,
+   -0.4
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.19,
+   "z_error_mm": 1.27,
+   "yaw_error_deg": -0.77,
+   "tilt_deg": 1.01
+  },
+  "max_force_object_env_N": 39.8,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.5,
+  "trial": 2
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -3.98,
+   0.24,
+   1.42,
+   -0.27
+  ],
+  "in_hand_mm_deg": [
+   -1.99,
+   -0.58
+  ],
+  "measure_error_mm_deg": [
+   0.28,
+   0.63,
+   0.03,
+   0.22
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.62,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.14,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.28,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.1,
+  "trial": 3
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   2.6,
+   -3.42,
+   -1.2,
+   -0.86
+  ],
+  "in_hand_mm_deg": [
+   0.44,
+   0.67
+  ],
+  "measure_error_mm_deg": [
+   0.35,
+   0.22,
+   0.12,
+   0.27
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.56,
+   "z_error_mm": 0.87,
+   "yaw_error_deg": 0.61,
+   "tilt_deg": 0.72
+  },
+  "max_force_object_env_N": 10.89,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 7.9,
+  "trial": 4
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.81,
+   0.99,
+   0.12,
+   -0.22
+  ],
+  "in_hand_mm_deg": [
+   0.32,
+   0.63
+  ],
+  "measure_error_mm_deg": [
+   -1.45,
+   0.33,
+   -0.07,
+   -1.1
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.34,
+   "z_error_mm": 1.17,
+   "yaw_error_deg": -0.84,
+   "tilt_deg": 1.21
+  },
+  "max_force_object_env_N": 8.65,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.1,
+  "trial": 5
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.83,
+   -0.03,
+   -1.61,
+   0.05
+  ],
+  "in_hand_mm_deg": [
+   1.16,
+   1.0
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   1.25,
+   -0.37,
+   0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 2.3,
+   "z_error_mm": 1.7,
+   "yaw_error_deg": 0.47,
+   "tilt_deg": 1.5
+  },
+  "max_force_object_env_N": 10.73,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.7,
+  "trial": 6
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.24,
+   -2.03,
+   0.32,
+   -0.51
+  ],
+  "in_hand_mm_deg": [
+   -1.53,
+   0.05
+  ],
+  "measure_error_mm_deg": [
+   -0.84,
+   -0.41,
+   0.23,
+   -0.64
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.29,
+   "z_error_mm": 1.2,
+   "yaw_error_deg": -0.78,
+   "tilt_deg": 0.95
+  },
+  "max_force_object_env_N": 12.8,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.3,
+  "trial": 7
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   2.99,
+   3.91,
+   1.91,
+   -0.53
+  ],
+  "in_hand_mm_deg": [
+   -0.99,
+   -0.78
+  ],
+  "measure_error_mm_deg": [
+   -0.32,
+   -0.01,
+   0.21,
+   -0.25
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.57,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.61,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.89,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.4,
+  "trial": 8
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.64,
+   3.07,
+   -1.06,
+   1.4
+  ],
+  "in_hand_mm_deg": [
+   0.85,
+   -0.6
+  ],
+  "measure_error_mm_deg": [
+   -0.76,
+   0.09,
+   0.13,
+   -0.58
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.84,
+   "z_error_mm": 1.08,
+   "yaw_error_deg": -0.86,
+   "tilt_deg": 0.91
+  },
+  "max_force_object_env_N": 11.26,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.4,
+  "trial": 9
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   1.32,
+   3.2,
+   1.73,
+   -1.35
+  ],
+  "in_hand_mm_deg": [
+   1.29,
+   0.55
+  ],
+  "measure_error_mm_deg": [
+   0.17,
+   0.22,
+   0.1,
+   0.13
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.24,
+   "z_error_mm": 1.1,
+   "yaw_error_deg": 0.31,
+   "tilt_deg": 0.9
+  },
+  "max_force_object_env_N": 22.53,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.6,
+  "trial": 10
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.56,
+   -2.05,
+   1.83,
+   -0.55
+  ],
+  "in_hand_mm_deg": [
+   -0.84,
+   0.44
+  ],
+  "measure_error_mm_deg": [
+   -1.19,
+   0.54,
+   -0.08,
+   -0.9
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.65,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.97,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.37,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.0,
+  "trial": 11
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -3.67,
+   -0.17,
+   -0.57,
+   0.18
+  ],
+  "in_hand_mm_deg": [
+   0.41,
+   0.28
+  ],
+  "measure_error_mm_deg": [
+   -0.29,
+   -0.31,
+   0.3,
+   -0.22
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.5,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.09,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.82,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.6,
+  "trial": 12
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.68,
+   3.87,
+   1.34,
+   1.73
+  ],
+  "in_hand_mm_deg": [
+   -0.22,
+   0.46
+  ],
+  "measure_error_mm_deg": [
+   0.16,
+   0.28,
+   0.03,
+   0.11
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.19,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.38,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.9,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.2,
+  "trial": 13
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.69,
+   -2.21,
+   0.61,
+   1.78
+  ],
+  "in_hand_mm_deg": [
+   1.22,
+   -0.43
+  ],
+  "measure_error_mm_deg": [
+   -0.72,
+   0.31,
+   0.01,
+   -0.55
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.37,
+   "z_error_mm": 1.3,
+   "yaw_error_deg": -0.67,
+   "tilt_deg": 1.09
+  },
+  "max_force_object_env_N": 10.61,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.7,
+  "trial": 14
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.72,
+   2.72,
+   0.82,
+   1.45
+  ],
+  "in_hand_mm_deg": [
+   -1.41,
+   0.72
+  ],
+  "measure_error_mm_deg": [
+   0.0,
+   0.42,
+   -0.04,
+   -0.0
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.57,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": 0.31,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 7.43,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.6,
+  "trial": 15
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.67,
+   -2.27,
+   -0.63,
+   1.97
+  ],
+  "in_hand_mm_deg": [
+   1.82,
+   -0.83
+  ],
+  "measure_error_mm_deg": [
+   -1.33,
+   0.23,
+   0.03,
+   -1.02
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 2.06,
+   "z_error_mm": 1.91,
+   "yaw_error_deg": -1.45,
+   "tilt_deg": 1.62
+  },
+  "max_force_object_env_N": 10.76,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.4,
+  "trial": 16
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -1.85,
+   2.2,
+   -1.86,
+   -1.86
+  ],
+  "in_hand_mm_deg": [
+   -1.82,
+   0.74
+  ],
+  "measure_error_mm_deg": [
+   -0.6,
+   0.23,
+   0.07,
+   -0.44
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.88,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.37,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 12.4,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 10.3,
+  "trial": 17
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -1.66,
+   -1.81,
+   1.17,
+   -0.73
+  ],
+  "in_hand_mm_deg": [
+   0.95,
+   -0.26
+  ],
+  "measure_error_mm_deg": [
+   0.94,
+   -0.92,
+   0.45,
+   0.72
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.05,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.53,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 6.79,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.5,
+  "trial": 18
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.02,
+   -1.13,
+   -1.33,
+   -1.7
+  ],
+  "in_hand_mm_deg": [
+   1.48,
+   0.74
+  ],
+  "measure_error_mm_deg": [
+   -0.53,
+   0.21,
+   0.06,
+   -0.4
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.66,
+   "z_error_mm": 1.45,
+   "yaw_error_deg": -0.12,
+   "tilt_deg": 1.13
+  },
+  "max_force_object_env_N": 5.55,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.1,
+  "trial": 19
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.39,
+   1.88,
+   1.45,
+   -0.44
+  ],
+  "in_hand_mm_deg": [
+   0.85,
+   0.51
+  ],
+  "measure_error_mm_deg": [
+   0.51,
+   -0.16,
+   0.15,
+   0.39
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.47,
+   "z_error_mm": 0.84,
+   "yaw_error_deg": 0.59,
+   "tilt_deg": 0.71
+  },
+  "max_force_object_env_N": 10.63,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.8,
+  "trial": 20
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -4.22,
+   -3.62,
+   1.0,
+   0.82
+  ],
+  "in_hand_mm_deg": [
+   -1.26,
+   0.65
+  ],
+  "measure_error_mm_deg": [
+   -0.28,
+   -0.22,
+   0.17,
+   -0.22
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.88,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.09,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 10.43,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.3,
+  "trial": 21
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   3.01,
+   -1.67,
+   -0.64,
+   -1.56
+  ],
+  "in_hand_mm_deg": [
+   -0.22,
+   -0.78
+  ],
+  "measure_error_mm_deg": [
+   -1.33,
+   0.27,
+   0.06,
+   -1.02
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.93,
+   "z_error_mm": 0.84,
+   "yaw_error_deg": -1.44,
+   "tilt_deg": 0.7
+  },
+  "max_force_object_env_N": 11.25,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.7,
+  "trial": 22
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   0.43,
+   1.25,
+   0.33,
+   -1.71
+  ],
+  "in_hand_mm_deg": [
+   0.49,
+   0.5
+  ],
+  "measure_error_mm_deg": [
+   0.79,
+   0.14,
+   0.09,
+   0.6
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.55,
+   "z_error_mm": 0.91,
+   "yaw_error_deg": 0.82,
+   "tilt_deg": 0.74
+  },
+  "max_force_object_env_N": 10.99,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.9,
+  "trial": 23
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -3.58,
+   0.95,
+   1.28,
+   -1.23
+  ],
+  "in_hand_mm_deg": [
+   1.65,
+   0.94
+  ],
+  "measure_error_mm_deg": [
+   1.52,
+   0.27,
+   0.05,
+   1.16
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.26,
+   "z_error_mm": 1.5,
+   "yaw_error_deg": 1.31,
+   "tilt_deg": 1.17
+  },
+  "max_force_object_env_N": 62.84,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.3,
+  "trial": 24
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   2.12,
+   3.72,
+   -0.91,
+   0.66
+  ],
+  "in_hand_mm_deg": [
+   1.7,
+   -0.91
+  ],
+  "measure_error_mm_deg": [
+   -0.06,
+   0.08,
+   0.21,
+   -0.06
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.73,
+   "z_error_mm": 1.43,
+   "yaw_error_deg": -0.54,
+   "tilt_deg": 1.14
+  },
+  "max_force_object_env_N": 11.08,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.8,
+  "trial": 25
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   3.21,
+   -2.63,
+   1.2,
+   0.57
+  ],
+  "in_hand_mm_deg": [
+   1.21,
+   -0.2
+  ],
+  "measure_error_mm_deg": [
+   -0.09,
+   1.03,
+   -0.22,
+   -0.08
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.87,
+   "z_error_mm": 1.41,
+   "yaw_error_deg": -0.13,
+   "tilt_deg": 1.22
+  },
+  "max_force_object_env_N": 15.43,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 10.0,
+  "trial": 26
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.5,
+   4.24,
+   -1.72,
+   -1.38
+  ],
+  "in_hand_mm_deg": [
+   1.89,
+   0.83
+  ],
+  "measure_error_mm_deg": [
+   -0.11,
+   0.45,
+   -0.07,
+   -0.09
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 2.27,
+   "z_error_mm": 1.62,
+   "yaw_error_deg": 0.32,
+   "tilt_deg": 1.38
+  },
+  "max_force_object_env_N": 10.92,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.1,
+  "trial": 27
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -3.53,
+   4.73,
+   -0.94,
+   1.57
+  ],
+  "in_hand_mm_deg": [
+   1.62,
+   -0.95
+  ],
+  "measure_error_mm_deg": [
+   1.06,
+   0.35,
+   0.02,
+   0.81
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 2.15,
+   "z_error_mm": 1.27,
+   "yaw_error_deg": 0.12,
+   "tilt_deg": 1.11
+  },
+  "max_force_object_env_N": 9.24,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.0,
+  "trial": 28
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -4.9,
+   -1.73,
+   1.72,
+   1.17
+  ],
+  "in_hand_mm_deg": [
+   -0.45,
+   0.72
+  ],
+  "measure_error_mm_deg": [
+   0.18,
+   0.35,
+   -0.0,
+   0.13
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.09,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.56,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.34,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.7,
+  "trial": 29
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -1.92,
+   -1.53,
+   -1.24,
+   1.84
+  ],
+  "in_hand_mm_deg": [
+   1.21,
+   -0.08
+  ],
+  "measure_error_mm_deg": [
+   -0.25,
+   0.26,
+   0.04,
+   -0.19
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.08,
+   "z_error_mm": 0.99,
+   "yaw_error_deg": -0.14,
+   "tilt_deg": 0.85
+  },
+  "max_force_object_env_N": 7.37,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.8,
+  "trial": 30
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.36,
+   4.66,
+   -0.41,
+   -1.16
+  ],
+  "in_hand_mm_deg": [
+   -0.3,
+   0.44
+  ],
+  "measure_error_mm_deg": [
+   -1.79,
+   -0.05,
+   0.19,
+   -1.36
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.04,
+   "z_error_mm": 1.02,
+   "yaw_error_deg": -1.44,
+   "tilt_deg": 1.44
+  },
+  "max_force_object_env_N": 8.66,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.5,
+  "trial": 31
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   2.71,
+   -3.91,
+   1.78,
+   0.7
+  ],
+  "in_hand_mm_deg": [
+   -1.75,
+   0.67
+  ],
+  "measure_error_mm_deg": [
+   -0.72,
+   0.18,
+   0.18,
+   -0.54
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.16,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.12,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 11.34,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.4,
+  "trial": 32
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   4.72,
+   3.38,
+   -1.96,
+   -0.11
+  ],
+  "in_hand_mm_deg": [
+   0.36,
+   0.78
+  ],
+  "measure_error_mm_deg": [
+   0.05,
+   0.03,
+   0.09,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.63,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.51,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.91,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.4,
+  "trial": 33
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   0.03,
+   -4.23,
+   1.73,
+   1.81
+  ],
+  "in_hand_mm_deg": [
+   -0.06,
+   -0.89
+  ],
+  "measure_error_mm_deg": [
+   0.49,
+   0.24,
+   0.06,
+   0.37
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.66,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.15,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.35,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.8,
+  "trial": 34
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   3.39,
+   2.42,
+   1.88,
+   -1.97
+  ],
+  "in_hand_mm_deg": [
+   -0.26,
+   -0.43
+  ],
+  "measure_error_mm_deg": [
+   -0.9,
+   0.08,
+   0.13,
+   -0.68
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.77,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.92,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.04,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 9.3,
+  "trial": 35
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -3.92,
+   2.35,
+   -0.64,
+   -1.84
+  ],
+  "in_hand_mm_deg": [
+   -1.47,
+   0.61
+  ],
+  "measure_error_mm_deg": [
+   0.16,
+   0.13,
+   0.09,
+   0.13
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.65,
+   "z_error_mm": 0.75,
+   "yaw_error_deg": 0.38,
+   "tilt_deg": 0.7
+  },
+  "max_force_object_env_N": 9.58,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 8.8,
+  "trial": 36
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   1.06,
+   -2.85,
+   0.78,
+   -1.48
+  ],
+  "in_hand_mm_deg": [
+   0.69,
+   0.31
+  ],
+  "measure_error_mm_deg": [
+   0.07,
+   0.18,
+   0.07,
+   0.06
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.74,
+   "z_error_mm": 0.8,
+   "yaw_error_deg": 0.15,
+   "tilt_deg": 0.68
+  },
+  "max_force_object_env_N": 10.8,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.8,
+  "trial": 37
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -4.94,
+   0.12,
+   0.91,
+   1.03
+  ],
+  "in_hand_mm_deg": [
+   0.82,
+   0.77
+  ],
+  "measure_error_mm_deg": [
+   1.79,
+   0.12,
+   0.1,
+   1.36
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.31,
+   "z_error_mm": 1.4,
+   "yaw_error_deg": 1.75,
+   "tilt_deg": 1.17
+  },
+  "max_force_object_env_N": 10.78,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.8,
+  "trial": 38
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   2.56,
+   4.22,
+   -0.34,
+   -1.86
+  ],
+  "in_hand_mm_deg": [
+   -1.28,
+   -0.42
+  ],
+  "measure_error_mm_deg": [
+   -0.79,
+   0.16,
+   0.1,
+   -0.6
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.02,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.71,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.67,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.0,
+  "trial": 39
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -4.58,
+   -3.92,
+   0.08,
+   -0.99
+  ],
+  "in_hand_mm_deg": [
+   -0.86,
+   0.48
+  ],
+  "measure_error_mm_deg": [
+   -0.22,
+   0.02,
+   0.13,
+   -0.15
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.88,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.12,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.86,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.2,
+  "trial": 40
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   3.55,
+   3.62,
+   -0.52,
+   0.84
+  ],
+  "in_hand_mm_deg": [
+   1.41,
+   -0.7
+  ],
+  "measure_error_mm_deg": [
+   1.72,
+   -0.37,
+   0.29,
+   1.29
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.65,
+   "z_error_mm": 1.33,
+   "yaw_error_deg": 1.03,
+   "tilt_deg": 1.4
+  },
+  "max_force_object_env_N": 8.6,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.4,
+  "trial": 41
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.99,
+   1.48,
+   -0.94,
+   -1.23
+  ],
+  "in_hand_mm_deg": [
+   -0.53,
+   -0.97
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.34,
+   0.01,
+   -0.03
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.04,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -0.64,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 7.25,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.1,
+  "trial": 42
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.62,
+   -4.53,
+   -1.02,
+   -1.13
+  ],
+  "in_hand_mm_deg": [
+   -0.68,
+   -0.75
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   -0.05,
+   0.13,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.67,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.48,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.01,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.4,
+  "trial": 43
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -0.29,
+   1.88,
+   -0.64,
+   1.71
+  ],
+  "in_hand_mm_deg": [
+   1.44,
+   -0.39
+  ],
+  "measure_error_mm_deg": [
+   -0.5,
+   0.36,
+   -0.01,
+   -0.39
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.65,
+   "z_error_mm": 1.42,
+   "yaw_error_deg": -0.51,
+   "tilt_deg": 1.17
+  },
+  "max_force_object_env_N": 11.06,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.3,
+  "trial": 44
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -4.61,
+   2.68,
+   -1.04,
+   -0.67
+  ],
+  "in_hand_mm_deg": [
+   0.32,
+   1.0
+  ],
+  "measure_error_mm_deg": [
+   -1.14,
+   -0.58,
+   0.4,
+   -0.86
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.88,
+   "z_error_mm": 0.88,
+   "yaw_error_deg": -0.53,
+   "tilt_deg": 1.24
+  },
+  "max_force_object_env_N": 8.62,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.9,
+  "trial": 45
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   -2.0,
+   -0.31,
+   0.51,
+   0.73
+  ],
+  "in_hand_mm_deg": [
+   -1.15,
+   0.19
+  ],
+  "measure_error_mm_deg": [
+   -0.97,
+   0.25,
+   -0.04,
+   -0.74
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.8,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.82,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.9,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.4,
+  "trial": 46
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   0.44,
+   1.59,
+   -1.54,
+   -1.49
+  ],
+  "in_hand_mm_deg": [
+   1.9,
+   0.64
+  ],
+  "measure_error_mm_deg": [
+   -0.9,
+   0.06,
+   0.14,
+   -0.68
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.92,
+   "z_error_mm": 1.56,
+   "yaw_error_deg": -0.44,
+   "tilt_deg": 1.21
+  },
+  "max_force_object_env_N": 8.81,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.4,
+  "trial": 47
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   3.28,
+   4.34,
+   1.84,
+   -0.43
+  ],
+  "in_hand_mm_deg": [
+   1.02,
+   0.28
+  ],
+  "measure_error_mm_deg": [
+   0.51,
+   -0.57,
+   0.37,
+   0.4
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.46,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.52,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.01,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 2.7,
+  "trial": 48
+ },
+ {
+  "station": "reader_plate",
+  "delta_mm_deg": [
+   0.6,
+   1.79,
+   -0.72,
+   1.45
+  ],
+  "in_hand_mm_deg": [
+   -0.37,
+   -0.7
+  ],
+  "measure_error_mm_deg": [
+   0.27,
+   0.07,
+   0.13,
+   0.19
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.53,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.24,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.09,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 6.19,
+  "wall_s": 3.4,
+  "trial": 49
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -4.89,
+   1.39,
+   -1.07,
+   1.82
+  ],
+  "in_hand_mm_deg": [
+   -1.22,
+   -0.37
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.11,
+   0.01,
+   0.08
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.04,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.68,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.8,
+  "trial": 0
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   4.84,
+   0.2,
+   1.69,
+   1.13
+  ],
+  "in_hand_mm_deg": [
+   -1.52,
+   -0.57
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   -0.21,
+   0.16,
+   -0.0
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.84,
+   "z_error_mm": 0.84,
+   "yaw_error_deg": -0.21,
+   "tilt_deg": 0.78
+  },
+  "max_force_object_env_N": 12.55,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.2,
+  "trial": 1
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -1.13,
+   3.81,
+   -0.66,
+   -0.15
+  ],
+  "in_hand_mm_deg": [
+   -0.08,
+   -0.35
+  ],
+  "measure_error_mm_deg": [
+   0.12,
+   0.18,
+   -0.01,
+   -0.07
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.24,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.25,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.05,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.7,
+  "trial": 2
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.86,
+   -4.45,
+   -1.1,
+   1.3
+  ],
+  "in_hand_mm_deg": [
+   0.47,
+   0.02
+  ],
+  "measure_error_mm_deg": [
+   0.04,
+   0.21,
+   0.01,
+   0.05
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.63,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.02,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.82,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 11.0,
+  "trial": 3
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -1.3,
+   -3.7,
+   -0.17,
+   1.95
+  ],
+  "in_hand_mm_deg": [
+   0.38,
+   0.15
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.21,
+   -0.06,
+   0.09
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.57,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.19,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.46,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 12.1,
+  "trial": 4
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   4.9,
+   3.85,
+   2.0,
+   1.81
+  ],
+  "in_hand_mm_deg": [
+   0.67,
+   -0.39
+  ],
+  "measure_error_mm_deg": [
+   -0.2,
+   -0.19,
+   0.07,
+   0.13
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.54,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.11,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 6.15,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.9,
+  "trial": 5
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   1.28,
+   -1.52,
+   1.24,
+   -1.45
+  ],
+  "in_hand_mm_deg": [
+   -0.15,
+   0.68
+  ],
+  "measure_error_mm_deg": [
+   -0.06,
+   0.66,
+   -0.22,
+   0.2
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.56,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.1,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 9.7,
+  "trial": 6
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -0.45,
+   1.01,
+   -1.61,
+   -0.86
+  ],
+  "in_hand_mm_deg": [
+   1.82,
+   0.31
+  ],
+  "measure_error_mm_deg": [
+   0.07,
+   0.47,
+   -0.08,
+   0.05
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.95,
+   "z_error_mm": 1.43,
+   "yaw_error_deg": 0.11,
+   "tilt_deg": 1.26
+  },
+  "max_force_object_env_N": 10.03,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.2,
+  "trial": 7
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -1.35,
+   0.17,
+   1.1,
+   1.15
+  ],
+  "in_hand_mm_deg": [
+   1.31,
+   -0.42
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.61,
+   -0.23,
+   0.21
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.59,
+   "z_error_mm": 1.22,
+   "yaw_error_deg": -0.0,
+   "tilt_deg": 1.12
+  },
+  "max_force_object_env_N": 6.66,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.5,
+  "trial": 8
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -2.62,
+   1.39,
+   0.11,
+   0.26
+  ],
+  "in_hand_mm_deg": [
+   -1.14,
+   -0.36
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.24,
+   -0.09,
+   0.05
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.73,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -0.12,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 12.25,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.5,
+  "trial": 9
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.52,
+   -1.42,
+   1.03,
+   -1.81
+  ],
+  "in_hand_mm_deg": [
+   1.8,
+   -0.58
+  ],
+  "measure_error_mm_deg": [
+   0.11,
+   0.62,
+   -0.13,
+   0.05
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 2.08,
+   "z_error_mm": 1.5,
+   "yaw_error_deg": -0.16,
+   "tilt_deg": 1.29
+  },
+  "max_force_object_env_N": 22.97,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 12.2,
+  "trial": 10
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -0.22,
+   4.21,
+   -0.99,
+   -1.09
+  ],
+  "in_hand_mm_deg": [
+   1.94,
+   0.81
+  ],
+  "measure_error_mm_deg": [
+   0.08,
+   0.07,
+   0.06,
+   -0.05
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.95,
+   "z_error_mm": 1.49,
+   "yaw_error_deg": 0.38,
+   "tilt_deg": 1.23
+  },
+  "max_force_object_env_N": 9.94,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.0,
+  "trial": 11
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   0.32,
+   -4.39,
+   0.42,
+   -0.99
+  ],
+  "in_hand_mm_deg": [
+   -1.14,
+   0.86
+  ],
+  "measure_error_mm_deg": [
+   0.09,
+   0.33,
+   -0.12,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.61,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.53,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.43,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.6,
+  "trial": 12
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   1.19,
+   -0.56,
+   -1.75,
+   -0.51
+  ],
+  "in_hand_mm_deg": [
+   1.46,
+   -0.39
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.24,
+   -0.15,
+   0.11
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.42,
+   "z_error_mm": 1.14,
+   "yaw_error_deg": -0.04,
+   "tilt_deg": 1.05
+  },
+  "max_force_object_env_N": 7.91,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 10.2,
+  "trial": 13
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -1.77,
+   1.07,
+   -0.99,
+   0.23
+  ],
+  "in_hand_mm_deg": [
+   1.07,
+   -0.43
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.35,
+   -0.06,
+   0.11
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.16,
+   "z_error_mm": 1.01,
+   "yaw_error_deg": -0.06,
+   "tilt_deg": 0.9
+  },
+  "max_force_object_env_N": 8.91,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 11.9,
+  "trial": 14
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -0.27,
+   0.76,
+   -0.55,
+   -1.11
+  ],
+  "in_hand_mm_deg": [
+   -1.54,
+   0.13
+  ],
+  "measure_error_mm_deg": [
+   -0.05,
+   0.66,
+   -0.23,
+   0.2
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.26,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.55,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 11.7,
+  "trial": 15
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   4.37,
+   -4.81,
+   1.46,
+   1.85
+  ],
+  "in_hand_mm_deg": [
+   0.17,
+   0.94
+  ],
+  "measure_error_mm_deg": [
+   -0.14,
+   -0.17,
+   0.08,
+   0.09
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.45,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.4,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.63,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 9.5,
+  "trial": 16
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.05,
+   0.45,
+   -0.15,
+   -0.13
+  ],
+  "in_hand_mm_deg": [
+   0.73,
+   -0.53
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   0.31,
+   -0.09,
+   0.07
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.87,
+   "z_error_mm": 0.87,
+   "yaw_error_deg": -0.15,
+   "tilt_deg": 0.8
+  },
+  "max_force_object_env_N": 10.04,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 9.6,
+  "trial": 17
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.15,
+   -0.09,
+   0.7,
+   1.76
+  ],
+  "in_hand_mm_deg": [
+   -1.07,
+   -0.19
+  ],
+  "measure_error_mm_deg": [
+   -0.06,
+   0.18,
+   -0.07,
+   0.12
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.0,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.42,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.3,
+  "trial": 18
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -2.25,
+   -4.47,
+   0.49,
+   0.51
+  ],
+  "in_hand_mm_deg": [
+   2.0,
+   0.2
+  ],
+  "measure_error_mm_deg": [
+   0.09,
+   0.26,
+   -0.01,
+   -0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 2.2,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.13,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.38,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.8,
+  "trial": 19
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -1.04,
+   4.01,
+   -1.94,
+   -0.79
+  ],
+  "in_hand_mm_deg": [
+   1.01,
+   -0.68
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.71,
+   -0.29,
+   0.16
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.62,
+   "z_error_mm": 1.26,
+   "yaw_error_deg": -0.21,
+   "tilt_deg": 1.15
+  },
+  "max_force_object_env_N": 9.59,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.2,
+  "trial": 20
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -1.39,
+   3.49,
+   -0.62,
+   -1.03
+  ],
+  "in_hand_mm_deg": [
+   1.56,
+   -0.85
+  ],
+  "measure_error_mm_deg": [
+   0.12,
+   0.52,
+   -0.13,
+   0.03
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 2.01,
+   "z_error_mm": 1.54,
+   "yaw_error_deg": -0.43,
+   "tilt_deg": 1.29
+  },
+  "max_force_object_env_N": 10.4,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.0,
+  "trial": 21
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   3.57,
+   -1.85,
+   -1.17,
+   -0.05
+  ],
+  "in_hand_mm_deg": [
+   -0.07,
+   0.93
+  ],
+  "measure_error_mm_deg": [
+   0.13,
+   0.28,
+   -0.09,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.44,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.55,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.16,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.2,
+  "trial": 22
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.53,
+   -0.4,
+   0.24,
+   -0.73
+  ],
+  "in_hand_mm_deg": [
+   1.93,
+   -0.23
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   0.25,
+   -0.06,
+   0.04
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.8,
+   "z_error_mm": 1.35,
+   "yaw_error_deg": -0.06,
+   "tilt_deg": 1.24
+  },
+  "max_force_object_env_N": 8.62,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.1,
+  "trial": 23
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   3.86,
+   1.56,
+   1.66,
+   -0.58
+  ],
+  "in_hand_mm_deg": [
+   -0.33,
+   -0.26
+  ],
+  "measure_error_mm_deg": [
+   -0.01,
+   0.17,
+   -0.07,
+   0.06
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.21,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": -0.13,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.77,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.7,
+  "trial": 24
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   3.27,
+   4.53,
+   1.3,
+   -0.19
+  ],
+  "in_hand_mm_deg": [
+   1.32,
+   0.46
+  ],
+  "measure_error_mm_deg": [
+   0.15,
+   0.57,
+   -0.14,
+   0.02
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.68,
+   "z_error_mm": 1.32,
+   "yaw_error_deg": 0.2,
+   "tilt_deg": 1.13
+  },
+  "max_force_object_env_N": 12.05,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.2,
+  "trial": 25
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   0.19,
+   -3.17,
+   -1.05,
+   0.82
+  ],
+  "in_hand_mm_deg": [
+   -1.21,
+   0.12
+  ],
+  "measure_error_mm_deg": [
+   0.0,
+   0.31,
+   -0.1,
+   0.1
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.15,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.69,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.2,
+  "trial": 26
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   3.04,
+   1.54,
+   0.44,
+   -0.97
+  ],
+  "in_hand_mm_deg": [
+   -1.52,
+   -0.93
+  ],
+  "measure_error_mm_deg": [
+   0.06,
+   0.35,
+   -0.07,
+   0.03
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.63,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.02,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.27,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.3,
+  "trial": 27
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -4.54,
+   -2.68,
+   0.23,
+   -0.31
+  ],
+  "in_hand_mm_deg": [
+   -1.18,
+   -0.39
+  ],
+  "measure_error_mm_deg": [
+   0.09,
+   0.35,
+   0.01,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.71,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.15,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.56,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.1,
+  "trial": 28
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -0.39,
+   2.99,
+   0.62,
+   -1.84
+  ],
+  "in_hand_mm_deg": [
+   -0.07,
+   -0.63
+  ],
+  "measure_error_mm_deg": [
+   0.16,
+   0.46,
+   -0.12,
+   -0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.53,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.38,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 12.74,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.6,
+  "trial": 29
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   3.55,
+   3.85,
+   0.22,
+   0.95
+  ],
+  "in_hand_mm_deg": [
+   0.75,
+   0.63
+  ],
+  "measure_error_mm_deg": [
+   0.04,
+   0.13,
+   -0.01,
+   0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.82,
+   "z_error_mm": 0.9,
+   "yaw_error_deg": 0.31,
+   "tilt_deg": 0.77
+  },
+  "max_force_object_env_N": 8.87,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.4,
+  "trial": 30
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -2.21,
+   -2.71,
+   0.99,
+   1.84
+  ],
+  "in_hand_mm_deg": [
+   -1.08,
+   0.14
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.19,
+   -0.01,
+   0.04
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.72,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.11,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.66,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.2,
+  "trial": 31
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   0.44,
+   -1.26,
+   1.0,
+   -1.47
+  ],
+  "in_hand_mm_deg": [
+   -0.51,
+   -0.14
+  ],
+  "measure_error_mm_deg": [
+   0.09,
+   0.2,
+   0.0,
+   -0.03
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.39,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.12,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.28,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.7,
+  "trial": 32
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   4.53,
+   1.84,
+   0.84,
+   2.0
+  ],
+  "in_hand_mm_deg": [
+   -1.09,
+   0.21
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.13,
+   -0.01,
+   0.08
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.7,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": 0.14,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 9.65,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.3,
+  "trial": 33
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -3.92,
+   -3.38,
+   0.78,
+   1.3
+  ],
+  "in_hand_mm_deg": [
+   0.54,
+   0.16
+  ],
+  "measure_error_mm_deg": [
+   0.02,
+   0.35,
+   -0.1,
+   0.08
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.85,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": 0.19,
+   "tilt_deg": 0.01
+  },
+  "max_force_object_env_N": 8.16,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.2,
+  "trial": 34
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.91,
+   4.56,
+   1.7,
+   1.24
+  ],
+  "in_hand_mm_deg": [
+   -0.27,
+   0.53
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.28,
+   -0.1,
+   0.12
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.18,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.4,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.19,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.5,
+  "trial": 35
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -2.66,
+   4.04,
+   -0.88,
+   1.92
+  ],
+  "in_hand_mm_deg": [
+   -0.79,
+   -0.47
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.19,
+   -0.03,
+   0.08
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.58,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.2,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.17,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.2,
+  "trial": 36
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -1.64,
+   -0.15,
+   -1.2,
+   -0.95
+  ],
+  "in_hand_mm_deg": [
+   1.54,
+   0.86
+  ],
+  "measure_error_mm_deg": [
+   0.09,
+   0.35,
+   -0.07,
+   -0.0
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.8,
+   "z_error_mm": 1.42,
+   "yaw_error_deg": 0.45,
+   "tilt_deg": 1.17
+  },
+  "max_force_object_env_N": 10.24,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.2,
+  "trial": 37
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -3.45,
+   -0.59,
+   -0.32,
+   1.31
+  ],
+  "in_hand_mm_deg": [
+   0.64,
+   -0.18
+  ],
+  "measure_error_mm_deg": [
+   -0.06,
+   0.36,
+   -0.1,
+   0.16
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.38,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.01,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 8.73,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 3.4,
+  "trial": 38
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.89,
+   1.05,
+   -1.16,
+   1.17
+  ],
+  "in_hand_mm_deg": [
+   -0.14,
+   0.77
+  ],
+  "measure_error_mm_deg": [
+   0.04,
+   0.38,
+   -0.14,
+   0.09
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.25,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.25,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.38,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.7,
+  "trial": 39
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   1.65,
+   -3.49,
+   1.03,
+   0.32
+  ],
+  "in_hand_mm_deg": [
+   0.17,
+   -0.16
+  ],
+  "measure_error_mm_deg": [
+   0.06,
+   0.23,
+   0.02,
+   0.01
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.34,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.09,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.42,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.0,
+  "trial": 40
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   1.63,
+   -4.37,
+   0.02,
+   1.74
+  ],
+  "in_hand_mm_deg": [
+   -1.18,
+   -0.73
+  ],
+  "measure_error_mm_deg": [
+   -0.04,
+   0.28,
+   -0.07,
+   0.14
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.69,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": -0.26,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.47,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 1.9,
+  "trial": 41
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -0.89,
+   0.2,
+   -0.49,
+   -0.06
+  ],
+  "in_hand_mm_deg": [
+   0.7,
+   0.59
+  ],
+  "measure_error_mm_deg": [
+   -0.03,
+   0.26,
+   -0.06,
+   0.1
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 0.87,
+   "z_error_mm": 0.86,
+   "yaw_error_deg": 0.28,
+   "tilt_deg": 0.74
+  },
+  "max_force_object_env_N": 10.01,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 1.9,
+  "trial": 42
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -4.48,
+   -1.18,
+   0.48,
+   -1.92
+  ],
+  "in_hand_mm_deg": [
+   1.8,
+   0.28
+  ],
+  "measure_error_mm_deg": [
+   0.14,
+   0.49,
+   -0.11,
+   -0.01
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 2.04,
+   "z_error_mm": 1.47,
+   "yaw_error_deg": 0.05,
+   "tilt_deg": 1.32
+  },
+  "max_force_object_env_N": 4.53,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.0,
+  "trial": 43
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   -0.15,
+   -0.52,
+   -1.41,
+   -1.73
+  ],
+  "in_hand_mm_deg": [
+   0.72,
+   0.85
+  ],
+  "measure_error_mm_deg": [
+   0.09,
+   0.43,
+   -0.11,
+   0.03
+  ],
+  "success": false,
+  "failure": "not seated",
+  "truth": {
+   "xy_error_mm": 1.15,
+   "z_error_mm": 1.08,
+   "yaw_error_deg": 0.47,
+   "tilt_deg": 0.96
+  },
+  "max_force_object_env_N": 10.13,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 1.9,
+  "trial": 44
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.92,
+   -4.79,
+   -1.84,
+   0.05
+  ],
+  "in_hand_mm_deg": [
+   0.29,
+   0.21
+  ],
+  "measure_error_mm_deg": [
+   -0.17,
+   0.45,
+   -0.17,
+   0.28
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.76,
+   "z_error_mm": -0.01,
+   "yaw_error_deg": 0.41,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 14.62,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.0,
+  "trial": 45
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   3.76,
+   3.98,
+   1.96,
+   -0.67
+  ],
+  "in_hand_mm_deg": [
+   -0.13,
+   0.99
+  ],
+  "measure_error_mm_deg": [
+   0.03,
+   0.21,
+   -0.1,
+   0.03
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.27,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.41,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 9.99,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.1,
+  "trial": 46
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   2.0,
+   -4.43,
+   1.64,
+   0.47
+  ],
+  "in_hand_mm_deg": [
+   -1.23,
+   -0.3
+  ],
+  "measure_error_mm_deg": [
+   -0.02,
+   0.33,
+   -0.02,
+   0.13
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.75,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.0,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 11.78,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.0,
+  "trial": 47
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   0.78,
+   1.53,
+   -0.36,
+   0.98
+  ],
+  "in_hand_mm_deg": [
+   0.13,
+   0.95
+  ],
+  "measure_error_mm_deg": [
+   0.01,
+   0.05,
+   0.03,
+   0.02
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 0.18,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.17,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 7.51,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 2.0,
+  "trial": 48
+ },
+ {
+  "station": "sorter_left_plate",
+  "delta_mm_deg": [
+   3.53,
+   -3.5,
+   -1.59,
+   1.41
+  ],
+  "in_hand_mm_deg": [
+   0.43,
+   0.95
+  ],
+  "measure_error_mm_deg": [
+   -0.01,
+   0.48,
+   -0.16,
+   0.17
+  ],
+  "success": true,
+  "failure": null,
+  "truth": {
+   "xy_error_mm": 1.33,
+   "z_error_mm": -0.0,
+   "yaw_error_deg": 0.58,
+   "tilt_deg": 0.0
+  },
+  "max_force_object_env_N": 4.13,
+  "max_force_finger_env_N": 0.0,
+  "skill_time_s": 7.14,
+  "wall_s": 1.9,
+  "trial": 49
+ }
+]

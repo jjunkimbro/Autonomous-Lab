@@ -1,0 +1,108 @@
+{
+  "input_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_waypoints_v1.xml",
+  "output_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_exact_references_v1.xml",
+  "coordinate_frame": "MuJoCo world",
+  "unit": "meter",
+  "references": {
+    "ref_fluent_tube": {
+      "process_name": "fluent_tube",
+      "workpiece": "TUBE_5ML",
+      "position": [
+        0.28,
+        0.208,
+        0.566
+      ],
+      "approach_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "extraction_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "enabled": true
+    },
+    "ref_sorter_left_plate": {
+      "process_name": "sorter_left_plate",
+      "workpiece": "PLATE",
+      "position": [
+        0.36575,
+        1.829,
+        0.554
+      ],
+      "approach_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "extraction_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "enabled": true
+    },
+    "ref_sorter_right_tube": {
+      "process_name": "sorter_right_tube",
+      "workpiece": "TUBE_5ML",
+      "position": [
+        0.50075,
+        1.745,
+        0.564
+      ],
+      "approach_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "extraction_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "enabled": true
+    },
+    "ref_ngs_tube": {
+      "process_name": "ngs_tube",
+      "workpiece": "TUBE_5ML",
+      "position": [
+        0.967,
+        1.506,
+        0.605
+      ],
+      "approach_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "extraction_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "enabled": true
+    },
+    "ref_ngs_reserve_hole": {
+      "process_name": "ngs_reserve_hole",
+      "workpiece": "TUBE_5ML",
+      "position": [
+        0.967,
+        1.59,
+        0.605
+      ],
+      "approach_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "extraction_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "enabled": false
+    }
+  }
+}

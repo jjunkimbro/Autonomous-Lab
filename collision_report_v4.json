@@ -1,0 +1,830 @@
+{
+  "name": "COLLISION CHECK V4",
+  "plan_json": "C:\\Users\\jkim1\\autonomous_lab\\rulebased_motion_plan_v4.json",
+  "spacing_m": {
+    "env": 0.004,
+    "robot": 0.008,
+    "gripper": 0.004
+  },
+  "contact_threshold_m": 0.004,
+  "warning_clearance_m": 0.01,
+  "tasks": [
+    {
+      "task_id": 1,
+      "description": "TRANSIT_EMPTY HOME -> plate_hotel_4",
+      "status": "OK",
+      "robot_min_mm": 31.1,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_platehotel",
+        "label": "UNTUCK",
+        "segment": "TUCK",
+        "frame": 112
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 31.2,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 2,
+      "description": "PICK_PLATE plate_a @ plate_hotel_4",
+      "status": "WARN",
+      "robot_min_mm": 41.0,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_waste",
+        "label": "EXTRACT",
+        "segment": "SKILL",
+        "frame": 244
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.0
+    },
+    {
+      "task_id": 3,
+      "description": "TRANSIT_LOADED plate_hotel_4 -> fluent_plate",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 306
+      },
+      "held_min_mm": 31.7,
+      "held_worst_env": "visual_platehotel",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 4,
+      "description": "PLACE_PLATE plate_a @ fluent_plate",
+      "status": "WARN",
+      "robot_min_mm": 17.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "RELEASE_CLEAR",
+        "segment": "SKILL",
+        "frame": 879
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.4
+    },
+    {
+      "task_id": 7,
+      "description": "PICK_PLATE plate_a @ fluent_plate",
+      "status": "WARN",
+      "robot_min_mm": 17.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "GRASP",
+        "segment": "SKILL",
+        "frame": 1110
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.1
+    },
+    {
+      "task_id": 8,
+      "description": "TRANSIT_LOADED fluent_plate -> incubator_plate",
+      "status": "WARN",
+      "robot_min_mm": 46.8,
+      "robot_worst": {
+        "link": "rg2_fingertip_left",
+        "env": "visual_stx44_plateholder",
+        "label": "UNTUCK",
+        "segment": "TUCK",
+        "frame": 1485
+      },
+      "held_min_mm": 6.4,
+      "held_worst_env": "visual_stx44_plateholder",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 9,
+      "description": "PLACE_PLATE plate_a @ incubator_plate",
+      "status": "WARN",
+      "robot_min_mm": 12.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_stx44_plateholder",
+        "label": "RELEASE_CLEAR",
+        "segment": "SKILL",
+        "frame": 1722
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.3
+    },
+    {
+      "task_id": 12,
+      "description": "PICK_PLATE plate_a @ incubator_plate",
+      "status": "WARN",
+      "robot_min_mm": 12.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_stx44_plateholder",
+        "label": "GRASP",
+        "segment": "SKILL",
+        "frame": 1839
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.0
+    },
+    {
+      "task_id": 13,
+      "description": "TRANSIT_LOADED incubator_plate -> reader_plate",
+      "status": "WARN",
+      "robot_min_mm": 46.8,
+      "robot_worst": {
+        "link": "rg2_fingertip_left",
+        "env": "visual_stx44_plateholder",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 1962
+      },
+      "held_min_mm": 6.4,
+      "held_worst_env": "visual_stx44_plateholder",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 14,
+      "description": "PLACE_PLATE plate_a @ reader_plate",
+      "status": "WARN",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "APPROACH_LIFTED",
+        "segment": "SKILL",
+        "frame": 2259
+      },
+      "held_min_mm": 6.9,
+      "held_worst_env": "visual_reader_body1",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.0
+    },
+    {
+      "task_id": 17,
+      "description": "PICK_PLATE plate_a @ reader_plate",
+      "status": "WARN",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "APPROACH",
+        "segment": "SKILL",
+        "frame": 2539
+      },
+      "held_min_mm": 6.9,
+      "held_worst_env": "visual_reader_body1",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.0
+    },
+    {
+      "task_id": 18,
+      "description": "TRANSIT_LOADED reader_plate -> fluent_plate",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 2729
+      },
+      "held_min_mm": 30.1,
+      "held_worst_env": "visual_reader_plateholder",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 19,
+      "description": "PLACE_PLATE plate_a @ fluent_plate",
+      "status": "WARN",
+      "robot_min_mm": 17.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "RELEASE_CLEAR",
+        "segment": "SKILL",
+        "frame": 3382
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.4
+    },
+    {
+      "task_id": 20,
+      "description": "TRANSIT_EMPTY fluent_plate -> tube_hotel_1",
+      "status": "OK",
+      "robot_min_mm": 31.5,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_780_body1",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 3459
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 33.3,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 21,
+      "description": "PICK_TUBE_5ML tube_a @ tube_hotel_1",
+      "status": "WARN",
+      "robot_min_mm": 40.4,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_tube3",
+        "label": "EXTRACT_UP",
+        "segment": "SKILL",
+        "frame": 3780
+      },
+      "held_min_mm": 30.5,
+      "held_worst_env": "visual_table",
+      "object_min_mm": 9.2,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 22,
+      "description": "TRANSIT_LOADED tube_hotel_1 -> fluent_tube",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 3815
+      },
+      "held_min_mm": 32.7,
+      "held_worst_env": "visual_table",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 23,
+      "description": "PLACE_TUBE_5ML tube_a @ fluent_tube",
+      "status": "WARN",
+      "robot_min_mm": 49.0,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "INSERT_HOVER",
+        "segment": "SKILL",
+        "frame": 4360
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 9.2,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 25,
+      "description": "TRANSIT_EMPTY fluent_tube -> fluent_plate",
+      "status": "OK",
+      "robot_min_mm": 31.5,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_780_body1",
+        "label": "UNTUCK",
+        "segment": "TUCK",
+        "frame": 4732
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 26,
+      "description": "PICK_PLATE plate_a @ fluent_plate",
+      "status": "WARN",
+      "robot_min_mm": 17.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "GRASP",
+        "segment": "SKILL",
+        "frame": 4899
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.1
+    },
+    {
+      "task_id": 27,
+      "description": "TRANSIT_LOADED fluent_plate -> waste",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 5040
+      },
+      "held_min_mm": 32.4,
+      "held_worst_env": "visual_780_body1",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 28,
+      "description": "DROP_PLATE plate_a @ waste",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "DROP",
+        "segment": "SKILL",
+        "frame": 5246
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 29,
+      "description": "TRANSIT_EMPTY waste -> fluent_tube",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 5340
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 30,
+      "description": "PICK_TUBE_5ML tube_a @ fluent_tube",
+      "status": "WARN",
+      "robot_min_mm": 49.0,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "PRE_HOVER",
+        "segment": "SKILL",
+        "frame": 5960
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 9.2,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 31,
+      "description": "TRANSIT_LOADED fluent_tube -> sorter_right_tube",
+      "status": "OK",
+      "robot_min_mm": 35.2,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_SH800_body1",
+        "label": "UNTUCK",
+        "segment": "TUCK",
+        "frame": 6362
+      },
+      "held_min_mm": 41.8,
+      "held_worst_env": "visual_SH800_body1",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 32,
+      "description": "PLACE_TUBE_5ML tube_a @ sorter_right_tube",
+      "status": "WARN",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "INSERT_HOVER",
+        "segment": "SKILL",
+        "frame": 6377
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 9.2,
+      "fingertip_support_min_mm": 12.1
+    },
+    {
+      "task_id": 33,
+      "description": "TRANSIT_EMPTY sorter_right_tube -> plate_hotel_3",
+      "status": "OK",
+      "robot_min_mm": 31.3,
+      "robot_worst": {
+        "link": "rg2_fingertip_left",
+        "env": "visual_platehotel",
+        "label": "UNTUCK",
+        "segment": "TUCK",
+        "frame": 6919
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 30.9,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 34,
+      "description": "PICK_PLATE plate_b @ plate_hotel_3",
+      "status": "WARN",
+      "robot_min_mm": 41.0,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_waste",
+        "label": "EXTRACT",
+        "segment": "SKILL",
+        "frame": 7041
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.0
+    },
+    {
+      "task_id": 35,
+      "description": "TRANSIT_LOADED plate_hotel_3 -> sorter_left_plate",
+      "status": "OK",
+      "robot_min_mm": 45.5,
+      "robot_worst": {
+        "link": "upper_arm_link",
+        "env": "visual_NGS_rack1",
+        "label": "TRANSIT",
+        "segment": "TRANSIT",
+        "frame": 7239
+      },
+      "held_min_mm": 31.5,
+      "held_worst_env": "visual_platehotel",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 36,
+      "description": "PLACE_PLATE plate_b @ sorter_left_plate",
+      "status": "WARN",
+      "robot_min_mm": 10.3,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_SH800_body1",
+        "label": "RELEASE_CLEAR",
+        "segment": "SKILL",
+        "frame": 7780
+      },
+      "held_min_mm": 21.2,
+      "held_worst_env": "visual_SH800_body1",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.9
+    },
+    {
+      "task_id": 39,
+      "description": "PICK_PLATE plate_b @ sorter_left_plate",
+      "status": "WARN",
+      "robot_min_mm": 10.3,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_SH800_body1",
+        "label": "GRASP",
+        "segment": "SKILL",
+        "frame": 7930
+      },
+      "held_min_mm": 21.2,
+      "held_worst_env": "visual_SH800_body1",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.0
+    },
+    {
+      "task_id": 40,
+      "description": "TRANSIT_LOADED sorter_left_plate -> fluent_plate",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 8082
+      },
+      "held_min_mm": 31.9,
+      "held_worst_env": "visual_780_body1",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 41,
+      "description": "PLACE_PLATE plate_b @ fluent_plate",
+      "status": "WARN",
+      "robot_min_mm": 17.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "RELEASE_CLEAR",
+        "segment": "SKILL",
+        "frame": 8754
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.4
+    },
+    {
+      "task_id": 42,
+      "description": "TRANSIT_EMPTY fluent_plate -> sorter_right_tube",
+      "status": "OK",
+      "robot_min_mm": 31.5,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_780_body1",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 8831
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 46.4,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 43,
+      "description": "PICK_TUBE_5ML tube_a @ sorter_right_tube",
+      "status": "WARN",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "APPROACH",
+        "segment": "SKILL",
+        "frame": 9208
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 9.2,
+      "fingertip_support_min_mm": 12.3
+    },
+    {
+      "task_id": 44,
+      "description": "TRANSIT_LOADED sorter_right_tube -> waste",
+      "status": "OK",
+      "robot_min_mm": 35.6,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_SH800_body1",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 9366
+      },
+      "held_min_mm": 42.0,
+      "held_worst_env": "visual_SH800_body1",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 45,
+      "description": "DROP_TUBE_5ML tube_a @ waste",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "DROP",
+        "segment": "SKILL",
+        "frame": 9706
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 46,
+      "description": "TRANSIT_EMPTY waste -> tube_hotel_2",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 9804
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 33.5,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 47,
+      "description": "PICK_TUBE_5ML tube_b @ tube_hotel_2",
+      "status": "WARN",
+      "robot_min_mm": 11.1,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_tube3",
+        "label": "EXTRACT_UP",
+        "segment": "SKILL",
+        "frame": 10107
+      },
+      "held_min_mm": 18.0,
+      "held_worst_env": "visual_tube3",
+      "object_min_mm": 9.1,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 48,
+      "description": "TRANSIT_LOADED tube_hotel_2 -> fluent_tube",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 10142
+      },
+      "held_min_mm": 20.2,
+      "held_worst_env": "visual_tubehotel",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 49,
+      "description": "PLACE_TUBE_5ML tube_b @ fluent_tube",
+      "status": "WARN",
+      "robot_min_mm": 49.0,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "INSERT_HOVER",
+        "segment": "SKILL",
+        "frame": 10685
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 9.1,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 52,
+      "description": "PICK_TUBE_5ML tube_b @ fluent_tube",
+      "status": "WARN",
+      "robot_min_mm": 49.0,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "PRE_HOVER",
+        "segment": "SKILL",
+        "frame": 11230
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 9.1,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 53,
+      "description": "TRANSIT_LOADED fluent_tube -> ngs_tube",
+      "status": "OK",
+      "robot_min_mm": 24.1,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_NGS_cartridge1",
+        "label": "UNTUCK",
+        "segment": "TUCK",
+        "frame": 11570
+      },
+      "held_min_mm": 30.1,
+      "held_worst_env": "visual_NGS_rack1",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 54,
+      "description": "PLACE_TUBE_5ML tube_b @ ngs_tube",
+      "status": "WARN",
+      "robot_min_mm": 7.8,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_NGS_cartridge1",
+        "label": "RELEASE_CLEAR",
+        "segment": "SKILL",
+        "frame": 11750
+      },
+      "held_min_mm": 22.4,
+      "held_worst_env": "visual_NGS_cartridge1",
+      "object_min_mm": 9.1,
+      "fingertip_support_min_mm": 17.0
+    },
+    {
+      "task_id": 56,
+      "description": "TRANSIT_EMPTY ngs_tube -> fluent_plate",
+      "status": "OK",
+      "robot_min_mm": 19.0,
+      "robot_worst": {
+        "link": "rg2_fingertip_right",
+        "env": "visual_NGS_cartridge1",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 11784
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 57,
+      "description": "PICK_PLATE plate_b @ fluent_plate",
+      "status": "WARN",
+      "robot_min_mm": 17.6,
+      "robot_worst": {
+        "link": "onrobot_rg2_model_frame",
+        "env": "visual_780_body1",
+        "label": "GRASP",
+        "segment": "SKILL",
+        "frame": 12251
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 5.0,
+      "fingertip_support_min_mm": 3.1
+    },
+    {
+      "task_id": 58,
+      "description": "TRANSIT_LOADED fluent_plate -> waste",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "TUCK",
+        "segment": "TUCK",
+        "frame": 12392
+      },
+      "held_min_mm": 32.4,
+      "held_worst_env": "visual_780_body1",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": 59,
+      "description": "DROP_PLATE plate_b @ waste",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "DROP",
+        "segment": "SKILL",
+        "frame": 12598
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    },
+    {
+      "task_id": null,
+      "description": "START/END",
+      "status": "OK",
+      "robot_min_mm": 50.0,
+      "robot_worst": {
+        "link": "-",
+        "env": "-",
+        "label": "START_TUCK",
+        "segment": "HOLD",
+        "frame": 0
+      },
+      "held_min_mm": 50.0,
+      "held_worst_env": "-",
+      "object_min_mm": 50.0,
+      "fingertip_support_min_mm": 50.0
+    }
+  ],
+  "hit_intervals": []
+}

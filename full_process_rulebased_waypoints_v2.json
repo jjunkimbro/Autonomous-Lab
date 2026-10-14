@@ -1,0 +1,3407 @@
+{
+  "name": "FULL RULE-BASED PROCESS V2",
+  "input_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_exact_references_v1.xml",
+  "output_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_full_waypoints_v2.xml",
+  "coordinate_frame": "MuJoCo world",
+  "unit": "meter",
+  "safe_z": 0.9,
+  "tool_offset": "pending",
+  "ik": "not connected",
+  "collision": "not connected",
+  "interpolation": "not connected",
+  "stations": {
+    "plate_hotel_4": {
+      "station": "plate_hotel_4",
+      "site": "ref_platewell4",
+      "coordinate_source": "ref_platewell4",
+      "workpiece": "PLATE",
+      "approach_axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -1.0,
+        -0.0
+      ],
+      "target": [
+        0.870772839,
+        0.11649999,
+        0.623999953
+      ],
+      "approach": [
+        0.870772839,
+        0.17649999,
+        0.623999953
+      ],
+      "staging": [
+        0.870772839,
+        0.17649999,
+        0.703999953
+      ],
+      "extract": [
+        0.870772839,
+        0.21649999,
+        0.623999953
+      ],
+      "lift": [
+        0.870772839,
+        0.21649999,
+        0.9
+      ],
+      "transport_entry": [
+        0.870772839,
+        0.17649999,
+        0.9
+      ]
+    },
+    "plate_hotel_3": {
+      "station": "plate_hotel_3",
+      "site": "ref_platewell3",
+      "coordinate_source": "ref_platewell3",
+      "workpiece": "PLATE",
+      "approach_axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -1.0,
+        -0.0
+      ],
+      "target": [
+        0.870772779,
+        0.11649999,
+        0.588999927
+      ],
+      "approach": [
+        0.870772779,
+        0.17649999,
+        0.588999927
+      ],
+      "staging": [
+        0.870772779,
+        0.17649999,
+        0.668999927
+      ],
+      "extract": [
+        0.870772779,
+        0.21649999,
+        0.588999927
+      ],
+      "lift": [
+        0.870772779,
+        0.21649999,
+        0.9
+      ],
+      "transport_entry": [
+        0.870772779,
+        0.17649999,
+        0.9
+      ]
+    },
+    "tube_hotel_1": {
+      "station": "tube_hotel_1",
+      "site": "ref_tube1",
+      "coordinate_source": "ref_tube1",
+      "workpiece": "TUBE_5ML",
+      "approach_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -0.0,
+        -1.0
+      ],
+      "target": [
+        0.700000048,
+        0.170000002,
+        0.585000038
+      ],
+      "approach": [
+        0.700000048,
+        0.170000002,
+        0.665000038
+      ],
+      "staging": [
+        0.700000048,
+        0.170000002,
+        0.7650000379999999
+      ],
+      "extract": [
+        0.700000048,
+        0.170000002,
+        0.705000038
+      ],
+      "lift": [
+        0.700000048,
+        0.170000002,
+        0.9
+      ],
+      "transport_entry": [
+        0.700000048,
+        0.170000002,
+        0.9
+      ]
+    },
+    "tube_hotel_2": {
+      "station": "tube_hotel_2",
+      "site": "ref_tube2",
+      "coordinate_source": "ref_tube2",
+      "workpiece": "TUBE_5ML",
+      "approach_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -0.0,
+        -1.0
+      ],
+      "target": [
+        0.700000048,
+        0.140000001,
+        0.585000038
+      ],
+      "approach": [
+        0.700000048,
+        0.140000001,
+        0.665000038
+      ],
+      "staging": [
+        0.700000048,
+        0.140000001,
+        0.7650000379999999
+      ],
+      "extract": [
+        0.700000048,
+        0.140000001,
+        0.705000038
+      ],
+      "lift": [
+        0.700000048,
+        0.140000001,
+        0.9
+      ],
+      "transport_entry": [
+        0.700000048,
+        0.140000001,
+        0.9
+      ]
+    },
+    "fluent_plate": {
+      "station": "fluent_plate",
+      "site": "ref_780_plateholder1",
+      "coordinate_source": "ref_780_plateholder1",
+      "workpiece": "PLATE",
+      "approach_axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -1.0,
+        -0.0
+      ],
+      "target": [
+        0.445000231,
+        0.264000028,
+        0.564999998
+      ],
+      "approach": [
+        0.445000231,
+        0.344000028,
+        0.564999998
+      ],
+      "staging": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "extract": [
+        0.445000231,
+        0.364000028,
+        0.564999998
+      ],
+      "lift": [
+        0.445000231,
+        0.364000028,
+        0.9
+      ],
+      "transport_entry": [
+        0.445000231,
+        0.344000028,
+        0.9
+      ]
+    },
+    "fluent_tube": {
+      "station": "fluent_tube",
+      "site": "ref_fluent_tube",
+      "coordinate_source": "ref_fluent_tube",
+      "workpiece": "TUBE_5ML",
+      "approach_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -0.0,
+        -1.0
+      ],
+      "target": [
+        0.28,
+        0.208,
+        0.566
+      ],
+      "approach": [
+        0.28,
+        0.208,
+        0.6459999999999999
+      ],
+      "staging": [
+        0.28,
+        0.208,
+        0.746
+      ],
+      "extract": [
+        0.28,
+        0.208,
+        0.6859999999999999
+      ],
+      "lift": [
+        0.28,
+        0.208,
+        0.9
+      ],
+      "transport_entry": [
+        0.28,
+        0.208,
+        0.9
+      ]
+    },
+    "incubator_plate": {
+      "station": "incubator_plate",
+      "site": "ref_stx44_plateholder",
+      "coordinate_source": "ref_stx44_plateholder",
+      "workpiece": "PLATE",
+      "approach_axis": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "insertion_axis": [
+        1.0,
+        -0.0,
+        -0.0
+      ],
+      "target": [
+        1.14400053,
+        0.991500318,
+        0.690000057
+      ],
+      "approach": [
+        1.04400053,
+        0.991500318,
+        0.690000057
+      ],
+      "staging": [
+        1.04400053,
+        0.991500318,
+        0.770000057
+      ],
+      "extract": [
+        0.99400053,
+        0.991500318,
+        0.690000057
+      ],
+      "lift": [
+        0.99400053,
+        0.991500318,
+        0.9
+      ],
+      "transport_entry": [
+        1.04400053,
+        0.991500318,
+        0.9
+      ]
+    },
+    "reader_plate": {
+      "station": "reader_plate",
+      "site": "ref_reader_plateholder",
+      "coordinate_source": "ref_reader_plateholder",
+      "workpiece": "PLATE",
+      "approach_axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        1.0,
+        -0.0
+      ],
+      "target": [
+        0.123500012,
+        1.66250002,
+        0.550000072
+      ],
+      "approach": [
+        0.123500012,
+        1.58250002,
+        0.550000072
+      ],
+      "staging": [
+        0.123500012,
+        1.58250002,
+        0.630000072
+      ],
+      "extract": [
+        0.123500012,
+        1.5425000199999999,
+        0.550000072
+      ],
+      "lift": [
+        0.123500012,
+        1.5425000199999999,
+        0.9
+      ],
+      "transport_entry": [
+        0.123500012,
+        1.58250002,
+        0.9
+      ]
+    },
+    "sorter_left_plate": {
+      "station": "sorter_left_plate",
+      "site": "ref_sorter_left_plate",
+      "coordinate_source": "ref_sorter_left_plate",
+      "workpiece": "PLATE",
+      "approach_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -0.0,
+        -1.0
+      ],
+      "target": [
+        0.36575,
+        1.829,
+        0.554
+      ],
+      "approach": [
+        0.36575,
+        1.829,
+        0.634
+      ],
+      "staging": [
+        0.36575,
+        1.829,
+        0.734
+      ],
+      "extract": [
+        0.36575,
+        1.829,
+        0.674
+      ],
+      "lift": [
+        0.36575,
+        1.829,
+        0.9
+      ],
+      "transport_entry": [
+        0.36575,
+        1.829,
+        0.9
+      ]
+    },
+    "sorter_right_tube": {
+      "station": "sorter_right_tube",
+      "site": "ref_sorter_right_tube",
+      "coordinate_source": "ref_sorter_right_tube",
+      "workpiece": "TUBE_5ML",
+      "approach_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -0.0,
+        -1.0
+      ],
+      "target": [
+        0.50075,
+        1.745,
+        0.564
+      ],
+      "approach": [
+        0.50075,
+        1.745,
+        0.6439999999999999
+      ],
+      "staging": [
+        0.50075,
+        1.745,
+        0.744
+      ],
+      "extract": [
+        0.50075,
+        1.745,
+        0.6839999999999999
+      ],
+      "lift": [
+        0.50075,
+        1.745,
+        0.9
+      ],
+      "transport_entry": [
+        0.50075,
+        1.745,
+        0.9
+      ]
+    },
+    "ngs_tube": {
+      "station": "ngs_tube",
+      "site": "ref_ngs_tube",
+      "coordinate_source": "ref_ngs_tube",
+      "workpiece": "TUBE_5ML",
+      "approach_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -0.0,
+        -1.0
+      ],
+      "target": [
+        0.967,
+        1.506,
+        0.605
+      ],
+      "approach": [
+        0.967,
+        1.506,
+        0.6849999999999999
+      ],
+      "staging": [
+        0.967,
+        1.506,
+        0.7849999999999999
+      ],
+      "extract": [
+        0.967,
+        1.506,
+        0.725
+      ],
+      "lift": [
+        0.967,
+        1.506,
+        0.9
+      ],
+      "transport_entry": [
+        0.967,
+        1.506,
+        0.9
+      ]
+    },
+    "waste": {
+      "station": "waste",
+      "site": "ref_waste",
+      "coordinate_source": "ref_waste",
+      "workpiece": "ANY",
+      "approach_axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "insertion_axis": [
+        -0.0,
+        -0.0,
+        -1.0
+      ],
+      "target": [
+        1.08000028,
+        0.25,
+        0.700000018
+      ],
+      "approach": [
+        1.08000028,
+        0.25,
+        0.800000018
+      ],
+      "staging": [
+        1.08000028,
+        0.25,
+        0.880000018
+      ],
+      "extract": [
+        1.08000028,
+        0.25,
+        0.850000018
+      ],
+      "lift": [
+        1.08000028,
+        0.25,
+        0.9
+      ],
+      "transport_entry": [
+        1.08000028,
+        0.25,
+        0.9
+      ]
+    }
+  },
+  "process": [
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "plate_hotel_4",
+      "to": "fluent_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "FLUENT_INITIAL_PLATE_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "fluent_plate",
+      "to": "incubator_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "STX44_CULTURE",
+      "requires": {
+        "incubator_plate": "plate_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "incubator_plate",
+      "to": "reader_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "READER_ANALYSIS",
+      "requires": {
+        "reader_plate": "plate_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "reader_plate",
+      "to": "fluent_plate"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_a",
+      "from": "tube_hotel_1",
+      "to": "fluent_tube"
+    },
+    {
+      "type": "PROCESS",
+      "name": "FLUENT_POST_READER_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a",
+        "fluent_tube": "tube_a"
+      }
+    },
+    {
+      "type": "DISPOSE",
+      "object": "plate_a",
+      "from": "fluent_plate",
+      "to": "waste"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_a",
+      "from": "fluent_tube",
+      "to": "sorter_right_tube"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_b",
+      "from": "plate_hotel_3",
+      "to": "sorter_left_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "CELL_SORTING",
+      "requires": {
+        "sorter_left_plate": "plate_b",
+        "sorter_right_tube": "tube_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_b",
+      "from": "sorter_left_plate",
+      "to": "fluent_plate"
+    },
+    {
+      "type": "DISPOSE",
+      "object": "tube_a",
+      "from": "sorter_right_tube",
+      "to": "waste"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_b",
+      "from": "tube_hotel_2",
+      "to": "fluent_tube"
+    },
+    {
+      "type": "PROCESS",
+      "name": "FLUENT_NGS_PREPARATION",
+      "requires": {
+        "fluent_plate": "plate_b",
+        "fluent_tube": "tube_b"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_b",
+      "from": "fluent_tube",
+      "to": "ngs_tube"
+    },
+    {
+      "type": "PROCESS",
+      "name": "NGS_ANALYSIS",
+      "requires": {
+        "ngs_tube": "tube_b"
+      }
+    },
+    {
+      "type": "DISPOSE",
+      "object": "plate_b",
+      "from": "fluent_plate",
+      "to": "waste"
+    }
+  ],
+  "commands": [
+    {
+      "command_id": 1,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "plate_hotel_4",
+      "process_step": 1
+    },
+    {
+      "command_id": 2,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_a",
+      "station": "plate_hotel_4",
+      "process_step": 1
+    },
+    {
+      "command_id": 3,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "plate_hotel_4",
+      "object": "plate_a",
+      "position": [
+        0.870772839,
+        0.17649999,
+        0.703999953
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 4,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "plate_hotel_4",
+      "object": "plate_a",
+      "position": [
+        0.870772839,
+        0.17649999,
+        0.623999953
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 5,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "plate_hotel_4",
+      "object": "plate_a",
+      "position": [
+        0.870772839,
+        0.11649999,
+        0.623999953
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 6,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_a",
+      "station": "plate_hotel_4",
+      "process_step": 1
+    },
+    {
+      "command_id": 7,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_a",
+      "station": "plate_hotel_4",
+      "process_step": 1
+    },
+    {
+      "command_id": 8,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "plate_hotel_4",
+      "object": "plate_a",
+      "position": [
+        0.870772839,
+        0.21649999,
+        0.623999953
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 9,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "plate_hotel_4",
+      "object": "plate_a",
+      "position": [
+        0.870772839,
+        0.21649999,
+        0.9
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 10,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.9
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 11,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 12,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.564999998
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 13,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.264000028,
+        0.564999998
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 14,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 1
+    },
+    {
+      "command_id": 15,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 1
+    },
+    {
+      "command_id": 16,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.564999998
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 17,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 1
+    },
+    {
+      "command_id": 18,
+      "process_step": 2,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_START",
+      "equipment_process": "FLUENT_INITIAL_PLATE_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a"
+      }
+    },
+    {
+      "command_id": 19,
+      "process_step": 2,
+      "type": "PROCESS",
+      "event": "WAIT_FOR_COMPLETION",
+      "equipment_process": "FLUENT_INITIAL_PLATE_PROCESS"
+    },
+    {
+      "command_id": 20,
+      "process_step": 2,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_END",
+      "equipment_process": "FLUENT_INITIAL_PLATE_PROCESS"
+    },
+    {
+      "command_id": 21,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 3
+    },
+    {
+      "command_id": 22,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 3
+    },
+    {
+      "command_id": 23,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 24,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.564999998
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 25,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.264000028,
+        0.564999998
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 26,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 3
+    },
+    {
+      "command_id": 27,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 3
+    },
+    {
+      "command_id": 28,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.564999998
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 29,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.9
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 30,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.04400053,
+        0.991500318,
+        0.9
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 31,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.04400053,
+        0.991500318,
+        0.770000057
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 32,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.04400053,
+        0.991500318,
+        0.690000057
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 33,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.14400053,
+        0.991500318,
+        0.690000057
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 34,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "incubator_plate",
+      "process_step": 3
+    },
+    {
+      "command_id": 35,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "plate_a",
+      "station": "incubator_plate",
+      "process_step": 3
+    },
+    {
+      "command_id": 36,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        0.99400053,
+        0.991500318,
+        0.690000057
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 37,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.04400053,
+        0.991500318,
+        0.770000057
+      ],
+      "process_step": 3
+    },
+    {
+      "command_id": 38,
+      "process_step": 4,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_START",
+      "equipment_process": "STX44_CULTURE",
+      "requires": {
+        "incubator_plate": "plate_a"
+      }
+    },
+    {
+      "command_id": 39,
+      "process_step": 4,
+      "type": "PROCESS",
+      "event": "WAIT_FOR_COMPLETION",
+      "equipment_process": "STX44_CULTURE"
+    },
+    {
+      "command_id": 40,
+      "process_step": 4,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_END",
+      "equipment_process": "STX44_CULTURE"
+    },
+    {
+      "command_id": 41,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "incubator_plate",
+      "process_step": 5
+    },
+    {
+      "command_id": 42,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_a",
+      "station": "incubator_plate",
+      "process_step": 5
+    },
+    {
+      "command_id": 43,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.04400053,
+        0.991500318,
+        0.770000057
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 44,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.04400053,
+        0.991500318,
+        0.690000057
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 45,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        1.14400053,
+        0.991500318,
+        0.690000057
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 46,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_a",
+      "station": "incubator_plate",
+      "process_step": 5
+    },
+    {
+      "command_id": 47,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_a",
+      "station": "incubator_plate",
+      "process_step": 5
+    },
+    {
+      "command_id": 48,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        0.99400053,
+        0.991500318,
+        0.690000057
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 49,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "position": [
+        0.99400053,
+        0.991500318,
+        0.9
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 50,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.58250002,
+        0.9
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 51,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.58250002,
+        0.630000072
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 52,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.58250002,
+        0.550000072
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 53,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.66250002,
+        0.550000072
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 54,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "reader_plate",
+      "process_step": 5
+    },
+    {
+      "command_id": 55,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "plate_a",
+      "station": "reader_plate",
+      "process_step": 5
+    },
+    {
+      "command_id": 56,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.5425000199999999,
+        0.550000072
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 57,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.58250002,
+        0.630000072
+      ],
+      "process_step": 5
+    },
+    {
+      "command_id": 58,
+      "process_step": 6,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_START",
+      "equipment_process": "READER_ANALYSIS",
+      "requires": {
+        "reader_plate": "plate_a"
+      }
+    },
+    {
+      "command_id": 59,
+      "process_step": 6,
+      "type": "PROCESS",
+      "event": "WAIT_FOR_COMPLETION",
+      "equipment_process": "READER_ANALYSIS"
+    },
+    {
+      "command_id": 60,
+      "process_step": 6,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_END",
+      "equipment_process": "READER_ANALYSIS"
+    },
+    {
+      "command_id": 61,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "reader_plate",
+      "process_step": 7
+    },
+    {
+      "command_id": 62,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_a",
+      "station": "reader_plate",
+      "process_step": 7
+    },
+    {
+      "command_id": 63,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.58250002,
+        0.630000072
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 64,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.58250002,
+        0.550000072
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 65,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.66250002,
+        0.550000072
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 66,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_a",
+      "station": "reader_plate",
+      "process_step": 7
+    },
+    {
+      "command_id": 67,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_a",
+      "station": "reader_plate",
+      "process_step": 7
+    },
+    {
+      "command_id": 68,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.5425000199999999,
+        0.550000072
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 69,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "reader_plate",
+      "object": "plate_a",
+      "position": [
+        0.123500012,
+        1.5425000199999999,
+        0.9
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 70,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.9
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 71,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 72,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.564999998
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 73,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.264000028,
+        0.564999998
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 74,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 7
+    },
+    {
+      "command_id": 75,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 7
+    },
+    {
+      "command_id": 76,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.564999998
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 77,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 7
+    },
+    {
+      "command_id": 78,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_a",
+      "station": "tube_hotel_1",
+      "process_step": 8
+    },
+    {
+      "command_id": 79,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_TUBE_5ML",
+      "object": "tube_a",
+      "station": "tube_hotel_1",
+      "process_step": 8
+    },
+    {
+      "command_id": 80,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "tube_hotel_1",
+      "object": "tube_a",
+      "position": [
+        0.700000048,
+        0.170000002,
+        0.7650000379999999
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 81,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "tube_hotel_1",
+      "object": "tube_a",
+      "position": [
+        0.700000048,
+        0.170000002,
+        0.665000038
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 82,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "tube_hotel_1",
+      "object": "tube_a",
+      "position": [
+        0.700000048,
+        0.170000002,
+        0.585000038
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 83,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "tube_a",
+      "station": "tube_hotel_1",
+      "process_step": 8
+    },
+    {
+      "command_id": 84,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "tube_a",
+      "station": "tube_hotel_1",
+      "process_step": 8
+    },
+    {
+      "command_id": 85,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "tube_hotel_1",
+      "object": "tube_a",
+      "position": [
+        0.700000048,
+        0.170000002,
+        0.705000038
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 86,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "tube_hotel_1",
+      "object": "tube_a",
+      "position": [
+        0.700000048,
+        0.170000002,
+        0.9
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 87,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.9
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 88,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.746
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 89,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.6459999999999999
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 90,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.566
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 91,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_a",
+      "station": "fluent_tube",
+      "process_step": 8
+    },
+    {
+      "command_id": 92,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "tube_a",
+      "station": "fluent_tube",
+      "process_step": 8
+    },
+    {
+      "command_id": 93,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.6859999999999999
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 94,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.746
+      ],
+      "process_step": 8
+    },
+    {
+      "command_id": 95,
+      "process_step": 9,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_START",
+      "equipment_process": "FLUENT_POST_READER_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a",
+        "fluent_tube": "tube_a"
+      }
+    },
+    {
+      "command_id": 96,
+      "process_step": 9,
+      "type": "PROCESS",
+      "event": "WAIT_FOR_COMPLETION",
+      "equipment_process": "FLUENT_POST_READER_PROCESS"
+    },
+    {
+      "command_id": 97,
+      "process_step": 9,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_END",
+      "equipment_process": "FLUENT_POST_READER_PROCESS"
+    },
+    {
+      "command_id": 98,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 10
+    },
+    {
+      "command_id": 99,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 10
+    },
+    {
+      "command_id": 100,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 101,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.564999998
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 102,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.264000028,
+        0.564999998
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 103,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 10
+    },
+    {
+      "command_id": 104,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_a",
+      "station": "fluent_plate",
+      "process_step": 10
+    },
+    {
+      "command_id": 105,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.564999998
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 106,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.9
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 107,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "waste",
+      "object": "plate_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.9
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 108,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "waste",
+      "object": "plate_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.880000018
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 109,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "waste",
+      "object": "plate_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.800000018
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 110,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "waste",
+      "object": "plate_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.700000018
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 111,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_a",
+      "station": "waste",
+      "process_step": 10
+    },
+    {
+      "command_id": 112,
+      "type": "EVENT",
+      "event": "DISPOSE",
+      "object": "plate_a",
+      "station": "waste",
+      "process_step": 10
+    },
+    {
+      "command_id": 113,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "waste",
+      "object": "plate_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.850000018
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 114,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "waste",
+      "object": "plate_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.880000018
+      ],
+      "process_step": 10
+    },
+    {
+      "command_id": 115,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_a",
+      "station": "fluent_tube",
+      "process_step": 11
+    },
+    {
+      "command_id": 116,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_TUBE_5ML",
+      "object": "tube_a",
+      "station": "fluent_tube",
+      "process_step": 11
+    },
+    {
+      "command_id": 117,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.746
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 118,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.6459999999999999
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 119,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.566
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 120,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "tube_a",
+      "station": "fluent_tube",
+      "process_step": 11
+    },
+    {
+      "command_id": 121,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "tube_a",
+      "station": "fluent_tube",
+      "process_step": 11
+    },
+    {
+      "command_id": 122,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.6859999999999999
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 123,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "position": [
+        0.28,
+        0.208,
+        0.9
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 124,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.9
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 125,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.744
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 126,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.6439999999999999
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 127,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.564
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 128,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_a",
+      "station": "sorter_right_tube",
+      "process_step": 11
+    },
+    {
+      "command_id": 129,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "tube_a",
+      "station": "sorter_right_tube",
+      "process_step": 11
+    },
+    {
+      "command_id": 130,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.6839999999999999
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 131,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.744
+      ],
+      "process_step": 11
+    },
+    {
+      "command_id": 132,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_b",
+      "station": "plate_hotel_3",
+      "process_step": 12
+    },
+    {
+      "command_id": 133,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_b",
+      "station": "plate_hotel_3",
+      "process_step": 12
+    },
+    {
+      "command_id": 134,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "plate_hotel_3",
+      "object": "plate_b",
+      "position": [
+        0.870772779,
+        0.17649999,
+        0.668999927
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 135,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "plate_hotel_3",
+      "object": "plate_b",
+      "position": [
+        0.870772779,
+        0.17649999,
+        0.588999927
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 136,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "plate_hotel_3",
+      "object": "plate_b",
+      "position": [
+        0.870772779,
+        0.11649999,
+        0.588999927
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 137,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_b",
+      "station": "plate_hotel_3",
+      "process_step": 12
+    },
+    {
+      "command_id": 138,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_b",
+      "station": "plate_hotel_3",
+      "process_step": 12
+    },
+    {
+      "command_id": 139,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "plate_hotel_3",
+      "object": "plate_b",
+      "position": [
+        0.870772779,
+        0.21649999,
+        0.588999927
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 140,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "plate_hotel_3",
+      "object": "plate_b",
+      "position": [
+        0.870772779,
+        0.21649999,
+        0.9
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 141,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.9
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 142,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.734
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 143,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.634
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 144,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.554
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 145,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_b",
+      "station": "sorter_left_plate",
+      "process_step": 12
+    },
+    {
+      "command_id": 146,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "plate_b",
+      "station": "sorter_left_plate",
+      "process_step": 12
+    },
+    {
+      "command_id": 147,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.674
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 148,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.734
+      ],
+      "process_step": 12
+    },
+    {
+      "command_id": 149,
+      "process_step": 13,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_START",
+      "equipment_process": "CELL_SORTING",
+      "requires": {
+        "sorter_left_plate": "plate_b",
+        "sorter_right_tube": "tube_a"
+      }
+    },
+    {
+      "command_id": 150,
+      "process_step": 13,
+      "type": "PROCESS",
+      "event": "WAIT_FOR_COMPLETION",
+      "equipment_process": "CELL_SORTING"
+    },
+    {
+      "command_id": 151,
+      "process_step": 13,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_END",
+      "equipment_process": "CELL_SORTING"
+    },
+    {
+      "command_id": 152,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_b",
+      "station": "sorter_left_plate",
+      "process_step": 14
+    },
+    {
+      "command_id": 153,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_b",
+      "station": "sorter_left_plate",
+      "process_step": 14
+    },
+    {
+      "command_id": 154,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.734
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 155,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.634
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 156,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.554
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 157,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_b",
+      "station": "sorter_left_plate",
+      "process_step": 14
+    },
+    {
+      "command_id": 158,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_b",
+      "station": "sorter_left_plate",
+      "process_step": 14
+    },
+    {
+      "command_id": 159,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.674
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 160,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "position": [
+        0.36575,
+        1.829,
+        0.9
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 161,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.9
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 162,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 163,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.564999998
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 164,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.264000028,
+        0.564999998
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 165,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_b",
+      "station": "fluent_plate",
+      "process_step": 14
+    },
+    {
+      "command_id": 166,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "plate_b",
+      "station": "fluent_plate",
+      "process_step": 14
+    },
+    {
+      "command_id": 167,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.564999998
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 168,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 14
+    },
+    {
+      "command_id": 169,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_a",
+      "station": "sorter_right_tube",
+      "process_step": 15
+    },
+    {
+      "command_id": 170,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_TUBE_5ML",
+      "object": "tube_a",
+      "station": "sorter_right_tube",
+      "process_step": 15
+    },
+    {
+      "command_id": 171,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.744
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 172,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.6439999999999999
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 173,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.564
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 174,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "tube_a",
+      "station": "sorter_right_tube",
+      "process_step": 15
+    },
+    {
+      "command_id": 175,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "tube_a",
+      "station": "sorter_right_tube",
+      "process_step": 15
+    },
+    {
+      "command_id": 176,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.6839999999999999
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 177,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "position": [
+        0.50075,
+        1.745,
+        0.9
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 178,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "waste",
+      "object": "tube_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.9
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 179,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "waste",
+      "object": "tube_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.880000018
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 180,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "waste",
+      "object": "tube_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.800000018
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 181,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "waste",
+      "object": "tube_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.700000018
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 182,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_a",
+      "station": "waste",
+      "process_step": 15
+    },
+    {
+      "command_id": 183,
+      "type": "EVENT",
+      "event": "DISPOSE",
+      "object": "tube_a",
+      "station": "waste",
+      "process_step": 15
+    },
+    {
+      "command_id": 184,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "waste",
+      "object": "tube_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.850000018
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 185,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "waste",
+      "object": "tube_a",
+      "position": [
+        1.08000028,
+        0.25,
+        0.880000018
+      ],
+      "process_step": 15
+    },
+    {
+      "command_id": 186,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_b",
+      "station": "tube_hotel_2",
+      "process_step": 16
+    },
+    {
+      "command_id": 187,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_TUBE_5ML",
+      "object": "tube_b",
+      "station": "tube_hotel_2",
+      "process_step": 16
+    },
+    {
+      "command_id": 188,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "tube_hotel_2",
+      "object": "tube_b",
+      "position": [
+        0.700000048,
+        0.140000001,
+        0.7650000379999999
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 189,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "tube_hotel_2",
+      "object": "tube_b",
+      "position": [
+        0.700000048,
+        0.140000001,
+        0.665000038
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 190,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "tube_hotel_2",
+      "object": "tube_b",
+      "position": [
+        0.700000048,
+        0.140000001,
+        0.585000038
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 191,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "tube_b",
+      "station": "tube_hotel_2",
+      "process_step": 16
+    },
+    {
+      "command_id": 192,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "tube_b",
+      "station": "tube_hotel_2",
+      "process_step": 16
+    },
+    {
+      "command_id": 193,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "tube_hotel_2",
+      "object": "tube_b",
+      "position": [
+        0.700000048,
+        0.140000001,
+        0.705000038
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 194,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "tube_hotel_2",
+      "object": "tube_b",
+      "position": [
+        0.700000048,
+        0.140000001,
+        0.9
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 195,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.9
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 196,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.746
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 197,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.6459999999999999
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 198,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.566
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 199,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_b",
+      "station": "fluent_tube",
+      "process_step": 16
+    },
+    {
+      "command_id": 200,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "tube_b",
+      "station": "fluent_tube",
+      "process_step": 16
+    },
+    {
+      "command_id": 201,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.6859999999999999
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 202,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.746
+      ],
+      "process_step": 16
+    },
+    {
+      "command_id": 203,
+      "process_step": 17,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_START",
+      "equipment_process": "FLUENT_NGS_PREPARATION",
+      "requires": {
+        "fluent_plate": "plate_b",
+        "fluent_tube": "tube_b"
+      }
+    },
+    {
+      "command_id": 204,
+      "process_step": 17,
+      "type": "PROCESS",
+      "event": "WAIT_FOR_COMPLETION",
+      "equipment_process": "FLUENT_NGS_PREPARATION"
+    },
+    {
+      "command_id": 205,
+      "process_step": 17,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_END",
+      "equipment_process": "FLUENT_NGS_PREPARATION"
+    },
+    {
+      "command_id": 206,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_b",
+      "station": "fluent_tube",
+      "process_step": 18
+    },
+    {
+      "command_id": 207,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_TUBE_5ML",
+      "object": "tube_b",
+      "station": "fluent_tube",
+      "process_step": 18
+    },
+    {
+      "command_id": 208,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.746
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 209,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.6459999999999999
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 210,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.566
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 211,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "tube_b",
+      "station": "fluent_tube",
+      "process_step": 18
+    },
+    {
+      "command_id": 212,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "tube_b",
+      "station": "fluent_tube",
+      "process_step": 18
+    },
+    {
+      "command_id": 213,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.6859999999999999
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 214,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "position": [
+        0.28,
+        0.208,
+        0.9
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 215,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "ngs_tube",
+      "object": "tube_b",
+      "position": [
+        0.967,
+        1.506,
+        0.9
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 216,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "ngs_tube",
+      "object": "tube_b",
+      "position": [
+        0.967,
+        1.506,
+        0.7849999999999999
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 217,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "ngs_tube",
+      "object": "tube_b",
+      "position": [
+        0.967,
+        1.506,
+        0.6849999999999999
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 218,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "ngs_tube",
+      "object": "tube_b",
+      "position": [
+        0.967,
+        1.506,
+        0.605
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 219,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "tube_b",
+      "station": "ngs_tube",
+      "process_step": 18
+    },
+    {
+      "command_id": 220,
+      "type": "EVENT",
+      "event": "DETACH",
+      "object": "tube_b",
+      "station": "ngs_tube",
+      "process_step": 18
+    },
+    {
+      "command_id": 221,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "ngs_tube",
+      "object": "tube_b",
+      "position": [
+        0.967,
+        1.506,
+        0.725
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 222,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "ngs_tube",
+      "object": "tube_b",
+      "position": [
+        0.967,
+        1.506,
+        0.7849999999999999
+      ],
+      "process_step": 18
+    },
+    {
+      "command_id": 223,
+      "process_step": 19,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_START",
+      "equipment_process": "NGS_ANALYSIS",
+      "requires": {
+        "ngs_tube": "tube_b"
+      }
+    },
+    {
+      "command_id": 224,
+      "process_step": 19,
+      "type": "PROCESS",
+      "event": "WAIT_FOR_COMPLETION",
+      "equipment_process": "NGS_ANALYSIS"
+    },
+    {
+      "command_id": 225,
+      "process_step": 19,
+      "type": "PROCESS",
+      "event": "EQUIPMENT_END",
+      "equipment_process": "NGS_ANALYSIS"
+    },
+    {
+      "command_id": 226,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_b",
+      "station": "fluent_plate",
+      "process_step": 20
+    },
+    {
+      "command_id": 227,
+      "type": "EVENT",
+      "event": "GRIPPER_MODE_PLATE",
+      "object": "plate_b",
+      "station": "fluent_plate",
+      "process_step": 20
+    },
+    {
+      "command_id": 228,
+      "type": "MOTION",
+      "phase": "PICK_STAGING",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.644999998
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 229,
+      "type": "MOTION",
+      "phase": "PICK_APPROACH",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.344000028,
+        0.564999998
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 230,
+      "type": "MOTION",
+      "phase": "GRASP",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.264000028,
+        0.564999998
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 231,
+      "type": "EVENT",
+      "event": "GRIPPER_CLOSE",
+      "object": "plate_b",
+      "station": "fluent_plate",
+      "process_step": 20
+    },
+    {
+      "command_id": 232,
+      "type": "EVENT",
+      "event": "ATTACH",
+      "object": "plate_b",
+      "station": "fluent_plate",
+      "process_step": 20
+    },
+    {
+      "command_id": 233,
+      "type": "MOTION",
+      "phase": "EXTRACT",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.564999998
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 234,
+      "type": "MOTION",
+      "phase": "LIFT",
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "position": [
+        0.445000231,
+        0.364000028,
+        0.9
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 235,
+      "type": "MOTION",
+      "phase": "TRANSPORT",
+      "station": "waste",
+      "object": "plate_b",
+      "position": [
+        1.08000028,
+        0.25,
+        0.9
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 236,
+      "type": "MOTION",
+      "phase": "PLACE_STAGING",
+      "station": "waste",
+      "object": "plate_b",
+      "position": [
+        1.08000028,
+        0.25,
+        0.880000018
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 237,
+      "type": "MOTION",
+      "phase": "PLACE_APPROACH",
+      "station": "waste",
+      "object": "plate_b",
+      "position": [
+        1.08000028,
+        0.25,
+        0.800000018
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 238,
+      "type": "MOTION",
+      "phase": "INSERT",
+      "station": "waste",
+      "object": "plate_b",
+      "position": [
+        1.08000028,
+        0.25,
+        0.700000018
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 239,
+      "type": "EVENT",
+      "event": "GRIPPER_OPEN",
+      "object": "plate_b",
+      "station": "waste",
+      "process_step": 20
+    },
+    {
+      "command_id": 240,
+      "type": "EVENT",
+      "event": "DISPOSE",
+      "object": "plate_b",
+      "station": "waste",
+      "process_step": 20
+    },
+    {
+      "command_id": 241,
+      "type": "MOTION",
+      "phase": "RETREAT",
+      "station": "waste",
+      "object": "plate_b",
+      "position": [
+        1.08000028,
+        0.25,
+        0.850000018
+      ],
+      "process_step": 20
+    },
+    {
+      "command_id": 242,
+      "type": "MOTION",
+      "phase": "RETREAT_STAGING",
+      "station": "waste",
+      "object": "plate_b",
+      "position": [
+        1.08000028,
+        0.25,
+        0.880000018
+      ],
+      "process_step": 20
+    }
+  ],
+  "logical_validation": {
+    "slots": {
+      "plate_hotel_4": null,
+      "plate_hotel_3": null,
+      "tube_hotel_1": null,
+      "tube_hotel_2": null,
+      "fluent_plate": null,
+      "fluent_tube": null,
+      "incubator_plate": null,
+      "reader_plate": null,
+      "sorter_left_plate": null,
+      "sorter_right_tube": null,
+      "ngs_tube": "tube_b",
+      "waste": null
+    },
+    "object_states": {
+      "plate_a": {
+        "state": "DISPOSED",
+        "slot": null
+      },
+      "plate_b": {
+        "state": "DISPOSED",
+        "slot": null
+      },
+      "tube_a": {
+        "state": "DISPOSED",
+        "slot": null
+      },
+      "tube_b": {
+        "state": "AT_SLOT",
+        "slot": "ngs_tube"
+      }
+    },
+    "equipment_runs": [
+      "FLUENT_INITIAL_PLATE_PROCESS",
+      "STX44_CULTURE",
+      "READER_ANALYSIS",
+      "FLUENT_POST_READER_PROCESS",
+      "CELL_SORTING",
+      "FLUENT_NGS_PREPARATION",
+      "NGS_ANALYSIS"
+    ],
+    "waste_contents": [
+      "plate_a",
+      "tube_a",
+      "plate_b"
+    ]
+  },
+  "statistics": {
+    "motion_command_count": 143,
+    "maximum_raw_segment_m": 1.6897349761305418,
+    "total_raw_distance_m": 33.389490601456515
+  }
+}

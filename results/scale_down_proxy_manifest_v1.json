@@ -1,0 +1,423 @@
+{
+  "source": "C:\\Users\\jkim1\\autonomous_lab\\models\\autonomous_lab.xml",
+  "policy": "rear shell depth only; interface-side faces and all functional interfaces copied 1:1",
+  "candidate_basis": "screening ratios for simulation comparison; not derived from internal packaging CAD",
+  "production_ready": false,
+  "missing_production_inputs": [
+    "verified internal mechanism envelopes",
+    "door hardware and swept volumes",
+    "sensor and cable service envelopes",
+    "manufacturing and installation tolerances",
+    "exact 5 mL tube and holder CAD"
+  ],
+  "fixed_interface_names": [
+    "plate_hotel_site",
+    "fluent_input_plate_site",
+    "fluent_glass_door_center_site",
+    "fluent_handoff_site",
+    "stx44_plate_site",
+    "reader_aperture_center_site",
+    "reader_plate_site",
+    "waste_drop_site",
+    "waste_pre_drop_site",
+    "col_plate_hotel_plate_support",
+    "col_fluent_input_plate_support",
+    "col_stx44_plate_support",
+    "col_reader_plate_support",
+    "col_plate_hotel_rear",
+    "col_fluent_front_left_frame",
+    "col_fluent_front_bottom_frame",
+    "col_fluent_front_top_frame",
+    "col_reader_front_left",
+    "col_reader_front_right",
+    "col_reader_front_bottom",
+    "col_reader_front_top",
+    "col_waste_body"
+  ],
+  "candidates": [
+    {
+      "candidate": "C1_conservative",
+      "rear_depth_scale": 0.85,
+      "rear_depth_reduction_percent": 15.000000000000002,
+      "applied_axis_scale_xyz": [
+        1.0,
+        0.85,
+        1.0
+      ],
+      "design_intent": "screening candidate with the largest unmodeled packaging reserve",
+      "xml": "C:\\Users\\jkim1\\autonomous_lab\\models\\autonomous_lab_scale_C1_conservative.xml",
+      "fixed_interfaces_unchanged": true,
+      "collision_obstacles_subset_of_source": true,
+      "compiled": true,
+      "nq": 23,
+      "nv": 22,
+      "nu": 16,
+      "changed_shell_geoms": {
+        "col_fluent_rear": {
+          "equipment": "fluent",
+          "fixed_interface_face_y_m": -0.09999999999999998,
+          "source_position_m": [
+            0.77,
+            -0.3775,
+            0.003
+          ],
+          "candidate_position_m": [
+            0.77,
+            -0.335875,
+            0.003
+          ],
+          "source_half_size_m": [
+            0.845,
+            0.2775,
+            0.618
+          ],
+          "candidate_half_size_m": [
+            0.845,
+            0.235875,
+            0.618
+          ],
+          "source_full_depth_m": 0.555,
+          "candidate_full_depth_m": 0.47175,
+          "rear_depth_reduction_m": 0.08325000000000005
+        },
+        "col_stx44_main": {
+          "equipment": "stx44",
+          "fixed_interface_face_y_m": 0.142264,
+          "source_position_m": [
+            -5.9346465,
+            -0.100237,
+            1.00577
+          ],
+          "candidate_position_m": [
+            -5.9346465,
+            -0.06386185,
+            1.00577
+          ],
+          "source_half_size_m": [
+            0.1846465,
+            0.242501,
+            0.5675
+          ],
+          "candidate_half_size_m": [
+            0.1846465,
+            0.20612585,
+            0.5675
+          ],
+          "source_full_depth_m": 0.485002,
+          "candidate_full_depth_m": 0.4122517,
+          "rear_depth_reduction_m": 0.07275029999999999
+        },
+        "col_stx44_upper_right": {
+          "equipment": "stx44",
+          "fixed_interface_face_y_m": 0.142264,
+          "source_position_m": [
+            -5.591396,
+            -0.100237,
+            1.236635
+          ],
+          "candidate_position_m": [
+            -5.591396,
+            -0.06386185,
+            1.236635
+          ],
+          "source_half_size_m": [
+            0.158604,
+            0.242501,
+            0.336635
+          ],
+          "candidate_half_size_m": [
+            0.158604,
+            0.20612585,
+            0.336635
+          ],
+          "source_full_depth_m": 0.485002,
+          "candidate_full_depth_m": 0.4122517,
+          "rear_depth_reduction_m": 0.07275029999999999
+        },
+        "col_reader_rear": {
+          "equipment": "reader",
+          "fixed_interface_face_y_m": -0.04799999999999999,
+          "source_position_m": [
+            -1.247,
+            -0.3025,
+            0.4975
+          ],
+          "candidate_position_m": [
+            -1.247,
+            -0.264325,
+            0.4975
+          ],
+          "source_half_size_m": [
+            0.247,
+            0.2545,
+            0.1975
+          ],
+          "candidate_half_size_m": [
+            0.247,
+            0.216325,
+            0.1975
+          ],
+          "source_full_depth_m": 0.509,
+          "candidate_full_depth_m": 0.43265,
+          "rear_depth_reduction_m": 0.07635000000000003
+        }
+      }
+    },
+    {
+      "candidate": "C2_balanced",
+      "rear_depth_scale": 0.7,
+      "rear_depth_reduction_percent": 30.000000000000004,
+      "applied_axis_scale_xyz": [
+        1.0,
+        0.7,
+        1.0
+      ],
+      "design_intent": "balanced screening candidate for engineering follow-up",
+      "xml": "C:\\Users\\jkim1\\autonomous_lab\\models\\autonomous_lab_scale_C2_balanced.xml",
+      "fixed_interfaces_unchanged": true,
+      "collision_obstacles_subset_of_source": true,
+      "compiled": true,
+      "nq": 23,
+      "nv": 22,
+      "nu": 16,
+      "changed_shell_geoms": {
+        "col_fluent_rear": {
+          "equipment": "fluent",
+          "fixed_interface_face_y_m": -0.09999999999999998,
+          "source_position_m": [
+            0.77,
+            -0.3775,
+            0.003
+          ],
+          "candidate_position_m": [
+            0.77,
+            -0.29425,
+            0.003
+          ],
+          "source_half_size_m": [
+            0.845,
+            0.2775,
+            0.618
+          ],
+          "candidate_half_size_m": [
+            0.845,
+            0.19425,
+            0.618
+          ],
+          "source_full_depth_m": 0.555,
+          "candidate_full_depth_m": 0.3885,
+          "rear_depth_reduction_m": 0.16650000000000004
+        },
+        "col_stx44_main": {
+          "equipment": "stx44",
+          "fixed_interface_face_y_m": 0.142264,
+          "source_position_m": [
+            -5.9346465,
+            -0.100237,
+            1.00577
+          ],
+          "candidate_position_m": [
+            -5.9346465,
+            -0.027486699999999975,
+            1.00577
+          ],
+          "source_half_size_m": [
+            0.1846465,
+            0.242501,
+            0.5675
+          ],
+          "candidate_half_size_m": [
+            0.1846465,
+            0.16975069999999998,
+            0.5675
+          ],
+          "source_full_depth_m": 0.485002,
+          "candidate_full_depth_m": 0.33950139999999995,
+          "rear_depth_reduction_m": 0.14550060000000004
+        },
+        "col_stx44_upper_right": {
+          "equipment": "stx44",
+          "fixed_interface_face_y_m": 0.142264,
+          "source_position_m": [
+            -5.591396,
+            -0.100237,
+            1.236635
+          ],
+          "candidate_position_m": [
+            -5.591396,
+            -0.027486699999999975,
+            1.236635
+          ],
+          "source_half_size_m": [
+            0.158604,
+            0.242501,
+            0.336635
+          ],
+          "candidate_half_size_m": [
+            0.158604,
+            0.16975069999999998,
+            0.336635
+          ],
+          "source_full_depth_m": 0.485002,
+          "candidate_full_depth_m": 0.33950139999999995,
+          "rear_depth_reduction_m": 0.14550060000000004
+        },
+        "col_reader_rear": {
+          "equipment": "reader",
+          "fixed_interface_face_y_m": -0.04799999999999999,
+          "source_position_m": [
+            -1.247,
+            -0.3025,
+            0.4975
+          ],
+          "candidate_position_m": [
+            -1.247,
+            -0.22615,
+            0.4975
+          ],
+          "source_half_size_m": [
+            0.247,
+            0.2545,
+            0.1975
+          ],
+          "candidate_half_size_m": [
+            0.247,
+            0.17815,
+            0.1975
+          ],
+          "source_full_depth_m": 0.509,
+          "candidate_full_depth_m": 0.3563,
+          "rear_depth_reduction_m": 0.1527
+        }
+      }
+    },
+    {
+      "candidate": "C3_aggressive",
+      "rear_depth_scale": 0.6,
+      "rear_depth_reduction_percent": 40.0,
+      "applied_axis_scale_xyz": [
+        1.0,
+        0.6,
+        1.0
+      ],
+      "design_intent": "maximum modeled rear-depth reduction screening candidate",
+      "xml": "C:\\Users\\jkim1\\autonomous_lab\\models\\autonomous_lab_scale_C3_aggressive.xml",
+      "fixed_interfaces_unchanged": true,
+      "collision_obstacles_subset_of_source": true,
+      "compiled": true,
+      "nq": 23,
+      "nv": 22,
+      "nu": 16,
+      "changed_shell_geoms": {
+        "col_fluent_rear": {
+          "equipment": "fluent",
+          "fixed_interface_face_y_m": -0.09999999999999998,
+          "source_position_m": [
+            0.77,
+            -0.3775,
+            0.003
+          ],
+          "candidate_position_m": [
+            0.77,
+            -0.26649999999999996,
+            0.003
+          ],
+          "source_half_size_m": [
+            0.845,
+            0.2775,
+            0.618
+          ],
+          "candidate_half_size_m": [
+            0.845,
+            0.1665,
+            0.618
+          ],
+          "source_full_depth_m": 0.555,
+          "candidate_full_depth_m": 0.333,
+          "rear_depth_reduction_m": 0.22200000000000003
+        },
+        "col_stx44_main": {
+          "equipment": "stx44",
+          "fixed_interface_face_y_m": 0.142264,
+          "source_position_m": [
+            -5.9346465,
+            -0.100237,
+            1.00577
+          ],
+          "candidate_position_m": [
+            -5.9346465,
+            -0.0032365999999999784,
+            1.00577
+          ],
+          "source_half_size_m": [
+            0.1846465,
+            0.242501,
+            0.5675
+          ],
+          "candidate_half_size_m": [
+            0.1846465,
+            0.14550059999999998,
+            0.5675
+          ],
+          "source_full_depth_m": 0.485002,
+          "candidate_full_depth_m": 0.29100119999999996,
+          "rear_depth_reduction_m": 0.19400080000000003
+        },
+        "col_stx44_upper_right": {
+          "equipment": "stx44",
+          "fixed_interface_face_y_m": 0.142264,
+          "source_position_m": [
+            -5.591396,
+            -0.100237,
+            1.236635
+          ],
+          "candidate_position_m": [
+            -5.591396,
+            -0.0032365999999999784,
+            1.236635
+          ],
+          "source_half_size_m": [
+            0.158604,
+            0.242501,
+            0.336635
+          ],
+          "candidate_half_size_m": [
+            0.158604,
+            0.14550059999999998,
+            0.336635
+          ],
+          "source_full_depth_m": 0.485002,
+          "candidate_full_depth_m": 0.29100119999999996,
+          "rear_depth_reduction_m": 0.19400080000000003
+        },
+        "col_reader_rear": {
+          "equipment": "reader",
+          "fixed_interface_face_y_m": -0.04799999999999999,
+          "source_position_m": [
+            -1.247,
+            -0.3025,
+            0.4975
+          ],
+          "candidate_position_m": [
+            -1.247,
+            -0.2007,
+            0.4975
+          ],
+          "source_half_size_m": [
+            0.247,
+            0.2545,
+            0.1975
+          ],
+          "candidate_half_size_m": [
+            0.247,
+            0.1527,
+            0.1975
+          ],
+          "source_full_depth_m": 0.509,
+          "candidate_full_depth_m": 0.3054,
+          "rear_depth_reduction_m": 0.2036
+        }
+      }
+    }
+  ]
+}

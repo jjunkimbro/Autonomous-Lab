@@ -1,0 +1,390 @@
+{
+  "policy": "rear shell only; all robot/payload interfaces fixed 1:1; Fluent input/output use the central front glass-door opening; continuous joints use nearest-equivalent angle branches; Fluent-to-STX44 uses a no-J6-flip IK branch with safe-rail wrist alignment; branches use one continuous plate state without intermediate resets; plate +Z and A1 heading are fixed during transport; joint references use quintic smoothstep timing",
+  "advisory_clearance_m": 0.01,
+  "candidates": [
+    {
+      "candidate": "C1_conservative",
+      "model": "C:\\Users\\jkim1\\autonomous_lab\\models\\autonomous_lab_scale_C1_conservative.xml",
+      "fixed_interfaces_unchanged": true,
+      "rear_shell_collision_volume_reduction_percent": 15.000000000000014,
+      "full_process_status": "PASS",
+      "minimum_clearance_m": 0.012331444991665273,
+      "maximum_transport_tilt_deg": 0.0,
+      "robustness_advisory": "PASS_10MM",
+      "branches": {
+        "positive": {
+          "status": "PASS",
+          "steps": 5958,
+          "minimum_clearance_m": 0.012331444991665273,
+          "continuous_state": true,
+          "segments": [
+            {
+              "name": "plate_hotel_to_fluent",
+              "status": "PASS",
+              "steps": 1088,
+              "minimum_clearance_m": 0.029450799280875586,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196548,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_initial",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774869,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "reader_to_fluent",
+              "status": "PASS",
+              "steps": 1114,
+              "minimum_clearance_m": 0.012331444991665273,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44_repeat",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.040133942741964836,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_repeat",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774859,
+              "clearance_advisory": "PASS_10MM"
+            }
+          ],
+          "collision": null,
+          "failure_reason": null,
+          "placement": {
+            "xy_error_m": 0.0002549349492389953,
+            "z_error_m": -0.0031212092545520043,
+            "tilt_deg": 2.5008088465191047,
+            "top_up_dot": 0.9990476057058935,
+            "heading_deg": 6.78384923245264e-05,
+            "linear_speed_m_s": 6.337895185187498e-09,
+            "valid": true
+          },
+          "plate_orientation_policy": "world_upright_fixed_heading_v1",
+          "maximum_transport_tilt_deg": 0.0,
+          "maximum_allowed_transport_tilt_deg": 3.0
+        },
+        "negative": {
+          "status": "PASS",
+          "steps": 3988,
+          "minimum_clearance_m": 0.012331444991665273,
+          "continuous_state": true,
+          "segments": [
+            {
+              "name": "plate_hotel_to_fluent",
+              "status": "PASS",
+              "steps": 1088,
+              "minimum_clearance_m": 0.029450799280875586,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196548,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_initial",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774869,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "reader_to_waste",
+              "status": "PASS",
+              "steps": 1022,
+              "minimum_clearance_m": 0.012331444991665273,
+              "clearance_advisory": "PASS_10MM"
+            }
+          ],
+          "collision": null,
+          "failure_reason": null,
+          "placement": {
+            "xy_error_m": 0.008820125436132637,
+            "z_error_m": 0.12607030939580693,
+            "tilt_deg": 0.0,
+            "top_up_dot": 1.0,
+            "heading_deg": 0.0,
+            "linear_speed_m_s": 0.0,
+            "valid": true
+          },
+          "plate_orientation_policy": "world_upright_fixed_heading_v1",
+          "maximum_transport_tilt_deg": 0.0,
+          "maximum_allowed_transport_tilt_deg": 3.0
+        }
+      },
+      "simulation_feasible": true
+    },
+    {
+      "candidate": "C2_balanced",
+      "model": "C:\\Users\\jkim1\\autonomous_lab\\models\\autonomous_lab_scale_C2_balanced.xml",
+      "fixed_interfaces_unchanged": true,
+      "rear_shell_collision_volume_reduction_percent": 30.000000000000014,
+      "full_process_status": "PASS",
+      "minimum_clearance_m": 0.012331453331078436,
+      "maximum_transport_tilt_deg": 0.0,
+      "robustness_advisory": "PASS_10MM",
+      "branches": {
+        "positive": {
+          "status": "PASS",
+          "steps": 5958,
+          "minimum_clearance_m": 0.012331453331078436,
+          "continuous_state": true,
+          "segments": [
+            {
+              "name": "plate_hotel_to_fluent",
+              "status": "PASS",
+              "steps": 1088,
+              "minimum_clearance_m": 0.029450799280875586,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196548,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_initial",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774869,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "reader_to_fluent",
+              "status": "PASS",
+              "steps": 1114,
+              "minimum_clearance_m": 0.012331453331078436,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44_repeat",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196505,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_repeat",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.025732640187748568,
+              "clearance_advisory": "PASS_10MM"
+            }
+          ],
+          "collision": null,
+          "failure_reason": null,
+          "placement": {
+            "xy_error_m": 0.0002549349492407705,
+            "z_error_m": -0.003121209254557389,
+            "tilt_deg": 2.5008088465395146,
+            "top_up_dot": 0.9990476057058779,
+            "heading_deg": 6.783849066310463e-05,
+            "linear_speed_m_s": 6.337896472210107e-09,
+            "valid": true
+          },
+          "plate_orientation_policy": "world_upright_fixed_heading_v1",
+          "maximum_transport_tilt_deg": 0.0,
+          "maximum_allowed_transport_tilt_deg": 3.0
+        },
+        "negative": {
+          "status": "PASS",
+          "steps": 3988,
+          "minimum_clearance_m": 0.012331453331078436,
+          "continuous_state": true,
+          "segments": [
+            {
+              "name": "plate_hotel_to_fluent",
+              "status": "PASS",
+              "steps": 1088,
+              "minimum_clearance_m": 0.029450799280875586,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196548,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_initial",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774869,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "reader_to_waste",
+              "status": "PASS",
+              "steps": 1022,
+              "minimum_clearance_m": 0.012331453331078436,
+              "clearance_advisory": "PASS_10MM"
+            }
+          ],
+          "collision": null,
+          "failure_reason": null,
+          "placement": {
+            "xy_error_m": 0.008820125436125793,
+            "z_error_m": 0.12607030939580205,
+            "tilt_deg": 0.0,
+            "top_up_dot": 1.0,
+            "heading_deg": 0.0,
+            "linear_speed_m_s": 0.0,
+            "valid": true
+          },
+          "plate_orientation_policy": "world_upright_fixed_heading_v1",
+          "maximum_transport_tilt_deg": 0.0,
+          "maximum_allowed_transport_tilt_deg": 3.0
+        }
+      },
+      "simulation_feasible": true
+    },
+    {
+      "candidate": "C3_aggressive",
+      "model": "C:\\Users\\jkim1\\autonomous_lab\\models\\autonomous_lab_scale_C3_aggressive.xml",
+      "fixed_interfaces_unchanged": true,
+      "rear_shell_collision_volume_reduction_percent": 40.0,
+      "full_process_status": "PASS",
+      "minimum_clearance_m": 0.012331451402559646,
+      "maximum_transport_tilt_deg": 0.0,
+      "robustness_advisory": "PASS_10MM",
+      "branches": {
+        "positive": {
+          "status": "PASS",
+          "steps": 5958,
+          "minimum_clearance_m": 0.012331451402559646,
+          "continuous_state": true,
+          "segments": [
+            {
+              "name": "plate_hotel_to_fluent",
+              "status": "PASS",
+              "steps": 1088,
+              "minimum_clearance_m": 0.029450799280875586,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196548,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_initial",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774869,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "reader_to_fluent",
+              "status": "PASS",
+              "steps": 1114,
+              "minimum_clearance_m": 0.012331451402559646,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44_repeat",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196527,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_repeat",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774858,
+              "clearance_advisory": "PASS_10MM"
+            }
+          ],
+          "collision": null,
+          "failure_reason": null,
+          "placement": {
+            "xy_error_m": 0.00025493494923954884,
+            "z_error_m": -0.003121209254553392,
+            "tilt_deg": 2.500808846523478,
+            "top_up_dot": 0.9990476057058901,
+            "heading_deg": 6.783849202646545e-05,
+            "linear_speed_m_s": 6.337895453184751e-09,
+            "valid": true
+          },
+          "plate_orientation_policy": "world_upright_fixed_heading_v1",
+          "maximum_transport_tilt_deg": 0.0,
+          "maximum_allowed_transport_tilt_deg": 3.0
+        },
+        "negative": {
+          "status": "PASS",
+          "steps": 3988,
+          "minimum_clearance_m": 0.012331451402559646,
+          "continuous_state": true,
+          "segments": [
+            {
+              "name": "plate_hotel_to_fluent",
+              "status": "PASS",
+              "steps": 1088,
+              "minimum_clearance_m": 0.029450799280875586,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "fluent_to_stx44",
+              "status": "PASS",
+              "steps": 864,
+              "minimum_clearance_m": 0.04013394274196548,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "stx44_to_reader_initial",
+              "status": "PASS",
+              "steps": 1014,
+              "minimum_clearance_m": 0.02573264018774869,
+              "clearance_advisory": "PASS_10MM"
+            },
+            {
+              "name": "reader_to_waste",
+              "status": "PASS",
+              "steps": 1022,
+              "minimum_clearance_m": 0.012331451402559646,
+              "clearance_advisory": "PASS_10MM"
+            }
+          ],
+          "collision": null,
+          "failure_reason": null,
+          "placement": {
+            "xy_error_m": 0.008820125436053067,
+            "z_error_m": 0.1260703093957553,
+            "tilt_deg": 0.0,
+            "top_up_dot": 1.0,
+            "heading_deg": 0.0,
+            "linear_speed_m_s": 0.0,
+            "valid": true
+          },
+          "plate_orientation_policy": "world_upright_fixed_heading_v1",
+          "maximum_transport_tilt_deg": 0.0,
+          "maximum_allowed_transport_tilt_deg": 3.0
+        }
+      },
+      "simulation_feasible": true
+    }
+  ],
+  "simulation_optimum": "C3_aggressive",
+  "provisional_engineering_recommendation": "C2_balanced",
+  "recommendation_condition": "Replace the provisional engineering recommendation after exact internal CAD, door stroke, sensor, cable, service-space, tolerance, and 5 mL tube constraints are added."
+}

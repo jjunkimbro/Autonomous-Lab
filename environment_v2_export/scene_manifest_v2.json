@@ -1,0 +1,5241 @@
+{
+  "schema": "autonomous_lab_environment_v2",
+  "generated_at_utc": "2026-10-06T14:29:59+00:00",
+  "source_blend": "biofinalbackup.blend",
+  "source_sha256": "03f1aaf8e5ee4aed475eff348e001f06c4d23c269b7d7b9f901f40b45bcff016",
+  "blender_version": "5.2.0 LTS",
+  "coordinate_convention": {
+    "axes": "Blender world XYZ",
+    "up": "+Z",
+    "obj_transform": "World transform baked into vertices",
+    "mujoco_mesh_pos": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mujoco_mesh_quat_wxyz": [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "units": {
+    "system": "METRIC",
+    "length_unit": "METERS",
+    "scale_length": 1.0
+  },
+  "scene": {
+    "name": "Scene",
+    "frame_start": 1,
+    "frame_end": 250,
+    "object_count": 55,
+    "mesh_export_count": 44
+  },
+  "warnings": [],
+  "export_failures": [],
+  "meshes": [
+    {
+      "object": "780_body1",
+      "category": "fluent",
+      "file": "meshes/780_body1.obj",
+      "vertices": 692,
+      "triangles": 1364
+    },
+    {
+      "object": "780_body2",
+      "category": "fluent",
+      "file": "meshes/780_body2.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "780_plateholder1",
+      "category": "fluent",
+      "file": "meshes/780_plateholder1.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "780_plateholder2",
+      "category": "fluent",
+      "file": "meshes/780_plateholder2.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "780_plateholder3",
+      "category": "fluent",
+      "file": "meshes/780_plateholder3.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "780_plateholder4",
+      "category": "fluent",
+      "file": "meshes/780_plateholder4.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "Cylinder",
+      "category": "other",
+      "file": "meshes/Cylinder.obj",
+      "vertices": 6,
+      "triangles": 8
+    },
+    {
+      "object": "NGS_body1",
+      "category": "ngs",
+      "file": "meshes/NGS_body1.obj",
+      "vertices": 48,
+      "triangles": 72
+    },
+    {
+      "object": "NGS_body2",
+      "category": "ngs",
+      "file": "meshes/NGS_body2.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "NGS_body3",
+      "category": "ngs",
+      "file": "meshes/NGS_body3.obj",
+      "vertices": 72,
+      "triangles": 140
+    },
+    {
+      "object": "NGS_cartridge1",
+      "category": "ngs",
+      "file": "meshes/NGS_cartridge1.obj",
+      "vertices": 32,
+      "triangles": 48
+    },
+    {
+      "object": "NGS_cartridge2",
+      "category": "ngs",
+      "file": "meshes/NGS_cartridge2.obj",
+      "vertices": 32,
+      "triangles": 48
+    },
+    {
+      "object": "NGS_cartridge_button1",
+      "category": "ngs",
+      "file": "meshes/NGS_cartridge_button1.obj",
+      "vertices": 72,
+      "triangles": 136
+    },
+    {
+      "object": "NGS_cartridge_button2",
+      "category": "ngs",
+      "file": "meshes/NGS_cartridge_button2.obj",
+      "vertices": 72,
+      "triangles": 136
+    },
+    {
+      "object": "NGS_display1",
+      "category": "ngs",
+      "file": "meshes/NGS_display1.obj",
+      "vertices": 16,
+      "triangles": 32
+    },
+    {
+      "object": "NGS_display2",
+      "category": "ngs",
+      "file": "meshes/NGS_display2.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "NGS_library1",
+      "category": "ngs",
+      "file": "meshes/NGS_library1.obj",
+      "vertices": 264,
+      "triangles": 524
+    },
+    {
+      "object": "NGS_library2",
+      "category": "ngs",
+      "file": "meshes/NGS_library2.obj",
+      "vertices": 264,
+      "triangles": 524
+    },
+    {
+      "object": "NGS_rack1",
+      "category": "ngs",
+      "file": "meshes/NGS_rack1.obj",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "object": "NGS_rack2",
+      "category": "ngs",
+      "file": "meshes/NGS_rack2.obj",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "object": "NGS_rack3",
+      "category": "ngs",
+      "file": "meshes/NGS_rack3.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "NGS_rack4",
+      "category": "ngs",
+      "file": "meshes/NGS_rack4.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "platehotel",
+      "category": "plate_hotel",
+      "file": "meshes/platehotel.obj",
+      "vertices": 48,
+      "triangles": 92
+    },
+    {
+      "object": "platewell1",
+      "category": "plate",
+      "file": "meshes/platewell1.obj",
+      "vertices": 6200,
+      "triangles": 12396
+    },
+    {
+      "object": "platewell2",
+      "category": "plate",
+      "file": "meshes/platewell2.obj",
+      "vertices": 6200,
+      "triangles": 12396
+    },
+    {
+      "object": "platewell3",
+      "category": "plate",
+      "file": "meshes/platewell3.obj",
+      "vertices": 6200,
+      "triangles": 12396
+    },
+    {
+      "object": "platewell4",
+      "category": "plate",
+      "file": "meshes/platewell4.obj",
+      "vertices": 6200,
+      "triangles": 12396
+    },
+    {
+      "object": "rail",
+      "category": "rail",
+      "file": "meshes/rail.obj",
+      "vertices": 160,
+      "triangles": 276
+    },
+    {
+      "object": "reader_body1",
+      "category": "reader",
+      "file": "meshes/reader_body1.obj",
+      "vertices": 16,
+      "triangles": 28
+    },
+    {
+      "object": "reader_body2",
+      "category": "reader",
+      "file": "meshes/reader_body2.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "reader_plateholder",
+      "category": "reader",
+      "file": "meshes/reader_plateholder.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "SH800_body1",
+      "category": "sh800",
+      "file": "meshes/SH800_body1.obj",
+      "vertices": 224,
+      "triangles": 404
+    },
+    {
+      "object": "SH800_body2",
+      "category": "sh800",
+      "file": "meshes/SH800_body2.obj",
+      "vertices": 16,
+      "triangles": 24
+    },
+    {
+      "object": "SH800_body3",
+      "category": "sh800",
+      "file": "meshes/SH800_body3.obj",
+      "vertices": 24,
+      "triangles": 36
+    },
+    {
+      "object": "slide",
+      "category": "other",
+      "file": "meshes/slide.obj",
+      "vertices": 8,
+      "triangles": 12
+    },
+    {
+      "object": "stx44_body1",
+      "category": "stx44",
+      "file": "meshes/stx44_body1.obj",
+      "vertices": 36,
+      "triangles": 68
+    },
+    {
+      "object": "stx44_plateholder",
+      "category": "stx44",
+      "file": "meshes/stx44_plateholder.obj",
+      "vertices": 40,
+      "triangles": 60
+    },
+    {
+      "object": "table",
+      "category": "table",
+      "file": "meshes/table.obj",
+      "vertices": 36,
+      "triangles": 56
+    },
+    {
+      "object": "tube1",
+      "category": "tube",
+      "file": "meshes/tube1.obj",
+      "vertices": 128,
+      "triangles": 252
+    },
+    {
+      "object": "tube2",
+      "category": "tube",
+      "file": "meshes/tube2.obj",
+      "vertices": 128,
+      "triangles": 252
+    },
+    {
+      "object": "tube3",
+      "category": "tube",
+      "file": "meshes/tube3.obj",
+      "vertices": 128,
+      "triangles": 252
+    },
+    {
+      "object": "tube4",
+      "category": "tube",
+      "file": "meshes/tube4.obj",
+      "vertices": 128,
+      "triangles": 252
+    },
+    {
+      "object": "tubehotel",
+      "category": "tube",
+      "file": "meshes/tubehotel.obj",
+      "vertices": 648,
+      "triangles": 1272
+    },
+    {
+      "object": "waste",
+      "category": "waste",
+      "file": "meshes/waste.obj",
+      "vertices": 16,
+      "triangles": 28
+    }
+  ],
+  "objects": [
+    {
+      "name": "780_body1",
+      "type": "MESH",
+      "category": "fluent",
+      "process_interface_candidate": false,
+      "parent": "Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.19999998807907104
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.5600000023841858,
+        0.4000000059604645,
+        0.30000001192092896
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.19999998807907104
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.788139485370266e-07,
+          -5.960462345910855e-09,
+          0.5
+        ],
+        "max": [
+          0.5600001811981201,
+          0.4000000059604645,
+          0.800000011920929
+        ],
+        "center": [
+          0.2800001800060272,
+          0.20000000298023224,
+          0.6499999761581421
+        ],
+        "size": [
+          0.5600000023841858,
+          0.4000000059604645,
+          0.30000001192092896
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 692,
+        "polygons_source": 376
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/780_body1.obj",
+      "mesh_evaluated": {
+        "vertices": 692,
+        "triangles": 1364
+      }
+    },
+    {
+      "name": "780_body2",
+      "type": "MESH",
+      "category": "fluent",
+      "process_interface_candidate": false,
+      "parent": "Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.19999998807907104
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.5600000023841858,
+        0.3999999761581421,
+        0.30000007152557373
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.19999998807907104
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.7881393432617188e-07,
+          -1.4901161193847656e-08,
+          0.8000001311302185
+        ],
+        "max": [
+          0.5600001811981201,
+          0.3999999761581421,
+          1.1000001430511475
+        ],
+        "center": [
+          0.2800001800060272,
+          0.19999998807907104,
+          0.9500001668930054
+        ],
+        "size": [
+          0.5600000023841858,
+          0.3999999761581421,
+          0.30000001192092896
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/780_body2.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "780_plateholder1",
+      "type": "MESH",
+      "category": "fluent",
+      "process_interface_candidate": true,
+      "parent": "Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.19999998807907104
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.09000000357627869,
+        0.13199998438358307,
+        0.004999995231628418
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.19999998807907104
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.4000002145767212,
+          0.19800002872943878,
+          0.5600000023841858
+        ],
+        "max": [
+          0.4900002181529999,
+          0.33000001311302185,
+          0.5649999976158142
+        ],
+        "center": [
+          0.44500023126602173,
+          0.2640000283718109,
+          0.5625
+        ],
+        "size": [
+          0.09000000357627869,
+          0.13199998438358307,
+          0.004999995231628418
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/780_plateholder1.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "780_plateholder2",
+      "type": "MESH",
+      "category": "fluent",
+      "process_interface_candidate": true,
+      "parent": "Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.19999998807907104
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.09000000357627869,
+        0.13199999928474426,
+        0.004999995231628418
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.19999998807907104
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.07000021636486053,
+          0.19800004363059998,
+          0.5600001215934753
+        ],
+        "max": [
+          0.16000021994113922,
+          0.33000004291534424,
+          0.5650001168251038
+        ],
+        "center": [
+          0.11500021815299988,
+          0.2640000581741333,
+          0.5625001192092896
+        ],
+        "size": [
+          0.09000000357627869,
+          0.13199999928474426,
+          0.004999995231628418
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/780_plateholder2.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "780_plateholder3",
+      "type": "MESH",
+      "category": "fluent",
+      "process_interface_candidate": true,
+      "parent": "Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.19999998807907104
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.09000000357627869,
+        0.13199998438358307,
+        0.004999995231628418
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.19999998807907104
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.17000019550323486,
+          0.19800005853176117,
+          0.5600001215934753
+        ],
+        "max": [
+          0.26000019907951355,
+          0.33000004291534424,
+          0.5650001168251038
+        ],
+        "center": [
+          0.2150001972913742,
+          0.2640000581741333,
+          0.5625001192092896
+        ],
+        "size": [
+          0.09000000357627869,
+          0.13199998438358307,
+          0.004999995231628418
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/780_plateholder3.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "780_plateholder4",
+      "type": "MESH",
+      "category": "fluent",
+      "process_interface_candidate": true,
+      "parent": "Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.19999998807907104
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.09000000357627869,
+        0.13199998438358307,
+        0.004999995231628418
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.19999998807907104
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.30000022053718567,
+          0.19800002872943878,
+          0.5600000023841858
+        ],
+        "max": [
+          0.39000022411346436,
+          0.33000001311302185,
+          0.5649999976158142
+        ],
+        "center": [
+          0.3450002074241638,
+          0.2640000283718109,
+          0.5625
+        ],
+        "size": [
+          0.09000000357627869,
+          0.13199998438358307,
+          0.004999995231628418
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/780_plateholder4.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "category": "other",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": false,
+      "export_mesh": false,
+      "export_reason": "type=CAMERA",
+      "location_world": [
+        7.358891487121582,
+        -6.925790786743164,
+        4.958309173583984
+      ],
+      "rotation_quaternion_world_wxyz": [
+        0.7804827094078064,
+        0.483536034822464,
+        0.20870360732078552,
+        0.33687159419059753
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_world": [
+        [
+          0.6859206557273865,
+          -0.32401347160339355,
+          0.6515582203865051,
+          7.358891487121582
+        ],
+        [
+          0.7276763319969177,
+          0.305420845746994,
+          -0.6141703724861145,
+          -6.925790786743164
+        ],
+        [
+          0.0,
+          0.8953956365585327,
+          0.44527140259742737,
+          4.958309173583984
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": null,
+      "mesh_source": null,
+      "custom_properties": {}
+    },
+    {
+      "name": "Cylinder",
+      "type": "MESH",
+      "category": "other",
+      "process_interface_candidate": false,
+      "parent": "Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.19999998807907104
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.5600000619888306,
+        0.07999998331069946,
+        0.15999996662139893
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.19999998807907104
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          2.1606685152164573e-07,
+          0.3999999761581421,
+          0.8000003099441528
+        ],
+        "max": [
+          0.5600003004074097,
+          0.47999995946884155,
+          0.9600002765655518
+        ],
+        "center": [
+          0.2800002694129944,
+          0.4399999678134918,
+          0.8800002932548523
+        ],
+        "size": [
+          0.5600000619888306,
+          0.07999998331069946,
+          0.15999996662139893
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 6,
+        "polygons_source": 5
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/Cylinder.obj",
+      "mesh_evaluated": {
+        "vertices": 6,
+        "triangles": 8
+      }
+    },
+    {
+      "name": "Empty",
+      "type": "EMPTY",
+      "category": "other",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "type=EMPTY",
+      "location_world": [
+        1.7881393432617188e-07,
+        0.0,
+        0.5
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.7881393432617188e-07
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": null,
+      "mesh_source": null,
+      "custom_properties": {}
+    },
+    {
+      "name": "Empty.001",
+      "type": "EMPTY",
+      "category": "other",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "type=EMPTY",
+      "location_world": [
+        1.5000001192092896,
+        0.8700000047683716,
+        0.5
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.5000001192092896
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.8700000047683716
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": null,
+      "mesh_source": null,
+      "custom_properties": {}
+    },
+    {
+      "name": "Light",
+      "type": "LIGHT",
+      "category": "other",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": false,
+      "export_mesh": false,
+      "export_reason": "type=LIGHT",
+      "location_world": [
+        4.076245307922363,
+        1.0054539442062378,
+        5.903861999511719
+      ],
+      "rotation_quaternion_world_wxyz": [
+        0.570947527885437,
+        0.16907574236392975,
+        0.27217137813568115,
+        0.7558803558349609
+      ],
+      "scale_world": [
+        1.0,
+        0.9999999403953552,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_world": [
+        [
+          -0.29086464643478394,
+          -0.7711008191108704,
+          0.5663931965827942,
+          4.076245307922363
+        ],
+        [
+          0.9551711678504944,
+          -0.1998833566904068,
+          0.21839119493961334,
+          1.0054539442062378
+        ],
+        [
+          -0.05518905818462372,
+          0.6045247316360474,
+          0.7946722507476807,
+          5.903861999511719
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": null,
+      "mesh_source": null,
+      "custom_properties": {}
+    },
+    {
+      "name": "NGS_body1",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.4660000801086426,
+        0.4320002794265747,
+        0.6799999475479126
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8039997220039368,
+          1.5679996013641357,
+          0.5
+        ],
+        "max": [
+          1.2699997425079346,
+          1.9999998807907104,
+          1.1799999475479126
+        ],
+        "center": [
+          1.0369997024536133,
+          1.7839996814727783,
+          0.8399999737739563
+        ],
+        "size": [
+          0.4660000205039978,
+          0.4320002794265747,
+          0.6799999475479126
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 48,
+        "polygons_source": 36
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_body1.obj",
+      "mesh_evaluated": {
+        "vertices": 48,
+        "triangles": 72
+      }
+    },
+    {
+      "name": "NGS_body2",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.4259999990463257,
+        0.41200006008148193,
+        0.019999980926513672
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8239997029304504,
+          1.5679999589920044,
+          0.9699999690055847
+        ],
+        "max": [
+          1.249999761581421,
+          1.9800000190734863,
+          0.9899999499320984
+        ],
+        "center": [
+          1.0369997024536133,
+          1.7739999294281006,
+          0.9799999594688416
+        ],
+        "size": [
+          0.42600005865097046,
+          0.41200006008148193,
+          0.019999980926513672
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_body2.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "NGS_body3",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.4259999990463257,
+        0.37199997901916504,
+        0.44999998807907104
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8239997029304504,
+          1.6079999208450317,
+          0.5
+        ],
+        "max": [
+          1.249999761581421,
+          1.9799998998641968,
+          0.949999988079071
+        ],
+        "center": [
+          1.0369997024536133,
+          1.7939999103546143,
+          0.7250000238418579
+        ],
+        "size": [
+          0.42600005865097046,
+          0.37199997901916504,
+          0.44999998807907104
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 72,
+        "polygons_source": 46
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_body3.obj",
+      "mesh_evaluated": {
+        "vertices": 72,
+        "triangles": 140
+      }
+    },
+    {
+      "name": "NGS_cartridge1",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0700000524520874,
+        0.10000014305114746,
+        0.1899999976158142
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.853999674320221,
+          1.4880000352859497,
+          0.559999942779541
+        ],
+        "max": [
+          0.9239997267723083,
+          1.5880001783370972,
+          0.75
+        ],
+        "center": [
+          0.8889997005462646,
+          1.5380001068115234,
+          0.6549999713897705
+        ],
+        "size": [
+          0.0700000524520874,
+          0.10000014305114746,
+          0.19000005722045898
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 32,
+        "polygons_source": 24
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_cartridge1.obj",
+      "mesh_evaluated": {
+        "vertices": 32,
+        "triangles": 48
+      }
+    },
+    {
+      "name": "NGS_cartridge2",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0700000524520874,
+        0.10000014305114746,
+        0.19000005722045898
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.049999713897705,
+          1.6079999208450317,
+          0.559999942779541
+        ],
+        "max": [
+          1.1199997663497925,
+          1.7080000638961792,
+          0.75
+        ],
+        "center": [
+          1.0849997997283936,
+          1.6579999923706055,
+          0.6549999713897705
+        ],
+        "size": [
+          0.0700000524520874,
+          0.10000014305114746,
+          0.19000005722045898
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 32,
+        "polygons_source": 24
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_cartridge2.obj",
+      "mesh_evaluated": {
+        "vertices": 32,
+        "triangles": 48
+      }
+    },
+    {
+      "name": "NGS_cartridge_button1",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.039999961853027344,
+        0.010000109672546387,
+        0.03999999165534973
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.868999719619751,
+          1.4779999256134033,
+          0.6949999928474426
+        ],
+        "max": [
+          0.9089996814727783,
+          1.4880000352859497,
+          0.7350000143051147
+        ],
+        "center": [
+          0.8889997005462646,
+          1.4830000400543213,
+          0.7150000333786011
+        ],
+        "size": [
+          0.039999961853027344,
+          0.010000109672546387,
+          0.04000002145767212
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 72,
+        "polygons_source": 40
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_cartridge_button1.obj",
+      "mesh_evaluated": {
+        "vertices": 72,
+        "triangles": 136
+      }
+    },
+    {
+      "name": "NGS_cartridge_button2",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.039999961853027344,
+        0.010000109672546387,
+        0.03999999165534973
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.0649996995925903,
+          1.5980000495910645,
+          0.6949999928474426
+        ],
+        "max": [
+          1.1049996614456177,
+          1.6080001592636108,
+          0.7350000143051147
+        ],
+        "center": [
+          1.084999680519104,
+          1.6030001640319824,
+          0.7150000333786011
+        ],
+        "size": [
+          0.039999961853027344,
+          0.010000109672546387,
+          0.04000002145767212
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 72,
+        "polygons_source": 40
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_cartridge_button2.obj",
+      "mesh_evaluated": {
+        "vertices": 72,
+        "triangles": 136
+      }
+    },
+    {
+      "name": "NGS_display1",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.25,
+        0.009999990463256836,
+        0.15000003576278687
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.9119997024536133,
+          1.7740000486373901,
+          1.1499998569488525
+        ],
+        "max": [
+          1.1619997024536133,
+          1.784000039100647,
+          1.2999999523162842
+        ],
+        "center": [
+          1.0369997024536133,
+          1.7790000438690186,
+          1.2249999046325684
+        ],
+        "size": [
+          0.25,
+          0.009999990463256836,
+          0.15000009536743164
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 16,
+        "polygons_source": 12
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_display1.obj",
+      "mesh_evaluated": {
+        "vertices": 16,
+        "triangles": 32
+      }
+    },
+    {
+      "name": "NGS_display2",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.23000001907348633,
+        0.009999990463256836,
+        0.12999999523162842
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.9219996929168701,
+          1.7740000486373901,
+          1.1600000858306885
+        ],
+        "max": [
+          1.1519997119903564,
+          1.784000039100647,
+          1.290000081062317
+        ],
+        "center": [
+          1.0369997024536133,
+          1.7790000438690186,
+          1.2250001430511475
+        ],
+        "size": [
+          0.23000001907348633,
+          0.009999990463256836,
+          0.12999999523162842
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_display2.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "NGS_Empty",
+      "type": "EMPTY",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "type=EMPTY",
+      "location_world": [
+        0.8039998412132263,
+        1.5679997205734253,
+        0.5
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.8039998412132263
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.5679997205734253
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": null,
+      "mesh_source": null,
+      "custom_properties": {}
+    },
+    {
+      "name": "NGS_library1",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0700000524520874,
+        0.11999988555908203,
+        0.09000003337860107
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.9489996433258057,
+          1.4879999160766602,
+          0.559999942779541
+        ],
+        "max": [
+          1.018999695777893,
+          1.6079998016357422,
+          0.6499999761581421
+        ],
+        "center": [
+          0.9839996695518494,
+          1.5479998588562012,
+          0.6049999594688416
+        ],
+        "size": [
+          0.0700000524520874,
+          0.11999988555908203,
+          0.09000003337860107
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 264,
+        "polygons_source": 142
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_library1.obj",
+      "mesh_evaluated": {
+        "vertices": 264,
+        "triangles": 524
+      }
+    },
+    {
+      "name": "NGS_library2",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0700000524520874,
+        0.11999988555908203,
+        0.09000003337860107
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.1499996185302734,
+          1.6079998016357422,
+          0.559999942779541
+        ],
+        "max": [
+          1.2199997901916504,
+          1.7279996871948242,
+          0.6499999761581421
+        ],
+        "center": [
+          1.184999704360962,
+          1.6679997444152832,
+          0.6049999594688416
+        ],
+        "size": [
+          0.07000017166137695,
+          0.11999988555908203,
+          0.09000003337860107
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 264,
+        "polygons_source": 142
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_library2.obj",
+      "mesh_evaluated": {
+        "vertices": 264,
+        "triangles": 524
+      }
+    },
+    {
+      "name": "NGS_rack1",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.19000005722045898,
+        0.16000008583068848,
+        0.10000002384185791
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8439996838569641,
+          1.4780000448226929,
+          0.5499999523162842
+        ],
+        "max": [
+          1.0339996814727783,
+          1.6380001306533813,
+          0.6499999761581421
+        ],
+        "center": [
+          0.9389996528625488,
+          1.558000087738037,
+          0.5999999642372131
+        ],
+        "size": [
+          0.1899999976158142,
+          0.16000008583068848,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 16,
+        "polygons_source": 10
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_rack1.obj",
+      "mesh_evaluated": {
+        "vertices": 16,
+        "triangles": 28
+      }
+    },
+    {
+      "name": "NGS_rack2",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.19000005722045898,
+        0.16000008583068848,
+        0.10000002384185791
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.0399997234344482,
+          1.597999930381775,
+          0.5499999523162842
+        ],
+        "max": [
+          1.2299997806549072,
+          1.7580000162124634,
+          0.6499999761581421
+        ],
+        "center": [
+          1.1349997520446777,
+          1.6779999732971191,
+          0.5999999642372131
+        ],
+        "size": [
+          0.19000005722045898,
+          0.16000008583068848,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 16,
+        "polygons_source": 10
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_rack2.obj",
+      "mesh_evaluated": {
+        "vertices": 16,
+        "triangles": 28
+      }
+    },
+    {
+      "name": "NGS_rack3",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.19000005722045898,
+        0.16000008583068848,
+        0.10000002384185791
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8439996838569641,
+          1.5979996919631958,
+          0.7899999618530273
+        ],
+        "max": [
+          1.0339996814727783,
+          1.7579997777938843,
+          0.8899999856948853
+        ],
+        "center": [
+          0.9389996528625488,
+          1.67799973487854,
+          0.8399999737739563
+        ],
+        "size": [
+          0.1899999976158142,
+          0.16000008583068848,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_rack3.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "NGS_rack4",
+      "type": "MESH",
+      "category": "ngs",
+      "process_interface_candidate": true,
+      "parent": "NGS_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.2699996829032898,
+        0.0,
+        0.2999999523162842
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.19000005722045898,
+        0.16000008583068848,
+        0.10000002384185791
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2699996829032898
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.0399997234344482,
+          1.5979996919631958,
+          0.7899999618530273
+        ],
+        "max": [
+          1.2299997806549072,
+          1.7579997777938843,
+          0.8899999856948853
+        ],
+        "center": [
+          1.1349997520446777,
+          1.67799973487854,
+          0.8399999737739563
+        ],
+        "size": [
+          0.19000005722045898,
+          0.16000008583068848,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/NGS_rack4.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "platehotel",
+      "type": "MESH",
+      "category": "plate_hotel",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.16500002145767212,
+        0.15000000596046448,
+        0.18000000715255737
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.7899998426437378,
+          0.029999999329447746,
+          0.5
+        ],
+        "max": [
+          0.9549998641014099,
+          0.18000000715255737,
+          0.6800000071525574
+        ],
+        "center": [
+          0.8724998235702515,
+          0.10500000417232513,
+          0.5900000333786011
+        ],
+        "size": [
+          0.16500002145767212,
+          0.15000000596046448,
+          0.18000000715255737
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 48,
+        "polygons_source": 36
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/platehotel.obj",
+      "mesh_evaluated": {
+        "vertices": 48,
+        "triangles": 92
+      }
+    },
+    {
+      "name": "platewell1",
+      "type": "MESH",
+      "category": "plate",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.8700000643730164,
+        0.11706110090017319,
+        0.5140359997749329
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.08500000834465027,
+        0.12700003385543823,
+        0.01399993896484375
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.8700000643730164
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.11706110090017319
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5140359997749329
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8282727599143982,
+          0.05299998074769974,
+          0.5049999952316284
+        ],
+        "max": [
+          0.9132727980613708,
+          0.18000000715255737,
+          0.5189999341964722
+        ],
+        "center": [
+          0.8707727789878845,
+          0.11649999022483826,
+          0.5119999647140503
+        ],
+        "size": [
+          0.08500003814697266,
+          0.12700003385543823,
+          0.01399993896484375
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 6200,
+        "polygons_source": 3202
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/platewell1.obj",
+      "mesh_evaluated": {
+        "vertices": 6200,
+        "triangles": 12396
+      }
+    },
+    {
+      "name": "platewell2",
+      "type": "MESH",
+      "category": "plate",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.8700000643730164,
+        0.11706109344959259,
+        0.5490360260009766
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.08500000834465027,
+        0.12700003385543823,
+        0.01399993896484375
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.8700000643730164
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.11706109344959259
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5490360260009766
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8282727599143982,
+          0.05299997329711914,
+          0.5400000214576721
+        ],
+        "max": [
+          0.9132727980613708,
+          0.18000000715255737,
+          0.5539999604225159
+        ],
+        "center": [
+          0.8707727789878845,
+          0.11649999022483826,
+          0.546999990940094
+        ],
+        "size": [
+          0.08500003814697266,
+          0.12700003385543823,
+          0.01399993896484375
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 6200,
+        "polygons_source": 3202
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/platewell2.obj",
+      "mesh_evaluated": {
+        "vertices": 6200,
+        "triangles": 12396
+      }
+    },
+    {
+      "name": "platewell3",
+      "type": "MESH",
+      "category": "plate",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.8700000643730164,
+        0.11706109344959259,
+        0.5840359926223755
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.08500000834465027,
+        0.12700003385543823,
+        0.01399993896484375
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.8700000643730164
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.11706109344959259
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5840359926223755
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.8282727599143982,
+          0.05299997329711914,
+          0.574999988079071
+        ],
+        "max": [
+          0.9132727980613708,
+          0.18000000715255737,
+          0.5889999270439148
+        ],
+        "center": [
+          0.8707727789878845,
+          0.11649999022483826,
+          0.5819999575614929
+        ],
+        "size": [
+          0.08500003814697266,
+          0.12700003385543823,
+          0.01399993896484375
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 6200,
+        "polygons_source": 3202
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/platewell3.obj",
+      "mesh_evaluated": {
+        "vertices": 6200,
+        "triangles": 12396
+      }
+    },
+    {
+      "name": "platewell4",
+      "type": "MESH",
+      "category": "plate",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.8700001239776611,
+        0.11706109344959259,
+        0.6190360188484192
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.08500000834465027,
+        0.12700003385543823,
+        0.01399993896484375
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.8700001239776611
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.11706109344959259
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.6190360188484192
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.828272819519043,
+          0.05299997329711914,
+          0.6100000143051147
+        ],
+        "max": [
+          0.9132728576660156,
+          0.18000000715255737,
+          0.6239999532699585
+        ],
+        "center": [
+          0.8707728385925293,
+          0.11649999022483826,
+          0.6169999837875366
+        ],
+        "size": [
+          0.08500003814697266,
+          0.12700003385543823,
+          0.01399993896484375
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 6200,
+        "polygons_source": 3202
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/platewell4.obj",
+      "mesh_evaluated": {
+        "vertices": 6200,
+        "triangles": 12396
+      }
+    },
+    {
+      "name": "rail",
+      "type": "MESH",
+      "category": "rail",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        1.0,
+        0.25000011920928955,
+        0.050000011920928955
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.0,
+          0.8749998807907104,
+          0.20000001788139343
+        ],
+        "max": [
+          1.0,
+          1.125,
+          0.2500000298023224
+        ],
+        "center": [
+          0.5,
+          0.9999999403953552,
+          0.2250000238418579
+        ],
+        "size": [
+          1.0,
+          0.25000011920928955,
+          0.050000011920928955
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 160,
+        "polygons_source": 102
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/rail.obj",
+      "mesh_evaluated": {
+        "vertices": 160,
+        "triangles": 276
+      }
+    },
+    {
+      "name": "reader_body1",
+      "type": "MESH",
+      "category": "reader",
+      "process_interface_candidate": false,
+      "parent": "reader_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.29999998211860657
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.24700000882148743,
+        0.2749999761581421,
+        0.09999999403953552
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.29999998211860657
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.0,
+          1.725000023841858,
+          0.5
+        ],
+        "max": [
+          0.24700000882148743,
+          2.0,
+          0.6000000238418579
+        ],
+        "center": [
+          0.12350000441074371,
+          1.8624999523162842,
+          0.550000011920929
+        ],
+        "size": [
+          0.24700000882148743,
+          0.2749999761581421,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 16,
+        "polygons_source": 12
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/reader_body1.obj",
+      "mesh_evaluated": {
+        "vertices": 16,
+        "triangles": 28
+      }
+    },
+    {
+      "name": "reader_body2",
+      "type": "MESH",
+      "category": "reader",
+      "process_interface_candidate": false,
+      "parent": "reader_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.29999998211860657
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.24199999868869781,
+        0.26999998092651367,
+        0.09999999403953552
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.29999998211860657
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.005000010132789612,
+          1.7300000190734863,
+          0.6000000238418579
+        ],
+        "max": [
+          0.24700000882148743,
+          2.0,
+          0.699999988079071
+        ],
+        "center": [
+          0.12600001692771912,
+          1.8650000095367432,
+          0.6499999761581421
+        ],
+        "size": [
+          0.24199999868869781,
+          0.26999998092651367,
+          0.09999996423721313
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/reader_body2.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "reader_Empty",
+      "type": "EMPTY",
+      "category": "reader",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "type=EMPTY",
+      "location_world": [
+        0.0,
+        1.725000023841858,
+        0.5
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.725000023841858
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": null,
+      "mesh_source": null,
+      "custom_properties": {}
+    },
+    {
+      "name": "reader_plateholder",
+      "type": "MESH",
+      "category": "reader",
+      "process_interface_candidate": true,
+      "parent": "reader_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.29999998211860657
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.14000000059604645,
+        0.125,
+        0.004999995231628418
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.29999998211860657
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.053500011563301086,
+          1.600000023841858,
+          0.5450000762939453
+        ],
+        "max": [
+          0.19350001215934753,
+          1.725000023841858,
+          0.5500000715255737
+        ],
+        "center": [
+          0.12350001186132431,
+          1.662500023841858,
+          0.5475000739097595
+        ],
+        "size": [
+          0.14000000059604645,
+          0.125,
+          0.004999995231628418
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/reader_plateholder.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "reader_png1",
+      "type": "MESH",
+      "category": "reader",
+      "process_interface_candidate": false,
+      "parent": "reader_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "presentation-only object",
+      "location_world": [
+        0.0,
+        0.0,
+        0.29999998211860657
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.24699999392032623,
+        0.005000114440917969,
+        0.10000002384185791
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.29999998211860657
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.0,
+          1.725000023841858,
+          0.6000000238418579
+        ],
+        "max": [
+          0.24699999392032623,
+          1.7300001382827759,
+          0.7000000476837158
+        ],
+        "center": [
+          0.12349999696016312,
+          1.727500081062317,
+          0.6500000357627869
+        ],
+        "size": [
+          0.24699999392032623,
+          0.005000114440917969,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {}
+    },
+    {
+      "name": "reader_png2",
+      "type": "MESH",
+      "category": "reader",
+      "process_interface_candidate": false,
+      "parent": "reader_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "presentation-only object",
+      "location_world": [
+        0.0,
+        0.0,
+        0.29999998211860657
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.004999999888241291,
+        0.26999998092651367,
+        0.10000002384185791
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.29999998211860657
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          8.847564458847046e-09,
+          1.7300000190734863,
+          0.5999999642372131
+        ],
+        "max": [
+          0.00500000873580575,
+          2.0,
+          0.699999988079071
+        ],
+        "center": [
+          0.0025000087916851044,
+          1.8650000095367432,
+          0.6499999761581421
+        ],
+        "size": [
+          0.004999999888241291,
+          0.26999998092651367,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {}
+    },
+    {
+      "name": "SH800_body1",
+      "type": "MESH",
+      "category": "sh800",
+      "process_interface_candidate": true,
+      "parent": "SH800_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.04999995231628418,
+        0.0,
+        0.3000001013278961
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.27500003576278687,
+        0.2750002145767212,
+        0.37000003457069397
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.04999995231628418
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.3000001013278961
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.296999990940094,
+          1.725000023841858,
+          0.5000001192092896
+        ],
+        "max": [
+          0.5720000267028809,
+          2.000000238418579,
+          0.8700001239776611
+        ],
+        "center": [
+          0.4345000088214874,
+          1.8625001907348633,
+          0.6850001215934753
+        ],
+        "size": [
+          0.27500003576278687,
+          0.2750002145767212,
+          0.3700000047683716
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 224,
+        "polygons_source": 140
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/SH800_body1.obj",
+      "mesh_evaluated": {
+        "vertices": 224,
+        "triangles": 404
+      }
+    },
+    {
+      "name": "SH800_body2",
+      "type": "MESH",
+      "category": "sh800",
+      "process_interface_candidate": true,
+      "parent": "SH800_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.04999995231628418,
+        0.0,
+        0.3000001013278961
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.12750005722045898,
+        0.1700000762939453,
+        0.0299999862909317
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.04999995231628418
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.3000001013278961
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.3019999861717224,
+          1.7450000047683716,
+          0.5240001678466797
+        ],
+        "max": [
+          0.4295000433921814,
+          1.915000081062317,
+          0.5540001392364502
+        ],
+        "center": [
+          0.3657500147819519,
+          1.8300000429153442,
+          0.5390001535415649
+        ],
+        "size": [
+          0.12750005722045898,
+          0.1700000762939453,
+          0.029999971389770508
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 16,
+        "polygons_source": 12
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/SH800_body2.obj",
+      "mesh_evaluated": {
+        "vertices": 16,
+        "triangles": 24
+      }
+    },
+    {
+      "name": "SH800_body3",
+      "type": "MESH",
+      "category": "sh800",
+      "process_interface_candidate": true,
+      "parent": "SH800_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.04999995231628418,
+        0.0,
+        0.3000001013278961
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.1274999976158142,
+        0.16999995708465576,
+        0.10000002384185791
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.04999995231628418
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.3000001013278961
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.3020000457763672,
+          1.725000262260437,
+          0.6440001726150513
+        ],
+        "max": [
+          0.4295000433921814,
+          1.8950002193450928,
+          0.7440001964569092
+        ],
+        "center": [
+          0.3657500445842743,
+          1.8100001811981201,
+          0.6940001845359802
+        ],
+        "size": [
+          0.1274999976158142,
+          0.16999995708465576,
+          0.10000002384185791
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 24,
+        "polygons_source": 18
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/SH800_body3.obj",
+      "mesh_evaluated": {
+        "vertices": 24,
+        "triangles": 36
+      }
+    },
+    {
+      "name": "SH800_Empty",
+      "type": "EMPTY",
+      "category": "sh800",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "type=EMPTY",
+      "location_world": [
+        0.2969999611377716,
+        1.725000023841858,
+        0.5000001192092896
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.2969999611377716
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.725000023841858
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.5000001192092896
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": null,
+      "mesh_source": null,
+      "custom_properties": {}
+    },
+    {
+      "name": "SH800_png1",
+      "type": "MESH",
+      "category": "sh800",
+      "process_interface_candidate": true,
+      "parent": "SH800_Empty",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "presentation-only object",
+      "location_world": [
+        0.04999995231628418,
+        0.0,
+        0.3000001013278961
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.2749999761581421,
+        0.004999995231628418,
+        0.11599999666213989
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.04999995231628418
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.3000001013278961
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.296999990940094,
+          1.725000262260437,
+          0.754000186920166
+        ],
+        "max": [
+          0.5719999670982361,
+          1.7300002574920654,
+          0.8700001239776611
+        ],
+        "center": [
+          0.43449997901916504,
+          1.7275002002716064,
+          0.8120001554489136
+        ],
+        "size": [
+          0.2749999761581421,
+          0.004999995231628418,
+          0.11599993705749512
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {}
+    },
+    {
+      "name": "slide",
+      "type": "MESH",
+      "category": "other",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.25,
+        0.25,
+        0.050000011920928955
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          5.960464477539063e-08,
+          0.875,
+          0.2500000298023224
+        ],
+        "max": [
+          0.2500000596046448,
+          1.125,
+          0.30000004172325134
+        ],
+        "center": [
+          0.12500005960464478,
+          1.0,
+          0.27500003576278687
+        ],
+        "size": [
+          0.25,
+          0.25,
+          0.050000011920928955
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/slide.obj",
+      "mesh_evaluated": {
+        "vertices": 8,
+        "triangles": 12
+      }
+    },
+    {
+      "name": "stx44_body1",
+      "type": "MESH",
+      "category": "stx44",
+      "process_interface_candidate": false,
+      "parent": "Empty.001",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        -0.039999961853027344,
+        0.30000001192092896
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.24000000953674316,
+        0.24000000953674316,
+        0.5600000023841858
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.039999961853027344
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.30000001192092896
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.260000228881836,
+          0.8700000047683716,
+          0.5
+        ],
+        "max": [
+          1.500000238418579,
+          1.1100000143051147,
+          1.059999942779541
+        ],
+        "center": [
+          1.3800002336502075,
+          0.9900000095367432,
+          0.7799999713897705
+        ],
+        "size": [
+          0.24000000953674316,
+          0.24000000953674316,
+          0.559999942779541
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 36,
+        "polygons_source": 26
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/stx44_body1.obj",
+      "mesh_evaluated": {
+        "vertices": 36,
+        "triangles": 68
+      }
+    },
+    {
+      "name": "stx44_plateholder",
+      "type": "MESH",
+      "category": "stx44",
+      "process_interface_candidate": true,
+      "parent": "Empty.001",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        -0.039999961853027344,
+        0.30000001192092896
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.2919996380805969,
+        0.09000003337860107,
+        0.19000005722045898
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.039999961853027344
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.30000001192092896
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.9980006814002991,
+          0.946500301361084,
+          0.5
+        ],
+        "max": [
+          1.290000319480896,
+          1.036500334739685,
+          0.690000057220459
+        ],
+        "center": [
+          1.14400053024292,
+          0.9915003180503845,
+          0.5950000286102295
+        ],
+        "size": [
+          0.2919996380805969,
+          0.09000003337860107,
+          0.19000005722045898
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 40,
+        "polygons_source": 30
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/stx44_plateholder.obj",
+      "mesh_evaluated": {
+        "vertices": 40,
+        "triangles": 60
+      }
+    },
+    {
+      "name": "stx44_png1",
+      "type": "MESH",
+      "category": "stx44",
+      "process_interface_candidate": false,
+      "parent": "Empty.001",
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": false,
+      "export_reason": "presentation-only object",
+      "location_world": [
+        0.0,
+        -0.039999961853027344,
+        0.30000001192092896
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.005000114440917969,
+        0.24000000953674316,
+        0.15999996662139893
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.039999961853027344
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.30000001192092896
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          1.2550002336502075,
+          0.8700000047683716,
+          0.9000000357627869
+        ],
+        "max": [
+          1.2600003480911255,
+          1.1100000143051147,
+          1.059999942779541
+        ],
+        "center": [
+          1.2575002908706665,
+          0.9900000095367432,
+          0.9800000190734863
+        ],
+        "size": [
+          0.005000114440917969,
+          0.24000000953674316,
+          0.15999990701675415
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 8,
+        "polygons_source": 6
+      },
+      "custom_properties": {}
+    },
+    {
+      "name": "table",
+      "type": "MESH",
+      "category": "table",
+      "process_interface_candidate": false,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        1.5000003576278687,
+        2.0,
+        0.5
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          1.5000003576278687,
+          2.0,
+          0.5
+        ],
+        "center": [
+          0.7500001788139343,
+          1.0,
+          0.25
+        ],
+        "size": [
+          1.5000003576278687,
+          2.0,
+          0.5
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 36,
+        "polygons_source": 26
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/table.obj",
+      "mesh_evaluated": {
+        "vertices": 36,
+        "triangles": 56
+      }
+    },
+    {
+      "name": "tube1",
+      "type": "MESH",
+      "category": "tube",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.7000000476837158,
+        0.17000000178813934,
+        0.5475000143051147
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        0.006000000052154064,
+        0.006000000052154064,
+        0.03750000149011612
+      ],
+      "dimensions_world": [
+        0.012000000104308128,
+        0.012000000104308128,
+        0.07500000298023224
+      ],
+      "matrix_world": [
+        [
+          0.006000000052154064,
+          0.0,
+          0.0,
+          0.7000000476837158
+        ],
+        [
+          0.0,
+          0.006000000052154064,
+          0.0,
+          0.17000000178813934
+        ],
+        [
+          0.0,
+          0.0,
+          0.03750000149011612,
+          0.5475000143051147
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.6940000653266907,
+          0.164000004529953,
+          0.5099999904632568
+        ],
+        "max": [
+          0.706000030040741,
+          0.17599999904632568,
+          0.5850000381469727
+        ],
+        "center": [
+          0.7000000476837158,
+          0.17000000178813934,
+          0.5475000143051147
+        ],
+        "size": [
+          0.011999964714050293,
+          0.01199999451637268,
+          0.07500004768371582
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 128,
+        "polygons_source": 68
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/tube1.obj",
+      "mesh_evaluated": {
+        "vertices": 128,
+        "triangles": 252
+      }
+    },
+    {
+      "name": "tube2",
+      "type": "MESH",
+      "category": "tube",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.7000000476837158,
+        0.14000000059604645,
+        0.5475000143051147
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        0.006000000052154064,
+        0.006000000052154064,
+        0.03750000149011612
+      ],
+      "dimensions_world": [
+        0.012000000104308128,
+        0.012000000104308128,
+        0.07500000298023224
+      ],
+      "matrix_world": [
+        [
+          0.006000000052154064,
+          0.0,
+          0.0,
+          0.7000000476837158
+        ],
+        [
+          0.0,
+          0.006000000052154064,
+          0.0,
+          0.14000000059604645
+        ],
+        [
+          0.0,
+          0.0,
+          0.03750000149011612,
+          0.5475000143051147
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.6940000653266907,
+          0.1340000033378601,
+          0.5099999904632568
+        ],
+        "max": [
+          0.706000030040741,
+          0.1459999978542328,
+          0.5850000381469727
+        ],
+        "center": [
+          0.7000000476837158,
+          0.14000000059604645,
+          0.5475000143051147
+        ],
+        "size": [
+          0.011999964714050293,
+          0.01199999451637268,
+          0.07500004768371582
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 128,
+        "polygons_source": 68
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/tube2.obj",
+      "mesh_evaluated": {
+        "vertices": 128,
+        "triangles": 252
+      }
+    },
+    {
+      "name": "tube3",
+      "type": "MESH",
+      "category": "tube",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.7000000476837158,
+        0.10999999940395355,
+        0.5475000143051147
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        0.006000000052154064,
+        0.006000000052154064,
+        0.03750000149011612
+      ],
+      "dimensions_world": [
+        0.012000000104308128,
+        0.012000000104308128,
+        0.07500000298023224
+      ],
+      "matrix_world": [
+        [
+          0.006000000052154064,
+          0.0,
+          0.0,
+          0.7000000476837158
+        ],
+        [
+          0.0,
+          0.006000000052154064,
+          0.0,
+          0.10999999940395355
+        ],
+        [
+          0.0,
+          0.0,
+          0.03750000149011612,
+          0.5475000143051147
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.6940000653266907,
+          0.10400000214576721,
+          0.5099999904632568
+        ],
+        "max": [
+          0.706000030040741,
+          0.11599999666213989,
+          0.5850000381469727
+        ],
+        "center": [
+          0.7000000476837158,
+          0.10999999940395355,
+          0.5475000143051147
+        ],
+        "size": [
+          0.011999964714050293,
+          0.01199999451637268,
+          0.07500004768371582
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 128,
+        "polygons_source": 68
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/tube3.obj",
+      "mesh_evaluated": {
+        "vertices": 128,
+        "triangles": 252
+      }
+    },
+    {
+      "name": "tube4",
+      "type": "MESH",
+      "category": "tube",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.7000000476837158,
+        0.07999999821186066,
+        0.5475000143051147
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        0.006000000052154064,
+        0.006000000052154064,
+        0.03750000149011612
+      ],
+      "dimensions_world": [
+        0.012000000104308128,
+        0.012000000104308128,
+        0.07500000298023224
+      ],
+      "matrix_world": [
+        [
+          0.006000000052154064,
+          0.0,
+          0.0,
+          0.7000000476837158
+        ],
+        [
+          0.0,
+          0.006000000052154064,
+          0.0,
+          0.07999999821186066
+        ],
+        [
+          0.0,
+          0.0,
+          0.03750000149011612,
+          0.5475000143051147
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.6940000653266907,
+          0.07400000095367432,
+          0.5099999904632568
+        ],
+        "max": [
+          0.706000030040741,
+          0.085999995470047,
+          0.5850000381469727
+        ],
+        "center": [
+          0.7000000476837158,
+          0.07999999821186066,
+          0.5475000143051147
+        ],
+        "size": [
+          0.011999964714050293,
+          0.01199999451637268,
+          0.07500004768371582
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 128,
+        "polygons_source": 68
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/tube4.obj",
+      "mesh_evaluated": {
+        "vertices": 128,
+        "triangles": 252
+      }
+    },
+    {
+      "name": "tubehotel",
+      "type": "MESH",
+      "category": "tube",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.019999980926513672,
+        0.14000003039836884,
+        0.014999926090240479
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.6900001764297485,
+          0.03999997675418854,
+          0.5000001192092896
+        ],
+        "max": [
+          0.7100001573562622,
+          0.18000000715255737,
+          0.51500004529953
+        ],
+        "center": [
+          0.7000001668930054,
+          0.10999999195337296,
+          0.5075000524520874
+        ],
+        "size": [
+          0.019999980926513672,
+          0.14000003039836884,
+          0.014999926090240479
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 648,
+        "polygons_source": 346
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/tubehotel.obj",
+      "mesh_evaluated": {
+        "vertices": 648,
+        "triangles": 1272
+      }
+    },
+    {
+      "name": "waste",
+      "type": "MESH",
+      "category": "waste",
+      "process_interface_candidate": true,
+      "parent": null,
+      "collections": [
+        "Collection"
+      ],
+      "visible_viewport": true,
+      "visible_render": true,
+      "export_mesh": true,
+      "export_reason": "included",
+      "location_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_quaternion_world_wxyz": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale_world": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "dimensions_world": [
+        0.20000004768371582,
+        0.20000006258487701,
+        0.19999998807907104
+      ],
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "bbox_world": {
+        "min": [
+          0.9800002574920654,
+          0.1499999612569809,
+          0.5
+        ],
+        "max": [
+          1.1800003051757812,
+          0.3500000238418579,
+          0.699999988079071
+        ],
+        "center": [
+          1.0800002813339233,
+          0.25,
+          0.6000000238418579
+        ],
+        "size": [
+          0.20000004768371582,
+          0.20000006258487701,
+          0.19999998807907104
+        ]
+      },
+      "mesh_source": {
+        "vertices_source": 16,
+        "polygons_source": 12
+      },
+      "custom_properties": {},
+      "exported_obj": "meshes/waste.obj",
+      "mesh_evaluated": {
+        "vertices": 16,
+        "triangles": 28
+      }
+    }
+  ]
+}

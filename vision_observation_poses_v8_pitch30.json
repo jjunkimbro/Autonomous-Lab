@@ -1,0 +1,154 @@
+{
+  "empty_hand": {
+    "fluent_plate": {
+      "value": 1.1164031982421876,
+      "reduced": [
+        0.18600000000000014,
+        1.5707963267948966,
+        -2.025707487034008,
+        2.2962866919562837,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.16,
+        0.0,
+        0.06
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 58.20159912109375,
+      "visible": 1.0,
+      "edge_margin": 198.3775604726032,
+      "counts": {
+        "empty": 96,
+        "object": 0,
+        "occluded": 0,
+        "missing": 0
+      }
+    },
+    "incubator_plate": {
+      "value": 0.47403604494647456,
+      "reduced": [
+        0.0014241680412276103,
+        2.836160034490786,
+        -1.4251116071120418,
+        1.4723175641824584,
+        1.265363707695889
+      ],
+      "tcp_offset_station": [
+        -0.16,
+        0.0,
+        0.06
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 59.22795104980469,
+      "visible": 0.4166666666666667,
+      "edge_margin": 195.27543100187228,
+      "counts": {
+        "empty": 40,
+        "object": 0,
+        "occluded": 56,
+        "missing": 0
+      }
+    },
+    "reader_plate": {
+      "value": 1.1024309692382812,
+      "reduced": [
+        0.133,
+        -1.5707963267948966,
+        -2.28188702795087,
+        2.4355560303576738,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.16,
+        0.0,
+        0.06
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 51.215484619140625,
+      "visible": 1.0,
+      "edge_margin": 108.33462590965644,
+      "counts": {
+        "empty": 96,
+        "object": 0,
+        "occluded": 0,
+        "missing": 0
+      }
+    },
+    "sorter_left_plate": {
+      "value": 1.1297533569335938,
+      "reduced": [
+        0.3747499999999999,
+        -1.5707963267948966,
+        -1.6047184433548538,
+        2.021684711862531,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.1,
+        0.0,
+        0.06
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 64.87667846679688,
+      "visible": 1.0,
+      "edge_margin": 119.67896050283514,
+      "counts": {
+        "empty": 96,
+        "object": 0,
+        "occluded": 0,
+        "missing": 0
+      }
+    },
+    "plate_hotel_4": {
+      "value": 0.5690203043619793,
+      "reduced": [
+        0.611772999999993,
+        1.5707963267948966,
+        -1.523380627820325,
+        1.787994472677611,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.1,
+        0.0,
+        0.06
+      ],
+      "clearance": 0.02651378793892026,
+      "clearance_pair": [
+        "rg2_fingertip_left",
+        "visual_platehotel"
+      ],
+      "detected": true,
+      "marker_pixels": 76.17681884765625,
+      "visible": 0.4166666666666667,
+      "edge_margin": 197.21527184319416,
+      "counts": {
+        "empty": 0,
+        "object": 40,
+        "occluded": 56,
+        "missing": 0
+      }
+    }
+  }
+}

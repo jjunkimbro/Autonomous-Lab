@@ -1,0 +1,84 @@
+{
+  "plate": {
+    "fluent_plate": [
+      "fixture_fluent_plate_far_left_end",
+      "fixture_fluent_plate_far_left_side",
+      "fixture_fluent_plate_mid_left",
+      "fixture_fluent_plate_far_right_end",
+      "fixture_fluent_plate_far_right_side",
+      "fixture_fluent_plate_mid_right",
+      "fixture_fluent_plate_near_center"
+    ],
+    "incubator_plate": [
+      "fixture_incubator_plate_far_left_end",
+      "fixture_incubator_plate_far_left_side",
+      "fixture_incubator_plate_mid_left",
+      "fixture_incubator_plate_far_right_end",
+      "fixture_incubator_plate_far_right_side",
+      "fixture_incubator_plate_mid_right",
+      "fixture_incubator_plate_near_center"
+    ],
+    "reader_plate": [
+      "fixture_reader_plate_far_left_end",
+      "fixture_reader_plate_far_left_side",
+      "fixture_reader_plate_mid_left",
+      "fixture_reader_plate_far_right_end",
+      "fixture_reader_plate_far_right_side",
+      "fixture_reader_plate_mid_right",
+      "fixture_reader_plate_near_center"
+    ],
+    "sorter_left_plate": [
+      "fixture_sorter_left_plate_far_left_end",
+      "fixture_sorter_left_plate_far_left_side",
+      "fixture_sorter_left_plate_mid_left",
+      "fixture_sorter_left_plate_far_right_end",
+      "fixture_sorter_left_plate_far_right_side",
+      "fixture_sorter_left_plate_mid_right",
+      "fixture_sorter_left_plate_near_center"
+    ]
+  },
+  "tube": {
+    "tube_hotel_1": [
+      "fixture_tube_hotel_1_wall0",
+      "fixture_tube_hotel_1_wall1",
+      "fixture_tube_hotel_1_wall2",
+      "fixture_tube_hotel_1_wall3"
+    ],
+    "tube_hotel_2": [
+      "fixture_tube_hotel_2_wall0",
+      "fixture_tube_hotel_2_wall1",
+      "fixture_tube_hotel_2_wall2",
+      "fixture_tube_hotel_2_wall3"
+    ],
+    "fluent_tube": [
+      "fixture_fluent_tube_wall0",
+      "fixture_fluent_tube_wall1",
+      "fixture_fluent_tube_wall2",
+      "fixture_fluent_tube_wall3"
+    ],
+    "sorter_right_tube": [
+      "fixture_sorter_right_tube_wall0",
+      "fixture_sorter_right_tube_wall1",
+      "fixture_sorter_right_tube_wall2",
+      "fixture_sorter_right_tube_wall3"
+    ],
+    "ngs_tube": [
+      "fixture_ngs_tube_wall0",
+      "fixture_ngs_tube_wall1",
+      "fixture_ngs_tube_wall2",
+      "fixture_ngs_tube_wall3"
+    ]
+  },
+  "locator": {
+    "height": 0.004,
+    "thickness": 0.004,
+    "chamfer": 0.0025,
+    "clearance": 0.00075,
+    "length": 0.02
+  },
+  "socket": {
+    "clearance": 0.0005,
+    "thickness": 0.003,
+    "chamfer": 0.0015
+  }
+}

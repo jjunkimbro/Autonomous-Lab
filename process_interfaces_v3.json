@@ -1,0 +1,2914 @@
+{
+  "name": "PROCESS INTERFACES V3",
+  "input_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_multiworkpiece_v2.xml",
+  "output_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_interfaces_v3.xml",
+  "coordinate_frame": "MuJoCo world",
+  "unit": "meter",
+  "conventions": {
+    "control_point": "ur5e_rg2_grasp_center",
+    "tool_frame": "z = 손가락이 뻗는 방향, x = 닫힘 방향, y = 월드 위쪽",
+    "pre_waypoint": "rule-based 이송과 pick/place skill 의 제어권 전환 지점",
+    "insertion_axis": "물체가 장비 슬롯으로 들어가는 방향 (grasp_frame 과 독립)"
+  },
+  "rg2": {
+    "control_site": "ur5e_rg2_grasp_center",
+    "control_site_frame_at_home": {
+      "x_closing": [
+        1.0,
+        -0.0,
+        0.0
+      ],
+      "y": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "z_approach": [
+        -0.0,
+        -1.0,
+        0.0
+      ]
+    },
+    "tip_ahead_of_control_site": 0.0208,
+    "pad_length": 0.031,
+    "finger_half_height": 0.0104,
+    "max_outer_span_open": 0.1127,
+    "stroke": 0.11
+  },
+  "workpiece_dimensions": {
+    "PLATE": {
+      "length": 0.127,
+      "width": 0.085,
+      "height": 0.014
+    },
+    "TUBE_5ML": {
+      "diameter": 0.012,
+      "length": 0.075
+    }
+  },
+  "gripper_modes": {
+    "PLATE": {
+      "open_width": 0.1,
+      "edge_inset": 0.02,
+      "support_clearance": 0.002,
+      "lift_off": 0.005
+    },
+    "TUBE_5ML": {
+      "open_width": 0.03,
+      "axis_offset": 0.006,
+      "top_clearance": 0.002,
+      "extract_margin": 0.015
+    }
+  },
+  "tilt_limit_deg": {
+    "LIQUID": 3.0,
+    "EMPTY": 10.0
+  },
+  "interfaces": {
+    "plate_hotel_4": {
+      "station": "plate_hotel_4",
+      "site": "ref_platewell4",
+      "reference_kind": "PLATE_TOP",
+      "reference_position": [
+        0.870773,
+        0.1165,
+        0.624
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.707107,
+          0.707107,
+          0.0,
+          0.0
+        ],
+        "tool_yaw_deg": -90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "PLATE",
+      "grasp_type": "HORIZONTAL_END_GRASP",
+      "object_center": [
+        0.870773,
+        0.1165,
+        0.617
+      ],
+      "support_z": 0.61,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.870773,
+            0.2308,
+            0.6224
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.870773,
+            0.2108,
+            0.6224
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.870773,
+            0.16,
+            0.6224
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "LIFT_OFF",
+          "position": [
+            0.870773,
+            0.16,
+            0.6274
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "EXTRACT",
+          "position": [
+            0.870773,
+            0.2108,
+            0.6274
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.870773,
+            0.2308,
+            0.6274
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.870773,
+            0.2308,
+            0.6274
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "APPROACH_LIFTED",
+          "position": [
+            0.870773,
+            0.2108,
+            0.6274
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.870773,
+            0.16,
+            0.6274
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.870773,
+            0.16,
+            0.6224
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.870773,
+            0.2108,
+            0.6224
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.870773,
+            0.2308,
+            0.6224
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_support_m": 0.002,
+        "finger_plate_overlap_m": 0.012,
+        "plate_fits_holder": true,
+        "plate_size_world_xy": [
+          0.085,
+          0.127
+        ],
+        "pre_retreat_m": 0.0708
+      }
+    },
+    "plate_hotel_3": {
+      "station": "plate_hotel_3",
+      "site": "ref_platewell3",
+      "reference_kind": "PLATE_TOP",
+      "reference_position": [
+        0.870773,
+        0.1165,
+        0.589
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.707107,
+          0.707107,
+          0.0,
+          0.0
+        ],
+        "tool_yaw_deg": -90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "PLATE",
+      "grasp_type": "HORIZONTAL_END_GRASP",
+      "object_center": [
+        0.870773,
+        0.1165,
+        0.582
+      ],
+      "support_z": 0.575,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.870773,
+            0.2308,
+            0.5874
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.870773,
+            0.2108,
+            0.5874
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.870773,
+            0.16,
+            0.5874
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "LIFT_OFF",
+          "position": [
+            0.870773,
+            0.16,
+            0.5924
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "EXTRACT",
+          "position": [
+            0.870773,
+            0.2108,
+            0.5924
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.870773,
+            0.2308,
+            0.5924
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.870773,
+            0.2308,
+            0.5924
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "APPROACH_LIFTED",
+          "position": [
+            0.870773,
+            0.2108,
+            0.5924
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.870773,
+            0.16,
+            0.5924
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.870773,
+            0.16,
+            0.5874
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.870773,
+            0.2108,
+            0.5874
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.870773,
+            0.2308,
+            0.5874
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_support_m": 0.002,
+        "finger_plate_overlap_m": 0.012,
+        "plate_fits_holder": true,
+        "plate_size_world_xy": [
+          0.085,
+          0.127
+        ],
+        "pre_retreat_m": 0.0708
+      }
+    },
+    "fluent_plate": {
+      "station": "fluent_plate",
+      "site": "ref_780_plateholder1",
+      "reference_kind": "SUPPORT_TOP",
+      "reference_position": [
+        0.445,
+        0.264,
+        0.565
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.707107,
+          0.707107,
+          0.0,
+          0.0
+        ],
+        "tool_yaw_deg": -90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "PLATE",
+      "grasp_type": "HORIZONTAL_END_GRASP",
+      "object_center": [
+        0.445,
+        0.264,
+        0.572
+      ],
+      "support_z": 0.565,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.445,
+            0.4508,
+            0.5774
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.445,
+            0.3583,
+            0.5774
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.445,
+            0.3075,
+            0.5774
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "LIFT_OFF",
+          "position": [
+            0.445,
+            0.3075,
+            0.5824
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "EXTRACT",
+          "position": [
+            0.445,
+            0.3583,
+            0.5824
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.445,
+            0.4508,
+            0.5824
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.445,
+            0.4508,
+            0.5824
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "APPROACH_LIFTED",
+          "position": [
+            0.445,
+            0.3583,
+            0.5824
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.445,
+            0.3075,
+            0.5824
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.445,
+            0.3075,
+            0.5774
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.445,
+            0.3583,
+            0.5774
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.445,
+            0.4508,
+            0.5774
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_support_m": 0.002,
+        "finger_plate_overlap_m": 0.012,
+        "plate_fits_holder": true,
+        "plate_size_world_xy": [
+          0.085,
+          0.127
+        ],
+        "pre_retreat_m": 0.1433
+      }
+    },
+    "incubator_plate": {
+      "station": "incubator_plate",
+      "site": "ref_stx44_plateholder",
+      "reference_kind": "SUPPORT_TOP",
+      "reference_position": [
+        1.144001,
+        0.9915,
+        0.69
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "tool_yaw_deg": 0.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "PLATE",
+      "grasp_type": "HORIZONTAL_END_GRASP",
+      "object_center": [
+        1.144001,
+        0.9915,
+        0.697
+      ],
+      "support_z": 0.69,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            1.0292,
+            0.9915,
+            0.7024
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            1.049701,
+            0.9915,
+            0.7024
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            1.100501,
+            0.9915,
+            0.7024
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "LIFT_OFF",
+          "position": [
+            1.100501,
+            0.9915,
+            0.7074
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "EXTRACT",
+          "position": [
+            1.049701,
+            0.9915,
+            0.7074
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            1.0292,
+            0.9915,
+            0.7074
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            1.0292,
+            0.9915,
+            0.7074
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "APPROACH_LIFTED",
+          "position": [
+            1.049701,
+            0.9915,
+            0.7074
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            1.100501,
+            0.9915,
+            0.7074
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            1.100501,
+            0.9915,
+            0.7024
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            1.049701,
+            0.9915,
+            0.7024
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            1.0292,
+            0.9915,
+            0.7024
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_support_m": 0.002,
+        "finger_plate_overlap_m": 0.012,
+        "plate_fits_holder": true,
+        "plate_size_world_xy": [
+          0.127,
+          0.085
+        ],
+        "pre_retreat_m": 0.0713
+      }
+    },
+    "reader_plate": {
+      "station": "reader_plate",
+      "site": "ref_reader_plateholder",
+      "reference_kind": "SUPPORT_TOP",
+      "reference_position": [
+        0.1235,
+        1.6625,
+        0.55
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          -0.5,
+          -0.5,
+          0.5,
+          0.5
+        ],
+        "tool_yaw_deg": 180.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "PLATE",
+      "grasp_type": "HORIZONTAL_END_GRASP",
+      "object_center": [
+        0.1235,
+        1.6625,
+        0.557
+      ],
+      "support_z": 0.55,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.2448,
+            1.6625,
+            0.5624
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.2178,
+            1.6625,
+            0.5624
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.167,
+            1.6625,
+            0.5624
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "LIFT_OFF",
+          "position": [
+            0.167,
+            1.6625,
+            0.5674
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "EXTRACT",
+          "position": [
+            0.2178,
+            1.6625,
+            0.5674
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.2448,
+            1.6625,
+            0.5674
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.2448,
+            1.6625,
+            0.5674
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "APPROACH_LIFTED",
+          "position": [
+            0.2178,
+            1.6625,
+            0.5674
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.167,
+            1.6625,
+            0.5674
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.167,
+            1.6625,
+            0.5624
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.2178,
+            1.6625,
+            0.5624
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.2448,
+            1.6625,
+            0.5624
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_support_m": 0.002,
+        "finger_plate_overlap_m": 0.012,
+        "plate_fits_holder": true,
+        "plate_size_world_xy": [
+          0.127,
+          0.085
+        ],
+        "pre_retreat_m": 0.0778
+      }
+    },
+    "sorter_left_plate": {
+      "station": "sorter_left_plate",
+      "site": "ref_sorter_left_plate",
+      "reference_kind": "SUPPORT_TOP",
+      "reference_position": [
+        0.36575,
+        1.829,
+        0.554
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.0,
+          0.0,
+          0.707107,
+          0.707107
+        ],
+        "tool_yaw_deg": 90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "PLATE",
+      "grasp_type": "HORIZONTAL_END_GRASP",
+      "object_center": [
+        0.36575,
+        1.829,
+        0.561
+      ],
+      "support_z": 0.554,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.36575,
+            1.6742,
+            0.5664
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.36575,
+            1.7347,
+            0.5664
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.36575,
+            1.7855,
+            0.5664
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "LIFT_OFF",
+          "position": [
+            0.36575,
+            1.7855,
+            0.5714
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "EXTRACT",
+          "position": [
+            0.36575,
+            1.7347,
+            0.5714
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.36575,
+            1.6742,
+            0.5714
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_LIFTED",
+          "position": [
+            0.36575,
+            1.6742,
+            0.5714
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "APPROACH_LIFTED",
+          "position": [
+            0.36575,
+            1.7347,
+            0.5714
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.36575,
+            1.7855,
+            0.5714
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.36575,
+            1.7855,
+            0.5664
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.36575,
+            1.7347,
+            0.5664
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.36575,
+            1.6742,
+            0.5664
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_support_m": 0.002,
+        "finger_plate_overlap_m": 0.012,
+        "plate_fits_holder": true,
+        "plate_size_world_xy": [
+          0.085,
+          0.127
+        ],
+        "pre_retreat_m": 0.1113
+      }
+    },
+    "tube_hotel_1": {
+      "station": "tube_hotel_1",
+      "site": "ref_tube1",
+      "reference_kind": "TUBE_TOP",
+      "reference_position": [
+        0.7,
+        0.17,
+        0.585
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.707107,
+          0.707107,
+          0.0,
+          0.0
+        ],
+        "tool_yaw_deg": -90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "TUBE_5ML",
+      "grasp_type": "HORIZONTAL_SIDE_GRASP",
+      "object_axis_xy": [
+        0.7,
+        0.17
+      ],
+      "seat_z": 0.51,
+      "top_z": 0.585,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.7,
+            0.2268,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.7,
+            0.2188,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.7,
+            0.176,
+            0.5726
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "EXTRACT_UP",
+          "position": [
+            0.7,
+            0.176,
+            0.5931
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.7,
+            0.2268,
+            0.5931
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.7,
+            0.2268,
+            0.5931
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.7,
+            0.176,
+            0.5931
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.7,
+            0.176,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.7,
+            0.2188,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.7,
+            0.2268,
+            0.5726
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_holder_m": 0.0467,
+        "tip_beyond_tube_far_side_m": 0.0088,
+        "insertion_depth_m": 0.0055,
+        "insertion_depth_source": "measured",
+        "pre_retreat_m": 0.0508
+      }
+    },
+    "tube_hotel_2": {
+      "station": "tube_hotel_2",
+      "site": "ref_tube2",
+      "reference_kind": "TUBE_TOP",
+      "reference_position": [
+        0.7,
+        0.14,
+        0.585
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.707107,
+          0.707107,
+          0.0,
+          0.0
+        ],
+        "tool_yaw_deg": -90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "front_blockers": [
+        "tube_hotel_1"
+      ],
+      "rl_candidate": true,
+      "workpiece": "TUBE_5ML",
+      "grasp_type": "HORIZONTAL_SIDE_GRASP",
+      "object_axis_xy": [
+        0.7,
+        0.14
+      ],
+      "seat_z": 0.51,
+      "top_z": 0.585,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.7,
+            0.1968,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.7,
+            0.1888,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.7,
+            0.146,
+            0.5726
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "EXTRACT_UP",
+          "position": [
+            0.7,
+            0.146,
+            0.5931
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.7,
+            0.1968,
+            0.5931
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.7,
+            0.1968,
+            0.5931
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.7,
+            0.146,
+            0.5931
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.7,
+            0.146,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.7,
+            0.1888,
+            0.5726
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.7,
+            0.1968,
+            0.5726
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_holder_m": 0.0467,
+        "tip_beyond_tube_far_side_m": 0.0088,
+        "insertion_depth_m": 0.0055,
+        "insertion_depth_source": "measured",
+        "pre_retreat_m": 0.0508
+      }
+    },
+    "fluent_tube": {
+      "station": "fluent_tube",
+      "site": "ref_fluent_tube",
+      "reference_kind": "TUBE_SEAT",
+      "reference_position": [
+        0.28,
+        0.208,
+        0.566
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.707107,
+          0.707107,
+          0.0,
+          0.0
+        ],
+        "tool_yaw_deg": -90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "TUBE_5ML",
+      "grasp_type": "HORIZONTAL_SIDE_GRASP",
+      "object_axis_xy": [
+        0.28,
+        0.208
+      ],
+      "seat_z": 0.566,
+      "top_z": 0.641,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.28,
+            0.4508,
+            0.6286
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.28,
+            0.2568,
+            0.6286
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.28,
+            0.214,
+            0.6286
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "EXTRACT_UP",
+          "position": [
+            0.28,
+            0.214,
+            0.6736
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.28,
+            0.4508,
+            0.6736
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.28,
+            0.4508,
+            0.6736
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.28,
+            0.214,
+            0.6736
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.28,
+            0.214,
+            0.6286
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.28,
+            0.2568,
+            0.6286
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.28,
+            0.4508,
+            0.6286
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_holder_m": 0.0222,
+        "tip_beyond_tube_far_side_m": 0.0088,
+        "insertion_depth_m": 0.03,
+        "insertion_depth_source": "assumed",
+        "pre_retreat_m": 0.2368
+      }
+    },
+    "sorter_right_tube": {
+      "station": "sorter_right_tube",
+      "site": "ref_sorter_right_tube",
+      "reference_kind": "TUBE_SEAT",
+      "reference_position": [
+        0.50075,
+        1.745,
+        0.564
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.0,
+          0.0,
+          0.707107,
+          0.707107
+        ],
+        "tool_yaw_deg": 90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "TUBE_5ML",
+      "grasp_type": "HORIZONTAL_SIDE_GRASP",
+      "object_axis_xy": [
+        0.50075,
+        1.745
+      ],
+      "seat_z": 0.564,
+      "top_z": 0.639,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.50075,
+            1.6742,
+            0.6266
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.50075,
+            1.6962,
+            0.6266
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.50075,
+            1.739,
+            0.6266
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "EXTRACT_UP",
+          "position": [
+            0.50075,
+            1.739,
+            0.6716
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.50075,
+            1.6742,
+            0.6716
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.50075,
+            1.6742,
+            0.6716
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.50075,
+            1.739,
+            0.6716
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.50075,
+            1.739,
+            0.6266
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.50075,
+            1.6962,
+            0.6266
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.50075,
+            1.6742,
+            0.6266
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_holder_m": 0.0222,
+        "tip_beyond_tube_far_side_m": 0.0088,
+        "insertion_depth_m": 0.03,
+        "insertion_depth_source": "assumed",
+        "pre_retreat_m": 0.0648
+      }
+    },
+    "ngs_tube": {
+      "station": "ngs_tube",
+      "site": "ref_ngs_tube",
+      "reference_kind": "TUBE_SEAT",
+      "reference_position": [
+        0.967,
+        1.506,
+        0.605
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.0,
+          0.0,
+          0.707107,
+          0.707107
+        ],
+        "tool_yaw_deg": 90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": true,
+      "workpiece": "TUBE_5ML",
+      "grasp_type": "HORIZONTAL_SIDE_GRASP",
+      "object_axis_xy": [
+        0.967,
+        1.506
+      ],
+      "seat_z": 0.605,
+      "top_z": 0.68,
+      "pick": [
+        {
+          "name": "PRE",
+          "position": [
+            0.967,
+            1.4272,
+            0.6676
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "APPROACH",
+          "position": [
+            0.967,
+            1.4572,
+            0.6676
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "GRASP",
+          "position": [
+            0.967,
+            1.5,
+            0.6676
+          ],
+          "gripper": "close"
+        },
+        {
+          "name": "EXTRACT_UP",
+          "position": [
+            0.967,
+            1.5,
+            0.7276
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.967,
+            1.4272,
+            0.7276
+          ],
+          "gripper": "closed"
+        }
+      ],
+      "place": [
+        {
+          "name": "PRE_HOVER",
+          "position": [
+            0.967,
+            1.4272,
+            0.7276
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "INSERT_HOVER",
+          "position": [
+            0.967,
+            1.5,
+            0.7276
+          ],
+          "gripper": "closed"
+        },
+        {
+          "name": "SET_DOWN",
+          "position": [
+            0.967,
+            1.5,
+            0.6676
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "RELEASE_CLEAR",
+          "position": [
+            0.967,
+            1.4572,
+            0.6676
+          ],
+          "gripper": "open"
+        },
+        {
+          "name": "PRE",
+          "position": [
+            0.967,
+            1.4272,
+            0.6676
+          ],
+          "gripper": "open"
+        }
+      ],
+      "checks": {
+        "closing_width_ok": true,
+        "finger_above_holder_m": 0.0072,
+        "tip_beyond_tube_far_side_m": 0.0088,
+        "insertion_depth_m": 0.045,
+        "insertion_depth_source": "measured",
+        "pre_retreat_m": 0.0728
+      }
+    },
+    "waste": {
+      "station": "waste",
+      "site": "ref_waste",
+      "reference_kind": "DROP_CENTER",
+      "reference_position": [
+        1.08,
+        0.25,
+        0.7
+      ],
+      "grasp_frame": {
+        "x_closing": [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        "y_up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "z_approach": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "quat_wxyz": [
+          0.707107,
+          0.707107,
+          0.0,
+          0.0
+        ],
+        "tool_yaw_deg": -90.0,
+        "symmetric_about_z": true
+      },
+      "insertion_axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "front_blockers": [],
+      "rl_candidate": false,
+      "workpiece": "ANY",
+      "grasp_type": "DROP",
+      "rim_z": 0.7,
+      "drop": {
+        "PLATE": [
+          {
+            "name": "DROP_HOVER",
+            "position": [
+              1.08,
+              0.2935,
+              0.8124
+            ],
+            "gripper": "closed"
+          },
+          {
+            "name": "DROP",
+            "position": [
+              1.08,
+              0.2935,
+              0.7624
+            ],
+            "gripper": "open"
+          },
+          {
+            "name": "RETREAT_UP",
+            "position": [
+              1.08,
+              0.2935,
+              0.8624
+            ],
+            "gripper": "open"
+          }
+        ],
+        "TUBE_5ML": [
+          {
+            "name": "DROP_HOVER",
+            "position": [
+              1.08,
+              0.256,
+              0.8626
+            ],
+            "gripper": "closed"
+          },
+          {
+            "name": "DROP",
+            "position": [
+              1.08,
+              0.256,
+              0.8126
+            ],
+            "gripper": "open"
+          },
+          {
+            "name": "RETREAT_UP",
+            "position": [
+              1.08,
+              0.256,
+              0.9126
+            ],
+            "gripper": "open"
+          }
+        ]
+      },
+      "checks": {
+        "plate_fits_opening": true
+      }
+    }
+  },
+  "process": [
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "plate_hotel_4",
+      "to": "fluent_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "FLUENT_INITIAL_PLATE_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "fluent_plate",
+      "to": "incubator_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "STX44_CULTURE",
+      "requires": {
+        "incubator_plate": "plate_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "incubator_plate",
+      "to": "reader_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "READER_ANALYSIS",
+      "requires": {
+        "reader_plate": "plate_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_a",
+      "from": "reader_plate",
+      "to": "fluent_plate"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_a",
+      "from": "tube_hotel_1",
+      "to": "fluent_tube"
+    },
+    {
+      "type": "PROCESS",
+      "name": "FLUENT_POST_READER_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a",
+        "fluent_tube": "tube_a"
+      }
+    },
+    {
+      "type": "DISPOSE",
+      "object": "plate_a",
+      "from": "fluent_plate",
+      "to": "waste"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_a",
+      "from": "fluent_tube",
+      "to": "sorter_right_tube"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_b",
+      "from": "plate_hotel_3",
+      "to": "sorter_left_plate"
+    },
+    {
+      "type": "PROCESS",
+      "name": "CELL_SORTING",
+      "requires": {
+        "sorter_left_plate": "plate_b",
+        "sorter_right_tube": "tube_a"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "plate_b",
+      "from": "sorter_left_plate",
+      "to": "fluent_plate"
+    },
+    {
+      "type": "DISPOSE",
+      "object": "tube_a",
+      "from": "sorter_right_tube",
+      "to": "waste"
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_b",
+      "from": "tube_hotel_2",
+      "to": "fluent_tube"
+    },
+    {
+      "type": "PROCESS",
+      "name": "FLUENT_NGS_PREPARATION",
+      "requires": {
+        "fluent_plate": "plate_b",
+        "fluent_tube": "tube_b"
+      }
+    },
+    {
+      "type": "TRANSFER",
+      "object": "tube_b",
+      "from": "fluent_tube",
+      "to": "ngs_tube"
+    },
+    {
+      "type": "PROCESS",
+      "name": "NGS_ANALYSIS",
+      "requires": {
+        "ngs_tube": "tube_b"
+      }
+    },
+    {
+      "type": "DISPOSE",
+      "object": "plate_b",
+      "from": "fluent_plate",
+      "to": "waste"
+    }
+  ],
+  "task_plan": [
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 1,
+      "from": "HOME",
+      "to": "plate_hotel_4",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": null,
+      "task_id": 1
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 1,
+      "station": "plate_hotel_4",
+      "object": "plate_a",
+      "content": "EMPTY",
+      "rl_candidate": true,
+      "task_id": 2
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 1,
+      "from": "plate_hotel_4",
+      "to": "fluent_plate",
+      "object": "plate_a",
+      "content": "EMPTY",
+      "tilt_limit_deg": 10.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_LIFTED",
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 3
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "process_step": 1,
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "content": "EMPTY",
+      "rl_candidate": true,
+      "task_id": 4
+    },
+    {
+      "skill": "EQUIPMENT_RUN",
+      "process_step": 2,
+      "equipment_process": "FLUENT_INITIAL_PLATE_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a"
+      },
+      "task_id": 5
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 3,
+      "from": "fluent_plate",
+      "to": "fluent_plate",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 6
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 3,
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 7
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 3,
+      "from": "fluent_plate",
+      "to": "incubator_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_LIFTED",
+      "tool_yaw_change_deg": 90.0,
+      "task_id": 8
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "process_step": 3,
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 9
+    },
+    {
+      "skill": "EQUIPMENT_RUN",
+      "process_step": 4,
+      "equipment_process": "STX44_CULTURE",
+      "requires": {
+        "incubator_plate": "plate_a"
+      },
+      "task_id": 10
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 5,
+      "from": "incubator_plate",
+      "to": "incubator_plate",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 11
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 5,
+      "station": "incubator_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 12
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 5,
+      "from": "incubator_plate",
+      "to": "reader_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_LIFTED",
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 13
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "process_step": 5,
+      "station": "reader_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 14
+    },
+    {
+      "skill": "EQUIPMENT_RUN",
+      "process_step": 6,
+      "equipment_process": "READER_ANALYSIS",
+      "requires": {
+        "reader_plate": "plate_a"
+      },
+      "task_id": 15
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 7,
+      "from": "reader_plate",
+      "to": "reader_plate",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 16
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 7,
+      "station": "reader_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 17
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 7,
+      "from": "reader_plate",
+      "to": "fluent_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_LIFTED",
+      "tool_yaw_change_deg": 90.0,
+      "task_id": 18
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "process_step": 7,
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 19
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 8,
+      "from": "fluent_plate",
+      "to": "tube_hotel_1",
+      "end_waypoint": "PRE",
+      "gripper_mode": "TUBE_5ML",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 20
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "process_step": 8,
+      "station": "tube_hotel_1",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 21
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 8,
+      "from": "tube_hotel_1",
+      "to": "fluent_tube",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_HOVER",
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 22
+    },
+    {
+      "skill": "PLACE_TUBE_5ML",
+      "process_step": 8,
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 23
+    },
+    {
+      "skill": "EQUIPMENT_RUN",
+      "process_step": 9,
+      "equipment_process": "FLUENT_POST_READER_PROCESS",
+      "requires": {
+        "fluent_plate": "plate_a",
+        "fluent_tube": "tube_a"
+      },
+      "task_id": 24
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 10,
+      "from": "fluent_tube",
+      "to": "fluent_plate",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 25
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 10,
+      "station": "fluent_plate",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 26
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 10,
+      "from": "fluent_plate",
+      "to": "waste",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "DROP_HOVER",
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 27
+    },
+    {
+      "skill": "DROP_PLATE",
+      "process_step": 10,
+      "station": "waste",
+      "object": "plate_a",
+      "content": "LIQUID",
+      "rl_candidate": false,
+      "task_id": 28
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 11,
+      "from": "waste",
+      "to": "fluent_tube",
+      "end_waypoint": "PRE",
+      "gripper_mode": "TUBE_5ML",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 29
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "process_step": 11,
+      "station": "fluent_tube",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 30
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 11,
+      "from": "fluent_tube",
+      "to": "sorter_right_tube",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_HOVER",
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 31
+    },
+    {
+      "skill": "PLACE_TUBE_5ML",
+      "process_step": 11,
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 32
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 12,
+      "from": "sorter_right_tube",
+      "to": "plate_hotel_3",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 33
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 12,
+      "station": "plate_hotel_3",
+      "object": "plate_b",
+      "content": "EMPTY",
+      "rl_candidate": true,
+      "task_id": 34
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 12,
+      "from": "plate_hotel_3",
+      "to": "sorter_left_plate",
+      "object": "plate_b",
+      "content": "EMPTY",
+      "tilt_limit_deg": 10.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_LIFTED",
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 35
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "process_step": 12,
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "content": "EMPTY",
+      "rl_candidate": true,
+      "task_id": 36
+    },
+    {
+      "skill": "EQUIPMENT_RUN",
+      "process_step": 13,
+      "equipment_process": "CELL_SORTING",
+      "requires": {
+        "sorter_left_plate": "plate_b",
+        "sorter_right_tube": "tube_a"
+      },
+      "task_id": 37
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 14,
+      "from": "sorter_left_plate",
+      "to": "sorter_left_plate",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 38
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 14,
+      "station": "sorter_left_plate",
+      "object": "plate_b",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 39
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 14,
+      "from": "sorter_left_plate",
+      "to": "fluent_plate",
+      "object": "plate_b",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_LIFTED",
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 40
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "process_step": 14,
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 41
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 15,
+      "from": "fluent_plate",
+      "to": "sorter_right_tube",
+      "end_waypoint": "PRE",
+      "gripper_mode": "TUBE_5ML",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 42
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "process_step": 15,
+      "station": "sorter_right_tube",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 43
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 15,
+      "from": "sorter_right_tube",
+      "to": "waste",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "DROP_HOVER",
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 44
+    },
+    {
+      "skill": "DROP_TUBE_5ML",
+      "process_step": 15,
+      "station": "waste",
+      "object": "tube_a",
+      "content": "LIQUID",
+      "rl_candidate": false,
+      "task_id": 45
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 16,
+      "from": "waste",
+      "to": "tube_hotel_2",
+      "end_waypoint": "PRE",
+      "gripper_mode": "TUBE_5ML",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 46
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "process_step": 16,
+      "station": "tube_hotel_2",
+      "object": "tube_b",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 47
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 16,
+      "from": "tube_hotel_2",
+      "to": "fluent_tube",
+      "object": "tube_b",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_HOVER",
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 48
+    },
+    {
+      "skill": "PLACE_TUBE_5ML",
+      "process_step": 16,
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 49
+    },
+    {
+      "skill": "EQUIPMENT_RUN",
+      "process_step": 17,
+      "equipment_process": "FLUENT_NGS_PREPARATION",
+      "requires": {
+        "fluent_plate": "plate_b",
+        "fluent_tube": "tube_b"
+      },
+      "task_id": 50
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 18,
+      "from": "fluent_tube",
+      "to": "fluent_tube",
+      "end_waypoint": "PRE",
+      "gripper_mode": "TUBE_5ML",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 51
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "process_step": 18,
+      "station": "fluent_tube",
+      "object": "tube_b",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 52
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 18,
+      "from": "fluent_tube",
+      "to": "ngs_tube",
+      "object": "tube_b",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "PRE_HOVER",
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 53
+    },
+    {
+      "skill": "PLACE_TUBE_5ML",
+      "process_step": 18,
+      "station": "ngs_tube",
+      "object": "tube_b",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 54
+    },
+    {
+      "skill": "EQUIPMENT_RUN",
+      "process_step": 19,
+      "equipment_process": "NGS_ANALYSIS",
+      "requires": {
+        "ngs_tube": "tube_b"
+      },
+      "task_id": 55
+    },
+    {
+      "skill": "TRANSIT_EMPTY",
+      "process_step": 20,
+      "from": "ngs_tube",
+      "to": "fluent_plate",
+      "end_waypoint": "PRE",
+      "gripper_mode": "PLATE",
+      "wrist_reorientation_allowed": true,
+      "tool_yaw_change_deg": -180.0,
+      "task_id": 56
+    },
+    {
+      "skill": "PICK_PLATE",
+      "process_step": 20,
+      "station": "fluent_plate",
+      "object": "plate_b",
+      "content": "LIQUID",
+      "rl_candidate": true,
+      "task_id": 57
+    },
+    {
+      "skill": "TRANSIT_LOADED",
+      "process_step": 20,
+      "from": "fluent_plate",
+      "to": "waste",
+      "object": "plate_b",
+      "content": "LIQUID",
+      "tilt_limit_deg": 3.0,
+      "keep_upright": true,
+      "wrist_reorientation_allowed": false,
+      "end_waypoint": "DROP_HOVER",
+      "tool_yaw_change_deg": 0.0,
+      "task_id": 58
+    },
+    {
+      "skill": "DROP_PLATE",
+      "process_step": 20,
+      "station": "waste",
+      "object": "plate_b",
+      "content": "LIQUID",
+      "rl_candidate": false,
+      "task_id": 59
+    }
+  ],
+  "skill_catalog": [
+    {
+      "skill": "DROP_PLATE",
+      "station": "waste",
+      "rl_candidate": false,
+      "uses": 2
+    },
+    {
+      "skill": "DROP_TUBE_5ML",
+      "station": "waste",
+      "rl_candidate": false,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_PLATE",
+      "station": "fluent_plate",
+      "rl_candidate": true,
+      "uses": 3
+    },
+    {
+      "skill": "PICK_PLATE",
+      "station": "incubator_plate",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_PLATE",
+      "station": "plate_hotel_3",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_PLATE",
+      "station": "plate_hotel_4",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_PLATE",
+      "station": "reader_plate",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_PLATE",
+      "station": "sorter_left_plate",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "station": "fluent_tube",
+      "rl_candidate": true,
+      "uses": 2
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "station": "sorter_right_tube",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "station": "tube_hotel_1",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PICK_TUBE_5ML",
+      "station": "tube_hotel_2",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "station": "fluent_plate",
+      "rl_candidate": true,
+      "uses": 3
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "station": "incubator_plate",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "station": "reader_plate",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PLACE_PLATE",
+      "station": "sorter_left_plate",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PLACE_TUBE_5ML",
+      "station": "fluent_tube",
+      "rl_candidate": true,
+      "uses": 2
+    },
+    {
+      "skill": "PLACE_TUBE_5ML",
+      "station": "ngs_tube",
+      "rl_candidate": true,
+      "uses": 1
+    },
+    {
+      "skill": "PLACE_TUBE_5ML",
+      "station": "sorter_right_tube",
+      "rl_candidate": true,
+      "uses": 1
+    }
+  ],
+  "logical_validation": {
+    "slots": {
+      "plate_hotel_4": null,
+      "plate_hotel_3": null,
+      "tube_hotel_1": null,
+      "tube_hotel_2": null,
+      "fluent_plate": null,
+      "fluent_tube": null,
+      "incubator_plate": null,
+      "reader_plate": null,
+      "sorter_left_plate": null,
+      "sorter_right_tube": null,
+      "ngs_tube": "tube_b",
+      "waste": null
+    },
+    "object_states": {
+      "plate_a": {
+        "state": "DISPOSED",
+        "slot": null
+      },
+      "plate_b": {
+        "state": "DISPOSED",
+        "slot": null
+      },
+      "tube_a": {
+        "state": "DISPOSED",
+        "slot": null
+      },
+      "tube_b": {
+        "state": "AT_SLOT",
+        "slot": "ngs_tube"
+      }
+    },
+    "equipment_runs": [
+      "FLUENT_INITIAL_PLATE_PROCESS",
+      "STX44_CULTURE",
+      "READER_ANALYSIS",
+      "FLUENT_POST_READER_PROCESS",
+      "CELL_SORTING",
+      "FLUENT_NGS_PREPARATION",
+      "NGS_ANALYSIS"
+    ],
+    "waste_contents": [
+      "plate_a",
+      "tube_a",
+      "plate_b"
+    ]
+  },
+  "warnings": [
+    "모든 장비 형상은 충돌이 꺼진 visual mesh 의 AABB 로만 확인했습니다. 충돌 검사 단계에서 재검증이 필요합니다.",
+    "Reader: plate 장변이 X 방향이므로 V2 의 -Y 진입을 +X 측면 진입(tool -X)으로 변경했습니다. 실제 drawer 측면 접근 공간 확인이 필요합니다.",
+    "Sorter 왼쪽: stage 위 덮개 때문에 V2 의 수직 진입을 전면 수평 진입(tool +Y)으로 변경했습니다.",
+    "Plate 는 항상 로봇 쪽 끝(E1)을 잡습니다. 모든 장비에서 E1 이 로봇 쪽을 향하며, 장비별 A1 방향 요구조건은 아직 확인되지 않았습니다.",
+    "fluent_tube: tube 삽입 깊이를 0.03 m 로 가정했습니다 (holder CAD 없음).",
+    "fluent_tube: reference site 를 tube 아랫면으로 해석했습니다. 확인이 필요합니다.",
+    "sorter_right_tube: tube 삽입 깊이를 0.03 m 로 가정했습니다 (holder CAD 없음).",
+    "sorter_right_tube: reference site 를 tube 아랫면으로 해석했습니다. 확인이 필요합니다.",
+    "ngs_tube: reference site 를 tube 아랫면으로 해석했습니다. 확인이 필요합니다."
+  ],
+  "ik": "not connected",
+  "collision": "not connected",
+  "interpolation": "not connected"
+}

@@ -1,0 +1,586 @@
+<mujoco model="autonomous_lab_environment_v2">
+  <compiler angle="radian" meshdir="environment_v2_export/"/>
+
+  <option timestep="0.001" impratio="10" integrator="implicitfast" cone="elliptic" noslip_iterations="4"/>
+
+  <size nkey="1"/>
+
+  <statistic extent="1.35" center="0.75 1 0.65"/>
+
+  <visual>
+    <global azimuth="-125" elevation="-27"/>
+    <headlight ambient="0.32 0.32 0.32" diffuse="0.72 0.72 0.72" specular="0.18 0.18 0.18"/>
+    <rgba haze="0.12 0.15 0.19 1"/>
+  </visual>
+
+  <default>
+    <geom contype="0" conaffinity="0" group="1" density="0"/>
+    <default class="reference_site">
+      <site size="0.006 0.005 0.005" group="3" rgba="1 0.15 0.1 0.95"/>
+    </default>
+    <default class="ur5e_main">
+      <geom contype="1" conaffinity="1" group="0" density="1000"/>
+      <default class="ur5e_ur5e">
+        <material shininess="0.25"/>
+        <joint range="-6.28319 6.28319" armature="0.1" axis="0 1 0"/>
+        <site size="0.001 0.005 0.005" group="4" rgba="0.5 0.5 0.5 0.3"/>
+        <general ctrlrange="-6.2831 6.2831" forcerange="-150 150" biastype="affine" gainprm="2000" biasprm="0 -2000 -400"/>
+        <default class="ur5e_size3">
+          <default class="ur5e_size3_limited">
+            <joint range="-3.1415 3.1415"/>
+            <general ctrlrange="-3.1415 3.1415"/>
+          </default>
+        </default>
+        <default class="ur5e_size1">
+          <general forcerange="-28 28" gainprm="500" biasprm="0 -500 -100"/>
+        </default>
+        <default class="ur5e_visual">
+          <geom type="mesh" contype="0" conaffinity="0" group="2"/>
+        </default>
+        <default class="ur5e_collision">
+          <geom type="capsule" group="3"/>
+          <default class="ur5e_eef_collision">
+            <geom type="cylinder"/>
+          </default>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <material name="ur5e_black" class="ur5e_ur5e" rgba="0.033 0.033 0.033 1"/>
+    <material name="ur5e_jointgray" class="ur5e_ur5e" rgba="0.278 0.278 0.278 1"/>
+    <material name="ur5e_linkgray" class="ur5e_ur5e" rgba="0.82 0.82 0.82 1"/>
+    <material name="ur5e_urblue" class="ur5e_ur5e" rgba="0.49 0.678 0.8 1"/>
+    <mesh name="mesh_780_body1" content_type="model/obj" file="meshes/780_body1.obj"/>
+    <mesh name="mesh_780_body2" content_type="model/obj" file="meshes/780_body2.obj"/>
+    <mesh name="mesh_780_plateholder1" content_type="model/obj" file="meshes/780_plateholder1.obj"/>
+    <mesh name="mesh_780_plateholder2" content_type="model/obj" file="meshes/780_plateholder2.obj"/>
+    <mesh name="mesh_780_plateholder3" content_type="model/obj" file="meshes/780_plateholder3.obj"/>
+    <mesh name="mesh_780_plateholder4" content_type="model/obj" file="meshes/780_plateholder4.obj"/>
+    <mesh name="mesh_Cylinder" content_type="model/obj" file="meshes/Cylinder.obj"/>
+    <mesh name="mesh_NGS_body1" content_type="model/obj" file="meshes/NGS_body1.obj"/>
+    <mesh name="mesh_NGS_body2" content_type="model/obj" file="meshes/NGS_body2.obj"/>
+    <mesh name="mesh_NGS_body3" content_type="model/obj" file="meshes/NGS_body3.obj"/>
+    <mesh name="mesh_NGS_cartridge1" content_type="model/obj" file="meshes/NGS_cartridge1.obj"/>
+    <mesh name="mesh_NGS_cartridge2" content_type="model/obj" file="meshes/NGS_cartridge2.obj"/>
+    <mesh name="mesh_NGS_cartridge_button1" content_type="model/obj" file="meshes/NGS_cartridge_button1.obj"/>
+    <mesh name="mesh_NGS_cartridge_button2" content_type="model/obj" file="meshes/NGS_cartridge_button2.obj"/>
+    <mesh name="mesh_NGS_display1" content_type="model/obj" file="meshes/NGS_display1.obj"/>
+    <mesh name="mesh_NGS_display2" content_type="model/obj" file="meshes/NGS_display2.obj"/>
+    <mesh name="mesh_NGS_library1" content_type="model/obj" file="meshes/NGS_library1.obj"/>
+    <mesh name="mesh_NGS_library2" content_type="model/obj" file="meshes/NGS_library2.obj"/>
+    <mesh name="mesh_NGS_rack1" content_type="model/obj" file="meshes/NGS_rack1.obj"/>
+    <mesh name="mesh_NGS_rack2" content_type="model/obj" file="meshes/NGS_rack2.obj"/>
+    <mesh name="mesh_NGS_rack3" content_type="model/obj" file="meshes/NGS_rack3.obj"/>
+    <mesh name="mesh_NGS_rack4" content_type="model/obj" file="meshes/NGS_rack4.obj"/>
+    <mesh name="mesh_platehotel" content_type="model/obj" file="meshes/platehotel.obj"/>
+    <mesh name="mesh_platewell1" content_type="model/obj" file="meshes/platewell1.obj"/>
+    <mesh name="mesh_platewell2" content_type="model/obj" file="meshes/platewell2.obj"/>
+    <mesh name="mesh_platewell3" content_type="model/obj" file="meshes/platewell3.obj"/>
+    <mesh name="mesh_platewell4" content_type="model/obj" file="meshes/platewell4.obj"/>
+    <mesh name="mesh_rail" content_type="model/obj" file="meshes/rail.obj"/>
+    <mesh name="mesh_reader_body1" content_type="model/obj" file="meshes/reader_body1.obj"/>
+    <mesh name="mesh_reader_body2" content_type="model/obj" file="meshes/reader_body2.obj"/>
+    <mesh name="mesh_reader_plateholder" content_type="model/obj" file="meshes/reader_plateholder.obj"/>
+    <mesh name="mesh_SH800_body1" content_type="model/obj" file="meshes/SH800_body1.obj"/>
+    <mesh name="mesh_SH800_body2" content_type="model/obj" file="meshes/SH800_body2.obj"/>
+    <mesh name="mesh_SH800_body3" content_type="model/obj" file="meshes/SH800_body3.obj"/>
+    <mesh name="mesh_slide" content_type="model/obj" file="meshes/slide.obj"/>
+    <mesh name="mesh_stx44_body1" content_type="model/obj" file="meshes/stx44_body1.obj"/>
+    <mesh name="mesh_stx44_plateholder" content_type="model/obj" file="meshes/stx44_plateholder.obj"/>
+    <mesh name="mesh_table" content_type="model/obj" file="meshes/table.obj"/>
+    <mesh name="mesh_tube1" content_type="model/obj" file="meshes/tube1.obj"/>
+    <mesh name="mesh_tube2" content_type="model/obj" file="meshes/tube2.obj"/>
+    <mesh name="mesh_tube3" content_type="model/obj" file="meshes/tube3.obj"/>
+    <mesh name="mesh_tube4" content_type="model/obj" file="meshes/tube4.obj"/>
+    <mesh name="mesh_tubehotel" content_type="model/obj" file="meshes/tubehotel.obj"/>
+    <mesh name="mesh_waste" content_type="model/obj" file="meshes/waste.obj"/>
+    <mesh name="ur5e_base_0" file="../mujoco_menagerie/universal_robots_ur5e/assets/base_0.obj"/>
+    <mesh name="ur5e_base_1" file="../mujoco_menagerie/universal_robots_ur5e/assets/base_1.obj"/>
+    <mesh name="ur5e_shoulder_0" file="../mujoco_menagerie/universal_robots_ur5e/assets/shoulder_0.obj"/>
+    <mesh name="ur5e_shoulder_1" file="../mujoco_menagerie/universal_robots_ur5e/assets/shoulder_1.obj"/>
+    <mesh name="ur5e_shoulder_2" file="../mujoco_menagerie/universal_robots_ur5e/assets/shoulder_2.obj"/>
+    <mesh name="ur5e_upperarm_0" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_0.obj"/>
+    <mesh name="ur5e_upperarm_1" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_1.obj"/>
+    <mesh name="ur5e_upperarm_2" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_2.obj"/>
+    <mesh name="ur5e_upperarm_3" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_3.obj"/>
+    <mesh name="ur5e_forearm_0" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_0.obj"/>
+    <mesh name="ur5e_forearm_1" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_1.obj"/>
+    <mesh name="ur5e_forearm_2" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_2.obj"/>
+    <mesh name="ur5e_forearm_3" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_3.obj"/>
+    <mesh name="ur5e_wrist1_0" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist1_0.obj"/>
+    <mesh name="ur5e_wrist1_1" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist1_1.obj"/>
+    <mesh name="ur5e_wrist1_2" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist1_2.obj"/>
+    <mesh name="ur5e_wrist2_0" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist2_0.obj"/>
+    <mesh name="ur5e_wrist2_1" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist2_1.obj"/>
+    <mesh name="ur5e_wrist2_2" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist2_2.obj"/>
+    <mesh name="ur5e_wrist3" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist3.obj"/>
+    <mesh name="ur5e_onrobot_rg2_official_mesh" file="../rg2_official_assets/onrobot_rg2_official.obj"/>
+  </asset>
+
+  <worldbody>
+    <camera name="cell_overview" quat="0.825304 0.424108 0.170409 0.331612" pos="2.45 -1.15 2.35"/>
+    <camera name="cell_top" pos="0.75 1 3.1"/>
+    <light name="key_light" pos="0.4 0.6 2.6" dir="0.09759 0.19518 -0.9759" type="directional"/>
+    <light name="fill_light" pos="1.6 1.8 1.8" dir="-0.408248 -0.408248 -0.816497" diffuse="0.45 0.45 0.45" type="directional"/>
+    <body name="environment_visuals">
+      <geom name="visual_780_body1" type="mesh" rgba="0.22 0.55 0.88 1" mesh="mesh_780_body1"/>
+      <geom name="visual_780_body2" type="mesh" rgba="0.22 0.55 0.88 1" mesh="mesh_780_body2"/>
+      <geom name="visual_780_plateholder1" type="mesh" rgba="0.72 0.56 0.08 1" mesh="mesh_780_plateholder1"/>
+      <geom name="visual_780_plateholder2" type="mesh" rgba="0.22 0.55 0.88 1" mesh="mesh_780_plateholder2"/>
+      <geom name="visual_780_plateholder3" type="mesh" rgba="0.22 0.55 0.88 1" mesh="mesh_780_plateholder3"/>
+      <geom name="visual_780_plateholder4" type="mesh" rgba="0.22 0.55 0.88 1" mesh="mesh_780_plateholder4"/>
+      <geom name="visual_Cylinder" type="mesh" rgba="0.58 0.6 0.64 1" mesh="mesh_Cylinder"/>
+      <geom name="visual_NGS_body1" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_body1"/>
+      <geom name="visual_NGS_body2" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_body2"/>
+      <geom name="visual_NGS_body3" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_body3"/>
+      <geom name="visual_NGS_cartridge1" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_cartridge1"/>
+      <geom name="visual_NGS_cartridge2" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_cartridge2"/>
+      <geom name="visual_NGS_cartridge_button1" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_cartridge_button1"/>
+      <geom name="visual_NGS_cartridge_button2" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_cartridge_button2"/>
+      <geom name="visual_NGS_display1" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_display1"/>
+      <geom name="visual_NGS_display2" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_display2"/>
+      <geom name="visual_NGS_library1" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_library1"/>
+      <geom name="visual_NGS_library2" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_library2"/>
+      <geom name="visual_NGS_rack1" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_rack1"/>
+      <geom name="visual_NGS_rack2" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_rack2"/>
+      <geom name="visual_NGS_rack3" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_rack3"/>
+      <geom name="visual_NGS_rack4" type="mesh" rgba="0.4 0.65 0.34 1" mesh="mesh_NGS_rack4"/>
+      <geom name="visual_platehotel" type="mesh" rgba="0.18 0.67 0.52 1" mesh="mesh_platehotel"/>
+      <geom name="visual_platewell1" type="mesh" rgba="0.75 0.86 0.96 0.92" mesh="mesh_platewell1"/>
+      <geom name="visual_platewell2" type="mesh" rgba="0.75 0.86 0.96 0.92" mesh="mesh_platewell2"/>
+      <geom name="visual_rail" type="mesh" rgba="0.18 0.2 0.24 1" mesh="mesh_rail"/>
+      <geom name="visual_reader_body1" type="mesh" rgba="0.54 0.34 0.82 1" mesh="mesh_reader_body1"/>
+      <geom name="visual_reader_body2" type="mesh" rgba="0.54 0.34 0.82 1" mesh="mesh_reader_body2"/>
+      <geom name="visual_reader_plateholder" pos="1.7865 1.531 0" quat="0.707107 0 0 0.707107" type="mesh" rgba="0.72 0.56 0.08 1" mesh="mesh_reader_plateholder"/>
+      <geom name="visual_SH800_body1" type="mesh" rgba="0.25 0.7 0.78 1" mesh="mesh_SH800_body1"/>
+      <geom name="visual_SH800_body2" type="mesh" rgba="0.72 0.56 0.08 1" mesh="mesh_SH800_body2"/>
+      <geom name="visual_SH800_body3" type="mesh" rgba="0.25 0.7 0.78 1" mesh="mesh_SH800_body3"/>
+      <geom name="visual_stx44_body1" type="mesh" rgba="0.92 0.48 0.18 1" mesh="mesh_stx44_body1"/>
+      <geom name="visual_stx44_plateholder" type="mesh" rgba="0.72 0.56 0.08 1" mesh="mesh_stx44_plateholder"/>
+      <geom name="visual_table" type="mesh" rgba="0.34 0.37 0.42 1" mesh="mesh_table"/>
+      <geom name="visual_tube3" type="mesh" rgba="0.93 0.78 0.22 1" mesh="mesh_tube3"/>
+      <geom name="visual_tube4" type="mesh" rgba="0.93 0.78 0.22 1" mesh="mesh_tube4"/>
+      <geom name="visual_tubehotel" type="mesh" rgba="0.93 0.78 0.22 1" mesh="mesh_tubehotel"/>
+      <geom name="visual_waste" type="mesh" rgba="0.78 0.2 0.2 1" mesh="mesh_waste"/>
+    </body>
+    <body name="process_references">
+      <site name="ref_780_plateholder1" class="reference_site" pos="0.445 0.264 0.565"/>
+      <site name="ref_780_plateholder2" class="reference_site" pos="0.115 0.264 0.565"/>
+      <site name="ref_780_plateholder3" class="reference_site" pos="0.215 0.264 0.565"/>
+      <site name="ref_780_plateholder4" class="reference_site" pos="0.345 0.264 0.565"/>
+      <site name="ref_platehotel" class="reference_site" pos="0.8725 0.105 0.68"/>
+      <site name="ref_platewell1" class="reference_site" pos="0.870773 0.1165 0.519"/>
+      <site name="ref_platewell2" class="reference_site" pos="0.870773 0.1165 0.554"/>
+      <site name="ref_platewell3" class="reference_site" pos="0.870773 0.1165 0.589"/>
+      <site name="ref_platewell4" class="reference_site" pos="0.870773 0.1165 0.624"/>
+      <site name="ref_reader_plateholder" class="reference_site" pos="0.124 1.655 0.55"/>
+      <site name="ref_stx44_plateholder" class="reference_site" pos="1.144 0.9915 0.69"/>
+      <site name="ref_tube1" class="reference_site" pos="0.7 0.17 0.585"/>
+      <site name="ref_tube2" class="reference_site" pos="0.7 0.14 0.585"/>
+      <site name="ref_tube3" class="reference_site" pos="0.7 0.11 0.585"/>
+      <site name="ref_tube4" class="reference_site" pos="0.7 0.08 0.585"/>
+      <site name="ref_tubehotel" class="reference_site" pos="0.7 0.11 0.515"/>
+      <site name="ref_waste" class="reference_site" pos="1.08 0.25 0.7"/>
+    </body>
+    <body name="ur5e_mount" pos="0.125 1 0.3">
+      <joint name="rail_joint" type="slide" range="0 0.75" armature="0.1" damping="100" frictionloss="5" axis="1 0 0" limited="true"/>
+      <geom name="visual_slide" pos="-0.125 -1 -0.3" quat="1 0 0 0" type="mesh" rgba="0.58 0.6 0.64 1" mesh="mesh_slide"/>
+      <site name="ur5e_mount_reference" size="0.0745 0.002" type="cylinder" group="3" rgba="0.1 1 0.1 0.45"/>
+      <body name="ur5e_base" childclass="ur5e_ur5e" quat="0 0 0 -1">
+        <inertial pos="0 0 0" mass="4" diaginertia="0.00443333 0.00443333 0.0072"/>
+        <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_base_0"/>
+        <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_base_1"/>
+        <body name="ur5e_shoulder_link" pos="0 0 0.163">
+          <inertial pos="0 0 0" mass="3.7" diaginertia="0.0102675 0.0102675 0.00666"/>
+          <joint name="ur5e_shoulder_pan_joint" class="ur5e_size3" axis="0 0 1"/>
+          <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_shoulder_0"/>
+          <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_shoulder_1"/>
+          <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_shoulder_2"/>
+          <geom class="ur5e_collision" size="0.06 0.06" pos="0 0 -0.04" contype="0" conaffinity="0"/>
+          <body name="ur5e_upper_arm_link" pos="0 0.138 0" quat="0.707107 0 0.707107 0">
+            <inertial pos="0 0 0.2125" mass="8.393" diaginertia="0.133886 0.133886 0.0151074"/>
+            <joint name="ur5e_shoulder_lift_joint" class="ur5e_size3"/>
+            <geom class="ur5e_visual" material="ur5e_linkgray" mesh="ur5e_upperarm_0"/>
+            <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_upperarm_1"/>
+            <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_upperarm_2"/>
+            <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_upperarm_3"/>
+            <geom class="ur5e_collision" size="0.06 0.06" pos="0 -0.04 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0"/>
+            <geom class="ur5e_collision" size="0.05 0.2" pos="0 0 0.2" contype="0" conaffinity="0"/>
+            <body name="ur5e_forearm_link" pos="0 -0.131 0.425">
+              <inertial pos="0 0 0.196" mass="2.275" diaginertia="0.0311796 0.0311796 0.004095"/>
+              <joint name="ur5e_elbow_joint" class="ur5e_size3_limited"/>
+              <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_forearm_0"/>
+              <geom class="ur5e_visual" material="ur5e_linkgray" mesh="ur5e_forearm_1"/>
+              <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_forearm_2"/>
+              <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_forearm_3"/>
+              <geom class="ur5e_collision" size="0.055 0.06" pos="0 0.08 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0"/>
+              <geom class="ur5e_collision" size="0.038 0.19" pos="0 0 0.2" contype="0" conaffinity="0"/>
+              <body name="ur5e_wrist_1_link" pos="0 0 0.392" quat="0.707107 0 0.707107 0">
+                <inertial pos="0 0.127 0" mass="1.219" diaginertia="0.0025599 0.0025599 0.0021942"/>
+                <joint name="ur5e_wrist_1_joint" class="ur5e_size1"/>
+                <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_wrist1_0"/>
+                <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_wrist1_1"/>
+                <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_wrist1_2"/>
+                <geom class="ur5e_collision" size="0.04 0.07" pos="0 0.05 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0"/>
+                <body name="ur5e_wrist_2_link" pos="0 0.127 0">
+                  <inertial pos="0 0 0.1" mass="1.219" diaginertia="0.0025599 0.0025599 0.0021942"/>
+                  <joint name="ur5e_wrist_2_joint" class="ur5e_size1" axis="0 0 1"/>
+                  <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_wrist2_0"/>
+                  <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_wrist2_1"/>
+                  <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_wrist2_2"/>
+                  <geom class="ur5e_collision" size="0.04 0.06" pos="0 0 0.04" contype="0" conaffinity="0"/>
+                  <geom class="ur5e_collision" size="0.04 0.04" pos="0 0.02 0.1" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0"/>
+                  <body name="ur5e_wrist_3_link" pos="0 0 0.1">
+                    <inertial pos="0 0.0771683 0" quat="0.707107 0 0 0.707107" mass="0.1889" diaginertia="0.000132134 9.90863e-05 9.90863e-05"/>
+                    <joint name="ur5e_wrist_3_joint" class="ur5e_size1"/>
+                    <geom class="ur5e_visual" material="ur5e_linkgray" mesh="ur5e_wrist3"/>
+                    <geom class="ur5e_eef_collision" size="0.04 0.02" pos="0 0.08 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0"/>
+                    <site name="ur5e_attachment_site" pos="0 0.1 0" quat="-0.707107 0.707107 0 0"/>
+                    <body name="ur5e_onrobot_rg2_body" pos="0 0.1 0" quat="-0.707107 0.707107 0 0">
+                      <body name="ur5e_onrobot_rg2_model_frame">
+                        <inertial pos="0 0 0.07" mass="0.78" diaginertia="0.00303 0.00439 0.00153"/>
+                        <geom name="ur5e_onrobot_rg2_visual" type="mesh" contype="0" conaffinity="0" group="2" rgba="0.12 0.12 0.14 1" mass="0" mesh="ur5e_onrobot_rg2_official_mesh"/>
+                        <geom name="rg2_body_collision" size="0.035 0.018 0.07" pos="0 0 0.075" type="box" contype="8" conaffinity="3" group="5" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.9 0.2 0.9 0.25" mass="0"/>
+                        <geom name="rg2_linkage_collision" size="0.068 0.014 0.0305" pos="0 0 0.1755" type="box" contype="8" conaffinity="3" group="5" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.9 0.2 0.9 0.25" mass="0"/>
+                        <geom name="d405_body_visual" size="0.021 0.021 0.0115" pos="-0.0725347 0.0390028 0.194465" quat="-0.303052 0.146247 0.848095 0.409275" type="box" contype="8" conaffinity="3" group="2" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.15 0.15 0.18 1" mass="0"/>
+                        <geom name="d405_bracket" size="0.0127674 0.01 0.012" pos="-0.0477674 0.0390028 0.194465" type="box" contype="0" conaffinity="0" group="2" rgba="0.55 0.57 0.6 1" mass="0"/>
+                        <site name="ur5e_rg2_tcp" size="0.005" pos="0 0 0.213" group="3" rgba="1 0.2 0.2 1"/>
+                        <site name="ur5e_rg2_grasp_center" size="0.004" pos="0 0 0.185" group="3" rgba="0.2 1 0.2 1"/>
+                        <site name="ur5e_rg2_fingertip_center" size="0.004" pos="0 -0.015 0.285" group="3" rgba="1 1 0.2 1"/>
+                        <camera name="d405_wrist_camera" quat="-0.303052 0.146247 0.848095 0.409275" pos="-0.068 0.03 0.2" fovy="58"/>
+                        <body name="ur5e_rg2_fingertip_left">
+                          <joint name="ur5e_rg2_fingertip_left_joint" type="slide" range="0.004 0.055" armature="0.2" damping="20" axis="-1 0 0" limited="true"/>
+                          <geom name="ur5e_rg2_fingertip_left_geom" size="0.003 0.005 0.06" pos="-0.003 -0.015 0.235" type="box" contype="4" conaffinity="2" condim="6" group="2" friction="1.2 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.8 0.82 0.86 1" mass="0.02"/>
+                        </body>
+                        <body name="ur5e_rg2_fingertip_right">
+                          <joint name="ur5e_rg2_fingertip_right_joint" type="slide" range="0.004 0.055" armature="0.2" damping="20" axis="1 0 0" limited="true"/>
+                          <geom name="ur5e_rg2_fingertip_right_geom" size="0.003 0.005 0.06" pos="0.003 -0.015 0.235" type="box" contype="4" conaffinity="2" condim="6" group="2" friction="1.2 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.8 0.82 0.86 1" mass="0.02"/>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+    <body name="rule_based_waypoint_markers">
+      <site name="wp_fluent_target" size="0.008" pos="0.445 0.264 0.58" rgba="0.1 1 0.2 1"/>
+      <site name="wp_fluent_approach" size="0.008" pos="0.445 0.344 0.58" rgba="1 0.9 0.1 1"/>
+      <site name="wp_fluent_staging" size="0.008" pos="0.445 0.424 0.66" rgba="1 0.4 0.05 1"/>
+      <site name="wp_fluent_extract" size="0.008" pos="0.445 0.364 0.58" rgba="0.1 0.35 1 1"/>
+      <site name="wp_fluent_lift" size="0.008" pos="0.445 0.364 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_fluent_transport_entry" size="0.0064" pos="0.445 0.344 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_fluent_path_staging_approach" size="0.002 0.0565685" pos="0.445 0.384 0.62" quat="0.92388 -0.382683 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_fluent_path_approach_target" size="0.002 0.04" pos="0.445 0.304 0.58" quat="0.707107 -0.707107 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_fluent_path_target_extract" size="0.002 0.05" pos="0.445 0.314 0.58" quat="0.707107 0.707107 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_fluent_path_extract_lift" size="0.002 0.16" pos="0.445 0.364 0.74" quat="0 1 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_fluent_path_transport_descend" size="0.002 0.16" pos="0.445 0.344 0.74" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_incubator_target" size="0.008" pos="1.144 0.9915 0.705" rgba="0.1 1 0.2 1"/>
+      <site name="wp_incubator_approach" size="0.008" pos="1.044 0.9915 0.705" rgba="1 0.9 0.1 1"/>
+      <site name="wp_incubator_staging" size="0.008" pos="0.964001 0.9915 0.785" rgba="1 0.4 0.05 1"/>
+      <site name="wp_incubator_extract" size="0.008" pos="1.024 0.9915 0.705" rgba="0.1 0.35 1 1"/>
+      <site name="wp_incubator_lift" size="0.008" pos="1.024 0.9915 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_incubator_transport_entry" size="0.0064" pos="1.044 0.9915 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_incubator_path_staging_approach" size="0.002 0.0565685" pos="1.004 0.9915 0.745" quat="0.92388 0 -0.382683 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_incubator_path_approach_target" size="0.002 0.05" pos="1.094 0.9915 0.705" quat="0.707107 0 -0.707107 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_incubator_path_target_extract" size="0.002 0.06" pos="1.084 0.9915 0.705" quat="0.707107 0 0.707107 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_incubator_path_extract_lift" size="0.002 0.0975" pos="1.024 0.9915 0.8025" quat="0 1 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_incubator_path_transport_descend" size="0.002 0.0975" pos="1.044 0.9915 0.8025" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_reader_target" size="0.008" pos="0.1235 1.6625 0.565" rgba="0.1 1 0.2 1"/>
+      <site name="wp_reader_approach" size="0.008" pos="0.1235 1.5625 0.565" rgba="1 0.9 0.1 1"/>
+      <site name="wp_reader_staging" size="0.008" pos="0.1235 1.4825 0.645" rgba="1 0.4 0.05 1"/>
+      <site name="wp_reader_extract" size="0.008" pos="0.1235 1.5425 0.565" rgba="0.1 0.35 1 1"/>
+      <site name="wp_reader_lift" size="0.008" pos="0.1235 1.5425 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_reader_transport_entry" size="0.0064" pos="0.1235 1.5625 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_reader_path_staging_approach" size="0.002 0.0565685" pos="0.1235 1.5225 0.605" quat="0.92388 0.382683 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_reader_path_approach_target" size="0.002 0.05" pos="0.1235 1.6125 0.565" quat="0.707107 0.707107 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_reader_path_target_extract" size="0.002 0.06" pos="0.1235 1.6025 0.565" quat="0.707107 -0.707107 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_reader_path_extract_lift" size="0.002 0.1675" pos="0.1235 1.5425 0.7325" quat="0 1 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_reader_path_transport_descend" size="0.002 0.1675" pos="0.1235 1.5625 0.7325" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_waste_target" size="0.008" pos="1.08 0.25 0.75" rgba="0.1 1 0.2 1"/>
+      <site name="wp_waste_approach" size="0.008" pos="1.08 0.25 0.85" rgba="1 0.9 0.1 1"/>
+      <site name="wp_waste_staging" size="0.008" pos="1.08 0.25 0.95" rgba="1 0.4 0.05 1"/>
+      <site name="wp_waste_extract" size="0.008" pos="1.08 0.25 0.87" rgba="0.1 0.35 1 1"/>
+      <site name="wp_waste_lift" size="0.008" pos="1.08 0.25 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_waste_transport_entry" size="0.0064" pos="1.08 0.25 0.9" rgba="0.1 1 1 1"/>
+      <site name="wp_waste_path_staging_approach" size="0.002 0.05" pos="1.08 0.25 0.9" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_waste_path_approach_target" size="0.002 0.05" pos="1.08 0.25 0.8" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_waste_path_target_extract" size="0.002 0.06" pos="1.08 0.25 0.81" quat="0 1 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_waste_path_extract_lift" size="0.002 0.015" pos="1.08 0.25 0.885" quat="0 1 0 0" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+      <site name="wp_waste_path_transport_descend" size="0.002 0.025" pos="1.08 0.25 0.875" type="cylinder" rgba="0.9 0.9 0.9 0.55"/>
+    </body>
+    <body name="exact_process_references">
+      <site name="ref_fluent_tube" size="0.025" pos="0.28 0.208 0.566" rgba="1 0.8 0 1"/>
+      <site name="ref_sorter_left_plate" size="0.025" pos="0.36575 1.829 0.554" rgba="0.1 0.35 1 1"/>
+      <site name="ref_sorter_right_tube" size="0.025" pos="0.50075 1.745 0.564" rgba="1 0 0.75 1"/>
+      <site name="ref_ngs_tube" size="0.025" pos="0.967 1.506 0.605" rgba="0 0.9 0.9 1"/>
+      <site name="ref_ngs_reserve_hole" size="0.025" pos="0.967 1.59 0.605" rgba="0.2 0.65 0.65 0.45"/>
+    </body>
+    <body name="full_process_waypoint_markers_v2">
+      <site name="wp2_plate_hotel_4_target" size="0.006" pos="0.870773 0.1165 0.624" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_plate_hotel_4_approach" size="0.006" pos="0.870773 0.1765 0.624" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_plate_hotel_4_staging" size="0.006" pos="0.870773 0.1765 0.704" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_plate_hotel_4_extract" size="0.006" pos="0.870773 0.2165 0.624" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_plate_hotel_4_lift" size="0.006" pos="0.870773 0.2165 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_plate_hotel_4_transport_entry" size="0.006" pos="0.870773 0.1765 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_plate_hotel_3_target" size="0.006" pos="0.870773 0.1165 0.589" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_plate_hotel_3_approach" size="0.006" pos="0.870773 0.1765 0.589" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_plate_hotel_3_staging" size="0.006" pos="0.870773 0.1765 0.669" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_plate_hotel_3_extract" size="0.006" pos="0.870773 0.2165 0.589" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_plate_hotel_3_lift" size="0.006" pos="0.870773 0.2165 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_plate_hotel_3_transport_entry" size="0.006" pos="0.870773 0.1765 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_tube_hotel_1_target" size="0.006" pos="0.7 0.17 0.585" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_tube_hotel_1_approach" size="0.006" pos="0.7 0.17 0.665" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_tube_hotel_1_staging" size="0.006" pos="0.7 0.17 0.765" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_tube_hotel_1_extract" size="0.006" pos="0.7 0.17 0.705" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_tube_hotel_1_lift" size="0.006" pos="0.7 0.17 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_tube_hotel_1_transport_entry" size="0.006" pos="0.7 0.17 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_tube_hotel_2_target" size="0.006" pos="0.7 0.14 0.585" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_tube_hotel_2_approach" size="0.006" pos="0.7 0.14 0.665" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_tube_hotel_2_staging" size="0.006" pos="0.7 0.14 0.765" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_tube_hotel_2_extract" size="0.006" pos="0.7 0.14 0.705" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_tube_hotel_2_lift" size="0.006" pos="0.7 0.14 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_tube_hotel_2_transport_entry" size="0.006" pos="0.7 0.14 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_fluent_plate_target" size="0.006" pos="0.445 0.264 0.565" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_fluent_plate_approach" size="0.006" pos="0.445 0.344 0.565" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_fluent_plate_staging" size="0.006" pos="0.445 0.344 0.645" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_fluent_plate_extract" size="0.006" pos="0.445 0.364 0.565" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_fluent_plate_lift" size="0.006" pos="0.445 0.364 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_fluent_plate_transport_entry" size="0.006" pos="0.445 0.344 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_fluent_tube_target" size="0.006" pos="0.28 0.208 0.566" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_fluent_tube_approach" size="0.006" pos="0.28 0.208 0.646" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_fluent_tube_staging" size="0.006" pos="0.28 0.208 0.746" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_fluent_tube_extract" size="0.006" pos="0.28 0.208 0.686" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_fluent_tube_lift" size="0.006" pos="0.28 0.208 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_fluent_tube_transport_entry" size="0.006" pos="0.28 0.208 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_incubator_plate_target" size="0.006" pos="1.144 0.9915 0.69" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_incubator_plate_approach" size="0.006" pos="1.044 0.9915 0.69" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_incubator_plate_staging" size="0.006" pos="1.044 0.9915 0.77" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_incubator_plate_extract" size="0.006" pos="0.994001 0.9915 0.69" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_incubator_plate_lift" size="0.006" pos="0.994001 0.9915 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_incubator_plate_transport_entry" size="0.006" pos="1.044 0.9915 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_reader_plate_target" size="0.006" pos="0.1235 1.6625 0.55" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_reader_plate_approach" size="0.006" pos="0.1235 1.5825 0.55" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_reader_plate_staging" size="0.006" pos="0.1235 1.5825 0.63" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_reader_plate_extract" size="0.006" pos="0.1235 1.5425 0.55" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_reader_plate_lift" size="0.006" pos="0.1235 1.5425 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_reader_plate_transport_entry" size="0.006" pos="0.1235 1.5825 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_sorter_left_plate_target" size="0.006" pos="0.36575 1.829 0.554" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_sorter_left_plate_approach" size="0.006" pos="0.36575 1.829 0.634" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_sorter_left_plate_staging" size="0.006" pos="0.36575 1.829 0.734" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_sorter_left_plate_extract" size="0.006" pos="0.36575 1.829 0.674" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_sorter_left_plate_lift" size="0.006" pos="0.36575 1.829 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_sorter_left_plate_transport_entry" size="0.006" pos="0.36575 1.829 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_sorter_right_tube_target" size="0.006" pos="0.50075 1.745 0.564" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_sorter_right_tube_approach" size="0.006" pos="0.50075 1.745 0.644" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_sorter_right_tube_staging" size="0.006" pos="0.50075 1.745 0.744" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_sorter_right_tube_extract" size="0.006" pos="0.50075 1.745 0.684" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_sorter_right_tube_lift" size="0.006" pos="0.50075 1.745 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_sorter_right_tube_transport_entry" size="0.006" pos="0.50075 1.745 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_ngs_tube_target" size="0.006" pos="0.967 1.506 0.605" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_ngs_tube_approach" size="0.006" pos="0.967 1.506 0.685" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_ngs_tube_staging" size="0.006" pos="0.967 1.506 0.785" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_ngs_tube_extract" size="0.006" pos="0.967 1.506 0.725" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_ngs_tube_lift" size="0.006" pos="0.967 1.506 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_ngs_tube_transport_entry" size="0.006" pos="0.967 1.506 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+      <site name="wp2_waste_target" size="0.006" pos="1.08 0.25 0.7" group="3" rgba="1 0.1 0.1 0.9"/>
+      <site name="wp2_waste_approach" size="0.006" pos="1.08 0.25 0.8" group="3" rgba="1 0.85 0 0.85"/>
+      <site name="wp2_waste_staging" size="0.006" pos="1.08 0.25 0.88" group="3" rgba="1 0.45 0 0.75"/>
+      <site name="wp2_waste_extract" size="0.006" pos="1.08 0.25 0.85" group="3" rgba="0.9 0 0.8 0.8"/>
+      <site name="wp2_waste_lift" size="0.006" pos="1.08 0.25 0.9" group="3" rgba="0 0.85 0.95 0.75"/>
+      <site name="wp2_waste_transport_entry" size="0.006" pos="1.08 0.25 0.9" group="3" rgba="0.1 1 0.4 0.75"/>
+    </body>
+    <body name="workpiece_plate_a" pos="0.870773 0.1165 0.617">
+      <inertial pos="0 0 0" mass="0.06" diaginertia="2.50425e-05 5.50951e-05 7.87648e-05"/>
+      <joint name="workpiece_plate_a_freejoint" type="free"/>
+      <geom name="workpiece_plate_a_visual" pos="-0.870773 -0.1165 -0.617" quat="1 0 0 0" type="mesh" group="2" rgba="0.75 0.86 0.96 0.92" mesh="mesh_platewell4"/>
+      <geom name="workpiece_plate_a_collision" size="0.0425 0.0635 0.00699997" type="box" contype="1" conaffinity="6" condim="6" group="4" friction="1 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.2 0.6 1 0.35"/>
+      <site name="workpiece_plate_a_center" size="0.004" pos="-0.000412214 0.000294075 0.000663722" group="4" rgba="1 1 1 0.5"/>
+    </body>
+    <body name="workpiece_plate_b" pos="0.870773 0.1165 0.582">
+      <inertial pos="0 0 0" mass="0.06" diaginertia="2.50425e-05 5.50951e-05 7.87648e-05"/>
+      <joint name="workpiece_plate_b_freejoint" type="free"/>
+      <geom name="workpiece_plate_b_visual" pos="-0.870773 -0.1165 -0.617" quat="1 0 0 0" type="mesh" group="2" rgba="0.75 0.86 0.96 0.92" mesh="mesh_platewell4"/>
+      <geom name="workpiece_plate_b_collision" size="0.0425 0.0635 0.00699997" type="box" contype="1" conaffinity="6" condim="6" group="4" friction="1 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.2 0.6 1 0.35"/>
+      <site name="workpiece_plate_b_center" size="0.004" pos="-0.000412214 0.000294075 0.000663722" group="4" rgba="1 1 1 0.5"/>
+    </body>
+    <body name="workpiece_tube_a" pos="0.7 0.17 0.5475">
+      <inertial pos="0 0 0" mass="0.008" diaginertia="2.737e-06 2.737e-06 1.41e-07"/>
+      <joint name="workpiece_tube_a_freejoint" type="free"/>
+      <geom name="workpiece_tube_a_visual" pos="-0.7 -0.17 -0.5475" type="mesh" rgba="0.93 0.78 0.22 1" mesh="mesh_tube1"/>
+      <geom name="workpiece_tube_a_collision" size="0.00599998 0.0375" type="cylinder" contype="1" conaffinity="6" condim="6" group="4" friction="1 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.2 0.6 1 0.35"/>
+      <site name="workpiece_tube_a_center" size="0.004" pos="3.16285e-10 2.11861e-10 -0.00245756" group="4" rgba="1 1 1 0.5"/>
+    </body>
+    <body name="workpiece_tube_b" pos="0.7 0.14 0.5475">
+      <inertial pos="0 0 0" mass="0.008" diaginertia="2.737e-06 2.737e-06 1.41e-07"/>
+      <joint name="workpiece_tube_b_freejoint" type="free"/>
+      <geom name="workpiece_tube_b_visual" pos="-0.7 -0.14 -0.5475" type="mesh" rgba="0.93 0.78 0.22 1" mesh="mesh_tube2"/>
+      <geom name="workpiece_tube_b_collision" size="0.00599998 0.0375" type="cylinder" contype="1" conaffinity="6" condim="6" group="4" friction="1 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.2 0.6 1 0.35"/>
+      <site name="workpiece_tube_b_center" size="0.004" pos="3.16284e-10 4.03954e-10 -0.00245756" group="4" rgba="1 1 1 0.5"/>
+    </body>
+    <body name="process_interface_markers_v4">
+      <site name="wp4_plate_hotel_4_pick_pre" pos="0.870773 0.22 0.618" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_plate_hotel_4_pick_approach" pos="0.870773 0.2 0.618" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_plate_hotel_4_pick_grasp" pos="0.870773 0.16 0.618" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_plate_hotel_4_pick_lift_off" pos="0.870773 0.16 0.623" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_plate_hotel_4_pick_extract" pos="0.870773 0.2 0.623" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_plate_hotel_4_pick_pre_loaded" pos="0.870773 0.317 0.623" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_plate_hotel_4_tool_axis" size="0.0015 0.04" pos="0.870773 0.2 0.618" quat="0.707107 -0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_plate_hotel_3_pick_pre" pos="0.870773 0.22 0.583" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_plate_hotel_3_pick_approach" pos="0.870773 0.2 0.583" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_plate_hotel_3_pick_grasp" pos="0.870773 0.16 0.583" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_plate_hotel_3_pick_lift_off" pos="0.870773 0.16 0.588" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_plate_hotel_3_pick_extract" pos="0.870773 0.2 0.588" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_plate_hotel_3_pick_pre_loaded" pos="0.870773 0.317 0.588" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_plate_hotel_3_tool_axis" size="0.0015 0.04" pos="0.870773 0.2 0.583" quat="0.707107 -0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_fluent_plate_pick_pre" pos="0.445 0.44 0.573" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_fluent_plate_pick_approach" pos="0.445 0.3475 0.573" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_fluent_plate_pick_grasp" pos="0.445 0.3075 0.573" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_fluent_plate_pick_lift_off" pos="0.445 0.3075 0.578" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_fluent_plate_pick_extract" pos="0.445 0.3475 0.578" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_fluent_plate_pick_pre_loaded" pos="0.445 0.537 0.578" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_fluent_plate_tool_axis" size="0.0015 0.04" pos="0.445 0.3475 0.573" quat="0.707107 -0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_incubator_plate_pick_pre" pos="1.04 0.9915 0.698" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_incubator_plate_pick_approach" pos="1.0605 0.9915 0.698" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_incubator_plate_pick_grasp" pos="1.1005 0.9915 0.698" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_incubator_plate_pick_lift_off" pos="1.1005 0.9915 0.703" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_incubator_plate_pick_extract" pos="1.0605 0.9915 0.703" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_incubator_plate_pick_pre_loaded" pos="0.943 0.9915 0.703" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_incubator_plate_tool_axis" size="0.0015 0.04" pos="1.0605 0.9915 0.698" quat="0.707107 0 -0.707107 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_reader_plate_pick_pre" pos="0.124 1.545 0.558" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_reader_plate_pick_approach" pos="0.124 1.5715 0.558" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_reader_plate_pick_grasp" pos="0.124 1.6115 0.558" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_reader_plate_pick_lift_off" pos="0.124 1.6115 0.563" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_reader_plate_pick_extract" pos="0.124 1.5715 0.563" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_reader_plate_pick_pre_loaded" pos="0.124 1.448 0.563" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_reader_plate_tool_axis" size="0.0015 0.04" pos="0.124 1.5715 0.558" quat="0.707107 0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_sorter_left_plate_pick_pre" pos="0.36575 1.685 0.562" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_sorter_left_plate_pick_approach" pos="0.36575 1.7455 0.562" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_sorter_left_plate_pick_grasp" pos="0.36575 1.7855 0.562" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_sorter_left_plate_pick_lift_off" pos="0.36575 1.7855 0.567" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_sorter_left_plate_pick_extract" pos="0.36575 1.7455 0.567" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_sorter_left_plate_pick_pre_loaded" pos="0.36575 1.588 0.567" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_sorter_left_plate_tool_axis" size="0.0015 0.04" pos="0.36575 1.7455 0.562" quat="0.707107 0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_tube_hotel_1_pick_pre" pos="0.7 0.216 0.577" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_tube_hotel_1_pick_approach" pos="0.7 0.188 0.577" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_tube_hotel_1_pick_grasp" pos="0.7 0.166 0.577" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_tube_hotel_1_pick_extract_up" pos="0.7 0.166 0.5975" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_tube_hotel_1_pick_pre_hover" pos="0.7 0.216 0.5975" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_tube_hotel_1_tool_axis" size="0.0015 0.04" pos="0.7 0.206 0.577" quat="0.707107 -0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_tube_hotel_2_pick_pre" pos="0.7 0.186 0.577" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_tube_hotel_2_pick_approach" pos="0.7 0.158 0.577" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_tube_hotel_2_pick_grasp" pos="0.7 0.136 0.577" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_tube_hotel_2_pick_extract_up" pos="0.7 0.136 0.5975" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_tube_hotel_2_pick_pre_hover" pos="0.7 0.186 0.5975" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_tube_hotel_2_tool_axis" size="0.0015 0.04" pos="0.7 0.176 0.577" quat="0.707107 -0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_fluent_tube_pick_pre" pos="0.28 0.44 0.633" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_fluent_tube_pick_approach" pos="0.28 0.226 0.633" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_fluent_tube_pick_grasp" pos="0.28 0.204 0.633" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_fluent_tube_pick_extract_up" pos="0.28 0.204 0.678" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_fluent_tube_pick_pre_hover" pos="0.28 0.44 0.678" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_fluent_tube_tool_axis" size="0.0015 0.04" pos="0.28 0.244 0.633" quat="0.707107 -0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_sorter_right_tube_pick_pre" pos="0.50075 1.685 0.631" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_sorter_right_tube_pick_approach" pos="0.50075 1.727 0.631" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_sorter_right_tube_pick_grasp" pos="0.50075 1.749 0.631" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_sorter_right_tube_pick_extract_up" pos="0.50075 1.749 0.676" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_sorter_right_tube_pick_pre_hover" pos="0.50075 1.685 0.676" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_sorter_right_tube_tool_axis" size="0.0015 0.04" pos="0.50075 1.709 0.631" quat="0.707107 0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_ngs_tube_pick_pre" pos="0.967 1.438 0.672" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_ngs_tube_pick_approach" pos="0.967 1.488 0.672" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_ngs_tube_pick_grasp" pos="0.967 1.51 0.672" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_ngs_tube_pick_extract_up" pos="0.967 1.51 0.732" group="3" rgba="0 0.85 0.95 0.9"/>
+      <site name="wp4_ngs_tube_pick_pre_hover" pos="0.967 1.438 0.732" group="3" rgba="0.1 1 0.4 0.9"/>
+      <site name="wp4_ngs_tube_tool_axis" size="0.0015 0.04" pos="0.967 1.47 0.672" quat="0.707107 0.707107 0 0" type="capsule" group="3" rgba="1 1 1 0.6"/>
+      <site name="wp4_waste_plate_drop_hover" pos="1.08 0.2935 0.808" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_waste_plate_drop" pos="1.08 0.2935 0.758" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_waste_plate_retreat_up" pos="1.08 0.2935 0.858" group="3" rgba="1 0.85 0 0.9"/>
+      <site name="wp4_waste_tube_5ml_drop_hover" pos="1.08 0.246 0.867" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_waste_tube_5ml_drop" pos="1.08 0.246 0.817" group="3" rgba="1 0.1 0.1 0.95"/>
+      <site name="wp4_waste_tube_5ml_retreat_up" pos="1.08 0.246 0.917" group="3" rgba="1 0.85 0 0.9"/>
+    </body>
+    <body name="physics_proxies_v7">
+      <geom name="proxy_table" size="0.75 1 0.01" pos="0.75 1 0.49" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_plate_hotel_4_pad" size="0.0395 0.0605 0.002" pos="0.870773 0.1165 0.608" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.72 0.56 0.08 1"/>
+      <geom name="proxy_plate_hotel_3_pad" size="0.0395 0.0605 0.002" pos="0.870773 0.1165 0.573" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.72 0.56 0.08 1"/>
+      <geom name="proxy_fluent_plate_pad" size="0.0395 0.0605 0.002" pos="0.445 0.264 0.563" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_incubator_plate_pad" size="0.0605 0.0395 0.002" pos="1.144 0.9915 0.688" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_reader_plate_pad" size="0.0395 0.0605 0.002" pos="0.124 1.655 0.548" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_sorter_left_plate_pad" size="0.0395 0.0605 0.002" pos="0.36575 1.829 0.552" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_tube_hotel_1_seat" size="0.011 0.011 0.002" pos="0.7 0.17 0.508" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_1_wall0" size="0.0015 0.011 0.00275" pos="0.7095 0.17 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_1_wall1" size="0.0015 0.011 0.00275" pos="0.6905 0.17 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_1_wall2" size="0.008 0.0015 0.00275" pos="0.7 0.1795 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_1_wall3" size="0.008 0.0015 0.00275" pos="0.7 0.1605 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_2_seat" size="0.011 0.011 0.002" pos="0.7 0.14 0.508" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_2_wall0" size="0.0015 0.011 0.00275" pos="0.7095 0.14 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_2_wall1" size="0.0015 0.011 0.00275" pos="0.6905 0.14 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_2_wall2" size="0.008 0.0015 0.00275" pos="0.7 0.1495 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_tube_hotel_2_wall3" size="0.008 0.0015 0.00275" pos="0.7 0.1305 0.51275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_fluent_tube_seat" size="0.011 0.011 0.002" pos="0.28 0.208 0.564" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_fluent_tube_wall0" size="0.0015 0.011 0.015" pos="0.2895 0.208 0.581" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_fluent_tube_wall1" size="0.0015 0.011 0.015" pos="0.2705 0.208 0.581" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_fluent_tube_wall2" size="0.008 0.0015 0.015" pos="0.28 0.2175 0.581" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_fluent_tube_wall3" size="0.008 0.0015 0.015" pos="0.28 0.1985 0.581" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_sorter_right_tube_seat" size="0.011 0.011 0.002" pos="0.50075 1.745 0.562" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_sorter_right_tube_wall0" size="0.0015 0.011 0.015" pos="0.51025 1.745 0.579" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_sorter_right_tube_wall1" size="0.0015 0.011 0.015" pos="0.49125 1.745 0.579" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_sorter_right_tube_wall2" size="0.008 0.0015 0.015" pos="0.50075 1.7545 0.579" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_sorter_right_tube_wall3" size="0.008 0.0015 0.015" pos="0.50075 1.7355 0.579" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_ngs_tube_seat" size="0.011 0.011 0.002" pos="0.967 1.506 0.603" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_ngs_tube_wall0" size="0.0015 0.011 0.0225" pos="0.9765 1.506 0.6275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_ngs_tube_wall1" size="0.0015 0.011 0.0225" pos="0.9575 1.506 0.6275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_ngs_tube_wall2" size="0.008 0.0015 0.0225" pos="0.967 1.5155 0.6275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_ngs_tube_wall3" size="0.008 0.0015 0.0225" pos="0.967 1.4965 0.6275" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
+      <geom name="proxy_waste_bottom" size="0.1 0.1 0.0025" pos="1.08 0.25 0.5025" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_waste_wall_x0" size="0.0025 0.1 0.1" pos="0.9825 0.25 0.6" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_waste_wall_x1" size="0.0025 0.1 0.1" pos="1.1775 0.25 0.6" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_waste_wall_y0" size="0.1 0.0025 0.1" pos="1.08 0.1525 0.6" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_waste_wall_y1" size="0.1 0.0025 0.1" pos="1.08 0.3475 0.6" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+    </body>
+    <body name="tube_hole_markers">
+      <geom name="tube_hole_marker_00" size="0.0072 0.0022" pos="0.7 0.17 0.5125" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_01" size="0.0072 0.0022" pos="0.7 0.14 0.5125" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_02" size="0.0072 0.0022" pos="0.7 0.11 0.5125" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_03" size="0.0072 0.0022" pos="0.7 0.08 0.5125" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_04" size="0.0072 0.0022" pos="0.7 0.05 0.5125" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_05" size="0.0072 0.0047" pos="0.28 0.208 0.57" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_06" size="0.0072 0.0047" pos="0.28 0.238 0.57" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_07" size="0.0072 0.0047" pos="0.28 0.268 0.57" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_08" size="0.0072 0.0047" pos="0.28 0.298 0.57" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_09" size="0.0072 0.0047" pos="0.28 0.328 0.57" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_10" size="0.0072 0.0147" pos="0.5007 1.745 0.569" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_11" size="0.0077 0.0222" pos="0.967 1.506 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_12" size="0.0077 0.0222" pos="0.967 1.59 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_13" size="0.0077 0.0222" pos="1.001 1.506 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_14" size="0.0077 0.0222" pos="1.001 1.59 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_15" size="0.0077 0.0222" pos="1.168 1.626 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_16" size="0.0077 0.0222" pos="1.168 1.71 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_17" size="0.0077 0.0222" pos="1.202 1.626 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+      <geom name="tube_hole_marker_18" size="0.0077 0.0222" pos="1.202 1.71 0.6275" type="cylinder" rgba="0.82 0.1 0.1 1"/>
+    </body>
+  </worldbody>
+
+  <equality>
+    <joint name="rg2_fingertip_coupling" joint1="ur5e_rg2_fingertip_right_joint" joint2="ur5e_rg2_fingertip_left_joint" solref="0.004"/>
+  </equality>
+
+  <actuator>
+    <general name="rail_actuator" joint="rail_joint" ctrlrange="0 0.75" ctrllimited="true" forcelimited="true" forcerange="-2000 2000" biastype="affine" gainprm="0"/>
+    <general name="ur5e_shoulder_pan" class="ur5e_size3" joint="ur5e_shoulder_pan_joint" gainprm="0" biasprm="0 0 0"/>
+    <general name="ur5e_shoulder_lift" class="ur5e_size3" joint="ur5e_shoulder_lift_joint" gainprm="0" biasprm="0 0 0"/>
+    <general name="ur5e_elbow" class="ur5e_size3_limited" joint="ur5e_elbow_joint" gainprm="0" biasprm="0 0 0"/>
+    <general name="ur5e_wrist_1" class="ur5e_size1" joint="ur5e_wrist_1_joint" gainprm="0" biasprm="0 0 0"/>
+    <general name="ur5e_wrist_2" class="ur5e_size1" joint="ur5e_wrist_2_joint" gainprm="0" biasprm="0 0 0"/>
+    <general name="ur5e_wrist_3" class="ur5e_size1" joint="ur5e_wrist_3_joint" gainprm="0" biasprm="0 0 0"/>
+    <general name="rg2_fingertip_actuator" joint="ur5e_rg2_fingertip_left_joint" ctrlrange="0 0.055" ctrllimited="true" forcelimited="true" forcerange="-30 30" biastype="affine" gainprm="6000" biasprm="0 -6000 -100"/>
+  </actuator>
+
+  <keyframe>
+    <key name="ur5e_home" qpos="0 -1.5708 -1.5708 1.5708 -1.5708 -1.5708 0 0.05 0.05 0.870773 0.1165 0.617 1 0 0 0 0.870773 0.1165 0.582 1 0 0 0 0.7 0.17 0.5475 1 0 0 0 0.7 0.14 0.5475 1 0 0 0" ctrl="0 -1.5708 -1.5708 1.5708 -1.5708 -1.5708 0 0"/>
+  </keyframe>
+</mujoco>

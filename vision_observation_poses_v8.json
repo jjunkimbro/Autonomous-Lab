@@ -1,0 +1,190 @@
+{
+  "empty_hand": {
+    "fluent_plate": {
+      "value": 1.182595703125,
+      "reduced": [
+        0.156,
+        1.5707963267948966,
+        -2.0257074870340093,
+        2.2962866919562837,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.16,
+        -0.03,
+        0.06
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 91.2978515625,
+      "visible": 1.0,
+      "edge_margin": 109.08096604916932,
+      "plate_in_view": true,
+      "counts": {
+        "empty": 96,
+        "object": 0,
+        "occluded": 0,
+        "missing": 0
+      }
+    },
+    "incubator_plate": {
+      "value": 0.4844678836089959,
+      "reduced": [
+        0.011870906572480652,
+        2.923426497090502,
+        -1.284018296435146,
+        1.0931759907167522,
+        1.3526301702956054
+      ],
+      "tcp_offset_station": [
+        -0.1,
+        0.03,
+        0.14
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 55.71722412109375,
+      "visible": 0.4166666666666667,
+      "edge_margin": 104.01372329959129,
+      "plate_in_view": true,
+      "counts": {
+        "empty": 40,
+        "object": 0,
+        "occluded": 56,
+        "missing": 0
+      }
+    },
+    "reader_plate": {
+      "value": 1.1942977294921875,
+      "reduced": [
+        0.13300000000000003,
+        -1.5707963267948966,
+        -1.8962329319006122,
+        2.263331525133036,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.04,
+        0.0,
+        0.06
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 97.14886474609375,
+      "visible": 1.0,
+      "edge_margin": 140.042300563725,
+      "plate_in_view": true,
+      "counts": {
+        "empty": 96,
+        "object": 0,
+        "occluded": 0,
+        "missing": 0
+      }
+    },
+    "sorter_left_plate": {
+      "value": 1.1654625244140626,
+      "reduced": [
+        0.34475000000000006,
+        -1.5707963267948966,
+        -1.7904449696573193,
+        2.0716597366350338,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.16,
+        0.03,
+        0.1
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 82.73126220703125,
+      "visible": 1.0,
+      "edge_margin": 141.02179338858497,
+      "plate_in_view": true,
+      "counts": {
+        "empty": 96,
+        "object": 0,
+        "occluded": 0,
+        "missing": 0
+      }
+    },
+    "plate_hotel_4": {
+      "value": 1.097941446940104,
+      "reduced": [
+        0.641773,
+        1.5707963267948966,
+        -1.6656229051708231,
+        1.9264546166117043,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.16,
+        0.03,
+        0.06
+      ],
+      "clearance": 0.02598288912343558,
+      "clearance_pair": [
+        "onrobot_rg2_model_frame",
+        "visual_waste"
+      ],
+      "detected": true,
+      "marker_pixels": 90.63739013671875,
+      "visible": 0.9166666666666666,
+      "edge_margin": 217.8718972961978,
+      "plate_in_view": true,
+      "counts": {
+        "empty": 0,
+        "object": 88,
+        "occluded": 8,
+        "missing": 0
+      }
+    },
+    "plate_hotel_3": {
+      "value": 0.8327920328776042,
+      "reduced": [
+        0.581773,
+        1.5707963267948966,
+        -1.7890980581296791,
+        2.1214947954327386,
+        1.5707963267948966
+      ],
+      "tcp_offset_station": [
+        -0.22,
+        -0.03,
+        0.06
+      ],
+      "clearance": 0.05,
+      "clearance_pair": [
+        "-",
+        "-"
+      ],
+      "detected": true,
+      "marker_pixels": 83.06268310546875,
+      "visible": 0.6666666666666666,
+      "edge_margin": 110.32513802963933,
+      "plate_in_view": true,
+      "counts": {
+        "empty": 0,
+        "object": 64,
+        "occluded": 32,
+        "missing": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "input_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_full_waypoints_v2.xml",
+  "output_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_multiworkpiece_v1.xml",
+  "collision": "disabled",
+  "workpieces": {
+    "plate_a": {
+      "body": "workpiece_plate_a",
+      "joint": "workpiece_plate_a_freejoint",
+      "geom": "workpiece_plate_a_visual",
+      "site": "workpiece_plate_a_center",
+      "type": "PLATE",
+      "mass": 0.04,
+      "initial_slot": "plate_hotel_4",
+      "initial_position": [
+        0.870361,
+        0.116794,
+        0.617664
+      ]
+    },
+    "plate_b": {
+      "body": "workpiece_plate_b",
+      "joint": "workpiece_plate_b_freejoint",
+      "geom": "workpiece_plate_b_visual",
+      "site": "workpiece_plate_b_center",
+      "type": "PLATE",
+      "mass": 0.04,
+      "initial_slot": "plate_hotel_3",
+      "initial_position": [
+        0.870361,
+        0.116794,
+        0.582664
+      ]
+    },
+    "tube_a": {
+      "body": "workpiece_tube_a",
+      "joint": "workpiece_tube_a_freejoint",
+      "geom": "workpiece_tube_a_visual",
+      "site": "workpiece_tube_a_center",
+      "type": "TUBE_5ML",
+      "mass": 0.005,
+      "initial_slot": "tube_hotel_1",
+      "initial_position": [
+        0.7000000476837154,
+        0.17000000178813923,
+        0.5450424510209779
+      ]
+    },
+    "tube_b": {
+      "body": "workpiece_tube_b",
+      "joint": "workpiece_tube_b_freejoint",
+      "geom": "workpiece_tube_b_visual",
+      "site": "workpiece_tube_b_center",
+      "type": "TUBE_5ML",
+      "mass": 0.005,
+      "initial_slot": "tube_hotel_2",
+      "initial_position": [
+        0.7000000476837158,
+        0.14000000059604634,
+        0.5450424510209783
+      ]
+    }
+  }
+}

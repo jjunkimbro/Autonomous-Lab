@@ -1,0 +1,883 @@
+<mujoco model="autonomous_lab">
+
+    <compiler
+        angle="radian"
+        autolimits="true"/>
+
+    <option
+        timestep="0.002"
+        integrator="implicitfast"
+        gravity="0 0 -9.81"/>
+
+
+    <!-- ================================================== -->
+    <!-- ASSETS -->
+    <!-- ================================================== -->
+
+    <asset>
+
+        <!-- Reader -->
+        <mesh
+            name="reader_body_mesh"
+            file="../assets/reader/reader_body.obj"/>
+
+        <mesh
+            name="reader_tray_mesh"
+            file="../assets/reader/reader_tray.obj"/>
+
+
+        <!-- STX44 -->
+        <mesh
+            name="stx44_body_mesh"
+            file="../assets/stx44/stx44_body.obj"/>
+
+
+        <!-- SH800 -->
+        <mesh
+            name="sh800_body_mesh"
+            file="../assets/sh800/sh800_body.obj"/>
+
+        <mesh
+            name="sh800_collection_door_mesh"
+            file="../assets/sh800/sh800_collection_door.obj"/>
+
+        <mesh
+            name="sh800_sample_door_mesh"
+            file="../assets/sh800/sh800_sample_door.obj"/>
+
+
+        <!-- Fluent -->
+        <mesh
+            name="fluent_body_mesh"
+            file="../assets/fluent/fluent_body.obj"/>
+
+
+        <!-- Plate Hotel -->
+        <mesh
+            name="plate_hotel_body_mesh"
+            file="../assets/plate_hotel/plate_hotel_body.obj"/>
+
+
+        <!-- Waste -->
+        <mesh
+            name="waste_body_mesh"
+            file="../assets/waste/waste_body.obj"/>
+
+
+        <!-- UR5e + Generic 2-Finger Gripper -->
+        <model
+            name="ur5e_model"
+            file="../assets/ur5e/ur5e.xml"/>
+
+    </asset>
+
+
+    <!-- ================================================== -->
+    <!-- WORLD -->
+    <!-- ================================================== -->
+
+    <worldbody>
+
+
+        <!-- ================================================= -->
+        <!-- RL / VISION CAMERAS                               -->
+        <!-- ================================================= -->
+
+        <camera
+            name="lab_overview_camera"
+            pos="0 -3.0 2.5"
+            xyaxes="1 0 0 0 0.65 0.76"
+            fovy="55"/>
+
+
+        <!-- ================================================= -->
+        <!-- FLOOR -->
+        <!-- ================================================= -->
+
+        <geom
+            name="floor"
+            type="plane"
+            pos="0 0 0"
+            size="10 10 0.1"
+            rgba="0.88 0.88 0.88 1"
+            contype="1"
+            conaffinity="1"/>
+
+
+        <!-- ================================================= -->
+        <!-- LINEAR RAIL -->
+        <!-- ================================================= -->
+
+        <geom
+            name="rail_base"
+            type="box"
+            pos="0 0.125 0.05"
+            size="2.30 0.10 0.05"
+            rgba="0.18 0.18 0.20 1"
+            contype="0"
+            conaffinity="0"/>
+
+        <geom
+            name="rail_guide_1"
+            type="box"
+            pos="0 0.055 0.12"
+            size="2.30 0.015 0.02"
+            rgba="0.35 0.35 0.38 1"
+            contype="0"
+            conaffinity="0"/>
+
+        <geom
+            name="rail_guide_2"
+            type="box"
+            pos="0 0.195 0.12"
+            size="2.30 0.015 0.02"
+            rgba="0.35 0.35 0.38 1"
+            contype="0"
+            conaffinity="0"/>
+
+
+        <!-- ================================================= -->
+        <!-- RAIL CARRIAGE + UR5e + GRIPPER -->
+        <!-- ================================================= -->
+
+        <body
+            name="rail_carriage"
+            pos="0 0.125 0.17">
+
+            <joint
+                name="rail_slide_joint"
+                type="slide"
+                axis="1 0 0"
+                range="-2.0 2.0"
+                damping="50"/>
+
+            <geom
+                name="rail_carriage_geom"
+                type="box"
+                pos="0 0 0"
+                size="0.15 0.12 0.03"
+                rgba="0.12 0.25 0.55 1"
+                contype="0"
+                conaffinity="0"/>
+
+            <site
+                name="rail_robot_mount_site"
+                type="sphere"
+                pos="0 0 0.035"
+                size="0.018"
+                rgba="1 0 0 1"/>
+
+            <body
+                name="ur5e_mount"
+                pos="0 0 0.035">
+
+                <attach
+                    model="ur5e_model"
+                    prefix="ur5e_"/>
+
+            </body>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- PLATE HOTEL -->
+        <!-- ================================================= -->
+
+        <body
+            name="plate_hotel_module"
+            pos="8.068 0.0815 -0.880">
+
+            <geom
+                name="plate_hotel_body_geom"
+                type="mesh"
+                mesh="plate_hotel_body_mesh"
+                rgba="0.60 0.60 0.65 1"
+                contype="0"
+                conaffinity="0"/>
+
+
+            <!-- Rear structure only -->
+
+            <geom
+                name="col_plate_hotel_rear"
+                type="box"
+                pos="-9.9175 -0.6875 0.9825"
+                size="0.0625 0.0075 0.1025"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <site
+                name="plate_hotel_site"
+                type="sphere"
+                pos="-9.918 -0.6315 0.985"
+                size="0.018"
+                rgba="0 1 0 1"/>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- STX44 -->
+        <!-- ================================================= -->
+
+        <body
+            name="stx44_module"
+            pos="4.549 -0.45226 0">
+
+            <geom
+                name="stx44_body_geom"
+                type="mesh"
+                mesh="stx44_body_mesh"
+                rgba="0.65 0.65 0.68 1"
+                contype="0"
+                conaffinity="0"/>
+
+
+            <!-- ================================================= -->
+            <!-- STX44 SIMPLIFIED COLLISION V2 -->
+            <!-- ================================================= -->
+
+
+            <!-- Main left body -->
+
+            <geom
+                name="col_stx44_main"
+                type="box"
+                pos="-5.9346465 -0.100237 1.005770"
+                size="0.1846465 0.242501 0.5675"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!-- Upper-right structure -->
+
+            <geom
+                name="col_stx44_upper_right"
+                type="box"
+                pos="-5.591396 -0.100237 1.236635"
+                size="0.158604 0.242501 0.336635"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!-- Plate access site -->
+
+            <site
+                name="stx44_plate_site"
+                type="sphere"
+                pos="-5.499 -0.09774 0.6383"
+                size="0.018"
+                rgba="0 1 0 1"/>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- READER -->
+        <!-- ================================================= -->
+
+        <body
+            name="reader_module"
+            pos="1.344 -0.545 0">
+
+            <geom
+                name="reader_body_geom"
+                type="mesh"
+                mesh="reader_body_mesh"
+                rgba="0.65 0.65 0.68 1"
+                contype="0"
+                conaffinity="0"/>
+
+
+            <!-- ================================================= -->
+            <!-- READER COLLISION V3 -->
+            <!--
+                기존:
+                    col_reader_body
+                    center = (-1.247, -0.2775, 0.4975)
+                    size   = (0.247, 0.2795, 0.1975)
+
+                Bounds:
+                    X = -1.494 ~ -1.000
+                    Y = -0.557 ~ +0.002
+                    Z = +0.300 ~ +0.695
+
+                Plate loading aperture proxy:
+                    center X = -1.344
+                    center Z =  0.420
+
+                    width  = 140 mm
+                    height =  40 mm
+                    depth  =  50 mm
+
+                Opening bounds:
+                    X = -1.414 ~ -1.274
+                    Y = -0.048 ~ +0.002
+                    Z =  0.400 ~  0.440
+
+                따라서 기존 하나짜리 Box 대신
+                5개의 Box로 나누어 loading corridor를 실제로 비운다.
+
+                IMPORTANT:
+                현재 140 x 40 x 50 mm는 provisional geometry.
+                실제 Reader 투입구 치수 확보 시 교체 필요.
+            -->
+            <!-- ================================================= -->
+
+
+            <!-- Rear body:
+                 Y = -0.557 ~ -0.048 -->
+
+            <geom
+                name="col_reader_rear"
+                type="box"
+                pos="-1.247 -0.3025 0.4975"
+                size="0.247 0.2545 0.1975"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!-- Front-left:
+                 X = -1.494 ~ -1.414 -->
+
+            <geom
+                name="col_reader_front_left"
+                type="box"
+                pos="-1.454 -0.023 0.4975"
+                size="0.040 0.025 0.1975"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!-- Front-right:
+                 X = -1.274 ~ -1.000 -->
+
+            <geom
+                name="col_reader_front_right"
+                type="box"
+                pos="-1.137 -0.023 0.4975"
+                size="0.137 0.025 0.1975"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!-- Front-bottom:
+                 Opening 아래
+                 Z = 0.300 ~ 0.400 -->
+
+            <geom
+                name="col_reader_front_bottom"
+                type="box"
+                pos="-1.344 -0.023 0.350"
+                size="0.070 0.025 0.050"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!-- Front-top:
+                 Opening 위
+                 Z = 0.440 ~ 0.695 -->
+
+            <geom
+                name="col_reader_front_top"
+                type="box"
+                pos="-1.344 -0.023 0.5675"
+                size="0.070 0.025 0.1275"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!-- Loading aperture debug site -->
+
+            <site
+                name="reader_aperture_center_site"
+                type="sphere"
+                pos="-1.344 0.002 0.420"
+                size="0.008"
+                rgba="1 0 1 1"/>
+
+
+            <!-- ================================================= -->
+            <!-- READER TRAY -->
+            <!-- ================================================= -->
+
+            <body
+                name="reader_tray"
+                pos="-1.344 -0.005 0.420">
+
+                <joint
+                    name="reader_tray_joint"
+                    type="hinge"
+                    axis="1 0 0"
+                    range="-1.5708 0"
+                    damping="3"/>
+
+                <geom
+                    name="reader_tray_geom"
+                    type="mesh"
+                    mesh="reader_tray_mesh"
+                    pos="1.344 0.005 -0.420"
+                    rgba="0.20 0.40 0.85 1"
+                    contype="0"
+                    conaffinity="0"/>
+
+                <site
+                    name="reader_plate_site"
+                    type="sphere"
+                    pos="0 0 0.020"
+                    size="0.015"
+                    rgba="0 1 0 1"/>
+
+            </body>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- WASTE -->
+        <!-- ================================================= -->
+
+        <body
+            name="waste_module"
+            pos="3.050 -0.050 -0.300">
+
+            <geom
+                name="waste_body_geom"
+                type="mesh"
+                mesh="waste_body_mesh"
+                rgba="0.45 0.45 0.50 1"
+                contype="0"
+                conaffinity="0"/>
+
+
+            <geom
+                name="col_waste_body"
+                type="box"
+                pos="-2.000 -0.500 0.500"
+                size="0.150 0.150 0.200"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <site
+                name="waste_drop_site"
+                type="sphere"
+                pos="-2.000 -0.500 0.710"
+                size="0.020"
+                rgba="1 0 1 1"/>
+
+            <site
+                name="waste_pre_drop_site"
+                type="sphere"
+                pos="-2.000 -0.500 0.810"
+                size="0.015"
+                rgba="0 1 1 1"/>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- SH800 : CURRENTLY INACTIVE -->
+        <!-- ================================================= -->
+
+        <body
+            name="sh800_module"
+            pos="1.880 0.240 0">
+
+            <geom
+                name="sh800_body_geom"
+                type="mesh"
+                mesh="sh800_body_mesh"
+                rgba="0.45 0.45 0.48 1"
+                contype="0"
+                conaffinity="0"/>
+
+
+            <site
+                name="sh800_collection_button_site"
+                type="sphere"
+                pos="-0.127 -0.700 0.4945"
+                size="0.012"
+                rgba="1 0 0 1"/>
+
+            <site
+                name="sh800_sample_button_site"
+                type="sphere"
+                pos="-0.465 -0.690 0.445"
+                size="0.012"
+                rgba="1 0.5 0 1"/>
+
+            <site
+                name="sh800_plate_site"
+                type="sphere"
+                pos="-0.130 -0.790 0.410"
+                size="0.015"
+                rgba="0 1 0 1"/>
+
+            <site
+                name="sh800_tube_site"
+                type="sphere"
+                pos="-0.3579 -0.7502 0.395"
+                size="0.015"
+                rgba="1 0 1 1"/>
+
+
+            <body
+                name="sh800_collection_door"
+                pos="-0.010 -0.705 0.4945">
+
+                <joint
+                    name="sh800_collection_door_joint"
+                    type="hinge"
+                    axis="0 0 1"
+                    range="-1.5708 0"
+                    damping="3"/>
+
+                <geom
+                    name="sh800_collection_door_geom"
+                    type="mesh"
+                    mesh="sh800_collection_door_mesh"
+                    pos="0.010 0.705 -0.4945"
+                    rgba="0.20 0.35 0.80 1"
+                    contype="0"
+                    conaffinity="0"/>
+
+            </body>
+
+
+            <body
+                name="sh800_sample_door"
+                pos="0 0 0">
+
+                <joint
+                    name="sh800_sample_door_joint"
+                    type="slide"
+                    axis="0 0 1"
+                    range="0 0.16"
+                    damping="5"/>
+
+                <geom
+                    name="sh800_sample_door_geom"
+                    type="mesh"
+                    mesh="sh800_sample_door_mesh"
+                    rgba="0.20 0.75 0.30 1"
+                    contype="0"
+                    conaffinity="0"/>
+
+            </body>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- FLUENT 780 -->
+        <!-- ================================================= -->
+
+        <body
+            name="fluent_module"
+            pos="0.25 0.80 0.915"
+            euler="0 0 3.14159265">
+
+            <geom
+                name="fluent_body_geom"
+                type="mesh"
+                mesh="fluent_body_mesh"
+                pos="3.595 1.850 -0.915"
+                rgba="0.65 0.65 0.68 1"
+                contype="0"
+                conaffinity="0"/>
+
+
+            <!-- Rear body -->
+
+            <geom
+                name="col_fluent_rear"
+                type="box"
+                pos="0.770 -0.3775 0.003"
+                size="0.845 0.2775 0.618"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+
+            <!--
+                Open front glass-door frame.
+
+                The former model used one solid central box and forced the
+                robot around the left edge.  The physical loading direction
+                is through the opening between the large front glass doors.
+                These four boxes retain the frame while leaving the main
+                opening centered at world x=-0.52 m.  The open doors have no
+                fixed center divider; the right-side handoff remains open.
+            -->
+
+            <geom
+                name="col_fluent_front_left_frame"
+                type="box"
+                pos="1.5075 0.482 0.003"
+                size="0.1075 0.015 0.618"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+            <geom
+                name="col_fluent_front_bottom_frame"
+                type="box"
+                pos="0.770 0.482 -0.525"
+                size="0.845 0.015 0.090"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+            <geom
+                name="col_fluent_front_top_frame"
+                type="box"
+                pos="0.770 0.482 0.478"
+                size="0.845 0.015 0.143"
+                rgba="1 0 0 0.20"
+                contype="1"
+                conaffinity="1"/>
+
+            <site
+                name="fluent_glass_door_center_site"
+                type="sphere"
+                pos="0.770 0.497 0"
+                size="0.025"
+                rgba="1 0.8 0 1"/>
+
+
+            <!-- Fluent Input -->
+
+            <site
+                name="fluent_input_plate_site"
+                type="sphere"
+                pos="0.770 0 0"
+                size="0.020"
+                rgba="0 0.5 1 1"/>
+
+
+            <!-- Fluent Handoff -->
+
+            <site
+                name="fluent_handoff_site"
+                type="sphere"
+                pos="0.770 0 0"
+                size="0.020"
+                rgba="0 1 0 1"/>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- PROCESS PLATE -->
+        <!-- ================================================= -->
+
+        <body
+            name="process_plate"
+            mocap="true"
+            pos="-1.85 -0.55 0.105">
+
+            <geom
+                name="process_plate_geom"
+                type="box"
+                size="0.064 0.043 0.007"
+                rgba="0.85 0.90 1.00 1"
+                contype="0"
+                conaffinity="0"/>
+
+            <site
+                name="process_plate_center_site"
+                type="sphere"
+                pos="0 0 0"
+                size="0.008"
+                rgba="1 1 0 1"/>
+
+        </body>
+
+
+        <!-- ================================================= -->
+        <!-- RL PHYSICAL PLATE                                -->
+        <!-- ================================================= -->
+
+        <!--
+            Kept separate from process_plate so the existing playback
+            scripts continue to work. The RL environment moves this free
+            body from its parked pose to the Plate Hotel during reset.
+        -->
+        <body
+            name="rl_process_plate"
+            pos="0 0 -2">
+
+            <freejoint name="rl_process_plate_freejoint"/>
+
+            <geom
+                name="rl_process_plate_geom"
+                type="box"
+                size="0.064 0.043 0.007"
+                density="500"
+                friction="0.8 0.02 0.002"
+                rgba="0.20 0.75 1.00 1"
+                contype="1"
+                conaffinity="1"/>
+
+            <!-- Visual liquid plane and keyed A1 corner.  Both are
+                 non-colliding and make an accidental flip/yaw change visible. -->
+            <geom
+                name="rl_process_plate_liquid_surface"
+                type="box"
+                pos="0 0 0.0085"
+                size="0.055 0.034 0.001"
+                rgba="0.10 0.60 1.00 0.65"
+                contype="0"
+                conaffinity="0"/>
+
+            <geom
+                name="rl_process_plate_a1_marker"
+                type="sphere"
+                pos="-0.052 0.032 0.011"
+                size="0.006"
+                rgba="1.00 0.10 0.05 1.00"
+                contype="0"
+                conaffinity="0"/>
+
+            <site
+                name="rl_process_plate_center_site"
+                type="sphere"
+                size="0.006"
+                rgba="1 1 0 1"/>
+
+        </body>
+
+
+        <!-- Mocap grasp target followed by an inactive-by-default weld. -->
+        <body
+            name="rl_plate_grasp_target"
+            mocap="true"
+            pos="0 0 -2">
+
+            <site
+                name="rl_plate_grasp_target_site"
+                type="sphere"
+                size="0.004"
+                rgba="1 0.5 0 0.25"/>
+
+        </body>
+
+
+        <!--
+            30 x 50 mm central pedestal.  The plate stays center-supported
+            while all four sides remain open for the RG6 finger and knuckle
+            sweep.  The entry/placement pose itself remains unchanged.
+        -->
+        <geom
+            name="col_plate_hotel_plate_support"
+            type="box"
+            pos="-1.85 -0.55 0.088"
+            size="0.015 0.025 0.010"
+            rgba="0.15 0.15 0.18 0"
+            contype="1"
+            conaffinity="1"/>
+
+        <geom
+            name="col_fluent_input_plate_support"
+            type="box"
+            pos="-0.52 0.80 0.898"
+            size="0.015 0.025 0.010"
+            rgba="0.15 0.15 0.18 0"
+            contype="1"
+            conaffinity="1"/>
+
+        <geom
+            name="col_stx44_plate_support"
+            type="box"
+            pos="-0.95 -0.55 0.6213"
+            size="0.015 0.025 0.010"
+            rgba="0.15 0.15 0.18 0"
+            contype="1"
+            conaffinity="1"/>
+
+        <geom
+            name="col_reader_plate_support"
+            type="box"
+            pos="0 -0.55 0.423"
+            size="0.015 0.025 0.010"
+            rgba="0.15 0.15 0.18 0"
+            contype="1"
+            conaffinity="1"/>
+
+
+    </worldbody>
+
+
+    <!-- ================================================== -->
+    <!-- RL EQUALITY CONSTRAINT                            -->
+    <!-- ================================================== -->
+
+    <equality>
+
+        <weld
+            name="rl_plate_grasp_weld"
+            body1="rl_plate_grasp_target"
+            body2="rl_process_plate"
+            active="false"
+            solref="0.0005 1"
+            solimp="0.999 0.9999 0.00001"/>
+
+    </equality>
+
+
+    <!-- ================================================== -->
+    <!-- ACTUATORS -->
+    <!-- ================================================== -->
+
+    <actuator>
+
+
+        <!-- Rail -->
+
+        <position
+            name="rail_slide_actuator"
+            joint="rail_slide_joint"
+            kp="1200"
+            ctrlrange="-2.0 2.0"/>
+
+
+        <!-- Reader -->
+
+        <position
+            name="reader_tray_actuator"
+            joint="reader_tray_joint"
+            kp="50"
+            ctrlrange="-1.5708 0"/>
+
+
+        <!-- SH800 -->
+
+        <position
+            name="sh800_collection_door_actuator"
+            joint="sh800_collection_door_joint"
+            kp="50"
+            ctrlrange="-1.5708 0"/>
+
+        <position
+            name="sh800_sample_door_actuator"
+            joint="sh800_sample_door_joint"
+            kp="200"
+            ctrlrange="0 0.16"/>
+
+
+    </actuator>
+
+
+</mujoco>

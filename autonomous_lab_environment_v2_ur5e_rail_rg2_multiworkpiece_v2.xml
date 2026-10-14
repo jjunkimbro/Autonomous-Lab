@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="autonomous_lab_environment_v2">
+  <compiler angle="degree" meshdir="environment_v2_export" autolimits="true" />
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast" />
+  <statistic center="0.75 1.0 0.65" extent="1.35" />
+  <visual>
+    <global azimuth="-125" elevation="-27" />
+    <headlight ambient="0.32 0.32 0.32" diffuse="0.72 0.72 0.72" specular="0.18 0.18 0.18" />
+    <rgba haze="0.12 0.15 0.19 1" />
+  </visual>
+  <default>
+    <geom group="1" contype="0" conaffinity="0" density="0" />
+    <default class="reference_site">
+      <site type="sphere" size="0.006" rgba="1 0.15 0.10 0.95" group="3" />
+    </default>
+  </default>
+  <asset>
+    <mesh name="mesh_780_body1" file="meshes/780_body1.obj" />
+    <mesh name="mesh_780_body2" file="meshes/780_body2.obj" />
+    <mesh name="mesh_780_plateholder1" file="meshes/780_plateholder1.obj" />
+    <mesh name="mesh_780_plateholder2" file="meshes/780_plateholder2.obj" />
+    <mesh name="mesh_780_plateholder3" file="meshes/780_plateholder3.obj" />
+    <mesh name="mesh_780_plateholder4" file="meshes/780_plateholder4.obj" />
+    <mesh name="mesh_Cylinder" file="meshes/Cylinder.obj" />
+    <mesh name="mesh_NGS_body1" file="meshes/NGS_body1.obj" />
+    <mesh name="mesh_NGS_body2" file="meshes/NGS_body2.obj" />
+    <mesh name="mesh_NGS_body3" file="meshes/NGS_body3.obj" />
+    <mesh name="mesh_NGS_cartridge1" file="meshes/NGS_cartridge1.obj" />
+    <mesh name="mesh_NGS_cartridge2" file="meshes/NGS_cartridge2.obj" />
+    <mesh name="mesh_NGS_cartridge_button1" file="meshes/NGS_cartridge_button1.obj" />
+    <mesh name="mesh_NGS_cartridge_button2" file="meshes/NGS_cartridge_button2.obj" />
+    <mesh name="mesh_NGS_display1" file="meshes/NGS_display1.obj" />
+    <mesh name="mesh_NGS_display2" file="meshes/NGS_display2.obj" />
+    <mesh name="mesh_NGS_library1" file="meshes/NGS_library1.obj" />
+    <mesh name="mesh_NGS_library2" file="meshes/NGS_library2.obj" />
+    <mesh name="mesh_NGS_rack1" file="meshes/NGS_rack1.obj" />
+    <mesh name="mesh_NGS_rack2" file="meshes/NGS_rack2.obj" />
+    <mesh name="mesh_NGS_rack3" file="meshes/NGS_rack3.obj" />
+    <mesh name="mesh_NGS_rack4" file="meshes/NGS_rack4.obj" />
+    <mesh name="mesh_platehotel" file="meshes/platehotel.obj" />
+    <mesh name="mesh_platewell1" file="meshes/platewell1.obj" />
+    <mesh name="mesh_platewell2" file="meshes/platewell2.obj" />
+    <mesh name="mesh_platewell3" file="meshes/platewell3.obj" />
+    <mesh name="mesh_platewell4" file="meshes/platewell4.obj" />
+    <mesh name="mesh_rail" file="meshes/rail.obj" />
+    <mesh name="mesh_reader_body1" file="meshes/reader_body1.obj" />
+    <mesh name="mesh_reader_body2" file="meshes/reader_body2.obj" />
+    <mesh name="mesh_reader_plateholder" file="meshes/reader_plateholder.obj" />
+    <mesh name="mesh_SH800_body1" file="meshes/SH800_body1.obj" />
+    <mesh name="mesh_SH800_body2" file="meshes/SH800_body2.obj" />
+    <mesh name="mesh_SH800_body3" file="meshes/SH800_body3.obj" />
+    <mesh name="mesh_slide" file="meshes/slide.obj" />
+    <mesh name="mesh_stx44_body1" file="meshes/stx44_body1.obj" />
+    <mesh name="mesh_stx44_plateholder" file="meshes/stx44_plateholder.obj" />
+    <mesh name="mesh_table" file="meshes/table.obj" />
+    <mesh name="mesh_tube1" file="meshes/tube1.obj" />
+    <mesh name="mesh_tube2" file="meshes/tube2.obj" />
+    <mesh name="mesh_tube3" file="meshes/tube3.obj" />
+    <mesh name="mesh_tube4" file="meshes/tube4.obj" />
+    <mesh name="mesh_tubehotel" file="meshes/tubehotel.obj" />
+    <mesh name="mesh_waste" file="meshes/waste.obj" />
+    <model name="ur5e_source" file="mujoco_menagerie/universal_robots_ur5e/ur5e_rg2_official.xml" />
+  </asset>
+  <worldbody>
+    <light name="key_light" pos="0.4 0.6 2.6" dir="0.1 0.2 -1" directional="true" />
+    <light name="fill_light" pos="1.6 1.8 1.8" dir="-0.5 -0.5 -1" directional="true" diffuse="0.45 0.45 0.45" />
+    <camera name="cell_overview" pos="2.45 -1.15 2.35" xyaxes="0.72 0.69 0 -0.40 0.42 0.81" />
+    <camera name="cell_top" pos="0.75 1.0 3.1" quat="1 0 0 0" />
+    <body name="environment_visuals">
+      <geom name="visual_780_body1" type="mesh" mesh="mesh_780_body1" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_body2" type="mesh" mesh="mesh_780_body2" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_plateholder1" type="mesh" mesh="mesh_780_plateholder1" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_plateholder2" type="mesh" mesh="mesh_780_plateholder2" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_plateholder3" type="mesh" mesh="mesh_780_plateholder3" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_plateholder4" type="mesh" mesh="mesh_780_plateholder4" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_Cylinder" type="mesh" mesh="mesh_Cylinder" rgba="0.58 0.60 0.64 1" />
+      <geom name="visual_NGS_body1" type="mesh" mesh="mesh_NGS_body1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_body2" type="mesh" mesh="mesh_NGS_body2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_body3" type="mesh" mesh="mesh_NGS_body3" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_cartridge1" type="mesh" mesh="mesh_NGS_cartridge1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_cartridge2" type="mesh" mesh="mesh_NGS_cartridge2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_cartridge_button1" type="mesh" mesh="mesh_NGS_cartridge_button1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_cartridge_button2" type="mesh" mesh="mesh_NGS_cartridge_button2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_display1" type="mesh" mesh="mesh_NGS_display1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_display2" type="mesh" mesh="mesh_NGS_display2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_library1" type="mesh" mesh="mesh_NGS_library1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_library2" type="mesh" mesh="mesh_NGS_library2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack1" type="mesh" mesh="mesh_NGS_rack1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack2" type="mesh" mesh="mesh_NGS_rack2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack3" type="mesh" mesh="mesh_NGS_rack3" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack4" type="mesh" mesh="mesh_NGS_rack4" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_platehotel" type="mesh" mesh="mesh_platehotel" rgba="0.18 0.67 0.52 1" />
+      <geom name="visual_platewell1" type="mesh" mesh="mesh_platewell1" rgba="0.75 0.86 0.96 0.92" />
+      <geom name="visual_platewell2" type="mesh" mesh="mesh_platewell2" rgba="0.75 0.86 0.96 0.92" />
+      <geom name="visual_platewell3" type="mesh" mesh="mesh_platewell3" rgba="0.75 0.86 0.96 0.92" />
+      <geom name="visual_rail" type="mesh" mesh="mesh_rail" rgba="0.18 0.20 0.24 1" />
+      <geom name="visual_reader_body1" type="mesh" mesh="mesh_reader_body1" rgba="0.54 0.34 0.82 1" />
+      <geom name="visual_reader_body2" type="mesh" mesh="mesh_reader_body2" rgba="0.54 0.34 0.82 1" />
+      <geom name="visual_reader_plateholder" type="mesh" mesh="mesh_reader_plateholder" rgba="0.54 0.34 0.82 1" />
+      <geom name="visual_SH800_body1" type="mesh" mesh="mesh_SH800_body1" rgba="0.25 0.70 0.78 1" />
+      <geom name="visual_SH800_body2" type="mesh" mesh="mesh_SH800_body2" rgba="0.25 0.70 0.78 1" />
+      <geom name="visual_SH800_body3" type="mesh" mesh="mesh_SH800_body3" rgba="0.25 0.70 0.78 1" />
+      <geom name="visual_stx44_body1" type="mesh" mesh="mesh_stx44_body1" rgba="0.92 0.48 0.18 1" />
+      <geom name="visual_stx44_plateholder" type="mesh" mesh="mesh_stx44_plateholder" rgba="0.92 0.48 0.18 1" />
+      <geom name="visual_table" type="mesh" mesh="mesh_table" rgba="0.34 0.37 0.42 1" />
+      <geom name="visual_tube3" type="mesh" mesh="mesh_tube3" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tube4" type="mesh" mesh="mesh_tube4" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubehotel" type="mesh" mesh="mesh_tubehotel" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_waste" type="mesh" mesh="mesh_waste" rgba="0.78 0.20 0.20 1" />
+    </body>
+    <body name="process_references">
+      <site name="ref_780_plateholder1" pos="0.445000231 0.264000028 0.564999998" class="reference_site" />
+      <site name="ref_780_plateholder2" pos="0.115000218 0.264000058 0.565000117" class="reference_site" />
+      <site name="ref_780_plateholder3" pos="0.215000197 0.264000058 0.565000117" class="reference_site" />
+      <site name="ref_780_plateholder4" pos="0.345000207 0.264000028 0.564999998" class="reference_site" />
+      <site name="ref_platehotel" pos="0.872499824 0.105000004 0.680000037" class="reference_site" />
+      <site name="ref_platewell1" pos="0.870772779 0.11649999 0.518999934" class="reference_site" />
+      <site name="ref_platewell2" pos="0.870772779 0.11649999 0.55399996" class="reference_site" />
+      <site name="ref_platewell3" pos="0.870772779 0.11649999 0.588999927" class="reference_site" />
+      <site name="ref_platewell4" pos="0.870772839 0.11649999 0.623999953" class="reference_site" />
+      <site name="ref_reader_plateholder" pos="0.123500012 1.66250002 0.550000072" class="reference_site" />
+      <site name="ref_stx44_plateholder" pos="1.14400053 0.991500318 0.690000057" class="reference_site" />
+      <site name="ref_tube1" pos="0.700000048 0.170000002 0.585000038" class="reference_site" />
+      <site name="ref_tube2" pos="0.700000048 0.140000001 0.585000038" class="reference_site" />
+      <site name="ref_tube3" pos="0.700000048 0.109999999 0.585000038" class="reference_site" />
+      <site name="ref_tube4" pos="0.700000048 0.0799999982 0.585000038" class="reference_site" />
+      <site name="ref_tubehotel" pos="0.700000167 0.109999992 0.515000015" class="reference_site" />
+      <site name="ref_waste" pos="1.08000028 0.25 0.700000018" class="reference_site" />
+    </body>
+    <body name="ur5e_mount" pos="0.125 1 0.3" quat="1 0 0 0">
+      <joint name="rail_joint" type="slide" axis="1 0 0" range="0.000000 0.750000" limited="true" damping="100" armature="0.1" frictionloss="5" />
+      <site name="ur5e_mount_reference" type="cylinder" size="0.074500 0.002" pos="0 0 0" rgba="0.1 1 0.1 0.45" group="3" />
+      <attach model="ur5e_source" body="base" prefix="ur5e_" />
+      <geom name="visual_slide" type="mesh" mesh="mesh_slide" rgba="0.58 0.60 0.64 1" pos="-0.125 -1 -0.3" contype="0" conaffinity="0" />
+    </body>
+    <body name="rule_based_waypoint_markers" pos="0 0 0" quat="1 0 0 0">
+      <site name="wp_fluent_target" type="sphere" pos="0.4450002315 0.2640000285 0.5799999369" size="0.008000" rgba="0.10 1.00 0.20 1.0" group="0" />
+      <site name="wp_fluent_approach" type="sphere" pos="0.4450002315 0.3440000285 0.5799999369" size="0.008000" rgba="1.00 0.90 0.10 1.0" group="0" />
+      <site name="wp_fluent_staging" type="sphere" pos="0.4450002315 0.4240000285 0.6599999369" size="0.008000" rgba="1.00 0.40 0.05 1.0" group="0" />
+      <site name="wp_fluent_extract" type="sphere" pos="0.4450002315 0.3640000285 0.5799999369" size="0.008000" rgba="0.10 0.35 1.00 1.0" group="0" />
+      <site name="wp_fluent_lift" type="sphere" pos="0.4450002315 0.3640000285 0.9" size="0.008000" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_fluent_transport_entry" type="sphere" pos="0.4450002315 0.3440000285 0.9" size="0.006400" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_fluent_path_staging_approach" type="cylinder" fromto="0.4450002315 0.4240000285 0.6599999369 0.4450002315 0.3440000285 0.5799999369" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_fluent_path_approach_target" type="cylinder" fromto="0.4450002315 0.3440000285 0.5799999369 0.4450002315 0.2640000285 0.5799999369" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_fluent_path_target_extract" type="cylinder" fromto="0.4450002315 0.2640000285 0.5799999369 0.4450002315 0.3640000285 0.5799999369" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_fluent_path_extract_lift" type="cylinder" fromto="0.4450002315 0.3640000285 0.5799999369 0.4450002315 0.3640000285 0.9" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_fluent_path_transport_descend" type="cylinder" fromto="0.4450002315 0.3440000285 0.9 0.4450002315 0.3440000285 0.5799999369" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_incubator_target" type="sphere" pos="1.14400053 0.991500318 0.7049999964" size="0.008000" rgba="0.10 1.00 0.20 1.0" group="0" />
+      <site name="wp_incubator_approach" type="sphere" pos="1.04400053 0.991500318 0.7049999964" size="0.008000" rgba="1.00 0.90 0.10 1.0" group="0" />
+      <site name="wp_incubator_staging" type="sphere" pos="0.96400053 0.991500318 0.7849999964" size="0.008000" rgba="1.00 0.40 0.05 1.0" group="0" />
+      <site name="wp_incubator_extract" type="sphere" pos="1.02400053 0.991500318 0.7049999964" size="0.008000" rgba="0.10 0.35 1.00 1.0" group="0" />
+      <site name="wp_incubator_lift" type="sphere" pos="1.02400053 0.991500318 0.9" size="0.008000" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_incubator_transport_entry" type="sphere" pos="1.04400053 0.991500318 0.9" size="0.006400" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_incubator_path_staging_approach" type="cylinder" fromto="0.96400053 0.991500318 0.7849999964 1.04400053 0.991500318 0.7049999964" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_incubator_path_approach_target" type="cylinder" fromto="1.04400053 0.991500318 0.7049999964 1.14400053 0.991500318 0.7049999964" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_incubator_path_target_extract" type="cylinder" fromto="1.14400053 0.991500318 0.7049999964 1.02400053 0.991500318 0.7049999964" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_incubator_path_extract_lift" type="cylinder" fromto="1.02400053 0.991500318 0.7049999964 1.02400053 0.991500318 0.9" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_incubator_path_transport_descend" type="cylinder" fromto="1.04400053 0.991500318 0.9 1.04400053 0.991500318 0.7049999964" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_reader_target" type="sphere" pos="0.123500012 1.66250002 0.5650000114" size="0.008000" rgba="0.10 1.00 0.20 1.0" group="0" />
+      <site name="wp_reader_approach" type="sphere" pos="0.123500012 1.56250002 0.5650000114" size="0.008000" rgba="1.00 0.90 0.10 1.0" group="0" />
+      <site name="wp_reader_staging" type="sphere" pos="0.123500012 1.48250002 0.6450000114" size="0.008000" rgba="1.00 0.40 0.05 1.0" group="0" />
+      <site name="wp_reader_extract" type="sphere" pos="0.123500012 1.54250002 0.5650000114" size="0.008000" rgba="0.10 0.35 1.00 1.0" group="0" />
+      <site name="wp_reader_lift" type="sphere" pos="0.123500012 1.54250002 0.9" size="0.008000" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_reader_transport_entry" type="sphere" pos="0.123500012 1.56250002 0.9" size="0.006400" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_reader_path_staging_approach" type="cylinder" fromto="0.123500012 1.48250002 0.6450000114 0.123500012 1.56250002 0.5650000114" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_reader_path_approach_target" type="cylinder" fromto="0.123500012 1.56250002 0.5650000114 0.123500012 1.66250002 0.5650000114" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_reader_path_target_extract" type="cylinder" fromto="0.123500012 1.66250002 0.5650000114 0.123500012 1.54250002 0.5650000114" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_reader_path_extract_lift" type="cylinder" fromto="0.123500012 1.54250002 0.5650000114 0.123500012 1.54250002 0.9" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_reader_path_transport_descend" type="cylinder" fromto="0.123500012 1.56250002 0.9 0.123500012 1.56250002 0.5650000114" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_waste_target" type="sphere" pos="1.08000028 0.25 0.750000018" size="0.008000" rgba="0.10 1.00 0.20 1.0" group="0" />
+      <site name="wp_waste_approach" type="sphere" pos="1.08000028 0.25 0.850000018" size="0.008000" rgba="1.00 0.90 0.10 1.0" group="0" />
+      <site name="wp_waste_staging" type="sphere" pos="1.08000028 0.25 0.950000018" size="0.008000" rgba="1.00 0.40 0.05 1.0" group="0" />
+      <site name="wp_waste_extract" type="sphere" pos="1.08000028 0.25 0.870000018" size="0.008000" rgba="0.10 0.35 1.00 1.0" group="0" />
+      <site name="wp_waste_lift" type="sphere" pos="1.08000028 0.25 0.9" size="0.008000" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_waste_transport_entry" type="sphere" pos="1.08000028 0.25 0.9" size="0.006400" rgba="0.10 1.00 1.00 1.0" group="0" />
+      <site name="wp_waste_path_staging_approach" type="cylinder" fromto="1.08000028 0.25 0.950000018 1.08000028 0.25 0.850000018" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_waste_path_approach_target" type="cylinder" fromto="1.08000028 0.25 0.850000018 1.08000028 0.25 0.750000018" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_waste_path_target_extract" type="cylinder" fromto="1.08000028 0.25 0.750000018 1.08000028 0.25 0.870000018" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_waste_path_extract_lift" type="cylinder" fromto="1.08000028 0.25 0.870000018 1.08000028 0.25 0.9" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+      <site name="wp_waste_path_transport_descend" type="cylinder" fromto="1.08000028 0.25 0.9 1.08000028 0.25 0.850000018" size="0.002000" rgba="0.90 0.90 0.90 0.55" group="0" />
+    </body>
+    <body name="exact_process_references" pos="0 0 0">
+      <site name="ref_fluent_tube" type="sphere" pos="0.280000000 0.208000000 0.566000000" size="0.025 0.025 0.025" rgba="1.000000000 0.800000000 0.000000000 1.000000000" group="0" />
+      <site name="ref_sorter_left_plate" type="sphere" pos="0.365750000 1.829000000 0.554000000" size="0.025 0.025 0.025" rgba="0.100000000 0.350000000 1.000000000 1.000000000" group="0" />
+      <site name="ref_sorter_right_tube" type="sphere" pos="0.500750000 1.745000000 0.564000000" size="0.025 0.025 0.025" rgba="1.000000000 0.000000000 0.750000000 1.000000000" group="0" />
+      <site name="ref_ngs_tube" type="sphere" pos="0.967000000 1.506000000 0.605000000" size="0.025 0.025 0.025" rgba="0.000000000 0.900000000 0.900000000 1.000000000" group="0" />
+      <site name="ref_ngs_reserve_hole" type="sphere" pos="0.967000000 1.590000000 0.605000000" size="0.025 0.025 0.025" rgba="0.200000000 0.650000000 0.650000000 0.450000000" group="0" />
+    </body>
+    <body name="full_process_waypoint_markers_v2" pos="0 0 0">
+      <site name="wp2_plate_hotel_4_target" type="sphere" pos="0.870772839 0.116499990 0.623999953" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_plate_hotel_4_approach" type="sphere" pos="0.870772839 0.176499990 0.623999953" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_plate_hotel_4_staging" type="sphere" pos="0.870772839 0.176499990 0.703999953" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_plate_hotel_4_extract" type="sphere" pos="0.870772839 0.216499990 0.623999953" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_plate_hotel_4_lift" type="sphere" pos="0.870772839 0.216499990 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_plate_hotel_4_transport_entry" type="sphere" pos="0.870772839 0.176499990 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_plate_hotel_3_target" type="sphere" pos="0.870772779 0.116499990 0.588999927" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_plate_hotel_3_approach" type="sphere" pos="0.870772779 0.176499990 0.588999927" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_plate_hotel_3_staging" type="sphere" pos="0.870772779 0.176499990 0.668999927" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_plate_hotel_3_extract" type="sphere" pos="0.870772779 0.216499990 0.588999927" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_plate_hotel_3_lift" type="sphere" pos="0.870772779 0.216499990 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_plate_hotel_3_transport_entry" type="sphere" pos="0.870772779 0.176499990 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_tube_hotel_1_target" type="sphere" pos="0.700000048 0.170000002 0.585000038" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_tube_hotel_1_approach" type="sphere" pos="0.700000048 0.170000002 0.665000038" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_tube_hotel_1_staging" type="sphere" pos="0.700000048 0.170000002 0.765000038" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_tube_hotel_1_extract" type="sphere" pos="0.700000048 0.170000002 0.705000038" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_tube_hotel_1_lift" type="sphere" pos="0.700000048 0.170000002 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_tube_hotel_1_transport_entry" type="sphere" pos="0.700000048 0.170000002 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_tube_hotel_2_target" type="sphere" pos="0.700000048 0.140000001 0.585000038" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_tube_hotel_2_approach" type="sphere" pos="0.700000048 0.140000001 0.665000038" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_tube_hotel_2_staging" type="sphere" pos="0.700000048 0.140000001 0.765000038" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_tube_hotel_2_extract" type="sphere" pos="0.700000048 0.140000001 0.705000038" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_tube_hotel_2_lift" type="sphere" pos="0.700000048 0.140000001 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_tube_hotel_2_transport_entry" type="sphere" pos="0.700000048 0.140000001 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_fluent_plate_target" type="sphere" pos="0.445000231 0.264000028 0.564999998" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_fluent_plate_approach" type="sphere" pos="0.445000231 0.344000028 0.564999998" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_fluent_plate_staging" type="sphere" pos="0.445000231 0.344000028 0.644999998" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_fluent_plate_extract" type="sphere" pos="0.445000231 0.364000028 0.564999998" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_fluent_plate_lift" type="sphere" pos="0.445000231 0.364000028 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_fluent_plate_transport_entry" type="sphere" pos="0.445000231 0.344000028 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_fluent_tube_target" type="sphere" pos="0.280000000 0.208000000 0.566000000" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_fluent_tube_approach" type="sphere" pos="0.280000000 0.208000000 0.646000000" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_fluent_tube_staging" type="sphere" pos="0.280000000 0.208000000 0.746000000" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_fluent_tube_extract" type="sphere" pos="0.280000000 0.208000000 0.686000000" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_fluent_tube_lift" type="sphere" pos="0.280000000 0.208000000 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_fluent_tube_transport_entry" type="sphere" pos="0.280000000 0.208000000 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_incubator_plate_target" type="sphere" pos="1.144000530 0.991500318 0.690000057" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_incubator_plate_approach" type="sphere" pos="1.044000530 0.991500318 0.690000057" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_incubator_plate_staging" type="sphere" pos="1.044000530 0.991500318 0.770000057" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_incubator_plate_extract" type="sphere" pos="0.994000530 0.991500318 0.690000057" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_incubator_plate_lift" type="sphere" pos="0.994000530 0.991500318 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_incubator_plate_transport_entry" type="sphere" pos="1.044000530 0.991500318 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_reader_plate_target" type="sphere" pos="0.123500012 1.662500020 0.550000072" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_reader_plate_approach" type="sphere" pos="0.123500012 1.582500020 0.550000072" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_reader_plate_staging" type="sphere" pos="0.123500012 1.582500020 0.630000072" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_reader_plate_extract" type="sphere" pos="0.123500012 1.542500020 0.550000072" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_reader_plate_lift" type="sphere" pos="0.123500012 1.542500020 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_reader_plate_transport_entry" type="sphere" pos="0.123500012 1.582500020 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_sorter_left_plate_target" type="sphere" pos="0.365750000 1.829000000 0.554000000" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_sorter_left_plate_approach" type="sphere" pos="0.365750000 1.829000000 0.634000000" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_sorter_left_plate_staging" type="sphere" pos="0.365750000 1.829000000 0.734000000" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_sorter_left_plate_extract" type="sphere" pos="0.365750000 1.829000000 0.674000000" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_sorter_left_plate_lift" type="sphere" pos="0.365750000 1.829000000 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_sorter_left_plate_transport_entry" type="sphere" pos="0.365750000 1.829000000 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_sorter_right_tube_target" type="sphere" pos="0.500750000 1.745000000 0.564000000" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_sorter_right_tube_approach" type="sphere" pos="0.500750000 1.745000000 0.644000000" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_sorter_right_tube_staging" type="sphere" pos="0.500750000 1.745000000 0.744000000" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_sorter_right_tube_extract" type="sphere" pos="0.500750000 1.745000000 0.684000000" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_sorter_right_tube_lift" type="sphere" pos="0.500750000 1.745000000 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_sorter_right_tube_transport_entry" type="sphere" pos="0.500750000 1.745000000 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_ngs_tube_target" type="sphere" pos="0.967000000 1.506000000 0.605000000" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_ngs_tube_approach" type="sphere" pos="0.967000000 1.506000000 0.685000000" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_ngs_tube_staging" type="sphere" pos="0.967000000 1.506000000 0.785000000" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_ngs_tube_extract" type="sphere" pos="0.967000000 1.506000000 0.725000000" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_ngs_tube_lift" type="sphere" pos="0.967000000 1.506000000 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_ngs_tube_transport_entry" type="sphere" pos="0.967000000 1.506000000 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+      <site name="wp2_waste_target" type="sphere" pos="1.080000280 0.250000000 0.700000018" size="0.006 0.006 0.006" rgba="1.000000000 0.100000000 0.100000000 0.900000000" group="3" />
+      <site name="wp2_waste_approach" type="sphere" pos="1.080000280 0.250000000 0.800000018" size="0.006 0.006 0.006" rgba="1.000000000 0.850000000 0.000000000 0.850000000" group="3" />
+      <site name="wp2_waste_staging" type="sphere" pos="1.080000280 0.250000000 0.880000018" size="0.006 0.006 0.006" rgba="1.000000000 0.450000000 0.000000000 0.750000000" group="3" />
+      <site name="wp2_waste_extract" type="sphere" pos="1.080000280 0.250000000 0.850000018" size="0.006 0.006 0.006" rgba="0.900000000 0.000000000 0.800000000 0.800000000" group="3" />
+      <site name="wp2_waste_lift" type="sphere" pos="1.080000280 0.250000000 0.900000000" size="0.006 0.006 0.006" rgba="0.000000000 0.850000000 0.950000000 0.750000000" group="3" />
+      <site name="wp2_waste_transport_entry" type="sphere" pos="1.080000280 0.250000000 0.900000000" size="0.006 0.006 0.006" rgba="0.100000000 1.000000000 0.400000000 0.750000000" group="3" />
+    </body>
+    <body name="workpiece_plate_a" pos="0.000000375 -0.000000064 0.000000294" quat="1.000000000 0.000000000 0.000000000 0.000000000">
+      <freejoint name="workpiece_plate_a_freejoint" />
+      <inertial pos="0.870360625412 0.116794063839 0.61766370615" mass="0.04" diaginertia="2.50425096667e-05 5.50951336667e-05 7.87648266667e-05" />
+      <geom name="workpiece_plate_a_visual" type="mesh" mesh="mesh_platewell4" rgba="0.75 0.86 0.96 0.92" contype="0" conaffinity="0" mass="0" group="2" />
+      <site name="workpiece_plate_a_center" type="sphere" pos="0.870360625 0.116794064 0.617663706" size="0.004 0.004 0.004" rgba="1 1 1 0.5" group="4" />
+    </body>
+    <body name="workpiece_plate_b" pos="0.000000375 -0.000000064 -0.034999706" quat="1.000000000 0.000000000 0.000000000 0.000000000">
+      <freejoint name="workpiece_plate_b_freejoint" />
+      <inertial pos="0.870360625412 0.116794063839 0.61766370615" mass="0.04" diaginertia="2.50425096667e-05 5.50951336667e-05 7.87648266667e-05" />
+      <geom name="workpiece_plate_b_visual" type="mesh" mesh="mesh_platewell4" rgba="0.75 0.86 0.96 0.92" contype="0" conaffinity="0" mass="0" group="2" />
+      <site name="workpiece_plate_b_center" type="sphere" pos="0.870360625 0.116794064 0.617663706" size="0.004 0.004 0.004" rgba="1 1 1 0.5" group="4" />
+    </body>
+    <body name="workpiece_tube_a" pos="0.000000000 0.000000000 0.000000000" quat="1.000000000 0.000000000 0.000000000 0.000000000">
+      <freejoint name="workpiece_tube_a_freejoint" />
+      <inertial pos="0 0 0" mass="0.005000000" diaginertia="0.000002737 0.000002737 0.000000141" />
+      <geom name="workpiece_tube_a_visual" type="mesh" mesh="mesh_tube1" rgba="0.93 0.78 0.22 1" contype="0" conaffinity="0" mass="0" group="1" />
+      <site name="workpiece_tube_a_center" type="sphere" pos="0.700000048 0.170000002 0.545042451" size="0.004 0.004 0.004" rgba="1 1 1 0.5" group="4" />
+    </body>
+    <body name="workpiece_tube_b" pos="0.000000000 0.000000000 0.000000000" quat="1.000000000 0.000000000 0.000000000 0.000000000">
+      <freejoint name="workpiece_tube_b_freejoint" />
+      <inertial pos="0 0 0" mass="0.005000000" diaginertia="0.000002737 0.000002737 0.000000141" />
+      <geom name="workpiece_tube_b_visual" type="mesh" mesh="mesh_tube2" rgba="0.93 0.78 0.22 1" contype="0" conaffinity="0" mass="0" group="1" />
+      <site name="workpiece_tube_b_center" type="sphere" pos="0.700000048 0.140000001 0.545042451" size="0.004 0.004 0.004" rgba="1 1 1 0.5" group="4" />
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="rail_actuator" joint="rail_joint" kp="5000" ctrlrange="0.000000 0.750000" ctrllimited="true" forcerange="-2000 2000" forcelimited="true" />
+  </actuator>
+</mujoco>

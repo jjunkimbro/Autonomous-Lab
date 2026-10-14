@@ -1,0 +1,39 @@
+{
+  "input_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_waypoints_v1.xml",
+  "output_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_plate_process_ports.xml",
+  "units": "meter",
+  "ports": {
+    "ref_fluent_tube": {
+      "label": "FLUENT TUBE",
+      "position": [
+        0.345,
+        0.264,
+        0.625
+      ]
+    },
+    "ref_sorter_left_plate": {
+      "label": "SORTER LEFT PLATE",
+      "position": [
+        0.3,
+        1.6,
+        0.65
+      ]
+    },
+    "ref_sorter_right_tube": {
+      "label": "SORTER RIGHT TUBE",
+      "position": [
+        0.44,
+        1.6,
+        0.65
+      ]
+    },
+    "ref_ngs_tube": {
+      "label": "NGS TUBE",
+      "position": [
+        0.939,
+        1.544973,
+        0.65
+      ]
+    }
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "name": "PHYSICAL PROCESS V5",
+  "model_xml": "C:\\Users\\jkim1\\autonomous_lab\\autonomous_lab_environment_v2_ur5e_rail_rg2_physics_v5.xml",
+  "plan_json": "C:\\Users\\jkim1\\autonomous_lab\\rulebased_motion_plan_v4.json",
+  "grip_force_per_finger_N": 20.0,
+  "max_tracking_error": 0.01080770304859846,
+  "records": [
+    {
+      "type": "CARRY",
+      "object": "plate_a",
+      "pick_task": 2,
+      "station": "plate_hotel_4",
+      "content": "EMPTY",
+      "max_slip_mm": 0.5272768335541773,
+      "max_rot_deg": 0.009422737132992904,
+      "max_tilt_deg": 0.18514481542707828,
+      "release_task": 4,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "plate_a",
+      "task_id": 4,
+      "station": "fluent_plate",
+      "xy_error_mm": 0.3,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.001,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "plate_a",
+      "pick_task": 7,
+      "station": "fluent_plate",
+      "content": "LIQUID",
+      "max_slip_mm": 0.8807826524577866,
+      "max_rot_deg": 0.002367663180431068,
+      "max_tilt_deg": 0.13733434216109117,
+      "release_task": 9,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "plate_a",
+      "task_id": 9,
+      "station": "incubator_plate",
+      "xy_error_mm": 0.85,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.003,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "plate_a",
+      "pick_task": 12,
+      "station": "incubator_plate",
+      "content": "LIQUID",
+      "max_slip_mm": 0.6265757898890291,
+      "max_rot_deg": 0.0017258776098340125,
+      "max_tilt_deg": 0.21458268866778507,
+      "release_task": 14,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "plate_a",
+      "task_id": 14,
+      "station": "reader_plate",
+      "xy_error_mm": 1.2,
+      "z_error_mm": -0.01,
+      "tilt_deg": 0.004,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "plate_a",
+      "pick_task": 17,
+      "station": "reader_plate",
+      "content": "LIQUID",
+      "max_slip_mm": 0.9458966694079598,
+      "max_rot_deg": 0.006099640369348844,
+      "max_tilt_deg": 0.17960341856094486,
+      "release_task": 19,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "plate_a",
+      "task_id": 19,
+      "station": "fluent_plate",
+      "xy_error_mm": 1.98,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.001,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "tube_a",
+      "pick_task": 21,
+      "station": "tube_hotel_1",
+      "content": "LIQUID",
+      "max_slip_mm": 0.5485576060077152,
+      "max_rot_deg": 0.0009674396975036991,
+      "max_tilt_deg": 0.20309785210987563,
+      "release_task": 23,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "tube_a",
+      "task_id": 23,
+      "station": "fluent_tube",
+      "xy_error_mm": 0.47,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.002,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "plate_a",
+      "pick_task": 26,
+      "station": "fluent_plate",
+      "content": "LIQUID",
+      "max_slip_mm": 0.565460095128858,
+      "max_rot_deg": 0.001081358841116867,
+      "max_tilt_deg": 0.1778725048148962,
+      "release_task": 28,
+      "status": "OK"
+    },
+    {
+      "type": "DROP",
+      "object": "plate_a",
+      "task_id": 28,
+      "station": "waste",
+      "inside_waste": true,
+      "position": [
+        1.058,
+        0.2871,
+        0.5631
+      ],
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "tube_a",
+      "pick_task": 30,
+      "station": "fluent_tube",
+      "content": "LIQUID",
+      "max_slip_mm": 0.8367107836337218,
+      "max_rot_deg": 0.002393891175249132,
+      "max_tilt_deg": 0.2580762418995066,
+      "release_task": 32,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "tube_a",
+      "task_id": 32,
+      "station": "sorter_right_tube",
+      "xy_error_mm": 1.11,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.003,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "plate_b",
+      "pick_task": 34,
+      "station": "plate_hotel_3",
+      "content": "EMPTY",
+      "max_slip_mm": 1.028459469382544,
+      "max_rot_deg": 0.0016264860779541628,
+      "max_tilt_deg": 0.1416636729800218,
+      "release_task": 36,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "plate_b",
+      "task_id": 36,
+      "station": "sorter_left_plate",
+      "xy_error_mm": 0.86,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.001,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "plate_b",
+      "pick_task": 39,
+      "station": "sorter_left_plate",
+      "content": "LIQUID",
+      "max_slip_mm": 0.991603788833846,
+      "max_rot_deg": 0.009724354862494738,
+      "max_tilt_deg": 0.22201463611462058,
+      "release_task": 41,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "plate_b",
+      "task_id": 41,
+      "station": "fluent_plate",
+      "xy_error_mm": 1.7,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.001,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "tube_a",
+      "pick_task": 43,
+      "station": "sorter_right_tube",
+      "content": "LIQUID",
+      "max_slip_mm": 0.7316172022590388,
+      "max_rot_deg": 0.002400711904685363,
+      "max_tilt_deg": 0.20393430245888047,
+      "release_task": 45,
+      "status": "OK"
+    },
+    {
+      "type": "DROP",
+      "object": "tube_a",
+      "task_id": 45,
+      "station": "waste",
+      "inside_waste": true,
+      "position": [
+        1.0799,
+        0.2482,
+        0.5425
+      ],
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "tube_b",
+      "pick_task": 47,
+      "station": "tube_hotel_2",
+      "content": "LIQUID",
+      "max_slip_mm": 0.5646230364832664,
+      "max_rot_deg": 0.0009574758361991653,
+      "max_tilt_deg": 0.2137445217307394,
+      "release_task": 49,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "tube_b",
+      "task_id": 49,
+      "station": "fluent_tube",
+      "xy_error_mm": 0.49,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.001,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "tube_b",
+      "pick_task": 52,
+      "station": "fluent_tube",
+      "content": "LIQUID",
+      "max_slip_mm": 0.685942499454047,
+      "max_rot_deg": 0.0027745749377241905,
+      "max_tilt_deg": 0.3645637955847743,
+      "release_task": 54,
+      "status": "OK"
+    },
+    {
+      "type": "PLACE",
+      "object": "tube_b",
+      "task_id": 54,
+      "station": "ngs_tube",
+      "xy_error_mm": 0.88,
+      "z_error_mm": -0.0,
+      "tilt_deg": 0.001,
+      "status": "OK"
+    },
+    {
+      "type": "CARRY",
+      "object": "plate_b",
+      "pick_task": 57,
+      "station": "fluent_plate",
+      "content": "LIQUID",
+      "max_slip_mm": 0.5652008352838253,
+      "max_rot_deg": 0.0012123712038641132,
+      "max_tilt_deg": 0.1761065355913776,
+      "release_task": 59,
+      "status": "OK"
+    },
+    {
+      "type": "DROP",
+      "object": "plate_b",
+      "task_id": 59,
+      "station": "waste",
+      "inside_waste": true,
+      "position": [
+        1.0508,
+        0.2908,
+        0.5604
+      ],
+      "status": "OK"
+    }
+  ],
+  "failures": 0
+}
