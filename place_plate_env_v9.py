@@ -8,7 +8,7 @@
 #     → 정책은 이 경로에 잔차 보정을 더하고 놓을 순간을 정한다 → 놓은 뒤 0.4 s 정착 → 채점
 #
 #   행동 (5, -1 ~ 1, 20 Hz)
-#     0 ~ 2 : 장비 좌표계 f / l / 위쪽 보정 속도 (최대 20 mm/s, 누적 ±6 mm)
+#     0 ~ 2 : 장비 좌표계 f / l / 위쪽 보정 속도 (최대 20 mm/s, 누적 ±6 mm, 아래쪽만 -3 mm)
 #     3     : yaw 보정 속도 (최대 2 °/s, 누적 ±1.5 °)  — J1 로 돌린다 (손목 규칙 유지)
 #     4     : 놓기 (> 0.5 이고 기본 경로의 하강이 시작된 뒤)
 #
@@ -23,7 +23,9 @@
 #
 #   action = 0 이면 지금의 규칙 기반 + 비전 보정과 같다 (기준선 확인용).
 
+import itertools
 import math
+import time
 
 import gymnasium as gym
 import mujoco
@@ -31,6 +33,7 @@ import numpy as np
 
 import skill_scene_v9 as s9
 import vision_scene_v8 as scene
+from camera_config import WRIST_CAMERA
 
 
 JOINT_NAMES = ("rail_joint", "ur5e_shoulder_pan_joint", "ur5e_shoulder_lift_joint", "ur5e_elbow_joint",
@@ -58,21 +61,62 @@ SETTLE_START = 0.2
 SETTLE_RELEASE = 0.4
 RESIDUAL_SPEED = 0.020
 RESIDUAL_LIMIT = 0.006
+# 아래쪽 보정만 따로 제한한다 (안전 한계). 명목 경로의 fingertip <-> 지지면 간격은
+# 전 장비 4.14 mm 로 측정됐다. 대칭 ±6 mm 로 두면 정책이 plate 를 포켓에 박으려고
+# 아래로 3.5 mm 이상 밀어 fingertip 이 지지면을 파고든다 (배양기에서 50 N 충돌 후 끼임).
+# 그리퍼를 장비에 박는 명령은 학습으로 피할 일이 아니라 애초에 낼 수 없어야 한다.
+RESIDUAL_DOWN_LIMIT = 0.003
+RESIDUAL_LOW = np.array([-RESIDUAL_LIMIT, -RESIDUAL_LIMIT, -RESIDUAL_DOWN_LIMIT])
+RESIDUAL_HIGH = np.full(3, RESIDUAL_LIMIT)
 YAW_SPEED = math.radians(2.0)
 YAW_LIMIT = math.radians(1.5)
 RELEASE_THRESHOLD = 0.5
+# 놓는 순간 plate 가 지지면에서 이만큼 넘게 떠 있으면 벌점 (m 당 이득)
+RELEASE_HEIGHT_TOLERANCE = 0.0005
+RELEASE_HEIGHT_GAIN = 1000.0
 
 CT_KP, CT_KD = 900.0, 60.0
 
+# 레일(J0) 은 0 ~ 0.75 m 만 움직인다. 명목 자세를 한쪽 끝에 붙여 잡으면 장비 오차를 따라가다
+# 레일이 하드 스톱에 걸려 TCP 가 명령 지점에 못 간다. 배양기가 그랬다: 앵커가 레일 0.00 m 라
+# 장비 yaw +2 deg 에서 IK 가 -0.15 m 를 요구 -> 0 에서 잘림 -> plate 를 32 mm 앞에 138 N 으로 박았다.
+# 그래서 앵커를 고를 때 장비 오차 상자 전체를 레일 안에서 따라갈 수 있는지 먼저 확인한다.
+RAIL_LIMITS = (0.0, 0.75)
+# 0.12 는 재서 고른 값이다. 앵커 후보를 훑으며 이 여유를 만족하는 첫 후보를 쓰는데,
+# 0.02 면 배양기가 궤적 중간에 레일 -0.058 m 를 명령해 여전히 잘리고, 0.16 이면 멀쩡한
+# Reader 앵커까지 끌려 나온다. 0.12 에서 배양기만 바뀌고 (0.00 -> 0.164 m, 여유 94 mm)
+# Fluent / Reader / 소터 앵커는 그대로다.
+RAIL_SAFETY = 0.12                     # 하드 스톱에서 추가로 띄우는 여유
+ANCHOR_PROBE = ("SET_DOWN", "APPROACH_LIFTED")
+
+# IK (감쇠 최소제곱). 감쇠가 없으면 특이점 근처에서 발산한다.
+IK_ITERATIONS = 12
+IK_DAMPING = 0.02
+IK_MAX_STEP = 0.10             # 한 반복에서 움직일 수 있는 관절 변화량 한계 (rad / m)
+
+# student 영상 ROI 중심 (TCP 기준). 잡은 plate 먼 쪽 끝 아래 = holder 입구가 보이는 곳.
+#   plate 중심은 TCP z = 0.0435, 먼 쪽 끝은 z = 0.107 이다.
+ROI_CENTER_TCP = np.array([0.0, -0.012, 0.095])
+BRIGHTNESS_RANGE = (0.75, 1.25)         # 조명 변화 (sim2real)
+
 STATION_ERROR = np.array([0.005, 0.005, 0.002, math.radians(2.0)])
 IN_HAND_ERROR = np.array([0.002, math.radians(1.0)])
-# 비전 측정 오차 표준편차 (x, y, z m, yaw rad) — 0 단계 기준선 측정 오차 크기
+# 비전 측정 오차 표준편차 (x, y, z m, yaw rad).
+# v10 포인트클라우드 인지(마커 없음)를 장비별 20 회씩 재서 얻은 축별 RMS (measure_sigma_v10.py).
+#   (vision_pointcloud_v10: 깊이 잔차 + RGB 밝기 잔차 정합)
+# 배양기만 측면(y) 1.64 mm · yaw 0.52 deg 로 한 자릿수 나쁘다. STX44 는 보이는 면이 평평한
+# 전면뿐이라 깊이(x 0.18 mm)는 잘 잡지만 좌우로 미끄러져도 영상이 거의 안 변한다.
+# 관측 자세 40 개를 실제로 등록·시험해 봤지만 (search_incubator_view.py) 더 나은 자세는 없었다.
+# 측면 포켓 여유가 0.8 mm 이므로 이 장비는 다른 곳보다 낮게 묶일 수 있다.
 MEASURE_SIGMA = {
-    "fluent_plate": np.array([0.0001, 0.0002, 0.0002, math.radians(0.05)]),
-    "incubator_plate": np.array([0.0004, 0.0008, 0.0003, math.radians(0.15)]),
-    "reader_plate": np.array([0.0008, 0.0004, 0.0002, math.radians(0.3)]),
-    "sorter_left_plate": np.array([0.0001, 0.0004, 0.0001, math.radians(0.1)]),
+    "fluent_plate": np.array([0.000030, 0.000054, 0.000046, math.radians(0.009)]),
+    "incubator_plate": np.array([0.000181, 0.001639, 0.000162, math.radians(0.522)]),
+    "reader_plate": np.array([0.000081, 0.000067, 0.000030, math.radians(0.073)]),
+    "sorter_left_plate": np.array([0.000020, 0.000130, 0.000035, math.radians(0.016)]),
 }
+# 위 값은 시뮬레이션 인지 정확도다. 실제 카메라는 조명 변화 · 반사 · 캘리브레이션 오차로 더 나쁘다.
+# 낙관적 조건에만 맞춰 학습하면 실전에서 무너지므로, 에피소드마다 이 배율로 키운다.
+MEASURE_SIGMA_SCALE = (1.0, 4.0)
 FRICTION_RANGE = (0.7, 1.2)
 
 # 손 안 어긋남 측정 (flange D415 깊이, 시작 자세): plate 먼 쪽 끝을 TCP 진입 방향 점 개수 분포가 끊기는 곳으로 찾는다.
@@ -113,8 +157,30 @@ class PlacePlateEnv(gym.Env):
         self._prepare_stations()
 
         self.action_space = gym.spaces.Box(-1.0, 1.0, shape=(5,), dtype=np.float32)
-        size = len(self._state())
-        self.observation_space = gym.spaces.Box(-np.inf, np.inf, shape=(size,), dtype=np.float32)
+        state_space = gym.spaces.Box(-np.inf, np.inf, shape=(len(self._state()),), dtype=np.float32)
+
+        # student 용 영상 관측 (RGB-D). teacher 는 상태값만 쓰므로 렌더러를 만들지 않는다.
+        self.render_width, self.render_height = WRIST_CAMERA["render_resolution"]
+        self.image_width, self.image_height = WRIST_CAMERA["roi_size"]
+        self.camera_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_CAMERA, WRIST_CAMERA["name"])
+        self.renderer = None
+        self.roi_origin = (0, 0)
+        self._roi_pending = True
+        self.brightness = 1.0
+        self.scene_option = mujoco.MjvOption()
+        self.scene_option.geomgroup[:] = 0
+        for group in (0, 1, 2, 4):
+            self.scene_option.geomgroup[group] = 1
+        self.scene_option.sitegroup[:] = 0
+
+        if obs_mode == "visuotactile":
+            self.observation_space = gym.spaces.Dict({
+                "state": state_space,
+                "rgb": gym.spaces.Box(0, 255, shape=(self.image_height, self.image_width, 3), dtype=np.uint8),
+                "depth": gym.spaces.Box(0.0, 1.0, shape=(self.image_height, self.image_width, 1), dtype=np.float32),
+            })
+        else:
+            self.observation_space = state_space
 
     # ------------------------------------------------------------------
     def _ids(self):
@@ -140,19 +206,58 @@ class PlacePlateEnv(gym.Env):
         self.mass = np.zeros((m.nv, m.nv))
         self.force = np.zeros(6)
 
+    @staticmethod
+    def _rail_span(solver, anchor, points, origin):
+        """이 앵커(J1 · J5 고정)로 장비 오차 상자를 따라갈 때 레일이 가야 하는 범위.
+
+        닿지 못하는 모서리가 하나라도 있으면 None (그 앵커는 후보에서 뺀다).
+        """
+        j1, j5 = float(anchor[1]), float(anchor[4])
+        seed = (float(anchor[0]), float(anchor[2]), float(anchor[3]))
+        low = high = float(anchor[0])
+        for corner in itertools.product((-1.0, 1.0), repeat=4):
+            delta = np.array(corner) * STATION_ERROR
+            for name in ANCHOR_PROBE:
+                target = origin + rot_z(delta[3]) @ (points[name] - origin) + delta[:3]
+                x, error = solver.solve_fixed(target, j1, j5, seed)
+                if error > 0.002:
+                    return None
+                low, high = min(low, float(x[0])), max(high, float(x[0]))
+        return low, high
+
     def _prepare_stations(self):
-        """장비별 기준 관절값 (명목 APPROACH_LIFTED) — J1 / J5 는 여기서 정하고 에피소드 중 고정."""
+        """장비별 기준 관절값 (명목 APPROACH_LIFTED) — J1 / J5 는 여기서 정하고 에피소드 중 고정.
+
+        후보는 J5 가 기준값에 가까운 순서로 나온다. 그 순서를 지키되, 장비 오차 상자 전체를
+        레일 안에서 따라갈 수 있는 첫 후보를 고른다 (RAIL_LIMITS 주석 참고).
+        """
         import plan_rulebased_ik_v4 as ik
         solver = ik.Solver(ik.Kinematics(), elbow_sign=1)
+        low_limit = RAIL_LIMITS[0] + RAIL_SAFETY
+        high_limit = RAIL_LIMITS[1] - RAIL_SAFETY
         self.station_data = {}
         for station in self.stations:
             interface = self.interfaces[station]
             points = {p["name"]: np.array(p["position"]) for p in interface["place"]}
             z = np.asarray(interface["grasp_frame"]["z_approach"], dtype=float)
-            anchor = next(solver.solve_anchor(points["SET_DOWN"], z))
+            origin, rotation = scene.station_frame(interface)
+
+            anchor = fallback = None
+            for candidate in solver.solve_anchor(points["SET_DOWN"], z):
+                if fallback is None:
+                    fallback = candidate
+                span = self._rail_span(solver, candidate, points, origin)
+                if span is not None and span[0] >= low_limit and span[1] <= high_limit:
+                    anchor = candidate
+                    break
+            if anchor is None:
+                # 레일 안에 드는 후보가 없다 — 예전처럼 첫 후보를 쓰되 조용히 넘어가지 않는다.
+                anchor = fallback
+                print(f"[place_plate_env] {station}: 레일 여유를 만족하는 앵커가 없어 첫 후보를 쓴다 "
+                      f"(rail {anchor[0]:+.3f} m). 장비 오차에서 하드 스톱에 걸릴 수 있다.", flush=True)
+
             q = ik.Kinematics.full(anchor)
             q_start = self._ik(q, points["APPROACH_LIFTED"])
-            origin, rotation = scene.station_frame(interface)
             self.station_data[station] = {"q_start": q_start, "points": points, "origin": origin, "rotation": rotation,
                                           "yaw": math.atan2(rotation[1, 0], rotation[0, 0])}
 
@@ -168,23 +273,41 @@ class PlacePlateEnv(gym.Env):
         q[4] = -(q[2] + q[3])
         return q
 
-    def _ik(self, q_seed, target, iterations=4):
+    def _ik(self, q_seed, target, iterations=IK_ITERATIONS):
+        """감쇠 최소제곱 IK (rail · shoulder_lift · elbow 3 자유도, 손목은 규칙으로 따라온다).
+
+        감쇠 없이 풀면 특이점 근처에서 한 스텝이 폭주하므로 감쇠를 넣고, 스텝 크기를 제한하고,
+        더 좋아질 때만 받아들인다.
+
+        주의: 배양기에서 TCP 가 36 mm 벗어나던 문제는 여기가 원인이 아니었다. 레일이 하드 스톱에
+        걸린 것이었고 (RAIL_LIMITS 주석 참고) _prepare_stations 의 앵커 선택에서 고쳤다.
+        """
         q = self._couple(q_seed)
         free = (0, 2, 3)
+        best_q, best_error = q.copy(), float("inf")
         for _ in range(iterations):
             position, _ = self._fk(q)
             error = target - position
-            if np.linalg.norm(error) < 1.0e-6:
+            norm = float(np.linalg.norm(error))
+            if norm < best_error:
+                best_q, best_error = q.copy(), norm
+            if norm < 1.0e-6:
                 break
             jacobian = np.zeros((3, 3))
             for column, index in enumerate(free):
                 trial = q.copy()
                 trial[index] += 1.0e-5
                 jacobian[:, column] = (self._fk(self._couple(trial))[0] - position) / 1.0e-5
-            delta = np.linalg.solve(jacobian + 1.0e-9 * np.eye(3), error)
+            delta = np.linalg.solve(jacobian.T @ jacobian + IK_DAMPING ** 2 * np.eye(3), jacobian.T @ error)
+            step = float(np.linalg.norm(delta))
+            if step > IK_MAX_STEP:
+                delta *= IK_MAX_STEP / step
             for column, index in enumerate(free):
                 q[index] += delta[column]
             q = self._couple(q)
+        position, _ = self._fk(q)
+        if float(np.linalg.norm(target - position)) > best_error:
+            return best_q
         return q
 
     def _transform(self, point, delta):
@@ -207,7 +330,8 @@ class PlacePlateEnv(gym.Env):
         r = self.rng if self.randomize else None
         self.truth = np.array(options.get("delta", r.uniform(-STATION_ERROR, STATION_ERROR) if r else np.zeros(4)))
         self.in_hand = np.array(options.get("in_hand", r.uniform(-IN_HAND_ERROR, IN_HAND_ERROR) if r else np.zeros(2)))
-        noise = r.normal(0.0, MEASURE_SIGMA[self.station_name]) if r else np.zeros(4)
+        noise = (r.normal(0.0, MEASURE_SIGMA[self.station_name] * r.uniform(*MEASURE_SIGMA_SCALE))
+                 if r else np.zeros(4))
         self.measured = self.truth + np.array(options.get("measure_noise", noise))
 
         self.perturber.reset()
@@ -255,6 +379,9 @@ class PlacePlateEnv(gym.Env):
         self.yaw_residual = 0.0
         self.released = False
         self.max_force = 0.0
+        self.release_height = 0.0
+        self._roi_pending = True
+        self.brightness = float(self.rng.uniform(*BRIGHTNESS_RANGE)) if self.randomize else 1.0
         self.reference = self._plate_in_tcp()
         self.steps = 0
         self.in_hand_est = self._measure_in_hand() if self.obs_mode == "measured" else self.in_hand[0]
@@ -304,7 +431,7 @@ class PlacePlateEnv(gym.Env):
         action = np.clip(np.asarray(action, dtype=float), -1.0, 1.0)
         dt = 1.0 / CONTROL_HZ
         rotation = rot_z(self.measured[3]) @ self.station["rotation"]
-        self.residual = np.clip(self.residual + action[:3] * RESIDUAL_SPEED * dt, -RESIDUAL_LIMIT, RESIDUAL_LIMIT)
+        self.residual = np.clip(self.residual + action[:3] * RESIDUAL_SPEED * dt, RESIDUAL_LOW, RESIDUAL_HIGH)
         self.yaw_residual = float(np.clip(self.yaw_residual + action[3] * YAW_SPEED * dt, -YAW_LIMIT, YAW_LIMIT))
         target = self._nominal(self.time + dt) + rotation @ self.residual
         seed = self.q_target.copy()
@@ -320,18 +447,23 @@ class PlacePlateEnv(gym.Env):
             force = max(force, self._contact_force())
         self.time += dt
         self.steps += 1
-        self.max_force = max(self.max_force, force)
 
         failed = (self._tilt() > FAIL_TILT or np.linalg.norm(self._plate_in_tcp() - self.reference) > FAIL_SLIP
                   or not np.isfinite(self.data.qpos).all())
         seated = False
         if release and not failed:
             self.released = True
+            # 놓는 순간 plate 가 지지면 위로 얼마나 떠 있는지 (떨어뜨리면 액체가 튄다)
+            self.release_height = max(0.0, float(self._plate_vs_holder()[2]))
             self.grip = GRIP_OPEN
+            # 정착 중 접촉도 같이 센다. 이걸 빼면 '놓기 전에만' 접촉력이 걸려서
+            # 일찍 놓아 벌점을 피하는 것이 최적 전략이 된다 (낙하 배치).
             for _ in range(int(SETTLE_RELEASE / self.model.opt.timestep)):
                 self._control(self.q_target)
                 mujoco.mj_step(self.model, self.data)
+                force = max(force, self._contact_force())
             seated = self._seated()
+        self.max_force = max(self.max_force, force)
         reward = self._reward(action, force, seated, failed, release)
         terminated = bool(self.released or failed)
         return self._obs(), reward, terminated, False, self._info(seated, failed)
@@ -401,9 +533,12 @@ class PlacePlateEnv(gym.Env):
             [self.yaw_residual / YAW_LIMIT, progress, self.time / EPISODE_TIME],
             [(self.data.qpos[self.finger_qpos[0]] - GRIP_CLOSED) * 200.0],
             [self._contact_force() / 20.0, self.max_force / 50.0],
-            (self._plate_in_tcp() - HELD_CENTER) * 200.0 if hasattr(self, "reference") else np.zeros(3),
         ]
         if self.obs_mode == "privileged":
+            # 손 안 plate 의 실제 위치는 시뮬레이터 정답이다. 실제 로봇에서는 잴 수 없으므로
+            # teacher 에게만 준다. student 는 영상에서 읽어야 한다.
+            parts.append((self._plate_in_tcp() - HELD_CENTER) * 200.0
+                         if hasattr(self, "reference") else np.zeros(3))
             error = self._plate_vs_holder() if hasattr(self, "reference") else np.zeros(4)
             parts.append(error[:3] * 200.0)
             parts.append([math.degrees(error[3]), self._tilt() / 2.0, self.in_hand[0] * 500.0])
@@ -416,7 +551,78 @@ class PlacePlateEnv(gym.Env):
         return np.concatenate([np.ravel(p) for p in parts]).astype(np.float32)
 
     def _obs(self):
-        return self._state()
+        state = self._state()
+        if self.obs_mode != "visuotactile":
+            return state
+        if self._roi_pending:
+            self.roi_origin = self._roi_origin()
+            self._roi_pending = False
+        rgb, depth = self._rgbd()
+        return {"state": state, "rgb": rgb, "depth": depth}
+
+    def _roi_centre_tcp(self):
+        """ROI 중심 (TCP 기준). 스킬마다 봐야 할 곳이 달라 하위 환경이 바꾼다."""
+        return ROI_CENTER_TCP
+
+    def _roi_origin(self):
+        """ROI 좌상단 픽셀. 카메라가 flange 에 고정이라 TCP 기준점을 투영해 reset 마다 1 회 정한다.
+
+        잡은 plate 의 먼 쪽 끝 아래(= holder 입구가 보이는 곳)를 중심에 둔다. TCP 기준으로 고정하면
+        들고 있는 plate 는 화면에서 항상 같은 자리에 있고, holder 의 픽셀 위치가 곧 어긋남이 된다.
+        """
+        mujoco.mj_kinematics(self.model, self.data)
+        tcp, rot = self.data.site_xpos[self.site], self.data.site_xmat[self.site].reshape(3, 3)
+        point = tcp + rot @ self._roi_centre_tcp()
+
+        position = self.data.cam_xpos[self.camera_id]
+        rotation = self.data.cam_xmat[self.camera_id].reshape(3, 3)
+        local = rotation.T @ (point - position)          # camera 좌표 (-z 가 시선)
+        fovy = math.radians(self.model.cam_fovy[self.camera_id])
+        focal = (self.render_height / 2.0) / math.tan(fovy / 2.0)
+        u = self.render_width / 2.0 + focal * local[0] / -local[2]
+        v = self.render_height / 2.0 - focal * local[1] / -local[2]
+        left = int(np.clip(round(u - self.image_width / 2), 0, self.render_width - self.image_width))
+        top = int(np.clip(round(v - self.image_height / 2), 0, self.render_height - self.image_height))
+        return left, top
+
+    def _rgbd(self):
+        # OpenGL context 는 환경마다 하나만 만든다 (worker 마다 여러 개 만들면 Windows 에서 실패)
+        if self.renderer is None:
+            for attempt in range(5):
+                try:
+                    self.renderer = mujoco.Renderer(self.model, self.render_height, self.render_width)
+                    break
+                except Exception:
+                    if attempt == 4:
+                        raise
+                    time.sleep(1.0 + attempt)
+
+        self.renderer.disable_depth_rendering()
+        self.renderer.update_scene(self.data, camera=self.camera_id, scene_option=self.scene_option)
+        rgb = self.renderer.render().copy()
+        self.renderer.enable_depth_rendering()
+        self.renderer.update_scene(self.data, camera=self.camera_id, scene_option=self.scene_option)
+        depth = self.renderer.render().copy()
+        self.renderer.disable_depth_rendering()
+
+        near, far = WRIST_CAMERA["depth_range_m"]
+        if self.randomize:
+            rgb = np.clip(rgb * self.brightness + self.rng.normal(0.0, 2.0, rgb.shape), 0, 255).astype(np.uint8)
+            sigma = WRIST_CAMERA["depth_noise_base_m"] + WRIST_CAMERA["depth_noise_slope"] * depth ** 2
+            depth = depth + self.rng.normal(size=depth.shape) * sigma
+            depth[self.rng.random(depth.shape) < WRIST_CAMERA["depth_dropout"]] = 0.0
+
+        left, top = self.roi_origin
+        rgb = rgb[top:top + self.image_height, left:left + self.image_width]
+        depth = depth[top:top + self.image_height, left:left + self.image_width]
+        valid = (depth >= near) & (depth <= far)
+        normalized = np.where(valid, (depth - near) / (far - near), 0.0)
+        return np.ascontiguousarray(rgb), normalized[..., None].astype(np.float32)
+
+    def close(self):
+        if self.renderer is not None:
+            self.renderer.close()
+            self.renderer = None
 
     def _reward(self, action, force, seated, failed, release):
         error = self._plate_vs_holder()
@@ -426,6 +632,9 @@ class PlacePlateEnv(gym.Env):
             reward += 10.0 if seated else -5.0
             # 들어 올린 채(높이 보정 +) 놓으면 plate 가 떨어져 블록에 걸친다
             reward -= 3.0 * max(0.0, self.residual[2]) / RESIDUAL_LIMIT
+            # 떠 있는 상태에서 놓지 않게 한다 (지지면에 닿은 뒤 놓아야 한다).
+            # 안 막으면 하강 전에 놓아 떨어뜨리는 것이 최적이 된다 — 액체가 든 plate 에는 쓸 수 없다.
+            reward -= RELEASE_HEIGHT_GAIN * max(0.0, self.release_height - RELEASE_HEIGHT_TOLERANCE)
         if failed:
             reward -= 10.0
         return float(reward)
@@ -435,7 +644,8 @@ class PlacePlateEnv(gym.Env):
         return {"station": getattr(self, "station_name", None), "success": bool(seated), "failed": bool(failed),
                 "released": bool(getattr(self, "released", False)), "xy_error_mm": float(np.linalg.norm(error[:2]) * 1000),
                 "z_error_mm": float(error[2] * 1000), "yaw_error_deg": float(math.degrees(error[3])), "tilt_deg": self._tilt(),
-                "max_force_N": float(getattr(self, "max_force", 0.0)), "in_hand_mm": float(self.in_hand[0] * 1000)}
+                "max_force_N": float(getattr(self, "max_force", 0.0)), "in_hand_mm": float(self.in_hand[0] * 1000),
+                "release_height_mm": float(getattr(self, "release_height", 0.0) * 1000)}
 
 
 if __name__ == "__main__":

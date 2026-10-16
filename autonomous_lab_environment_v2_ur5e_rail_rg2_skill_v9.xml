@@ -48,14 +48,14 @@
   </default>
 
   <asset>
-    <texture type="2d" colorspace="linear" name="tag_texture_01" file="vision_markers/tag36h11_01.png"/>
-    <texture type="2d" colorspace="linear" name="tag_texture_07" file="vision_markers/tag36h11_07.png"/>
-    <texture type="2d" colorspace="linear" name="tag_texture_02" file="vision_markers/tag36h11_02.png"/>
-    <texture type="2d" colorspace="linear" name="tag_texture_05" file="vision_markers/tag36h11_05.png"/>
-    <texture type="2d" colorspace="linear" name="tag_texture_03" file="vision_markers/tag36h11_03.png"/>
-    <texture type="2d" colorspace="linear" name="tag_texture_04" file="vision_markers/tag36h11_04.png"/>
-    <texture type="2d" colorspace="linear" name="tag_texture_06" file="vision_markers/tag36h11_06.png"/>
-    <texture type="2d" colorspace="linear" name="tag_texture_00" file="vision_markers/tag36h11_00.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_01" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_01.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_07" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_07.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_02" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_02.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_05" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_05.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_03" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_03.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_04" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_04.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_06" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_06.png"/>
+    <texture type="2d" colorspace="linear" name="tag_texture_00" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/vision_markers/tag36h11_00.png"/>
     <material name="ur5e_black" class="ur5e_ur5e" rgba="0.033 0.033 0.033 1"/>
     <material name="ur5e_jointgray" class="ur5e_ur5e" rgba="0.278 0.278 0.278 1"/>
     <material name="ur5e_linkgray" class="ur5e_ur5e" rgba="0.82 0.82 0.82 1"/>
@@ -68,71 +68,71 @@
     <material name="tag_material_04" texture="tag_texture_04" specular="0" shininess="0"/>
     <material name="tag_material_06" texture="tag_texture_06" specular="0" shininess="0"/>
     <material name="tag_material_00" texture="tag_texture_00" specular="0" shininess="0"/>
-    <mesh name="mesh_780_body1" content_type="model/obj" file="meshes/780_body1.obj"/>
-    <mesh name="mesh_780_body2" content_type="model/obj" file="meshes/780_body2.obj"/>
-    <mesh name="mesh_780_plateholder1" content_type="model/obj" file="meshes/780_plateholder1.obj"/>
-    <mesh name="mesh_780_plateholder2" content_type="model/obj" file="meshes/780_plateholder2.obj"/>
-    <mesh name="mesh_780_plateholder3" content_type="model/obj" file="meshes/780_plateholder3.obj"/>
-    <mesh name="mesh_780_plateholder4" content_type="model/obj" file="meshes/780_plateholder4.obj"/>
-    <mesh name="mesh_Cylinder" content_type="model/obj" file="meshes/Cylinder.obj"/>
-    <mesh name="mesh_NGS_body1" content_type="model/obj" file="meshes/NGS_body1.obj"/>
-    <mesh name="mesh_NGS_body2" content_type="model/obj" file="meshes/NGS_body2.obj"/>
-    <mesh name="mesh_NGS_body3" content_type="model/obj" file="meshes/NGS_body3.obj"/>
-    <mesh name="mesh_NGS_cartridge1" content_type="model/obj" file="meshes/NGS_cartridge1.obj"/>
-    <mesh name="mesh_NGS_cartridge2" content_type="model/obj" file="meshes/NGS_cartridge2.obj"/>
-    <mesh name="mesh_NGS_cartridge_button1" content_type="model/obj" file="meshes/NGS_cartridge_button1.obj"/>
-    <mesh name="mesh_NGS_cartridge_button2" content_type="model/obj" file="meshes/NGS_cartridge_button2.obj"/>
-    <mesh name="mesh_NGS_display1" content_type="model/obj" file="meshes/NGS_display1.obj"/>
-    <mesh name="mesh_NGS_display2" content_type="model/obj" file="meshes/NGS_display2.obj"/>
-    <mesh name="mesh_NGS_library1" content_type="model/obj" file="meshes/NGS_library1.obj"/>
-    <mesh name="mesh_NGS_library2" content_type="model/obj" file="meshes/NGS_library2.obj"/>
-    <mesh name="mesh_NGS_rack1" content_type="model/obj" file="meshes/NGS_rack1.obj"/>
-    <mesh name="mesh_NGS_rack2" content_type="model/obj" file="meshes/NGS_rack2.obj"/>
-    <mesh name="mesh_NGS_rack3" content_type="model/obj" file="meshes/NGS_rack3.obj"/>
-    <mesh name="mesh_NGS_rack4" content_type="model/obj" file="meshes/NGS_rack4.obj"/>
-    <mesh name="mesh_platehotel" content_type="model/obj" file="meshes/platehotel.obj"/>
-    <mesh name="mesh_platewell1" content_type="model/obj" file="meshes/platewell1.obj"/>
-    <mesh name="mesh_platewell2" content_type="model/obj" file="meshes/platewell2.obj"/>
-    <mesh name="mesh_platewell3" content_type="model/obj" file="meshes/platewell3.obj"/>
-    <mesh name="mesh_platewell4" content_type="model/obj" file="meshes/platewell4.obj"/>
-    <mesh name="mesh_rail" content_type="model/obj" file="meshes/rail.obj"/>
-    <mesh name="mesh_reader_body1" content_type="model/obj" file="meshes/reader_body1.obj"/>
-    <mesh name="mesh_reader_body2" content_type="model/obj" file="meshes/reader_body2.obj"/>
-    <mesh name="mesh_reader_plateholder" content_type="model/obj" file="meshes/reader_plateholder.obj"/>
-    <mesh name="mesh_SH800_body1" content_type="model/obj" file="meshes/SH800_body1.obj"/>
-    <mesh name="mesh_SH800_body2" content_type="model/obj" file="meshes/SH800_body2.obj"/>
-    <mesh name="mesh_SH800_body3" content_type="model/obj" file="meshes/SH800_body3.obj"/>
-    <mesh name="mesh_slide" content_type="model/obj" file="meshes/slide.obj"/>
-    <mesh name="mesh_stx44_body1" content_type="model/obj" file="meshes/stx44_body1.obj"/>
-    <mesh name="mesh_stx44_plateholder" content_type="model/obj" file="meshes/stx44_plateholder.obj"/>
-    <mesh name="mesh_table" content_type="model/obj" file="meshes/table.obj"/>
-    <mesh name="mesh_tube1" content_type="model/obj" file="meshes/tube1.obj"/>
-    <mesh name="mesh_tube2" content_type="model/obj" file="meshes/tube2.obj"/>
-    <mesh name="mesh_tube3" content_type="model/obj" file="meshes/tube3.obj"/>
-    <mesh name="mesh_tube4" content_type="model/obj" file="meshes/tube4.obj"/>
-    <mesh name="mesh_tubehotel" content_type="model/obj" file="meshes/tubehotel.obj"/>
-    <mesh name="mesh_waste" content_type="model/obj" file="meshes/waste.obj"/>
-    <mesh name="ur5e_base_0" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/base_0.obj"/>
-    <mesh name="ur5e_base_1" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/base_1.obj"/>
-    <mesh name="ur5e_shoulder_0" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/shoulder_0.obj"/>
-    <mesh name="ur5e_shoulder_1" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/shoulder_1.obj"/>
-    <mesh name="ur5e_shoulder_2" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/shoulder_2.obj"/>
-    <mesh name="ur5e_upperarm_0" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_0.obj"/>
-    <mesh name="ur5e_upperarm_1" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_1.obj"/>
-    <mesh name="ur5e_upperarm_2" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_2.obj"/>
-    <mesh name="ur5e_upperarm_3" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/upperarm_3.obj"/>
-    <mesh name="ur5e_forearm_0" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_0.obj"/>
-    <mesh name="ur5e_forearm_1" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_1.obj"/>
-    <mesh name="ur5e_forearm_2" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_2.obj"/>
-    <mesh name="ur5e_forearm_3" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/forearm_3.obj"/>
-    <mesh name="ur5e_wrist1_0" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist1_0.obj"/>
-    <mesh name="ur5e_wrist1_1" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist1_1.obj"/>
-    <mesh name="ur5e_wrist1_2" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist1_2.obj"/>
-    <mesh name="ur5e_wrist2_0" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist2_0.obj"/>
-    <mesh name="ur5e_wrist2_1" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist2_1.obj"/>
-    <mesh name="ur5e_wrist2_2" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist2_2.obj"/>
-    <mesh name="ur5e_wrist3" content_type="model/obj" file="../mujoco_menagerie/universal_robots_ur5e/assets/wrist3.obj"/>
-    <mesh name="ur5e_onrobot_rg2_official_mesh" content_type="model/obj" file="../rg2_official_assets/onrobot_rg2_official.obj"/>
+    <mesh name="mesh_780_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_body1.obj"/>
+    <mesh name="mesh_780_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_body2.obj"/>
+    <mesh name="mesh_780_plateholder1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder1.obj"/>
+    <mesh name="mesh_780_plateholder2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder2.obj"/>
+    <mesh name="mesh_780_plateholder3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder3.obj"/>
+    <mesh name="mesh_780_plateholder4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder4.obj"/>
+    <mesh name="mesh_Cylinder" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/Cylinder.obj"/>
+    <mesh name="mesh_NGS_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_body1.obj"/>
+    <mesh name="mesh_NGS_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_body2.obj"/>
+    <mesh name="mesh_NGS_body3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_body3.obj"/>
+    <mesh name="mesh_NGS_cartridge1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge1.obj"/>
+    <mesh name="mesh_NGS_cartridge2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge2.obj"/>
+    <mesh name="mesh_NGS_cartridge_button1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge_button1.obj"/>
+    <mesh name="mesh_NGS_cartridge_button2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge_button2.obj"/>
+    <mesh name="mesh_NGS_display1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_display1.obj"/>
+    <mesh name="mesh_NGS_display2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_display2.obj"/>
+    <mesh name="mesh_NGS_library1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_library1.obj"/>
+    <mesh name="mesh_NGS_library2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_library2.obj"/>
+    <mesh name="mesh_NGS_rack1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack1.obj"/>
+    <mesh name="mesh_NGS_rack2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack2.obj"/>
+    <mesh name="mesh_NGS_rack3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack3.obj"/>
+    <mesh name="mesh_NGS_rack4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack4.obj"/>
+    <mesh name="mesh_platehotel" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platehotel.obj"/>
+    <mesh name="mesh_platewell1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell1.obj"/>
+    <mesh name="mesh_platewell2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell2.obj"/>
+    <mesh name="mesh_platewell3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell3.obj"/>
+    <mesh name="mesh_platewell4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell4.obj"/>
+    <mesh name="mesh_rail" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/rail.obj"/>
+    <mesh name="mesh_reader_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/reader_body1.obj"/>
+    <mesh name="mesh_reader_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/reader_body2.obj"/>
+    <mesh name="mesh_reader_plateholder" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/reader_plateholder.obj"/>
+    <mesh name="mesh_SH800_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/SH800_body1.obj"/>
+    <mesh name="mesh_SH800_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/SH800_body2.obj"/>
+    <mesh name="mesh_SH800_body3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/SH800_body3.obj"/>
+    <mesh name="mesh_slide" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/slide.obj"/>
+    <mesh name="mesh_stx44_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/stx44_body1.obj"/>
+    <mesh name="mesh_stx44_plateholder" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/stx44_plateholder.obj"/>
+    <mesh name="mesh_table" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/table.obj"/>
+    <mesh name="mesh_tube1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube1.obj"/>
+    <mesh name="mesh_tube2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube2.obj"/>
+    <mesh name="mesh_tube3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube3.obj"/>
+    <mesh name="mesh_tube4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube4.obj"/>
+    <mesh name="mesh_tubehotel" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tubehotel.obj"/>
+    <mesh name="mesh_waste" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/waste.obj"/>
+    <mesh name="ur5e_base_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/base_0.obj"/>
+    <mesh name="ur5e_base_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/base_1.obj"/>
+    <mesh name="ur5e_shoulder_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/shoulder_0.obj"/>
+    <mesh name="ur5e_shoulder_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/shoulder_1.obj"/>
+    <mesh name="ur5e_shoulder_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/shoulder_2.obj"/>
+    <mesh name="ur5e_upperarm_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_0.obj"/>
+    <mesh name="ur5e_upperarm_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_1.obj"/>
+    <mesh name="ur5e_upperarm_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_2.obj"/>
+    <mesh name="ur5e_upperarm_3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_3.obj"/>
+    <mesh name="ur5e_forearm_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_0.obj"/>
+    <mesh name="ur5e_forearm_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_1.obj"/>
+    <mesh name="ur5e_forearm_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_2.obj"/>
+    <mesh name="ur5e_forearm_3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_3.obj"/>
+    <mesh name="ur5e_wrist1_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist1_0.obj"/>
+    <mesh name="ur5e_wrist1_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist1_1.obj"/>
+    <mesh name="ur5e_wrist1_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist1_2.obj"/>
+    <mesh name="ur5e_wrist2_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist2_0.obj"/>
+    <mesh name="ur5e_wrist2_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist2_1.obj"/>
+    <mesh name="ur5e_wrist2_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist2_2.obj"/>
+    <mesh name="ur5e_wrist3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist3.obj"/>
+    <mesh name="ur5e_onrobot_rg2_official_mesh" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/rg2_official_assets/onrobot_rg2_official.obj"/>
     <mesh name="fixture_fluent_plate_far_left_end_mesh" vertex="0 -0.01 0 0.004 -0.01 0 0.004 -0.01 0.004 0.0025 -0.01 0.004 0 -0.01 0.0015 0 0.01 0 0.004 0.01 0 0.004 0.01 0.004 0.0025 0.01 0.004 0 0.01 0.0015"/>
     <mesh name="fixture_fluent_plate_far_left_side_mesh" vertex="0 -0.01 0 0.004 -0.01 0 0.004 -0.01 0.004 0.0025 -0.01 0.004 0 -0.01 0.0015 0 0.01 0 0.004 0.01 0 0.004 0.01 0.004 0.0025 0.01 0.004 0 0.01 0.0015"/>
     <mesh name="fixture_fluent_plate_mid_left_mesh" vertex="0 -0.01 0 0.004 -0.01 0 0.004 -0.01 0.004 0.0025 -0.01 0.004 0 -0.01 0.0015 0 0.01 0 0.004 0.01 0 0.004 0.01 0.004 0.0025 0.01 0.004 0 0.01 0.0015"/>
@@ -572,7 +572,7 @@
       <geom name="proxy_plate_hotel_4_pad" size="0.0395 0.0605 0.002" pos="0.870773 0.1165 0.608" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.72 0.56 0.08 1"/>
       <geom name="proxy_plate_hotel_3_pad" size="0.0395 0.0605 0.002" pos="0.870773 0.1165 0.573" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.72 0.56 0.08 1"/>
       <geom name="proxy_fluent_plate_pad" size="0.0395 0.0605 0.002" pos="0.445 0.264 0.563" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
-      <geom name="proxy_incubator_plate_pad" size="0.0605 0.0395 0.002" pos="1.144 0.9915 0.688" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
+      <geom name="proxy_incubator_plate_pad" size="0.0605 0.0395 0.002" pos="1.064 0.9915 0.688" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
       <geom name="proxy_reader_plate_pad" size="0.0395 0.0605 0.002" pos="0.124 1.655 0.548" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
       <geom name="proxy_sorter_left_plate_pad" size="0.0395 0.0605 0.002" pos="0.36575 1.829 0.552" type="box" contype="2" condim="4" group="5" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.95 0.55 0.1 0.35"/>
       <geom name="proxy_tube_hotel_1_seat" size="0.011 0.011 0.002" pos="0.7 0.17 0.508" type="box" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.82 0.1 0.1 1"/>
@@ -610,8 +610,8 @@
     <body name="vision_markers_v8">
       <geom name="vision_marker_01" size="0.0234 0.0234 0.0003" pos="0.445 0.4008 0.5303" quat="0 0 0.707107 0.707107" type="box" material="tag_material_01"/>
       <geom name="vision_marker_07" size="0.026 0.026 0.0003" pos="0.435 0.0408 0.6453" quat="0 0 0.707107 0.707107" type="box" material="tag_material_07"/>
-      <geom name="vision_marker_02" size="0.0195 0.0195 0.0003" pos="1.3092 0.9465 0.8503" quat="-0.5 -0.5 0.5 0.5" type="box" material="tag_material_02"/>
-      <geom name="vision_marker_05" size="0.0195 0.0195 0.0003" pos="1.3092 1.0365 0.8503" quat="-0.5 -0.5 0.5 0.5" type="box" material="tag_material_05"/>
+      <geom name="vision_marker_02" size="0.0195 0.0195 0.0003" pos="1.2292 0.9465 0.8503" quat="-0.5 -0.5 0.5 0.5" type="box" material="tag_material_02"/>
+      <geom name="vision_marker_05" size="0.0195 0.0195 0.0003" pos="1.2292 1.0365 0.8503" quat="-0.5 -0.5 0.5 0.5" type="box" material="tag_material_05"/>
       <geom name="vision_marker_03" size="0.026 0.026 0.0003" pos="0.124 1.7292 0.6503" quat="0.707107 0.707107 0 0" type="box" material="tag_material_03"/>
       <geom name="vision_marker_04" size="0.01625 0.01625 0.0003" pos="0.45075 1.7242 0.7193" quat="0.707107 0.707107 0 0" type="box" material="tag_material_04"/>
       <geom name="vision_marker_06" size="0.0195 0.0195 0.0003" pos="0.34575 1.7942 0.7043" quat="0.707107 0.707107 0 0" type="box" material="tag_material_06"/>
@@ -625,13 +625,13 @@
       <geom name="fixture_fluent_plate_far_right_side" pos="0.40175 0.2105 0.565" quat="0 0 0 1" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_fluent_plate_far_right_side_mesh"/>
       <geom name="fixture_fluent_plate_mid_right" pos="0.40175 0.259 0.565" quat="0 0 0 1" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_fluent_plate_mid_right_mesh"/>
       <geom name="fixture_fluent_plate_near_center" pos="0.445 0.32825 0.565" quat="0.707107 0 0 0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_fluent_plate_near_center_mesh"/>
-      <geom name="fixture_incubator_plate_far_left_end" pos="1.20825 1.024 0.69" quat="1 0 0 0" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_left_end_mesh"/>
-      <geom name="fixture_incubator_plate_far_left_side" pos="1.1975 1.03475 0.69" quat="0.707107 0 0 0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_left_side_mesh"/>
-      <geom name="fixture_incubator_plate_mid_left" pos="1.149 1.03475 0.69" quat="0.707107 0 0 0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_mid_left_mesh"/>
-      <geom name="fixture_incubator_plate_far_right_end" pos="1.20825 0.959 0.69" quat="1 0 0 0" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_right_end_mesh"/>
-      <geom name="fixture_incubator_plate_far_right_side" pos="1.1975 0.94825 0.69" quat="0.707107 0 0 -0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_right_side_mesh"/>
-      <geom name="fixture_incubator_plate_mid_right" pos="1.149 0.94825 0.69" quat="0.707107 0 0 -0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_mid_right_mesh"/>
-      <geom name="fixture_incubator_plate_near_center" pos="1.07975 0.9915 0.69" quat="0 0 0 1" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_near_center_mesh"/>
+      <geom name="fixture_incubator_plate_far_left_end" pos="1.12825 1.024 0.69" quat="1 0 0 0" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_left_end_mesh"/>
+      <geom name="fixture_incubator_plate_far_left_side" pos="1.1175 1.03475 0.69" quat="0.707107 0 0 0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_left_side_mesh"/>
+      <geom name="fixture_incubator_plate_mid_left" pos="1.069 1.03475 0.69" quat="0.707107 0 0 0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_mid_left_mesh"/>
+      <geom name="fixture_incubator_plate_far_right_end" pos="1.12825 0.959 0.69" quat="1 0 0 0" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_right_end_mesh"/>
+      <geom name="fixture_incubator_plate_far_right_side" pos="1.1175 0.94825 0.69" quat="0.707107 0 0 -0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_far_right_side_mesh"/>
+      <geom name="fixture_incubator_plate_mid_right" pos="1.069 0.94825 0.69" quat="0.707107 0 0 -0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_mid_right_mesh"/>
+      <geom name="fixture_incubator_plate_near_center" pos="0.999751 0.9915 0.69" quat="0 0 0 1" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_incubator_plate_near_center_mesh"/>
       <geom name="fixture_reader_plate_far_left_end" pos="0.0915 1.71925 0.55" quat="0.707107 0 0 0.707107" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_reader_plate_far_left_end_mesh"/>
       <geom name="fixture_reader_plate_far_left_side" pos="0.08075 1.7085 0.55" quat="0 0 0 1" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_reader_plate_far_left_side_mesh"/>
       <geom name="fixture_reader_plate_mid_left" pos="0.08075 1.66 0.55" quat="0 0 0 1" type="mesh" contype="2" condim="4" group="4" friction="0.8 0.01 0.001" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.62 0.48 0.06 1" mesh="fixture_reader_plate_mid_left_mesh"/>

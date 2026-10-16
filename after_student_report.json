@@ -1,0 +1,96 @@
+{
+  "baseline": {
+    "fluent_plate": {
+      "success": 0.68,
+      "force_N": 11.666720774180932,
+      "release_mm": 0.6263267853623056,
+      "xy_mm": 0.7164436472227713,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.22,
+      "force_N": 25.4744901128552,
+      "release_mm": 2.136933147697882,
+      "xy_mm": 3.080564133674357,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.58,
+      "force_N": 12.548130035480224,
+      "release_mm": 0.8054390423332913,
+      "xy_mm": 0.7818403325730333,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.76,
+      "force_N": 16.82823322290612,
+      "release_mm": 0.5274991301691422,
+      "xy_mm": 0.9314976364607329,
+      "jams": 0
+    },
+    "OVERALL": 0.56
+  },
+  "student": {
+    "fluent_plate": {
+      "success": 1.0,
+      "force_N": 7.291917152438389,
+      "release_mm": 0.25832680690789805,
+      "xy_mm": 0.5525677239373168,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.76,
+      "force_N": 24.76409000954105,
+      "release_mm": 0.8533806588438985,
+      "xy_mm": 1.070073927452916,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 1.0,
+      "force_N": 7.64614827220219,
+      "release_mm": 0.2660871051392921,
+      "xy_mm": 0.5617820815299159,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.98,
+      "force_N": 9.069412324877911,
+      "release_mm": 0.32318569315224815,
+      "xy_mm": 0.5334062969089153,
+      "jams": 0
+    },
+    "OVERALL": 0.9349999999999999
+  },
+  "student_blind": {
+    "fluent_plate": {
+      "success": 0.08,
+      "force_N": 12.584259797337976,
+      "release_mm": 1.977955283637616,
+      "xy_mm": 1.446967535203771,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.18,
+      "force_N": 78.5993397030006,
+      "release_mm": 2.701094060009414,
+      "xy_mm": 4.563078838123664,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.02,
+      "force_N": 18.322996488229506,
+      "release_mm": 2.0584218085132893,
+      "xy_mm": 1.552227021968601,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.32,
+      "force_N": 76.85756142787599,
+      "release_mm": 1.900951849687371,
+      "xy_mm": 1.4805334796130092,
+      "jams": 0
+    },
+    "OVERALL": 0.15000000000000002
+  },
+  "image_contribution": 0.7849999999999999
+}

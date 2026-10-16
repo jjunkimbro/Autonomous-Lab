@@ -1,38 +1,26 @@
 [
   {
-    "scenario": "route_a",
+    "scenario": "both_shift",
     "mode": "vision",
     "status": "DONE",
     "injected": {
-      "plate_hotel": [
-        3.0,
-        -2.0,
-        0.0,
-        -1.0
-      ],
       "fluent_plate": [
         -4.0,
-        3.0,
+        4.0,
         1.0,
-        1.5
-      ],
-      "incubator_plate": [
-        4.0,
-        4.0,
-        -1.0,
         -2.0
       ],
-      "reader_plate": [
-        -3.0,
-        -4.0,
-        1.0,
-        2.0
+      "plate_hotel": [
+        4.0,
+        2.0,
+        0.0,
+        1.5
       ]
     },
     "ground_truth": {
-      "xy_error_mm": 1.07,
+      "xy_error_mm": 0.86,
       "z_error_mm": -0.0,
-      "yaw_error_deg": 0.12,
+      "yaw_error_deg": 0.09,
       "tilt_deg": 0.0
     },
     "transfers": [
@@ -42,66 +30,15 @@
         "to": "fluent_plate",
         "status": "DONE",
         "ground_truth": {
-          "xy_error_mm": 0.9,
+          "xy_error_mm": 0.86,
           "z_error_mm": -0.0,
-          "yaw_error_deg": 0.11,
+          "yaw_error_deg": 0.09,
           "tilt_deg": 0.0
         },
         "measured": [
-          -0.99,
-          0.27,
-          0.06
-        ]
-      },
-      {
-        "object": "plate_a",
-        "from": "fluent_plate",
-        "to": "incubator_plate",
-        "status": "DONE",
-        "ground_truth": {
-          "xy_error_mm": 0.66,
-          "z_error_mm": -0.0,
-          "yaw_error_deg": 0.19,
-          "tilt_deg": 0.0
-        },
-        "measured": [
-          0.17,
-          -0.01,
-          0.8
-        ]
-      },
-      {
-        "object": "plate_a",
-        "from": "incubator_plate",
-        "to": "reader_plate",
-        "status": "DONE",
-        "ground_truth": {
-          "xy_error_mm": 0.79,
-          "z_error_mm": -0.0,
-          "yaw_error_deg": -0.13,
-          "tilt_deg": 0.0
-        },
-        "measured": [
-          0.71,
-          0.02,
-          -0.03
-        ]
-      },
-      {
-        "object": "plate_a",
-        "from": "reader_plate",
-        "to": "fluent_plate",
-        "status": "DONE",
-        "ground_truth": {
-          "xy_error_mm": 1.07,
-          "z_error_mm": -0.0,
-          "yaw_error_deg": 0.12,
-          "tilt_deg": 0.0
-        },
-        "measured": [
-          1.0,
-          0.28,
-          0.29
+          0.7,
+          0.26,
+          -0.07
         ]
       }
     ],
@@ -123,15 +60,15 @@
         "input": {
           "marker": true,
           "delta_mm_deg": [
-            -3.96,
-            3.01,
+            -3.98,
+            3.98,
             1.01,
-            1.52
+            -2.0
           ],
           "sigma_mm_deg": [
             0.001,
-            0.003,
-            0.001,
+            0.009,
+            0.008,
             0.0
           ],
           "occupancy": "EMPTY",
@@ -150,19 +87,19 @@
         "input": {
           "marker": true,
           "delta_mm_deg": [
-            3.12,
-            -3.37,
-            -0.56,
-            -1.13
+            3.79,
+            2.21,
+            0.02,
+            1.4
           ],
           "sigma_mm_deg": [
-            0.004,
-            0.062,
-            0.025,
-            0.021
+            0.013,
+            0.043,
+            0.018,
+            0.026
           ],
           "occupancy": "OCCUPIED",
-          "visible": 0.906,
+          "visible": 0.917,
           "transit": {
             "order": "simultaneous",
             "clearance_mm": 50.0
@@ -176,10 +113,10 @@
         "step": "STEP4 feasibility",
         "input": {
           "delta_mm_deg": [
-            3.12,
-            -3.37,
-            -0.56,
-            -1.13
+            3.79,
+            2.21,
+            0.02,
+            1.4
           ]
         },
         "judgment": "grasp feasible",
@@ -193,10 +130,10 @@
           "collision_ok": true,
           "clearance": {
             "ok": true,
-            "margin": 0.0014401537152916991,
-            "strict_min_m": 0.0333,
+            "margin": 0.002019613864839521,
+            "strict_min_m": 0.0415,
             "strict_worst": "onrobot_rg2_model_frame/visual_waste",
-            "fingertip_support_min_m": 0.0024
+            "fingertip_support_min_m": 0.003
           },
           "j5_deg": 90.0,
           "transit": {
@@ -216,385 +153,31 @@
         },
         "judgment": "carried in tucked posture",
         "output": "at fluent_plate loaded observation pose",
-        "sim_time_s": 22.38
+        "sim_time_s": 22.19
       },
       {
         "step": "STEP7 re-check",
         "input": {
           "marker": true,
           "delta_mm_deg": [
-            -0.33,
-            7.29,
-            1.89,
-            0.45
+            0.45,
+            6.46,
+            1.74,
+            -3.19
           ],
           "sigma_mm_deg": [
-            1.227,
-            0.304,
-            0.079,
-            0.32
+            0.801,
+            0.234,
+            0.069,
+            0.208
           ],
           "occupancy": "EMPTY",
-          "visible": 0.615,
-          "marker_displacement_mm": 0.28
-        },
-        "judgment": "consistent with STEP2 (marker moved 0.3 mm)",
-        "output": "place",
-        "sim_time_s": 22.38
-      },
-      {
-        "step": "STEP8 place",
-        "input": {
-          "collision_ok": true
-        },
-        "judgment": "released",
-        "output": "retreat to PRE",
-        "sim_time_s": 33.92
-      },
-      {
-        "step": "STEP9 verify",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            -3.98,
-            3.02,
-            1.02,
-            1.53
-          ],
-          "sigma_mm_deg": [
-            0.003,
-            0.002,
-            0.001,
-            0.001
-          ],
-          "occupancy": "OCCUPIED",
-          "visible": 0.906,
-          "plate_offset_mm_deg": [
-            -0.99,
-            0.27,
-            0.06
-          ]
-        },
-        "judgment": "plate offset 1.0 mm, yaw +0.1 deg (within tolerance)",
-        "output": "DONE",
-        "sim_time_s": 37.87
-      },
-      {
-        "step": "STEP1 command",
-        "input": {
-          "object": "plate_a",
-          "from": "fluent_plate",
-          "to": "incubator_plate",
-          "attempt": 0
-        },
-        "judgment": "accepted",
-        "output": "plan transfer",
-        "sim_time_s": 37.87
-      },
-      {
-        "step": "STEP2 destination",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            4.27,
-            3.57,
-            -0.84,
-            -1.85
-          ],
-          "sigma_mm_deg": [
-            0.03,
-            0.004,
-            0.009,
-            0.001
-          ],
-          "occupancy": "EMPTY",
-          "visible": 0.396,
-          "transit": {
-            "order": "simultaneous",
-            "clearance_mm": 50.0
-          }
-        },
-        "judgment": "empty, pose measured",
-        "output": "reserved incubator_plate for plate_a",
-        "sim_time_s": 43.22
-      },
-      {
-        "step": "STEP3 source",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            -3.98,
-            3.03,
-            1.02,
-            1.52
-          ],
-          "sigma_mm_deg": [
-            0.004,
-            0.001,
-            0.001,
-            0.001
-          ],
-          "occupancy": "OCCUPIED",
-          "visible": 0.948,
-          "plate_offset_mm": [
-            -0.8,
-            0.21
-          ],
-          "transit": {
-            "order": "simultaneous",
-            "clearance_mm": 50.0
-          }
-        },
-        "judgment": "slot occupancy OCCUPIED",
-        "output": "source pose measured",
-        "sim_time_s": 48.57
-      },
-      {
-        "step": "STEP4 feasibility",
-        "input": {
-          "delta_mm_deg": [
-            -3.98,
-            3.03,
-            1.02,
-            1.52
-          ]
-        },
-        "judgment": "grasp feasible",
-        "output": "pick with correction",
-        "sim_time_s": 48.57
-      },
-      {
-        "step": "STEP5 pick",
-        "input": {
-          "finger_half_width_mm": 42.5,
-          "collision_ok": true,
-          "clearance": {
-            "ok": true,
-            "margin": 0.0030308131152266887,
-            "strict_min_m": 0.0188,
-            "strict_worst": "onrobot_rg2_model_frame/visual_780_body1",
-            "fingertip_support_min_m": 0.004
-          },
-          "j5_deg": 90.0,
-          "transit": {
-            "order": "simultaneous",
-            "clearance_mm": 50.0
-          }
-        },
-        "judgment": "plate held",
-        "output": "extracted to PRE_LOADED",
-        "sim_time_s": 58.89
-      },
-      {
-        "step": "STEP6 transport",
-        "input": {
-          "order": "simultaneous",
-          "clearance_mm": 50.0
-        },
-        "judgment": "carried in tucked posture",
-        "output": "at incubator_plate loaded observation pose",
-        "sim_time_s": 63.7
-      },
-      {
-        "step": "STEP7 re-check",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            4.73,
-            4.66,
-            -1.21,
-            -2.27
-          ],
-          "sigma_mm_deg": [
-            0.066,
-            0.011,
-            0.023,
-            0.005
-          ],
-          "occupancy": "EMPTY",
-          "visible": 0.312,
-          "marker_displacement_mm": 0.31
-        },
-        "judgment": "consistent with STEP2 (marker moved 0.3 mm)",
-        "output": "place",
-        "sim_time_s": 63.7
-      },
-      {
-        "step": "STEP8 place",
-        "input": {
-          "collision_ok": true
-        },
-        "judgment": "released",
-        "output": "retreat to PRE",
-        "sim_time_s": 73.35
-      },
-      {
-        "step": "STEP9 verify",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            4.3,
-            3.57,
-            -0.85,
-            -1.85
-          ],
-          "sigma_mm_deg": [
-            0.022,
-            0.003,
-            0.006,
-            0.001
-          ],
-          "occupancy": "OCCUPIED",
-          "visible": 0.979,
-          "plate_offset_mm_deg": [
-            0.17,
-            -0.01,
-            0.8
-          ]
-        },
-        "judgment": "plate offset 0.2 mm, yaw +0.8 deg (within tolerance)",
-        "output": "DONE",
-        "sim_time_s": 77.57
-      },
-      {
-        "step": "STEP1 command",
-        "input": {
-          "object": "plate_a",
-          "from": "incubator_plate",
-          "to": "reader_plate",
-          "attempt": 0
-        },
-        "judgment": "accepted",
-        "output": "plan transfer",
-        "sim_time_s": 77.57
-      },
-      {
-        "step": "STEP2 destination",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            -3.18,
-            -3.93,
-            1.1,
-            1.86
-          ],
-          "sigma_mm_deg": [
-            0.046,
-            0.024,
-            0.008,
-            0.035
-          ],
-          "occupancy": "EMPTY",
-          "visible": 0.99,
-          "transit": {
-            "order": "simultaneous",
-            "clearance_mm": 50.0
-          }
-        },
-        "judgment": "empty, pose measured",
-        "output": "reserved reader_plate for plate_a",
-        "sim_time_s": 83.6
-      },
-      {
-        "step": "STEP3 source",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            4.33,
-            3.57,
-            -0.86,
-            -1.85
-          ],
-          "sigma_mm_deg": [
-            0.023,
-            0.003,
-            0.007,
-            0.0
-          ],
-          "occupancy": "OCCUPIED",
-          "visible": 0.99,
-          "plate_offset_mm": [
-            0.19,
-            0.01
-          ],
-          "transit": {
-            "order": "simultaneous",
-            "clearance_mm": 50.0
-          }
-        },
-        "judgment": "slot occupancy OCCUPIED",
-        "output": "source pose measured",
-        "sim_time_s": 89.63
-      },
-      {
-        "step": "STEP4 feasibility",
-        "input": {
-          "delta_mm_deg": [
-            4.33,
-            3.57,
-            -0.86,
-            -1.85
-          ]
-        },
-        "judgment": "grasp feasible",
-        "output": "pick with correction",
-        "sim_time_s": 89.63
-      },
-      {
-        "step": "STEP5 pick",
-        "input": {
-          "finger_half_width_mm": 42.5,
-          "collision_ok": true,
-          "clearance": {
-            "ok": true,
-            "margin": 0.0011435768622452334,
-            "strict_min_m": 0.0118,
-            "strict_worst": "onrobot_rg2_model_frame/visual_stx44_plateholder",
-            "fingertip_support_min_m": 0.0021
-          },
-          "j5_deg": 75.0,
-          "transit": {
-            "order": "simultaneous",
-            "clearance_mm": 50.0
-          }
-        },
-        "judgment": "plate held",
-        "output": "extracted to PRE_LOADED",
-        "sim_time_s": 97.95
-      },
-      {
-        "step": "STEP6 transport",
-        "input": {
-          "order": "simultaneous",
-          "clearance_mm": 50.0
-        },
-        "judgment": "carried in tucked posture",
-        "output": "at reader_plate loaded observation pose",
-        "sim_time_s": 103.36
-      },
-      {
-        "step": "STEP7 re-check",
-        "input": {
-          "marker": true,
-          "delta_mm_deg": [
-            -2.87,
-            -4.21,
-            1.27,
-            2.09
-          ],
-          "sigma_mm_deg": [
-            0.139,
-            0.083,
-            0.033,
-            0.112
-          ],
-          "occupancy": "EMPTY",
-          "visible": 0.521,
+          "visible": 0.635,
           "marker_displacement_mm": 0.08
         },
         "judgment": "consistent with STEP2 (marker moved 0.1 mm)",
         "output": "place",
-        "sim_time_s": 103.36
+        "sim_time_s": 22.19
       },
       {
         "step": "STEP8 place",
@@ -603,47 +186,94 @@
         },
         "judgment": "released",
         "output": "retreat to PRE",
-        "sim_time_s": 112.81
+        "sim_time_s": 33.89
       },
       {
         "step": "STEP9 verify",
         "input": {
           "marker": true,
           "delta_mm_deg": [
-            -3.26,
-            -3.97,
-            1.12,
-            1.79
+            -3.99,
+            3.98,
+            1.01,
+            -2.0
           ],
           "sigma_mm_deg": [
-            0.009,
-            0.019,
-            0.007,
-            0.007
+            0.002,
+            0.01,
+            0.01,
+            0.001
           ],
           "occupancy": "OCCUPIED",
-          "visible": 0.969,
+          "visible": 0.896,
           "plate_offset_mm_deg": [
-            0.71,
-            0.02,
-            -0.03
+            0.7,
+            0.26,
+            -0.07
           ]
         },
-        "judgment": "plate offset 0.7 mm, yaw -0.0 deg (within tolerance)",
+        "judgment": "plate offset 0.7 mm, yaw -0.1 deg (within tolerance)",
         "output": "DONE",
-        "sim_time_s": 116.92
-      },
+        "sim_time_s": 37.83
+      }
+    ],
+    "sim_time_s": 37.8
+  },
+  {
+    "scenario": "both_shift",
+    "mode": "open_loop",
+    "status": "FAILED_PLACEMENT",
+    "injected": {
+      "fluent_plate": [
+        -4.0,
+        4.0,
+        1.0,
+        -2.0
+      ],
+      "plate_hotel": [
+        4.0,
+        2.0,
+        0.0,
+        1.5
+      ]
+    },
+    "ground_truth": {
+      "xy_error_mm": 6.55,
+      "z_error_mm": -0.0,
+      "yaw_error_deg": 3.96,
+      "tilt_deg": 0.0
+    },
+    "transfers": [
+      {
+        "object": "plate_a",
+        "from": "plate_hotel_4",
+        "to": "fluent_plate",
+        "status": "FAILED_PLACEMENT",
+        "ground_truth": {
+          "xy_error_mm": 6.55,
+          "z_error_mm": -0.0,
+          "yaw_error_deg": 3.96,
+          "tilt_deg": 0.0
+        },
+        "measured": [
+          1.69,
+          4.6,
+          4.03
+        ]
+      }
+    ],
+    "log": [
       {
         "step": "STEP1 command",
         "input": {
           "object": "plate_a",
-          "from": "reader_plate",
+          "from": "plate_hotel_4",
           "to": "fluent_plate",
           "attempt": 0
         },
         "judgment": "accepted",
         "output": "plan transfer",
-        "sim_time_s": 116.92
+        "sim_time_s": 0.0
       },
       {
         "step": "STEP2 destination",
@@ -651,15 +281,15 @@
           "marker": true,
           "delta_mm_deg": [
             -3.98,
-            3.03,
-            1.02,
-            1.52
+            3.98,
+            1.01,
+            -2.0
           ],
           "sigma_mm_deg": [
-            0.005,
-            0.004,
-            0.004,
-            0.001
+            0.001,
+            0.009,
+            0.008,
+            0.0
           ],
           "occupancy": "EMPTY",
           "visible": 1.0,
@@ -668,66 +298,55 @@
             "clearance_mm": 50.0
           }
         },
-        "judgment": "empty, pose measured",
+        "judgment": "open-loop (no vision)",
         "output": "reserved fluent_plate for plate_a",
-        "sim_time_s": 124.51
+        "sim_time_s": 2.49
       },
       {
         "step": "STEP3 source",
         "input": {
           "marker": true,
           "delta_mm_deg": [
-            -3.26,
-            -3.99,
-            1.13,
-            1.79
+            3.79,
+            2.21,
+            0.02,
+            1.4
           ],
           "sigma_mm_deg": [
-            0.022,
-            0.02,
-            0.007,
-            0.017
+            0.013,
+            0.043,
+            0.018,
+            0.026
           ],
           "occupancy": "OCCUPIED",
-          "visible": 0.969,
-          "plate_offset_mm": [
-            0.77,
-            0.05
-          ],
+          "visible": 0.917,
           "transit": {
             "order": "simultaneous",
             "clearance_mm": 50.0
           }
         },
-        "judgment": "slot occupancy OCCUPIED",
-        "output": "source pose measured",
-        "sim_time_s": 132.11
+        "judgment": "open-loop (no vision)",
+        "output": "nominal pose",
+        "sim_time_s": 8.38
       },
       {
         "step": "STEP4 feasibility",
-        "input": {
-          "delta_mm_deg": [
-            -3.26,
-            -3.99,
-            1.13,
-            1.79
-          ]
-        },
-        "judgment": "grasp feasible",
-        "output": "pick with correction",
-        "sim_time_s": 132.11
+        "input": {},
+        "judgment": "open-loop (no check)",
+        "output": "pick at nominal waypoints",
+        "sim_time_s": 8.38
       },
       {
         "step": "STEP5 pick",
         "input": {
-          "finger_half_width_mm": 42.5,
+          "finger_half_width_mm": 43.0,
           "collision_ok": true,
           "clearance": {
             "ok": true,
-            "margin": 0.0031280305364086436,
-            "strict_min_m": 0.05,
-            "strict_worst": "-",
-            "fingertip_support_min_m": 0.0041
+            "margin": 0.0020102785915274315,
+            "strict_min_m": 0.041,
+            "strict_worst": "onrobot_rg2_model_frame/visual_waste",
+            "fingertip_support_min_m": 0.003
           },
           "j5_deg": 90.0,
           "transit": {
@@ -737,7 +356,7 @@
         },
         "judgment": "plate held",
         "output": "extracted to PRE_LOADED",
-        "sim_time_s": 140.54
+        "sim_time_s": 16.39
       },
       {
         "step": "STEP6 transport",
@@ -747,31 +366,30 @@
         },
         "judgment": "carried in tucked posture",
         "output": "at fluent_plate loaded observation pose",
-        "sim_time_s": 147.58
+        "sim_time_s": 22.28
       },
       {
         "step": "STEP7 re-check",
         "input": {
           "marker": true,
           "delta_mm_deg": [
-            -1.68,
-            7.23,
-            1.87,
-            0.79
+            1.37,
+            6.35,
+            1.73,
+            -3.43
           ],
           "sigma_mm_deg": [
-            1.047,
-            0.215,
-            0.055,
-            0.272
+            0.642,
+            0.179,
+            0.048,
+            0.165
           ],
           "occupancy": "EMPTY",
-          "visible": 0.604,
-          "marker_displacement_mm": 0.28
+          "visible": 0.635
         },
-        "judgment": "consistent with STEP2 (marker moved 0.3 mm)",
+        "judgment": "open-loop (no re-check)",
         "output": "place",
-        "sim_time_s": 147.58
+        "sim_time_s": 22.28
       },
       {
         "step": "STEP8 place",
@@ -780,37 +398,37 @@
         },
         "judgment": "released",
         "output": "retreat to PRE",
-        "sim_time_s": 159.11
+        "sim_time_s": 33.91
       },
       {
         "step": "STEP9 verify",
         "input": {
           "marker": true,
           "delta_mm_deg": [
-            -3.98,
-            3.02,
-            1.02,
-            1.53
+            -3.99,
+            3.98,
+            1.01,
+            -2.0
           ],
           "sigma_mm_deg": [
-            0.001,
-            0.004,
             0.002,
+            0.01,
+            0.01,
             0.001
           ],
           "occupancy": "OCCUPIED",
-          "visible": 0.917,
+          "visible": 0.969,
           "plate_offset_mm_deg": [
-            1.0,
-            0.28,
-            0.29
+            1.69,
+            4.6,
+            4.03
           ]
         },
-        "judgment": "plate offset 1.0 mm, yaw +0.3 deg (within tolerance)",
-        "output": "DONE",
-        "sim_time_s": 163.07
+        "judgment": "plate offset 4.9 mm, yaw +4.0 deg (out of tolerance)",
+        "output": "ALARM (re-seat plate)",
+        "sim_time_s": 37.87
       }
     ],
-    "sim_time_s": 163.1
+    "sim_time_s": 37.9
   }
 ]

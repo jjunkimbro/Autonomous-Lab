@@ -19,3 +19,27 @@ MUJOCO_LOG.TXT
 mujoco_menagerie/*
 !mujoco_menagerie/LICENSE
 !mujoco_menagerie/universal_robots_ur5e/
+
+# 파이썬 가상환경
+.venv/
+
+# 돌리면서 생기는 콘솔 기록 (스크립트가 커밋돼 있으니 다시 만들 수 있다)
+after_student.txt
+measure_sigma.txt
+plate_sigma.txt
+obs_replan.txt
+obs_loaded_replan.txt
+pick_baseline*.txt
+student_after_fix.txt
+train_teacher_v4.txt
+train_student_v4.txt
+view_search.txt
+vision_reregister*.txt
+
+# 진단용으로 렌더한 그림 (render_incubator_place.py 등으로 다시 만들 수 있다)
+incubator_check.png
+incubator_holder.png
+incubator_place.png
+incubator_viewer.png
+mask_check.png
+obs_view_check.png
