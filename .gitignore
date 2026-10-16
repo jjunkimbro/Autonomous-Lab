@@ -1,5 +1,7 @@
-# 실행 · 학습 결과 (크다, 다시 만들 수 있다)
-rl_runs/
+# 실행 · 학습 결과
+#   rl_runs/ 는 학습된 정책과 평가 기록이라 저장소에 남긴다 (약 38 MB).
+#   _old 는 작업 중 만든 백업 사본이라 뺀다 (옛 지오메트리로 학습돼 못 쓴다).
+rl_runs/place_plate_v9_student_old/
 vision_workflow_frames_v8/
 d405_gripper_backup/
 scale_down_lab/
@@ -22,24 +24,3 @@ mujoco_menagerie/*
 
 # 파이썬 가상환경
 .venv/
-
-# 돌리면서 생기는 콘솔 기록 (스크립트가 커밋돼 있으니 다시 만들 수 있다)
-after_student.txt
-measure_sigma.txt
-plate_sigma.txt
-obs_replan.txt
-obs_loaded_replan.txt
-pick_baseline*.txt
-student_after_fix.txt
-train_teacher_v4.txt
-train_student_v4.txt
-view_search.txt
-vision_reregister*.txt
-
-# 진단용으로 렌더한 그림 (render_incubator_place.py 등으로 다시 만들 수 있다)
-incubator_check.png
-incubator_holder.png
-incubator_place.png
-incubator_viewer.png
-mask_check.png
-obs_view_check.png

@@ -1,0 +1,60 @@
+기다리는 중: train_student_v4.txt 에 'Output :' 가 찍힐 때까지 (최대 180 분)
+학습 완료 확인. 이어서 진행한다.
+
+=== baseline (50 회/장비) ===
+  station                   성공률      접촉력        낙하       xy    끼임
+  fluent_plate             0.68    11.7N    0.63mm    0.72mm     0
+  incubator_plate          0.22    25.5N    2.14mm    3.08mm     0
+  reader_plate             0.58    12.5N    0.81mm    0.78mm     0
+  sorter_left_plate        0.76    16.8N    0.53mm    0.93mm     0
+  OVERALL                  0.56
+
+=== student (50 회/장비) ===
+  station                   성공률      접촉력        낙하       xy    끼임
+  fluent_plate             1.00     7.3N    0.26mm    0.55mm     0
+  incubator_plate          0.76    24.8N    0.85mm    1.07mm     0
+  reader_plate             1.00     7.6N    0.27mm    0.56mm     0
+  sorter_left_plate        0.98     9.1N    0.32mm    0.53mm     0
+  OVERALL                  0.93
+
+=== student_blind (50 회/장비) ===
+  station                   성공률      접촉력        낙하       xy    끼임
+  fluent_plate             0.08    12.6N    1.98mm    1.45mm     0
+  incubator_plate          0.18    78.6N    2.70mm    4.56mm     0
+  reader_plate             0.02    18.3N    2.06mm    1.55mm     0
+  sorter_left_plate        0.32    76.9N    1.90mm    1.48mm     0
+  OVERALL                  0.15
+
+--- 카메라 기여도 ---
+  규칙 기반          0.56
+  student 영상 있음  0.93
+  student 영상 가림  0.15
+  영상 기여도        +0.78
+
+Output : after_student_report.json
+
+시연 영상 (student) ...
+  fluent_plate         ep0  SUCCESS    drop 0.16mm  force    9.7N  xy 0.80mm  (61 frames)
+  fluent_plate         ep1  SUCCESS    drop 0.31mm  force    8.4N  xy 0.39mm  (61 frames)
+  incubator_plate      ep0  SUCCESS    drop 1.51mm  force    7.1N  xy 0.84mm  (61 frames)
+  incubator_plate      ep1  SUCCESS    drop 0.23mm  force    5.5N  xy 0.97mm  (61 frames)
+  reader_plate         ep0  SUCCESS    drop 0.27mm  force    8.2N  xy 0.58mm  (61 frames)
+  reader_plate         ep1  SUCCESS    drop 0.28mm  force    7.2N  xy 0.47mm  (61 frames)
+  sorter_left_plate    ep0  SUCCESS    drop 0.29mm  force    9.4N  xy 0.65mm  (61 frames)
+  sorter_left_plate    ep1  SUCCESS    drop 0.27mm  force    6.9N  xy 0.56mm  (61 frames)
+
+student: 8/8 success
+Output : C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\rl_runs\place_plate_v9_student\demo_student.mp4
+
+시연 영상 (baseline) ...
+  fluent_plate         ep0  NOT SEATED drop 1.43mm  force   10.7N  xy 1.82mm  (61 frames)
+  fluent_plate         ep1  SUCCESS    drop 0.12mm  force   18.1N  xy 0.76mm  (61 frames)
+  incubator_plate      ep0  NOT SEATED drop 3.78mm  force   10.9N  xy 6.62mm  (61 frames)
+  incubator_plate      ep1  SUCCESS    drop 0.75mm  force    8.1N  xy 0.31mm  (61 frames)
+  reader_plate         ep0  SUCCESS    drop 0.52mm  force   14.5N  xy 0.58mm  (61 frames)
+  reader_plate         ep1  SUCCESS    drop 0.00mm  force   12.0N  xy 0.41mm  (61 frames)
+  sorter_left_plate    ep0  SUCCESS    drop 1.83mm  force   10.9N  xy 0.68mm  (61 frames)
+  sorter_left_plate    ep1  SUCCESS    drop 0.00mm  force   11.8N  xy 0.53mm  (61 frames)
+
+baseline: 6/8 success
+Output : C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\rl_runs\place_plate_v9_student\demo_baseline.mp4

@@ -1,0 +1,2 @@
+incubator_plate    offset [-0.16  0.03  0.18]  marker 44 px  visible 1.00  edge 108 px  clearance 50 mm  J5 72  (90 rendered)
+Output : C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\vision_observation_poses_v8.json

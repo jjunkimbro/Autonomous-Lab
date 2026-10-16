@@ -1,0 +1,2 @@
+incubator_plate    offset [-0.22  0.08  0.21]  marker 41 px  edge 126 px  clearance 50 mm  J5 100  (140 rendered)
+Output : C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\vision_observation_loaded_v8.json

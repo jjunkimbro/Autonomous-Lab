@@ -1,0 +1,6 @@
+기존 student (옛 지오메트리 학습) 를 수정된 장면에서 40회씩
+  station                  성공률      접촉력       xy
+  fluent_plate            1.00     7.4N    0.18mm
+  incubator_plate         0.12    37.3N    3.22mm
+  reader_plate            1.00     7.3N    0.23mm
+  sorter_left_plate       1.00     7.2N    0.23mm

@@ -1,0 +1,542 @@
+[
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 9.0656016142493,
+   "release_height_mm": 0.1606993580891558
+  },
+  "incubator_plate": {
+   "success": 0.3,
+   "max_force_N": 22.97333251151937,
+   "release_height_mm": 2.1144994401741224
+  },
+  "reader_plate": {
+   "success": 0.8,
+   "max_force_N": 13.119339981942833,
+   "release_height_mm": 0.48786871565164036
+  },
+  "sorter_left_plate": {
+   "success": 0.7,
+   "max_force_N": 100.21941345011048,
+   "release_height_mm": 0.5952986285065243
+  },
+  "overall": 0.7,
+  "force_N": 36.34442188945549,
+  "release_mm": 0.8395915356053607,
+  "timesteps": 20016,
+  "minutes": 0.6
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.594532445662575,
+   "release_height_mm": 0.23067671976872983
+  },
+  "incubator_plate": {
+   "success": 0.5,
+   "max_force_N": 21.08783035359003,
+   "release_height_mm": 1.7611550240998142
+  },
+  "reader_plate": {
+   "success": 0.8,
+   "max_force_N": 9.916683337974819,
+   "release_height_mm": 0.5237605055539829
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 9.99596161786059,
+   "release_height_mm": 0.39048905318967986
+  },
+  "overall": 0.825,
+  "force_N": 12.148751938772005,
+  "release_mm": 0.7265203256530517,
+  "timesteps": 40008,
+  "minutes": 1.1
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.399172746249016,
+   "release_height_mm": 0.45701027999687227
+  },
+  "incubator_plate": {
+   "success": 0.8,
+   "max_force_N": 23.988008777030377,
+   "release_height_mm": 1.010216552284604
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 8.453371113132036,
+   "release_height_mm": 0.5295053623002532
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 8.46764167221076,
+   "release_height_mm": 0.4483201884769805
+  },
+  "overall": 0.95,
+  "force_N": 12.077048577155546,
+  "release_mm": 0.6112630957646775,
+  "timesteps": 60000,
+  "minutes": 1.6
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.245732012962603,
+   "release_height_mm": 0.4019698651963388
+  },
+  "incubator_plate": {
+   "success": 0.8,
+   "max_force_N": 24.72404911383959,
+   "release_height_mm": 0.8527373818919104
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.444430849280718,
+   "release_height_mm": 0.4529799299953341
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.235713972847852,
+   "release_height_mm": 0.4342020960927506
+  },
+  "overall": 0.95,
+  "force_N": 11.662481487232691,
+  "release_mm": 0.5354723182940835,
+  "timesteps": 80016,
+  "minutes": 2.2
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.5101125587537325,
+   "release_height_mm": 0.3290603885703791
+  },
+  "incubator_plate": {
+   "success": 0.9,
+   "max_force_N": 15.906692399604045,
+   "release_height_mm": 0.5063021707524928
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.8143986467467155,
+   "release_height_mm": 0.3499174133790639
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.2298110147648815,
+   "release_height_mm": 0.3232068038972469
+  },
+  "overall": 0.975,
+  "force_N": 9.615253654967344,
+  "release_mm": 0.3771216941497957,
+  "timesteps": 100008,
+  "minutes": 2.7
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 8.502267300645407,
+   "release_height_mm": 0.27331946993912615
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 13.91561516553001,
+   "release_height_mm": 0.5102179844357568
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 9.680965678510637,
+   "release_height_mm": 0.2704815210274103
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 10.950178302604465,
+   "release_height_mm": 0.24895289907062024
+  },
+  "overall": 1.0,
+  "force_N": 10.762256611822629,
+  "release_mm": 0.3257429686182284,
+  "timesteps": 120000,
+  "minutes": 3.3
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.804711126167144,
+   "release_height_mm": 0.3456447359737269
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 11.6577395439284,
+   "release_height_mm": 0.46767837404987356
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 8.668328996670144,
+   "release_height_mm": 0.3565981077121916
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 9.900167039440015,
+   "release_height_mm": 0.3332558018824483
+  },
+  "overall": 1.0,
+  "force_N": 9.507736676551426,
+  "release_mm": 0.3757942549045601,
+  "timesteps": 140016,
+  "minutes": 3.8
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.65408619183976,
+   "release_height_mm": 0.26413040592337955
+  },
+  "incubator_plate": {
+   "success": 0.9,
+   "max_force_N": 13.240968690841266,
+   "release_height_mm": 0.4848826776684856
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 8.414130206338914,
+   "release_height_mm": 0.2829877988367979
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.398625826802329,
+   "release_height_mm": 0.2588394970630348
+  },
+  "overall": 0.975,
+  "force_N": 9.176952728955566,
+  "release_mm": 0.32271009487292446,
+  "timesteps": 160008,
+  "minutes": 4.3
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.8945179961832235,
+   "release_height_mm": 0.29743289754553537
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 11.25872985389687,
+   "release_height_mm": 0.4222021362671802
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 8.377303640280662,
+   "release_height_mm": 0.2471391560940117
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.449060106198681,
+   "release_height_mm": 0.23423680261381863
+  },
+  "overall": 1.0,
+  "force_N": 8.74490289913986,
+  "release_mm": 0.30025274813013647,
+  "timesteps": 180000,
+  "minutes": 4.8
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.543549787819893,
+   "release_height_mm": 0.29368144735625323
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 10.2937825669976,
+   "release_height_mm": 0.3909388785754975
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.563020180651106,
+   "release_height_mm": 0.2738804055454014
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.146611067884466,
+   "release_height_mm": 0.2270827302391476
+  },
+  "overall": 1.0,
+  "force_N": 8.136740900838266,
+  "release_mm": 0.2963958654290749,
+  "timesteps": 200016,
+  "minutes": 5.2
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.841200748807374,
+   "release_height_mm": 0.06550237502609413
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 8.80493235396561,
+   "release_height_mm": 0.26866577834118166
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.898481566516432,
+   "release_height_mm": 0.11989842879046586
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.284020349001875,
+   "release_height_mm": 0.04100529093813421
+  },
+  "overall": 1.0,
+  "force_N": 7.957158754572822,
+  "release_mm": 0.12376796827396896,
+  "timesteps": 220008,
+  "minutes": 5.7
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.580277080661395,
+   "release_height_mm": 0.030653938221147925
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 7.661487846723389,
+   "release_height_mm": 0.15913891429075733
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.4945685092888485,
+   "release_height_mm": 0.014077255867595007
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.434324049339793,
+   "release_height_mm": 0.019208969392570108
+  },
+  "overall": 1.0,
+  "force_N": 7.542664371503358,
+  "release_mm": 0.05576976944301759,
+  "timesteps": 240000,
+  "minutes": 6.1
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.645883418582692,
+   "release_height_mm": 0.016070012700819536
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 6.808835037838671,
+   "release_height_mm": 0.1593325494338549
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.979154096447137,
+   "release_height_mm": 0.02145859393123395
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.637248623613438,
+   "release_height_mm": 0.027451654790333624
+  },
+  "overall": 1.0,
+  "force_N": 7.5177802941204845,
+  "release_mm": 0.0560782027140605,
+  "timesteps": 260016,
+  "minutes": 6.6
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.649482208002523,
+   "release_height_mm": 0.015946837290670146
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 7.041001461946169,
+   "release_height_mm": 0.14898669671958853
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.492543453494312,
+   "release_height_mm": 0.01607629327577964
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.532619884499556,
+   "release_height_mm": 0.013948485168657765
+  },
+  "overall": 1.0,
+  "force_N": 7.42891175198564,
+  "release_mm": 0.04873957811367402,
+  "timesteps": 280008,
+  "minutes": 7.0
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.694211940605959,
+   "release_height_mm": 0.017210664899669492
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 6.710030526039292,
+   "release_height_mm": 0.09223030472165217
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.536499814167459,
+   "release_height_mm": 0.013412308830162978
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.553253409482996,
+   "release_height_mm": 0.028205523147339928
+  },
+  "overall": 1.0,
+  "force_N": 7.373498922573927,
+  "release_mm": 0.03776470039970614,
+  "timesteps": 300000,
+  "minutes": 7.5
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.690506048844699,
+   "release_height_mm": 0.019257014535567496
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 7.047735770998132,
+   "release_height_mm": 0.12787575040579258
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.646960345986552,
+   "release_height_mm": 0.03202029075943802
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.62451056888672,
+   "release_height_mm": 0.03442203680464884
+  },
+  "overall": 1.0,
+  "force_N": 7.502428183679025,
+  "release_mm": 0.05339377312636173,
+  "timesteps": 320016,
+  "minutes": 7.9
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.748055809798724,
+   "release_height_mm": 0.04745055252599606
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 6.727053693723576,
+   "release_height_mm": 0.06341736069109816
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.656662256525162,
+   "release_height_mm": 0.0455602812688638
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.642740945589216,
+   "release_height_mm": 0.04215789654214985
+  },
+  "overall": 1.0,
+  "force_N": 7.4436281764091685,
+  "release_mm": 0.04964652275702697,
+  "timesteps": 340008,
+  "minutes": 8.3
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.749607493719443,
+   "release_height_mm": 0.07410225287967087
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 6.676917042496122,
+   "release_height_mm": 0.038520714385570365
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.661293430785949,
+   "release_height_mm": 0.056463776699122725
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.654400632463856,
+   "release_height_mm": 0.06280777553051564
+  },
+  "overall": 1.0,
+  "force_N": 7.4355546498663445,
+  "release_mm": 0.0579736298737199,
+  "timesteps": 360000,
+  "minutes": 8.8
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.763460375841741,
+   "release_height_mm": 0.09043388579462741
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 6.663009495562096,
+   "release_height_mm": 0.03949083480413451
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.702382174094057,
+   "release_height_mm": 0.08372264048538414
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.695758074695273,
+   "release_height_mm": 0.06598146517311498
+  },
+  "overall": 1.0,
+  "force_N": 7.456152530048291,
+  "release_mm": 0.06990720656431526,
+  "timesteps": 380016,
+  "minutes": 9.2
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 7.566844714225981,
+   "release_height_mm": 0.11018160106478492
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 12.02448457423923,
+   "release_height_mm": 0.07074684051735503
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 7.795674042177259,
+   "release_height_mm": 0.09621865727253986
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 7.739441422297196,
+   "release_height_mm": 0.0996336405947873
+  },
+  "overall": 1.0,
+  "force_N": 8.781611188234915,
+  "release_mm": 0.09419518486236678,
+  "timesteps": 400008,
+  "minutes": 9.7
+ }
+]

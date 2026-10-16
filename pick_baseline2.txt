@@ -1,0 +1,7 @@
+station                  성공률      잡은 어긋남      민 거리       들림      접촉력
+sorter_left_plate       1.00      0.49mm    0.00mm   8.08mm    54.2N
+reader_plate            1.00      0.41mm    0.00mm   8.06mm    70.7N
+fluent_plate            1.00      0.42mm    0.00mm   8.05mm    46.6N
+incubator_plate         1.00      1.55mm    0.44mm   8.48mm   184.1N
+OVERALL                 1.00      0.61mm    0.07mm   8.13mm    76.7N
+40 회 9.1 s

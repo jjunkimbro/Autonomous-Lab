@@ -1,0 +1,43 @@
+  back -0.22 side +0.00 h 0.06  xy mean  2.25 mm  max  3.92 mm  clearance 50 mm
+  back -0.22 side +0.03 h 0.06  xy mean  2.10 mm  max  3.22 mm  clearance 50 mm
+  back -0.22 side +0.00 h 0.10  xy mean  1.56 mm  max  2.95 mm  clearance 50 mm
+  back -0.22 side +0.03 h 0.10  xy mean  1.44 mm  max  2.82 mm  clearance 50 mm
+  back -0.22 side +0.00 h 0.14  xy mean  1.70 mm  max  3.03 mm  clearance 50 mm
+  back -0.22 side +0.03 h 0.14  xy mean  1.49 mm  max  2.98 mm  clearance 50 mm
+  back -0.22 side +0.00 h 0.18  xy mean  1.49 mm  max  2.92 mm  clearance 50 mm
+  back -0.22 side +0.03 h 0.18  xy mean  1.16 mm  max  2.61 mm  clearance 50 mm
+  back -0.22 side +0.00 h 0.22  xy mean  1.50 mm  max  4.30 mm  clearance 50 mm
+  back -0.22 side +0.03 h 0.22  xy mean  1.36 mm  max  2.32 mm  clearance 50 mm
+  back -0.16 side +0.00 h 0.06  xy mean  2.17 mm  max  3.98 mm  clearance 50 mm
+  back -0.16 side +0.03 h 0.06  xy mean  1.80 mm  max  3.62 mm  clearance 50 mm
+  back -0.16 side +0.00 h 0.10  xy mean  1.23 mm  max  1.84 mm  clearance 50 mm
+  back -0.16 side +0.03 h 0.10  xy mean  0.93 mm  max  1.85 mm  clearance 50 mm
+  back -0.16 side +0.00 h 0.14  xy mean  1.03 mm  max  2.26 mm  clearance 50 mm
+  back -0.16 side +0.03 h 0.14  xy mean  1.61 mm  max  2.59 mm  clearance 50 mm
+  back -0.16 side +0.00 h 0.18  xy mean  1.62 mm  max  4.55 mm  clearance 50 mm
+  back -0.16 side +0.03 h 0.18  xy mean  0.98 mm  max  1.98 mm  clearance 50 mm
+  back -0.16 side +0.00 h 0.22  xy mean  1.53 mm  max  4.01 mm  clearance 50 mm
+  back -0.16 side +0.03 h 0.22  xy mean  1.11 mm  max  1.84 mm  clearance 50 mm
+  back -0.10 side +0.00 h 0.06  xy mean  2.14 mm  max  4.13 mm  clearance 50 mm
+  back -0.10 side +0.03 h 0.06  xy mean  1.63 mm  max  3.67 mm  clearance 50 mm
+  back -0.10 side +0.00 h 0.10  xy mean  1.67 mm  max  2.84 mm  clearance 50 mm
+  back -0.10 side +0.03 h 0.10  xy mean  1.00 mm  max  1.84 mm  clearance 50 mm
+  back -0.10 side +0.00 h 0.14  xy mean  1.38 mm  max  3.15 mm  clearance 50 mm
+  back -0.10 side +0.03 h 0.14  xy mean  1.11 mm  max  1.73 mm  clearance 50 mm
+  back -0.10 side +0.00 h 0.18  xy mean  1.34 mm  max  3.12 mm  clearance 50 mm
+  back -0.10 side +0.03 h 0.18  xy mean  0.92 mm  max  2.17 mm  clearance 50 mm
+  back -0.10 side +0.00 h 0.22  xy mean  0.69 mm  max  1.62 mm  clearance 50 mm
+  back -0.10 side +0.03 h 0.22  xy mean  1.25 mm  max  2.68 mm  clearance 50 mm
+  back -0.04 side +0.00 h 0.06  xy mean  1.21 mm  max  3.31 mm  clearance 50 mm
+  back -0.04 side +0.03 h 0.06  xy mean  1.10 mm  max  2.90 mm  clearance 50 mm
+  back -0.04 side +0.00 h 0.10  xy mean  1.65 mm  max  4.03 mm  clearance 50 mm
+  back -0.04 side +0.03 h 0.10  xy mean  1.52 mm  max  2.60 mm  clearance 50 mm
+  back -0.04 side +0.00 h 0.14  xy mean  1.39 mm  max  3.45 mm  clearance 50 mm
+  back -0.04 side +0.03 h 0.14  xy mean  1.21 mm  max  2.86 mm  clearance 50 mm
+  back -0.04 side +0.00 h 0.18  xy mean  1.65 mm  max  3.66 mm  clearance 50 mm
+  back -0.04 side +0.03 h 0.18  xy mean  1.43 mm  max  3.08 mm  clearance 50 mm
+  back -0.04 side +0.00 h 0.22  xy mean  1.58 mm  max  3.45 mm  clearance 50 mm
+  back -0.04 side +0.03 h 0.22  xy mean  1.34 mm  max  3.16 mm  clearance 50 mm
+
+best: back -0.10 side +0.00 h 0.22  xy mean 0.69 mm  max 1.62 mm
+Output : C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\incubator_view_best.json

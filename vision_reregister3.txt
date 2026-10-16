@@ -1,0 +1,86 @@
+scene  : autonomous_lab_environment_v2_ur5e_rail_rg2_skill_v9.xml
+  fluent_plate                  25410 points  f [-0.137,+0.260] up [-0.065,+0.168]  gray 0.47+-0.15
+  incubator_plate               10192 points  f [+0.165,+0.299] up [-0.130,+0.269]  gray 0.55+-0.13
+  reader_plate                  18639 points  f [-0.071,+0.230] up [-0.092,+0.150]  gray 0.51+-0.17
+  sorter_left_plate             20394 points  f [-0.105,+0.086] up [-0.052,+0.207]  gray 0.54+-0.17
+  plate_hotel_4                  9058 points  f [-0.063,+0.085] up [-0.106,+0.071]  gray 0.60+-0.24
+  plate_hotel_3                  8181 points  f [-0.063,+0.073] up [-0.072,+0.106]  gray 0.56+-0.24
+  fluent_plate@loaded           24604 points  f [-0.137,+0.262] up [-0.065,+0.210]  gray 0.48+-0.14
+  incubator_plate@loaded         8275 points  f [-0.066,+0.299] up [-0.130,+0.269]  gray 0.54+-0.13
+  reader_plate@loaded           12037 points  f [-0.070,+0.275] up [-0.070,+0.150]  gray 0.52+-0.17
+  sorter_left_plate@loaded      20597 points  f [-0.105,+0.086] up [-0.051,+0.270]  gray 0.58+-0.14
+
+plate measurement bias (기준 위치에 놓고 재기)
+  fluent_plate         f -1.00 mm  l -0.05 mm  yaw +0.07 deg   (n 5)
+  incubator_plate      f +0.00 mm  l -0.01 mm  yaw +0.18 deg   (n 5)   (보정 안 함: f 측정 불가)
+  reader_plate         f -0.79 mm  l -0.14 mm  yaw +0.07 deg   (n 5)
+  sorter_left_plate    f -1.11 mm  l -0.11 mm  yaw +0.18 deg   (n 5)
+
+Output : C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\vision_cloud_registry_v10.npz
+
+=== 정합 정확도 ===
+  fluent_plate       trial 0  xy  0.00 mm  z +0.00 mm  yaw +0.00 deg  inlier 0.93  rms 0.85 mm  EMPTY
+  fluent_plate       trial 1  xy  0.01 mm  z -0.01 mm  yaw +0.01 deg  inlier 0.97  rms 0.67 mm  EMPTY
+  fluent_plate       trial 2  xy  0.08 mm  z +0.01 mm  yaw +0.01 deg  inlier 0.97  rms 0.67 mm  EMPTY
+  fluent_plate       trial 3  xy  0.03 mm  z -0.03 mm  yaw -0.00 deg  inlier 0.97  rms 0.66 mm  EMPTY
+  fluent_plate       trial 4  xy  0.04 mm  z +0.02 mm  yaw -0.00 deg  inlier 0.97  rms 0.68 mm  EMPTY
+  fluent_plate       trial 5  xy  0.01 mm  z +0.03 mm  yaw +0.01 deg  inlier 0.97  rms 0.64 mm  EMPTY
+  fluent_plate       trial 6  xy  0.10 mm  z -0.07 mm  yaw +0.00 deg  inlier 0.95  rms 0.69 mm  EMPTY
+  fluent_plate       trial 7  xy  0.03 mm  z -0.04 mm  yaw +0.01 deg  inlier 0.96  rms 0.67 mm  EMPTY
+  fluent_plate       trial 8  xy  0.04 mm  z +0.05 mm  yaw +0.01 deg  inlier 0.98  rms 0.66 mm  EMPTY
+  fluent_plate       trial 9  xy  0.05 mm  z -0.02 mm  yaw -0.01 deg  inlier 0.97  rms 0.67 mm  EMPTY
+  incubator_plate    trial 0  xy  0.01 mm  z +0.01 mm  yaw -0.00 deg  inlier 0.82  rms 1.01 mm  EMPTY
+  incubator_plate    trial 1  xy  0.15 mm  z -0.03 mm  yaw +0.05 deg  inlier 0.93  rms 0.86 mm  EMPTY
+  incubator_plate    trial 2  xy  1.78 mm  z -0.11 mm  yaw +0.59 deg  inlier 0.91  rms 0.89 mm  EMPTY
+  incubator_plate    trial 3  xy  0.06 mm  z -0.15 mm  yaw -0.01 deg  inlier 0.95  rms 0.81 mm  EMPTY
+  incubator_plate    trial 4  xy  0.37 mm  z -0.00 mm  yaw +0.08 deg  inlier 0.93  rms 0.88 mm  EMPTY
+  incubator_plate    trial 5  xy  0.64 mm  z -0.31 mm  yaw -0.11 deg  inlier 0.89  rms 0.94 mm  EMPTY
+  incubator_plate    trial 6  xy  2.04 mm  z -0.17 mm  yaw -0.66 deg  inlier 0.87  rms 0.93 mm  EMPTY
+  incubator_plate    trial 7  xy  0.20 mm  z -0.20 mm  yaw +0.02 deg  inlier 0.94  rms 0.83 mm  EMPTY
+  incubator_plate    trial 8  xy  1.71 mm  z -0.18 mm  yaw +0.54 deg  inlier 0.90  rms 0.90 mm  EMPTY
+  incubator_plate    trial 9  xy  1.55 mm  z -0.28 mm  yaw +0.43 deg  inlier 0.89  rms 0.91 mm  EMPTY
+  reader_plate       trial 0  xy  0.12 mm  z -0.01 mm  yaw +0.13 deg  inlier 1.00  rms 0.63 mm  EMPTY
+  reader_plate       trial 1  xy  0.07 mm  z -0.04 mm  yaw +0.00 deg  inlier 0.97  rms 0.58 mm  EMPTY
+  reader_plate       trial 2  xy  0.04 mm  z -0.01 mm  yaw +0.01 deg  inlier 0.97  rms 0.56 mm  EMPTY
+  reader_plate       trial 3  xy  0.03 mm  z -0.03 mm  yaw +0.04 deg  inlier 0.98  rms 0.57 mm  EMPTY
+  reader_plate       trial 4  xy  0.18 mm  z -0.03 mm  yaw +0.14 deg  inlier 0.97  rms 0.59 mm  EMPTY
+  reader_plate       trial 5  xy  0.07 mm  z +0.00 mm  yaw +0.07 deg  inlier 0.97  rms 0.58 mm  EMPTY
+  reader_plate       trial 6  xy  0.02 mm  z -0.02 mm  yaw +0.04 deg  inlier 0.97  rms 0.58 mm  EMPTY
+  reader_plate       trial 7  xy  0.09 mm  z -0.03 mm  yaw -0.01 deg  inlier 0.97  rms 0.57 mm  EMPTY
+  reader_plate       trial 8  xy  0.06 mm  z -0.02 mm  yaw +0.05 deg  inlier 0.99  rms 0.56 mm  EMPTY
+  reader_plate       trial 9  xy  0.09 mm  z -0.02 mm  yaw +0.07 deg  inlier 0.97  rms 0.57 mm  EMPTY
+  sorter_left_plate  trial 0  xy  0.15 mm  z -0.03 mm  yaw -0.01 deg  inlier 0.99  rms 0.69 mm  EMPTY
+  sorter_left_plate  trial 1  xy  0.17 mm  z +0.03 mm  yaw +0.00 deg  inlier 0.99  rms 0.59 mm  EMPTY
+  sorter_left_plate  trial 2  xy  0.01 mm  z -0.00 mm  yaw -0.01 deg  inlier 0.98  rms 0.56 mm  EMPTY
+  sorter_left_plate  trial 3  xy  0.13 mm  z +0.03 mm  yaw -0.03 deg  inlier 0.99  rms 0.57 mm  EMPTY
+  sorter_left_plate  trial 4  xy  0.04 mm  z +0.05 mm  yaw -0.00 deg  inlier 0.99  rms 0.56 mm  EMPTY
+  sorter_left_plate  trial 5  xy  0.07 mm  z +0.04 mm  yaw +0.02 deg  inlier 0.99  rms 0.57 mm  EMPTY
+  sorter_left_plate  trial 6  xy  0.11 mm  z -0.00 mm  yaw -0.00 deg  inlier 0.98  rms 0.57 mm  EMPTY
+  sorter_left_plate  trial 7  xy  0.18 mm  z -0.01 mm  yaw -0.04 deg  inlier 0.99  rms 0.58 mm  EMPTY
+  sorter_left_plate  trial 8  xy  0.11 mm  z +0.06 mm  yaw -0.04 deg  inlier 0.99  rms 0.56 mm  EMPTY
+  sorter_left_plate  trial 9  xy  0.12 mm  z +0.04 mm  yaw +0.01 deg  inlier 0.99  rms 0.57 mm  EMPTY
+  plate_hotel_4      trial 0  xy  0.13 mm  z +0.01 mm  yaw -0.14 deg  inlier 0.91  rms 0.73 mm  OCCUPIED
+  plate_hotel_4      trial 1  xy  0.25 mm  z +0.03 mm  yaw -0.01 deg  inlier 0.90  rms 0.64 mm  OCCUPIED
+  plate_hotel_4      trial 2  xy  0.23 mm  z +0.04 mm  yaw -0.05 deg  inlier 0.90  rms 0.64 mm  OCCUPIED
+  plate_hotel_4      trial 3  xy  0.22 mm  z +0.08 mm  yaw -0.09 deg  inlier 0.91  rms 0.64 mm  OCCUPIED
+  plate_hotel_4      trial 4  xy  0.21 mm  z +0.05 mm  yaw +0.11 deg  inlier 0.91  rms 0.63 mm  OCCUPIED
+  plate_hotel_4      trial 5  xy  0.19 mm  z +0.05 mm  yaw -0.07 deg  inlier 0.91  rms 0.64 mm  OCCUPIED
+  plate_hotel_4      trial 6  xy  0.08 mm  z -0.00 mm  yaw +0.01 deg  inlier 0.91  rms 0.62 mm  OCCUPIED
+  plate_hotel_4      trial 7  xy  0.18 mm  z +0.05 mm  yaw +0.03 deg  inlier 0.91  rms 0.63 mm  OCCUPIED
+  plate_hotel_4      trial 8  xy  0.20 mm  z +0.08 mm  yaw -0.10 deg  inlier 0.91  rms 0.66 mm  OCCUPIED
+  plate_hotel_4      trial 9  xy  0.33 mm  z +0.13 mm  yaw +0.06 deg  inlier 0.91  rms 0.69 mm  OCCUPIED
+  plate_hotel_3      trial 0  xy  0.03 mm  z -0.00 mm  yaw -0.02 deg  inlier 0.96  rms 0.87 mm  OCCUPIED
+  plate_hotel_3      trial 1  xy  0.11 mm  z -0.04 mm  yaw -0.00 deg  inlier 0.96  rms 0.67 mm  OCCUPIED
+  plate_hotel_3      trial 2  xy  0.01 mm  z +0.03 mm  yaw -0.03 deg  inlier 0.96  rms 0.66 mm  OCCUPIED
+  plate_hotel_3      trial 3  xy  0.14 mm  z +0.03 mm  yaw +0.07 deg  inlier 0.95  rms 0.71 mm  OCCUPIED
+  plate_hotel_3      trial 4  xy  0.33 mm  z -0.04 mm  yaw -0.11 deg  inlier 0.97  rms 0.69 mm  OCCUPIED
+  plate_hotel_3      trial 5  xy  0.34 mm  z +0.14 mm  yaw -0.19 deg  inlier 0.95  rms 0.74 mm  OCCUPIED
+  plate_hotel_3      trial 6  xy  0.09 mm  z +0.03 mm  yaw +0.11 deg  inlier 0.96  rms 0.68 mm  OCCUPIED
+  plate_hotel_3      trial 7  xy  0.11 mm  z +0.08 mm  yaw +0.01 deg  inlier 0.96  rms 0.70 mm  OCCUPIED
+  plate_hotel_3      trial 8  xy  0.36 mm  z +0.05 mm  yaw -0.09 deg  inlier 0.95  rms 0.70 mm  OCCUPIED
+  plate_hotel_3      trial 9  xy  0.29 mm  z +0.09 mm  yaw -0.08 deg  inlier 0.94  rms 0.71 mm  OCCUPIED
+
+success 60/60
+xy  mean 0.24 mm  max 2.04 mm
+z   mean 0.05 mm  max 0.31 mm
+yaw mean 0.08 deg  max 0.66 deg

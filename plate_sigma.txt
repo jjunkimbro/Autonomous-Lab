@@ -1,0 +1,12 @@
+station                      f         l        yaw    n
+fluent_plate            0.223m    0.214m     0.163d   16
+incubator_plate        26.851m    0.061m     1.778d   16
+reader_plate            0.258m    0.167m     0.079d   16
+sorter_left_plate      29.609m    0.292m     1.841d   16
+
+PLATE_SIGMA = {   # (f, l m, yaw rad) — 장비 프레임 기준, 집기 경로가 쓰는 오차
+    "fluent_plate": np.array([0.000223, 0.000214, math.radians(0.163)]),
+    "incubator_plate": np.array([0.026851, 0.000061, math.radians(1.778)]),
+    "reader_plate": np.array([0.000258, 0.000167, math.radians(0.079)]),
+    "sorter_left_plate": np.array([0.029609, 0.000292, math.radians(1.841)]),
+}
