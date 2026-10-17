@@ -1,0 +1,105 @@
+{
+  "env": "pick",
+  "run": "pick_plate_B_student",
+  "env_kwargs": {
+    "corrected": false,
+    "residual_limit": 0.012,
+    "residual_down": 0.005,
+    "dual_scale": true
+  },
+  "episodes": 50,
+  "B_nominal": {
+    "fluent_plate": {
+      "success": 0.22,
+      "force_N": 98.59911143970359,
+      "release_mm": 7.1865409646380884,
+      "xy_mm": 7.1865409646380884,
+      "jams": 11
+    },
+    "incubator_plate": {
+      "success": 0.18,
+      "force_N": 120.8888355874876,
+      "release_mm": 5.50951529207118,
+      "xy_mm": 5.50951529207118,
+      "jams": 4
+    },
+    "reader_plate": {
+      "success": 0.24,
+      "force_N": 90.29954565302909,
+      "release_mm": 6.560363518867057,
+      "xy_mm": 6.560363518867057,
+      "jams": 8
+    },
+    "sorter_left_plate": {
+      "success": 0.22,
+      "force_N": 97.5833297753231,
+      "release_mm": 4.5759411564276835,
+      "xy_mm": 4.5759411564276835,
+      "jams": 5
+    },
+    "OVERALL": 0.215
+  },
+  "B_student": {
+    "fluent_plate": {
+      "success": 1.0,
+      "force_N": 74.76862402704982,
+      "release_mm": 0.8545716110163601,
+      "xy_mm": 0.8545716110163601,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.98,
+      "force_N": 75.9772834485294,
+      "release_mm": 0.8255755276853586,
+      "xy_mm": 0.8255755276853586,
+      "jams": 1
+    },
+    "reader_plate": {
+      "success": 1.0,
+      "force_N": 74.02990024119187,
+      "release_mm": 0.8849111707412507,
+      "xy_mm": 0.8849111707412507,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 1.0,
+      "force_N": 66.19010361049062,
+      "release_mm": 0.786716563797397,
+      "xy_mm": 0.786716563797397,
+      "jams": 0
+    },
+    "OVERALL": 0.995
+  },
+  "B_student_blind": {
+    "fluent_plate": {
+      "success": 0.0,
+      "force_N": 117.9129107340335,
+      "release_mm": 11.090392347135177,
+      "xy_mm": 11.090392347135177,
+      "jams": 6
+    },
+    "incubator_plate": {
+      "success": 0.0,
+      "force_N": 338.3714835935961,
+      "release_mm": 12.169521903085974,
+      "xy_mm": 12.169521903085974,
+      "jams": 26
+    },
+    "reader_plate": {
+      "success": 0.0,
+      "force_N": 107.51681959915544,
+      "release_mm": 13.397208421095382,
+      "xy_mm": 13.397208421095382,
+      "jams": 20
+    },
+    "sorter_left_plate": {
+      "success": 0.0,
+      "force_N": 318.533997499587,
+      "release_mm": 12.625758535882067,
+      "xy_mm": 12.625758535882067,
+      "jams": 24
+    },
+    "OVERALL": 0.0
+  },
+  "image_contribution": 0.995
+}

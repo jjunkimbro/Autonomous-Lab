@@ -97,6 +97,15 @@ IK_MAX_STEP = 0.10             # 한 반복에서 움직일 수 있는 관절 �
 # student 영상 ROI 중심 (TCP 기준). 잡은 plate 먼 쪽 끝 아래 = holder 입구가 보이는 곳.
 #   plate 중심은 TCP z = 0.0435, 먼 쪽 끝은 z = 0.107 이다.
 ROI_CENTER_TCP = np.array([0.0, -0.012, 0.095])
+# B 안(end-to-end)용 두 배율 관측.
+#   기본 해상도는 픽셀당 1.62 mm 라 장비 오차 +-5 mm 가 3 픽셀뿐이다. 해상도를 올리면 정밀해지지만
+#   창이 좁아져 holder 가 화면 밖으로 나간다 (3배에서 52 mm). 그래서 한 번 크게 렌더한 뒤
+#   같은 중심에서 두 번 자른다: 넓은 창(맥락, 어디에 holder 가 있나) + 좁은 창(정밀, 얼마나 어긋났나).
+DUAL_WIDE_PIXELS = 288          # 3 배 렌더에서 288 px = 155 mm (A 안과 같은 시야)
+DUAL_FINE_PIXELS = 96           # 3 배 렌더에서 96 px = 52 mm (픽셀당 0.54 mm)
+# 정밀 창을 plate 한가운데 두면 웰만 가득 찬다. 정보는 plate 가장자리와 로케이터 사이의 틈에 있으므로
+# 왼쪽 모서리 바깥, 조금 앞쪽에 둔다 (후보 4곳을 렌더해 비교한 결과).
+DUAL_FINE_CENTER_TCP = np.array([0.0425, -0.012, 0.125])
 BRIGHTNESS_RANGE = (0.75, 1.25)         # 조명 변화 (sim2real)
 
 STATION_ERROR = np.array([0.005, 0.005, 0.002, math.radians(2.0)])
@@ -138,9 +147,23 @@ class PlacePlateEnv(gym.Env):
     metadata = {"render_modes": ["rgb_array"], "render_fps": CONTROL_HZ}
 
     def __init__(self, obs_mode="privileged", stations=s9.PLATE_STATIONS, randomize=True, seed=None, nominal_lift=True,
-                 station_weights=None):
+                 station_weights=None, corrected=True, residual_limit=None, residual_down=None, render_scale=1,
+                 roi_size=None, dual_scale=False):
+        """corrected=False 가 B 안(end-to-end)이다.
+
+        A 안: 비전이 잰 장비 자세로 경로를 먼저 옮기고, 정책은 남은 오차(주로 손 안 어긋남)만 다듬는다.
+        B 안: 경로를 보정하지 않는다. 장비는 실제로 틀어져 있고, 정책이 그 틀어짐까지 영상에서 읽어
+              잔차로 흡수해야 한다. 그래서 잔차 한계를 넓히고 영상 해상도를 올려야 한다
+              (기본 해상도는 픽셀당 1.62 mm 라 장비 오차 +-5 mm 가 3 픽셀밖에 안 된다).
+        """
         super().__init__()
         self.station_weights = station_weights
+        self.corrected = corrected
+        self.dual_scale = dual_scale
+        self.render_scale = 3 if dual_scale else render_scale
+        self.residual_high = np.full(3, RESIDUAL_LIMIT if residual_limit is None else residual_limit)
+        down = RESIDUAL_DOWN_LIMIT if residual_down is None else residual_down
+        self.residual_low = np.array([-self.residual_high[0], -self.residual_high[1], -down])
         self.obs_mode = obs_mode
         self.stations = tuple(stations)
         self.randomize = randomize
@@ -160,8 +183,8 @@ class PlacePlateEnv(gym.Env):
         state_space = gym.spaces.Box(-np.inf, np.inf, shape=(len(self._state()),), dtype=np.float32)
 
         # student 용 영상 관측 (RGB-D). teacher 는 상태값만 쓰므로 렌더러를 만들지 않는다.
-        self.render_width, self.render_height = WRIST_CAMERA["render_resolution"]
-        self.image_width, self.image_height = WRIST_CAMERA["roi_size"]
+        self.render_width, self.render_height = (v * self.render_scale for v in WRIST_CAMERA["render_resolution"])
+        self.image_width, self.image_height = roi_size or WRIST_CAMERA["roi_size"]
         self.camera_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_CAMERA, WRIST_CAMERA["name"])
         self.renderer = None
         self.roi_origin = (0, 0)
@@ -176,8 +199,10 @@ class PlacePlateEnv(gym.Env):
         if obs_mode == "visuotactile":
             self.observation_space = gym.spaces.Dict({
                 "state": state_space,
-                "rgb": gym.spaces.Box(0, 255, shape=(self.image_height, self.image_width, 3), dtype=np.uint8),
-                "depth": gym.spaces.Box(0.0, 1.0, shape=(self.image_height, self.image_width, 1), dtype=np.float32),
+                "rgb": gym.spaces.Box(0, 255, shape=(self.image_height, self.image_width, 6 if dual_scale else 3),
+                                      dtype=np.uint8),
+                "depth": gym.spaces.Box(0.0, 1.0, shape=(self.image_height, self.image_width, 2 if dual_scale else 1),
+                                        dtype=np.float32),
             })
         else:
             self.observation_space = state_space
@@ -343,16 +368,18 @@ class PlacePlateEnv(gym.Env):
             d.qpos[adr:adr + 3] = position
             d.qpos[adr + 3:adr + 7] = [1.0, 0.0, 0.0, 0.0]
 
-        # 비전으로 보정한 기본 경로 (측정값 기준)
+        # A 안은 비전 측정값으로 경로를 옮기고, B 안은 명목 경로를 그대로 쓴다.
+        # B 안에서 장비는 실제로 self.truth 만큼 틀어져 있으므로 그 차이를 정책이 영상에서 읽어야 한다.
+        self.path_delta = self.measured if self.corrected else np.zeros(4)
         pts = self.station["points"]
-        self.p_approach = self._transform(pts["APPROACH_LIFTED"], self.measured)
-        self.p_hover = self._transform(pts["INSERT_HOVER"], self.measured)
-        self.p_down = self._transform(pts["SET_DOWN"], self.measured)
+        self.p_approach = self._transform(pts["APPROACH_LIFTED"], self.path_delta)
+        self.p_hover = self._transform(pts["INSERT_HOVER"], self.path_delta)
+        self.p_down = self._transform(pts["SET_DOWN"], self.path_delta)
         self.p_down[2] -= EXTRA_DESCENT
         self.slide_time = float(np.linalg.norm(self.p_hover - self.p_approach)) / SLIDE_SPEED
         self.descent_time = float(np.linalg.norm(self.p_down - self.p_hover)) / DESCENT_SPEED
         self.q_base = self.station["q_start"].copy()
-        self.q_base[1] += self.measured[3]                       # 측정한 yaw 만큼 J1 (tool yaw = J1 + const)
+        self.q_base[1] += self.path_delta[3]                     # 측정한 yaw 만큼 J1 (tool yaw = J1 + const)
         self.q_target = self._ik(self.q_base, self.p_approach)
         d.qpos[self.qpos_adr] = self.q_target
         for adr in self.finger_qpos:
@@ -430,8 +457,8 @@ class PlacePlateEnv(gym.Env):
     def step(self, action):
         action = np.clip(np.asarray(action, dtype=float), -1.0, 1.0)
         dt = 1.0 / CONTROL_HZ
-        rotation = rot_z(self.measured[3]) @ self.station["rotation"]
-        self.residual = np.clip(self.residual + action[:3] * RESIDUAL_SPEED * dt, RESIDUAL_LOW, RESIDUAL_HIGH)
+        rotation = rot_z(self.path_delta[3]) @ self.station["rotation"]
+        self.residual = np.clip(self.residual + action[:3] * RESIDUAL_SPEED * dt, self.residual_low, self.residual_high)
         self.yaw_residual = float(np.clip(self.yaw_residual + action[3] * YAW_SPEED * dt, -YAW_LIMIT, YAW_LIMIT))
         target = self._nominal(self.time + dt) + rotation @ self.residual
         seed = self.q_target.copy()
@@ -519,17 +546,17 @@ class PlacePlateEnv(gym.Env):
     def _state(self):
         if not hasattr(self, "station"):
             self.station = self.station_data[self.stations[0]]
-            self.truth = self.measured = np.zeros(4)
+            self.truth = self.measured = self.path_delta = np.zeros(4)
             self.in_hand = np.zeros(2)
             self.time, self.residual, self.yaw_residual, self.max_force = 0.0, np.zeros(3), 0.0, 0.0
             self.p_down = self.station["points"]["SET_DOWN"]
             self.slide_time = self.descent_time = 1.0
-        rotation = rot_z(self.measured[3]) @ self.station["rotation"]
+        rotation = rot_z(self.path_delta[3]) @ self.station["rotation"]
         tcp = self.data.site_xpos[self.site]
         progress = min(1.0, self.time / max(self.slide_time + self.descent_time, 1e-6))
         parts = [
             rotation.T @ (tcp - self.p_down) * 50.0,
-            self.residual / RESIDUAL_LIMIT,
+            self.residual / self.residual_high[0],
             [self.yaw_residual / YAW_LIMIT, progress, self.time / EPISODE_TIME],
             [(self.data.qpos[self.finger_qpos[0]] - GRIP_CLOSED) * 200.0],
             [self._contact_force() / 20.0, self.max_force / 50.0],
@@ -581,6 +608,12 @@ class PlacePlateEnv(gym.Env):
         focal = (self.render_height / 2.0) / math.tan(fovy / 2.0)
         u = self.render_width / 2.0 + focal * local[0] / -local[2]
         v = self.render_height / 2.0 - focal * local[1] / -local[2]
+        if self.dual_scale:
+            fine = tcp + rot @ DUAL_FINE_CENTER_TCP
+            local_f = rotation.T @ (fine - position)
+            uf = self.render_width / 2.0 + focal * local_f[0] / -local_f[2]
+            vf = self.render_height / 2.0 - focal * local_f[1] / -local_f[2]
+            return (int(round(u)), int(round(v))), (int(round(uf)), int(round(vf)))
         left = int(np.clip(round(u - self.image_width / 2), 0, self.render_width - self.image_width))
         top = int(np.clip(round(v - self.image_height / 2), 0, self.render_height - self.image_height))
         return left, top
@@ -612,12 +645,32 @@ class PlacePlateEnv(gym.Env):
             depth = depth + self.rng.normal(size=depth.shape) * sigma
             depth[self.rng.random(depth.shape) < WRIST_CAMERA["depth_dropout"]] = 0.0
 
-        left, top = self.roi_origin
-        rgb = rgb[top:top + self.image_height, left:left + self.image_width]
-        depth = depth[top:top + self.image_height, left:left + self.image_width]
         valid = (depth >= near) & (depth <= far)
-        normalized = np.where(valid, (depth - near) / (far - near), 0.0)
-        return np.ascontiguousarray(rgb), normalized[..., None].astype(np.float32)
+        normalized = np.where(valid, (depth - near) / (far - near), 0.0).astype(np.float32)
+
+        if not self.dual_scale:
+            left, top = self.roi_origin
+            rgb = rgb[top:top + self.image_height, left:left + self.image_width]
+            normalized = normalized[top:top + self.image_height, left:left + self.image_width]
+            return np.ascontiguousarray(rgb), normalized[..., None]
+
+        import cv2
+        centres = self.roi_origin
+        out_rgb, out_depth = [], []
+        for (cu, cv_), window in zip(centres, (DUAL_WIDE_PIXELS, DUAL_FINE_PIXELS)):
+            left = int(np.clip(cu - window // 2, 0, self.render_width - window))
+            top = int(np.clip(cv_ - window // 2, 0, self.render_height - window))
+            crop_rgb = rgb[top:top + window, left:left + window]
+            crop_depth = normalized[top:top + window, left:left + window]
+            if window != self.image_width:
+                crop_rgb = cv2.resize(crop_rgb, (self.image_width, self.image_height),
+                                      interpolation=cv2.INTER_AREA)
+                crop_depth = cv2.resize(crop_depth, (self.image_width, self.image_height),
+                                        interpolation=cv2.INTER_AREA)
+            out_rgb.append(crop_rgb)
+            out_depth.append(crop_depth[..., None])
+        return (np.ascontiguousarray(np.concatenate(out_rgb, axis=-1)),
+                np.ascontiguousarray(np.concatenate(out_depth, axis=-1)).astype(np.float32))
 
     def close(self):
         if self.renderer is not None:

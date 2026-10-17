@@ -1,0 +1,23 @@
+C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py:150: UserWarning: You are trying to run PPO on the GPU, but it is primarily intended to run on the CPU when not using a CNN policy (you are using ActorCriticPolicy which should be a MlpPolicy). See https://github.com/DLR-RM/stable-baselines3/issues/1245 for more info. You can pass `device='cpu'` or `export CUDA_VISIBLE_DEVICES=` to force using the CPU.Note: The model will train, but the GPU utilization will be poor and the training might take longer than on CPU.
+  warnings.warn(
+baseline (zero action) is about 0.5-0.6 success
+[eval]   20016 steps  success 0.23  force 110.8N  drop 3.65mm  fluent 0.10  incuba 0.40  reader 0.20  sorter 0.20
+[eval]   40008 steps  success 0.30  force  83.7N  drop 3.92mm  fluent 0.30  incuba 0.50  reader 0.10  sorter 0.30
+[eval]   60000 steps  success 0.38  force 192.5N  drop 3.07mm  fluent 0.40  incuba 0.50  reader 0.30  sorter 0.30
+[eval]   80016 steps  success 0.68  force 140.8N  drop 2.09mm  fluent 0.60  incuba 0.60  reader 0.90  sorter 0.60
+[eval]  100008 steps  success 0.78  force 131.2N  drop 2.14mm  fluent 0.80  incuba 0.80  reader 0.90  sorter 0.60
+[eval]  120000 steps  success 0.93  force  78.3N  drop 1.87mm  fluent 1.00  incuba 0.90  reader 1.00  sorter 0.80
+[eval]  140016 steps  success 0.95  force 125.1N  drop 1.69mm  fluent 0.90  incuba 1.00  reader 1.00  sorter 0.90
+[eval]  160008 steps  success 0.97  force  81.0N  drop 1.67mm  fluent 1.00  incuba 1.00  reader 1.00  sorter 0.90
+[eval]  180000 steps  success 0.95  force  84.3N  drop 1.58mm  fluent 1.00  incuba 0.90  reader 1.00  sorter 0.90
+[eval]  200016 steps  success 0.95  force  71.7N  drop 0.92mm  fluent 0.90  incuba 1.00  reader 1.00  sorter 0.90
+[eval]  220008 steps  success 0.93  force  89.3N  drop 1.48mm  fluent 0.90  incuba 1.00  reader 1.00  sorter 0.80
+[eval]  240000 steps  success 1.00  force  74.2N  drop 0.80mm  fluent 1.00  incuba 1.00  reader 1.00  sorter 1.00
+[eval]  260016 steps  success 1.00  force  72.6N  drop 0.78mm  fluent 1.00  incuba 1.00  reader 1.00  sorter 1.00
+[eval]  280008 steps  success 1.00  force  71.4N  drop 0.81mm  fluent 1.00  incuba 1.00  reader 1.00  sorter 1.00
+[eval]  300000 steps  success 0.95  force  73.7N  drop 0.91mm  fluent 0.90  incuba 1.00  reader 1.00  sorter 0.90
+[eval]  320016 steps  success 0.97  force  72.1N  drop 0.84mm  fluent 0.90  incuba 1.00  reader 1.00  sorter 1.00
+[eval]  340008 steps  success 0.97  force  78.5N  drop 0.75mm  fluent 1.00  incuba 1.00  reader 1.00  sorter 0.90
+[eval]  360000 steps  success 0.95  force  73.9N  drop 0.79mm  fluent 0.90  incuba 1.00  reader 1.00  sorter 0.90
+[eval]  380016 steps  success 1.00  force  71.8N  drop 0.77mm  fluent 1.00  incuba 1.00  reader 1.00  sorter 1.00
+[eval]  400008 steps  success 1.00  force  70.9N  drop 0.82mm  fluent 1.00  incuba 1.00  reader 1.00  sorter 1.00

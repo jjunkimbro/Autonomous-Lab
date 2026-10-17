@@ -164,6 +164,11 @@ class PickPlateEnv(pp.PlacePlateEnv):
         rest_noise = r.normal(0.0, RESTING_SIGMA) if r else np.zeros(3)
         self.rest_measured = self.rest + np.array(options.get("rest_noise", rest_noise))
 
+        # end-to-end (corrected=False) 에서는 경로가 측정값을 쓰지 않는다. 장비도 plate 도
+        # 실제로는 어긋나 있는데 공칭 경로로 접근하므로, 정책이 영상에서 전량을 읽어야 한다.
+        self.path_delta = self.measured if self.corrected else np.zeros(4)
+        self.rest_delta = self.rest_measured if self.corrected else np.zeros(3)
+
         self.perturber.reset()
         self.perturber.apply(self.station_name, self.truth)
         for geom in self.plate_geoms:
@@ -175,17 +180,17 @@ class PickPlateEnv(pp.PlacePlateEnv):
 
         # 비전으로 보정한 기본 경로. plate 가 포켓 안에서 밀려 있으면 그만큼 더 따라간다.
         pts = self.station["points"]
-        lateral = self.station["rotation"] @ np.array([self.rest_measured[0], self.rest_measured[1], 0.0])
-        self.p_approach = self._transform(pts["APPROACH"], self.measured) + lateral
-        self.p_grasp = self._transform(pts["GRASP"], self.measured) + lateral
-        self.p_lift = self._transform(pts["LIFT_OFF"], self.measured) + lateral
-        self.p_extract = self._transform(pts["EXTRACT"], self.measured) + lateral
+        lateral = self.station["rotation"] @ np.array([self.rest_delta[0], self.rest_delta[1], 0.0])
+        self.p_approach = self._transform(pts["APPROACH"], self.path_delta) + lateral
+        self.p_grasp = self._transform(pts["GRASP"], self.path_delta) + lateral
+        self.p_lift = self._transform(pts["LIFT_OFF"], self.path_delta) + lateral
+        self.p_extract = self._transform(pts["EXTRACT"], self.path_delta) + lateral
         self.approach_time = float(np.linalg.norm(self.p_grasp - self.p_approach)) / APPROACH_SPEED
         self.lift_time = float(np.linalg.norm(self.p_lift - self.p_grasp)) / LIFT_SPEED
         self.extract_time = float(np.linalg.norm(self.p_extract - self.p_lift)) / EXTRACT_SPEED
 
         self.q_base = self.station["q_start"].copy()
-        self.q_base[1] += self.measured[3] + self.rest_measured[2]
+        self.q_base[1] += self.path_delta[3] + self.rest_delta[2]
         self.q_target = self._ik(self.q_base, self.p_approach)
         d.qpos[self.qpos_adr] = self.q_target
         for adr in self.finger_qpos:
@@ -260,12 +265,12 @@ class PickPlateEnv(pp.PlacePlateEnv):
     def step(self, action):
         action = np.clip(np.asarray(action, dtype=float), -1.0, 1.0)
         dt = 1.0 / CONTROL_HZ
-        rotation = rot_z(self.measured[3]) @ self.station["rotation"]
+        rotation = rot_z(self.path_delta[3]) @ self.station["rotation"]
 
         # 집은 뒤에는 보정을 못 바꾼다 — 문 plate 를 옆으로 끌면 holder 에 걸린다.
         if not self.gripped:
             self.residual = np.clip(self.residual + action[:3] * pp.RESIDUAL_SPEED * dt,
-                                    pp.RESIDUAL_LOW, pp.RESIDUAL_HIGH)
+                                    self.residual_low, self.residual_high)
             self.yaw_residual = float(np.clip(self.yaw_residual + action[3] * pp.YAW_SPEED * dt,
                                               -pp.YAW_LIMIT, pp.YAW_LIMIT))
 
@@ -335,18 +340,19 @@ class PickPlateEnv(pp.PlacePlateEnv):
     def _state(self):
         if not hasattr(self, "station"):
             self.station = self.station_data[self.stations[0]]
-            self.truth = self.measured = np.zeros(4)
+            self.truth = self.measured = self.path_delta = np.zeros(4)
+            self.rest_delta = np.zeros(3)
             self.rest = self.rest_measured = np.zeros(3)
             self.time, self.residual, self.yaw_residual, self.max_force = 0.0, np.zeros(3), 0.0, 0.0
             self.grip_time, self.gripped, self.disturbance = None, False, 0.0
             self.p_grasp = self.station["points"]["GRASP"]
             self.approach_time = self.lift_time = self.extract_time = 1.0
 
-        rotation = rot_z(self.measured[3]) @ self.station["rotation"]
+        rotation = rot_z(self.path_delta[3]) @ self.station["rotation"]
         tcp = self.data.site_xpos[self.site]
         parts = [
             rotation.T @ (tcp - self.p_grasp) * 50.0,
-            self.residual / pp.RESIDUAL_LIMIT,
+            self.residual / self.residual_high[0],
             [self.yaw_residual / pp.YAW_LIMIT, self._approach_fraction(), self.time / EPISODE_TIME],
             [(self.data.qpos[self.finger_qpos[0]] - GRIP_CLOSED) * 200.0, float(self.gripped)],
             [self._contact_force() / 20.0, self.max_force / 50.0],

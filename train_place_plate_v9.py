@@ -30,14 +30,28 @@ STATION_WEIGHTS = {"incubator_plate": 2.0}
 OBS_MODE = "privileged"
 
 
+ENV_KWARGS = {}
+ENV_NAME = "place"
+
+
+def env_class():
+    """ENV_NAME 으로 PlacePlate / PickPlate 를 고른다. 서브프로세스가 모듈을 다시 import 하므로
+    클래스를 직접 전달하지 않고 이름으로 고른다."""
+    if ENV_NAME == "pick":
+        import pick_plate_env_v9 as pk
+        return pk.PickPlateEnv
+    return pe.PlacePlateEnv
+
+
 def make_env(rank, seed, obs_mode="privileged"):
     def _init():
-        return pe.PlacePlateEnv(obs_mode=obs_mode, seed=seed + 1000 * rank, station_weights=STATION_WEIGHTS)
+        return env_class()(obs_mode=obs_mode, seed=seed + 1000 * rank,
+                           station_weights=STATION_WEIGHTS, **ENV_KWARGS)
     return _init
 
 
 def evaluate(model, episodes=40, seed=12345):
-    env = pe.PlacePlateEnv(obs_mode=OBS_MODE, seed=seed)
+    env = env_class()(obs_mode=OBS_MODE, seed=seed, **ENV_KWARGS)
     stats = {}
     for episode in range(episodes):
         station = env.stations[episode % len(env.stations)]
@@ -48,13 +62,20 @@ def evaluate(model, episodes=40, seed=12345):
             obs, reward, terminated, truncated, info = env.step(action)
             done = terminated or truncated
         stats.setdefault(station, []).append(info)
+    # 품질 지표 이름이 환경마다 다르다: place 는 낙하 높이, pick 은 집기 오차를 본다.
+    quality = "release_height_mm" if ENV_NAME == "place" else "grasp_offset_mm"
+
+    def mean(rows, key):
+        return float(np.mean([i[key] for i in rows]))
+
+    flat = [i for v in stats.values() for i in v]
     summary = {s: {"success": sum(i["success"] for i in v) / len(v),
-                   "max_force_N": float(np.mean([i["max_force_N"] for i in v])),
-                   "release_height_mm": float(np.mean([i["release_height_mm"] for i in v]))}
+                   "max_force_N": mean(v, "max_force_N"),
+                   quality: mean(v, quality)}
                for s, v in stats.items()}
-    summary["overall"] = float(np.mean([i["success"] for v in stats.values() for i in v]))
-    summary["force_N"] = float(np.mean([i["max_force_N"] for v in stats.values() for i in v]))
-    summary["release_mm"] = float(np.mean([i["release_height_mm"] for v in stats.values() for i in v]))
+    summary["overall"] = float(np.mean([i["success"] for i in flat]))
+    summary["force_N"] = mean(flat, "max_force_N")
+    summary["release_mm"] = mean(flat, quality)
     return summary
 
 
@@ -97,8 +118,16 @@ def main():
     parser.add_argument("--eval-episodes", type=int, default=40)
     parser.add_argument("--resume", default=None)
     parser.add_argument("--run-name", default=None)
+    parser.add_argument("--env", default="place", choices=("place", "pick"),
+                        help="place = 내려놓기, pick = 집기")
     parser.add_argument("--obs-mode", default="privileged", choices=("privileged", "measured"))
+    parser.add_argument("--end-to-end", action="store_true",
+                        help="B 안: 경로를 비전으로 보정하지 않는다 (teacher 는 정답을 보므로 영상은 안 씀)")
     args = parser.parse_args()
+    global ENV_KWARGS, ENV_NAME
+    ENV_NAME = args.env
+    if args.end_to_end:
+        ENV_KWARGS = dict(corrected=False, residual_limit=0.012, residual_down=0.005)
     global RUN_DIR, OBS_MODE
     OBS_MODE = args.obs_mode
     if args.run_name:

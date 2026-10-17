@@ -34,6 +34,8 @@ import torch.nn as nn
 
 import place_plate_env_v9 as pe
 
+ENV_CHOICES = ("place", "pick")
+
 
 BASE_DIR = Path(__file__).resolve().parent
 RUN_DIR = BASE_DIR / "rl_runs" / "place_plate_v9_student"
@@ -56,17 +58,18 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 # ======================================================================
 
 class StudentPolicy(nn.Module):
-    def __init__(self, state_size, action_size=5, image_shape=(96, 96)):
+    def __init__(self, state_size, action_size=5, image_shape=(96, 96), in_channels=4):
         super().__init__()
+        self.in_channels = in_channels
         self.encoder = nn.Sequential(
-            nn.Conv2d(4, 32, 5, stride=2, padding=2), nn.ReLU(),
+            nn.Conv2d(in_channels, 32, 5, stride=2, padding=2), nn.ReLU(),
             nn.Conv2d(32, 64, 3, stride=2, padding=1), nn.ReLU(),
             nn.Conv2d(64, 64, 3, stride=2, padding=1), nn.ReLU(),
             nn.Conv2d(64, 64, 3, stride=2, padding=1), nn.ReLU(),
             nn.Flatten(),
         )
         with torch.no_grad():
-            size = self.encoder(torch.zeros(1, 4, *image_shape)).shape[1]
+            size = self.encoder(torch.zeros(1, in_channels, *image_shape)).shape[1]
         self.image_head = nn.Sequential(nn.Linear(size, 256), nn.ReLU())
         self.state_head = nn.Sequential(nn.Linear(state_size, 128), nn.ReLU())
         self.policy = nn.Sequential(
@@ -80,7 +83,7 @@ class StudentPolicy(nn.Module):
 
 
 def to_image_tensor(rgb, depth):
-    """rgb uint8 (N,H,W,3), depth uint8 (N,H,W,1) → float (N,4,H,W)."""
+    """rgb uint8 (N,H,W,C), depth uint8 (N,H,W,D) → float (N,C+D,H,W). 두 배율이면 C=6, D=2."""
     rgb = torch.as_tensor(np.asarray(rgb), dtype=torch.float32) / 255.0
     depth = torch.as_tensor(np.asarray(depth), dtype=torch.float32) / 255.0
     return torch.cat((rgb, depth), dim=-1).permute(0, 3, 1, 2).contiguous()
@@ -92,7 +95,8 @@ def augment(image):
     그 기준에 대한 holder 의 픽셀 위치가 핵심 정보인데 영상 전체를 밀면 이 정보가 망가진다.
     """
     gain = torch.empty(image.shape[0], 1, 1, 1).uniform_(0.8, 1.2)
-    image[:, :3] = (image[:, :3] * gain).clamp(0.0, 1.0)
+    colour = image.shape[1] - (2 if image.shape[1] == 8 else 1)      # RGB 채널 수 (4ch -> 3, 8ch -> 6)
+    image[:, :colour] = (image[:, :colour] * gain).clamp(0.0, 1.0)
     return image
 
 
@@ -118,16 +122,50 @@ def teacher_observation(env, state):
     return np.concatenate((state, truth)).astype(np.float32)
 
 
-def worker_resources(worker, teacher_path, seed):
+def make_env(env_name, **kwargs):
+    """env_name 으로 PlacePlate / PickPlate 를 고른다. 워커가 별도 프로세스라 이름으로 넘긴다."""
+    if env_name == "pick":
+        import pick_plate_env_v9 as pk
+        return pk.PickPlateEnv(**kwargs)
+    return pe.PlacePlateEnv(**kwargs)
+
+
+def teacher_observation_pick(env, state):
+    """pick 용 privileged 꼬리 — 집기 오차 · plate 밀림 · 들림 · 기울기 · 실제 안착 오차."""
+    ready = hasattr(env, "rest_start")
+    error = env._grasp_error() if ready else np.zeros(3)
+    truth = np.concatenate((
+        error * 200.0,
+        [env._plate_moved() * 500.0 if ready else 0.0,
+         env._lifted() * 200.0 if ready else 0.0,
+         env._tilt() / 2.0],
+        np.array([env.rest[0], env.rest[1]]) * 500.0,
+        [math.degrees(env.rest[2])],
+    ))
+    return np.concatenate((state, truth)).astype(np.float32)
+
+
+def privileged_observation(env, state):
+    import pick_plate_env_v9 as pk
+    if isinstance(env, pk.PickPlateEnv):
+        return teacher_observation_pick(env, state)
+    return teacher_observation(env, state)
+
+
+def image_channels(env):
+    space = env.observation_space
+    return space["rgb"].shape[2] + space["depth"].shape[2]
+
+
+def worker_resources(worker, teacher_path, seed, env_kwargs=None, env_name="place"):
     if "env" not in _WORKER_CACHE:
         time.sleep(1.0 * worker)        # OpenGL context 생성 시점을 worker 마다 엇갈리게
         torch.set_num_threads(1)
         from stable_baselines3 import PPO
-        import place_plate_env_v9 as pe
 
         _WORKER_CACHE["teacher"] = PPO.load(teacher_path, device="cpu")
-        env = pe.PlacePlateEnv(obs_mode="visuotactile", seed=seed,
-                               station_weights={"incubator_plate": 2.0})
+        env = make_env(env_name, obs_mode="visuotactile", seed=seed,
+                       station_weights={"incubator_plate": 2.0}, **(env_kwargs or {}))
         env.reset()                     # 렌더러 생성
         _WORKER_CACHE["env"] = env
     env = _WORKER_CACHE["env"]
@@ -136,12 +174,13 @@ def worker_resources(worker, teacher_path, seed):
 
 
 def rollout_worker(args):
-    worker, episodes, beta, student_state, teacher_path, seed, record = args
-    env, teacher = worker_resources(worker, teacher_path, seed)
+    worker, episodes, beta, student_state, teacher_path, seed, record, env_kwargs, env_name = args
+    env, teacher = worker_resources(worker, teacher_path, seed, env_kwargs, env_name)
 
     student = None
     if student_state is not None:
-        student = StudentPolicy(env.observation_space["state"].shape[0])
+        student = StudentPolicy(env.observation_space["state"].shape[0],
+                                in_channels=image_channels(env))
         student.load_state_dict(student_state)
         student.eval()
 
@@ -153,7 +192,7 @@ def rollout_worker(args):
         station = env.stations[(worker + episode) % len(env.stations)]
         obs, info = env.reset(options={"station": station})
         while True:
-            teacher_action = teacher.predict(teacher_observation(env, obs["state"]), deterministic=True)[0]
+            teacher_action = teacher.predict(privileged_observation(env, obs["state"]), deterministic=True)[0]
             if record:
                 samples["rgb"].append(obs["rgb"])
                 samples["depth"].append((obs["depth"] * 255.0).astype(np.uint8))
@@ -176,9 +215,11 @@ def rollout_worker(args):
     return samples, results
 
 
-def run_parallel(pool, total_episodes, beta, student_state, teacher_path, seed, record):
+def run_parallel(pool, total_episodes, beta, student_state, teacher_path, seed, record,
+                 env_kwargs=None, env_name="place"):
     per_worker = int(np.ceil(total_episodes / WORKERS))
-    jobs = [(worker, per_worker, beta, student_state, teacher_path, seed + 1000 * worker, record)
+    jobs = [(worker, per_worker, beta, student_state, teacher_path, seed + 1000 * worker, record,
+             env_kwargs, env_name)
             for worker in range(WORKERS)]
     outputs = pool.map(rollout_worker, jobs)
     samples = None
@@ -195,8 +236,13 @@ def summarize(results):
         summary[station] = float(np.mean([r["success"] for r in rows]))
     summary["failed"] = int(sum(r["failed"] for r in results))
     summary["force_N"] = float(np.mean([r["max_force_N"] for r in results]))
-    summary["release_mm"] = float(np.mean([r["release_height_mm"] for r in results]))
-    summary["xy_mm"] = float(np.mean([r["xy_error_mm"] for r in results]))
+    # 품질 지표 이름이 환경마다 다르다: place 는 낙하 높이 · 안착 오차, pick 은 집기 오차를 본다.
+    # pick 에는 낙하 높이가 없다. lift_mm 는 들어올린 높이(오차가 아니다)이므로
+    # 품질 지표로는 집기 오차를 쓴다 — teacher 평가(evaluate)와 같은 기준이 된다.
+    drop = "release_height_mm" if "release_height_mm" in results[0] else "grasp_offset_mm"
+    offset = "xy_error_mm" if "xy_error_mm" in results[0] else "grasp_offset_mm"
+    summary["release_mm"] = float(np.mean([r[drop] for r in results]))
+    summary["xy_mm"] = float(np.mean([r[offset] for r in results]))
     return summary
 
 
@@ -229,18 +275,32 @@ def main():
     parser.add_argument("--teacher", default=str(BASE_DIR / "rl_runs" / "place_plate_v9_teacher_v3" / "best_model.zip"))
     parser.add_argument("--iterations", type=int, default=ITERATIONS)
     parser.add_argument("--episodes", type=int, default=EPISODES_PER_ITERATION)
+    parser.add_argument("--run-name", default="place_plate_v9_student")
+    parser.add_argument("--env", default="place", choices=ENV_CHOICES,
+                        help="place = 내려놓기, pick = 집기")
+    parser.add_argument("--end-to-end", action="store_true",
+                        help="B 안: 경로를 비전으로 보정하지 않고, 정책이 영상에서 장비 오차까지 읽는다")
     args = parser.parse_args()
 
+    env_kwargs = {}
+    if args.end_to_end:
+        env_kwargs = dict(corrected=False, residual_limit=0.012, residual_down=0.005, dual_scale=True)
+
+    global RUN_DIR
+    RUN_DIR = BASE_DIR / "rl_runs" / args.run_name
     RUN_DIR.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(8)
     print(f"device {DEVICE}   workers {WORKERS}   teacher {Path(args.teacher).parent.name}", flush=True)
 
     import place_plate_env_v9 as pe
-    probe = pe.PlacePlateEnv(obs_mode="visuotactile")
+    probe = make_env(args.env, obs_mode="visuotactile", **env_kwargs)
     state_size = probe.observation_space["state"].shape[0]
+    channels = image_channels(probe)
     probe.close()
+    print(f"mode {'B end-to-end' if args.end_to_end else 'A corrected'}   "
+          f"state {state_size}   image channels {channels}", flush=True)
 
-    student = StudentPolicy(state_size).to(DEVICE)
+    student = StudentPolicy(state_size, in_channels=channels).to(DEVICE)
     optimizer = torch.optim.Adam(student.parameters(), lr=LEARNING_RATE)
     dataset = None
     log = []
@@ -248,7 +308,8 @@ def main():
     start = time.perf_counter()
 
     with mp.get_context("spawn").Pool(WORKERS) as pool:
-        teacher_eval = summarize(run_parallel(pool, EVAL_EPISODES, 1.0, None, args.teacher, 90_000, False)[1])
+        teacher_eval = summarize(run_parallel(pool, EVAL_EPISODES, 1.0, None, args.teacher, 90_000, False,
+                                              env_kwargs, args.env)[1])
         print(f"teacher (privileged) success {teacher_eval['success'] * 100:.1f}%  "
               f"force {teacher_eval['force_N']:.1f}N  drop {teacher_eval['release_mm']:.2f}mm", flush=True)
 
@@ -256,7 +317,7 @@ def main():
             beta = BETAS[min(iteration, len(BETAS) - 1)]
             student_state = None if iteration == 0 else {k: v.cpu() for k, v in student.state_dict().items()}
             samples, _ = run_parallel(pool, args.episodes, beta, student_state, args.teacher,
-                                      1_000 * iteration, True)
+                                      1_000 * iteration, True, env_kwargs, args.env)
 
             if dataset is None:
                 dataset = samples
@@ -269,7 +330,7 @@ def main():
             loss = train_student(student, dataset, optimizer)
             student_state = {k: v.cpu() for k, v in student.state_dict().items()}
             evaluation = summarize(run_parallel(pool, EVAL_EPISODES, 0.0, student_state,
-                                                args.teacher, 50_000, False)[1])
+                                                args.teacher, 50_000, False, env_kwargs, args.env)[1])
             entry = {"iteration": iteration, "beta": beta, "loss": loss,
                      "samples": int(len(dataset["action"])),
                      "minutes": round((time.perf_counter() - start) / 60.0, 1), **evaluation}

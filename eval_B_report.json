@@ -1,0 +1,108 @@
+{
+  "env_kwargs": {
+    "corrected": false,
+    "residual_limit": 0.012,
+    "residual_down": 0.005,
+    "dual_scale": true
+  },
+  "episodes": 50,
+  "B_nominal": {
+    "fluent_plate": {
+      "success": 0.12,
+      "force_N": 33.49997328210502,
+      "release_mm": 2.9218386367241034,
+      "xy_mm": 3.698727121946197,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.4,
+      "force_N": 29.18552150272951,
+      "release_mm": 2.0417598674089743,
+      "xy_mm": 3.453148142496865,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.06,
+      "force_N": 34.89346341482323,
+      "release_mm": 2.9372714857870452,
+      "xy_mm": 3.325669416833802,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.26,
+      "force_N": 28.892653185907907,
+      "release_mm": 2.4091090800455417,
+      "xy_mm": 3.3187305938804843,
+      "jams": 0
+    },
+    "OVERALL": 0.21000000000000002
+  },
+  "B_student": {
+    "fluent_plate": {
+      "success": 0.9,
+      "force_N": 12.47843255217745,
+      "release_mm": 0.5535482805071745,
+      "xy_mm": 0.7979058960224441,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.96,
+      "force_N": 10.496669365158773,
+      "release_mm": 0.39334145277142957,
+      "xy_mm": 0.717333804791447,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.84,
+      "force_N": 12.828016727040321,
+      "release_mm": 0.6206388003877406,
+      "xy_mm": 0.8057785752333357,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.98,
+      "force_N": 11.603038221991813,
+      "release_mm": 0.4007043696185075,
+      "xy_mm": 0.8375917971247949,
+      "jams": 0
+    },
+    "OVERALL": 0.9199999999999999
+  },
+  "B_student_blind": {
+    "fluent_plate": {
+      "success": 0.0,
+      "force_N": 69.01093350199014,
+      "release_mm": 3.8925833509659458,
+      "xy_mm": 9.049408250004111,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.0,
+      "force_N": 75.97862887813528,
+      "release_mm": 4.019894838314255,
+      "xy_mm": 9.006831972835116,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.0,
+      "force_N": 48.048368528981385,
+      "release_mm": 3.999125273408723,
+      "xy_mm": 8.437658632837277,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.0,
+      "force_N": 61.40407067929235,
+      "release_mm": 3.953173332814164,
+      "xy_mm": 8.628379679478373,
+      "jams": 0
+    },
+    "OVERALL": 0.0
+  },
+  "A": {
+    "baseline": 0.56,
+    "student": 0.9349999999999999,
+    "student_blind": 0.15000000000000002
+  },
+  "image_contribution": 0.9199999999999999
+}
