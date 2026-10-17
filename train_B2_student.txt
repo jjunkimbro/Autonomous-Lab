@@ -1,0 +1,17 @@
+device cuda   workers 12   teacher place_plate_B2_teacher
+mode B end-to-end   state 12   image channels 8
+teacher (privileged) success 96.4%  force 17.8N  drop 0.67mm
+C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_student_v9.py:268: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:821.)
+  total += float(loss) * len(index)
+[iter 0] beta 1.0  loss 0.0158  n  16055  student  31.0%  force  48.0N  drop 3.33mm  fluent 0.14  incuba 0.45  reader 0.26  sorter 0.38
+[iter 1] beta 0.5  loss 0.0036  n  32486  student  48.8%  force  32.2N  drop 2.74mm  fluent 0.55  incuba 0.36  reader 0.55  sorter 0.50
+[iter 2] beta 0.3  loss 0.0022  n  49529  student  76.8%  force  18.6N  drop 1.58mm  fluent 0.69  incuba 0.71  reader 0.90  sorter 0.76
+[iter 3] beta 0.2  loss 0.0014  n  65811  student  94.0%  force  15.4N  drop 0.62mm  fluent 0.95  incuba 0.93  reader 0.90  sorter 0.98
+[iter 4] beta 0.1  loss 0.0011  n  82031  student  87.5%  force  15.3N  drop 1.31mm  fluent 0.90  incuba 0.76  reader 0.98  sorter 0.86
+[iter 5] beta 0.0  loss 0.0007  n  99643  student  95.8%  force  11.9N  drop 0.56mm  fluent 0.98  incuba 0.98  reader 0.90  sorter 0.98
+[iter 6] beta 0.0  loss 0.0005  n 115530  student  92.3%  force  11.6N  drop 0.59mm  fluent 0.90  incuba 0.93  reader 0.90  sorter 0.95
+[iter 7] beta 0.0  loss 0.0004  n 131427  student  96.4%  force  15.2N  drop 0.77mm  fluent 1.00  incuba 0.93  reader 1.00  sorter 0.93
+
+best student success 96.4%   teacher 96.4%
+Output : C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\rl_runs\place_plate_B2_student

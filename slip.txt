@@ -1,0 +1,43 @@
+
+=== 동시 1.2 (관절 1.2 rad/s, 레일 0.30 m/s) ===
+  출발 -> 도착                                        레일      미끄러짐     yaw      측면      진입     초
+        fluent_plate -> incubator_plate        20mm    20.13mm   2.96d  20.31mm   2.67mm   1.2
+     incubator_plate -> fluent_plate           29mm     4.85mm   2.32d   3.92mm   2.30mm   1.2
+   sorter_left_plate -> fluent_plate          192mm   152.79mm  67.81d 147.86mm  36.04mm   2.9
+        fluent_plate -> reader_plate           51mm     1.44mm   0.00d   0.81mm   1.68mm   2.9
+
+=== 순차 1.2 (관절 1.2 rad/s, 레일 0.30 m/s) ===
+  출발 -> 도착                                        레일      미끄러짐     yaw      측면      진입     초
+        fluent_plate -> incubator_plate        20mm    19.48mm   1.79d  19.75mm   1.86mm   1.6
+     incubator_plate -> fluent_plate           29mm     5.56mm   1.64d   4.79mm   1.60mm   1.6
+   sorter_left_plate -> fluent_plate          192mm   154.07mm  78.50d 148.09mm  40.95mm   3.8
+        fluent_plate -> reader_plate           51mm     1.44mm   0.00d   0.81mm   1.68mm   3.4
+
+=== 순차 0.5 (관절 0.5 rad/s, 레일 0.12 m/s) ===
+  출발 -> 도착                                        레일      미끄러짐     yaw      측면      진입     초
+        fluent_plate -> incubator_plate        20mm    20.05mm   1.56d  20.38mm   1.14mm   2.9
+     incubator_plate -> fluent_plate           29mm     5.24mm   1.59d   4.49mm   1.74mm   3.0
+   sorter_left_plate -> fluent_plate          192mm   160.64mm  82.76d 157.30mm  30.46mm   8.4
+        fluent_plate -> reader_plate           51mm     0.61mm   0.00d   0.80mm   0.85mm   7.3
+
+=== 순차 0.2 (관절 0.2 rad/s, 레일 0.05 m/s) ===
+  출발 -> 도착                                        레일      미끄러짐     yaw      측면      진입     초
+        fluent_plate -> incubator_plate        20mm    20.56mm   1.44d  20.90mm   0.73mm   6.4
+     incubator_plate -> fluent_plate           29mm     3.43mm   0.92d   2.98mm   0.76mm   6.6
+   sorter_left_plate -> fluent_plate          192mm   169.84mm  81.21d 165.22mm  36.35mm  20.1
+        fluent_plate -> reader_plate           51mm     0.24mm   0.00d   0.80mm   0.48mm  17.3
+
+=== 요약 ===
+  동시 1.2  n= 12  미끄러짐 평균 44.80 최대 177.85  측면 평균 43.22 p95 154.90 최대 168.52  진입 p95 39.88 최대 55.36  이동  2.1s
+  순차 1.2  n= 12  미끄러짐 평균 45.14 최대 180.83  측면 평균 43.36 p95 155.38 최대 171.91  진입 p95 44.71 최대 54.58  이동  2.6s
+  순차 0.5  n= 12  미끄러짐 평균 46.64 최대 174.53  측면 평균 45.74 p95 161.45 최대 171.31  진입 p95 33.13 최대 36.03  이동  5.4s
+  순차 0.2  n= 12  미끄러짐 평균 48.52 최대 181.06  측면 평균 47.48 p95 175.39 최대 176.32  진입 p95 42.26 최대 49.02  이동 12.6s
+
+  미끄러짐이 가장 작은 설정: 순차 1.2
+
+--- IN_HAND_ERROR 권고 (순차 이동 기준) ---
+  현재   진입 ±2.0 mm,  측면 ≡ 0
+  실측   진입 p95 44.71 mm,  측면 p95 155.38 mm
+  권고   진입 ±45.0 mm,  측면 ±155.5 mm (3축으로 확장)
+
+Output : slip_report.json

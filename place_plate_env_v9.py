@@ -89,6 +89,23 @@ RAIL_LIMITS = (0.0, 0.75)
 RAIL_SAFETY = 0.12                     # 하드 스톱에서 추가로 띄우는 여유
 ANCHOR_PROBE = ("SET_DOWN", "APPROACH_LIFTED")
 
+# 실제 장비에서는 레일과 팔을 동시에 움직이면 제어가 어렵다. 에피소드 중 무엇이 움직이는지
+# 공칭 경로로 재보니 (정책 잔차 없이) 이미 분리돼 있었다:
+#
+#   장비        레일      shoulder   elbow    진입축이 레일축과
+#   Fluent      0.0 mm     6.64 d    4.92 d   수직  -> 팔만 움직인다
+#   Reader      0.0 mm     7.99 d    4.15 d   수직  -> 팔만 움직인다
+#   소터        0.0 mm     5.83 d    5.82 d   수직  -> 팔만 움직인다
+#   배양기     40.7 mm     0.22 d    1.40 d   평행  -> 레일만 움직인다
+#
+# 즉 동시에 움직이는 구성은 없다. 둘이 같이 움직이는 것은 정책 잔차가 레일축 방향을 보정할 때뿐이고
+# (세 장비에서 3~6 mm), 그것은 앵커로 피할 수 없다 — 진입축과 레일축의 각도가 기하로 정해지기
+# 때문이다. 레일 이동이 가장 작은 앵커를 고르게 해 봤지만 배양기는 39.1 -> 39.6 mm 로 그대로였다.
+# 아래 플래그는 그 시도를 재현할 수 있게 남겨 둔 것이고, 기본값은 끈다.
+MINIMISE_RAIL_TRAVEL = False
+ANCHOR_CANDIDATES = 24              # solve_anchor 후보를 이만큼까지만 본다
+EPISODE_PROBE = ("APPROACH_LIFTED", "INSERT_HOVER", "SET_DOWN")
+
 # IK (감쇠 최소제곱). 감쇠가 없으면 특이점 근처에서 발산한다.
 IK_ITERATIONS = 12
 IK_DAMPING = 0.02
@@ -109,7 +126,13 @@ DUAL_FINE_CENTER_TCP = np.array([0.0425, -0.012, 0.125])
 BRIGHTNESS_RANGE = (0.75, 1.25)         # 조명 변화 (sim2real)
 
 STATION_ERROR = np.array([0.005, 0.005, 0.002, math.radians(2.0)])
-IN_HAND_ERROR = np.array([0.002, math.radians(1.0)])
+# 손 안 plate 어긋남 — (TCP x 측면, TCP y 측면, TCP z 진입 방향, yaw).
+#
+# 예전에는 [진입 방향, yaw] 2 개뿐이었고 측면 두 축은 항상 정확히 0 이었다. 그래서 집기 -> 이동 ->
+# 놓기 체인을 실제로 돌려 보니 놓기가 학습한 적 없는 상태를 받아 0.92 -> 0.54 로 무너졌다
+# (성공 시 측면 0.82 mm 대 실패 시 7.91 mm). 이동을 PRE_LOADED 경유 + 레일/팔 분리로 고친 뒤
+# 실측 p95 는 진입 1.61 mm, 측면 1.45 mm 였다. 거기에 여유를 두고 잡는다.
+IN_HAND_ERROR = np.array([0.002, 0.002, 0.0025, math.radians(1.0)])
 # 비전 측정 오차 표준편차 (x, y, z m, yaw rad).
 # v10 포인트클라우드 인지(마커 없음)를 장비별 20 회씩 재서 얻은 축별 RMS (measure_sigma_v10.py).
 #   (vision_pointcloud_v10: 깊이 잔차 + RGB 밝기 잔차 정합)
@@ -232,6 +255,21 @@ class PlacePlateEnv(gym.Env):
         self.force = np.zeros(6)
 
     @staticmethod
+    def _rail_travel(solver, anchor, points, origin, names):
+        """공칭 경로를 따라갈 때 레일이 움직이는 폭 (m). 작을수록 팔만으로 일한다."""
+        j1, j5 = float(anchor[1]), float(anchor[4])
+        seed = (float(anchor[0]), float(anchor[2]), float(anchor[3]))
+        rails = []
+        for name in names:
+            if name not in points:
+                continue
+            x, error = solver.solve_fixed(np.asarray(points[name]), j1, j5, seed)
+            if error > 0.002:
+                return float("inf")
+            rails.append(float(x[0]))
+        return (max(rails) - min(rails)) if rails else float("inf")
+
+    @staticmethod
     def _rail_span(solver, anchor, points, origin):
         """이 앵커(J1 · J5 고정)로 장비 오차 상자를 따라갈 때 레일이 가야 하는 범위.
 
@@ -268,13 +306,21 @@ class PlacePlateEnv(gym.Env):
             origin, rotation = scene.station_frame(interface)
 
             anchor = fallback = None
-            for candidate in solver.solve_anchor(points["SET_DOWN"], z):
+            best_travel = float("inf")
+            for index, candidate in enumerate(solver.solve_anchor(points["SET_DOWN"], z)):
                 if fallback is None:
                     fallback = candidate
+                if index >= ANCHOR_CANDIDATES:
+                    break
                 span = self._rail_span(solver, candidate, points, origin)
-                if span is not None and span[0] >= low_limit and span[1] <= high_limit:
+                if span is None or span[0] < low_limit or span[1] > high_limit:
+                    continue
+                if not MINIMISE_RAIL_TRAVEL:
                     anchor = candidate
                     break
+                travel = self._rail_travel(solver, candidate, points, origin, EPISODE_PROBE)
+                if travel < best_travel:
+                    anchor, best_travel = candidate, travel
             if anchor is None:
                 # 레일 안에 드는 후보가 없다 — 예전처럼 첫 후보를 쓰되 조용히 넘어가지 않는다.
                 anchor = fallback
@@ -354,7 +400,8 @@ class PlacePlateEnv(gym.Env):
         self.station = self.station_data[self.station_name]
         r = self.rng if self.randomize else None
         self.truth = np.array(options.get("delta", r.uniform(-STATION_ERROR, STATION_ERROR) if r else np.zeros(4)))
-        self.in_hand = np.array(options.get("in_hand", r.uniform(-IN_HAND_ERROR, IN_HAND_ERROR) if r else np.zeros(2)))
+        self.in_hand = np.array(options.get("in_hand", r.uniform(-IN_HAND_ERROR, IN_HAND_ERROR)
+                                            if r else np.zeros(4)))
         noise = (r.normal(0.0, MEASURE_SIGMA[self.station_name] * r.uniform(*MEASURE_SIGMA_SCALE))
                  if r else np.zeros(4))
         self.measured = self.truth + np.array(options.get("measure_noise", noise))
@@ -388,9 +435,9 @@ class PlacePlateEnv(gym.Env):
 
         # plate 를 손에 (+ 진입 방향 어긋남, yaw)
         tcp, rot = d.site_xpos[self.site].copy(), d.site_xmat[self.site].reshape(3, 3).copy()
-        local = HELD_CENTER + np.array([0.0, 0.0, self.in_hand[0]])
+        local = HELD_CENTER + np.array([self.in_hand[0], self.in_hand[1], self.in_hand[2]])
         plate_rot = rot @ HELD_AXES
-        yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0]) + self.in_hand[1]
+        yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0]) + self.in_hand[3]
         d.qpos[self.plate_qpos:self.plate_qpos + 3] = tcp + rot @ local
         quat = np.zeros(4)
         mujoco.mju_axisAngle2Quat(quat, np.array([0.0, 0.0, 1.0]), yaw)
@@ -411,7 +458,7 @@ class PlacePlateEnv(gym.Env):
         self.brightness = float(self.rng.uniform(*BRIGHTNESS_RANGE)) if self.randomize else 1.0
         self.reference = self._plate_in_tcp()
         self.steps = 0
-        self.in_hand_est = self._measure_in_hand() if self.obs_mode == "measured" else self.in_hand[0]
+        self.in_hand_est = self._measure_in_hand() if self.obs_mode == "measured" else self.in_hand[2]
         return self._obs(), self._info(False, False)
 
     def _measure_in_hand(self):
@@ -547,7 +594,7 @@ class PlacePlateEnv(gym.Env):
         if not hasattr(self, "station"):
             self.station = self.station_data[self.stations[0]]
             self.truth = self.measured = self.path_delta = np.zeros(4)
-            self.in_hand = np.zeros(2)
+            self.in_hand = np.zeros(4)
             self.time, self.residual, self.yaw_residual, self.max_force = 0.0, np.zeros(3), 0.0, 0.0
             self.p_down = self.station["points"]["SET_DOWN"]
             self.slide_time = self.descent_time = 1.0
@@ -568,7 +615,7 @@ class PlacePlateEnv(gym.Env):
                          if hasattr(self, "reference") else np.zeros(3))
             error = self._plate_vs_holder() if hasattr(self, "reference") else np.zeros(4)
             parts.append(error[:3] * 200.0)
-            parts.append([math.degrees(error[3]), self._tilt() / 2.0, self.in_hand[0] * 500.0])
+            parts.append([math.degrees(error[3]), self._tilt() / 2.0, self.in_hand[2] * 500.0])
         elif self.obs_mode == "measured":
             # teacher 와 같은 자리에 측정 기반 추정값 (기울기 · 손 안 yaw 는 측정하지 않음 → 0)
             ready = hasattr(self, "reference") and hasattr(self, "in_hand_est")
@@ -697,7 +744,7 @@ class PlacePlateEnv(gym.Env):
         return {"station": getattr(self, "station_name", None), "success": bool(seated), "failed": bool(failed),
                 "released": bool(getattr(self, "released", False)), "xy_error_mm": float(np.linalg.norm(error[:2]) * 1000),
                 "z_error_mm": float(error[2] * 1000), "yaw_error_deg": float(math.degrees(error[3])), "tilt_deg": self._tilt(),
-                "max_force_N": float(getattr(self, "max_force", 0.0)), "in_hand_mm": float(self.in_hand[0] * 1000),
+                "max_force_N": float(getattr(self, "max_force", 0.0)), "in_hand_mm": float(np.linalg.norm(self.in_hand[:3]) * 1000),
                 "release_height_mm": float(getattr(self, "release_height", 0.0) * 1000)}
 
 

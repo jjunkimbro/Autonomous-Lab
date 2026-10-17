@@ -1,0 +1,32 @@
+집기 정책 8채널, 놓기 정책 8채널
+
+출발 -> 도착                                         집기     운반     놓기
+        fluent_plate -> incubator_plate      1.00   1.00   0.00
+        fluent_plate -> reader_plate         0.90   0.90   0.80
+        fluent_plate -> sorter_left_plate    1.00   1.00   0.00
+     incubator_plate -> fluent_plate         1.00   1.00   0.10
+     incubator_plate -> reader_plate         1.00   1.00   0.50
+     incubator_plate -> sorter_left_plate    1.00   1.00   0.50
+        reader_plate -> fluent_plate         1.00   1.00   0.90
+        reader_plate -> incubator_plate      1.00   0.90   0.80
+        reader_plate -> sorter_left_plate    1.00   1.00   0.90
+   sorter_left_plate -> fluent_plate         1.00   0.00   0.00
+   sorter_left_plate -> incubator_plate      1.00   1.00   0.70
+   sorter_left_plate -> reader_plate         0.90   0.90   0.60
+
+--- 단계별 ---
+  집기                    0.983
+  운반 | 집기 성공        0.907
+  놓기 | 운반 성공        0.542
+  전체 이송              0.483
+
+  곱셈 추정치 (0.99 x 0.92)  0.911
+  실측                        0.483
+
+  이동 중 미끄러짐  평균 19.774 mm  최대 261.240 mm
+
+--- 놓기 정책이 학습 중 본 적 없는 축 (TCP x, y) ---
+  놓기 성공 시 측면 어긋남  0.820 mm  (n=58)
+  놓기 실패 시 측면 어긋남  7.911 mm  (n=49)
+
+Output : eval_transfer_report.json

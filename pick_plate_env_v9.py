@@ -101,13 +101,24 @@ class PickPlateEnv(pp.PlacePlateEnv):
             origin, rotation = scene.station_frame(interface)
 
             anchor = fallback = None
-            for candidate in solver.solve_anchor(points["GRASP"], z):
+            best_travel = float("inf")
+            for index, candidate in enumerate(solver.solve_anchor(points["GRASP"], z)):
                 if fallback is None:
                     fallback = candidate
+                if index >= pp.ANCHOR_CANDIDATES:
+                    break
                 span = self._rail_span(solver, candidate, points, origin)
-                if span is not None and span[0] >= low_limit and span[1] <= high_limit:
+                if span is None or span[0] < low_limit or span[1] > high_limit:
+                    continue
+                if not pp.MINIMISE_RAIL_TRAVEL:
                     anchor = candidate
                     break
+                # 집기 쪽 공칭 경로로 레일 이동을 잰다.
+                travel = pp.PlacePlateEnv._rail_travel(
+                    solver, candidate, points, origin,
+                    ("APPROACH", "GRASP", "LIFT_OFF", "EXTRACT"))
+                if travel < best_travel:
+                    anchor, best_travel = candidate, travel
             if anchor is None:
                 anchor = fallback
                 print(f"[pick_plate_env] {station}: 레일 여유를 만족하는 앵커가 없어 첫 후보를 쓴다 "

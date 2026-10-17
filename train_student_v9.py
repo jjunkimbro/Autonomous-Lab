@@ -117,7 +117,7 @@ def teacher_observation(env, state):
     truth = np.concatenate((
         (env._plate_in_tcp() - pe.HELD_CENTER) * 200.0,
         error[:3] * 200.0,
-        [math.degrees(error[3]), env._tilt() / 2.0, env.in_hand[0] * 500.0],
+        [math.degrees(error[3]), env._tilt() / 2.0, env.in_hand[2] * 500.0],
     ))
     return np.concatenate((state, truth)).astype(np.float32)
 
