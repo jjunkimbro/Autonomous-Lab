@@ -1,0 +1,112 @@
+{
+  "env": "place",
+  "run": "place_plate_A3_student",
+  "appearance": false,
+  "env_kwargs": {
+    "corrected": true,
+    "residual_limit": null,
+    "residual_down": null,
+    "dual_scale": true,
+    "appearance": false
+  },
+  "episodes": 50,
+  "B_nominal": {
+    "fluent_plate": {
+      "success": 0.4,
+      "force_N": 12.4806561311814,
+      "release_mm": 1.1666539468372794,
+      "xy_mm": 1.1110894022241213,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.1,
+      "force_N": 31.81338903699743,
+      "release_mm": 2.8804250616835954,
+      "xy_mm": 3.8287352608771896,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.38,
+      "force_N": 13.981213156774611,
+      "release_mm": 1.0213756689354136,
+      "xy_mm": 0.9904957222972705,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.64,
+      "force_N": 20.523087455764866,
+      "release_mm": 0.7616618186681001,
+      "xy_mm": 0.9815305793044412,
+      "jams": 0
+    },
+    "OVERALL": 0.38
+  },
+  "B_student": {
+    "fluent_plate": {
+      "success": 1.0,
+      "force_N": 6.482838329479621,
+      "release_mm": 0.28918069467086754,
+      "xy_mm": 0.3165394368237778,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.76,
+      "force_N": 11.114886804963412,
+      "release_mm": 0.7262802619154217,
+      "xy_mm": 0.837305296508493,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 1.0,
+      "force_N": 6.565346872996802,
+      "release_mm": 0.357462420624135,
+      "xy_mm": 0.4148395797085664,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.98,
+      "force_N": 7.010591279154924,
+      "release_mm": 0.3251903040122195,
+      "xy_mm": 0.3796666591954274,
+      "jams": 0
+    },
+    "OVERALL": 0.9349999999999999
+  },
+  "B_student_blind": {
+    "fluent_plate": {
+      "success": 0.24,
+      "force_N": 13.517996323038979,
+      "release_mm": 1.6704817560165772,
+      "xy_mm": 1.290862572365868,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.26,
+      "force_N": 35.748808371283054,
+      "release_mm": 2.3941684245667427,
+      "xy_mm": 2.700765570072166,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.24,
+      "force_N": 25.919411928616086,
+      "release_mm": 1.7904646299820959,
+      "xy_mm": 1.1041326202486368,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.56,
+      "force_N": 22.242415333579512,
+      "release_mm": 1.6431964716612593,
+      "xy_mm": 1.2748552235411312,
+      "jams": 0
+    },
+    "OVERALL": 0.325
+  },
+  "A": {
+    "baseline": 0.56,
+    "student": 0.9349999999999999,
+    "student_blind": 0.15000000000000002
+  },
+  "image_contribution": 0.6099999999999999
+}

@@ -10,6 +10,7 @@
 # 결과:
 #   rl_runs/place_plate_v9_teacher/ (best_model.zip, eval_log.json)
 
+import ast
 import argparse
 import json
 import time
@@ -121,6 +122,8 @@ def main():
     parser.add_argument("--env", default="place", choices=("place", "pick"),
                         help="place = 내려놓기, pick = 집기")
     parser.add_argument("--obs-mode", default="privileged", choices=("privileged", "measured"))
+    parser.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
+                        help="환경 인자 덮어쓰기 (예: --set perception_random=True). --end-to-end 뒤에 적용")
     parser.add_argument("--end-to-end", action="store_true",
                         help="B 안: 경로를 비전으로 보정하지 않는다 (teacher 는 정답을 보므로 영상은 안 씀)")
     args = parser.parse_args()
@@ -128,6 +131,9 @@ def main():
     ENV_NAME = args.env
     if args.end_to_end:
         ENV_KWARGS = dict(corrected=False, residual_limit=0.012, residual_down=0.005)
+    for item in args.set:
+        key, _, value = item.partition("=")
+        ENV_KWARGS[key.strip()] = ast.literal_eval(value.strip())
     global RUN_DIR, OBS_MODE
     OBS_MODE = args.obs_mode
     if args.run_name:

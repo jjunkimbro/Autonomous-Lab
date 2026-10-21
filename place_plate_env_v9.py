@@ -125,6 +125,29 @@ DUAL_FINE_PIXELS = 96           # 3 배 렌더에서 96 px = 52 mm (픽셀당 0.
 DUAL_FINE_CENTER_TCP = np.array([0.0425, -0.012, 0.125])
 BRIGHTNESS_RANGE = (0.75, 1.25)         # 조명 변화 (sim2real)
 
+# ======================================================================
+# 외관 현실성 (sim2real)
+# ======================================================================
+# B 구조에서 성능의 전량은 정책이 받는 96x96 ROI 영상에서 나온다 (영상을 가리면 0.01).
+# 그런데 그 영상은 MuJoCo 렌더러가 만든 것이고, 예전 랜덤화는 밝기 한 축뿐이었다. 실제 D415 로
+# 찍은 플라스틱 plate 는 반사 · 그림자 · 화이트밸런스 · 노출이 전혀 다르므로, 렌더러 특유의
+# 단서에 기대 학습하면 실물에서 무너진다. 두 갈래로 나눠 흔든다.
+#
+#   장면 단위 (에피소드마다 한 번) — 조명 위치 · 세기 · 반사, 재질 반짝임, 물체 색
+#   센서 단위 (프레임마다)        — 화이트밸런스, 감마, 비네팅, 신호 비례 잡음, 깊이 결함
+#
+# 끌 수 있게 둔다: 켜고 끈 같은 정책을 비교해야 "외관에 둔감한가" 를 수치로 말할 수 있다.
+# 외관 랜덤화는 appearance_v10 이 소유한다 (인지 쪽 vision_perception_v8 도 같은 분포를 쓴다).
+# 기존 이름으로 참조하는 코드가 있어 여기서 재수출한다.
+from appearance_v10 import (  # noqa: E402
+    APPEARANCE_REALISM, LIGHT_POS_JITTER, LIGHT_DIR_JITTER, LIGHT_DIFFUSE_RANGE,
+    LIGHT_SPECULAR_RANGE, LIGHT_OFF_CHANCE, HEADLIGHT_AMBIENT_RANGE,
+    MATERIAL_SPECULAR_RANGE, MATERIAL_SHININESS_RANGE, MATERIAL_REFLECTANCE_MAX,
+    GEOM_TINT_JITTER, WHITE_BALANCE_JITTER, GAMMA_RANGE, VIGNETTE_RANGE,
+    SHOT_NOISE_SCALE, READ_NOISE_RANGE, BLUR_CHANCE, DEPTH_HOLE_CHANCE,
+    DEPTH_HOLE_FRACTION, DEPTH_EDGE_FLARE, DEPTH_BIAS_RANGE, DEPTH_QUANTUM,
+    NOMINAL_CAMERA, Appearance)
+
 STATION_ERROR = np.array([0.005, 0.005, 0.002, math.radians(2.0)])
 # 손 안 plate 어긋남 — (TCP x 측면, TCP y 측면, TCP z 진입 방향, yaw).
 #
@@ -149,6 +172,43 @@ MEASURE_SIGMA = {
 # 위 값은 시뮬레이션 인지 정확도다. 실제 카메라는 조명 변화 · 반사 · 캘리브레이션 오차로 더 나쁘다.
 # 낙관적 조건에만 맞춰 학습하면 실전에서 무너지므로, 에피소드마다 이 배율로 키운다.
 MEASURE_SIGMA_SCALE = (1.0, 4.0)
+# 위 MEASURE_SIGMA 는 **공칭 외관**에서 측정됐다. measure_sigma_appearance_v10.py 로 현실적 외관에서
+# 다시 재면 이렇게 커진다 (깊이 결함 배율 0.1 조건 = 정합 거부 0/100, 즉 "수용되었지만 틀린" 경우).
+# 거부까지 포함하는 조건은 perception_fail 로 따로 모델링한다.
+# 같은 자세에서 3 장 찍어 중앙값을 내면 (measure_multiview_v10.py) 이만큼 줄어든다.
+# 3 회 캡처는 0.1 초 수준이라 거의 공짜다. 장비마다 이득이 2 배 이상 다른 것이
+# 판단 RL(재관측 여부)의 근거다 — Fluent 0.44 배, 배양기 0.94 배.
+MEASURE_SIGMA_REALISTIC_FUSED = {
+    "fluent_plate": np.array([0.000178, 0.000204, 0.000094, math.radians(0.112)]),
+    "incubator_plate": np.array([0.000136, 0.001834, 0.000211, math.radians(0.538)]),
+    "reader_plate": np.array([0.000208, 0.000146, 0.000085, math.radians(0.171)]),
+    "sorter_left_plate": np.array([0.000074, 0.000161, 0.000086, math.radians(0.058)]),
+}
+
+# C 안: 인지 품질을 에피소드마다 공칭~완전실패까지 흔든다. A3 가 무너진 이유는 구조가 아니라
+# "인지가 정확하다"는 고정 가정 위에서 학습된 것이었다 (실측 σ 를 넣으면 0.92 -> 0.58).
+# 실측 범위: 공칭 대비 최대 46배 (measure_sigma_appearance_v10.py, RGB 외관만으로도).
+# 품질은 **두 실측 끝점 사이를 보간**한다. 전 장비에 같은 배율을 걸면 안 된다 —
+# 46 배는 소터 고유값이고, 인큐베이터는 공칭 σ 가 이미 1.2 mm 라 2.5 배였다.
+# 같은 배율을 걸면 인큐베이터 σ 가 37 mm 가 되어 장비 오차(±5 mm)보다 커진다.
+#   sigma = (1-t)*MEASURE_SIGMA + t*MEASURE_SIGMA_REALISTIC,  t ~ U(0, 1)
+# 그 위에 기존 (1~4배) 를 곱하면 최악이 소터 y 19.8 mm 로, x1 조건 실측(19.18 mm)과 맞는다.
+# 정합이 아예 거부될 확률의 범위. 실측은 깊이 결함 크기에 따라 0 ~ 0.85.
+PERCEPTION_FAIL_RANGE = (0.0, 0.85)
+# 보고된 신뢰도가 실제 오차와 어긋나는 정도 (로그정규). 오늘 측정에서 정합은 σ 가 20~46배
+# 커진 경우에도 inlier 를 정상으로 보고했다 — 신뢰도는 거짓말을 한다. 그 거짓말까지 겪게 한다.
+CONFIDENCE_ERROR_SIGMA = 0.8
+# 되돌릴 수 있는 보정만 신뢰한다. 보고된 측면 σ 가 잔차 예산의 이 비율을 넘으면 보정을 버리고
+# 명목 경로로 간다. 소터에서 σ 가 17 mm 까지 가는데 잔차는 ±12 mm 이므로, 그런 보정을 따라가면
+# 복구가 불가능하다 — 틀린 보정보다 보정 없음이 낫다. 판단 RL 이 나중에 이 문턱을 대신 고른다.
+CONFIDENCE_GATE = 1.0 / 3.0
+
+MEASURE_SIGMA_REALISTIC = {
+    "fluent_plate": np.array([0.000644, 0.000169, 0.000111, math.radians(0.216)]),
+    "incubator_plate": np.array([0.000213, 0.002130, 0.000226, math.radians(0.598)]),
+    "reader_plate": np.array([0.000262, 0.000107, 0.000066, math.radians(0.168)]),
+    "sorter_left_plate": np.array([0.001091, 0.004964, 0.000886, math.radians(0.313)]),
+}
 FRICTION_RANGE = (0.7, 1.2)
 
 # 손 안 어긋남 측정 (flange D415 깊이, 시작 자세): plate 먼 쪽 끝을 TCP 진입 방향 점 개수 분포가 끊기는 곳으로 찾는다.
@@ -171,7 +231,9 @@ class PlacePlateEnv(gym.Env):
 
     def __init__(self, obs_mode="privileged", stations=s9.PLATE_STATIONS, randomize=True, seed=None, nominal_lift=True,
                  station_weights=None, corrected=True, residual_limit=None, residual_down=None, render_scale=1,
-                 roi_size=None, dual_scale=False):
+                 roi_size=None, dual_scale=False, appearance=None,
+                 measure_sigma=None, perception_fail=0.0, perception_random=False,
+                 confidence_gate=None, report_confidence=None, mixed=False):
         """corrected=False 가 B 안(end-to-end)이다.
 
         A 안: 비전이 잰 장비 자세로 경로를 먼저 옮기고, 정책은 남은 오차(주로 손 안 어긋남)만 다듬는다.
@@ -182,6 +244,26 @@ class PlacePlateEnv(gym.Env):
         super().__init__()
         self.station_weights = station_weights
         self.corrected = corrected
+        # 외관 현실성. None 이면 모듈 기본값을 따른다 (켜고 끈 정책을 비교하려고 인자로 뺐다).
+        self.appearance = APPEARANCE_REALISM if appearance is None else bool(appearance)
+        # 인지 성능을 바꿔 끼울 수 있게 한다. "realistic" 은 현실적 외관에서 실측한 σ.
+        if measure_sigma == "realistic":
+            measure_sigma = MEASURE_SIGMA_REALISTIC
+        elif measure_sigma == "fused":
+            measure_sigma = MEASURE_SIGMA_REALISTIC_FUSED
+        self.measure_sigma = MEASURE_SIGMA if measure_sigma is None else dict(measure_sigma)
+        # 정합이 아예 거부될 확률 (inlier_fraction < 0.60). 거부되면 보정값이 없어 명목 경로로 간다.
+        self.perception_fail = float(perception_fail)
+        # C 안. 인지 품질(σ 배율 · 거부 확률)을 에피소드마다 다시 뽑고, 그 신뢰도를 관측에 넣는다.
+        self.perception_random = bool(perception_random)
+        self.confidence_gate = CONFIDENCE_GATE if confidence_gate is None else float(confidence_gate)
+        # 신뢰도를 관측에 넣을지. 기본은 perception_random 과 같지만 따로 켤 수 있어야 한다 —
+        # C 정책을 **고정** 인지 조건에서 평가할 때도 상태 차원이 같아야 하기 때문이다.
+        self.report_confidence = (self.perception_random if report_confidence is None
+                                  else bool(report_confidence))
+        # 혼용 모드 (TransferEnv 전용): 집기는 B, 놓기는 C. 집기는 이미 0.989 라 보정이
+        # 더해줄 것이 없는데 인지 품질 랜덤화가 과제만 어렵게 만든다 (0.989 -> 0.922).
+        self.mixed = bool(mixed)
         self.dual_scale = dual_scale
         self.render_scale = 3 if dual_scale else render_scale
         self.residual_high = np.full(3, RESIDUAL_LIMIT if residual_limit is None else residual_limit)
@@ -210,6 +292,7 @@ class PlacePlateEnv(gym.Env):
         self.image_width, self.image_height = roi_size or WRIST_CAMERA["roi_size"]
         self.camera_id = mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_CAMERA, WRIST_CAMERA["name"])
         self.renderer = None
+        self._appearance_baseline()
         self.roi_origin = (0, 0)
         self._roi_pending = True
         self.brightness = 1.0
@@ -402,8 +485,7 @@ class PlacePlateEnv(gym.Env):
         self.truth = np.array(options.get("delta", r.uniform(-STATION_ERROR, STATION_ERROR) if r else np.zeros(4)))
         self.in_hand = np.array(options.get("in_hand", r.uniform(-IN_HAND_ERROR, IN_HAND_ERROR)
                                             if r else np.zeros(4)))
-        noise = (r.normal(0.0, MEASURE_SIGMA[self.station_name] * r.uniform(*MEASURE_SIGMA_SCALE))
-                 if r else np.zeros(4))
+        noise = self._sample_perception(r, options)
         self.measured = self.truth + np.array(options.get("measure_noise", noise))
 
         self.perturber.reset()
@@ -417,7 +499,9 @@ class PlacePlateEnv(gym.Env):
 
         # A 안은 비전 측정값으로 경로를 옮기고, B 안은 명목 경로를 그대로 쓴다.
         # B 안에서 장비는 실제로 self.truth 만큼 틀어져 있으므로 그 차이를 정책이 영상에서 읽어야 한다.
-        self.path_delta = self.measured if self.corrected else np.zeros(4)
+        use = self.corrected and not self.perception_failed and self.perception_trusted
+        self.path_delta = self.measured if use else np.zeros(4)
+        self.perception_used = bool(use)
         pts = self.station["points"]
         self.p_approach = self._transform(pts["APPROACH_LIFTED"], self.path_delta)
         self.p_hover = self._transform(pts["INSERT_HOVER"], self.path_delta)
@@ -454,8 +538,13 @@ class PlacePlateEnv(gym.Env):
         self.released = False
         self.max_force = 0.0
         self.release_height = 0.0
+        self.release_force = 0.0
         self._roi_pending = True
         self.brightness = float(self.rng.uniform(*BRIGHTNESS_RANGE)) if self.randomize else 1.0
+        if self.randomize and self.appearance:
+            self._randomize_appearance()
+        elif self.appearance:
+            self._restore_appearance()
         self.reference = self._plate_in_tcp()
         self.steps = 0
         self.in_hand_est = self._measure_in_hand() if self.obs_mode == "measured" else self.in_hand[2]
@@ -532,10 +621,16 @@ class PlacePlateEnv(gym.Env):
             self.grip = GRIP_OPEN
             # 정착 중 접촉도 같이 센다. 이걸 빼면 '놓기 전에만' 접촉력이 걸려서
             # 일찍 놓아 벌점을 피하는 것이 최적 전략이 된다 (낙하 배치).
+            # 놓은 뒤 정착 구간의 힘은 따로 센다. 실제 로봇이 "후퇴 중 걸렸는가"를
+            # 판단할 때 쓸 수 있는 유일한 힘 신호다 (삽입 중 최대 힘과 섞으면 구분이 안 된다).
             for _ in range(int(SETTLE_RELEASE / self.model.opt.timestep)):
                 self._control(self.q_target)
                 mujoco.mj_step(self.model, self.data)
-                force = max(force, self._contact_force())
+                contact = self._contact_force()
+                force = max(force, contact)
+                # getattr 로 받는다 — reset 을 거치지 않는 경로(TransferEnv.begin_place)가
+                # 초기화를 빠뜨리면 여기서 죽는다. 같은 패턴을 이미 네 번 겪었다.
+                self.release_force = max(getattr(self, 'release_force', 0.0), contact)
             seated = self._seated()
         self.max_force = max(self.max_force, force)
         reward = self._reward(action, force, seated, failed, release)
@@ -598,6 +693,8 @@ class PlacePlateEnv(gym.Env):
             self.time, self.residual, self.yaw_residual, self.max_force = 0.0, np.zeros(3), 0.0, 0.0
             self.p_down = self.station["points"]["SET_DOWN"]
             self.slide_time = self.descent_time = 1.0
+            self.sigma_reported = np.zeros(4)
+            self.perception_failed = False
         rotation = rot_z(self.path_delta[3]) @ self.station["rotation"]
         tcp = self.data.site_xpos[self.site]
         progress = min(1.0, self.time / max(self.slide_time + self.descent_time, 1e-6))
@@ -608,6 +705,14 @@ class PlacePlateEnv(gym.Env):
             [(self.data.qpos[self.finger_qpos[0]] - GRIP_CLOSED) * 200.0],
             [self._contact_force() / 20.0, self.max_force / 50.0],
         ]
+        if self.report_confidence:
+            # 인지가 보고하는 신뢰도. 실제 로봇도 아는 값이므로 student 에게도 준다.
+            # 보정을 얼마나 믿을지를 정책이 스스로 정하게 하는 입력이다.
+            # 축별 σ 는 mm / 도 단위로 (공칭이 0.0x mm 라 그냥 넣으면 거의 0 이 된다).
+            parts.append(np.concatenate((
+                self.sigma_reported[:3] * 1000.0,
+                [math.degrees(self.sigma_reported[3]),
+                 1.0 if self.perception_failed else 0.0])))
         if self.obs_mode == "privileged":
             # 손 안 plate 의 실제 위치는 시뮬레이터 정답이다. 실제 로봇에서는 잴 수 없으므로
             # teacher 에게만 준다. student 는 영상에서 읽어야 한다.
@@ -665,6 +770,57 @@ class PlacePlateEnv(gym.Env):
         top = int(np.clip(round(v - self.image_height / 2), 0, self.render_height - self.image_height))
         return left, top
 
+    # ------------------------------------------------------------------
+    # 외관 현실성
+    # ------------------------------------------------------------------
+    def _sample_perception(self, r, options):
+        """이번 에피소드의 인지 품질을 뽑고, 측정 잡음을 돌려준다.
+
+        집기 환경은 reset 을 전체 재정의하므로 여기를 공유하지 않으면 sigma_reported 가
+        없는 상태로 _state 에 들어간다 (외관 랜덤화에서 _camera 로 같은 일이 있었다).
+        """
+        # 이번 에피소드의 인지 품질. C 안은 공칭~완전실패까지 흔들어 정책이 보정을
+        # 맹신하지 않게 한다. 고정 모드에서는 기존 (1~4배) 그대로다.
+        base = self.measure_sigma[self.station_name]
+        scale = float(r.uniform(*MEASURE_SIGMA_SCALE)) if r is not None else 1.0
+        if self.perception_random and r is not None:
+            blend = float(r.random())
+            base = (1.0 - blend) * base + blend * MEASURE_SIGMA_REALISTIC[self.station_name]
+            fail_rate = float(r.uniform(*PERCEPTION_FAIL_RANGE))
+            self.perception_blend = blend
+        else:
+            fail_rate = self.perception_fail
+            self.perception_blend = 0.0
+        self.sigma_used = base * scale
+        noise = r.normal(0.0, self.sigma_used) if r else np.zeros(4)
+        # 정합 거부. 보정값을 쓸 수 없으므로 A 안도 명목 경로로 떨어진다.
+        self.perception_failed = bool(options.get(
+            "perception_failed", r is not None and r.random() < fail_rate))
+        # 인지가 **보고하는** 신뢰도. 실제 σ 와 로그정규로 어긋난다 — 오늘 측정에서 정합은
+        # σ 가 46 배 커진 경우에도 inlier 를 정상으로 보고했다. 그 거짓말을 학습 분포에 넣는다.
+        bias = (math.exp(r.normal(0.0, CONFIDENCE_ERROR_SIGMA))
+                if (r is not None and self.perception_random) else 1.0)
+        self.sigma_reported = self.sigma_used * bias
+        # 신뢰도 문턱. 보고된 측면 σ 가 잔차 예산의 confidence_gate 배를 넘으면 보정을 버린다.
+        lateral = float(np.hypot(self.sigma_reported[0], self.sigma_reported[1]))
+        self.perception_trusted = lateral <= self.confidence_gate * self.residual_high[0]
+        return noise
+
+    def _appearance_baseline(self):
+        self.appear = Appearance(self.model)
+
+    def _randomize_appearance(self):
+        self.appear.randomize(self.rng)
+
+    def _restore_appearance(self):
+        self.appear.restore()
+
+    def _camera_response(self, rgb):
+        return self.appear.camera_response(rgb, self.brightness, self.rng)
+
+    def _depth_realism(self, depth):
+        return self.appear.depth_realism(depth, self.rng)
+
     def _rgbd(self):
         # OpenGL context 는 환경마다 하나만 만든다 (worker 마다 여러 개 만들면 Windows 에서 실패)
         if self.renderer is None:
@@ -687,10 +843,15 @@ class PlacePlateEnv(gym.Env):
 
         near, far = WRIST_CAMERA["depth_range_m"]
         if self.randomize:
-            rgb = np.clip(rgb * self.brightness + self.rng.normal(0.0, 2.0, rgb.shape), 0, 255).astype(np.uint8)
             sigma = WRIST_CAMERA["depth_noise_base_m"] + WRIST_CAMERA["depth_noise_slope"] * depth ** 2
             depth = depth + self.rng.normal(size=depth.shape) * sigma
             depth[self.rng.random(depth.shape) < WRIST_CAMERA["depth_dropout"]] = 0.0
+            if self.appearance:
+                rgb = self._camera_response(rgb)
+                depth = self._depth_realism(depth)
+            else:
+                rgb = np.clip(rgb * self.brightness + self.rng.normal(0.0, 2.0, rgb.shape),
+                              0, 255).astype(np.uint8)
 
         valid = (depth >= near) & (depth <= far)
         normalized = np.where(valid, (depth - near) / (far - near), 0.0).astype(np.float32)
@@ -745,7 +906,8 @@ class PlacePlateEnv(gym.Env):
                 "released": bool(getattr(self, "released", False)), "xy_error_mm": float(np.linalg.norm(error[:2]) * 1000),
                 "z_error_mm": float(error[2] * 1000), "yaw_error_deg": float(math.degrees(error[3])), "tilt_deg": self._tilt(),
                 "max_force_N": float(getattr(self, "max_force", 0.0)), "in_hand_mm": float(np.linalg.norm(self.in_hand[:3]) * 1000),
-                "release_height_mm": float(getattr(self, "release_height", 0.0) * 1000)}
+                "release_height_mm": float(getattr(self, "release_height", 0.0) * 1000),
+                "release_force_N": float(getattr(self, "release_force", 0.0))}
 
 
 if __name__ == "__main__":

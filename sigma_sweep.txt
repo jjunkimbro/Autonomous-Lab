@@ -1,0 +1,58 @@
+PHOTO_GAIN 125.0  (깊이 + 밝기)
+
+=== 공칭 외관 (25 회/장비) ===
+station                      x         y         z        yaw   fail
+fluent_plate            0.029m    0.064m    0.052m     0.010d      0
+incubator_plate         0.160m    1.212m    0.156m     0.372d      0
+reader_plate            0.062m    0.086m    0.036m     0.046d      0
+sorter_left_plate       0.024m    0.126m    0.035m     0.016d      0
+
+=== 현실적 x0.1 외관 (25 회/장비) ===
+station                      x         y         z        yaw   fail
+fluent_plate            0.643m    0.169m    0.111m     0.216d      0
+incubator_plate         0.213m    2.130m    0.226m     0.598d      0
+reader_plate            0.262m    0.107m    0.066m     0.168d      0
+sorter_left_plate       1.091m    4.964m    0.886m     0.313d      0
+
+=== 현실적 x0.25 외관 (25 회/장비) ===
+station                      x         y         z        yaw   fail
+fluent_plate            0.756m    0.273m    0.187m     0.276d      0
+incubator_plate         0.340m    2.060m    0.264m     0.571d      2
+reader_plate            0.471m    0.232m    0.114m     0.366d      1
+sorter_left_plate       2.283m   10.112m    1.739m     0.585d      1
+
+=== 현실적 x0.5 외관 (25 회/장비) ===
+station                      x         y         z        yaw   fail
+fluent_plate            1.017m    0.409m    0.314m     0.358d     14
+incubator_plate         0.239m    1.927m    0.227m     0.504d     14
+reader_plate            0.665m    0.275m    0.138m     0.333d     13
+sorter_left_plate       3.010m   14.586m    2.819m     1.100d     15
+
+=== 현실적 x1 외관 (25 회/장비) ===
+station                      x         y         z        yaw   fail
+fluent_plate            0.258m    0.116m    0.173m     0.174d     20
+incubator_plate         0.396m    1.673m    0.318m     0.468d     21
+reader_plate            0.395m    0.292m    0.210m     0.255d     20
+sorter_left_plate       4.968m   19.180m    3.983m     1.168d     24
+
+=== 정합 거부율 (실패 / 시도) ===
+station                            공칭         현실적 x0.1        현실적 x0.25         현실적 x0.5           현실적 x1
+fluent_plate                0/25             0/25             0/25            14/25            20/25     
+incubator_plate             0/25             0/25             2/25            14/25            21/25     
+reader_plate                0/25             0/25             1/25            13/25            20/25     
+sorter_left_plate           0/25             0/25             1/25            15/25            24/25     
+전체                         0/100            0/100            4/100           56/100           85/100    
+
+=== 현실적 / 공칭 σ 비율 (거부되지 않은 표본만 — 생존자 편향) ===
+  현실적 x0.1       fluent      22.1x incubator    1.8x reader       4.2x sorter_left  45.7x   최대 45.7x
+  현실적 x0.25      fluent      26.4x incubator    2.1x reader       7.9x sorter_left  95.7x   최대 95.7x
+  현실적 x0.5       fluent      34.9x incubator    1.6x reader      10.8x sorter_left 126.1x   최대 126.1x
+  현실적 x1         fluent      16.6x incubator    2.5x reader       6.4x sorter_left 208.2x   최대 208.2x
+
+--- 현실적 x1 기준 MEASURE_SIGMA (거부되지 않은 표본) ---
+    "fluent_plate": np.array([0.000258, 0.000116, 0.000173, math.radians(0.174)]),
+    "incubator_plate": np.array([0.000396, 0.001673, 0.000318, math.radians(0.468)]),
+    "reader_plate": np.array([0.000395, 0.000292, 0.000210, math.radians(0.255)]),
+    "sorter_left_plate": np.array([0.004968, 0.019180, 0.003983, math.radians(1.168)]),
+
+Output : sigma_appearance.json

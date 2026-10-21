@@ -1,0 +1,33 @@
+PHOTO_GAIN 0.0  (깊이만)
+
+=== 공칭 외관 (25 회/장비) ===
+station                      x         y         z        yaw   fail
+fluent_plate            1.148m    0.243m    0.115m     0.458d      0
+incubator_plate         0.283m    3.214m    0.535m     0.745d      1
+reader_plate            0.926m    0.140m    0.031m     0.284d      0
+sorter_left_plate       0.165m    0.263m    0.164m     0.092d      0
+
+=== 현실적 외관 (25 회/장비) ===
+station                      x         y         z        yaw   fail
+fluent_plate            1.483m    0.509m    0.455m     0.131d     21
+incubator_plate         0.526m    0.037m    0.047m     0.333d     24
+reader_plate            1.460m    0.398m    0.212m     0.269d     20
+sorter_left_plate       1.336m    4.846m    0.261m     0.414d     21
+
+=== 현실적 / 공칭 비율 ===
+station                     x        y        z      yaw       최대
+fluent_plate            1.29x    2.09x    3.96x    0.28x    3.96x
+incubator_plate         1.86x    0.01x    0.09x    0.45x    1.86x
+reader_plate            1.58x    2.84x    6.88x    0.95x    6.88x
+sorter_left_plate       8.08x   18.43x    1.59x    4.50x   18.43x
+
+  최대 배율 18.43x,  현재 MEASURE_SIGMA_SCALE 상한 4.0x
+  -> 범위를 넘는다. A3 의 0.92 는 과대평가이며 상한을 19x 로 올려 재평가해야 한다.
+
+--- 현실적 외관 기준 MEASURE_SIGMA ---
+    "fluent_plate": np.array([0.001483, 0.000509, 0.000455, math.radians(0.131)]),
+    "incubator_plate": np.array([0.000526, 0.000037, 0.000047, math.radians(0.333)]),
+    "reader_plate": np.array([0.001460, 0.000398, 0.000212, math.radians(0.269)]),
+    "sorter_left_plate": np.array([0.001336, 0.004846, 0.000261, math.radians(0.414)]),
+
+Output : sigma_appearance.json

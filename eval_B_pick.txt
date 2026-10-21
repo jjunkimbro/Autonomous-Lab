@@ -1,0 +1,31 @@
+기다리는 중: train_pick_B_student.txt 에 'Output :' (최대 180 분)
+학습 완료 확인.
+B student 불러옴, 영상 채널 8
+
+=== B_nominal (50 회/장비) ===
+  station                   성공률      접촉력      집기오차     집기오차    실패
+  fluent_plate             0.22    98.6N    7.19mm    7.19mm    11
+  incubator_plate          0.18   120.9N    5.51mm    5.51mm     4
+  reader_plate             0.24    90.3N    6.56mm    6.56mm     8
+  sorter_left_plate        0.22    97.6N    4.58mm    4.58mm     5
+  OVERALL                  0.21
+
+=== B_student (50 회/장비) ===
+  station                   성공률      접촉력      집기오차     집기오차    실패
+  fluent_plate             1.00    74.8N    0.85mm    0.85mm     0
+  incubator_plate          0.98    76.0N    0.83mm    0.83mm     1
+  reader_plate             1.00    74.0N    0.88mm    0.88mm     0
+  sorter_left_plate        1.00    66.2N    0.79mm    0.79mm     0
+  OVERALL                  0.99
+
+=== B_student_blind (50 회/장비) ===
+  station                   성공률      접촉력      집기오차     집기오차    실패
+  fluent_plate             0.00   117.9N   11.09mm   11.09mm     6
+  incubator_plate          0.00   338.4N   12.17mm   12.17mm    26
+  reader_plate             0.00   107.5N   13.40mm   13.40mm    20
+  sorter_left_plate        0.00   318.5N   12.63mm   12.63mm    24
+  OVERALL                  0.00
+
+  B 영상 기여도  +0.99
+
+Output : eval_B_pick_report.json

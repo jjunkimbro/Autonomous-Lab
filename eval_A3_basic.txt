@@ -1,0 +1,38 @@
+B student 불러옴, 영상 채널 8
+외관 랜덤화: 기본(밝기만)
+
+=== B_nominal (50 회/장비) ===
+  station                   성공률      접촉력        낙하     안착오차    실패
+  fluent_plate             0.40    12.5N    1.17mm    1.11mm     0
+  incubator_plate          0.10    31.8N    2.88mm    3.83mm     0
+  reader_plate             0.38    14.0N    1.02mm    0.99mm     0
+  sorter_left_plate        0.64    20.5N    0.76mm    0.98mm     0
+  OVERALL                  0.38
+
+=== B_student (50 회/장비) ===
+  station                   성공률      접촉력        낙하     안착오차    실패
+  fluent_plate             1.00     6.5N    0.29mm    0.32mm     0
+  incubator_plate          0.76    11.1N    0.73mm    0.84mm     0
+  reader_plate             1.00     6.6N    0.36mm    0.41mm     0
+  sorter_left_plate        0.98     7.0N    0.33mm    0.38mm     0
+  OVERALL                  0.93
+
+=== B_student_blind (50 회/장비) ===
+  station                   성공률      접촉력        낙하     안착오차    실패
+  fluent_plate             0.24    13.5N    1.67mm    1.29mm     0
+  incubator_plate          0.26    35.7N    2.39mm    2.70mm     0
+  reader_plate             0.24    25.9N    1.79mm    1.10mm     0
+  sorter_left_plate        0.56    22.2N    1.64mm    1.27mm     0
+  OVERALL                  0.33
+
+--- A 대 B (전체 성공률) ---
+  A 규칙기반 (비전 보정 O, 잔차 X)   0.56
+  A student (보정 + 잔차 RL)        0.93
+  A student 영상 가림                0.15
+  B 공칭   (비전 전무)               0.38
+  B student (영상에서 전량 RL)       0.93
+  B student 영상 가림                0.33
+
+  B 영상 기여도  +0.61
+
+Output : eval_A3_basic.json

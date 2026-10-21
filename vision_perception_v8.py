@@ -84,9 +84,16 @@ def invert(matrix):
 class WristCamera:
     """손목 카메라 원본 해상도 렌더링 + 내부 파라미터 (MuJoCo 카메라 기준)."""
 
-    def __init__(self, model, data, rng=None):
+    def __init__(self, model, data, rng=None, appearance=False):
         self.model = model
         self.data = data
+        # 외관 랜덤화. 정책 쪽(place_plate_env_v9)과 같은 분포를 쓴다.
+        # render-and-compare 는 실시간 밝기를 **등록 시점에 저장된** 기준 밝기와 비교하므로
+        # (vision_pointcloud_v10.fine_fit), 외관이 틀어지면 상쇄 없이 정합이 흔들린다.
+        self.appear = None
+        if appearance:
+            import appearance_v10
+            self.appear = appearance_v10.Appearance(model)
         self.id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_CAMERA, WRIST_CAMERA["name"])
         self.width, self.height = NATIVE
         self.renderer = mujoco.Renderer(model, self.height, self.width)
@@ -117,10 +124,15 @@ class WristCamera:
         self.renderer.disable_depth_rendering()
 
         if noise:
-            rgb = np.clip(rgb + self.rng.normal(0.0, PIXEL_NOISE, rgb.shape), 0, 255).astype(np.uint8)
             sigma = WRIST_CAMERA["depth_noise_base_m"] + WRIST_CAMERA["depth_noise_slope"] * depth ** 2
             depth = depth + self.rng.normal(size=depth.shape) * sigma
             depth[self.rng.random(depth.shape) < WRIST_CAMERA["depth_dropout"]] = 0.0
+            if self.appear is not None:
+                rgb = self.appear.camera_response(rgb, 1.0, self.rng)
+                depth = self.appear.depth_realism(depth, self.rng)
+            else:
+                rgb = np.clip(rgb + self.rng.normal(0.0, PIXEL_NOISE, rgb.shape),
+                              0, 255).astype(np.uint8)
         depth[(depth < DEPTH_RANGE[0]) | (depth > DEPTH_RANGE[1])] = 0.0
         return rgb, depth
 

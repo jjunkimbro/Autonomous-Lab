@@ -1,0 +1,14 @@
+규칙 기반(action=0) + 완벽한 비전 측정. 각도만 키워본다.
+   yaw                fluent             incubator                reader           sorter_left
+    0째    0.12mm    8.7N OK     0.13mm    8.2N OK     0.14mm    8.8N OK     0.11mm    8.7N OK 
+    2째    0.14mm    7.7N OK     0.14mm    7.2N OK     0.14mm    8.8N OK     0.11mm    8.7N OK 
+    5째    0.18mm    8.0N OK     0.19mm    6.9N OK     0.14mm    8.7N OK     0.11mm    8.8N OK 
+   10째    0.13mm    6.6N OK    44.66mm   10.5N XX     0.13mm    8.7N OK     0.11mm    8.6N OK 
+   15째    6.97mm   12.9N XX   106.16mm    0.0N XX     0.13mm    8.7N OK     0.11mm    8.6N OK 
+   20째   49.42mm    8.4N XX   260.35mm    0.0N XX     0.14mm    8.1N OK     0.11mm    8.7N OK 
+   30째  122.86mm   52.4N XX   347.99mm    0.0N XX     0.17mm    8.0N OK    34.82mm  214.4N XX 
+
+실패 시 레일 명령 범위도 같이 본다 (가동 0~0.75 m)
+  fluent yaw +10째: 레일 +0.054..+0.054  ok
+  fluent yaw +20째: 레일 -0.090..-0.090  스톱침범
+  fluent yaw +30째: 레일 -0.260..-0.260  스톱침범

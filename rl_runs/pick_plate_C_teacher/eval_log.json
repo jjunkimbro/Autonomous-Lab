@@ -1,0 +1,542 @@
+[
+ {
+  "fluent_plate": {
+   "success": 0.4,
+   "max_force_N": 163.35204711819807,
+   "grasp_offset_mm": 2.376810042523503
+  },
+  "incubator_plate": {
+   "success": 0.1,
+   "max_force_N": 137.4124112719876,
+   "grasp_offset_mm": 3.421799877322736
+  },
+  "reader_plate": {
+   "success": 0.4,
+   "max_force_N": 70.28642342106102,
+   "grasp_offset_mm": 2.40355620407463
+  },
+  "sorter_left_plate": {
+   "success": 0.0,
+   "max_force_N": 103.43774948663096,
+   "grasp_offset_mm": 3.9013318965718162
+  },
+  "overall": 0.225,
+  "force_N": 118.62215782446938,
+  "release_mm": 3.0258745051231712,
+  "timesteps": 20016,
+  "minutes": 0.4
+ },
+ {
+  "fluent_plate": {
+   "success": 0.2,
+   "max_force_N": 62.907884558772764,
+   "grasp_offset_mm": 3.0262654606388213
+  },
+  "incubator_plate": {
+   "success": 0.2,
+   "max_force_N": 363.90090322827757,
+   "grasp_offset_mm": 2.9727982733920086
+  },
+  "reader_plate": {
+   "success": 0.1,
+   "max_force_N": 67.10478084431307,
+   "grasp_offset_mm": 3.0637723099292566
+  },
+  "sorter_left_plate": {
+   "success": 0.0,
+   "max_force_N": 92.43970543376464,
+   "grasp_offset_mm": 4.102015805766904
+  },
+  "overall": 0.125,
+  "force_N": 146.58831851628202,
+  "release_mm": 3.291212962431748,
+  "timesteps": 40008,
+  "minutes": 0.8
+ },
+ {
+  "fluent_plate": {
+   "success": 0.2,
+   "max_force_N": 75.80657364496531,
+   "grasp_offset_mm": 3.752751914836383
+  },
+  "incubator_plate": {
+   "success": 0.1,
+   "max_force_N": 179.88311404923738,
+   "grasp_offset_mm": 3.761294831065134
+  },
+  "reader_plate": {
+   "success": 0.1,
+   "max_force_N": 68.4688993079048,
+   "grasp_offset_mm": 3.553906005892369
+  },
+  "sorter_left_plate": {
+   "success": 0.2,
+   "max_force_N": 71.89473354214597,
+   "grasp_offset_mm": 3.5781976135364295
+  },
+  "overall": 0.15,
+  "force_N": 99.01333013606336,
+  "release_mm": 3.6615375913325785,
+  "timesteps": 60000,
+  "minutes": 1.1
+ },
+ {
+  "fluent_plate": {
+   "success": 0.6,
+   "max_force_N": 155.7246486994174,
+   "grasp_offset_mm": 1.8662593192642138
+  },
+  "incubator_plate": {
+   "success": 0.3,
+   "max_force_N": 85.36329109932768,
+   "grasp_offset_mm": 2.7825339247993215
+  },
+  "reader_plate": {
+   "success": 0.8,
+   "max_force_N": 65.86820555320972,
+   "grasp_offset_mm": 1.859603027089415
+  },
+  "sorter_left_plate": {
+   "success": 0.4,
+   "max_force_N": 67.99355452841445,
+   "grasp_offset_mm": 3.066364572732972
+  },
+  "overall": 0.525,
+  "force_N": 93.7374249700923,
+  "release_mm": 2.3936902109714806,
+  "timesteps": 80016,
+  "minutes": 1.5
+ },
+ {
+  "fluent_plate": {
+   "success": 0.6,
+   "max_force_N": 73.40737185621654,
+   "grasp_offset_mm": 1.933919229777075
+  },
+  "incubator_plate": {
+   "success": 0.4,
+   "max_force_N": 76.28559319614594,
+   "grasp_offset_mm": 2.3932893808489584
+  },
+  "reader_plate": {
+   "success": 0.7,
+   "max_force_N": 68.19687448586625,
+   "grasp_offset_mm": 1.6945001482924738
+  },
+  "sorter_left_plate": {
+   "success": 0.5,
+   "max_force_N": 73.4354434844933,
+   "grasp_offset_mm": 2.697583245200952
+  },
+  "overall": 0.55,
+  "force_N": 72.83132075568051,
+  "release_mm": 2.1798230010298654,
+  "timesteps": 100008,
+  "minutes": 1.9
+ },
+ {
+  "fluent_plate": {
+   "success": 0.8,
+   "max_force_N": 141.3755476904928,
+   "grasp_offset_mm": 1.2072818277675286
+  },
+  "incubator_plate": {
+   "success": 0.3,
+   "max_force_N": 74.93208386888142,
+   "grasp_offset_mm": 2.41702313500135
+  },
+  "reader_plate": {
+   "success": 0.7,
+   "max_force_N": 60.653776164057945,
+   "grasp_offset_mm": 1.281507716855007
+  },
+  "sorter_left_plate": {
+   "success": 0.5,
+   "max_force_N": 73.96575391348816,
+   "grasp_offset_mm": 2.366179192020687
+  },
+  "overall": 0.575,
+  "force_N": 87.73179040923009,
+  "release_mm": 1.8179979679111427,
+  "timesteps": 120000,
+  "minutes": 2.2
+ },
+ {
+  "fluent_plate": {
+   "success": 0.8,
+   "max_force_N": 125.83856430437163,
+   "grasp_offset_mm": 1.081519780389253
+  },
+  "incubator_plate": {
+   "success": 0.4,
+   "max_force_N": 73.31978577804281,
+   "grasp_offset_mm": 2.0603124531070245
+  },
+  "reader_plate": {
+   "success": 0.9,
+   "max_force_N": 67.01276338637813,
+   "grasp_offset_mm": 1.1571474880541417
+  },
+  "sorter_left_plate": {
+   "success": 0.5,
+   "max_force_N": 74.87539757370197,
+   "grasp_offset_mm": 2.2186158581545388
+  },
+  "overall": 0.65,
+  "force_N": 85.26162776062363,
+  "release_mm": 1.6293988949262395,
+  "timesteps": 140016,
+  "minutes": 2.6
+ },
+ {
+  "fluent_plate": {
+   "success": 0.8,
+   "max_force_N": 138.18115449202008,
+   "grasp_offset_mm": 0.9823271239283837
+  },
+  "incubator_plate": {
+   "success": 0.6,
+   "max_force_N": 72.2250430019101,
+   "grasp_offset_mm": 1.66460689624184
+  },
+  "reader_plate": {
+   "success": 0.9,
+   "max_force_N": 63.655253314625135,
+   "grasp_offset_mm": 0.9733601632231691
+  },
+  "sorter_left_plate": {
+   "success": 0.7,
+   "max_force_N": 80.04005568148168,
+   "grasp_offset_mm": 1.7137063772650811
+  },
+  "overall": 0.75,
+  "force_N": 88.52537662250924,
+  "release_mm": 1.3335001401646183,
+  "timesteps": 160008,
+  "minutes": 2.9
+ },
+ {
+  "fluent_plate": {
+   "success": 0.9,
+   "max_force_N": 96.27340198625302,
+   "grasp_offset_mm": 0.9325986574990557
+  },
+  "incubator_plate": {
+   "success": 0.9,
+   "max_force_N": 76.53642843907195,
+   "grasp_offset_mm": 1.238417279775895
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 63.25869503754501,
+   "grasp_offset_mm": 0.8465942553311787
+  },
+  "sorter_left_plate": {
+   "success": 0.7,
+   "max_force_N": 74.97945756612265,
+   "grasp_offset_mm": 1.6906076528633747
+  },
+  "overall": 0.875,
+  "force_N": 77.76199575724816,
+  "release_mm": 1.177054461367376,
+  "timesteps": 180000,
+  "minutes": 3.3
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 68.68739903090751,
+   "grasp_offset_mm": 0.88918495415073
+  },
+  "incubator_plate": {
+   "success": 0.9,
+   "max_force_N": 95.2764322713261,
+   "grasp_offset_mm": 1.176088171648391
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 73.25961437112295,
+   "grasp_offset_mm": 0.9960666087015839
+  },
+  "sorter_left_plate": {
+   "success": 0.9,
+   "max_force_N": 70.82508161009423,
+   "grasp_offset_mm": 1.4797949231178251
+  },
+  "overall": 0.95,
+  "force_N": 77.01213182086272,
+  "release_mm": 1.1352836644046325,
+  "timesteps": 200016,
+  "minutes": 3.6
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 70.75757185694633,
+   "grasp_offset_mm": 0.8588835908539425
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 67.11920970488327,
+   "grasp_offset_mm": 1.2085504047486986
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 73.79733837548346,
+   "grasp_offset_mm": 0.8058263832142517
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 65.3273161124971,
+   "grasp_offset_mm": 1.173722233087751
+  },
+  "overall": 1.0,
+  "force_N": 69.25035901245253,
+  "release_mm": 1.011745652976161,
+  "timesteps": 220008,
+  "minutes": 4.0
+ },
+ {
+  "fluent_plate": {
+   "success": 0.9,
+   "max_force_N": 74.31943533847695,
+   "grasp_offset_mm": 1.0653429442660358
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 72.72974556133906,
+   "grasp_offset_mm": 0.976018187476799
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 69.85644541243892,
+   "grasp_offset_mm": 0.8687124705977027
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 77.05292658719203,
+   "grasp_offset_mm": 1.0874121495919424
+  },
+  "overall": 0.975,
+  "force_N": 73.48963822486175,
+  "release_mm": 0.99937143798312,
+  "timesteps": 240000,
+  "minutes": 4.3
+ },
+ {
+  "fluent_plate": {
+   "success": 0.8,
+   "max_force_N": 106.3109016162991,
+   "grasp_offset_mm": 1.0338631457660492
+  },
+  "incubator_plate": {
+   "success": 0.8,
+   "max_force_N": 86.15207072386606,
+   "grasp_offset_mm": 1.0013944713019942
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 71.17807697175884,
+   "grasp_offset_mm": 0.7081793546031543
+  },
+  "sorter_left_plate": {
+   "success": 0.9,
+   "max_force_N": 70.17010035691628,
+   "grasp_offset_mm": 1.2750347080866136
+  },
+  "overall": 0.875,
+  "force_N": 83.45278741721006,
+  "release_mm": 1.0046179199394527,
+  "timesteps": 260016,
+  "minutes": 4.7
+ },
+ {
+  "fluent_plate": {
+   "success": 0.8,
+   "max_force_N": 107.01141127286596,
+   "grasp_offset_mm": 1.1704337937383085
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 60.82801702960022,
+   "grasp_offset_mm": 1.0927875107062643
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 72.71364628856158,
+   "grasp_offset_mm": 0.7498669282997594
+  },
+  "sorter_left_plate": {
+   "success": 0.9,
+   "max_force_N": 78.76019786994229,
+   "grasp_offset_mm": 1.1854638001667708
+  },
+  "overall": 0.925,
+  "force_N": 79.82831811524251,
+  "release_mm": 1.0496380082277759,
+  "timesteps": 280008,
+  "minutes": 5.0
+ },
+ {
+  "fluent_plate": {
+   "success": 0.9,
+   "max_force_N": 67.34564769128033,
+   "grasp_offset_mm": 0.9503584028620595
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 60.160786941413924,
+   "grasp_offset_mm": 0.9873871992752374
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 74.37397439063105,
+   "grasp_offset_mm": 0.5972180837427947
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 75.13218057185486,
+   "grasp_offset_mm": 0.9911527573323367
+  },
+  "overall": 0.975,
+  "force_N": 69.25314739879505,
+  "release_mm": 0.8815291108031073,
+  "timesteps": 300000,
+  "minutes": 5.3
+ },
+ {
+  "fluent_plate": {
+   "success": 0.9,
+   "max_force_N": 57.85175215784993,
+   "grasp_offset_mm": 0.9317420811826063
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 76.68763882373212,
+   "grasp_offset_mm": 1.0271509545382915
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 63.17574584848471,
+   "grasp_offset_mm": 0.6454379105977803
+  },
+  "sorter_left_plate": {
+   "success": 0.9,
+   "max_force_N": 76.35944244127313,
+   "grasp_offset_mm": 1.2276020273993453
+  },
+  "overall": 0.95,
+  "force_N": 68.51864481783497,
+  "release_mm": 0.9579832434295058,
+  "timesteps": 320016,
+  "minutes": 5.7
+ },
+ {
+  "fluent_plate": {
+   "success": 0.9,
+   "max_force_N": 60.65054897520902,
+   "grasp_offset_mm": 1.0638223509097307
+  },
+  "incubator_plate": {
+   "success": 0.9,
+   "max_force_N": 80.63642205961966,
+   "grasp_offset_mm": 0.9859464739773165
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 74.85242063281794,
+   "grasp_offset_mm": 0.6213591625288181
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 72.670615791563,
+   "grasp_offset_mm": 1.0138107424887894
+  },
+  "overall": 0.95,
+  "force_N": 72.20250186480241,
+  "release_mm": 0.9212346824761635,
+  "timesteps": 340008,
+  "minutes": 6.0
+ },
+ {
+  "fluent_plate": {
+   "success": 0.9,
+   "max_force_N": 63.38509142897556,
+   "grasp_offset_mm": 0.9245206839227521
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 74.4462952323735,
+   "grasp_offset_mm": 1.0532184465334091
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 68.15124248304895,
+   "grasp_offset_mm": 0.5648072700637834
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 77.5727845716589,
+   "grasp_offset_mm": 1.1504754239242285
+  },
+  "overall": 0.975,
+  "force_N": 70.88885342901423,
+  "release_mm": 0.923255456111043,
+  "timesteps": 360000,
+  "minutes": 6.4
+ },
+ {
+  "fluent_plate": {
+   "success": 0.9,
+   "max_force_N": 77.84904566224517,
+   "grasp_offset_mm": 0.8914767545886976
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 65.15747959476445,
+   "grasp_offset_mm": 0.9963360752678023
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 63.416805600535895,
+   "grasp_offset_mm": 0.5682513321956157
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 73.92238824350088,
+   "grasp_offset_mm": 0.9139520845263644
+  },
+  "overall": 0.975,
+  "force_N": 70.0864297752616,
+  "release_mm": 0.84250406164462,
+  "timesteps": 380016,
+  "minutes": 6.7
+ },
+ {
+  "fluent_plate": {
+   "success": 1.0,
+   "max_force_N": 81.16433836826596,
+   "grasp_offset_mm": 0.7241980196640799
+  },
+  "incubator_plate": {
+   "success": 1.0,
+   "max_force_N": 61.81486648173965,
+   "grasp_offset_mm": 0.9548501272860765
+  },
+  "reader_plate": {
+   "success": 1.0,
+   "max_force_N": 68.84342334549409,
+   "grasp_offset_mm": 0.5215453801290361
+  },
+  "sorter_left_plate": {
+   "success": 1.0,
+   "max_force_N": 79.46656433128207,
+   "grasp_offset_mm": 0.921362706207001
+  },
+  "overall": 1.0,
+  "force_N": 72.82229813169545,
+  "release_mm": 0.7804890583215484,
+  "timesteps": 400008,
+  "minutes": 7.0
+ }
+]

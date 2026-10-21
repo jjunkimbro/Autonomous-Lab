@@ -1,0 +1,10 @@
+로봇을 A 장비 관측 자세에 두고, 네 장비 기준 점군을 모두 맞춰본다.
+표의 값 = inlier 비율 (높을수록 잘 맞음).  대각선이 정답.
+
+실제 \ 맞춰본                        fluent         incubator            reader       sorter_left
+fluent                          0.927*             0.000             0.000             0.000   -> fluent OK
+incubator                        0.000            0.915*             0.000             0.000   -> incubator OK
+reader                           0.000             0.000            0.991*             0.645   -> reader OK
+sorter_left                      0.000             0.000             0.920            0.986*   -> sorter_left OK
+
+정답률 4/4

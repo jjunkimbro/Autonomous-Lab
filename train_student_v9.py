@@ -22,7 +22,7 @@
 #   rl_runs/place_plate_v9_student/dagger_log.json
 
 from pathlib import Path
-import argparse
+import argparse, ast
 import json
 import math
 import multiprocessing as mp
@@ -278,13 +278,23 @@ def main():
     parser.add_argument("--run-name", default="place_plate_v9_student")
     parser.add_argument("--env", default="place", choices=ENV_CHOICES,
                         help="place = 내려놓기, pick = 집기")
+    parser.add_argument("--appearance", choices=("basic", "realistic"), default=None,
+                        help="외관 랜덤화. 기본은 환경 모듈 기본값")
+    parser.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
+                        help="환경 인자를 직접 덮어쓴다 (예: --set corrected=True). "
+                             "--end-to-end 뒤에 적용되므로 A/B 를 입력 조건만 같게 두고 비교할 때 쓴다")
     parser.add_argument("--end-to-end", action="store_true",
                         help="B 안: 경로를 비전으로 보정하지 않고, 정책이 영상에서 장비 오차까지 읽는다")
     args = parser.parse_args()
 
     env_kwargs = {}
+    if args.appearance:
+        env_kwargs["appearance"] = args.appearance == "realistic"
     if args.end_to_end:
-        env_kwargs = dict(corrected=False, residual_limit=0.012, residual_down=0.005, dual_scale=True)
+        env_kwargs.update(corrected=False, residual_limit=0.012, residual_down=0.005, dual_scale=True)
+    for item in args.set:
+        key, _, value = item.partition("=")
+        env_kwargs[key.strip()] = ast.literal_eval(value.strip())
 
     global RUN_DIR
     RUN_DIR = BASE_DIR / "rl_runs" / args.run_name

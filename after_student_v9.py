@@ -69,13 +69,21 @@ def main():
     parser.add_argument("--episodes", type=int, default=50)
     parser.add_argument("--seed", type=int, default=2024)
     parser.add_argument("--no-video", action="store_true")
+    parser.add_argument("--appearance", choices=("basic", "realistic"), default=None,
+                        help="외관 랜덤화. 기본은 환경 모듈 기본값")
+    parser.add_argument("--out", default="after_student_report.json")
     args = parser.parse_args()
 
     if args.wait_for and not wait_for(args.wait_for, args.timeout_min):
         return 1
 
     net, to_image = load_student()
-    env = pe.PlacePlateEnv(obs_mode="visuotactile", randomize=True, seed=args.seed)
+    env_kwargs = {}
+    if args.appearance:
+        env_kwargs["appearance"] = args.appearance == "realistic"
+    env = pe.PlacePlateEnv(obs_mode="visuotactile", randomize=True, seed=args.seed,
+                           **env_kwargs)
+    print(f"외관 {'현실적' if env.appearance else '기본'}", flush=True)
 
     def student(obs, blind=False):
         rgb = np.zeros_like(obs["rgb"]) if blind else obs["rgb"]
@@ -113,9 +121,9 @@ def main():
     print(f"  영상 기여도        {gap:+.2f}", flush=True)
 
     report["image_contribution"] = gap
-    (BASE / "after_student_report.json").write_text(
+    (BASE / args.out).write_text(
         json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
-    print("\nOutput : after_student_report.json", flush=True)
+    print(f"\nOutput : {args.out}", flush=True)
 
     if not args.no_video:
         for policy in ("student", "baseline"):

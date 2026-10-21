@@ -11,7 +11,7 @@
 # 실행:  py eval_transfer_v9.py --episodes 40
 # 결과:  eval_transfer_report.json
 
-import argparse, itertools, json, sys
+import argparse, ast, itertools, json, sys
 from pathlib import Path
 
 import numpy as np
@@ -85,6 +85,8 @@ def main():
     parser.add_argument("--place-run", default=str(PLACE_RUN), help="놓기 정책 디렉터리")
     parser.add_argument("--pick-run", default=str(PICK_RUN))
     parser.add_argument("--out", default="eval_transfer_report.json")
+    parser.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
+                        help="환경 인자 덮어쓰기 (예: --set corrected=True). C 안 체인 측정용")
     parser.add_argument("--simultaneous", action="store_true",
                         help="레일/팔을 동시에 움직이던 예전 방식으로 (기준선 재현용)")
     args = parser.parse_args()
@@ -95,7 +97,11 @@ def main():
     place_net, place_ch = load_student(Path(args.place_run))
     print(f"집기 정책 {pick_ch}채널, 놓기 정책 {place_ch}채널", flush=True)
 
-    env = tr.TransferEnv(obs_mode="visuotactile", randomize=True, seed=args.seed, **B_KWARGS)
+    kwargs = dict(B_KWARGS)
+    for item in args.set:
+        key, _, value = item.partition("=")
+        kwargs[key.strip()] = ast.literal_eval(value.strip())
+    env = tr.TransferEnv(obs_mode="visuotactile", randomize=True, seed=args.seed, **kwargs)
     pick_act, place_act = policy(pick_net), policy(place_net)
 
     pairs = [(a, b) for a, b in itertools.permutations(env.stations, 2)]

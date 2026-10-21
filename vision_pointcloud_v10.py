@@ -328,11 +328,11 @@ def fine_fit(camera, model_world, reference_gray, depth, gray, pivot, initial):
 class CloudPerception:
     """마커 없는 장비 자세 · 점유 · 놓인 plate 인지."""
 
-    def __init__(self, model, data, interfaces, registry=None, rng=None):
+    def __init__(self, model, data, interfaces, registry=None, rng=None, appearance=False):
         self.model = model
         self.data = data
         self.interfaces = interfaces
-        self.camera = WristCamera(model, data, rng)
+        self.camera = WristCamera(model, data, rng, appearance=appearance)
         self.registry = registry if registry is not None else load_registry()
         self.clouds = {}
         self.empty_depth = {}

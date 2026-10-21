@@ -169,16 +169,18 @@ class PickPlateEnv(pp.PlacePlateEnv):
                                            if r else np.zeros(4)))
         self.rest = np.array(options.get("rest", r.uniform(-RESTING_ERROR, RESTING_ERROR)
                                          if r else np.zeros(3)))
-        noise = (r.normal(0.0, pp.MEASURE_SIGMA[self.station_name] * r.uniform(*pp.MEASURE_SIGMA_SCALE))
-                 if r else np.zeros(4))
+        # 놓기 환경과 같은 헬퍼를 쓴다 (인지 품질 랜덤화 · 신뢰도 보고 · 신뢰도 문턱).
+        noise = self._sample_perception(r, options)
         self.measured = self.truth + np.array(options.get("measure_noise", noise))
         rest_noise = r.normal(0.0, RESTING_SIGMA) if r else np.zeros(3)
         self.rest_measured = self.rest + np.array(options.get("rest_noise", rest_noise))
 
         # end-to-end (corrected=False) 에서는 경로가 측정값을 쓰지 않는다. 장비도 plate 도
         # 실제로는 어긋나 있는데 공칭 경로로 접근하므로, 정책이 영상에서 전량을 읽어야 한다.
-        self.path_delta = self.measured if self.corrected else np.zeros(4)
-        self.rest_delta = self.rest_measured if self.corrected else np.zeros(3)
+        use = self.corrected and not self.perception_failed and self.perception_trusted
+        self.path_delta = self.measured if use else np.zeros(4)
+        self.rest_delta = self.rest_measured if use else np.zeros(3)
+        self.perception_used = bool(use)
 
         self.perturber.reset()
         self.perturber.apply(self.station_name, self.truth)
@@ -226,6 +228,11 @@ class PickPlateEnv(pp.PlacePlateEnv):
         self.grasp_offset = 0.0
         self._roi_pending = True
         self.brightness = float(self.rng.uniform(*pp.BRIGHTNESS_RANGE)) if self.randomize else 1.0
+        # place 의 reset 을 거치지 않으므로 외관 랜덤화를 여기서 직접 호출한다
+        if self.randomize and self.appearance:
+            self._randomize_appearance()
+        elif self.appearance:
+            self._restore_appearance()
         self.rest_start = self.data.xipos[self.plate_body].copy()
         return self._obs(), self._info(False, False)
 
@@ -358,6 +365,8 @@ class PickPlateEnv(pp.PlacePlateEnv):
             self.grip_time, self.gripped, self.disturbance = None, False, 0.0
             self.p_grasp = self.station["points"]["GRASP"]
             self.approach_time = self.lift_time = self.extract_time = 1.0
+            self.sigma_reported = np.zeros(4)
+            self.perception_failed = False
 
         rotation = rot_z(self.path_delta[3]) @ self.station["rotation"]
         tcp = self.data.site_xpos[self.site]
@@ -368,6 +377,12 @@ class PickPlateEnv(pp.PlacePlateEnv):
             [(self.data.qpos[self.finger_qpos[0]] - GRIP_CLOSED) * 200.0, float(self.gripped)],
             [self._contact_force() / 20.0, self.max_force / 50.0],
         ]
+        if self.report_confidence:
+            # 놓기와 같은 자리에 인지가 보고하는 신뢰도 (축별 σ + 거부 플래그).
+            parts.append(np.concatenate((
+                self.sigma_reported[:3] * 1000.0,
+                [math.degrees(self.sigma_reported[3]),
+                 1.0 if self.perception_failed else 0.0])))
         if self.obs_mode == "privileged":
             # 시뮬레이터 정답. 실제 로봇에서는 못 재므로 teacher 에게만 준다.
             error = self._grasp_error() if hasattr(self, "rest_start") else np.zeros(3)

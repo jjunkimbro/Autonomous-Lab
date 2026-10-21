@@ -1,0 +1,33 @@
+외관 현실적
+
+=== baseline (50 회/장비) ===
+  station                   성공률      접촉력        낙하       xy    끼임
+  fluent_plate             0.50    13.1N    1.06mm    0.90mm     0
+  incubator_plate          0.22    29.9N    2.58mm    3.24mm     0
+  reader_plate             0.40    14.3N    1.14mm    1.08mm     0
+  sorter_left_plate        0.50    29.7N    1.18mm    1.05mm     0
+  OVERALL                  0.41
+
+=== student (50 회/장비) ===
+  station                   성공률      접촉력        낙하       xy    끼임
+  fluent_plate             0.54    20.2N    1.51mm    0.85mm     0
+  incubator_plate          0.42    40.0N    1.61mm    1.23mm     0
+  reader_plate             0.48    17.6N    1.41mm    0.88mm     0
+  sorter_left_plate        0.54    25.0N    1.59mm    0.91mm     0
+  OVERALL                  0.49
+
+=== student_blind (50 회/장비) ===
+  station                   성공률      접촉력        낙하       xy    끼임
+  fluent_plate             0.04    17.6N    2.26mm    1.93mm     0
+  incubator_plate          0.10    45.8N    2.86mm    3.93mm     0
+  reader_plate             0.04    20.6N    2.10mm    1.68mm     0
+  sorter_left_plate        0.24    54.2N    1.80mm    1.56mm     0
+  OVERALL                  0.11
+
+--- 카메라 기여도 ---
+  규칙 기반          0.41
+  student 영상 있음  0.49
+  student 영상 가림  0.11
+  영상 기여도        +0.39
+
+Output : after_student_realistic.json

@@ -11,7 +11,7 @@
 #        py eval_B_v9.py --env pick  --episodes 50
 # 결과:  eval_B_<env>_report.json
 
-import argparse, json, sys, time
+import argparse, ast, json, sys, time
 from pathlib import Path
 
 import numpy as np
@@ -86,6 +86,11 @@ def main():
     parser.add_argument("--env", default="place", choices=("place", "pick"))
     parser.add_argument("--run-name")
     parser.add_argument("--out")
+    parser.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
+                        help="환경 인자 덮어쓰기 (예: --set corrected=True --set residual_limit=None). "
+                             "A 구조를 같은 스크립트로 재려면 쓴다")
+    parser.add_argument("--appearance", choices=("basic", "realistic"), default=None,
+                        help="외관 랜덤화. 기본은 환경 모듈 기본값")
     args = parser.parse_args()
 
     run_name = args.run_name or f"{args.env}_plate_B_student"
@@ -99,7 +104,14 @@ def main():
     net, channels = load_student(run_dir)
     print(f"B student 불러옴, 영상 채널 {channels}", flush=True)
 
-    env = make_env(args.env, obs_mode="visuotactile", randomize=True, seed=args.seed, **B_KWARGS)
+    kwargs = dict(B_KWARGS)
+    for item in args.set:
+        key, _, value = item.partition("=")
+        kwargs[key.strip()] = ast.literal_eval(value.strip())
+    if args.appearance:
+        kwargs["appearance"] = args.appearance == "realistic"
+    env = make_env(args.env, obs_mode="visuotactile", randomize=True, seed=args.seed, **kwargs)
+    print(f"외관 랜덤화: {'현실적' if env.appearance else '기본(밝기만)'}", flush=True)
 
     def student(obs, blind=False):
         rgb = np.zeros_like(obs["rgb"]) if blind else obs["rgb"]
@@ -114,8 +126,8 @@ def main():
         "B_student_blind": lambda o: student(o, blind=True),
     }
 
-    report = {"env": args.env, "run": run_name,
-              "env_kwargs": {k: v for k, v in B_KWARGS.items()}, "episodes": args.episodes}
+    report = {"env": args.env, "run": run_name, "appearance": bool(env.appearance),
+              "env_kwargs": {k: v for k, v in kwargs.items()}, "episodes": args.episodes}
     for name, act in policies.items():
         print(f"\n=== {name} ({args.episodes} 회/장비) ===", flush=True)
         print("  %-20s %8s %8s %9s %8s %5s"

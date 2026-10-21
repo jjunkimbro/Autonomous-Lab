@@ -108,6 +108,10 @@ class TransferEnv(pk.PickPlateEnv):
         options = dict(options or {})
         self.phase = "pick"
         self.station_data = self.pick_data
+        # 혼용 모드: 집기 단계를 B 로 되돌린다 (plan_place 가 놓기용으로 바꿔 두므로)
+        if self.mixed:
+            self.corrected = False
+            self.report_confidence = False
         self.target_name = options.pop("target", None)
         self.slip_mm = 0.0
         self.traverse_force = 0.0
@@ -227,14 +231,21 @@ class TransferEnv(pk.PickPlateEnv):
         self.target_place = target
         self.station_name = target
         self.station = self.place_data[target]
+        # 혼용: 집기는 보정 없이 (이미 0.989), 놓기만 보정 + 신뢰도 입력 (0.730 -> 0.892)
+        if getattr(self, "mixed", False):
+            self.corrected = True
+            self.report_confidence = True
         r = self.rng if self.randomize else None
 
         self.truth = np.array(options.get("delta", r.uniform(-pp.STATION_ERROR, pp.STATION_ERROR)
                                           if r else np.zeros(4)))
-        noise = (r.normal(0.0, pp.MEASURE_SIGMA[target] * r.uniform(*pp.MEASURE_SIGMA_SCALE))
-                 if r else np.zeros(4))
+        # 놓기/집기 환경과 같은 헬퍼를 쓴다. 여기에 따로 구현해 두면 신뢰도 문턱도,
+        # sigma_reported 갱신도 거치지 않아 놓기 단계가 공칭 품질 보정을 받아 버린다.
+        noise = self._sample_perception(r, options)
         self.measured = self.truth + np.array(options.get("measure_noise", noise))
-        self.path_delta = self.measured if self.corrected else np.zeros(4)
+        use = self.corrected and not self.perception_failed and self.perception_trusted
+        self.path_delta = self.measured if use else np.zeros(4)
+        self.perception_used = bool(use)
 
         # 목적지 장비를 실제로 틀어 놓는다. 출발지 교란은 되돌린다.
         self.perturber.reset()
@@ -268,6 +279,7 @@ class TransferEnv(pk.PickPlateEnv):
         self.released = False
         self.max_force = 0.0
         self.release_height = 0.0
+        self.release_force = 0.0
         self._roi_pending = True
         self.reference = self._plate_in_tcp()
         self.steps = 0
