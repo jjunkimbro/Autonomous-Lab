@@ -86,9 +86,12 @@ def main():
     model = PPO.load(args.policy, device="cpu")
     # 교시 주기까지 조율한 규칙을 넣는다. 정책의 이점이 "더 자주 교시한다"뿐이면
     # 주기를 조율한 규칙이 따라잡아야 한다 (주기 4 가 현실적 외관의 최선이었다).
+    # 216 조합 격자의 최선을 넣는다 (baseline_process_v11 --sweep --thresholds 1.5,0.15,8.0).
+    # 처음 비교에서 이 조합이 격자에 없었고, 그래서 정책의 우위가 과대평가됐다.
     contenders = {"정책": PolicyChooser(model),
-                  "규칙(교시20)": RuleChooser(bp.Tuned(**BEST_RULE)),
-                  "규칙(교시4, 최선)": RuleChooser(bp.Tuned(0.4, 0.8, 2, 3, 4)),
+                  "규칙(격자최선)": RuleChooser(bp.Tuned(1.5, 1.5, 1, 3, 20)),
+                  "규칙(격자최선 C1)": RuleChooser(bp.Tuned(1.5, 1.5, 1, 2, 20)),
+                  "규칙(조율 0.4/0.8)": RuleChooser(bp.Tuned(**BEST_RULE)),
                   "규칙(판정그대로)": RuleChooser(bp.FixedThreshold())}
     report = {"jobs": args.jobs, "episodes": args.episodes, "rule": BEST_RULE,
               "thresholds": thresholds, "conditions": {}}
@@ -106,7 +109,7 @@ def main():
                   f"{r['undetected']:8.2f}{r['humans']:7.1f}{r['retries']:8.1f}"
                   f"{r['teaches']:8.1f}{r['per_hour']:8.1f}")
         policy = np.array(result["정책"]["rewards"])
-        for name in ("규칙(교시20)", "규칙(교시4, 최선)", "규칙(판정그대로)"):
+        for name in [k for k in contenders if k != "정책"]:
             diff = policy - np.array(result[name]["rewards"])
             se = diff.std() / max(np.sqrt(len(diff)), 1)
             print(f"  정책 − {name}  {diff.mean():+.1f} ± {se:.1f}   "

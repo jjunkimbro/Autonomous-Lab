@@ -199,8 +199,12 @@ class Tuned(Rule):
         return 3
 
 
+THRESHOLDS = None               # main() 에서 --thresholds 로 덮어쓴다
+
+
 def run(rule, jobs, episodes, appearance, seed):
-    env = pe.ProcessEnv(jobs=jobs, appearance=appearance, seed=seed)
+    env = pe.ProcessEnv(jobs=jobs, appearance=appearance, seed=seed,
+                        thresholds=THRESHOLDS)
     totals = []
     logs = []
     for episode in range(episodes):
@@ -233,15 +237,25 @@ def main():
     parser.add_argument("--seed", type=int, default=7000)
     parser.add_argument("--out", default="baseline_process.json")
     parser.add_argument("--sweep", action="store_true", help="조율 규칙의 문턱 격자를 쓴다")
+    parser.add_argument("--thresholds", default=None, help="'height,tilt,lateral' 센서 문턱")
     args = parser.parse_args()
+    global THRESHOLDS
+    THRESHOLDS = (tuple(float(x) for x in args.thresholds.split(","))
+                  if args.thresholds else None)
 
     if args.sweep:
+        # arch 를 격자에 넣는다. 처음에는 (3,) 뿐이었고 — C 3 장 융합만 — 판단 정책이
+        # 새 문턱에서 **C 1 장을 98 % 쓰는** 전략을 찾아냈다. 격자에 그 전략이 없으면
+        # "정책이 규칙을 이겼다"는 비교가 성립하지 않는다. 기울기 격자에서 최적값이 격자
+        # 밖에 있었던 것과 같은 실수다.
+        # 수락 1.5 / 재확인 1.5 / 반복 0 은 "판정을 그대로 믿는다"에 해당한다 — 센서가
+        # 정확해지면 이것이 정교한 규칙을 이긴다.
         grid = [Tuned(a, r, n, arch, teach)
-                for a in (0.2, 0.3, 0.4, 0.5, 0.6)
-                for r in (0.5, 0.8, 1.2)
-                for n in (1, 2)
-                for arch in (3,)
-                for teach in (0, 20)
+                for a in (0.2, 0.4, 0.6, 1.5)
+                for r in (0.5, 0.8, 1.2, 1.5)
+                for n in (0, 1, 2)
+                for arch in (2, 3)
+                for teach in (0, 8, 20)
                 if r >= a]
         report = {"jobs": args.jobs, "episodes": args.episodes, "sweep": {}}
         for appearance in ("basic", "realistic"):
