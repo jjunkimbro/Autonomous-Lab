@@ -28,6 +28,7 @@ import vision_scene_v8 as scene
 import skill_scene_v9 as s9
 from train_student_v9 import to_image_tensor
 from eval_B_v9 import load_student
+import verify_place_v10 as vp10
 from verify_place_v10 import measure_seating, sensor_verdict
 
 BASE = Path(__file__).resolve().parent
@@ -54,7 +55,21 @@ def main():
     parser.add_argument("--place-run", default="place_plate_C_student")
     parser.add_argument("--seed", type=int, default=5150)
     parser.add_argument("--out", default="eval_transfer_verified.json")
+    # 문턱과 재확인은 공정 수준에서 다시 고른 값이다 (sweep_threshold_v11, baseline_process_v11).
+    # 오거부의 비용은 "작업 상실"이 아니라 재시도 21 초이므로 대칭 sweep 이 고른 0.8 mm 보다
+    # 좁은 쪽이 맞다. 애매한 값에서는 수락도 거부도 아니라 4 초짜리 재관측이 맞다.
+    parser.add_argument("--height", type=float, default=None, help="센서 높이 문턱 mm")
+    parser.add_argument("--tilt", type=float, default=None, help="센서 기울기 문턱 deg")
+    parser.add_argument("--reverify-margin", type=float, default=0.0,
+                        help="|높이| 가 이 값을 넘으면 다시 관측한다 (0 이면 끔)")
+    parser.add_argument("--reverify-repeats", type=int, default=2)
     args = parser.parse_args()
+    if args.height is not None:
+        vp10.SEATED_HEIGHT_MM = args.height
+    if args.tilt is not None:
+        vp10.SEATED_TILT_DEG = args.tilt
+    print(f"센서 문턱  높이 {vp10.SEATED_HEIGHT_MM} mm   기울기 {vp10.SEATED_TILT_DEG} deg   "
+          f"재확인 여유 {args.reverify_margin} mm x {args.reverify_repeats}", flush=True)
 
     pick_net, _ = load_student(BASE / "rl_runs" / args.pick_run)
     place_net, _ = load_student(BASE / "rl_runs" / args.place_run)
@@ -144,10 +159,32 @@ def main():
             if row.get("placed") is not None and row.get("stage") == "place":
                 result = look(target)
                 seating = measure_seating(perception, result["depth"], empty[target])
+                looks = 1
+                # 애매하면 다시 본다. 같은 시점 반복의 중앙값은 외관에서 오는 오차를
+                # 0.44~0.94 배로 줄인다 (measure_multiview_v10). 재시도보다 5 배 싸다.
+                if (args.reverify_margin > 0.0 and seating is not None
+                        and reference[target] is not None):
+                    pool = [seating]
+                    for _ in range(args.reverify_repeats):
+                        lift = abs(np.median([s["height_m"] for s in pool])
+                                   - reference[target]["height_m"]) * 1000.0
+                        if lift <= args.reverify_margin:
+                            break
+                        again = measure_seating(perception, look(target)["depth"],
+                                                empty[target])
+                        looks += 1
+                        if again is None:
+                            break
+                        pool.append(again)
+                    if len(pool) > 1:
+                        seating = dict(seating,
+                                       height_m=float(np.median([s["height_m"] for s in pool])),
+                                       tilt_deg=float(np.median([s["tilt_deg"] for s in pool])))
                 ok, reason = sensor_verdict(result, seating, reference[target],
                                             row["release_force_N"])
                 row["sensor_placed"] = bool(ok)
                 row["sensor_reason"] = reason
+                row["looks"] = looks
             else:
                 row.setdefault("sensor_placed", False)
                 row.setdefault("sensor_reason", f"{row['stage']} 단계에서 종료")
@@ -178,6 +215,10 @@ def main():
         false_reject=round(fn / max(sum(1 for r in done_rows if r["placed"]), 1), 3),
         reference_mm={k: (None if v is None else round(v["height_m"] * 1000, 2))
                       for k, v in reference.items()},
+        thresholds=dict(height=vp10.SEATED_HEIGHT_MM, tilt=vp10.SEATED_TILT_DEG,
+                        reverify_margin=args.reverify_margin,
+                        reverify_repeats=args.reverify_repeats),
+        looks_mean=round(float(np.mean([r.get("looks", 1) for r in rows])), 2),
         rows=rows)
 
     print("\n--- 단계별 ---", flush=True)
