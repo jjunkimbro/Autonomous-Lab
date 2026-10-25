@@ -58,6 +58,10 @@ DESCENT_SPEED = 0.020
 EXTRA_DESCENT = 0.001
 EPISODE_TIME = 3.0
 SETTLE_START = 0.2
+# Done 판정 문턱 (verify_place_v10.py 와 같은 값). 환경 쪽에서 '실패 상태인가' 를
+# 물을 때 쓴다 — verify 모듈을 import 하면 순환 참조가 된다.
+SEATED_TILT_DEG_CHECK = 0.15
+SEATED_HEIGHT_MM_CHECK = 1.5
 SETTLE_RELEASE = 0.4
 RESIDUAL_SPEED = 0.020
 RESIDUAL_LIMIT = 0.006

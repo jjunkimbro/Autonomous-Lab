@@ -58,6 +58,20 @@ RESTING_ERROR = np.array([0.0005, 0.0005, math.radians(0.3)])
 # 그 오차를 비전으로 잰 값의 오차 (장비 자세보다 쉽다 — plate 는 가깝고 윤곽이 뚜렷하다)
 RESTING_SIGMA = np.array([0.0004, 0.0004, math.radians(0.3)])
 
+# --- 실패 상태에서 시작하기 (복구) -------------------------------------------------
+# 놓기가 실패하면 plate 는 기둥에 걸쳐 기울어 앉는다. 그 상태에서 다시 집는 것이 복구다.
+#
+# 처음에는 실패 자세를 **합성**하려 했다 (옆으로 밀고 기울여 떨어뜨리기). 안 됐다:
+#   방향을 균일하게 뽑음        기울기 중앙 0.00 deg — 대각선은 포획 범위가 3.7mm 라 흡수된다
+#   축 방향 1.8~3.2mm 로 제한   진짜 실패 43 %, 나머지는 멀쩡히 앉거나 기둥 밖으로 빠졌다
+# 포획 한계(축별 1.5~1.7mm)와 기둥 여유(3.0mm) 사이의 띠가 너무 좁다. 그리고 실제 실패는
+# "밀린 판" 이 아니라 "손 안 오차를 안은 채 공중에서 놓은 판" 이다 — 떨어지며 회전해 기둥
+# 모서리에 먼저 닿는다. 그 역학은 합성으로 흉내내는 것보다 녹화하는 편이 정확하다.
+#
+# 그래서 build_failure_bank_v11.py 로 놓기를 실제로 돌려 실패 자세를 모아 두고, 여기서는
+# 그 은행에서 꺼내 쓴다. 비용은 은행을 만들 때 한 번만 든다.
+FAILURE_SETTLE = 0.3                    # s, 심은 뒤 가라앉히는 시간
+
 # 채점
 # 성공 기준을 PlacePlate 가 감당할 수 있는 범위에 맞춘다.
 # PlacePlate 의 IN_HAND_ERROR 가 +-2 mm 이므로, 그보다 크게 잡으면 다음 스킬이 떠안는다.
@@ -76,16 +90,46 @@ FAIL_FORCE = 150.0               # 이 이상이면 끼인 것으로 본다 (실
 DISTURB_GAIN = 400.0             # 집기 전에 plate 를 민 거리 (m 당)
 OFFSET_GAIN = 150.0              # 손 안 어긋남 (m 당)
 FORCE_GAIN = 0.02
+# 실물 UR5e 손목 F/T 의 측정 범위가 ±50 N 이다. 그 밖의 힘은 센서가 보고하지도 못하고,
+# 실제로는 보호 정지가 걸린다. 복구(끼인 판 빼내기)에서는 이게 핵심 제약이라 따로 벌점을 둔다.
+# 기본값 0 으로 두어 기존 학습과 평가는 그대로 둔다 — force_over_gain 을 준 실행에서만 켜진다.
+FORCE_LIMIT_N = 50.0
 
 # student 영상 ROI 중심 (TCP 기준). PlacePlate 는 든 plate 너머(= holder 입구)를 봤다.
 # 여기서는 빈손으로 들어가므로 손가락 앞쪽, plate 의 가까운 쪽 끝이 들어오는 자리를 본다.
 ROI_CENTER_TCP = np.array([0.0, -0.012, 0.055])
 
 
+def load_failure_bank(path):
+    """build_failure_bank_v11.py 가 만든 npz 를 {장비이름: {local, quat, delta}} 로 읽는다."""
+    from pathlib import Path
+    blob = np.load(Path(path), allow_pickle=False)
+    names = [str(n) for n in blob["names"]]
+    bank = {}
+    for index, name in enumerate(names):
+        mask = blob["station"] == index
+        bank[name] = {"local": blob["local"][mask], "quat": blob["quat"][mask],
+                      "delta": blob["delta"][mask]}
+    return bank
+
+
 class PickPlateEnv(pp.PlacePlateEnv):
     """PlacePlate 와 IK · 제어 · 접촉 · 영상 ROI 를 공유하고, 경로와 채점만 뒤집는다."""
 
     failed_pose = None               # reset(options={"failed_pose": ...}) 가 덮어쓴다
+    failure_state = None             # failure_rate 로 뽑힌 실패 상태 (옆으로 민 거리 · yaw)
+
+    def __init__(self, *args, failure_rate=0.0, failure_bank=None,
+                 force_over_gain=0.0, **kwargs):
+        """failure_rate = 실패 상태에서 시작하는 비율, failure_bank = 그 자세들의 npz 경로.
+
+        은행은 build_failure_bank_v11.py 가 만든다 (놓기를 실제로 돌려 녹화한 실패 자세).
+        force_over_gain 은 FORCE_LIMIT_N(50 N) 을 넘는 힘에 주는 추가 벌점이다. 0 이면 끈다.
+        """
+        self.failure_rate = float(failure_rate)
+        self.failure_bank = load_failure_bank(failure_bank) if failure_bank else None
+        self.force_over_gain = float(force_over_gain)
+        super().__init__(*args, **kwargs)
 
     def _prepare_stations(self):
         """pick 쪽 웨이포인트로 기준 관절값을 잡는다 (레일 여유 검사는 부모와 같은 규칙)."""
@@ -170,6 +214,19 @@ class PickPlateEnv(pp.PlacePlateEnv):
         self.truth = np.array(options.get("delta", r.uniform(-pp.STATION_ERROR, pp.STATION_ERROR)
                                            if r else np.zeros(4)))
         self.failed_pose = options.get("failed_pose")
+        # 실패 상태에서 시작할지. options 가 이기고, 없으면 failure_rate 로 은행에서 뽑는다.
+        # 자세는 그 장비가 **그때 틀어져 있던 상태** 기준이라 장비 오차(delta)도 같이 되살린다.
+        # 측정값(measured)은 아래에서 이 truth 로 다시 계산되므로 여기서 건드리지 않는다.
+        self.failure_state = None
+        if self.failed_pose is None and self.failure_rate > 0.0 and self.failure_bank:
+            if self.rng.random() < self.failure_rate:
+                pool = self.failure_bank.get(self.station_name)
+                if pool is not None and len(pool["local"]):
+                    pick = int(self.rng.integers(len(pool["local"])))
+                    self.failed_pose = {"local": pool["local"][pick],
+                                        "quat_s": pool["quat"][pick]}
+                    self.truth = np.array(pool["delta"][pick], dtype=float)
+                    self.failure_state = {"bank_index": pick}
         self.rest = np.array(options.get("rest", r.uniform(-RESTING_ERROR, RESTING_ERROR)
                                          if r else np.zeros(3)))
         # 놓기 환경과 같은 헬퍼를 쓴다 (인지 품질 랜덤화 · 신뢰도 보고 · 신뢰도 문턱).
@@ -214,9 +271,12 @@ class PickPlateEnv(pp.PlacePlateEnv):
         self.grip = GRIP_OPEN
         mujoco.mj_kinematics(m, d)
 
+        # 은행에서 꺼낸 자세는 이미 "쉬고 있던" 상태지만, 장비 마찰이 에피소드마다 달라
+        # 조금 더 가라앉힌다.
         self._seat_plate()
         mujoco.mj_forward(m, d)
-        for _ in range(int(pp.SETTLE_START / m.opt.timestep)):
+        settle = pp.SETTLE_START + (FAILURE_SETTLE if self.failed_pose is not None else 0.0)
+        for _ in range(int(settle / m.opt.timestep)):
             self._control(self.q_target)
             mujoco.mj_step(m, d)
 
@@ -291,6 +351,21 @@ class PickPlateEnv(pp.PlacePlateEnv):
     def _plate_moved(self):
         """집기 전 plate 가 원래 자리에서 움직인 거리."""
         return float(np.linalg.norm(self.data.xipos[self.plate_body] - self.rest_start))
+
+    def _resting_lateral(self):
+        """놓인 plate 가 **holder 기준** 으로 얼마나 밀려 있는가 [m].
+
+        장비 자체가 truth 만큼 틀어져 있으므로 공칭 원점 기준으로 재면 정상 안착도 수 mm 로
+        보인다 (처음에 그렇게 재서 생성기가 멀쩡한 줄 알았다). _plate_vs_holder 가 그 보정을 한다.
+        """
+        error = self._plate_vs_holder()
+        return float(math.hypot(error[0], error[1]))
+
+    def _is_failed_state(self):
+        """Done 판정 기준으로 지금 놓인 상태가 실패인가 (기울기 1 차 · 높이 2 차)."""
+        error = self._plate_vs_holder()
+        return bool(self._tilt() > pp.SEATED_TILT_DEG_CHECK
+                    or abs(error[2]) * 1000.0 > pp.SEATED_HEIGHT_MM_CHECK)
 
     def _grasp_error(self):
         """손 안 기준 자리 대비 어긋남 벡터 (TCP 좌표)."""
@@ -367,6 +442,9 @@ class PickPlateEnv(pp.PlacePlateEnv):
         offset = float(np.linalg.norm(self._grasp_error())) if self.gripped else 0.0
         reward = -OFFSET_GAIN * offset
         reward -= FORCE_GAIN * max(0.0, force - 5.0)
+        # 실물 센서 범위 밖은 따로, 더 세게 벌한다. 끼인 판을 억지로 끌면 여기에 걸린다.
+        if self.force_over_gain:
+            reward -= self.force_over_gain * max(0.0, force - FORCE_LIMIT_N)
         reward -= 0.005 * float(np.sum(np.square(action[:4])))
         if self.grip_time is not None:
             # 집기 전에 민 거리. 액체가 든 plate 는 밀리면 넘친다.
@@ -433,6 +511,7 @@ class PickPlateEnv(pp.PlacePlateEnv):
                 "disturbance_mm": float(getattr(self, "disturbance", 0.0) * 1000),
                 "lift_mm": float(self._lifted() * 1000) if hasattr(self, "rest_start") else 0.0,
                 "tilt_deg": self._tilt(),
+                "from_failure": self.failure_state is not None,
                 "max_force_N": float(getattr(self, "max_force", 0.0))}
 
 
