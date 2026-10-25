@@ -85,6 +85,8 @@ ROI_CENTER_TCP = np.array([0.0, -0.012, 0.055])
 class PickPlateEnv(pp.PlacePlateEnv):
     """PlacePlate 와 IK · 제어 · 접촉 · 영상 ROI 를 공유하고, 경로와 채점만 뒤집는다."""
 
+    failed_pose = None               # reset(options={"failed_pose": ...}) 가 덮어쓴다
+
     def _prepare_stations(self):
         """pick 쪽 웨이포인트로 기준 관절값을 잡는다 (레일 여유 검사는 부모와 같은 규칙)."""
         import plan_rulebased_ik_v4 as ik
@@ -167,6 +169,7 @@ class PickPlateEnv(pp.PlacePlateEnv):
 
         self.truth = np.array(options.get("delta", r.uniform(-pp.STATION_ERROR, pp.STATION_ERROR)
                                            if r else np.zeros(4)))
+        self.failed_pose = options.get("failed_pose")
         self.rest = np.array(options.get("rest", r.uniform(-RESTING_ERROR, RESTING_ERROR)
                                          if r else np.zeros(3)))
         # 놓기 환경과 같은 헬퍼를 쓴다 (인지 품질 랜덤화 · 신뢰도 보고 · 신뢰도 문턱).
@@ -237,8 +240,28 @@ class PickPlateEnv(pp.PlacePlateEnv):
         return self._obs(), self._info(False, False)
 
     def _seat_plate(self):
-        """plate 를 holder 의 (오차가 실린) 자리에 눕힌다."""
+        """plate 를 holder 의 (오차가 실린) 자리에 눕힌다.
+
+        options["failed_pose"] 를 주면 그 자세를 그대로 쓴다 — **놓기 실패 상태에서 다시 집기**
+        를 재려고 넣었다. 정상 자세는 장비 좌표계에서 (rest 오차 ±0.5mm / 0.3 도, 기울기 0) 인데,
+        실패 상태는 측면 수 mm · 기울기 1~3 도라 z 축 회전만으로는 표현할 수 없다.
+        local  : 장비 좌표계에서 plate 중심 (f, l, z) [m]
+        quat_s : 장비 좌표계 기준 plate 회전 (w, x, y, z)
+        """
         d = self.data
+        if self.failed_pose is not None:
+            rotation = np.asarray(self.station["rotation"])
+            origin = np.asarray(self.station["origin"])
+            local = np.asarray(self.failed_pose["local"], dtype=float)
+            d.qpos[self.plate_qpos:self.plate_qpos + 3] = origin + rotation @ local
+            station_mat = np.zeros(9)
+            mujoco.mju_quat2Mat(station_mat, np.asarray(self.failed_pose["quat_s"], dtype=float))
+            world = rotation @ station_mat.reshape(3, 3)
+            quat = np.zeros(4)
+            mujoco.mju_mat2Quat(quat, world.ravel())
+            d.qpos[self.plate_qpos + 3:self.plate_qpos + 7] = quat
+            d.qvel[self.plate_dof:self.plate_dof + 6] = 0.0
+            return
         rotation = rot_z(self.truth[3]) @ self.station["rotation"]
         centre = self._transform(self.station["origin"] + np.array([0.0, 0.0, PLATE["height"] / 2.0]), self.truth)
         centre = centre + rotation @ np.array([self.rest[0], self.rest[1], 0.0])
