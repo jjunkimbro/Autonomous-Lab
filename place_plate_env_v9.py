@@ -76,6 +76,25 @@ RELEASE_HEIGHT_TOLERANCE = 0.0005
 RELEASE_HEIGHT_GAIN = 1000.0
 
 CT_KP, CT_KD = 900.0, 60.0
+# 작업공간 축별 임피던스 (controller="task").
+#
+# 왜 필요한가: 위의 관절공간 계산토크는 모든 방향으로 똑같이 단단하다 (Kp 900 = 임계감쇠
+# 4.8 Hz, 실물 UR5e 의 servoj 에 해당). 접촉 작업에서 필요한 것은 축별 컴플라이언스다 —
+# 삽입·하강 방향으로 부드럽고 측면으로 단단한 것. 지금 접촉력이 74 N (집기) 까지 가는 이유가
+# 이것이고, 그 값은 실물 F/T 범위 (+-50 N, 정밀도 +-3.5 N) 밖이라 **실물 센서가 보고할 수 없는
+# 양**이다. 그러면 정책이 쓰는 힘 입력도, 걸림 문턱도 sim 과 real 에서 다른 뜻이 된다.
+# 또한 real-to-sim 역추정(마찰·접촉 강성)은 지령 강성이 알려져 있어야 성립한다.
+#
+# 구현: 관절 오차를 기준으로 두고, **부드럽게 할 축 방향 성분만 덜어낸다**.
+#   e = e_q - J^+ ((1 - S) (J e_q)),   e_q = q_target - q
+# S = 1 이면 e = e_q 로 지금과 완전히 같고, S = 0 인 축은 그 축 복원력만 사라진다.
+# 방향과 여유자유도(레일)는 손대지 않으므로 강성이 유지된다.
+#
+# 처음에 e = J^+ (S (x_d - x)) + 0.25 (q_d - q) 로 썼더니 위치 3 자유도만 작업공간 항으로
+# 제어되고 방향·여유자유도가 약한 자세항에만 남아 발산했다 (추종오차 2.18mm -> 271mm,
+# 접촉력 최대 556 N). 작업공간 임피던스는 전 자유도를 함께 다루지 않으면 성립하지 않는다.
+TASK_SCALE = (0.35, 1.0, 0.15)   # (진입 f, 측면 l, 수직 up) 강성 배율
+TASK_DAMPING = 0.08              # 자코비안 감쇠최소자승
 
 # 레일(J0) 은 0 ~ 0.75 m 만 움직인다. 명목 자세를 한쪽 끝에 붙여 잡으면 장비 오차를 따라가다
 # 레일이 하드 스톱에 걸려 TCP 가 명령 지점에 못 간다. 배양기가 그랬다: 앵커가 레일 0.00 m 라
@@ -231,6 +250,7 @@ class PlacePlateEnv(gym.Env):
 
     def __init__(self, obs_mode="privileged", stations=s9.PLATE_STATIONS, randomize=True, seed=None, nominal_lift=True,
                  station_weights=None, corrected=True, residual_limit=None, residual_down=None, render_scale=1,
+                 controller="joint", task_scale=None,
                  roi_size=None, dual_scale=False, appearance=None,
                  measure_sigma=None, perception_fail=0.0, perception_random=False,
                  confidence_gate=None, report_confidence=None, mixed=False):
@@ -266,6 +286,8 @@ class PlacePlateEnv(gym.Env):
         self.mixed = bool(mixed)
         self.dual_scale = dual_scale
         self.render_scale = 3 if dual_scale else render_scale
+        self.controller = controller
+        self.task_scale = np.asarray(task_scale if task_scale is not None else TASK_SCALE, dtype=float)
         self.residual_high = np.full(3, RESIDUAL_LIMIT if residual_limit is None else residual_limit)
         down = RESIDUAL_DOWN_LIMIT if residual_down is None else residual_down
         self.residual_low = np.array([-self.residual_high[0], -self.residual_high[1], -down])
@@ -597,6 +619,7 @@ class PlacePlateEnv(gym.Env):
         self.residual = np.clip(self.residual + action[:3] * RESIDUAL_SPEED * dt, self.residual_low, self.residual_high)
         self.yaw_residual = float(np.clip(self.yaw_residual + action[3] * YAW_SPEED * dt, -YAW_LIMIT, YAW_LIMIT))
         target = self._nominal(self.time + dt) + rotation @ self.residual
+        self.x_target = target
         seed = self.q_target.copy()
         seed[1] = self.q_base[1] + self.yaw_residual
         self.q_target = self._ik(seed, target, iterations=2)
@@ -647,7 +670,18 @@ class PlacePlateEnv(gym.Env):
     def _control(self, q_target):
         m, d = self.model, self.data
         q, qd = d.qpos[self.qpos_adr], d.qvel[self.dof_adr]
-        command = CT_KP * (q_target - q) - CT_KD * qd
+        error = q_target - q
+        if self.controller == "task":
+            jacp = np.zeros((3, m.nv))
+            mujoco.mj_jacSite(m, d, jacp, None, self.site)
+            jac = jacp[:, self.dof_adr]
+            rotation = rot_z(self.path_delta[3]) @ self.station["rotation"]
+            # 관절 오차가 만드는 작업공간 변위 중, 부드럽게 할 비율만큼을 덜어낸다
+            motion = rotation.T @ (jac @ error)
+            soften = rotation @ (motion * (1.0 - self.task_scale))
+            gram = jac @ jac.T + (TASK_DAMPING ** 2) * np.eye(3)
+            error = error - jac.T @ np.linalg.solve(gram, soften)
+        command = CT_KP * error - CT_KD * qd
         mujoco.mj_fullM(m, d, self.mass)
         block = self.mass[np.ix_(self.dof_adr, self.dof_adr)]
         d.qfrc_applied[:] = 0.0
