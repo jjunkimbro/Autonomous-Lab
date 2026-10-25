@@ -1,0 +1,112 @@
+{
+  "env": "place",
+  "run": "place_plate_B3_holdout_student",
+  "appearance": true,
+  "env_kwargs": {
+    "corrected": false,
+    "residual_limit": 0.012,
+    "residual_down": 0.005,
+    "dual_scale": true,
+    "appearance": true
+  },
+  "episodes": 50,
+  "B_nominal": {
+    "fluent_plate": {
+      "success": 0.1,
+      "force_N": 29.906505204352207,
+      "release_mm": 2.8123087513788825,
+      "xy_mm": 3.4227798590336294,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.44,
+      "force_N": 35.356465187940465,
+      "release_mm": 1.9464509911926076,
+      "xy_mm": 3.4754090646492686,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.14,
+      "force_N": 42.425354822447545,
+      "release_mm": 2.556626144649126,
+      "xy_mm": 3.523895379544976,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.18,
+      "force_N": 73.05674625494835,
+      "release_mm": 2.77362860500793,
+      "xy_mm": 3.945475509940767,
+      "jams": 1
+    },
+    "OVERALL": 0.21500000000000002
+  },
+  "B_student": {
+    "fluent_plate": {
+      "success": 0.88,
+      "force_N": 15.694312012291942,
+      "release_mm": 0.6506982493471815,
+      "xy_mm": 0.5908655116290895,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.0,
+      "force_N": 39.999086083301144,
+      "release_mm": 15.628889044087867,
+      "xy_mm": 8.293923563640588,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.94,
+      "force_N": 16.6535864215278,
+      "release_mm": 0.6775439978138165,
+      "xy_mm": 0.7539713333051127,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.88,
+      "force_N": 13.557212355409325,
+      "release_mm": 0.5076308022906507,
+      "xy_mm": 0.5432598284723306,
+      "jams": 0
+    },
+    "OVERALL": 0.6749999999999999
+  },
+  "B_student_blind": {
+    "fluent_plate": {
+      "success": 0.0,
+      "force_N": 18.560956058009502,
+      "release_mm": 3.1464449718065657,
+      "xy_mm": 13.389432839310187,
+      "jams": 0
+    },
+    "incubator_plate": {
+      "success": 0.0,
+      "force_N": 30.39325358009075,
+      "release_mm": 3.3634699543612716,
+      "xy_mm": 12.15016271501028,
+      "jams": 0
+    },
+    "reader_plate": {
+      "success": 0.0,
+      "force_N": 37.84756664453446,
+      "release_mm": 2.9007841161296994,
+      "xy_mm": 13.107077655889384,
+      "jams": 0
+    },
+    "sorter_left_plate": {
+      "success": 0.0,
+      "force_N": 45.369847218321354,
+      "release_mm": 3.184170286406631,
+      "xy_mm": 13.405465349697383,
+      "jams": 0
+    },
+    "OVERALL": 0.0
+  },
+  "A": {
+    "baseline": 0.56,
+    "student": 0.9349999999999999,
+    "student_blind": 0.15000000000000002
+  },
+  "image_contribution": 0.6749999999999999
+}

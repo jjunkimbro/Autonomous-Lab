@@ -124,16 +124,24 @@ def main():
     parser.add_argument("--obs-mode", default="privileged", choices=("privileged", "measured"))
     parser.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
                         help="환경 인자 덮어쓰기 (예: --set perception_random=True). --end-to-end 뒤에 적용")
+    parser.add_argument("--hold-out", default=None, metavar="STATION",
+                        help="그 장비를 학습에서 뺀다 (가중치 0). 평가는 전 장비에서 계속 한다 — "
+                             "처음 보는 홀더에서 보정이 일반화되는지 보기 위한 것")
     parser.add_argument("--end-to-end", action="store_true",
                         help="B 안: 경로를 비전으로 보정하지 않는다 (teacher 는 정답을 보므로 영상은 안 씀)")
     args = parser.parse_args()
-    global ENV_KWARGS, ENV_NAME
+    global ENV_KWARGS, ENV_NAME, STATION_WEIGHTS
     ENV_NAME = args.env
     if args.end_to_end:
         ENV_KWARGS = dict(corrected=False, residual_limit=0.012, residual_down=0.005)
     for item in args.set:
         key, _, value = item.partition("=")
         ENV_KWARGS[key.strip()] = ast.literal_eval(value.strip())
+    if args.hold_out:
+        STATION_WEIGHTS = dict(STATION_WEIGHTS or {})
+        STATION_WEIGHTS[args.hold_out] = 0.0
+        print(f"hold-out: {args.hold_out} 를 학습에서 제외한다 (평가는 전 장비에서 계속)",
+              flush=True)
     global RUN_DIR, OBS_MODE
     OBS_MODE = args.obs_mode
     if args.run_name:

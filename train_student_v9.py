@@ -89,14 +89,49 @@ def to_image_tensor(rgb, depth):
     return torch.cat((rgb, depth), dim=-1).permute(0, 3, 1, 2).contiguous()
 
 
+AUGMENT = "basic"
+
+
 def augment(image):
-    """밝기 변화만 준다.
-    평행이동 증강은 쓰지 않는다: 카메라가 flange 에 고정이라 잡은 plate 의 화면 위치는 일정하고,
-    그 기준에 대한 holder 의 픽셀 위치가 핵심 정보인데 영상 전체를 밀면 이 정보가 망가진다.
+    """basic = 밝기 변화만. strong = 채널별 색 변화 + 가장자리 띠 가리기.
+
+    평행이동 증강은 어느 쪽에서도 쓰지 않는다: 카메라가 flange 에 고정이라 잡은 plate 의
+    화면 위치는 일정하고, 그 기준에 대한 holder 의 픽셀 위치가 핵심 정보인데 영상 전체를
+    밀면 이 정보가 망가진다.
+
+    strong 을 넣은 이유 (2026-10-25 hold-out 측정):
+      배양기를 빼고 증류하면 그 장비에서 성공률이 0.00 이고, 보정량이 실제 오차와 무관한
+      9.7mm (cos 0.10), 삽입 깊이는 부호가 뒤집혀 +8.6mm 였다. 학습한 세 장비는 cos
+      0.72~0.97 로 제대로 읽는다. 즉 인지가 홀더가 아니라 **장면 전체**로 장비를 식별하고
+      장비마다 다른 보정을 외웠다. 홀더 입구와 잡은 plate 는 화면 가운데에, 장비 본체와
+      주변 구조물은 가장자리에 있으므로, 가장자리를 무작위로 가려서 그 지름길을 막는다.
     """
-    gain = torch.empty(image.shape[0], 1, 1, 1).uniform_(0.8, 1.2)
+    gain_shape = image.shape[0], 1, 1, 1
     colour = image.shape[1] - (2 if image.shape[1] == 8 else 1)      # RGB 채널 수 (4ch -> 3, 8ch -> 6)
+    if AUGMENT == "strong":
+        gain_shape = image.shape[0], colour, 1, 1                    # 채널별로 따로 흔든다
+    gain = torch.empty(*gain_shape).uniform_(0.7 if AUGMENT == "strong" else 0.8,
+                                             1.3 if AUGMENT == "strong" else 1.2)
     image[:, :colour] = (image[:, :colour] * gain).clamp(0.0, 1.0)
+
+    if AUGMENT == "strong":
+        n, _, height, width = image.shape
+        rows = torch.arange(height).view(1, height, 1)
+        cols = torch.arange(width).view(1, 1, width)
+
+        def thickness(size):
+            """절반은 안 가리고, 나머지는 그 변의 8~28 % 를 가린다.
+
+            상한 28 % 는 네 변을 다 가려도 가운데 44 % 가 남게 잡은 값이다 — 잡은 plate 와
+            홀더 입구는 거기에 있다. 더 키우면 신호까지 지운다.
+            """
+            keep = torch.rand(n, 1, 1) < 0.5
+            band = torch.empty(n, 1, 1).uniform_(0.08, 0.28) * size
+            return torch.where(keep, torch.zeros_like(band), band)
+
+        mask = ((rows < thickness(height)) | (rows >= height - thickness(height))
+                | (cols < thickness(width)) | (cols >= width - thickness(width)))
+        image = image.masked_fill(mask.unsqueeze(1), 0.0)
     return image
 
 
@@ -165,7 +200,7 @@ def worker_resources(worker, teacher_path, seed, env_kwargs=None, env_name="plac
 
         _WORKER_CACHE["teacher"] = PPO.load(teacher_path, device="cpu")
         env = make_env(env_name, obs_mode="visuotactile", seed=seed,
-                       station_weights={"incubator_plate": 2.0}, **(env_kwargs or {}))
+                       **(env_kwargs or {}))
         env.reset()                     # 렌더러 생성
         _WORKER_CACHE["env"] = env
     env = _WORKER_CACHE["env"]
@@ -174,8 +209,13 @@ def worker_resources(worker, teacher_path, seed, env_kwargs=None, env_name="plac
 
 
 def rollout_worker(args):
-    worker, episodes, beta, student_state, teacher_path, seed, record, env_kwargs, env_name = args
+    (worker, episodes, beta, student_state, teacher_path, seed, record,
+     env_kwargs, env_name, stations) = args
     env, teacher = worker_resources(worker, teacher_path, seed, env_kwargs, env_name)
+    # 여기서 장비를 **이름으로 지정**하므로 env 의 station_weights 는 적용되지 않는다
+    # (place_plate_env_v9.py:504, options 의 station 이 가중 표집을 덮어쓴다).
+    # 그래서 hold-out 은 가중치가 아니라 이 목록에서 빼는 방식으로만 효과가 있다.
+    choices = list(stations) if stations else list(env.stations)
 
     student = None
     if student_state is not None:
@@ -189,7 +229,7 @@ def rollout_worker(args):
     results = []
 
     for episode in range(episodes):
-        station = env.stations[(worker + episode) % len(env.stations)]
+        station = choices[(worker + episode) % len(choices)]
         obs, info = env.reset(options={"station": station})
         while True:
             teacher_action = teacher.predict(privileged_observation(env, obs["state"]), deterministic=True)[0]
@@ -216,10 +256,10 @@ def rollout_worker(args):
 
 
 def run_parallel(pool, total_episodes, beta, student_state, teacher_path, seed, record,
-                 env_kwargs=None, env_name="place"):
+                 env_kwargs=None, env_name="place", stations=None):
     per_worker = int(np.ceil(total_episodes / WORKERS))
     jobs = [(worker, per_worker, beta, student_state, teacher_path, seed + 1000 * worker, record,
-             env_kwargs, env_name)
+             env_kwargs, env_name, stations)
             for worker in range(WORKERS)]
     outputs = pool.map(rollout_worker, jobs)
     samples = None
@@ -283,6 +323,10 @@ def main():
     parser.add_argument("--set", action="append", default=[], metavar="KEY=VALUE",
                         help="환경 인자를 직접 덮어쓴다 (예: --set corrected=True). "
                              "--end-to-end 뒤에 적용되므로 A/B 를 입력 조건만 같게 두고 비교할 때 쓴다")
+    parser.add_argument("--hold-out", default=None, metavar="STATION",
+                        help="그 장비를 증류에서 뺀다 (가중치 0)")
+    parser.add_argument("--augment", choices=("basic", "strong"), default="basic",
+                        help="strong = 채널별 색 변화 + 가장자리 가리기. 장비 외형 암기를 막는다")
     parser.add_argument("--end-to-end", action="store_true",
                         help="B 안: 경로를 비전으로 보정하지 않고, 정책이 영상에서 장비 오차까지 읽는다")
     args = parser.parse_args()
@@ -295,18 +339,29 @@ def main():
     for item in args.set:
         key, _, value = item.partition("=")
         env_kwargs[key.strip()] = ast.literal_eval(value.strip())
+    # 증류는 worker 가 장비를 돌아가며 **이름으로** 지정한다 (rollout_worker 참조).
+    # 그래서 teacher 학습에 쓰는 station_weights 는 여기서 효력이 없다 — hold-out 은
+    # 수집에 쓰는 장비 목록에서 빼는 방식으로 구현한다. 평가는 전 장비에서 계속 한다.
 
-    global RUN_DIR
+    global RUN_DIR, AUGMENT
+    AUGMENT = args.augment
     RUN_DIR = BASE_DIR / "rl_runs" / args.run_name
     RUN_DIR.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(8)
-    print(f"device {DEVICE}   workers {WORKERS}   teacher {Path(args.teacher).parent.name}", flush=True)
+    print(f"device {DEVICE}   workers {WORKERS}   teacher {Path(args.teacher).parent.name}   "
+          f"augment {AUGMENT}", flush=True)
 
     import place_plate_env_v9 as pe
     probe = make_env(args.env, obs_mode="visuotactile", **env_kwargs)
     state_size = probe.observation_space["state"].shape[0]
     channels = image_channels(probe)
+    all_stations = list(probe.stations)
     probe.close()
+    train_stations = [s for s in all_stations if s != args.hold_out]
+    if args.hold_out:
+        assert args.hold_out in all_stations, f"{args.hold_out} 는 장비 목록에 없다"
+        print(f"hold-out: {args.hold_out} 를 증류에서 제외 "
+              f"(수집 {len(train_stations)} 장비, 평가는 {len(all_stations)} 장비 전부)", flush=True)
     print(f"mode {'B end-to-end' if args.end_to_end else 'A corrected'}   "
           f"state {state_size}   image channels {channels}", flush=True)
 
@@ -327,7 +382,8 @@ def main():
             beta = BETAS[min(iteration, len(BETAS) - 1)]
             student_state = None if iteration == 0 else {k: v.cpu() for k, v in student.state_dict().items()}
             samples, _ = run_parallel(pool, args.episodes, beta, student_state, args.teacher,
-                                      1_000 * iteration, True, env_kwargs, args.env)
+                                      1_000 * iteration, True, env_kwargs, args.env,
+                                      stations=train_stations)
 
             if dataset is None:
                 dataset = samples
