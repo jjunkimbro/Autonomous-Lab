@@ -1,0 +1,444 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>플레이트 이송 강화학습</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* 단일 컬럼. 본문은 68ch, 영상과 표는 폭을 넓게 쓴다. 절마다 위에 얇은 선. */
+  :root {
+    --paper: #f6f7f8;
+    --card: #ffffff;
+    --ink: #15181c;
+    --muted: #59636d;
+    --line: #d9dee3;
+    --accent: #0f7a6b;
+    --warn: #a8431f;
+    --display: "IBM Plex Sans Condensed", "Helvetica Neue", Arial, sans-serif;
+    --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1318;
+      --card: #161c22;
+      --ink: #e5e9ed;
+      --muted: #8d99a5;
+      --line: #28313a;
+      --accent: #4fd1b8;
+      --warn: #e58a62;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1318;
+    --card: #161c22;
+    --ink: #e5e9ed;
+    --muted: #8d99a5;
+    --line: #28313a;
+    --accent: #4fd1b8;
+    --warn: #e58a62;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 40px 72px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 52px; }
+  .prose { max-width: 68ch; display: flex; flex-direction: column; gap: 14px; }
+  p { margin: 0; }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(30px, 6vw, 46px);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(21px, 3.4vw, 27px);
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h3 { font-family: var(--display); font-size: 17px; margin: 0; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .lede { font-size: 18px; color: var(--muted); }
+  section { display: flex; flex-direction: column; gap: 20px; }
+  section.ruled { border-top: 1px solid var(--line); padding-top: 28px; }
+
+  figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  video {
+    width: 100%; max-width: 100%; display: block;
+    background: #000; border: 1px solid var(--line); border-radius: 3px;
+  }
+  figcaption { font-size: 13.5px; color: var(--muted); max-width: 72ch; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: 13.5px; }
+  .legend div { display: flex; gap: 8px; align-items: baseline; min-width: 0; }
+  .legend b { font-family: var(--display); font-weight: 600; white-space: nowrap; }
+  .legend span { color: var(--muted); min-width: 0; }
+
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; font-size: 14px; width: 100%; min-width: 440px; }
+  caption {
+    text-align: left; font-size: 13px; color: var(--muted);
+    padding-bottom: 8px; caption-side: top;
+  }
+  th, td { padding: 7px 12px 7px 0; text-align: left; border-bottom: 1px solid var(--line); }
+  thead th {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
+  }
+  td.num, th.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+  tr.lead td { font-weight: 600; }
+  tr.lead td.num { color: var(--accent); }
+
+  .note {
+    border-left: 2px solid var(--warn);
+    padding: 2px 0 2px 16px;
+    display: flex; flex-direction: column; gap: 10px;
+    max-width: 68ch;
+  }
+  .note h3 { color: var(--warn); }
+  .note p, .note li { font-size: 14.5px; }
+  ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+  code, .m { font-family: var(--mono); font-size: 0.92em; }
+  .stat { display: flex; flex-wrap: wrap; gap: 8px 32px; }
+  .stat div { display: flex; flex-direction: column; min-width: 128px; }
+  .stat .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .stat .v { font-family: var(--display); font-size: 25px; font-variant-numeric: tabular-nums; }
+</style>
+
+<div class="wrap">
+
+  <header class="prose">
+    <p class="eyebrow">MuJoCo · UR5e + RG2 · 플랜지 D415</p>
+    <h1>강화학습이 어디서 쓸모가 있었고 어디서 없었나</h1>
+    <p class="lede">
+      미세플레이트를 장비 사이로 옮기는 로봇에서 인지 · 판단 · 제어 세 층에 강화학습을 넣고,
+      각 층마다 <strong>조율한 규칙 기반</strong>과 같은 조건에서 비교했습니다.
+      결과는 층마다 달랐습니다.
+    </p>
+    <p>
+      아래 네 영상은 측정에 쓴 바로 그 정책이 돌아가는 것입니다. 화면의 숫자는 시뮬레이터가
+      아는 참값(장비 어긋남 · 그립 어긋남)이고, 정책은 그 숫자를 받지 않습니다 — 오른쪽에 붙은
+      두 배율 창과 깊이만 봅니다.
+    </p>
+  </header>
+
+  <section>
+    <p class="eyebrow">영상 1 — 제어층</p>
+    <h2>같은 교란, 왼쪽은 학습 정책, 오른쪽은 규칙</h2>
+    <figure>
+      <video controls loop muted playsinline preload="metadata">
+        <source src="control_compare.webm" type="video/webm">
+      </video>
+      <figcaption>
+        여섯 개 교란을 두 방법에 똑같이 주입했습니다. 이 여섯 개에서 정책 6/6, 규칙 2/6.
+        비율 자체는 조건당 50상황 측정값(아래 표)을 보셔야 합니다.
+      </figcaption>
+    </figure>
+    <div class="legend">
+      <div><b>왼쪽 · 학습 정책 B3</b><span>보정 없는 경로에서 영상만으로 잔차를 낸다. 홀더와 플레이트가 한 화면에 있으니 그 차이를 직접 읽는다.</span></div>
+      <div><b>오른쪽 · 규칙(개방)</b><span>인지층이 네 자유도를 다 재서 경로를 고치고 그대로 내려놓는다. RL 이전의 표준 파이프라인.</span></div>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>놓기 성공률 · 조건당 50상황을 네 방법에 동일 주입 · McNemar 짝 검정 · 모두 p&lt;0.001</caption>
+        <thead>
+          <tr>
+            <th>방법</th>
+            <th class="num">공칭 외관</th>
+            <th class="num">현실적 외관</th>
+            <th class="num">안착오차</th>
+            <th class="num">접촉력</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="lead">
+            <td>학습 정책 B3</td><td class="num">0.860</td><td class="num">0.880</td>
+            <td class="num">0.76 mm</td><td class="num">21.8 N</td>
+          </tr>
+          <tr>
+            <td>규칙(개방)</td><td class="num">0.420</td><td class="num">0.340</td>
+            <td class="num">1.38 mm</td><td class="num">14.0 N</td>
+          </tr>
+          <tr>
+            <td>규칙 + 깊이 서보</td><td class="num">0.200</td><td class="num">0.260</td>
+            <td class="num">2.31 mm</td><td class="num">16.6 N</td>
+          </tr>
+          <tr>
+            <td>깊이 서보 단독</td><td class="num">0.080</td><td class="num">0.100</td>
+            <td class="num">4.15 mm</td><td class="num">29.5 N</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h3>격차의 원인은 구조적입니다</h3>
+      <p>
+        교란은 두 종류입니다. <span class="m">장비</span> x,y ±5mm · z ±2mm · yaw ±2°,
+        그리고 <span class="m">그립</span> x,y ±2mm · z ±2.5mm · yaw ±1° — 플레이트가 그리퍼
+        안에서 어떻게 잡혔는지입니다. 규칙(개방)에서 그립 오차를 0 으로 고정하면 성공률이
+        <span class="m">0.458 → 0.875</span> 로 올라갑니다. 즉 남은 실패는 거의 전부 그립 오차입니다.
+      </p>
+      <p>
+        플랜지 카메라로 <em>장비</em>를 재는 파이프라인은 그립 오차를 볼 수 없습니다. 정책은
+        플레이트와 포켓을 같은 화면에서 보기 때문에 그 차이를 직접 읽습니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="ruled">
+    <p class="eyebrow">영상 2 — 전체 이송과 자체 검증</p>
+    <h2>로봇이 스스로 "놓았다"고 판정한다</h2>
+    <figure>
+      <video controls loop muted playsinline preload="metadata">
+        <source src="chain_verified.webm" type="video/webm">
+      </video>
+      <figcaption>
+        집기(B3) → 이동 → 놓기(C) → 관측 자세로 이동해 Done 검증. 마지막 화면에 로봇의 센서
+        판정과 시뮬레이터의 특권 판정을 나란히 적었습니다. 이 여섯 이송에서 6/6 일치.
+      </figcaption>
+    </figure>
+
+    <div class="stat">
+      <div><span class="k">이송 150회</span><span class="v">0.940</span></div>
+      <div><span class="k">센서 판정</span><span class="v">0.940</span></div>
+      <div><span class="k">오수락</span><span class="v">0.000</span></div>
+      <div><span class="k">오거부</span><span class="v">0.000</span></div>
+    </div>
+
+    <div class="prose">
+      <p>
+        센서 판정은 <strong>점유 + 가르친 기준 높이 + 기울기</strong>만 씁니다. 특권 정보는
+        쓰지 않습니다. 150 이송 전부에서 로봇의 판정이 시뮬레이터의 판정과 일치했고, 거부한
+        6건은 모두 기울기 0.2~0.4° 이며 모두 진짜 실패였습니다.
+      </p>
+      <h3>문턱을 두 번 골랐습니다</h3>
+      <p>
+        처음에는 격자 탐색으로 <span class="m">높이 0.8mm · 기울기 0.4°</span>를 골랐고
+        현실적 외관에서 오수락 0.030 이 남았습니다. 그 격자의 기울기 최솟값이 0.4 였습니다 —
+        <strong>최적값이 격자 밖에 있었습니다.</strong> 홀드아웃 320 행의 분포를 직접 보면
+        안착은 최대 0.119°, 실패는 최소 0.188° 로 완전히 갈립니다. 높이는 겹칩니다.
+        <span class="m">1.5mm · 0.15°</span>로 바꾸니 오수락이 0 이 됐습니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="ruled">
+    <p class="eyebrow">영상 3 — 일반화</p>
+    <h2>처음 보는 장비에서는 보정이 거꾸로 간다</h2>
+    <figure>
+      <video controls loop muted playsinline preload="metadata">
+        <source src="holdout_compare.webm" type="video/webm">
+      </video>
+      <figcaption>
+        같은 교란 여덟 개. 왼쪽은 네 장비를 모두 학습한 정책, 오른쪽은 <strong>배양기만
+        학습·증류에서 완전히 뺀</strong> 정책입니다. 이 여덟에서 6/8 대 0/8.
+      </figcaption>
+    </figure>
+    <div class="legend">
+      <div><b>왼쪽 · 전 장비 학습</b><span>배양기 성공률 0.68. 내려놓는 동안 보정이 아래쪽(−)으로 쌓인다.</span></div>
+      <div><b>오른쪽 · 배양기 미학습</b><span>성공률 0.00. 자막의 <span class="m">down</span> 값이 양수로 커지면서 공중에서 놓는다.</span></div>
+    </div>
+
+    <div class="stat">
+      <div><span class="k">보정 끔</span><span class="v">0.44</span></div>
+      <div><span class="k">전 장비 학습</span><span class="v">0.68</span></div>
+      <div><span class="k">배양기 미학습</span><span class="v">0.00</span></div>
+      <div><span class="k">낙하 높이</span><span class="v">15.6 mm</span></div>
+    </div>
+
+    <div class="prose">
+      <p>
+        핵심은 0.00 이 <strong>아무것도 안 한 0.44 보다 낮다</strong>는 점입니다. 못 하는 것이
+        아니라 적극적으로 망가뜨립니다. 삽입 깊이 보정이 <span class="m">+8.57mm</span> 로
+        부호가 뒤집혀 판을 들어올린 채 놓습니다 — 네 장비 모두 실제로 필요한 깊이 보정은
+        ±0.4mm 안입니다.
+      </p>
+      <p>
+        옆으로 미는 방향도 못 읽습니다. 학습한 장비에서는 보정 방향이 실제 오차를 상쇄하는데
+        (코사인 0.72~0.97, 크기 3.5mm 필요 → 3.6mm 적용), 처음 보는 장비에서는 방향이 무관해지고
+        (0.10) 크기가 3배가 됩니다. <strong>인지가 장비별 외형을 외운 것</strong>입니다.
+      </p>
+      <p>
+        특권 상태를 보는 교사는 뺀 장비에서도 1.00 입니다. 상태가 전부 장비 좌표계라 장비를
+        구분할 수가 없기 때문입니다. 문제는 제어가 아니라 인지에 있습니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="ruled">
+    <p class="eyebrow">영상 4 — 복구</p>
+    <h2>실패 상태를 학습에 넣으면 끼인 판을 다시 집는다</h2>
+    <figure>
+      <video controls loop muted playsinline preload="metadata">
+        <source src="recovery_compare.webm" type="video/webm">
+      </video>
+      <figcaption>
+        <strong>실제로 실패한 자세</strong>를 그대로 심고 시작합니다(놓기를 돌려 녹화한 은행
+        400건 중). 왼쪽은 기존 집기 정책, 오른쪽은 그런 실패 상태로 재학습한 정책.
+        <em>여기 여덟 건은 240건 비교에서 두 정책의 결과가 갈렸던 자세들을 고른 것</em>이라
+        비율로 읽으시면 안 됩니다 — 차이가 무엇인지 보여주는 영상입니다. 비율은 아래 표입니다.
+      </figcaption>
+    </figure>
+
+    <div class="scroll">
+      <table>
+        <caption>같은 은행 자세 240건(장비당 60)을 두 정책에 동일 입력 · McNemar 짝 검정</caption>
+        <thead>
+          <tr>
+            <th>단계</th><th class="num">기존 정책</th><th class="num">재학습 정책</th>
+            <th class="num">차이</th><th class="num">불일치</th><th class="num">p</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="lead">
+            <td>재집기</td><td class="num">0.667</td><td class="num">0.892</td>
+            <td class="num">+0.225</td><td class="num">58 / 4</td><td class="num">2.6e−13</td>
+          </tr>
+          <tr>
+            <td>최종 복구</td><td class="num">0.496</td><td class="num">0.688</td>
+            <td class="num">+0.192</td><td class="num">78 / 32</td><td class="num">1.4e−05</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose">
+      <h3>행동 공간은 그대로 두었습니다</h3>
+      <p>
+        재파지 · k단계 복귀 같은 <strong>하이브리드 행동을 넣지 않았습니다</strong>. 기존
+        연속 5차원 잔차 그대로이고, 바뀐 것은 학습 초기 상태뿐입니다. 그것만으로 재집기가
+        0.667 → 0.892 가 됩니다. 손 안 오차도 오히려 좋아집니다(1.36 → 0.68mm) — 기울어진
+        판을 더 가운데로 뭅니다.
+      </p>
+      <p>
+        최종 복구가 0.688 에서 멈추는 이유는 <strong>놓기가 상한</strong>이기 때문입니다.
+        재놓기 성공률(0.58~0.87)이 평소 놓기 성공률 그대로라, 재집기를 더 올려도 사슬이
+        거기서 잘립니다. 여러 번 재시도하면 1−(1−p)<sup>k</sup> 로 오르는데 그건 판단층의 일입니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="ruled">
+    <p class="eyebrow">판단층 — 영상 없음, 수치만</p>
+    <h2>여기서는 잘 조율한 규칙이 거의 따라옵니다</h2>
+    <div class="prose">
+      <p>
+        작업 큐 · 관측 장수 · 재시도 · 사람 호출 · 재교시를 결정하는 층입니다. 물리를 돌리지
+        않고 <strong>측정된 전이 통계</strong>로만 환경을 만들었습니다(센서 판정이 홀드아웃의
+        오수락 · 오거부를 그대로 재현합니다). 규칙은 216 조합을 쓸어 최선을 골랐습니다.
+      </p>
+    </div>
+    <div class="scroll">
+      <table>
+        <caption>120 작업 × 60 에피소드 · 같은 시드 짝 비교 · 보상 = 전달 +1, 미검출 −20, 사람 −2, 시간 −0.1/분</caption>
+        <thead>
+          <tr>
+            <th>방법</th><th class="num">공칭</th><th class="num">현실적</th>
+            <th class="num">미검출</th><th class="num">사람 호출</th><th class="num">시간당 전달</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="lead">
+            <td>판단 RL</td><td class="num">113.0</td><td class="num">112.6</td>
+            <td class="num">0.00</td><td class="num">0.9</td><td class="num">140</td>
+          </tr>
+          <tr>
+            <td>규칙 (216조합 최선)</td><td class="num">110.8</td><td class="num">111.1</td>
+            <td class="num">0.00</td><td class="num">1.0</td><td class="num">108</td>
+          </tr>
+          <tr>
+            <td>규칙 (판정 그대로)</td><td class="num">110.0</td><td class="num">110.6</td>
+            <td class="num">0.00</td><td class="num">1.2</td><td class="num">111</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p>
+        짝차이는 <span class="m">+2.2 ± 0.5</span>(공칭) / <span class="m">+1.6 ± 0.5</span>(현실적)
+        입니다. 분명하지만 작습니다 — 제어층의 2배 격차와 대비됩니다. 판단층에서 큰 이득은
+        전부 규칙으로 적을 수 있는 것이었습니다: 기울기 중심 판정, 판정을 그대로 믿기,
+        애매할 때 한 번만 다시 보기.
+      </p>
+      <p>
+        정책이 찾은 비자명한 하나: 검증이 믿을 만해지면 <strong>인지를 1/3 값으로 떨어뜨리는
+        것이 이득</strong>입니다. 문턱을 고치기 전에는 3장 융합을 88% 쓰다가, 고친 뒤에는
+        1장을 98% 쓰고 실패를 재시도로 처리합니다. 시간당 전달이 111 → 140 으로 올라갑니다.
+      </p>
+    </div>
+  </section>
+
+  <section class="ruled">
+    <p class="eyebrow">아직 결론이 아닌 것</p>
+    <h2>이 수치들이 보여주지 않는 것</h2>
+    <div class="note">
+      <h3>접촉력이 실물 센서 범위 밖입니다</h3>
+      <p>
+        집기 시도의 <strong>65% 가 ±50N 을 넘습니다</strong>(중앙 66N, 최대 263N). 실물 UR5e
+        손목 F/T 의 측정 범위가 ±50N 이므로, 시뮬에서 되는 복구가 실물에서는 보호 정지가
+        걸립니다. 보상에 50N 초과 벌점을 넣었지만 행동이 바뀌지 않았습니다 — 벌점을 순간
+        힘에 걸었는데 과도한 힘이 몇 스텝만 지속되기 때문입니다.
+      </p>
+      <p>
+        조사하다 보니 <strong>정상 집기가 88% 로 더 자주 넘습니다</strong>. 복구가 만든 문제가
+        아니라 집기 스킬이 처음부터 그랬고, 로그를 실패 상태별로 나눠 찍고 나서야 보였습니다.
+        이것이 다음 우선순위입니다.
+      </p>
+    </div>
+    <div class="note">
+      <h3>외관 분포가 실측으로 교정되지 않았습니다</h3>
+      <p>
+        깊이 모서리 번짐 · 평면 편향 · 결손의 범위를 제가 정했습니다. 측정된 절벽이
+        번짐 2.5mm ↔ 5mm 사이에 있고 정합 기준선이 2mm 입니다. 실물 D415 로 장비 입구를
+        녹화해 교정해야 C vs B3 · 융합 장수 · 신뢰도 게이트의 선택이 확정됩니다.
+      </p>
+    </div>
+    <div class="note">
+      <h3>기울기가 완벽하게 갈린 것이 시뮬레이터의 실패 양식일 수 있습니다</h3>
+      <p>
+        안 앉은 플레이트가 포켓 테두리에 걸치면 반드시 기울어집니다. 실물에 "평평하게
+        앉았지만 측면으로 밀린" 실패가 있으면 기울기만으로는 놓칩니다. 그래서 높이를
+        느슨한 2차 확인으로 남겨 두었습니다.
+      </p>
+    </div>
+    <div class="note">
+      <h3>규칙 서보는 미완성입니다</h3>
+      <p>
+        깊이에서 포켓 경계를 읽는 서보는 측정 가능한 한 축을 0.06mm 까지 맞춥니다. 그런데
+        열 방향 한 축만 관측 가능하고(행 방향은 측면축 · 높이 · yaw 가 섞입니다), 그 축인
+        그립 x 는 안착에 거의 영향이 없습니다. 보정된 경로 위에 얹는 것은 아직 작동하지
+        않습니다. 그래서 규칙 기반의 공정한 상한은 <strong>규칙(개방) 0.420</strong> 으로 봅니다.
+      </p>
+    </div>
+    <div class="note">
+      <h3>판단층 환경의 시간 비용은 가정입니다</h3>
+      <p>
+        사람 응답 180초, 관측 4초, 재교시 40초 — 제가 정한 값입니다. 미검출 비용 · 사람 응답 ·
+        틀어짐 세기 · 인지 거부율을 각각 3단계로 바꾼 12개 설정에서 규칙의 <em>순위</em>는
+        바뀌지 않았지만, 절대 수준은 94~102 로 움직입니다.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+</body></html>
