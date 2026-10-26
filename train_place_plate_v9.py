@@ -77,6 +77,16 @@ def evaluate(model, episodes=40, seed=12345):
     summary["overall"] = float(np.mean([i["success"] for i in flat]))
     summary["force_N"] = mean(flat, "max_force_N")
     summary["release_mm"] = mean(flat, quality)
+    # 복구 학습(pick + failure_bank)에서는 정상 상태와 실패 상태를 섞어 돌린다.
+    # 둘을 합친 성공률만 보면 어느 쪽이 오르는지 알 수 없어서 따로 적는다.
+    # 50N 은 실물 손목 F/T 의 측정 범위다 — 복구에서 넘기면 안 되는 선.
+    for label, rows in (("normal", [i for i in flat if not i.get("from_failure")]),
+                        ("recovery", [i for i in flat if i.get("from_failure")])):
+        if rows:
+            summary[label] = {"n": len(rows),
+                              "success": float(np.mean([i["success"] for i in rows])),
+                              "force_N": mean(rows, "max_force_N"),
+                              "over_50N": float(np.mean([i["max_force_N"] > 50.0 for i in rows]))}
     return summary
 
 

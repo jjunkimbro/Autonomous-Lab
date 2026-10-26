@@ -52,6 +52,8 @@ def main():
     parser.add_argument("--run", default="place_plate_B3_student")
     parser.add_argument("--seed", type=int, default=6400)
     parser.add_argument("--out", default="failure_bank.npz")
+    parser.add_argument("--target", type=int, default=0,
+                        help="장비마다 이만큼 모으면 일찍 끝낸다 (0 = episodes 를 다 돈다)")
     args = parser.parse_args()
 
     net, _ = load_student(BASE / "rl_runs" / args.run)
@@ -68,6 +70,14 @@ def main():
     rows = {"station": [], "local": [], "quat": [], "delta": [],
             "tilt_deg": [], "lateral_mm": [], "height_mm": []}
     names = list(env.stations)
+
+    def save():
+        """장비 하나가 끝날 때마다 저장한다. 두 번 중단돼서 두 시간을 날린 뒤에 넣었다."""
+        blob = {k: np.asarray(v) for k, v in rows.items()}
+        blob["names"] = np.asarray(names)
+        np.savez(BASE / args.out, **blob)
+        return blob
+
     print(f"정책 {args.run}   장비마다 {args.episodes} 회   손 안 오차 x{IN_HAND_SCALE}\n")
     for index, station in enumerate(names):
         kept = 0
@@ -93,12 +103,14 @@ def main():
             kept += 1
             if kept % 20 == 0:
                 print(f"  {station:<18} {kept:>4} 건 / {episode + 1} 회", flush=True)
-        print(f"  {station:<18} 완료 {kept}/{args.episodes} = {kept / args.episodes:.0%} 실패",
+                save()
+            if args.target and kept >= args.target:
+                break
+        print(f"  {station:<18} 완료 {kept}/{episode + 1} = {kept / (episode + 1):.0%} 실패",
               flush=True)
+        save()
 
-    out = {k: np.asarray(v) for k, v in rows.items()}
-    out["names"] = np.asarray(names)
-    np.savez(BASE / args.out, **out)
+    out = save()
     tilt, lateral = out["tilt_deg"], out["lateral_mm"]
     print(f"\n은행 {len(tilt)} 건  →  {args.out}")
     print(f"  기울기 중앙 {np.median(tilt):.2f} deg (최대 {tilt.max():.2f})")

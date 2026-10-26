@@ -152,11 +152,35 @@ def retry_place(station, picks, place_run, seed, appearance):
     return out
 
 
+def bank_failures(station, path, limit):
+    """은행에서 그 장비의 실패 자세를 꺼내 온다 (매번 놓기를 다시 돌리지 않으려고).
+
+    놓기를 돌려 모으면 장비당 80 회에 실패가 16~23 건뿐이라 짝지은 검정의 검정력이 없다
+    (p=0.51 로 유의하지 않았다). 은행은 장비당 100 건이라 같은 비용으로 표본이 4~6 배가 된다.
+    """
+    import pick_plate_env_v9 as pk
+    bank = pk.load_failure_bank(path)
+    pool = bank[station]
+    rows = []
+    for index in range(min(limit, len(pool["local"]))):
+        rows.append(dict(success=False, caught=True, tilt_deg=float("nan"),
+                         z_mm=float("nan"), xy_mm=float("nan"),
+                         delta=np.asarray(pool["delta"][index]).tolist(),
+                         pose={"local": np.asarray(pool["local"][index]).tolist(),
+                               "quat_s": np.asarray(pool["quat"][index]).tolist()}))
+    return rows
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--station", default="incubator_plate")
     parser.add_argument("--episodes", type=int, default=40)
-    parser.add_argument("--place-run", default="place_plate_B3_holdout_student")
+    parser.add_argument("--from-bank", default=None, metavar="NPZ",
+                        help="놓기를 다시 돌리지 않고 은행의 실패 자세를 쓴다")
+    parser.add_argument("--limit", type=int, default=100, help="은행에서 꺼낼 개수")
+    # 기본은 **정상 학습된** 놓기 정책이다. 한때 홀드아웃 학생이 기본이었는데, 그 정책은
+    # 배양기에서 성공률이 0.00 이라 재놓기 단계가 통째로 무너졌고 (0.02) 환경 버그로 착각했다.
+    parser.add_argument("--place-run", default="place_plate_B3_student")
     parser.add_argument("--pick-run", default="pick_plate_B3_student")
     parser.add_argument("--seed", type=int, default=9100)
     parser.add_argument("--basic", action="store_true", help="외관 랜덤화를 끈다")
@@ -167,20 +191,26 @@ def main():
     print(f"장비 {args.station}   놓기 {args.place_run}   집기 {args.pick_run}")
     print(f"외관 {'현실적' if appearance else '기본'}   {args.episodes} 회\n")
 
-    print("1/3 실패 상태 수집", flush=True)
-    rows = collect_failures(args.station, args.episodes, args.place_run,
-                            args.seed, appearance)
-    failures = [r for r in rows if not r["success"]]
-    caught = sum(1 for r in failures if r["caught"])
-    print(f"    놓기 성공 {sum(r['success'] for r in rows)}/{len(rows)}   "
-          f"실패 {len(failures)}   판정이 잡음 {caught}/{len(failures)}", flush=True)
-    if not failures:
-        print("    실패가 없다 — 잴 것이 없다.")
-        return
-    tilt = [r["tilt_deg"] for r in failures]
-    lat = [r["xy_mm"] for r in failures]
-    print(f"    실패 상태: 기울기 {np.median(tilt):.2f} deg (최대 {max(tilt):.2f}), "
-          f"측면 {np.median(lat):.2f} mm (최대 {max(lat):.2f})", flush=True)
+    if args.from_bank:
+        print(f"1/3 실패 상태를 은행에서 꺼낸다 ({args.from_bank})", flush=True)
+        rows = failures = bank_failures(args.station, args.from_bank, args.limit)
+        caught = len(failures)
+        print(f"    {len(failures)} 건", flush=True)
+    else:
+        print("1/3 실패 상태 수집", flush=True)
+        rows = collect_failures(args.station, args.episodes, args.place_run,
+                                args.seed, appearance)
+        failures = [r for r in rows if not r["success"]]
+        caught = sum(1 for r in failures if r["caught"])
+        print(f"    놓기 성공 {sum(r['success'] for r in rows)}/{len(rows)}   "
+              f"실패 {len(failures)}   판정이 잡음 {caught}/{len(failures)}", flush=True)
+        if not failures:
+            print("    실패가 없다 — 잴 것이 없다.")
+            return
+        tilt = [r["tilt_deg"] for r in failures]
+        lat = [r["xy_mm"] for r in failures]
+        print(f"    실패 상태: 기울기 {np.median(tilt):.2f} deg (최대 {max(tilt):.2f}), "
+              f"측면 {np.median(lat):.2f} mm (최대 {max(lat):.2f})", flush=True)
 
     print("\n2/3 다시 집기 (집기 정책 학습 범위: 측면 ±0.5mm, yaw 0.3 deg)", flush=True)
     picks = retry_pick(args.station, failures, args.pick_run, args.seed, appearance)

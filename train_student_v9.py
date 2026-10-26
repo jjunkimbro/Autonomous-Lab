@@ -271,6 +271,13 @@ def run_parallel(pool, total_episodes, beta, student_state, teacher_path, seed, 
 
 def summarize(results):
     summary = {"success": float(np.mean([r["success"] for r in results]))}
+    # 복구 학습에서는 정상 상태와 실패 상태가 섞인다. 합친 숫자만으로는 어느 쪽이 오르는지
+    # 알 수 없어서 따로 적는다 (50N = 실물 손목 F/T 측정 범위).
+    for label, rows in (("normal", [r for r in results if not r.get("from_failure")]),
+                        ("recovery", [r for r in results if r.get("from_failure")])):
+        if rows:
+            summary[label] = float(np.mean([r["success"] for r in rows]))
+            summary[label + "_over50N"] = float(np.mean([r["max_force_N"] > 50.0 for r in rows]))
     for station in sorted({r["station"] for r in results}):
         rows = [r for r in results if r["station"] == station]
         summary[station] = float(np.mean([r["success"] for r in rows]))
