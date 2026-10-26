@@ -9,15 +9,7 @@
       "fixture_fluent_plate_mid_right",
       "fixture_fluent_plate_near_center"
     ],
-    "incubator_plate": [
-      "fixture_incubator_plate_far_left_end",
-      "fixture_incubator_plate_far_left_side",
-      "fixture_incubator_plate_mid_left",
-      "fixture_incubator_plate_far_right_end",
-      "fixture_incubator_plate_far_right_side",
-      "fixture_incubator_plate_mid_right",
-      "fixture_incubator_plate_near_center"
-    ],
+    "incubator_plate": [],
     "reader_plate": [
       "fixture_reader_plate_far_left_end",
       "fixture_reader_plate_far_left_side",

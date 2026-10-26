@@ -41,6 +41,8 @@ SOCKET = {"clearance": 0.0005, "thickness": 0.003, "chamfer": 0.0015}
 TUBE_RADIUS = 0.006
 
 PLATE_STATIONS = ("fluent_plate", "incubator_plate", "reader_plate", "sorter_left_plate")
+# 위치 맞춤 블록을 붙이지 않는 장비 — 평평한 받침면만 남는다 (2026-10-27, 배양기는 장비 자체 형상으로만 본다).
+FLAT_PLATE_STATIONS = ("incubator_plate",)
 TUBE_STATIONS = ("tube_hotel_1", "tube_hotel_2", "fluent_tube", "sorter_right_tube", "ngs_tube")
 
 FIXTURE_RGBA = [0.62, 0.48, 0.06, 1.0]      # 어두운 노란색 (plate 자리와 같은 계열)
@@ -107,6 +109,8 @@ def add_plate_fixtures(spec, body, interfaces):
         origin, rotation = scene.station_frame(interfaces[station])
         f, l = rotation[:, 0], rotation[:, 1]
         names[station] = []
+        if station in FLAT_PLATE_STATIONS:
+            continue
         for label, (pf, pl), (of, ol) in plate_locator_layout():
             inner = origin + pf * f + pl * l
             outward = of * f + ol * l
