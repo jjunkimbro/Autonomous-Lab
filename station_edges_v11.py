@@ -39,6 +39,8 @@ SPACING = 0.0015
 VISIBLE_TOL = 0.005          # 점의 카메라 거리와 깊이 영상의 차이가 이 안이면 보인다
 GRAD_MIN = 6.0
 STEP_PX = 0.25
+CROSSING = False             # True 면 경계를 중간 밝기 교차로 다듬는다 (_mid_crossing)
+CROSS_SPAN_PX = 2.0
 COARSE_ABOVE = 0.003         # 좌우 사전 sigma 가 이보다 크면 격자로 먼저 훑는다
 # 앞뒤 · 높이 사전값에 모서리 수만큼 무게를 줄지 (1) 말지 (0). 정면 1 장만 쓸 때는 1 이어야 그 두 축이
 # 수 mm 씩 튀지 않는다. 옆 장면을 함께 쓰면 받침 모서리가 그 축을 잡아 주므로 0 이 낫다 (0.17 -> 0.02 mm).
@@ -59,6 +61,32 @@ def _bilinear(image, uv):
     du, dv = u - u0, v - v0
     return ((1 - du) * (1 - dv) * image[v0, u0] + du * (1 - dv) * image[v0, u0 + 1]
             + (1 - du) * dv * image[v0 + 1, u0] + du * dv * image[v0 + 1, u0 + 1])
+
+
+def _mid_crossing(profile, best, offsets, fallback):
+    """기울기 최대 자리 근처에서, 양쪽 밝기의 중간값을 지나는 자리를 보간해 찾는다.
+
+    기울기 최대는 한 픽셀 안의 어디를 고르는지가 픽셀 위상을 따라 흘러 (손 안 인지에서 yaw 0.36 deg,
+    놓아 둔 판 앞뒤 0.29 mm 치우침), 중간값 교차는 계단 모양 경계에서도 위상에 덜 끌린다.
+    """
+    k = int(round(CROSS_SPAN_PX / STEP_PX))
+    out = np.array(fallback, dtype=float)
+    n = profile.shape[1]
+    for i in range(len(best)):
+        b = int(best[i])
+        lo, hi = max(b - k, 0), min(b + k, n - 1)
+        if hi - lo < 4:
+            continue
+        level = 0.5 * (profile[i, lo] + profile[i, hi])
+        seg = profile[i, lo:hi + 1] - level
+        cross = np.where(np.sign(seg[:-1]) != np.sign(seg[1:]))[0]
+        if len(cross) == 0:
+            continue
+        j = lo + int(cross[np.argmin(np.abs(lo + cross - b))])
+        p, q = profile[i, j] - level, profile[i, j + 1] - level
+        frac = p / (p - q) if p != q else 0.0
+        out[i] = offsets[j] + frac * (offsets[j + 1] - offsets[j])
+    return out
 
 
 def _mesh_edges(model, geom, position, quat):
@@ -206,6 +234,8 @@ class EdgeModel:
         den = p_ - 2 * q_ + r_
         frac = np.where(np.abs(den) > 1e-9, 0.5 * (p_ - r_) / den, 0.0)
         measured = offsets[b] + np.clip(frac, -0.5, 0.5) * STEP_PX
+        if CROSSING:
+            measured = _mid_crossing(profile[rows], b, offsets, measured)
         sel, nrm = idx[good], normal[good]
         eps = np.array([1e-4, 1e-4, 1e-4, 2e-4])
         J = np.zeros((len(sel), 4))
@@ -217,7 +247,7 @@ class EdgeModel:
             J[:, j] = np.sum((uvt - uv[sel]) * nrm, axis=1) / eps[j]
         return measured, J
 
-    def estimate(self, shots, delta_init, prior_sigma):
+    def estimate(self, shots, delta_init, prior_sigma, first_window_px=None):
         """장비 delta 를 모서리로 다듬는다. shots = Shot 목록 (여러 자세를 함께 정합한다).
 
         prior_sigma = 처음 값을 얼마나 믿을지, **장비 좌표** (앞뒤 f, 좌우 l, 높이 z [m], yaw [rad]).
@@ -243,6 +273,10 @@ class EdgeModel:
         px_per_m = self._pixels_per_metre(shots[0], base)
         reach = 3.0 * (prior[1] + 0.3 * prior[3])        # yaw 는 받침에서 약 0.3 m 떨어진 모서리까지 민다
         first = int(np.clip(reach * px_per_m, 8, 48))
+        # 판처럼 작은 물체는 바로 옆에 다른 경계(판보다 2.5 mm 넓은 받침 윗면)가 붙어 있어, 장비용 계산식의
+        # 넓은 창이면 그 경계를 잡는다. 호출하는 쪽이 창을 정해 줄 수 있게 한다.
+        if first_window_px is not None:
+            first = int(first_window_px)
         windows = []
         while first > 8:
             windows.append(first)
