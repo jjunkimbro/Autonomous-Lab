@@ -19,8 +19,8 @@
 # 배양기에 놓기 (--incubator vision, B · C): 평평한 받침이라 incubator_operate_v11 의 self-1 로 놓는다.
 #   준비  시드마다 한 번, 빈 받침 스캔 + 데모 판으로 모델과 놓을 자리 (measure_scan_v11.prepare)
 #   운영  배양기는 준비 대비 incubator_operate 의 'large' 폭 (±5 mm · ±2 mm · ±2°) 안에서 밀려 있다.
-#         옆 +70 1 장으로 놓을 자리를 고치고, 손 안은 집은 직후 사진 값을 쓴다 (--place-inhand pick, 기본).
-#         --place-inhand photo 면 받침 위에서 손 안을 1 장 더 찍어 그 값을 쓴다.
+#         받침 위에서 손 안 1 장 (운반 중 미끄러짐까지) + 옆 +70 1 장으로 놓을 자리를 고친다 (--place-inhand photo, 기본).
+#         --place-inhand pick 이면 받침 위 사진 없이 집은 직후 손 안 값을 쓴다 (0.5 mm 이내 0.77 -> 0.40).
 #   A 와 --incubator path 는 예전 경로 (장비 인지 + 출발지 손 안 보정). 밀림은 세 팔 모두 같다.
 #
 # 채점: 놓은 판의 실제 자세에 Done 판정 문턱 (기울기 0.15 deg, 높이 1.5 mm). 모든 단계의 최대 접촉력.
@@ -306,7 +306,7 @@ def main():
     parser.add_argument("--workers", type=int, default=30)
     parser.add_argument("--seed", type=int, default=7300)
     parser.add_argument("--incubator", choices=("vision", "path"), default="vision")
-    parser.add_argument("--place-inhand", choices=("pick", "photo"), default="pick",
+    parser.add_argument("--place-inhand", choices=("pick", "photo"), default="photo",
                         help="배양기에 놓을 때 손 안 어긋남: 집은 직후 사진 값 / 받침 위에서 1 장 더")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
