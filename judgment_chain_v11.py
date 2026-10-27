@@ -14,11 +14,18 @@
 #   |앞뒤| <= 3 mm, |yaw| <= 1.2  -> 경로를 고쳐 놓기 (판 중심 · 방향이 공칭이 되게)
 #   그 밖                          -> 내려놓고 고쳐 다시 집기
 #
+# 배양기에 놓기 (--incubator vision, B · C): 평평한 받침이라 incubator_operate_v11 의 self-1 로 놓는다.
+#   준비  시드마다 한 번, 빈 받침 스캔 + 데모 판으로 모델과 놓을 자리 (measure_scan_v11.prepare)
+#   운영  배양기는 준비 대비 incubator_operate 의 'large' 폭 (±5 mm · ±2 mm · ±2°) 안에서 밀려 있다.
+#         받침 위 1 장(손 안) + 옆 +70 1 장으로 놓을 자리를 고쳐 놓는다. 출발지에서 잰 손 안 값은 쓰지 않는다.
+#   A 와 --incubator path 는 예전 경로 (장비 인지 + 출발지 손 안 보정). 밀림은 세 팔 모두 같다.
+#
 # 채점: 놓은 판의 실제 자세에 Done 판정 문턱 (기울기 0.15 deg, 높이 1.5 mm). 모든 단계의 최대 접촉력.
+#   배양기는 평평해서 어긋나도 평평하게 앉으므로 놓은 자리도 본다 (앞뒤 · 좌우 1 mm, 회전 0.5°).
 # 운반은 0.3 rad/s (1.2 rad/s 에서는 MuJoCo 마찰이 판을 1 mm 넘게 흘려보낸다, grasp_depth_sweep_v11).
 #
 # 실행:  py judgment_chain_v11.py --episodes 20
-# 결과:  judgment_chain.json
+# 결과:  judgment_chain.json  (--incubator path 면 judgment_chain_path.json)
 
 import argparse
 import itertools
@@ -39,6 +46,8 @@ NEAR_Z_MM = (0.5, 1.2)          # 이 사이면 문턱(0.8) 근처 -> 다시 본
 NEAR_YAW_DEG = (0.3, 0.75)      # 문턱 0.5 근처
 TRAVERSE_SPEED = 0.3
 FORCE_LIMIT_N = 50.0
+INCUBATOR = "incubator_plate"
+PLACED_TOL = (1.0, 1.0, 0.5)    # 평평한 받침에서 놓은 자리 (앞뒤 · 좌우 mm, 회전 deg) — §13.6
 
 
 def offsets_of(seen):
@@ -56,8 +65,76 @@ def near_threshold(seen):
     return NEAR_Z_MM[0] <= z <= NEAR_Z_MM[1] or NEAR_YAW_DEG[0] <= yaw <= NEAR_YAW_DEG[1]
 
 
+def incubator_shift(seed, rotation):
+    """운영 때 배양기가 준비 대비 밀린 양 (월드 delta). 팔마다 같다."""
+    import incubator_operate_v11 as io
+    span = io.SHIFTS["large"]
+    shift = np.random.default_rng([int(seed), 7]).uniform(-span, span)
+    sw = rotation[:2, :2] @ shift[:2]
+    return np.array([sw[0], sw[1], shift[2], shift[3]])
+
+
+def prepare_incubator(prep_env, prep_cam, seed, scan):
+    """준비 단계. (모델, 놓을 자리 중심, yaw, 준비 때 장비 delta). scan=False 면 장비 delta 만."""
+    import measure_scan_v11 as ms
+    prep_env.reset(seed=int(seed), options={"station": INCUBATOR})
+    truth = prep_env.truth.copy()
+    if not scan:
+        return None, None, None, truth
+    ms.empty_hand(prep_env)
+    while prep_env.time < prep_env.slide_time:
+        prep_env.step(np.zeros(5))
+    model, centre, yaw = ms.prepare(prep_env, prep_cam, prep_env.station_data[INCUBATOR]["rotation"], {})
+    return model, centre, yaw, truth
+
+
+def place_incubator(env, camera, perception, prep):
+    """받침 위 1 장(손 안) + 옆 +70 1 장으로 놓을 자리를 고쳐 놓는다 (incubator_operate_v11 self-1).
+
+    (마지막 step 의 info, 최대 접촉력, 기록) 을 돌려준다.
+    """
+    import judgment_actions_v11 as ja
+    import station_edges_v11 as se
+    import incubator_operate_v11 as io
+    from incubator_place_v11 import plan_corrected, as_offsets
+    model, centre0, yaw0, _ = prep
+    rotation = env.station["rotation"]
+    pivot = np.asarray(env.perturber.pivot(INCUBATOR))
+    zero = np.zeros(5)
+    env.begin_place()
+    while env.time < env.slide_time:
+        env.step(zero)
+    home = env.data.site_xpos[env.site].copy()
+    j1 = float(env.q_target[1])
+    force, seen, side = 0.0, None, None
+    for view in ("front", "aside+70"):
+        f, l, up = se.VIEWS[view]
+        force = max(force, ja.drive(env, home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1))
+        if view == "front":
+            seen = perception.observe()
+        rgb, depth = camera.capture(noise=True)
+        side = se.Shot(camera, rgb, depth)
+    offsets = as_offsets(seen) or [0.0, 0.0, 0.0, 0.0]
+    rel, fit = model.estimate_multi([side], np.zeros(4), io.OPERATE_PRIOR)
+    centre, yaw = io.shifted_target(pivot, centre0, yaw0, rel)
+    delta = io.absolute_delta(pivot, rotation, centre, yaw)
+    hover, down, j1c = plan_corrected(env, delta, offsets)
+    env.p_hover, env.p_down = hover, down
+    env.q_base[1] = j1c
+    force = max(force, ja.drive(env, hover, j1c))
+    env.time = env.slide_time
+    done = False
+    while not done:
+        _, _, term, trunc, info = env.step(zero)
+        done = term or trunc
+    e = delta - env.truth
+    ef = rotation.T @ np.array([e[0], e[1], 0.0])
+    return info, force, dict(edges=int(fit["edges"]), inhand_verdict=seen.get("verdict"),
+                             target_error=[float(ef[0] * 1000), float(ef[1] * 1000), float(math.degrees(e[3]))])
+
+
 def run(job):
-    arm, source, target, seeds = job
+    arm, source, target, seeds, incubator_mode = job
     import transfer_env_v9 as tr
     import place_plate_env_v9 as pp
     import vision_perception_v8 as vp
@@ -69,11 +146,20 @@ def run(job):
     env = tr.TransferEnv(obs_mode="privileged", randomize=True, seed=0, appearance=False, corrected=True)
     camera = vp.WristCamera(env.model, env.data, np.random.default_rng(int(seeds[0])), appearance=True)
     perception = InHandPerception(env.model, env.data, env.site, env.finger_qpos, camera)
+    vision = target == INCUBATOR and incubator_mode == "vision" and arm != "A"
+    if target == INCUBATOR:
+        prep_env = pp.PlacePlateEnv(obs_mode="privileged", randomize=True, seed=0, appearance=False, corrected=True)
+        prep_cam = vp.WristCamera(prep_env.model, prep_env.data, np.random.default_rng(int(seeds[0]) + 2),
+                                  appearance=True)
+        rotation = prep_env.station_data[INCUBATOR]["rotation"]
+        assert np.allclose(prep_env.perturber.pivot(INCUBATOR), env.perturber.pivot(INCUBATOR))
     zero = np.zeros(5)
     rows = []
     for seed in seeds:
         row = dict(arm=arm, source=source, target=target, seed=int(seed), regrips=0, views=0,
                    compensated=False, log=[])
+        if target == INCUBATOR:
+            prep = prepare_incubator(prep_env, prep_cam, seed, scan=vision)
         force = 0.0
         env.reset(seed=int(seed), options={"station": source, "target": target})
         done = False
@@ -130,7 +216,11 @@ def run(job):
 
         place_rng = np.random.default_rng(int(seed) + 1_000_003)
         options = {"delta": place_rng.uniform(-pp.STATION_ERROR, pp.STATION_ERROR)}
-        if offsets is not None:
+        if target == INCUBATOR:
+            options["delta"] = prep[3] + incubator_shift(seed, rotation)
+        if vision:
+            q_goal = env.plan_place(target, options)
+        elif offsets is not None:
             q_goal = ja.compensate_place(env, target, offsets, options)
             row["compensated"] = True
         else:
@@ -141,19 +231,30 @@ def run(job):
             row.update(stage="traverse", done_ok=False, max_force_N=force)
             rows.append(row)
             continue
-        env.begin_place()
-        done = False
-        while not done:
-            _, _, term, trunc, info = env.step(zero)
-            done = term or trunc
+        if vision:
+            info, f, record = place_incubator(env, camera, perception, prep)
+            force = max(force, f)
+            row["incubator"] = record
+        else:
+            env.begin_place()
+            done = False
+            while not done:
+                _, _, term, trunc, info = env.step(zero)
+                done = term or trunc
         force = max(force, info["max_force_N"])
         tilt, z_mm = float(info["tilt_deg"]), float(info["z_error_mm"])
-        row.update(stage="place", tilt_deg=tilt, z_mm=z_mm, max_force_N=force,
+        p = env._plate_vs_holder()
+        placed = [float(p[0] * 1000), float(p[1] * 1000), float(math.degrees(p[3]))]
+        in_place = target != INCUBATOR or all(abs(v) <= t for v, t in zip(placed, PLACED_TOL))
+        row.update(stage="place", tilt_deg=tilt, z_mm=z_mm, max_force_N=force, placed=placed,
+                   in_place=bool(in_place),
                    done_ok=bool(info["released"] and not info["failed"]
                                 and tilt <= pp.SEATED_TILT_DEG_CHECK
-                                and abs(z_mm) <= pp.SEATED_HEIGHT_MM_CHECK))
+                                and abs(z_mm) <= pp.SEATED_HEIGHT_MM_CHECK and in_place))
         rows.append(row)
     env.close()
+    if target == INCUBATOR:
+        prep_env.close()
     return rows
 
 
@@ -179,6 +280,8 @@ def summarise(rows):
             regrips_mean=round(float(np.mean([r["regrips"] for r in rs])), 3),
             extra_views_mean=round(float(np.mean([r["views"] for r in rs])), 3),
             compensated=sum(r["compensated"] for r in rs),
+            incubator_out_of_place=sum(r["target"] == INCUBATOR and r.get("stage") == "place"
+                                       and not r["in_place"] for r in rs),
             ok_but_failed=accepted_bad,
             force_median_N=round(float(np.median([r["max_force_N"] for r in rs])), 1),
             done_ok_by_target=by_target)
@@ -191,7 +294,8 @@ def main():
     parser.add_argument("--arms", nargs="+", default=list(ARMS))
     parser.add_argument("--workers", type=int, default=30)
     parser.add_argument("--seed", type=int, default=7300)
-    parser.add_argument("--out", default="judgment_chain.json")
+    parser.add_argument("--incubator", choices=("vision", "path"), default="vision")
+    parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
     import skill_scene_v9 as s9
@@ -199,7 +303,8 @@ def main():
     rng = np.random.default_rng(args.seed)
     seeds = {pair: rng.integers(1 << 30, size=args.episodes) for pair in pairs}
     chunk = 5
-    jobs = [(arm, a, b, seeds[(a, b)][i:i + chunk]) for arm in args.arms for (a, b) in pairs
+    args.out = args.out or ("judgment_chain.json" if args.incubator == "vision" else "judgment_chain_path.json")
+    jobs = [(arm, a, b, seeds[(a, b)][i:i + chunk], args.incubator) for arm in args.arms for (a, b) in pairs
             for i in range(0, args.episodes, chunk)]
     start = time.time()
     rows = []
@@ -211,11 +316,11 @@ def main():
 
     summary = summarise(rows)
     print(f"\n{'팔':<4}{'성공':>7}{'성공·50N':>10}{'≤50N':>7}{'사람':>6}{'재집기':>8}{'추가관측':>9}"
-          f"{'보정놓기':>9}{'OK인데실패':>11}{'힘중앙':>8}")
+          f"{'보정놓기':>9}{'OK인데실패':>11}{'힘중앙':>8}{'배양기어긋남':>12}")
     for arm, s in summary.items():
         print(f"{arm:<4}{s['done_ok']:7.3f}{s['done_ok_under_50N']:10.3f}{s['under_50N']:7.2f}{s['human']:>6}"
               f"{s['regrips_mean']:8.2f}{s['extra_views_mean']:9.2f}{s['compensated']:>9}{s['ok_but_failed']:>11}"
-              f"{s['force_median_N']:>8.1f}")
+              f"{s['force_median_N']:>8.1f}{s['incubator_out_of_place']:>12}")
     for arm, s in summary.items():
         print(f"  {arm} 도착 장비별: {s['done_ok_by_target']}")
     (BASE / args.out).write_text(json.dumps(dict(summary=summary, rows=rows), indent=1, ensure_ascii=False),
