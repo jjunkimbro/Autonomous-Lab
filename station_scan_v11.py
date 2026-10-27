@@ -34,8 +34,13 @@ SCAN_VIEWS = {
     "aside+70": (0.0, 0.070, 0.0), "aside-70": (0.0, -0.070, 0.0),
     "front_up": (-0.03, 0.0, 0.04), "aside+70_up": (-0.03, 0.070, 0.04), "aside-70_up": (-0.03, -0.070, 0.04),
 }
-# 모델에 넣을 범위 (장비 좌표, 공칭 받침 중심 기준) — 받침 · 그 위 몸체 앞면
-ROI = dict(f=(-0.10, 0.26), l=(-0.20, 0.20), up=(-0.10, 0.35))
+# 모델에 넣을 범위 (장비 좌표, 공칭 받침 중심 기준) — 받침 · 그 위 몸체 앞면.
+# 좌우는 받침 둘레 ±9 cm 만 (판 반폭 42.5 mm + 여유). ±20 cm 로 두면 옆 장비 경계가 들어가, 운영 때 장비만
+# 밀리고 옆 장비는 그대로일 때 정합이 '안 밀렸다' 쪽으로 끌렸다 (큰 밀림 1 mm · 0.5° 이내 리더 0.81 -> 1.00).
+ROI = dict(f=(-0.10, 0.26), l=(-0.09, 0.09), up=(-0.10, 0.35))
+# 장비마다 준비 때 한 번 정하는 범위. Fluent 는 받침이 장비 안쪽 깊이 있고 손에 든 판이 받침 둘레를 가려, 받침에서
+# 먼 몸체 경계까지 봐야 좌우 · 회전이 갈린다 (±9 cm 로 좁히면 밀림 없을 때도 1.00 -> 0.80). 옆에 붙은 장비가 없다.
+STATION_ROI = {"fluent_plate": dict(ROI, l=(-0.20, 0.20))}
 CANNY = (30, 90)
 PIXEL_STEP = 2
 CONFIRM_PX = 2.5
@@ -49,13 +54,16 @@ PAD_BAND = 0.0012
 
 
 class SelfModel(se.EdgeModel):
-    """준비 단계에서 만든 모서리 모델 (CAD 대신)."""
+    """준비 단계에서 만든 모서리 모델 (CAD 대신). surface = (points, normals) 면 깊이 면 모델도 쓴다."""
 
-    def __init__(self, points, tangents, pivot, frame):
+    def __init__(self, points, tangents, pivot, frame, surface=None):
         self.points = np.asarray(points, dtype=float)
         self.tangents = np.asarray(tangents, dtype=float)
         self.pivot = np.asarray(pivot, dtype=float)
         self.frame = np.asarray(frame, dtype=float)
+        if surface is not None:
+            self.surf_points = np.asarray(surface[0], dtype=float)
+            self.surf_normals = np.asarray(surface[1], dtype=float)
 
 
 def back_project(shot, uv, z):
@@ -106,8 +114,9 @@ def _edge_points(shot):
     return back_project(shot, np.column_stack((us[ok], vs[ok])).astype(float), z[ok]), edges
 
 
-def build(shots, pivot, frame, report=None):
+def build(shots, pivot, frame, report=None, roi=None):
     """모서리 모델 (points, tangents). pivot · frame 은 공칭 받침 중심과 장비 좌표축 (로봇이 아는 대략값)."""
+    roi = roi or ROI
     shots = list(shots.values()) if isinstance(shots, dict) else list(shots)
     clouds, maps = [], []
     for shot in shots:
@@ -117,8 +126,8 @@ def build(shots, pivot, frame, report=None):
     # 범위 안의 점만
     def inside(p):
         local = (p - pivot) @ frame
-        return ((local[:, 0] > ROI["f"][0]) & (local[:, 0] < ROI["f"][1]) & (local[:, 1] > ROI["l"][0])
-                & (local[:, 1] < ROI["l"][1]) & (local[:, 2] > ROI["up"][0]) & (local[:, 2] < ROI["up"][1]))
+        return ((local[:, 0] > roi["f"][0]) & (local[:, 0] < roi["f"][1]) & (local[:, 1] > roi["l"][0])
+                & (local[:, 1] < roi["l"][1]) & (local[:, 2] > roi["up"][0]) & (local[:, 2] < roi["up"][1]))
     kept = []
     for i, pts in enumerate(clouds):
         pts = pts[inside(pts)]
@@ -171,6 +180,72 @@ def build(shots, pivot, frame, report=None):
     if report is not None:
         report["model_points"] = int(len(points))
     return points, tangents
+
+
+SURFACE_STEP_PX = 4
+SURFACE_CONFIRM = 0.003
+SURFACE_VOXEL = 0.003
+SURFACE_NEIGHBOUR = 0.007
+SURFACE_FLAT = 0.05          # 이웃 PCA 가장 작은 고윳값 / 중간 고윳값 — 이보다 작으면 평평한 면
+SURFACE_MAX = 4000
+
+
+def build_surface(shots, pivot, frame, report=None, roi=None):
+    """깊이 면 모델 (points, normals). 모서리 정합이 시선 방향(앞뒤)을 못 잡는 장비를 위해.
+
+    Fluent 옆 사진은 보이는 경계 대부분이 시선 방향과 나란해, 밝기 경계만으로는 앞뒤 밀림이 사진에서 거의
+    안 보였다 (정답에서 출발해도 앞뒤 2~4 mm 틀린 답으로 갔다). 시선 방향은 깊이가 직접 잰다.
+    여러 사진에서 같은 자리에 보이는 깊이 점만 3 mm 격자로 합치고, 이웃이 평평한 곳만 법선과 함께 남긴다.
+    """
+    from scipy.spatial import cKDTree
+    roi = roi or ROI
+    shots = list(shots.values()) if isinstance(shots, dict) else list(shots)
+    kept = []
+    for i, shot in enumerate(shots):
+        h, w = shot.depth.shape
+        vs, us = np.mgrid[0:h:SURFACE_STEP_PX, 0:w:SURFACE_STEP_PX]
+        z = shot.depth[vs, us].ravel()
+        ok = z > 0
+        pts = back_project(shot, np.column_stack((us.ravel()[ok], vs.ravel()[ok])).astype(float), z[ok])
+        local = (pts - pivot) @ frame
+        pts = pts[(local[:, 0] > roi["f"][0]) & (local[:, 0] < roi["f"][1]) & (local[:, 1] > roi["l"][0])
+                  & (local[:, 1] < roi["l"][1]) & (local[:, 2] > roi["up"][0]) & (local[:, 2] < roi["up"][1])]
+        confirm = np.zeros(len(pts), int)
+        for j, other in enumerate(shots):
+            if j == i:
+                continue
+            uv, zz = other.project(pts)
+            hh, ww = other.depth.shape
+            inb = (uv[:, 0] > 1) & (uv[:, 0] < ww - 2) & (uv[:, 1] > 1) & (uv[:, 1] < hh - 2) & (zz > 0.05)
+            d = other.depth[np.clip(np.round(uv[:, 1]).astype(int), 0, hh - 1), np.clip(np.round(uv[:, 0]).astype(int), 0, ww - 1)]
+            confirm += inb & (d > 0) & (np.abs(d - zz) < SURFACE_CONFIRM)
+        kept.append(pts[confirm >= MIN_CONFIRM])
+    cloud = np.vstack(kept)
+    keys = np.floor(cloud / SURFACE_VOXEL).astype(np.int64)
+    _, inverse = np.unique(keys, axis=0, return_inverse=True)
+    inverse = inverse.ravel()
+    sums = np.zeros((inverse.max() + 1, 3))
+    np.add.at(sums, inverse, cloud)
+    counts = np.bincount(inverse)
+    merged = (sums / counts[:, None])[counts >= 2]
+    tree = cKDTree(merged)
+    points, normals = [], []
+    for p, nbrs in zip(merged, tree.query_ball_point(merged, SURFACE_NEIGHBOUR)):
+        if len(nbrs) < 6:
+            continue
+        q = merged[nbrs] - merged[nbrs].mean(axis=0)
+        evals, evecs = np.linalg.eigh(q.T @ q)
+        if evals[0] > SURFACE_FLAT * max(evals[1], 1e-12):
+            continue
+        points.append(p)
+        normals.append(evecs[:, 0])
+    points, normals = np.array(points), np.array(normals)
+    if len(points) > SURFACE_MAX:
+        pick = np.random.default_rng(0).choice(len(points), SURFACE_MAX, replace=False)
+        points, normals = points[pick], normals[pick]
+    if report is not None:
+        report["surface_points"] = int(len(points))
+    return points, normals
 
 
 def refine(points, tangents, shots, iterations=3):

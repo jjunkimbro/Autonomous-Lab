@@ -49,6 +49,9 @@ NWEIGHT = 0.0
 VIEWS = {"front": (0.0, 0.0, 0.0), "aside+70": (0.0, 0.070, 0.0), "aside-70": (0.0, -0.070, 0.0)}
 # estimate_multi 의 앞뒤 출발값 [m] (운영 때 장비가 준비 대비 ±5 mm 까지 밀릴 수 있다)
 MULTI_STARTS_F = (-0.006, -0.003, 0.0, 0.003, 0.006)
+# 깊이 면 항 (모델에 surf_points 가 있을 때). 밝기 경계는 시선 방향 이동을 거의 못 본다 — 깊이가 그 축을 잰다.
+DEPTH_TERM = True
+DEPTH_WINDOWS = (0.015, 0.008, 0.005, 0.003, 0.003)   # 면 점과 실측 깊이의 거리 허용 [m], 반복마다 좁힌다
 
 
 def _rz(a):
@@ -249,6 +252,53 @@ class EdgeModel:
             J[:, j] = np.sum((uvt - uv[sel]) * nrm, axis=1) / eps[j]
         return measured, J
 
+    def _measure_depth(self, shot, delta, tol):
+        """면 점마다 (법선 방향 실측 - 모델 거리 [m], 장비 좌표 4 자유도 야코비안). 가려진 점은 tol 로 빠진다."""
+        def place(d):
+            rot = _rz(d[3])
+            return self.pivot + (self.surf_points - self.pivot) @ rot.T + d[:3], self.surf_normals @ rot.T
+        pts, nrm = place(delta)
+        uv, z = shot.project(pts)
+        h, w = shot.depth.shape
+        ui, vi = np.round(uv[:, 0]).astype(int), np.round(uv[:, 1]).astype(int)
+        inb = (ui > 0) & (ui < w - 1) & (vi > 0) & (vi < h - 1) & (z > 0.05)
+        d = np.zeros(len(pts))
+        d[inb] = shot.depth[vi[inb], ui[inb]]
+        ok = inb & (d > 0)
+        rays = np.column_stack((ui, vi, np.ones(len(ui)))).astype(float) @ np.linalg.inv(shot.K).T
+        local = rays * d[:, None]
+        meas = local @ shot.world_from_camera[:3, :3].T + shot.world_from_camera[:3, 3]
+        r = np.sum((meas - pts) * nrm, axis=1)
+        idx = np.where(ok & (np.abs(r) < tol))[0]
+        if len(idx) < 30:
+            return None
+        eps = np.array([1e-4, 1e-4, 1e-4, 2e-4])
+        J = np.zeros((len(idx), 4))
+        for j in range(4):
+            x = np.zeros(4)
+            x[j] = eps[j]
+            p2, n2 = place(self._world(delta, x))
+            # 모서리 항과 같은 부호 규약: r 은 '실측 - 모델', J 는 모델을 옮겼을 때 모델 쪽이 움직이는 양
+            J[:, j] = -(np.sum((meas[idx] - p2[idx]) * n2[idx], axis=1) - r[idx]) / eps[j]
+        return r[idx], J
+
+    def _depth_solve(self, shots, base, x, prior):
+        """깊이 면만으로 4 축을 먼저 맞춘다 (앞뒤 · 높이를 밝기 경계 단계 전에 잡는다)."""
+        for tol in DEPTH_WINDOWS:
+            parts = [self._measure_depth(s, self._world(base, x), tol) for s in shots]
+            parts = [p for p in parts if p is not None]
+            if not parts:
+                return x
+            r = np.concatenate([p[0] for p in parts])
+            J = np.vstack([p[1] for p in parts])
+            scale = 1.4826 * np.median(np.abs(r - np.median(r))) + 1e-5
+            k = 1.5 * scale
+            weight = np.where(np.abs(r) <= k, 1.0, k / np.maximum(np.abs(r), 1e-12))
+            lam = np.diag((max(scale, 3e-4) / prior) ** 2)
+            step = np.linalg.solve((J * weight[:, None]).T @ J + lam, (J * weight[:, None]).T @ r - lam @ x)
+            x = x + step
+        return x
+
     def estimate(self, shots, delta_init, prior_sigma, first_window_px=None):
         """장비 delta 를 모서리로 다듬는다. shots = Shot 목록 (여러 자세를 함께 정합한다).
 
@@ -267,7 +317,10 @@ class EdgeModel:
         prior = np.asarray(prior_sigma, dtype=float)
         # 격자 훑기는 처음 값이 크게 틀릴 수 있을 때만 쓴다. 점수가 판 웰 무늬 · 그리퍼 경계에 묻혀
         # 맞는 자리가 뚜렷하지 않아, 교시 수준(좌우 0.3 mm)의 좋은 출발점을 오히려 엉뚱한 데로 옮겼다.
-        if prior[1] > COARSE_ABOVE:
+        depth = DEPTH_TERM and getattr(self, "surf_points", None) is not None and len(self.surf_points) > 0
+        if depth:
+            x = self._depth_solve(shots, base, x, prior)
+        elif prior[1] > COARSE_ABOVE:
             x[1], x[3] = self._coarse(shots[0], base, prior)
         # 첫 창은 처음 값의 불확실성(좌우 3 sigma + yaw 3 sigma 가 만드는 이동)을 픽셀로 바꾼 크기로 잡는다.
         # 고정 48 px 로 두면 교시 수준의 작은 오차에서도 그 넓은 창 안의 더 센 다른 경계를 잡아 좌우가
@@ -309,12 +362,26 @@ class EdgeModel:
                 sigma_px = max(scale, 0.5)
                 count = np.array([NWEIGHT * len(r) + (1 - NWEIGHT), 1.0, NWEIGHT * len(r) + (1 - NWEIGHT), 1.0])[free]
                 lam = np.diag(count * (sigma_px / prior[free]) ** 2)
-                step = np.linalg.solve(Jw.T @ J + lam, Jw.T @ r - lam @ x[free])
+                rs, Js, Jws = r, J, Jw
+                if depth and len(free) == 4:
+                    # 깊이 면 항을 같이 푼다: 강건한 폭으로 나눠 픽셀 항과 같은 단위로
+                    dparts = [self._measure_depth(s, self._world(base, x), DEPTH_WINDOWS[-1]) for s in shots]
+                    dparts = [p for p in dparts if p is not None]
+                    if dparts:
+                        rd = np.concatenate([p[0] for p in dparts])
+                        Jd = np.vstack([p[1] for p in dparts])[:, free]
+                        sd = 1.4826 * np.median(np.abs(rd - np.median(rd))) + 1e-5
+                        wd = np.where(np.abs(rd) <= 1.5 * sd, 1.0, 1.5 * sd / np.maximum(np.abs(rd), 1e-12))
+                        f_ = sigma_px / max(sd, 3e-4)
+                        rs = np.concatenate([r, rd * f_])
+                        Js = np.vstack([J, Jd * f_])
+                        Jws = np.vstack([Jw, Jd * f_ * wd[:, None]])
+                step = np.linalg.solve(Jws.T @ Js + lam, Jws.T @ rs - lam @ x[free])
                 x[free] += step
                 info = dict(edges=int(len(r)), rms_px=float(np.sqrt(np.mean((r - J @ step) ** 2))), ok=True)
         # 판단층이 이 추정을 믿을지 정할 근거 (마지막 반복 기준): 잔차의 강건한 폭, 후버 무게가 깎지 않은
         # 모서리 비율, 사후 축별 표준편차 (장비 좌표, f l z [m], yaw [rad]), 마지막 한 걸음의 크기.
-        cov = np.linalg.inv(Jw.T @ J + lam) * sigma_px ** 2
+        cov = np.linalg.inv(Jws.T @ Js + lam) * sigma_px ** 2
         sigma = np.full(4, np.nan)
         sigma[free] = np.sqrt(np.clip(np.diag(cov), 0.0, None))
         info.update(mad_px=float(scale), inlier_frac=float(np.mean(weight >= 1.0)),

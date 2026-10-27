@@ -69,7 +69,8 @@ def prepare(env, camera, rotation, report):
     pivot = np.asarray(env.perturber.pivot(env.station_name))
     shots = ss.capture(env, camera, rotation)
     report["_scan_shots"] = shots
-    points, tangents = ss.build(shots, pivot, rotation, report)
+    roi = ss.STATION_ROI.get(env.station_name, ss.ROI)
+    points, tangents = ss.build(shots, pivot, rotation, report, roi=roi)
     centre_depth, _ = ss.find_target(shots, pivot, rotation, report)
     report["target_depth_only"] = [float(v) for v in centre_depth]
     # 판을 놓기 전에 손을 위로 뺀다. 받침 위 자세 그대로 두면 장비가 1.7 deg 돌아 있을 때 판 모서리가
@@ -94,7 +95,8 @@ def prepare(env, camera, rotation, report):
     centre_d, yaw_d = ss.measure_demo_plate(demo, pivot, rotation, report)
     report["demo_depth_only"] = [float(v) for v in centre_d] + [float(yaw_d)]
     centre, yaw = ss.refine_demo_plate(demo, centre_d, yaw_d, rotation, report)
-    return ss.SelfModel(points, tangents, pivot, rotation), centre, yaw
+    surface = ss.build_surface(shots, pivot, rotation, report, roi=roi)
+    return ss.SelfModel(points, tangents, pivot, rotation, surface), centre, yaw
 
 
 def run(seeds):
