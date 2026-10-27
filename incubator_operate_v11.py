@@ -130,7 +130,7 @@ def run(job):
                 else:
                     if arm == "self-1":
                         _, side = look("aside+70")
-                        rel, info = model.estimate([side], np.zeros(4), prior)
+                        rel, info = model.estimate_multi([side], np.zeros(4), prior)
                         row["edges_one_shot"] = info["edges"]
                         move = rotation.T @ np.array([rel[0], rel[1], 0.0])
                         # 다시 찍기: 보정량이 사전 폭의 3 배를 넘으면. (준비 사진의 모서리 수와 비교하면
@@ -141,7 +141,7 @@ def run(job):
                                               move_z_mm=float(rel[2] * 1000), move_yaw_deg=float(math.degrees(rel[3])))
                     else:
                         shots = [front] + [look(v)[1] for v in ("aside+70", "aside-70")]
-                        rel, info = model.estimate(shots, np.zeros(4), prior)
+                        rel, info = model.estimate_multi(shots, np.zeros(4), prior)
                         row["signals"] = dict(info)
                     row["edges"] = info["edges"]
                     centre, yaw = shifted_target(pivot, centre0, yaw0, rel)

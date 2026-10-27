@@ -47,6 +47,8 @@ COARSE_ABOVE = 0.003         # 좌우 사전 sigma 가 이보다 크면 격자�
 NWEIGHT = 0.0
 # 정합에 쓰는 관측 자세: 받침 위 공칭 자세에서 장비 좌표 (앞뒤, 좌우, 위) 로 옮긴 곳
 VIEWS = {"front": (0.0, 0.0, 0.0), "aside+70": (0.0, 0.070, 0.0), "aside-70": (0.0, -0.070, 0.0)}
+# estimate_multi 의 앞뒤 출발값 [m] (운영 때 장비가 준비 대비 ±5 mm 까지 밀릴 수 있다)
+MULTI_STARTS_F = (-0.006, -0.003, 0.0, 0.003, 0.006)
 
 
 def _rz(a):
@@ -318,6 +320,33 @@ class EdgeModel:
         info.update(mad_px=float(scale), inlier_frac=float(np.mean(weight >= 1.0)),
                     sigma=[float(v) for v in sigma], last_step=float(np.linalg.norm(step[:2] if len(step) > 2 else step)))
         return self._world(base, x), info
+
+    def estimate_multi(self, shots, delta_init, prior_sigma, starts_f=MULTI_STARTS_F, first_window_px=None):
+        """앞뒤 출발값을 여러 개로 두고 정합해, 모서리가 가장 많이 맞는 답을 고른다.
+
+        한 출발값(0)에서만 풀면, 장비가 카메라 쪽으로 3~5 mm 밀렸을 때 1 단계(앞뒤 고정, 좌우 · yaw 만)에서
+        좌우 · yaw 가 앞뒤 오차를 떠안아 엉뚱한 해(좌우 ±1.5~2.5 mm 와 yaw ±0.4° 가 같이 틀림, 또는 앞뒤가
+        다른 경계에 붙어 +5~10 mm)로 갔다. 큰 밀림 400 회 중 14 회. 잔차는 정상과 비슷해 근거로 못 가렸다.
+        맞는 해는 모서리가 가장 많이 맞는다 (틀린 해의 0.3~0.9 배) — 그 20 건에서 모두 맞게 골랐다.
+
+        info 에 판단층용 근거를 더한다: 'alt_edges_ratio' = 1 mm · 0.25° 넘게 다른 해 중 가장 나은 것의 모서리 수
+        / 고른 해의 모서리 수 (1 에 가까우면 두 해가 비슷하게 설명한다 = 모호하다).
+        """
+        if isinstance(shots, Shot):
+            shots = [shots]
+        results = []
+        for f0 in starts_f:
+            init = self._world(np.asarray(delta_init, dtype=float), np.array([f0, 0.0, 0.0, 0.0]))
+            results.append(self.estimate(shots, init, prior_sigma, first_window_px))
+        best = int(np.argmax([info["edges"] for _, info in results]))
+        delta, info = results[best]
+        alt = 0
+        for d, i in results:
+            df = self.frame.T @ np.array([d[0] - delta[0], d[1] - delta[1], 0.0])
+            if np.hypot(df[0], df[1]) > 0.001 or abs(d[3] - delta[3]) > math.radians(0.25):
+                alt = max(alt, i["edges"])
+        info = dict(info, alt_edges_ratio=float(alt / max(info["edges"], 1)), start_f=float(starts_f[best]))
+        return delta, info
 
     def _pixels_per_metre(self, camera, base):
         """받침 근처에서 좌우 1 m 가 영상에서 몇 픽셀인가."""

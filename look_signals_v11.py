@@ -31,7 +31,8 @@ def features(s):
             ("sigma_f_mm", sig[0] * 1000), ("sigma_l_mm", sig[1] * 1000), ("sigma_yaw_deg", np.degrees(sig[3])),
             ("move_f_mm", abs(s["move_mm"][0])), ("move_l_mm", abs(s["move_mm"][1])),
             ("move_z_mm", abs(s["move_z_mm"])), ("move_yaw_deg", abs(s["move_yaw_deg"])),
-            ("last_step_um", s.get("last_step", 1e-3) * 1e6)]
+            ("last_step_um", s.get("last_step", 1e-3) * 1e6),
+            ("alt_edges_ratio", s.get("alt_edges_ratio", 0.0))]
 
 
 def pairs(rows):
@@ -133,7 +134,7 @@ def main():
         combined = cross_validated_scores(np.log1p(np.abs(X)), worth)
         report["combined_auc_worth"] = auc(combined, worth)
         print(f"\n근거 전부 (로지스틱, 5 접힘 교차검증) AUC 고칠 가치 {report['combined_auc_worth']:.3f}"
-              f"  — 양성 {worth.sum()} 개로는 12 개 무게를 못 맞춘다")
+              f"  — 양성 {worth.sum()} 개로는 근거 {X.shape[1]} 개의 무게를 못 맞춘다")
         ok1 = np.array([p["ok1"] for p in ps]); ok3 = np.array([p["ok3"] for p in ps])
         report["curve"] = {}
         for label, score in (("mad_px", X[:, names.index("mad_px")]), ("sigma_f_mm", X[:, names.index("sigma_f_mm")]),
