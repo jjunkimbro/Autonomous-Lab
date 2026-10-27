@@ -77,15 +77,20 @@ def prepare(env, camera, rotation, report):
     import judgment_actions_v11 as ja
     home = env.data.site_xpos[env.site].copy()
     f, l, up = ss.DEMO_VIEWS["front_up"]
-    ja.drive(env, home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up + 0.03]), float(env.q_target[1]))
+    above = home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up + 0.03])
+    ja.drive(env, above, float(env.q_target[1]))
     place_demo_plate(env)
     # 놓을 자리의 정답은 받침 중앙이 아니라 놓아 둔 판의 실제 자세다 (실물에서도 그 판이 기준이다).
     plate_rot = env.data.xmat[env.plate_body].reshape(3, 3)
-    report["_demo_actual"] = (env.data.xipos[env.plate_body].copy() - np.array([0.0, 0.0, 0.007]),
+    placed = env.data.xipos[env.plate_body].copy()
+    report["_demo_actual"] = (placed - np.array([0.0, 0.0, 0.007]),
                               math.remainder(math.atan2(plate_rot[1, 0], plate_rot[0, 0])
                                              - (env.station["yaw"] + math.pi / 2), math.pi))
-    ja.drive(env, home, float(env.q_target[1]))
-    demo = ss.capture(env, camera, rotation, views=ss.DEMO_VIEWS)
+    # home 으로 내려왔다가 찍으면, 장비가 옆으로 3 mm 넘게 밀리고 같은 쪽으로 돌아 있을 때 벌린 손가락이
+    # 판을 앞으로 1.0~1.8 mm 밀었다 (400 시드 중 8). 비전은 밀린 판을 정확히 쟀지만 그 자리는 이미 틀린
+    # 자리다. 위에 있는 채로 촬영 자세로 가고, 다 찍으면 위로 돌아간다.
+    demo = ss.capture(env, camera, rotation, views=ss.DEMO_VIEWS, home=home, park=above)
+    report["demo_moved_mm"] = float(np.linalg.norm(env.data.xipos[env.plate_body] - placed) * 1000)
     centre_d, yaw_d = ss.measure_demo_plate(demo, pivot, rotation, report)
     report["demo_depth_only"] = [float(v) for v in centre_d] + [float(yaw_d)]
     centre, yaw = ss.refine_demo_plate(demo, centre_d, yaw_d, rotation, report)

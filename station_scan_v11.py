@@ -75,18 +75,23 @@ def near_depth(depth, ui, vi, radius):
     return near
 
 
-def capture(env, camera, rotation, views=SCAN_VIEWS, drive=None):
-    """빈손으로 받침 위 공칭 자세 둘레를 돌며 찍는다. Shot 목록."""
+def capture(env, camera, rotation, views=SCAN_VIEWS, drive=None, home=None, park=None):
+    """빈손으로 받침 위 공칭 자세 둘레를 돌며 찍는다. Shot 목록.
+
+    home = 촬영 자세의 기준 (없으면 지금 자세), park = 다 찍고 돌아갈 자세 (없으면 home).
+    받침에 판이 있을 때는 home 높이로 내려오면 벌린 손가락이 판을 민다 — 위에서 찍고 위로 돌아간다.
+    """
     import judgment_actions_v11 as ja
     drive = drive or ja.drive
-    home = env.data.site_xpos[env.site].copy()
+    if home is None:
+        home = env.data.site_xpos[env.site].copy()
     j1 = float(env.q_target[1])
     shots = {}
     for name, (f, l, up) in views.items():
         drive(env, home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1)
         rgb, depth = camera.capture(noise=True)
         shots[name] = se.Shot(camera, rgb, depth)
-    drive(env, home, j1)
+    drive(env, home if park is None else park, j1)
     return shots
 
 
