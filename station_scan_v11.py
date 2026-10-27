@@ -374,8 +374,48 @@ def measure_demo_plate(shots, pivot, frame, report=None):
     lo, hi = np.percentile(q, 0.5, axis=0), np.percentile(q, 99.5, axis=0)
     centre_l = rot.T @ ((lo + hi) / 2.0)
     if report is not None:
-        report.update(demo_points=int(len(sel)), demo_size_mm=[float(v * 1000) for v in (hi - lo)])
+        tilt, top_mm = _plate_top_plane(local, centre_l, yaw)
+        report.update(demo_points=int(len(sel)), demo_size_mm=[float(v * 1000) for v in (hi - lo)],
+                      demo_tilt_deg=tilt, demo_top_mm=top_mm)
     return pivot + frame @ np.array([centre_l[0], centre_l[1], top - PLATE_HEIGHT]), yaw
+
+
+TOP_CELL = 0.005
+
+
+def _plate_top_plane(local, centre_l, yaw):
+    """판 윗면 평면의 기울기 [deg] 와 가운데 높이 [mm] (놓은 뒤 확인용).
+
+    판 위치를 잡는 ±1.2 mm 띠로는 기울어 얹힌 판(1° 면 판 끝끼리 2 mm 차이)을 띠 하나만 잘라 기울기를 못 잰다.
+    판 발자국 안(가장자리 6 mm 안쪽)의 ±8 mm 점을 5 mm 칸으로 나눠 칸마다 위쪽 80 % 높이(웰 구멍 바닥을 뺀다)를 쓰고
+    평면을 맞춘다.
+    """
+    rot = np.array([[math.cos(yaw), math.sin(yaw)], [-math.sin(yaw), math.cos(yaw)]])
+    q = (local[:, :2] - centre_l) @ rot.T
+    hf, hl = PLATE_SIZE[0] / 2.0 - 0.006, PLATE_SIZE[1] / 2.0 - 0.006
+    inside = (np.abs(q[:, 0]) < hf) & (np.abs(q[:, 1]) < hl)
+    if inside.sum() < 50:
+        return float("nan"), float("nan")
+    pts, qq = local[inside], q[inside]
+    cells = np.floor(qq / TOP_CELL).astype(int)
+    _, inverse = np.unique(cells, axis=0, return_inverse=True)
+    inverse = inverse.ravel()
+    rows = []
+    for k in range(inverse.max() + 1):
+        m = inverse == k
+        if m.sum() >= 3:
+            rows.append((qq[m, 0].mean(), qq[m, 1].mean(), np.percentile(pts[m, 2], 80)))
+    rows = np.array(rows)
+    if len(rows) < 10:
+        return float("nan"), float("nan")
+    A = np.column_stack((rows[:, 0], rows[:, 1], np.ones(len(rows))))
+    coef = np.linalg.lstsq(A, rows[:, 2], rcond=None)[0]
+    for _ in range(2):          # 1 mm 넘게 벗어난 칸 (판 밖 경계 · 웰) 을 빼고 다시
+        keep = np.abs(A @ coef - rows[:, 2]) < 0.001
+        if keep.sum() >= 10:
+            coef = np.linalg.lstsq(A[keep], rows[keep, 2], rcond=None)[0]
+    tilt = math.degrees(math.atan(math.hypot(coef[0], coef[1])))
+    return float(tilt), float(coef[2] * 1000)
 
 
 # 판 모양 (앞뒤, 좌우, 높이). 실물은 SBS 규격값을 넣는다. 시뮬레이션은 화면에 그려지는 판 메시 치수다

@@ -24,6 +24,12 @@
 #           --place-inhand pick 이면 받침 위 사진 없이 집은 직후 손 안 값을 쓴다 (배양기 0.5 mm 이내 0.77 -> 0.40).
 #   A 와 비전이 아닌 장비는 예전 경로 (장비 인지 = 정답 + 잡음, 출발지 손 안 보정). 장비 밀림은 세 팔 모두 같다.
 #
+# 놓은 뒤 확인 (6 단계, 비전 장비의 B · C): 손을 빼고 받침 위 1 장으로 기울기 · 높이 · (돌기 없는 받침은) 자리를
+#   준비 단계 데모 판과 비교한다 (place_verify_v11). 로봇 자신의 판정이다.
+#   B  판정이 실패면 사람 호출.
+#   C  판정이 실패면 그 사진으로 잰 판 자리로 그 자리에서 다시 집어 (2 단계 손 안 1 장) 4 · 5 단계로 다시 놓는다.
+#      다시 놓기는 1 번, 그래도 실패면 사람 호출.
+#
 # 채점: 놓은 판의 실제 자세에 Done 판정 문턱 (기울기 0.15 deg, 높이 1.5 mm). 모든 단계의 최대 접촉력.
 #   배양기는 평평해서 어긋나도 평평하게 앉으므로 놓은 자리도 본다 (앞뒤 · 좌우 1 mm, 회전 0.5°).
 # 운반은 0.3 rad/s (1.2 rad/s 에서는 MuJoCo 마찰이 판을 1 mm 넘게 흘려보낸다, grasp_depth_sweep_v11).
@@ -54,7 +60,8 @@ INCUBATOR = "incubator_plate"
 PLATE_STATIONS = ("fluent_plate", "incubator_plate", "reader_plate", "sorter_left_plate")   # skill_scene_v9
 FLAT_STATIONS = (INCUBATOR,)    # 돌기 없는 받침 — 놓은 자리도 채점한다
 VISION = {"all": PLATE_STATIONS, "incubator": (INCUBATOR,), "none": ()}
-PLACED_TOL = (1.0, 1.0, 0.5)    # 평평한 받침에서 놓은 자리 (앞뒤 · 좌우 mm, 회전 deg) — §13.6
+PLACED_TOL = (1.0, 1.0, 0.5)
+MAX_REPLACES = 1    # 평평한 받침에서 놓은 자리 (앞뒤 · 좌우 mm, 회전 deg) — §13.6
 
 
 def offsets_of(seen):
@@ -82,17 +89,18 @@ def station_shift(seed, rotation):
 
 
 def prepare_station(prep_env, prep_cam, seed, station, scan):
-    """준비 단계. (모델, 놓을 자리 중심, yaw, 준비 때 장비 delta). scan=False 면 장비 delta 만."""
+    """준비 단계. (모델, 놓을 자리 중심, yaw, 준비 때 장비 delta, 데모 판 판정 기준). scan=False 면 장비 delta 만."""
     import measure_scan_v11 as ms
     prep_env.reset(seed=int(seed), options={"station": station})
     truth = prep_env.truth.copy()
     if not scan:
-        return None, None, None, truth
+        return None, None, None, truth, None
     ms.empty_hand(prep_env)
     while prep_env.time < prep_env.slide_time:
         prep_env.step(np.zeros(5))
-    model, centre, yaw = ms.prepare(prep_env, prep_cam, prep_env.station_data[station]["rotation"], {})
-    return model, centre, yaw, truth
+    report = {}
+    model, centre, yaw = ms.prepare(prep_env, prep_cam, prep_env.station_data[station]["rotation"], report)
+    return model, centre, yaw, truth, dict(tilt_deg=report["demo_tilt_deg"], top_mm=report["demo_top_mm"])
 
 
 def place_by_vision(env, camera, perception, prep, pick_seen=None):
@@ -100,13 +108,13 @@ def place_by_vision(env, camera, perception, prep, pick_seen=None):
 
     손 안 어긋남은 pick_seen (집은 직후 손 안 사진) 을 쓴다. None 이면 받침 위에서 손 안을 1 장 더 찍는다.
 
-    (마지막 step 의 info, 최대 접촉력, 기록) 을 돌려준다.
+    (마지막 step 의 info, 최대 접촉력, 기록, 고친 놓을 자리 dict(target=(중심, yaw), dz_mm)) 를 돌려준다.
     """
     import judgment_actions_v11 as ja
     import station_edges_v11 as se
     import incubator_operate_v11 as io
     from incubator_place_v11 import plan_corrected, as_offsets
-    model, centre0, yaw0, _ = prep
+    model, centre0, yaw0 = prep[:3]
     rotation = env.station["rotation"]
     pivot = np.asarray(env.perturber.pivot(env.station_name))
     zero = np.zeros(5)
@@ -139,8 +147,37 @@ def place_by_vision(env, camera, perception, prep, pick_seen=None):
         done = term or trunc
     e = delta - env.truth
     ef = rotation.T @ np.array([e[0], e[1], 0.0])
-    return info, force, dict(edges=int(fit["edges"]), inhand_verdict=(seen or pick_seen).get("verdict"),
-                             target_error=[float(ef[0] * 1000), float(ef[1] * 1000), float(math.degrees(e[3]))])
+    record = dict(edges=int(fit["edges"]), inhand_verdict=(seen or pick_seen).get("verdict"),
+                  target_error=[float(ef[0] * 1000), float(ef[1] * 1000), float(math.degrees(e[3]))])
+    return info, force, record, dict(target=(centre, yaw), dz_mm=float(rel[2] * 1000))
+
+
+def truth_done(env, info, target):
+    """시뮬레이터 정답으로 지금 판이 제대로 앉았나 (채점용 — 로봇 판정에는 쓰지 않는다)."""
+    import place_plate_env_v9 as pp
+    p = env._plate_vs_holder()
+    placed = [float(p[0] * 1000), float(p[1] * 1000), float(math.degrees(p[3]))]
+    in_place = target not in FLAT_STATIONS or all(abs(v) <= t for v, t in zip(placed, PLACED_TOL))
+    tilt, z_mm = float(env._tilt()), float(p[2] * 1000)
+    ok = bool(info["released"] and not info["failed"] and tilt <= pp.SEATED_TILT_DEG_CHECK
+              and abs(z_mm) <= pp.SEATED_HEIGHT_MM_CHECK and in_place)
+    return ok, dict(tilt_deg=tilt, z_mm=z_mm, placed=placed, in_place=bool(in_place))
+
+
+def replace_here(env, camera, perception, centre, yaw):
+    """놓은 뒤 확인이 실패한 판을 그 자리에서 다시 집는다 (잰 판 자리로). (집었나, 손 안 인지, 최대 접촉력)."""
+    import place_verify_v11 as pv
+    from incubator_pick_v11 import replan_pick
+    pv.begin_pick_here(env)
+    force = replan_pick(env, centre, yaw)
+    done = False
+    while not done:
+        _, _, term, trunc, info = env.step(np.zeros(5))
+        done = term or trunc
+    force = max(force, float(info["max_force_N"]))
+    held = bool(env.gripped and not info["failed"])
+    seen = perception.observe() if held else dict(verdict="NG", gripped=False)
+    return held, seen, force
 
 
 def run(job):
@@ -249,8 +286,8 @@ def run(job):
             rows.append(row)
             continue
         if vision:
-            info, f, record = place_by_vision(env, camera, perception, prep,
-                                              pick_seen=seen if place_inhand == "pick" else None)
+            info, f, record, placed_at = place_by_vision(env, camera, perception, prep,
+                                                         pick_seen=seen if place_inhand == "pick" else None)
             force = max(force, f)
             row["vision_place"] = record
         else:
@@ -260,15 +297,42 @@ def run(job):
                 _, _, term, trunc, info = env.step(zero)
                 done = term or trunc
         force = max(force, info["max_force_N"])
-        tilt, z_mm = float(info["tilt_deg"]), float(info["z_error_mm"])
-        p = env._plate_vs_holder()
-        placed = [float(p[0] * 1000), float(p[1] * 1000), float(math.degrees(p[3]))]
-        in_place = target not in FLAT_STATIONS or all(abs(v) <= t for v, t in zip(placed, PLACED_TOL))
-        row.update(stage="place", tilt_deg=tilt, z_mm=z_mm, max_force_N=force, placed=placed,
-                   in_place=bool(in_place),
-                   done_ok=bool(info["released"] and not info["failed"]
-                                and tilt <= pp.SEATED_TILT_DEG_CHECK
-                                and abs(z_mm) <= pp.SEATED_HEIGHT_MM_CHECK and in_place))
+        stage = "place"
+        row["verify"], row["replaced"] = [], 0
+        if vision and info["released"] and not info["failed"]:
+            import place_verify_v11 as pv
+            while True:
+                c6, y6, rep6, f = pv.look_after_place(env, camera)
+                force = max(force, f)
+                ref = dict(prep[4], station_dz_mm=placed_at["dz_mm"])
+                ok6, why6, seen6 = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"],
+                                              flat=target in FLAT_STATIONS)
+                truth_ok, _ = truth_done(env, info, target)
+                row["verify"].append(dict(ok=bool(ok6), why=why6, truth_ok=truth_ok,
+                                          **{k: v for k, v in seen6.items()}))
+                if ok6:
+                    break
+                if arm != "C" or row["replaced"] >= MAX_REPLACES:
+                    stage = "human"
+                    break
+                held, seen2, f = replace_here(env, camera, perception, c6, y6)
+                force = max(force, f)
+                row["replaced"] += 1
+                if not held or seen2.get("verdict") == "NG" and not (
+                        seen2.get("in_hand") and seen2.get("z_mm") is not None
+                        and abs(seen2["z_mm"]) <= COMPENSATE_Z_MM and abs(seen2["yaw_deg"]) <= COMPENSATE_YAW_DEG):
+                    stage = "human"
+                    break
+                q_goal = env.plan_place(target, options)
+                env.traverse(q_goal)
+                force = max(force, env.traverse_force)
+                info, f, record, placed_at = place_by_vision(env, camera, perception, prep,
+                                                             pick_seen=seen2 if place_inhand == "pick" else None)
+                force = max(force, f, info["max_force_N"])
+                if not info["released"] or info["failed"]:
+                    break
+        ok, state = truth_done(env, info, target)
+        row.update(stage=stage, max_force_N=force, **state, done_ok=bool(ok and stage == "place"))
         rows.append(row)
     env.close()
     if prepared:
@@ -301,6 +365,10 @@ def summarise(rows):
             incubator_out_of_place=sum(r["target"] == INCUBATOR and r.get("stage") == "place"
                                        and not r["in_place"] for r in rs),
             ok_but_failed=accepted_bad,
+            verify_false_accept=sum(1 for r in rs for v in r.get("verify", [])[-1:] if v["ok"] and not v["truth_ok"]),
+            verify_false_reject=sum(1 for r in rs for v in r.get("verify", []) if not v["ok"] and v["truth_ok"]),
+            verify_caught=sum(1 for r in rs for v in r.get("verify", []) if not v["ok"] and not v["truth_ok"]),
+            replaced=sum(r.get("replaced", 0) for r in rs),
             force_median_N=round(float(np.median([r["max_force_N"] for r in rs])), 1),
             done_ok_by_target=by_target)
     return out
