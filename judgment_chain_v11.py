@@ -19,7 +19,8 @@
 # 배양기에 놓기 (--incubator vision, B · C): 평평한 받침이라 incubator_operate_v11 의 self-1 로 놓는다.
 #   준비  시드마다 한 번, 빈 받침 스캔 + 데모 판으로 모델과 놓을 자리 (measure_scan_v11.prepare)
 #   운영  배양기는 준비 대비 incubator_operate 의 'large' 폭 (±5 mm · ±2 mm · ±2°) 안에서 밀려 있다.
-#         받침 위 1 장(손 안) + 옆 +70 1 장으로 놓을 자리를 고쳐 놓는다. 출발지에서 잰 손 안 값은 쓰지 않는다.
+#         옆 +70 1 장으로 놓을 자리를 고치고, 손 안은 집은 직후 사진 값을 쓴다 (--place-inhand pick, 기본).
+#         --place-inhand photo 면 받침 위에서 손 안을 1 장 더 찍어 그 값을 쓴다.
 #   A 와 --incubator path 는 예전 경로 (장비 인지 + 출발지 손 안 보정). 밀림은 세 팔 모두 같다.
 #
 # 채점: 놓은 판의 실제 자세에 Done 판정 문턱 (기울기 0.15 deg, 높이 1.5 mm). 모든 단계의 최대 접촉력.
@@ -90,8 +91,10 @@ def prepare_incubator(prep_env, prep_cam, seed, scan):
     return model, centre, yaw, truth
 
 
-def place_incubator(env, camera, perception, prep):
-    """받침 위 1 장(손 안) + 옆 +70 1 장으로 놓을 자리를 고쳐 놓는다 (incubator_operate_v11 self-1).
+def place_incubator(env, camera, perception, prep, pick_seen=None):
+    """옆 +70 1 장으로 배양기 밀림을 재고 손 안 어긋남과 합쳐 놓을 자리를 고쳐 놓는다 (incubator_operate_v11 self-1).
+
+    손 안 어긋남은 pick_seen (집은 직후 손 안 사진) 을 쓴다. None 이면 받침 위에서 손 안을 1 장 더 찍는다.
 
     (마지막 step 의 info, 최대 접촉력, 기록) 을 돌려준다.
     """
@@ -109,7 +112,7 @@ def place_incubator(env, camera, perception, prep):
     home = env.data.site_xpos[env.site].copy()
     j1 = float(env.q_target[1])
     force, seen, side = 0.0, None, None
-    for view in ("front", "aside+70"):
+    for view in (("front", "aside+70") if pick_seen is None else ("aside+70",)):
         f, l, up = se.VIEWS[view]
         force = max(force, ja.drive(env, home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1))
         if view == "front":
@@ -117,7 +120,7 @@ def place_incubator(env, camera, perception, prep):
         else:
             rgb, depth = camera.capture(noise=True)
             side = se.Shot(camera, rgb, depth)
-    offsets = as_offsets(seen) or [0.0, 0.0, 0.0, 0.0]
+    offsets = as_offsets(seen if pick_seen is None else pick_seen) or [0.0, 0.0, 0.0, 0.0]
     rel, fit = model.estimate_multi([side], np.zeros(4), io.OPERATE_PRIOR)
     centre, yaw = io.shifted_target(pivot, centre0, yaw0, rel)
     delta = io.absolute_delta(pivot, rotation, centre, yaw)
@@ -132,12 +135,12 @@ def place_incubator(env, camera, perception, prep):
         done = term or trunc
     e = delta - env.truth
     ef = rotation.T @ np.array([e[0], e[1], 0.0])
-    return info, force, dict(edges=int(fit["edges"]), inhand_verdict=seen.get("verdict"),
+    return info, force, dict(edges=int(fit["edges"]), inhand_verdict=(seen or pick_seen).get("verdict"),
                              target_error=[float(ef[0] * 1000), float(ef[1] * 1000), float(math.degrees(e[3]))])
 
 
 def run(job):
-    arm, source, target, seeds, incubator_mode = job
+    arm, source, target, seeds, incubator_mode, place_inhand = job
     import transfer_env_v9 as tr
     import place_plate_env_v9 as pp
     import vision_perception_v8 as vp
@@ -232,13 +235,15 @@ def run(job):
         else:
             q_goal = env.plan_place(target, options)
         carried = bool(env.traverse(q_goal))
+        row.update(slip_mm=float(env.slip_mm), slip_yaw_deg=float(env.slip_yaw_deg))
         force = max(force, env.traverse_force)
         if not carried:
             row.update(stage="traverse", done_ok=False, max_force_N=force)
             rows.append(row)
             continue
         if vision:
-            info, f, record = place_incubator(env, camera, perception, prep)
+            info, f, record = place_incubator(env, camera, perception, prep,
+                                              pick_seen=seen if place_inhand == "pick" else None)
             force = max(force, f)
             row["incubator"] = record
         else:
@@ -301,6 +306,8 @@ def main():
     parser.add_argument("--workers", type=int, default=30)
     parser.add_argument("--seed", type=int, default=7300)
     parser.add_argument("--incubator", choices=("vision", "path"), default="vision")
+    parser.add_argument("--place-inhand", choices=("pick", "photo"), default="pick",
+                        help="배양기에 놓을 때 손 안 어긋남: 집은 직후 사진 값 / 받침 위에서 1 장 더")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
 
@@ -310,7 +317,7 @@ def main():
     seeds = {pair: rng.integers(1 << 30, size=args.episodes) for pair in pairs}
     chunk = 5
     args.out = args.out or ("judgment_chain.json" if args.incubator == "vision" else "judgment_chain_path.json")
-    jobs = [(arm, a, b, seeds[(a, b)][i:i + chunk], args.incubator) for arm in args.arms for (a, b) in pairs
+    jobs = [(arm, a, b, seeds[(a, b)][i:i + chunk], args.incubator, args.place_inhand) for arm in args.arms for (a, b) in pairs
             for i in range(0, args.episodes, chunk)]
     start = time.time()
     rows = []
