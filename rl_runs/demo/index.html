@@ -388,6 +388,24 @@
   </section>
 
   <section class="ruled">
+    <p class="eyebrow">영상 5 — 비전으로 집고 놓는 흐름</p>
+    <h2>찍어서 재고, 잰 자리로 집고 놓는다</h2>
+    <figure>
+      <video controls loop muted playsinline preload="metadata">
+        <source src="vision_flow.webm" type="video/webm">
+      </video>
+      <figcaption>
+        시뮬레이션을 실제로 돌리며 찍었습니다(64초). 1 준비(배양기, 장비마다 한 번): 빈 받침 8장 → 모서리 모델,
+        판을 한 번 두고 3장 → 놓을 자리. 2 배양기 → Fluent: 집기 전 판 1장 → 잰 자리로 집기 → 손 안 1장 → 운반 → 놓기.
+        3 Fluent → 배양기: 집기 → 손 안 1장 → 운반 → 옆 1장으로 배양기 밀림 → 고친 자리에 놓기.
+        초록 [비전 · 구현됨] 은 사진을 찍어 계산하는 단계, 주황 [지금 방식 → 바꿀 예정] 은 아직 사진 없이
+        정답 + 잡음을 쓰는 Fluent 단계입니다. <em>한 번의 이송을 보여 주는 영상</em>이라 비율로 읽으시면 안 됩니다 —
+        1200 상황 결과는 EXPERIMENTS §13.9 입니다.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="ruled">
     <p class="eyebrow">아직 결론이 아닌 것</p>
     <h2>이 수치들이 보여주지 않는 것</h2>
     <div class="note">
