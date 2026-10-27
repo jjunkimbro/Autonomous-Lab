@@ -317,9 +317,10 @@ def place_with_overlay(rec, env, camera, perception, prep):
         f, l, up = se.VIEWS[view]
         ja.drive(env, home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1)
         if view == "front":
-            seen = perception.observe()
-        rgb, depth = camera.capture(noise=True)
-        side = se.Shot(camera, rgb, depth)
+            seen = perception.observe()         # 받침 위: 손 안 1 장 (정합에는 옆 사진만 쓴다)
+        else:
+            rgb, depth = camera.capture(noise=True)
+            side = se.Shot(camera, rgb, depth)
     offsets = as_offsets(seen) or [0.0, 0.0, 0.0, 0.0]
     rel, fit = model.estimate_multi([side], np.zeros(4), io.OPERATE_PRIOR)
     centre, yaw = io.shifted_target(pivot, centre0, yaw0, rel)
