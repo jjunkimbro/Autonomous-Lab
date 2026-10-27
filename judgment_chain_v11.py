@@ -14,6 +14,8 @@
 #   |앞뒤| <= 3 mm, |yaw| <= 1.2  -> 경로를 고쳐 놓기 (판 중심 · 방향이 공칭이 되게)
 #   그 밖                          -> 내려놓고 고쳐 다시 집기
 #
+# 배양기에서 집기 (--incubator vision, B · C): 집기 전에 빈손으로 받침 위 1 장을 찍어 판 자체를 재고 그 자리로
+#   집는다 (incubator_pick_v11, 예전 장비 인지는 배양기에서 93 % 신뢰 문턱에 버려져 공칭 경로로 집었다).
 # 배양기에 놓기 (--incubator vision, B · C): 평평한 받침이라 incubator_operate_v11 의 self-1 로 놓는다.
 #   준비  시드마다 한 번, 빈 받침 스캔 + 데모 판으로 모델과 놓을 자리 (measure_scan_v11.prepare)
 #   운영  배양기는 준비 대비 incubator_operate 의 'large' 폭 (±5 mm · ±2 mm · ±2°) 안에서 밀려 있다.
@@ -162,6 +164,9 @@ def run(job):
             prep = prepare_incubator(prep_env, prep_cam, seed, scan=vision)
         force = 0.0
         env.reset(seed=int(seed), options={"station": source, "target": target})
+        if source == INCUBATOR and incubator_mode == "vision" and arm != "A":
+            from incubator_pick_v11 import look_and_replan
+            row["incubator_pick"], force = look_and_replan(env, camera, 1)
         done = False
         while not done:
             _, _, term, trunc, info = env.step(zero)
