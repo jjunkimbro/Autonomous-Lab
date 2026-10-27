@@ -61,7 +61,9 @@ STATIONS = {
         "marker_id": 1, "size": 0.036, "f": -0.1368, "l": 0.0, "h": -0.035, "mount": "vertical",
         # Fluent 안쪽 뒷벽 (지지면 위 20~170 mm): plate 를 든 채(STEP 7) 앞 마커가 가려도 plate 너머로 보인다
         "extra": [{"marker_id": 7, "size": 0.040, "f": 0.2232, "l": -0.010, "h": 0.080, "mount": "vertical"}],
-        "geoms": ["visual_780_plateholder1", "proxy_fluent_plate_pad", "visual_780_body1"],
+        # Fluent 는 한 강체다 — 예전에는 body2 · 옆 받침 2~4 를 빼고 옮겨, 장비 절반만 밀렸다 (EXPERIMENTS §13.9)
+        "geoms": ["visual_780_plateholder1", "proxy_fluent_plate_pad", "visual_780_body1", "visual_780_body2",
+                  "visual_780_plateholder2", "visual_780_plateholder3", "visual_780_plateholder4"],
     },
     "incubator_plate": {
         # STX44 본체 앞면, 지지면 위 130~190 mm (holder 아래 블록 앞면은 윗판이 8 cm 튀어나와 위에서 가려진다)

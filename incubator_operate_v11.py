@@ -59,7 +59,8 @@ def absolute_delta(pivot, frame, centre, yaw):
 
 
 def run(job):
-    seeds, arms = job
+    seeds, arms = job[:2]
+    STATION = job[2] if len(job) > 2 else globals()["STATION"]
     import place_plate_env_v9 as pp
     import vision_perception_v8 as vp
     import judgment_actions_v11 as ja
@@ -174,10 +175,11 @@ def main():
     parser.add_argument("--seed", type=int, default=6600)
     parser.add_argument("--out", default="incubator_operate.json")
     parser.add_argument("--arms", default=",".join(ARMS))
+    parser.add_argument("--station", default=STATION)
     args = parser.parse_args()
     arms = tuple(args.arms.split(","))
     seeds = np.random.default_rng(args.seed).integers(1 << 30, size=args.episodes)
-    jobs = [([s], arms) for s in seeds]
+    jobs = [([s], arms, args.station) for s in seeds]
     with mp.get_context("spawn").Pool(min(args.workers, len(jobs)), maxtasksperchild=1) as pool:
         rows = [r for part in pool.imap_unordered(run, jobs) for r in part]
     summary = {}

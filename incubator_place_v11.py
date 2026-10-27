@@ -46,7 +46,7 @@ def plan_corrected(env, delta, offsets):
     down = env._transform(pts["SET_DOWN"], delta)
     down[2] -= pp.EXTRA_DESCENT
     x, y, z, yaw = offsets
-    rot0 = ja.rz(delta[3]) @ ja.tool_axes(env, STATION)
+    rot0 = ja.rz(delta[3]) @ ja.tool_axes(env, env.station_name)
     c0 = pp.HELD_CENTER
     c = c0 + np.array([x, y, z])
     shift = rot0 @ c0 - ja.rz(-yaw) @ rot0 @ c

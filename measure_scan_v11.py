@@ -46,7 +46,7 @@ def place_demo_plate(env):
         env.model.geom_group[g] = group
         env.model.geom_contype[g] = contype
         env.model.geom_conaffinity[g] = conaff
-    pivot = np.asarray(env.perturber.pivot(STATION))
+    pivot = np.asarray(env.perturber.pivot(env.station_name))
     d = env.data
     d.qpos[env.plate_qpos:env.plate_qpos + 3] = pivot + env.truth[:3] + np.array([0.0, 0.0, pp.PLATE["height"] / 2.0])
     yaw = env.station["yaw"] + math.pi / 2 + env.truth[3]
@@ -66,7 +66,7 @@ def prepare(env, camera, rotation, report):
     돌려주는 놓을 자리(centre, yaw)는 준비 때 장비 자세 기준 월드 좌표다.
     """
     import station_scan_v11 as ss
-    pivot = np.asarray(env.perturber.pivot(STATION))
+    pivot = np.asarray(env.perturber.pivot(env.station_name))
     shots = ss.capture(env, camera, rotation)
     report["_scan_shots"] = shots
     points, tangents = ss.build(shots, pivot, rotation, report)

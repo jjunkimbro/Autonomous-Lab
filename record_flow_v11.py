@@ -269,7 +269,7 @@ def transfer(rec, env, camera, perception, source, target, seed, prep):
     import place_plate_env_v9 as pp
     options = {"delta": np.random.default_rng(int(seed) + 1_000_003).uniform(-pp.STATION_ERROR, pp.STATION_ERROR)}
     if target == INCUBATOR:
-        options["delta"] = prep[3] + jc.incubator_shift(seed, np.asarray(env.place_data[INCUBATOR]["rotation"]))
+        options["delta"] = prep[3] + jc.station_shift(seed, np.asarray(env.place_data[INCUBATOR]["rotation"]))
         q_goal = env.plan_place(target, options)
     elif offsets is not None:
         q_goal = ja.compensate_place(env, target, offsets, options)

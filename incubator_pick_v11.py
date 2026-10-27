@@ -111,7 +111,7 @@ def plate_truth(env):
 
 
 def run(job):
-    seeds, arms = job
+    seeds, arms, station = job
     import pick_plate_env_v9 as pk
     import vision_perception_v8 as vp
     from measure_inhand_v11 import truth_in_hand
@@ -121,9 +121,9 @@ def run(job):
     rows = []
     for seed in seeds:
         for arm in arms:
-            env.reset(seed=int(seed), options={"station": STATION})
+            env.reset(seed=int(seed), options={"station": station})
             truth = plate_truth(env)
-            row = dict(seed=int(seed), arm=arm, plate=truth, old_perception_used=bool(env.perception_used))
+            row = dict(seed=int(seed), arm=arm, station=station, plate=truth, old_perception_used=bool(env.perception_used))
             force = 0.0
             if arm != "old":
                 rec, force = look_and_replan(env, camera, int(arm.split("-")[1]))
@@ -151,11 +151,12 @@ def main():
     parser.add_argument("--workers", type=int, default=20)
     parser.add_argument("--seed", type=int, default=8800)
     parser.add_argument("--arms", default=",".join(ARMS))
+    parser.add_argument("--station", default=STATION)
     parser.add_argument("--out", default="incubator_pick.json")
     args = parser.parse_args()
     arms = tuple(args.arms.split(","))
     seeds = np.random.default_rng(args.seed).integers(1 << 30, size=args.episodes)
-    jobs = [(seeds[i:i + 5], arms) for i in range(0, len(seeds), 5)]
+    jobs = [(seeds[i:i + 5], arms, args.station) for i in range(0, len(seeds), 5)]
     with mp.get_context("spawn").Pool(min(args.workers, len(jobs)), maxtasksperchild=1) as pool:
         rows = [r for part in pool.imap_unordered(run, jobs) for r in part]
     summary = {}

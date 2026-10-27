@@ -238,6 +238,35 @@ PLATE_HEIGHT = 0.014
 DEMO_VIEWS = {"front_up": (-0.03, 0.0, 0.04), "aside+70_up": (-0.03, 0.070, 0.04), "aside-70_up": (-0.03, -0.070, 0.04)}
 
 
+COMPONENT_CELL = 0.002
+
+
+def _plate_component(sel):
+    """판 윗면 높이 띠의 점 중 판과 이어진 덩어리만 남긴다.
+
+    분류기에서는 같은 높이에 뒤쪽 벽 · 옆 구조물의 점이 섞여 판 크기가 152 x 120 mm 로 잡혔고 앞뒤가
+    10 mm 틀렸다. 2 mm 격자에서 이어진 덩어리 중 공칭 판 중심(±12 mm) 에 걸친 가장 큰 것을 고른다.
+    """
+    from scipy import ndimage
+    ij = np.floor(sel[:, :2] / COMPONENT_CELL).astype(int)
+    base = ij.min(axis=0)
+    ij -= base
+    grid = np.zeros(ij.max(axis=0) + 1, bool)
+    grid[ij[:, 0], ij[:, 1]] = True
+    labels, n = ndimage.label(grid, structure=np.ones((3, 3)))
+    if n <= 1:
+        return sel
+    centre = -base
+    r = int(round(0.012 / COMPONENT_CELL))
+    window = labels[max(centre[0] - r, 0):centre[0] + r + 1, max(centre[1] - r, 0):centre[1] + r + 1]
+    near = np.unique(window[window > 0])
+    if len(near) == 0:
+        return sel
+    sizes = ndimage.sum(grid, labels, near)
+    keep = near[int(np.argmax(sizes))]
+    return sel[labels[ij[:, 0], ij[:, 1]] == keep]
+
+
 def measure_demo_plate(shots, pivot, frame, report=None):
     """준비 단계에서 올바른 자리에 놓아 둔 판의 위치 -> 놓을 자리 (판 중심 월드 좌표, yaw [rad]).
 
@@ -260,7 +289,7 @@ def measure_demo_plate(shots, pivot, frame, report=None):
     local = np.vstack(pts)
     hist, edges = np.histogram(local[:, 2], bins=np.arange(PLATE_HEIGHT - 0.008, PLATE_HEIGHT + 0.0081, 0.0005))
     top = edges[np.argmax(hist)] + 0.00025
-    sel = local[np.abs(local[:, 2] - top) < PAD_BAND]
+    sel = _plate_component(local[np.abs(local[:, 2] - top) < PAD_BAND])
     xy = sel[:, :2] - sel[:, :2].mean(axis=0)
     evals, evecs = np.linalg.eigh(xy.T @ xy)
     axis = evecs[:, 1] * np.sign(evecs[0, 1] if abs(evecs[0, 1]) > 1e-9 else 1.0)
