@@ -290,6 +290,8 @@ class EdgeModel:
                 parts = [self._measure(shot, self._world(base, x), window) for shot in shots]
                 parts = [p for p in parts if p is not None]
                 if not parts:
+                    # 모서리를 잃고 끝남: 판단층에는 '믿을 근거 없음' 으로 보이게 한다
+                    info = dict(info, ok=False, mad_px=10.0, inlier_frac=0.0, sigma=[1.0] * 4, last_step=1e-3)
                     return self._world(base, x), info
                 r = np.concatenate([p[0] for p in parts])
                 J = np.vstack([p[1] for p in parts])
@@ -308,6 +310,13 @@ class EdgeModel:
                 step = np.linalg.solve(Jw.T @ J + lam, Jw.T @ r - lam @ x[free])
                 x[free] += step
                 info = dict(edges=int(len(r)), rms_px=float(np.sqrt(np.mean((r - J @ step) ** 2))), ok=True)
+        # 판단층이 이 추정을 믿을지 정할 근거 (마지막 반복 기준): 잔차의 강건한 폭, 후버 무게가 깎지 않은
+        # 모서리 비율, 사후 축별 표준편차 (장비 좌표, f l z [m], yaw [rad]), 마지막 한 걸음의 크기.
+        cov = np.linalg.inv(Jw.T @ J + lam) * sigma_px ** 2
+        sigma = np.full(4, np.nan)
+        sigma[free] = np.sqrt(np.clip(np.diag(cov), 0.0, None))
+        info.update(mad_px=float(scale), inlier_frac=float(np.mean(weight >= 1.0)),
+                    sigma=[float(v) for v in sigma], last_step=float(np.linalg.norm(step[:2] if len(step) > 2 else step)))
         return self._world(base, x), info
 
     def _pixels_per_metre(self, camera, base):

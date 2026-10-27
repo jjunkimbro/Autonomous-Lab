@@ -9,7 +9,8 @@
 #         준비 때 대비 배양기가 얼마나 밀렸는지 정합해 놓을 자리를 옮기고, 손 안 어긋남과 합쳐 놓는다.
 #
 # 방식 (같은 시드 · 같은 밀림 · 같은 손 안 어긋남):
-#   self-1      준비 모델 + 받침 위 1 장(손 안) + 옆 +70 1 장. 의심되면 3 장으로 다시
+#   self-1      준비 모델 + 받침 위 1 장(손 안) + 옆 +70 1 장. 다시 찍지 않는다 — 더 찍을지는 판단 RL 이
+#               정한다 (process_env_v11 '1 장 보고 놓기 / 2 장 더'). 그 근거(signals)와 예전 손 기준을 기록만 한다
 #   self-3      준비 모델 + 받침 위 + 옆 ±70 (3 장)
 #   cad-1       장면 메시 모델(CAD) + 받침 위 + 옆 +70 — 비교 기준. 준비 때 장비 자세는 안다고 둔다
 #   no-capture  준비 모델, 운영 때 장비는 안 찍는다 (준비 때 위치를 그대로 믿음)
@@ -134,15 +135,14 @@ def run(job):
                         move = rotation.T @ np.array([rel[0], rel[1], 0.0])
                         # 다시 찍기: 보정량이 사전 폭의 3 배를 넘으면. (준비 사진의 모서리 수와 비교하면
                         # 운영 때는 든 판이 모서리를 가려 늘 모자라 매번 다시 찍었다.)
-                        suspicious = (abs(move[0]) > 3 * prior[0] or abs(move[1]) > 3 * prior[1]
-                                      or abs(rel[3]) > 3 * prior[3] or info["edges"] < 100)
-                        if suspicious:
-                            row["fallback"] = True
-                            _, other = look("aside-70")
-                            rel, info = model.estimate([front, side, other], np.zeros(4), prior)
+                        row["rule_flag"] = bool(abs(move[0]) > 3 * prior[0] or abs(move[1]) > 3 * prior[1]
+                                                or abs(rel[3]) > 3 * prior[3] or info["edges"] < 100)
+                        row["signals"] = dict(info, move_mm=[float(move[0] * 1000), float(move[1] * 1000)],
+                                              move_z_mm=float(rel[2] * 1000), move_yaw_deg=float(math.degrees(rel[3])))
                     else:
                         shots = [front] + [look(v)[1] for v in ("aside+70", "aside-70")]
                         rel, info = model.estimate(shots, np.zeros(4), prior)
+                        row["signals"] = dict(info)
                     row["edges"] = info["edges"]
                     centre, yaw = shifted_target(pivot, centre0, yaw0, rel)
                     delta_abs = absolute_delta(pivot, rotation, centre, yaw)
@@ -173,16 +173,18 @@ def main():
     parser.add_argument("--workers", type=int, default=15)
     parser.add_argument("--seed", type=int, default=6600)
     parser.add_argument("--out", default="incubator_operate.json")
+    parser.add_argument("--arms", default=",".join(ARMS))
     args = parser.parse_args()
+    arms = tuple(args.arms.split(","))
     seeds = np.random.default_rng(args.seed).integers(1 << 30, size=args.episodes)
-    jobs = [([s], ARMS) for s in seeds]
+    jobs = [([s], arms) for s in seeds]
     with mp.get_context("spawn").Pool(min(args.workers, len(jobs)), maxtasksperchild=1) as pool:
         rows = [r for part in pool.imap_unordered(run, jobs) for r in part]
     summary = {}
     print(f"{'밀림':<7}{'방식':<12}{'치우침 앞뒤/좌우 mm':>20}{'흩어짐 앞뒤/좌우 mm':>20}{'회전 |오차| p95':>14}"
           f"{'≤0.5mm·0.25°':>14}{'≤1mm·0.5°':>11}{'촬영':>6}{'다시':>6}")
     for shift in SHIFTS:
-        for arm in ARMS:
+        for arm in arms:
             rs = [r for r in rows if r["shift"] == shift and r["arm"] == arm]
             p = np.array([r["placed"] for r in rs])
             tight = float(np.mean((np.abs(p[:, 0]) <= 0.5) & (np.abs(p[:, 1]) <= 0.5) & (np.abs(p[:, 2]) <= 0.25)))
