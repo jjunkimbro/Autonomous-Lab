@@ -46,12 +46,24 @@ COARSE_ABOVE = 0.003         # 좌우 사전 sigma 가 이보다 크면 격자�
 # 수 mm 씩 튀지 않는다. 옆 장면을 함께 쓰면 받침 모서리가 그 축을 잡아 주므로 0 이 낫다 (0.17 -> 0.02 mm).
 NWEIGHT = 0.0
 # 정합에 쓰는 관측 자세: 받침 위 공칭 자세에서 장비 좌표 (앞뒤, 좌우, 위) 로 옮긴 곳
-VIEWS = {"front": (0.0, 0.0, 0.0), "aside+70": (0.0, 0.070, 0.0), "aside-70": (0.0, -0.070, 0.0)}
+VIEWS = {"front": (0.0, 0.0, 0.0), "aside+70": (0.0, 0.070, 0.0), "aside-70": (0.0, -0.070, 0.0),
+         # 뒤로 8 · 위로 8 cm: 손에 든 판이 받침을 덜 가리고 몸체 먼 쪽까지 보인다. 옆 +70 과 함께 풀면
+         # Fluent 큰 밀림 0.75 -> 0.92, 다른 장비는 1.00 그대로 (혼자서는 리더 0.88 · 배양기 0.67).
+         "back80_up80": (-0.08, 0.0, 0.08)}
 # estimate_multi 의 앞뒤 출발값 [m] (운영 때 장비가 준비 대비 ±5 mm 까지 밀릴 수 있다)
 MULTI_STARTS_F = (-0.006, -0.003, 0.0, 0.003, 0.006)
 # 깊이 면 항 (모델에 surf_points 가 있을 때). 밝기 경계는 시선 방향 이동을 거의 못 본다 — 깊이가 그 축을 잰다.
 DEPTH_TERM = True
 DEPTH_WINDOWS = (0.015, 0.008, 0.005, 0.003, 0.003)   # 면 점과 실측 깊이의 거리 허용 [m], 반복마다 좁힌다
+# 정합 뒤 마무리: 사진 전체 점수(모서리 거리 + 깊이 면 거리)를 직접 줄인다 (estimate_multi 끝).
+# 모서리마다 가장 센 경계를 짝짓는 가우스-뉴턴은 Fluent 큰 밀림에서 정답보다 점수가 나쁜 자리에 멈췄다
+# (회전 1° 당 앞뒤 0.6 mm 치우침). 점수를 직접 줄이면 옆 +70 1 장 0.46 -> 0.75, 뒤 8 · 위 8 cm 0.58 -> 0.96
+# (1 mm · 0.5° 이내, 24 시드). 리더 · 분류기 · 배양기는 그대로 1.00.
+POLISH = True
+POLISH_TRUNC_PX = 4.0          # 모서리 거리 상한 (다른 경계까지 먼 점이 점수를 끌지 않게)
+POLISH_DEPTH_TOL = 0.004       # 깊이 면 점 허용 [m]
+POLISH_DEPTH_CAP = 0.002       # 깊이 면 거리 상한 [m]
+POLISH_STEPS = (0.0008, 0.0008, 0.0004, math.radians(0.2))   # 첫 걸음 (f, l, z [m], yaw [rad]), 6 번 반씩
 
 
 def _rz(a):
@@ -413,7 +425,72 @@ class EdgeModel:
             if np.hypot(df[0], df[1]) > 0.001 or abs(d[3] - delta[3]) > math.radians(0.25):
                 alt = max(alt, i["edges"])
         info = dict(info, alt_edges_ratio=float(alt / max(info["edges"], 1)), start_f=float(starts_f[best]))
+        if POLISH:
+            polished, before, after = self.polish(shots, delta)
+            moved = self.frame.T @ np.array([polished[0] - delta[0], polished[1] - delta[1], 0.0])
+            info.update(score_gn=before, score=after, polish_mm=[float(moved[0] * 1000), float(moved[1] * 1000)],
+                        polish_deg=float(math.degrees(polished[3] - delta[3])))
+            delta = polished
         return delta, info
+
+    def _score_fn(self, shots, delta0):
+        """사진 전체 점수 (작을수록 잘 맞음): 보이는 모델 모서리 점의 경계 거리 [px] 평균 + 깊이 면 거리 [mm] 평균.
+        보이는 점은 delta0 에서 한 번 정해 고정한다 (점 수가 바뀌어 점수가 튀지 않게)."""
+        import cv2
+        fixed = []
+        for shot in shots:
+            gray = np.clip(shot.gray, 0, 255).astype(np.uint8)
+            edges = cv2.Canny(cv2.GaussianBlur(gray, (5, 5), 1.0), 30, 90)
+            dist = cv2.distanceTransform((edges == 0).astype(np.uint8), cv2.DIST_L2, 3)
+            p, _ = self._place(delta0)
+            uv, z = shot.project(p)
+            h, w = dist.shape
+            ui, vi = np.round(uv[:, 0]).astype(int), np.round(uv[:, 1]).astype(int)
+            ok = (ui > 1) & (ui < w - 2) & (vi > 1) & (vi < h - 2) & (z > 0.05)
+            ci, cj = np.clip(vi, 1, h - 2), np.clip(ui, 1, w - 2)
+            near = np.full(len(p), np.inf)
+            for du in (-1, 0, 1):
+                for dv in (-1, 0, 1):
+                    dd = shot.depth[ci + dv, cj + du]
+                    near = np.minimum(near, np.where(dd > 0, dd, np.inf))
+            fixed.append((shot, dist, np.where(ok & (np.abs(near - z) < VISIBLE_TOL))[0]))
+        depth = getattr(self, "surf_points", None) is not None and len(self.surf_points) > 0
+
+        def score(delta):
+            total = 0.0
+            p, _ = self._place(delta)
+            for shot, dist, vis in fixed:
+                if len(vis):
+                    uv, _ = shot.project(p[vis])
+                    h, w = dist.shape
+                    uv = np.column_stack((np.clip(uv[:, 0], 0, w - 1.001), np.clip(uv[:, 1], 0, h - 1.001)))
+                    total += float(np.mean(np.minimum(_bilinear(dist, uv), POLISH_TRUNC_PX)))
+                if depth:
+                    res = self._measure_depth(shot, delta, POLISH_DEPTH_TOL)
+                    if res is not None:
+                        total += float(np.mean(np.minimum(np.abs(res[0]), POLISH_DEPTH_CAP))) * 1000
+            return total
+        return score
+
+    def polish(self, shots, delta):
+        """사진 전체 점수를 장비 좌표 4 축 좌표 탐색으로 줄인다. (다듬은 delta, 처음 점수, 마지막 점수)."""
+        score = self._score_fn(shots, delta)
+        x = np.zeros(4)
+        first = best = score(delta)
+        steps = np.array(POLISH_STEPS)
+        for _ in range(6):
+            improved = True
+            while improved:
+                improved = False
+                for j in range(4):
+                    for sign in (1.0, -1.0):
+                        t = x.copy()
+                        t[j] += sign * steps[j]
+                        v = score(self._world(delta, t))
+                        if v < best - 1e-6:
+                            best, x, improved = v, t, True
+            steps = steps * 0.5
+        return self._world(delta, x), float(first), float(best)
 
     def _pixels_per_metre(self, camera, base):
         """받침 근처에서 좌우 1 m 가 영상에서 몇 픽셀인가."""

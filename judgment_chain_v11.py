@@ -103,10 +103,15 @@ def prepare_station(prep_env, prep_cam, seed, station, scan):
     return model, centre, yaw, truth, dict(tilt_deg=report["demo_tilt_deg"], top_mm=report["demo_top_mm"])
 
 
-def place_by_vision(env, camera, perception, prep, pick_seen=None):
+def place_by_vision(env, camera, perception, prep, pick_seen=None, views=("aside+70",), correction=None, decide=None,
+                    fixed=None):
     """옆 +70 1 장으로 장비 밀림을 재고 손 안 어긋남과 합쳐 놓을 자리를 고쳐 놓는다 (incubator_operate_v11 self-1).
 
     손 안 어긋남은 pick_seen (집은 직후 손 안 사진) 을 쓴다. None 이면 받침 위에서 손 안을 1 장 더 찍는다.
+    views       장비를 찍는 자세들 (station_edges_v11.VIEWS, 함께 정합한다)
+    correction  놓을 자리에 더할 보정 (장비 좌표 앞뒤 · 좌우 [m], 회전 [rad]) — 판단층이 정한다
+    decide      decide(fit, rel) -> 더 찍을 자세 목록. 첫 정합 뒤 판단층이 1 장 더 찍을지 정한다 (판단 RL)
+    fixed       dict(target=(중심, yaw), dz_mm) — 장비를 다시 찍지 않고 이 놓을 자리를 쓴다 (같은 장비에 다시 놓기)
 
     (마지막 step 의 info, 최대 접촉력, 기록, 고친 놓을 자리 dict(target=(중심, yaw), dz_mm)) 를 돌려준다.
     """
@@ -123,18 +128,43 @@ def place_by_vision(env, camera, perception, prep, pick_seen=None):
         env.step(zero)
     home = env.data.site_xpos[env.site].copy()
     j1 = float(env.q_target[1])
-    force, seen, side = 0.0, None, None
-    for view in (("front", "aside+70") if pick_seen is None else ("aside+70",)):
-        f, l, up = se.VIEWS[view]
-        force = max(force, ja.drive(env, home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1))
-        if view == "front":
-            seen = perception.observe()         # 받침 위: 손 안 1 장 (정합에는 옆 사진만 쓴다)
-        else:
-            rgb, depth = camera.capture(noise=True)
-            side = se.Shot(camera, rgb, depth)
+    force, seen, shots = 0.0, None, []
+
+    def look(view_list):
+        nonlocal force, seen
+        for view in view_list:
+            f, l, up = se.VIEWS[view]
+            force = max(force, ja.drive(env, home + rotation @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1))
+            if view == "front":
+                seen = perception.observe()         # 받침 위: 손 안 1 장 (정합에는 장비 사진만 쓴다)
+            else:
+                rgb, depth = camera.capture(noise=True)
+                shots.append(se.Shot(camera, rgb, depth))
+
+    if fixed is not None:
+        views = ()
+    look((("front",) if pick_seen is None else ()) + tuple(views))
     offsets = as_offsets(seen if pick_seen is None else pick_seen) or [0.0, 0.0, 0.0, 0.0]
-    rel, fit = model.estimate_multi([side], np.zeros(4), io.OPERATE_PRIOR)
-    centre, yaw = io.shifted_target(pivot, centre0, yaw0, rel)
+    from measure_inhand_v11 import truth_in_hand
+    used = seen if pick_seen is None else pick_seen
+    inhand = dict(verdict=used.get("verdict"), reason=used.get("reason", ""), z_mm=used.get("z_mm"),
+                  yaw_deg=used.get("yaw_deg"), truth=truth_in_hand(env))   # truth 는 채점용
+    extra = ()
+    if fixed is None:
+        rel, fit = model.estimate_multi(shots, np.zeros(4), io.OPERATE_PRIOR)
+        extra = tuple(decide(fit, rel)) if decide is not None else ()
+        first_fit, first_rel = fit, rel
+        if extra:
+            look(extra)
+            rel, fit = model.estimate_multi(shots, np.zeros(4), io.OPERATE_PRIOR)
+        centre, yaw = io.shifted_target(pivot, centre0, yaw0, rel)
+        dz_mm = float(rel[2] * 1000)
+    else:
+        (centre, yaw), dz_mm = fixed["target"], fixed["dz_mm"]
+        fit, first_fit, first_rel = dict(edges=0), {}, np.zeros(4)
+    if correction is not None:
+        centre = centre + rotation @ np.array([correction[0], correction[1], 0.0])
+        yaw = yaw + correction[2]
     delta = io.absolute_delta(pivot, rotation, centre, yaw)
     hover, down, j1c = plan_corrected(env, delta, offsets)
     env.p_hover, env.p_down = hover, down
@@ -148,8 +178,20 @@ def place_by_vision(env, camera, perception, prep, pick_seen=None):
     e = delta - env.truth
     ef = rotation.T @ np.array([e[0], e[1], 0.0])
     record = dict(edges=int(fit["edges"]), inhand_verdict=(seen or pick_seen).get("verdict"),
-                  target_error=[float(ef[0] * 1000), float(ef[1] * 1000), float(math.degrees(e[3]))])
-    return info, force, record, dict(target=(centre, yaw), dz_mm=float(rel[2] * 1000))
+                  target_error=[float(ef[0] * 1000), float(ef[1] * 1000), float(math.degrees(e[3]))],
+                  views=list(views) + list(extra), fit=fit_features(first_fit, first_rel), inhand=inhand)
+    return info, force, record, dict(target=(centre, yaw), dz_mm=dz_mm)
+
+
+def fit_features(fit, rel):
+    """판단층이 보는 장비 정합 근거 (로봇이 아는 값만)."""
+    sig = fit.get("sigma", [np.nan] * 4)
+    return dict(edges=float(fit.get("edges", 0)), mad_px=float(fit.get("mad_px", np.nan)),
+                inlier=float(fit.get("inlier_frac", np.nan)), alt=float(fit.get("alt_edges_ratio", np.nan)),
+                score=float(fit.get("score", np.nan)), score_gn=float(fit.get("score_gn", np.nan)),
+                polish_mm=float(np.hypot(*fit.get("polish_mm", [0.0, 0.0]))), polish_deg=abs(fit.get("polish_deg", 0.0)),
+                sig_f=float(sig[0]) * 1000, sig_l=float(sig[1]) * 1000, sig_yaw=math.degrees(float(sig[3])),
+                shift_mm=float(np.hypot(rel[0], rel[1]) * 1000), shift_deg=abs(math.degrees(float(rel[3]))))
 
 
 def truth_done(env, info, target):

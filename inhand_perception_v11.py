@@ -106,7 +106,9 @@ class InHandPerception:
         out["tilt_deg"] = float(math.degrees(math.atan(b)))
         out["roll_deg"] = float(math.degrees(math.atan(self.roll)))
         if abs(out["roll_deg"]) > ROLL_LIMIT_DEG:
-            return self._verdict(out)
+            # 옆으로 기운 채 잡힌 판 (얹힌 판을 다시 집을 때): 판정은 NG 지만, 옆 기울기까지 넣은 평면으로
+            # 어긋남은 계속 잰다 — 다시 놓을 때 보정에 쓴다 (안 재면 앞뒤 중앙 2 mm 가 보정 없이 남았다).
+            plane = self.full_plane
 
         nominal_far = pp.PLATE["length"] - pp.EDGE_INSET
         far = []
@@ -177,7 +179,8 @@ class InHandPerception:
         # 그 가정이 깨졌는지는 따로 본다: 기울어 앉은 판을 다시 집으면 손 안에서도 옆으로 기운 채
         # 잡히고 (1.4 deg), 그때 a=0 으로 경계를 교차시키면 yaw 를 3 deg 틀린다.
         full = np.column_stack((top[:, 0], top[:, 2], np.ones(len(top))))[keep]
-        self.roll = float(np.linalg.lstsq(full, top[keep, 1], rcond=None)[0][0])
+        self.full_plane = np.linalg.lstsq(full, top[keep, 1], rcond=None)[0]
+        self.roll = float(self.full_plane[0])
         return np.array([0.0, coef[0], coef[1]]), int(len(top))
 
     def _edge(self, gray, depth, tcp, rot, plane, fixed, along, nominal):

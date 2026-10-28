@@ -60,7 +60,15 @@ def verdict(env, centre, yaw, report, reference, target=None, flat=False):
     top = report.get("demo_top_mm", float("nan"))
     d_tilt = tilt - reference["tilt_deg"]
     d_top = top - (reference["top_mm"] + reference.get("station_dz_mm", 0.0))
-    seen = dict(tilt_deg=tilt, d_tilt_deg=d_tilt, d_top_mm=d_top)
+    seen = dict(tilt_deg=tilt, d_tilt_deg=d_tilt, d_top_mm=d_top,
+                slope_deg=list(report.get("demo_slope_deg", [float("nan")] * 2)),
+                size_mm=list(report.get("demo_size_mm", [float("nan")] * 2)),
+                points=float(report.get("demo_points", 0)))
+    if target is not None:
+        # 판단층 입력: 고친 놓을 자리 대비 잰 판 자리 (돌기 받침에서는 판정에 쓰지 않는다)
+        e = rotation.T @ (centre - target[0])
+        dyaw = math.degrees(math.remainder(yaw - target[1], math.pi))
+        seen.update(place_error=[float(e[0] * 1000), float(e[1] * 1000), float(dyaw)])
     if not np.isfinite(tilt) or not np.isfinite(top):
         return False, "판 윗면을 못 찾음", seen
     if d_tilt > TILT_MARGIN_DEG:
@@ -68,9 +76,6 @@ def verdict(env, centre, yaw, report, reference, target=None, flat=False):
     if abs(d_top) > HEIGHT_MARGIN_MM:
         return False, f"높이 {d_top:+.2f} mm", seen
     if flat and target is not None:
-        e = rotation.T @ (centre - target[0])
-        dyaw = math.degrees(math.remainder(yaw - target[1], math.pi))
-        seen.update(place_error=[float(e[0] * 1000), float(e[1] * 1000), float(dyaw)])
         if abs(e[0]) * 1000 > PLACE_TOL[0] or abs(e[1]) * 1000 > PLACE_TOL[1] or abs(dyaw) > PLACE_TOL[2]:
             return False, f"자리 {e[0] * 1000:+.2f}/{e[1] * 1000:+.2f} mm · {dyaw:+.2f}°", seen
     return True, "", seen
