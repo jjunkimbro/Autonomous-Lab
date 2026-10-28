@@ -4,6 +4,11 @@
 # 짝으로 재고, 그 결과로 판단을 배운다 (한 걸음 RL = 상황별 행동 가치). judgment_chain_v11 의 규칙 C 와 비교한다.
 #
 # 판단하는 곳 (judgment_chain_v11 의 6 단계 순서 안):
+#   2 단계 뒤  집은 직후 손 안 1 장을 본 뒤 (다시 집은 뒤에도 다시)
+#              carry   운반 (손 안 어긋남은 4 단계 받침 위 손 안 1 장으로 놓을 때 고친다)
+#              look    판을 든 채 lift20 · turn+3 · turn-3 에서 3 장 더 보고 합쳐 다시 판단 (한 번)
+#              regrip  내려놓고 잰 어긋남을 되돌려 다시 집기 (최대 2 번)
+#              human   사람 호출
 #   5 단계 뒤  장비를 옆 +70 1 장으로 정합한 뒤
 #              place  그대로 놓기
 #              look   뒤 8 · 위 8 cm 1 장을 더 찍어 두 장으로 다시 정합하고 놓기
@@ -43,7 +48,11 @@ OUT = BASE / "rl_runs" / "judgment_rl"
 STATIONS = ("fluent_plate", "incubator_plate", "reader_plate", "sorter_left_plate")
 POCKET = ("fluent_plate", "reader_plate", "sorter_left_plate")
 D5_ACTIONS = ("place", "look")
+D2_ACTIONS = ("carry", "look", "regrip")
 D6_ACTIONS = ("human", "again", "look", "learned", "recheck", "again_drop", "learned_drop")
+# 2 단계 데이터: 집을 자리를 일부러 빗나가게 한다 (장비 좌표 앞뒤 · 좌우 [m], 회전 [rad], 균일).
+# 비전 집기는 손 안 OK 1.00 이라 그대로는 2 단계 판단이 배울 실패가 없다.
+INJECT_PICK = np.array([0.005, 0.003, math.radians(2.5)])
 DROP = 0.004
 EXTRA_VIEW = "back80_up80"
 # 장비 사진 1 장의 비용 (성공 1 대비). 0.02 로 두면 배양기에서 성공 1 % 를 내주고 사진 1 장을 아꼈다 —
@@ -87,7 +96,8 @@ class Runner:
             self._prep_key = (seed, target)
         return self._prep
 
-    def episode(self, seed, target, d5="place", d6="again", inject=None, correct=None, strict=False, d6_after="again"):
+    def episode(self, seed, target, d5="place", d6="again", inject=None, correct=None, strict=False, d6_after="again",
+                d2=None, d2_after=None, inject_pick=None):
         """한 이송. d5 / d6 = 행동 이름 또는 feats -> 행동 함수. correct(feats) -> 보정 (learned 행동용).
         strict = 규칙 C 처럼 다시 집은 판이 손 안 NG (보정 범위 밖) 면 사람 호출. 아니면 쥐고 있으면 다시 놓는다
         (옆으로 얹혔던 판은 손 안에서도 1~1.7° 기운 채 잡힌다 — 받침 홈이 바로잡는지는 결과로 배운다).
@@ -103,29 +113,22 @@ class Runner:
         rotation = np.asarray(self.prep_env.station_data[target]["rotation"])
         row = dict(seed=int(seed), source=source, target=target, photos=0, d5=None, d6=None, stage="")
         env.reset(seed=int(seed), options={"station": source, "target": target})
-        _, force = look_and_replan(env, camera, 1)
+        from incubator_pick_v11 import measure_plate, replan_pick
+        centre, yaw, _ = measure_plate(env, camera, 1)
+        if inject_pick is not None:
+            rot_s = np.asarray(env.station["rotation"])
+            centre = centre + rot_s @ np.array([inject_pick[0], inject_pick[1], 0.0])
+            yaw = yaw + inject_pick[2]
+        replan_pick(env, centre, yaw)
         done = False
         while not done:
             _, _, term, trunc, info = env.step(np.zeros(5))
             done = term or trunc
-        # 2 단계 (규칙 C 그대로 — 비전 집기는 손 안 OK 1.00 이라 아직 배울 것이 없다)
-        regrips = 0
-        while True:
-            held = bool(env.gripped and not info["failed"])
-            seen = perception.observe() if held else dict(verdict="NG", gripped=False)
-            measured = jc.offsets_of(seen)
-            if seen["verdict"] == "OK":
-                break
-            if (seen.get("gripped") and seen.get("in_hand") and measured is not None
-                    and abs(seen["z_mm"]) <= jc.COMPENSATE_Z_MM and abs(seen["yaw_deg"]) <= jc.COMPENSATE_YAW_DEG):
-                break
-            if regrips >= jc.MAX_REGRIPS:
-                row.update(stage="human_pick", done_ok=False, reward=0.0)
-                return row
-            ja.put_back(env)
-            ja.regrip(env, measured if (measured is not None and seen.get("gripped")) else [0.0] * 4)
-            regrips += 1
-            info = dict(failed=False)
+        # 2 단계 뒤 판단 (d2 = 첫 판단, d2_after = 다시 본 · 다시 집은 뒤. 없으면 규칙 C)
+        carried, row["d2"], row["regrips"], _, _ = stage2(env, perception, info, source, d2, d2_after)
+        if not carried:
+            row.update(stage="human_pick", done_ok=False, reward=0.0)
+            return row
         options = {"delta": prep[3] + jc.station_shift(seed, rotation)}
         if not env.traverse(env.plan_place(target, options)):
             row.update(stage="traverse", done_ok=False, reward=0.0)
@@ -264,6 +267,16 @@ _RUNNER = None
 
 
 def _job(task):
+    try:
+        return _job_inner(task)
+    except Exception as exc:          # 한 상황이 오류로 끝나도 수집 전체를 멈추지 않는다 (기록만)
+        import traceback
+        kind, seed, target, _ = task
+        return [dict(seed=int(seed), target=target, stage="error", done_ok=False, error=repr(exc),
+                     trace=traceback.format_exc()[-1500:])]
+
+
+def _job_inner(task):
     global _RUNNER
     if _RUNNER is None:
         _RUNNER = Runner()
@@ -287,6 +300,14 @@ def _job(task):
                 continue        # 사람 호출의 결과는 돌리지 않아도 안다 (보상 0)
             out.append(dict(_RUNNER.episode(seed, target, "place", a, inject=inject, correct=correct),
                             forced6=a, inject=inject.tolist()))
+    elif kind == "collect2":
+        # 2 단계 뒤 짝 데이터: 집을 자리를 일부러 빗나가게 하고 첫 판단만 행동별로 (그 뒤는 규칙 C)
+        inject_pick = np.random.default_rng([seed, 21]).uniform(-INJECT_PICK, INJECT_PICK)
+        pol = load_policy()
+        for a in D2_ACTIONS:
+            out.append(dict(_RUNNER.episode(seed, target, pol.act5, pol.act6, correct=pol.correct, d6_after=pol.act6,
+                                            d2=a, d2_after=rule2, inject_pick=inject_pick),
+                            forced2=a, inject_pick=inject_pick.tolist()))
     elif kind == "collect6n":
         # 일부러 어긋나게 하지 않은 실제 분포에서 놓은 뒤 판정이 실패한 상황만 (놓은 뒤 정합이 틀린 사례 포함)
         first = _RUNNER.episode(seed, target, "place", "human")
@@ -308,6 +329,82 @@ def _job(task):
             out.append(dict(_RUNNER.episode(seed, target, pol.act5, pol.act6, inject=inject, correct=pol.correct, d6_after=pol.act6),
                             policy=policy))
     return [_clean(r) for r in out]
+
+
+def stage2(env, perception, info, source, d2=None, d2_after=None):
+    """2 단계 뒤 판단 루프 (judgment_rl_v11 · judgment_chain_v11 의 R 이 함께 쓴다).
+    (운반하나, 판단 기록, 다시 집은 횟수, 마지막 손 안 인지, 최대 접촉력)."""
+    import judgment_chain_v11 as jc
+    import judgment_actions_v11 as ja
+    from inhand_perception_v11 import InHandPerception
+    d2 = d2 or rule2
+    d2_after = d2_after or rule2
+    regrips, looked, first, log, force = 0, False, True, [], 0.0
+    while True:
+        held = bool(env.gripped and not info.get("failed"))
+        if not looked:
+            seen = perception.observe() if held else dict(verdict="NG", gripped=False)
+        feats2 = dict(inhand_features(seen, regrips, looked),
+                      **{f"src_{k[3:]}": v for k, v in station_onehot(source).items()})
+        chooser = d2 if first else d2_after
+        act = chooser(feats2) if callable(chooser) else chooser
+        first = False
+        if act == "look" and (looked or not held):
+            act = rule2(feats2)
+        if act == "carry" and not held:
+            act = "regrip"
+        log.append(dict(feats=feats2, action=act))
+        if act == "look":
+            views = [seen]
+            for view in ("lift20", "turn+3", "turn-3"):
+                extra, f = ja.observe_from(env, perception, view)
+                force = max(force, f)
+                views.append(extra)
+            seen = ja.fuse(views)
+            InHandPerception._verdict(seen)
+            looked = True
+            continue
+        if act == "carry":
+            return True, log, regrips, seen, force
+        if act == "human" or (act == "regrip" and regrips >= jc.MAX_REGRIPS):
+            return False, log, regrips, seen, force
+        measured = jc.offsets_of(seen)
+        force = max(force, ja.put_back(env))
+        force = max(force, ja.regrip(env, measured if (measured is not None and seen.get("gripped")) else [0.0] * 4))
+        regrips += 1
+        looked = False
+        info = dict(failed=False)
+
+
+def inhand_features(seen, regrips, looked):
+    """집은 직후 손 안 사진에서 로봇이 아는 값."""
+    def num(k):
+        v = seen.get(k)
+        return float(v) if v is not None else np.nan
+    v = seen.get("verdict", "NG")
+    return dict(ok=float(v == "OK"), ng=float(v == "NG"), unsure_h=float(v == "UNSURE"),
+                gripped=float(bool(seen.get("gripped"))), in_hand=float(bool(seen.get("in_hand"))),
+                z_mm=num("z_mm"), yaw_deg=num("yaw_deg"), x_mm=num("x_mm"), height_mm=num("height_mm"),
+                tilt_h=num("tilt_deg"), roll_deg=num("roll_deg"), far_edges=num("far_edges"),
+                side_edges=num("side_edges"), top_points=num("top_points"),
+                regrips=float(regrips), looked=float(looked))
+
+
+def rule2(feats):
+    """규칙 C (judgment_chain_v11): OK -> 운반, 문턱 근처 · 불확실 -> 한 번 다시 보기, 보정 범위 안 NG -> 운반, 그 밖 -> 다시 집기."""
+    import judgment_chain_v11 as jc
+    if not feats["gripped"]:
+        return "regrip"
+    if feats["ok"]:
+        return "carry"
+    z, yaw = feats["z_mm"], feats["yaw_deg"]
+    near = feats["unsure_h"] or (np.isfinite(z) and (jc.NEAR_Z_MM[0] <= abs(z) <= jc.NEAR_Z_MM[1]
+                                                  or jc.NEAR_YAW_DEG[0] <= abs(yaw) <= jc.NEAR_YAW_DEG[1]))
+    if near and not feats["looked"]:
+        return "look"
+    if feats["in_hand"] and np.isfinite(z) and abs(z) <= jc.COMPENSATE_Z_MM and abs(yaw) <= jc.COMPENSATE_YAW_DEG:
+        return "carry"
+    return "regrip"
 
 
 def rule6(feats):
@@ -335,7 +432,7 @@ def load_policy():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=("diag", "collect5", "collect6", "collect6n", "eval"))
+    ap.add_argument("mode", choices=("diag", "collect2", "collect5", "collect6", "collect6n", "eval"))
     ap.add_argument("--episodes", type=int, default=8)
     ap.add_argument("--targets", default=",".join(STATIONS))
     ap.add_argument("--seed", type=int, default=7100)

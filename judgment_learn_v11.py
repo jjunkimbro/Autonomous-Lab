@@ -27,6 +27,8 @@ OUT = BASE / "rl_runs" / "judgment_rl"
 ENSEMBLE = 5
 HIDDEN = 64
 D5_ACTIONS = ("place", "look")
+D2_ACTIONS = ("carry", "look", "regrip")
+D2_PHOTOS = dict(carry=0, look=3, regrip=1)       # 손 안 사진 (다시 보기 3 장, 다시 집으면 1 장)
 D6_ACTIONS = ("again", "look", "learned", "recheck", "again_drop", "learned_drop")
 D6_PHOTOS = dict(again=1, look=2, learned=0, recheck=2, again_drop=1, learned_drop=0)   # 더 찍는 장비 사진
 # (recheck 는 1 장 + 실패면 다시 놓기 1 장)
@@ -225,8 +227,9 @@ def q_values(p, feats, photo_cost, silent):
 
 
 class Policy:
-    def __init__(self, correct, value5, value6, photo_cost, silent=None):
+    def __init__(self, correct, value5, value6, photo_cost, silent=None, value2=None):
         self.correct_model, self.value5, self.value6, self.photo_cost = correct, value5, value6, photo_cost
+        self.value2 = value2
         self.silent = silent or {g: {a: 0.0 for a in D6_ACTIONS} for g in ("unsure", "sure")}
 
     def correct(self, feats):
@@ -237,6 +240,17 @@ class Policy:
         q = [p[i] - self.photo_cost * D5_PHOTOS[a] for i, a in enumerate(D5_ACTIONS)]
         return D5_ACTIONS[int(np.argmax(q))]
 
+    def act2(self, feats):
+        """2 단계 뒤: 운반 / 다시 보기 (한 번) / 다시 집기. 모두 0 이하면 사람 호출. 학습 전이면 규칙 C."""
+        if self.value2 is None:
+            import judgment_rl_v11 as jr
+            return jr.rule2(feats)
+        p = self.value2.predict([feats])[0]
+        allowed = dict(carry=bool(feats.get("gripped")), look=bool(feats.get("gripped")) and not feats.get("looked"),
+                       regrip=True)
+        q = [p[i] - self.photo_cost * D2_PHOTOS[a] if allowed[a] else -np.inf for i, a in enumerate(D2_ACTIONS)]
+        return D2_ACTIONS[int(np.argmax(q))] if max(q) > 0.0 else "human"
+
     def act6(self, feats):
         q = q_values(self.value6.predict([feats])[0], feats, self.photo_cost, self.silent)
         return D6_ACTIONS[int(np.argmax(q))] if max(q) > 0.0 else "human"
@@ -246,7 +260,7 @@ class Policy:
         import torch
         st = torch.load(Path(out) / "policy.pt", weights_only=False)
         return cls(Ensemble.load(st["correct"]), Ensemble.load(st["value5"]), Ensemble.load(st["value6"]),
-                   st["photo_cost"], st.get("silent"))
+                   st["photo_cost"], st.get("silent"), Ensemble.load(st["value2"]) if st.get("value2") else None)
 
 
 # ----------------------------------------------------------------------
@@ -261,6 +275,18 @@ def d6_rows(rows):
         e["out"][r["forced6"]] = bool(r["done_ok"])
         e["silent"][r["forced6"]] = gross_silent(r)
     return list(by.values())
+
+
+def d2_rows(rows):
+    """2 단계 판단 데이터: 첫 판단의 근거와 행동별 결과 (같은 시드 · 목표의 짝)."""
+    by = {}
+    for r in rows:
+        if not r.get("d2"):
+            continue
+        key = (r["seed"], r["target"])
+        e = by.setdefault(key, dict(feats=r["d2"][0]["feats"], out={}))
+        e["out"][r["forced2"]] = bool(r["done_ok"])
+    return [e for e in by.values() if all(a in e["out"] for a in D2_ACTIONS)]
 
 
 def d5_rows(rows):
@@ -338,6 +364,12 @@ def main():
     silent = silent_rates(e6)
     print("조용한 실패 비율", {g: {a: round(v, 4) for a, v in d.items()} for g, d in silent.items()})
     state.update(value5=value5.state(), value6=value6.state(), silent=silent)
+    if (OUT / "collect2.json").exists():
+        e2 = d2_rows(json.loads((OUT / "collect2.json").read_text(encoding="utf-8")))
+        print(f"2 단계 데이터 {len(e2)} 상황  성공률 " +
+              "  ".join(f"{a} {np.mean([e['out'][a] for e in e2]):.3f}" for a in D2_ACTIONS))
+        value2, _ = train_values(e2, D2_ACTIONS)
+        state.update(value2=value2.state())
     torch.save(state, OUT / "policy.pt")
     print("->", OUT / "policy.pt")
 

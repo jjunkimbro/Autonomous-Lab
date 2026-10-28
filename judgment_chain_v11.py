@@ -150,6 +150,8 @@ def place_by_vision(env, camera, perception, prep, pick_seen=None, views=("aside
         views = ()
     look((("front",) if pick_seen is None else ()) + tuple(views))
     offsets = as_offsets(seen if pick_seen is None else pick_seen) or [0.0, 0.0, 0.0, 0.0]
+    # 크게 빗나가게 잡은 판은 손 안 값 일부가 NaN 일 수 있다 — 그 축은 고치지 않는다
+    offsets = [float(v) if v is not None and np.isfinite(v) else 0.0 for v in offsets]
     from measure_inhand_v11 import truth_in_hand
     used = seen if pick_seen is None else pick_seen
     inhand = dict(verdict=used.get("verdict"), reason=used.get("reason", ""), z_mm=used.get("z_mm"),
@@ -271,7 +273,17 @@ def run(job):
         offsets = None
         human = False
 
-        if arm != "A":
+        if arm == "R":
+            # 2 단계 뒤 판단 RL (judgment_rl_v11.stage2 — 운반 / 다시 보기 / 다시 집기 / 사람 호출)
+            import judgment_rl_v11 as jr
+            policy = jr.load_policy()
+            carried, row["d2"], row["regrips"], seen, f = jr.stage2(env, perception, info, source,
+                                                                   policy.act2, policy.act2)
+            force = max(force, f)
+            human = not carried
+            offsets = offsets_of(seen) if carried else None
+            info = dict(info, failed=False) if carried else info
+        elif arm != "A":
             while True:
                 held = bool(env.gripped and not info["failed"])
                 seen = perception.observe() if held else dict(verdict="NG", reason="집기 단계 실패", gripped=False)
