@@ -150,7 +150,7 @@ def put_back(env):
     """빼낸 자세(EXTRACT)에서 LIFT_OFF -> GRASP 로 되돌아가 판을 내려놓고 APPROACH 로 손을 뺀다."""
     force = drive(env, env.p_lift)
     force = max(force, drive(env, env.p_grasp))
-    force = max(force, set_grip(env, pp.GRIP_OPEN))
+    force = max(force, set_grip(env, env.GRIP_WIDE))
     force = max(force, drive(env, env.p_approach))
     env.gripped = False
     return force

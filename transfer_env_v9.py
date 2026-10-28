@@ -41,6 +41,12 @@ SEQUENTIAL_RAIL = True
 class TransferEnv(pk.PickPlateEnv):
     """집기 환경과 놓기 환경을 한 객체 안에서 phase 로 갈라 쓴다."""
 
+    # 운반 첫 구간의 '출발지 안전 자세' 를 출발 장비로 계산할지. plan_place 가 station_name 을 목적지로 바꾼 뒤
+    # traverse 를 부르므로, False(예전) 면 목적지 장비의 집기 PRE_LOADED 로 곧장 가고 그 구간에서 레일도 같이
+    # 움직인다 (레일은 팔이 멈춘 뒤에만 — 라는 의도와 다르다). 판은 손 아래로 거의 안 내려와 걸리지 않았지만,
+    # 손 아래 75 mm 로 늘어진 튜브는 지나가는 장비에 걸렸다. 판 결과를 바꾸지 않으려고 판은 아직 False.
+    TRAVERSE_FROM_SOURCE = False
+
     # ------------------------------------------------------------------
     def _prepare_stations(self):
         """pick 과 place 양쪽 기준 관절값을 다 만들어 둔다.
@@ -113,6 +119,7 @@ class TransferEnv(pk.PickPlateEnv):
             self.corrected = False
             self.report_confidence = False
         self.target_name = options.pop("target", None)
+        self.source_name = options.get("station")
         self.slip_mm = 0.0
         self.traverse_force = 0.0
         self.traverse_lateral_mm = 0.0
@@ -127,7 +134,7 @@ class TransferEnv(pk.PickPlateEnv):
         """
         error = self._grasp_error()                      # TCP 좌표 3축, m
         rot = self.data.site_xmat[self.site].reshape(3, 3)
-        plate_rot = rot @ pp.HELD_AXES
+        plate_rot = rot @ self.HOLD_AXES
         gripper_yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0])
         plate_mat = self.data.xmat[self.plate_body].reshape(3, 3)
         plate_yaw = math.atan2(plate_mat[1, 0], plate_mat[0, 0])
@@ -189,9 +196,12 @@ class TransferEnv(pk.PickPlateEnv):
             # 장비 사이를 관절 직선으로 가로지르면 들고 있는 plate 가 선반·장비 몸체를 긁는다.
             # 인터페이스가 장비마다 PRE_LOADED (plate 를 든 채 빠져나온 안전 자세) 를 주므로
             # 양쪽 PRE_LOADED 를 경유하고, 그 사이에서만 레일을 움직인다.
-            safe_from = self._ik(self.station_data[self.station_name]["q_start"].copy(),
-                                 self.pick_data[self.station_name]["points"]["PRE_LOADED"]) \
-                if "PRE_LOADED" in self.pick_data[self.station_name]["points"] else q_from
+            if self.TRAVERSE_FROM_SOURCE and getattr(self, "source_name", None):
+                src, src_data = self.source_name, self.pick_data[self.source_name]
+            else:
+                src, src_data = self.station_name, self.station_data[self.station_name]
+            safe_from = self._ik(src_data["q_start"].copy(), self.pick_data[src]["points"]["PRE_LOADED"]) \
+                if "PRE_LOADED" in self.pick_data[src]["points"] else q_from
             target_station = self.place_data[self.target_place]
             safe_to = self._ik(target_station["q_start"].copy(),
                                target_station["points"]["PRE_LOADED"])

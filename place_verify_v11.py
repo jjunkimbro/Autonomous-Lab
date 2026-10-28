@@ -202,6 +202,6 @@ def begin_pick_here(env):
     env.steps = 0
     env.disturbance = 0.0
     env.grasp_offset = 0.0
-    env.grip = pk.GRIP_OPEN
+    env.grip = env.GRIP_WIDE
     env.rest_start = env.data.xipos[env.plate_body].copy()
     env._roi_pending = True

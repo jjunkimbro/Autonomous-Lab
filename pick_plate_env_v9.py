@@ -117,6 +117,7 @@ class PickPlateEnv(pp.PlacePlateEnv):
     """PlacePlate 와 IK · 제어 · 접촉 · 영상 ROI 를 공유하고, 경로와 채점만 뒤집는다."""
 
     failed_pose = None               # reset(options={"failed_pose": ...}) 가 덮어쓴다
+    PICK_TIME = EPISODE_TIME         # 집기 에피소드 길이 (튜브는 더 들어 올려 길다)
     failure_state = None             # failure_rate 로 뽑힌 실패 상태 (옆으로 민 거리 · yaw)
 
     def __init__(self, *args, failure_rate=0.0, failure_bank=None,
@@ -267,8 +268,8 @@ class PickPlateEnv(pp.PlacePlateEnv):
         self.q_target = self._ik(self.q_base, self.p_approach)
         d.qpos[self.qpos_adr] = self.q_target
         for adr in self.finger_qpos:
-            d.qpos[adr] = GRIP_OPEN
-        self.grip = GRIP_OPEN
+            d.qpos[adr] = self.GRIP_WIDE
+        self.grip = self.GRIP_WIDE
         self._grip_cmd = None
         mujoco.mj_kinematics(m, d)
 
@@ -324,10 +325,10 @@ class PickPlateEnv(pp.PlacePlateEnv):
             d.qvel[self.plate_dof:self.plate_dof + 6] = 0.0
             return
         rotation = rot_z(self.truth[3]) @ self.station["rotation"]
-        centre = self._transform(self.station["origin"] + np.array([0.0, 0.0, PLATE["height"] / 2.0]), self.truth)
+        centre = self._transform(self.station["origin"] + np.array([0.0, 0.0, self.WORK_HEIGHT / 2.0]), self.truth)
         centre = centre + rotation @ np.array([self.rest[0], self.rest[1], 0.0])
         d.qpos[self.plate_qpos:self.plate_qpos + 3] = centre
-        yaw = self.station["yaw"] + math.pi / 2 + self.truth[3] + self.rest[2]
+        yaw = self.station["yaw"] + self.YAW_OFFSET + self.truth[3] + self.rest[2]
         quat = np.zeros(4)
         mujoco.mju_axisAngle2Quat(quat, np.array([0.0, 0.0, 1.0]), yaw)
         d.qpos[self.plate_qpos + 3:self.plate_qpos + 7] = quat
@@ -345,6 +346,10 @@ class PickPlateEnv(pp.PlacePlateEnv):
             return self.p_grasp + (elapsed / max(self.lift_time, 1e-6)) * (self.p_lift - self.p_grasp)
         s = min(1.0, (elapsed - self.lift_time) / max(self.extract_time, 1e-6))
         return self.p_lift + s * (self.p_extract - self.p_lift)
+
+    def _grip_deadline(self):
+        """정책이 쥐지 않아도 이 시각이면 쥔다."""
+        return self.PICK_TIME * 0.55
 
     def _approach_fraction(self):
         return min(1.0, self.time / max(self.approach_time, 1e-6))
@@ -370,11 +375,11 @@ class PickPlateEnv(pp.PlacePlateEnv):
 
     def _grasp_error(self):
         """손 안 기준 자리 대비 어긋남 벡터 (TCP 좌표)."""
-        return self._plate_in_tcp() - HELD_CENTER
+        return self._plate_in_tcp() - self.HOLD_CENTER
 
     def _lifted(self):
         rotation = rot_z(self.truth[3]) @ self.station["rotation"]
-        expected = self._transform(self.station["origin"] + np.array([0.0, 0.0, PLATE["height"] / 2.0]),
+        expected = self._transform(self.station["origin"] + np.array([0.0, 0.0, self.WORK_HEIGHT / 2.0]),
                                    self.truth)
         return float((rotation.T @ (self.data.xipos[self.plate_body] - expected))[2])
 
@@ -397,12 +402,12 @@ class PickPlateEnv(pp.PlacePlateEnv):
         self.q_target = self._ik(seed, target, iterations=2)
 
         deep_enough = self._approach_fraction() >= MIN_APPROACH_FRACTION
-        want_grip = (action[4] > GRIP_THRESHOLD and deep_enough) or self.time + dt >= EPISODE_TIME * 0.55
+        want_grip = (action[4] > GRIP_THRESHOLD and deep_enough) or self.time + dt >= self._grip_deadline()
         if want_grip and self.grip_time is None:
             # 집기 직전까지 plate 를 얼마나 밀었는지가 이 스킬의 핵심 벌점이다.
             self.disturbance = self._plate_moved()
             self.grip_time = self.time
-            self.grip = GRIP_CLOSED - GRIP_SQUEEZE
+            self.grip = self.GRIP_CLOSE - GRIP_SQUEEZE
 
         force = 0.0
         for _ in range(self.substeps):
@@ -424,7 +429,7 @@ class PickPlateEnv(pp.PlacePlateEnv):
 
         done_path = (self.grip_time is not None
                      and self.time >= self.grip_time + GRIP_SETTLE + self.lift_time + self.extract_time)
-        timeout = self.time >= EPISODE_TIME
+        timeout = self.time >= self.PICK_TIME
         picked = False
         if (done_path or timeout) and not failed:
             picked = self._picked()
@@ -475,8 +480,8 @@ class PickPlateEnv(pp.PlacePlateEnv):
         parts = [
             rotation.T @ (tcp - self.p_grasp) * 50.0,
             self.residual / self.residual_high[0],
-            [self.yaw_residual / pp.YAW_LIMIT, self._approach_fraction(), self.time / EPISODE_TIME],
-            [(self.data.qpos[self.finger_qpos[0]] - GRIP_CLOSED) * 200.0, float(self.gripped)],
+            [self.yaw_residual / pp.YAW_LIMIT, self._approach_fraction(), self.time / self.PICK_TIME],
+            [(self.data.qpos[self.finger_qpos[0]] - self.GRIP_CLOSE) * 200.0, float(self.gripped)],
             [self._contact_force() / 20.0, self.max_force / 50.0],
         ]
         if self.report_confidence:

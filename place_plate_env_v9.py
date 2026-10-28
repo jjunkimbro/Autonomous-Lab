@@ -258,6 +258,15 @@ def rot_z(angle):
 
 class PlacePlateEnv(gym.Env):
     metadata = {"render_modes": ["rgb_array"], "render_fps": CONTROL_HZ}
+    # 쥔 물체 (튜브 환경 tube_env_v11 이 바꾼다). 판: 높이 · 손 안 기준 자리 · 손 안 축 · 쥐는 폭 · 물체 x 축의 장비 대비 각
+    WORK_BODY = PLATE_BODY
+    WORK_HEIGHT = PLATE["height"]
+    HOLD_CENTER = HELD_CENTER
+    HOLD_AXES = HELD_AXES
+    GRIP_CLOSE = GRIP_CLOSED
+    YAW_OFFSET = math.pi / 2
+    OTHER_WORKPIECES = ("workpiece_plate_b", "workpiece_tube_a", "workpiece_tube_b")
+    GRIP_WIDE = GRIP_OPEN             # 벌린 폭 (반폭)
 
     def __init__(self, obs_mode="privileged", stations=s9.PLATE_STATIONS, randomize=True, seed=None, nominal_lift=True,
                  station_weights=None, corrected=True, residual_limit=None, residual_down=None, render_scale=1,
@@ -357,14 +366,14 @@ class PlacePlateEnv(gym.Env):
         self.finger_act = name(mujoco.mjtObj.mjOBJ_ACTUATOR, FINGERTIP_ACTUATOR)
         self.finger_geoms = {name(mujoco.mjtObj.mjOBJ_GEOM, g) for g in FINGERTIP_GEOMS}
         self.site = name(mujoco.mjtObj.mjOBJ_SITE, CONTROL_SITE)
-        self.plate_body = name(mujoco.mjtObj.mjOBJ_BODY, PLATE_BODY)
+        self.plate_body = name(mujoco.mjtObj.mjOBJ_BODY, self.WORK_BODY)
         joint = m.body_jntadr[self.plate_body]
         self.plate_qpos, self.plate_dof = m.jnt_qposadr[joint], m.jnt_dofadr[joint]
         self.plate_geoms = {g for g in range(m.ngeom) if m.geom_bodyid[g] == self.plate_body}
         self.env_geoms = {g for g in range(m.ngeom)
                           if (mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_GEOM, g) or "").startswith(("proxy_", "fixture_"))}
         self.parking = []
-        for index, other in enumerate(("workpiece_plate_b", "workpiece_tube_a", "workpiece_tube_b")):
+        for index, other in enumerate(self.OTHER_WORKPIECES):
             body = name(mujoco.mjtObj.mjOBJ_BODY, other)
             self.parking.append((m.jnt_qposadr[m.body_jntadr[body]], np.array([-1.0 - 0.3 * index, -1.0, 0.1])))
         self.mass = np.zeros((m.nv, m.nv))
@@ -547,19 +556,19 @@ class PlacePlateEnv(gym.Env):
         self.q_target = self._ik(self.q_base, self.p_approach)
         d.qpos[self.qpos_adr] = self.q_target
         for adr in self.finger_qpos:
-            d.qpos[adr] = GRIP_CLOSED
+            d.qpos[adr] = self.GRIP_CLOSE
         mujoco.mj_kinematics(m, d)
 
         # plate 를 손에 (+ 진입 방향 어긋남, yaw)
         tcp, rot = d.site_xpos[self.site].copy(), d.site_xmat[self.site].reshape(3, 3).copy()
-        local = HELD_CENTER + np.array([self.in_hand[0], self.in_hand[1], self.in_hand[2]])
-        plate_rot = rot @ HELD_AXES
+        local = self.HOLD_CENTER + np.array([self.in_hand[0], self.in_hand[1], self.in_hand[2]])
+        plate_rot = rot @ self.HOLD_AXES
         yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0]) + self.in_hand[3]
         d.qpos[self.plate_qpos:self.plate_qpos + 3] = tcp + rot @ local
         quat = np.zeros(4)
         mujoco.mju_axisAngle2Quat(quat, np.array([0.0, 0.0, 1.0]), yaw)
         d.qpos[self.plate_qpos + 3:self.plate_qpos + 7] = quat
-        self.grip = GRIP_CLOSED - GRIP_SQUEEZE
+        self.grip = self.GRIP_CLOSE - GRIP_SQUEEZE
         self._grip_cmd = None
         mujoco.mj_forward(m, d)
         for _ in range(int(SETTLE_START / m.opt.timestep)):
@@ -616,12 +625,12 @@ class PlacePlateEnv(gym.Env):
     def _estimated_plate_vs_holder(self):
         """측정값만으로 추정: 비전 장비 오차 + 손 안 어긋남 측정 + 로봇 TCP (기구학)."""
         tcp, rot = self.data.site_xpos[self.site], self.data.site_xmat[self.site].reshape(3, 3)
-        plate = tcp + rot @ (HELD_CENTER + np.array([0.0, 0.0, self.in_hand_est]))
+        plate = tcp + rot @ (self.HOLD_CENTER + np.array([0.0, 0.0, self.in_hand_est]))
         rotation = rot_z(self.measured[3]) @ self.station["rotation"]
-        expected = self._transform(self.station["origin"] + np.array([0.0, 0.0, PLATE["height"] / 2.0]), self.measured)
+        expected = self._transform(self.station["origin"] + np.array([0.0, 0.0, self.WORK_HEIGHT / 2.0]), self.measured)
         local = rotation.T @ (plate - expected)
-        plate_rot = rot @ HELD_AXES
-        yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0]) - (self.station["yaw"] + math.pi / 2 + self.measured[3])
+        plate_rot = rot @ self.HOLD_AXES
+        yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0]) - (self.station["yaw"] + self.YAW_OFFSET + self.measured[3])
         return np.array([local[0], local[1], local[2], math.remainder(yaw, math.pi)])
 
     def step(self, action):
@@ -653,7 +662,7 @@ class PlacePlateEnv(gym.Env):
             self.released = True
             # 놓는 순간 plate 가 지지면 위로 얼마나 떠 있는지 (떨어뜨리면 액체가 튄다)
             self.release_height = max(0.0, float(self._plate_vs_holder()[2]))
-            self.grip = GRIP_OPEN
+            self.grip = self.GRIP_WIDE
             # 정착 중 접촉도 같이 센다. 이걸 빼면 '놓기 전에만' 접촉력이 걸려서
             # 일찍 놓아 벌점을 피하는 것이 최적 전략이 된다 (낙하 배치).
             # 놓은 뒤 정착 구간의 힘은 따로 센다. 실제 로봇이 "후퇴 중 걸렸는가"를
@@ -730,10 +739,10 @@ class PlacePlateEnv(gym.Env):
     def _plate_vs_holder(self):
         """plate 중심이 실제 holder 자리 대비 (f, l, 높이, yaw) — 장비 좌표계."""
         rotation = rot_z(self.truth[3]) @ self.station["rotation"]
-        expected = self._transform(self.station["origin"] + np.array([0.0, 0.0, PLATE["height"] / 2.0]), self.truth)
+        expected = self._transform(self.station["origin"] + np.array([0.0, 0.0, self.WORK_HEIGHT / 2.0]), self.truth)
         local = rotation.T @ (self.data.xipos[self.plate_body] - expected)
         plate_rot = self.data.xmat[self.plate_body].reshape(3, 3)
-        yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0]) - (self.station["yaw"] + math.pi / 2 + self.truth[3])
+        yaw = math.atan2(plate_rot[1, 0], plate_rot[0, 0]) - (self.station["yaw"] + self.YAW_OFFSET + self.truth[3])
         yaw = math.remainder(yaw, math.pi)
         return np.array([local[0], local[1], local[2], yaw])
 
@@ -758,7 +767,7 @@ class PlacePlateEnv(gym.Env):
             rotation.T @ (tcp - self.p_down) * 50.0,
             self.residual / self.residual_high[0],
             [self.yaw_residual / YAW_LIMIT, progress, self.time / EPISODE_TIME],
-            [(self.data.qpos[self.finger_qpos[0]] - GRIP_CLOSED) * 200.0],
+            [(self.data.qpos[self.finger_qpos[0]] - self.GRIP_CLOSE) * 200.0],
             [self._contact_force() / 20.0, self.max_force / 50.0],
         ]
         if self.report_confidence:
@@ -772,7 +781,7 @@ class PlacePlateEnv(gym.Env):
         if self.obs_mode == "privileged":
             # 손 안 plate 의 실제 위치는 시뮬레이터 정답이다. 실제 로봇에서는 잴 수 없으므로
             # teacher 에게만 준다. student 는 영상에서 읽어야 한다.
-            parts.append((self._plate_in_tcp() - HELD_CENTER) * 200.0
+            parts.append((self._plate_in_tcp() - self.HOLD_CENTER) * 200.0
                          if hasattr(self, "reference") else np.zeros(3))
             error = self._plate_vs_holder() if hasattr(self, "reference") else np.zeros(4)
             parts.append(error[:3] * 200.0)
