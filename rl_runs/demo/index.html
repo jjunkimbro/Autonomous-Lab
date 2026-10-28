@@ -406,6 +406,25 @@
   </section>
 
   <section class="ruled">
+    <p class="eyebrow">영상 6 — 남은 문제: 배양기 놓은 뒤 판정</p>
+    <h2>판은 제자리인데, 다시 잰 배양기가 치우친다</h2>
+    <figure>
+      <video controls loop muted playsinline preload="metadata">
+        <source src="incubator_issue.webm" type="video/webm">
+      </video>
+      <figcaption>
+        시뮬레이션을 실제로 돌리며 찍었습니다(89초, 시드 307669177). 놓은 뒤 사진(위에서)의 판 둘레를 확대해
+        초록 = 사진으로 잰 판, 빨강 = 놓은 뒤 다시 잰 배양기 기준으로 판이 있어야 할 자리(판정이 비교하는 자리),
+        노랑 = 정답(로봇은 모름)을 겹쳐 그렸습니다. 1번째 판정: 판은 정답과 0.5 mm 안인데 빨강이 좌우 1.6 mm 치우쳐
+        '어긋남'. 판단이 학습 보정을 고르자 멀쩡한 판을 옮겼고, 2번째 판정은 같은 치우침이 옮겨진 판과 맞아 '통과' —
+        실제로는 좌우 1.35 mm 어긋난 조용한 실패입니다. 2번째 확대 창에는 판이 비켜난 쪽에 받침 윗면이 띠로 드러납니다.
+        1200 상황에서 이런 오거부는 약 1 %, 조용한 실패는 1 건이었습니다 (EXPERIMENTS §13.11). <em>문제를 보여 주려고
+        학습 보정을 고르게 한 영상</em>이라, 이 시드에서 판단 RL 자신은 '다시 놓기' 를 골라 사람을 불렀습니다.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="ruled">
     <p class="eyebrow">아직 결론이 아닌 것</p>
     <h2>이 수치들이 보여주지 않는 것</h2>
     <div class="note">
