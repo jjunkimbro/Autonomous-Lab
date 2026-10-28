@@ -65,6 +65,7 @@ FLAT_STATIONS = (INCUBATOR,)    # 돌기 없는 받침 — 놓은 자리도 채�
 VISION = {"all": PLATE_STATIONS, "incubator": (INCUBATOR,), "none": ()}
 PLACED_TOL = (1.0, 1.0, 0.5)
 MAX_REPLACES = 1    # 평평한 받침에서 놓은 자리 (앞뒤 · 좌우 mm, 회전 deg) — §13.6
+REPLACE_DROP = 0.0  # 다시 놓을 때 받침 위 이만큼 [m] 에서 손을 벌린다
 
 
 def offsets_of(seen):
@@ -107,7 +108,7 @@ def prepare_station(prep_env, prep_cam, seed, station, scan):
 
 
 def place_by_vision(env, camera, perception, prep, pick_seen=None, views=("aside+70",), correction=None, decide=None,
-                    fixed=None):
+                    fixed=None, drop=0.0):
     """옆 +70 1 장으로 장비 밀림을 재고 손 안 어긋남과 합쳐 놓을 자리를 고쳐 놓는다 (incubator_operate_v11 self-1).
 
     손 안 어긋남은 pick_seen (집은 직후 손 안 사진) 을 쓴다. None 이면 받침 위에서 손 안을 1 장 더 찍는다.
@@ -115,6 +116,7 @@ def place_by_vision(env, camera, perception, prep, pick_seen=None, views=("aside
     correction  놓을 자리에 더할 보정 (장비 좌표 앞뒤 · 좌우 [m], 회전 [rad]) — 판단층이 정한다
     decide      decide(fit, rel) -> 더 찍을 자세 목록. 첫 정합 뒤 판단층이 1 장 더 찍을지 정한다 (판단 RL)
     fixed       dict(target=(중심, yaw), dz_mm) — 장비를 다시 찍지 않고 이 놓을 자리를 쓴다 (같은 장비에 다시 놓기)
+    drop        받침 위 이만큼 [m] 에서 손을 벌린다 (다시 놓기: 손 안에서 기운 판을 손가락이 붙잡지 않고 홈이 바로잡게)
 
     (마지막 step 의 info, 최대 접촉력, 기록, 고친 놓을 자리 dict(target=(중심, yaw), dz_mm)) 를 돌려준다.
     """
@@ -170,6 +172,7 @@ def place_by_vision(env, camera, perception, prep, pick_seen=None, views=("aside
         yaw = yaw + correction[2]
     delta = io.absolute_delta(pivot, rotation, centre, yaw)
     hover, down, j1c = plan_corrected(env, delta, offsets)
+    down = down + np.array([0.0, 0.0, drop])
     env.p_hover, env.p_down = hover, down
     env.q_base[1] = j1c
     force = max(force, ja.drive(env, hover, j1c))
@@ -411,15 +414,17 @@ def run(job):
                 q_goal = env.plan_place(target, options)
                 env.traverse(q_goal)
                 force = max(force, env.traverse_force)
-                if act == "learned":
+                base, dropped = (act[:-5], True) if act.endswith("_drop") else (act, False)
+                drop = jr.DROP if dropped else REPLACE_DROP
+                if base == "learned":
                     fix = policy.correct(feats6)
                     info, f, record, placed_at = place_by_vision(
                         env, camera, perception, prep, fixed=placed_at,
-                        correction=(fix[0] / 1000.0, fix[1] / 1000.0, math.radians(fix[2])))
+                        correction=(fix[0] / 1000.0, fix[1] / 1000.0, math.radians(fix[2])), drop=drop)
                 else:
                     info, f, record, placed_at = place_by_vision(
                         env, camera, perception, prep, pick_seen=seen2 if place_inhand == "pick" else None,
-                        views=("aside+70", jr.EXTRA_VIEW) if act == "look" else ("aside+70",))
+                        views=("aside+70", "back80_up80") if base == "look" else ("aside+70",), drop=drop)
                 force = max(force, f, info["max_force_N"])
                 if not info["released"] or info["failed"]:
                     stage = "place_failed"      # 다시 놓다가 판을 놓침 (조용한 실패가 아니다 — 놓기가 실패했다)

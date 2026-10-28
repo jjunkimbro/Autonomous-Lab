@@ -15,6 +15,9 @@
 #                       지난 놓을 자리에 더해 다시 놓기
 #              recheck  (돌기 없는 받침의 '불확실' 판정만) 옆 +70 위 1 장을 더 찍어 세 장으로 장비를 다시 재고 판정.
 #                       그래도 실패면 다시 한 번 고른다 (recheck 빼고).
+#              again_drop · learned_drop  다시 놓기 / 학습 보정과 같되 받침 위 DROP 에서 손을 벌린다 (손 안에서 기운 판을
+#                       손가락이 붙잡지 않고 홈이 바로잡게). 놓을 자리가 정확한 리더 · 분류기는 4 mm 띄움이 다시 놓기
+#                       0.769 -> 0.949 · 0.932 -> 0.977, 놓을 자리가 덜 정확한 Fluent 는 0.714 -> 0.595 (턱에 그대로 얹힘).
 #
 # 보상: 제대로 앉으면 1, 사람 호출 · 실패 0, 장비 사진 1 장마다 PHOTO_COST 를 뺀다 (촬영 최소화).
 #
@@ -40,7 +43,8 @@ OUT = BASE / "rl_runs" / "judgment_rl"
 STATIONS = ("fluent_plate", "incubator_plate", "reader_plate", "sorter_left_plate")
 POCKET = ("fluent_plate", "reader_plate", "sorter_left_plate")
 D5_ACTIONS = ("place", "look")
-D6_ACTIONS = ("human", "again", "look", "learned", "recheck")
+D6_ACTIONS = ("human", "again", "look", "learned", "recheck", "again_drop", "learned_drop")
+DROP = 0.004
 EXTRA_VIEW = "back80_up80"
 # 장비 사진 1 장의 비용 (성공 1 대비). 0.02 로 두면 배양기에서 성공 1 % 를 내주고 사진 1 장을 아꼈다 —
 # 성공이 먼저, 촬영 최소화는 그다음이라 0.005.
@@ -178,17 +182,19 @@ class Runner:
             row.update(stage="human_repick", done_ok=False, reward=reward(row, False))
             return row
         env.traverse(env.plan_place(target, options))
-        if act == "learned":
+        base, dropped = (act[:-5], True) if act.endswith("_drop") else (act, False)
+        drop = DROP if dropped else jc.REPLACE_DROP
+        if base == "learned":
             fix = correct(feats6)
             row["d6"]["correction"] = list(fix)
             prev_c, prev_y = placed_at["target"]
             fixed = dict(target=(prev_c, prev_y), dz_mm=placed_at["dz_mm"])
             info, _, record, placed_at = jc.place_by_vision(
                 env, camera, perception, prep, fixed=fixed,
-                correction=(fix[0] / 1000.0, fix[1] / 1000.0, math.radians(fix[2])))
+                correction=(fix[0] / 1000.0, fix[1] / 1000.0, math.radians(fix[2])), drop=drop)
         else:
-            views = ("aside+70", EXTRA_VIEW) if act == "look" else ("aside+70",)
-            info, _, record, placed_at = jc.place_by_vision(env, camera, perception, prep, views=views)
+            views = ("aside+70", EXTRA_VIEW) if base == "look" else ("aside+70",)
+            info, _, record, placed_at = jc.place_by_vision(env, camera, perception, prep, views=views, drop=drop)
         row["photos"] += len(record["views"])
         row["place2"] = dict(target_error=record["target_error"], inhand=record["inhand"])
         if not info["released"] or info["failed"]:
@@ -277,7 +283,7 @@ def _job(task):
         correct = (lambda f: predict_correction(model, f)) if model else None
         only = extra.get("only")
         for a in D6_ACTIONS:
-            if a == "human" or (a == "learned" and correct is None) or (only and a not in only):
+            if a == "human" or (a.startswith("learned") and correct is None) or (only and a not in only):
                 continue        # 사람 호출의 결과는 돌리지 않아도 안다 (보상 0)
             out.append(dict(_RUNNER.episode(seed, target, "place", a, inject=inject, correct=correct),
                             forced6=a, inject=inject.tolist()))
@@ -287,8 +293,9 @@ def _job(task):
         if first.get("d6"):
             model = extra.get("correct")
             correct = (lambda f: predict_correction(model, f)) if model else None
+            only = extra.get("only")
             for a in D6_ACTIONS:
-                if a == "human" or (a == "learned" and correct is None):
+                if a == "human" or (a.startswith("learned") and correct is None) or (only and a not in only):
                     continue
                 out.append(dict(_RUNNER.episode(seed, target, "place", a, correct=correct), forced6=a))
     elif kind == "eval":
@@ -335,6 +342,7 @@ def main():
     ap.add_argument("--workers", type=int, default=24)
     ap.add_argument("--policy", default="rl")
     ap.add_argument("--correct", default="")
+    ap.add_argument("--only", default="", help="collect6 / collect6n: 이 행동들만 (쉼표)")
     ap.add_argument("--out", default="")
     ap.add_argument("--inject", action="store_true", help="eval: 첫 놓기를 일부러 어긋나게 (6 단계 판단 평가)")
     a = ap.parse_args()
@@ -348,6 +356,8 @@ def main():
     if a.mode == "collect6" and a.correct:
         extra["correct"] = a.correct
         extra["only"] = ("learned",)
+    if a.only:
+        extra["only"] = tuple(a.only.split(","))
     if a.mode == "collect6n" and a.correct:
         extra["correct"] = a.correct
     tasks = [(a.mode, s, t, extra) for t in targets for s in seeds]

@@ -27,8 +27,9 @@ OUT = BASE / "rl_runs" / "judgment_rl"
 ENSEMBLE = 5
 HIDDEN = 64
 D5_ACTIONS = ("place", "look")
-D6_ACTIONS = ("again", "look", "learned", "recheck")
-D6_PHOTOS = dict(again=1, look=2, learned=0, recheck=2)   # 더 찍는 장비 사진 (recheck 는 1 장 + 실패면 다시 놓기 1 장)
+D6_ACTIONS = ("again", "look", "learned", "recheck", "again_drop", "learned_drop")
+D6_PHOTOS = dict(again=1, look=2, learned=0, recheck=2, again_drop=1, learned_drop=0)   # 더 찍는 장비 사진
+# (recheck 는 1 장 + 실패면 다시 놓기 1 장)
 SILENT_PENALTY = 10.0    # 조용한 실패 1 건 = 성공 10 건 손해 (미검출 하나가 실험 하나를 망친다)
 # 벌점을 주는 조용한 실패: 로봇이 통과시켰는데 실제 판 자리가 문턱(1 mm · 0.5°)의 1.25 배를 넘은 경우.
 # 문턱 바로 위(1.05 mm 처럼 측정 정밀도 0.1~0.3 mm 안) 는 어떤 판정도 못 가르므로 보통 실패로 센다.
