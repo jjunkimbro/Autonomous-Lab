@@ -7,7 +7,10 @@
 #   가치 모델   판단하는 곳마다 행동별 성공 확률 (같은 상황에서 행동별 결과를 짝으로 잰 데이터).
 #               5 단계 뒤  place / look
 #               6 단계 뒤  again / look / learned   (human 은 0)
-#   판단        기대 보상 = 성공 확률 - 장비 사진 비용. 가장 큰 행동을 고른다. 6 단계 뒤에 모두 0 보다 작으면 사람 호출.
+#   판단        기대 보상 = 성공 확률 - 장비 사진 비용 - SILENT_PENALTY x 조용한 실패 비율. 가장 큰 행동을 고른다.
+#               6 단계 뒤에 모두 0 보다 작으면 사람 호출. 조용한 실패는 드물어(403 상황에 3 건) 상황별로는 못 배우므로
+#               행동 x '불확실' 여부 묶음별 비율로 센다 (사전 0.5 건). 처음에는 조용한 실패를 사람 호출과 같은 0 으로
+#               매겨, 배양기 '불확실' 에서 학습 보정을 47 % 골랐다 (그 행동만 조용한 실패 2 건).
 #
 # 모델은 작은 MLP 앙상블 (5 개, 입력 표준화). 데이터가 수백 건이라 크게 만들지 않는다.
 #
@@ -24,13 +27,41 @@ OUT = BASE / "rl_runs" / "judgment_rl"
 ENSEMBLE = 5
 HIDDEN = 64
 D5_ACTIONS = ("place", "look")
-D6_ACTIONS = ("again", "look", "learned")
-D6_PHOTOS = dict(again=1, look=2, learned=0)     # 다시 놓을 때 더 찍는 장비 사진
+D6_ACTIONS = ("again", "look", "learned", "recheck")
+D6_PHOTOS = dict(again=1, look=2, learned=0, recheck=2)   # 더 찍는 장비 사진 (recheck 는 1 장 + 실패면 다시 놓기 1 장)
+SILENT_PENALTY = 10.0    # 조용한 실패 1 건 = 성공 10 건 손해 (미검출 하나가 실험 하나를 망친다)
+# 벌점을 주는 조용한 실패: 로봇이 통과시켰는데 실제 판 자리가 문턱(1 mm · 0.5°)의 1.25 배를 넘은 경우.
+# 문턱 바로 위(1.05 mm 처럼 측정 정밀도 0.1~0.3 mm 안) 는 어떤 판정도 못 가르므로 보통 실패로 센다.
+GROSS = 1.25
+PLACED_TOL = (1.0, 1.0, 0.5)
+
+
+def gross_silent(row):
+    """벌점을 주는 조용한 실패인가 (실제 판 자리가 없으면 크다고 본다)."""
+    if row.get("stage") != "silent_fail":
+        return False
+    last = row.get("verify2") or row.get("verify1b") or row.get("verify1") or {}
+    placed = last.get("truth_placed") or (row.get("verify1") or {}).get("truth_placed")
+    if not placed:
+        return True
+    return max(abs(v) / t for v, t in zip(placed, PLACED_TOL)) > GROSS
 D5_PHOTOS = dict(place=0, look=1)
 
 
 def _keys(rows):
     return sorted({k for r in rows for k in r})
+
+
+# 옛 데이터에 없는 입력의 기본값 (돌기 받침에는 '불확실' · '다시 확인' 이 없다 = 0).
+# 기본값 없이 중앙값으로 채웠더니, 배양기 행에만 있던 unsure = 1 이 중앙값 · 표준편차 0 이 되어 운영 때 0 이
+# 들어오자 입력이 -100 만으로 튀고 학습 보정이 -7794 mm 가 나왔다 (전체 이송 R 30 건이 판을 놓쳤다).
+DEFAULTS = dict(unsure=0.0, rechecked=0.0)
+CLIP = 10.0          # 표준화한 입력을 이 안으로 자른다 (학습 때 못 본 값이 들어와도 모델이 튀지 않게)
+
+
+def _value(f, k):
+    v = f.get(k, DEFAULTS.get(k))
+    return float(v) if v is not None else np.nan
 
 
 class Scaler:
@@ -39,13 +70,13 @@ class Scaler:
         self.mid = np.nanmedian(X, axis=0)
         self.mid = np.where(np.isfinite(self.mid), self.mid, 0.0)
         Xf = np.where(np.isfinite(X), X, self.mid)
-        self.sd = Xf.std(axis=0) + 1e-6
+        sd = Xf.std(axis=0)
+        self.sd = np.where(sd > 1e-3, sd, 1.0)      # 거의 변하지 않는 입력은 키우지 않는다
 
     def __call__(self, feats_list):
-        X = np.array([[float(f.get(k, np.nan)) if f.get(k) is not None else np.nan for k in self.keys]
-                      for f in feats_list], dtype=float)
+        X = np.array([[_value(f, k) for k in self.keys] for f in feats_list], dtype=float)
         X = np.where(np.isfinite(X), X, self.mid)
-        return (X - self.mid) / self.sd
+        return np.clip((X - self.mid) / self.sd, -CLIP, CLIP)
 
     def state(self):
         return dict(keys=self.keys, mid=self.mid.tolist(), sd=self.sd.tolist())
@@ -111,8 +142,8 @@ class Ensemble:
 
     @classmethod
     def train(cls, feats, Y, mask, kind):
-        keys = _keys(feats)
-        X = np.array([[float(f[k]) if f.get(k) is not None else np.nan for k in keys] for f in feats])
+        keys = sorted(set(_keys(feats)) | set(DEFAULTS))
+        X = np.array([[_value(f, k) for k in keys] for f in feats])
         scaler = Scaler(keys, X)
         Xs = scaler(feats)
         Y = np.asarray(Y, dtype=float)
@@ -153,11 +184,14 @@ class Ensemble:
         return cls(scaler, nets, st["kind"], st["y_scale"])
 
 
+CORRECTION_LIMIT = (5.0, 5.0, 2.0)   # 학습 보정 상한 (앞뒤 · 좌우 mm, 회전 deg) — 장비 밀림 폭 (±5 mm · ±2°)
+
+
 def predict_correction(model, feats):
-    """보정 (앞뒤 mm, 좌우 mm, 회전 deg). model = Ensemble 또는 저장 경로."""
+    """보정 (앞뒤 mm, 좌우 mm, 회전 deg). model = Ensemble 또는 저장 경로. 상한으로 자른다."""
     if isinstance(model, (str, Path)):
         model = _load_correction(model)
-    return [float(v) for v in model.predict([feats])[0]]
+    return [float(np.clip(v, -m, m)) for v, m in zip(model.predict([feats])[0], CORRECTION_LIMIT)]
 
 
 _CACHE = {}
@@ -171,9 +205,28 @@ def _load_correction(path):
     return _CACHE[path]
 
 
+def silent_rates(entries):
+    """행동 x 불확실 여부 묶음별 조용한 실패 비율 (사전 0.5 건). {'unsure'|'sure': {행동: 비율}}."""
+    out = {}
+    for group in ("unsure", "sure"):
+        sel = [e for e in entries if bool(e["feats"].get("unsure")) == (group == "unsure")]
+        out[group] = {a: (sum(e["silent"].get(a, False) for e in sel if a in e["out"]) + 0.5)
+                      / (sum(a in e["out"] for e in sel) + 1.0) for a in D6_ACTIONS}
+    return out
+
+
+def q_values(p, feats, photo_cost, silent):
+    """6 단계 뒤 행동별 기대 보상 (다시 확인은 불확실 판정에서 한 번만)."""
+    group = "unsure" if feats.get("unsure") else "sure"
+    can_recheck = bool(feats.get("unsure")) and not feats.get("rechecked")
+    return [p[i] - photo_cost * D6_PHOTOS[a] - SILENT_PENALTY * silent[group][a] if (a != "recheck" or can_recheck)
+            else -np.inf for i, a in enumerate(D6_ACTIONS)]
+
+
 class Policy:
-    def __init__(self, correct, value5, value6, photo_cost):
+    def __init__(self, correct, value5, value6, photo_cost, silent=None):
         self.correct_model, self.value5, self.value6, self.photo_cost = correct, value5, value6, photo_cost
+        self.silent = silent or {g: {a: 0.0 for a in D6_ACTIONS} for g in ("unsure", "sure")}
 
     def correct(self, feats):
         return predict_correction(self.correct_model, feats)
@@ -184,8 +237,7 @@ class Policy:
         return D5_ACTIONS[int(np.argmax(q))]
 
     def act6(self, feats):
-        p = self.value6.predict([feats])[0]
-        q = [p[i] - self.photo_cost * D6_PHOTOS[a] for i, a in enumerate(D6_ACTIONS)]
+        q = q_values(self.value6.predict([feats])[0], feats, self.photo_cost, self.silent)
         return D6_ACTIONS[int(np.argmax(q))] if max(q) > 0.0 else "human"
 
     @classmethod
@@ -193,7 +245,7 @@ class Policy:
         import torch
         st = torch.load(Path(out) / "policy.pt", weights_only=False)
         return cls(Ensemble.load(st["correct"]), Ensemble.load(st["value5"]), Ensemble.load(st["value6"]),
-                   st["photo_cost"])
+                   st["photo_cost"], st.get("silent"))
 
 
 # ----------------------------------------------------------------------
@@ -201,11 +253,12 @@ def d6_rows(rows):
     """6 단계 판단 데이터: (근거, 정답 보정, 행동별 성공) — 같은 시드 · 목표의 짝을 묶는다."""
     by = {}
     for r in rows:
-        if not r.get("d6"):
+        if not r.get("d6") or r.get("stage") == "invalid":
             continue
         key = (r["seed"], r["target"])
-        e = by.setdefault(key, dict(feats=r["d6"]["feats"], label=r["d6"]["label"], out={}))
+        e = by.setdefault(key, dict(feats=r["d6"]["feats"], label=r["d6"]["label"], out={}, silent={}))
         e["out"][r["forced6"]] = bool(r["done_ok"])
+        e["silent"][r["forced6"]] = gross_silent(r)
     return list(by.values())
 
 
@@ -281,7 +334,9 @@ def main():
         f"{a} {np.mean([e['out'][a] for e in e6 if a in e['out']]):.3f} (n {sum(a in e['out'] for e in e6)})"
         for a in D6_ACTIONS))
     value6, _ = train_values(e6, D6_ACTIONS)
-    state.update(value5=value5.state(), value6=value6.state())
+    silent = silent_rates(e6)
+    print("조용한 실패 비율", {g: {a: round(v, 4) for a, v in d.items()} for g, d in silent.items()})
+    state.update(value5=value5.state(), value6=value6.state(), silent=silent)
     torch.save(state, OUT / "policy.pt")
     print("->", OUT / "policy.pt")
 

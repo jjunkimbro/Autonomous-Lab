@@ -26,11 +26,12 @@
 #           --place-inhand pick 이면 받침 위 사진 없이 집은 직후 손 안 값을 쓴다 (배양기 0.5 mm 이내 0.77 -> 0.40).
 #   A 와 비전이 아닌 장비는 예전 경로 (장비 인지 = 정답 + 잡음, 출발지 손 안 보정). 장비 밀림은 세 팔 모두 같다.
 #
-# 놓은 뒤 확인 (6 단계, 비전 장비의 B · C): 손을 빼고 받침 위 1 장으로 기울기 · 높이 · (돌기 없는 받침은) 자리를
+# 놓은 뒤 확인 (6 단계, 비전 장비의 B · C · R): 손을 빼고 받침 위 1 장으로 기울기 · 높이 · (돌기 없는 받침은) 자리를
 #   준비 단계 데모 판과 비교한다 (place_verify_v11). 로봇 자신의 판정이다.
 #   B  판정이 실패면 사람 호출.
 #   C  판정이 실패면 그 사진으로 잰 판 자리로 그 자리에서 다시 집어 (2 단계 손 안 1 장) 4 · 5 단계로 다시 놓는다.
 #      다시 놓기는 1 번, 그래도 실패면 사람 호출.
+#      돌기 없는 받침에서 놓기 전 · 놓은 뒤 장비 자리가 달라 '불확실' 이면 먼저 다시 확인 (1 장 더, place_verify_v11.recheck).
 #
 # 채점: 놓은 판의 실제 자세에 Done 판정 문턱 (기울기 0.15 deg, 높이 1.5 mm). 모든 단계의 최대 접촉력.
 #   배양기는 평평해서 어긋나도 평평하게 앉으므로 놓은 자리도 본다 (앞뒤 · 좌우 1 mm, 회전 0.5°).
@@ -366,12 +367,33 @@ def run(job):
                                           **{k: v for k, v in seen6.items()}))
                 if ok6:
                     break
+                rechecked = False
+                if seen6.get("unsure") and arm in ("C", "R"):
+                    # 돌기 없는 받침: 놓기 전 · 놓은 뒤 장비 자리가 달라 '불확실'. C 는 늘 다시 확인, R 은 판단이 고른다.
+                    act = "recheck"
+                    if arm == "R":
+                        feats6 = dict(jr.verify_features(seen6), **{f"fit_{k}": v for k, v in fit5.items()})
+                        act = policy.act6(feats6)
+                        row["d6"] = act
+                    if act == "recheck":
+                        force = max(force, pv.recheck(env, camera, rep6))
+                        row["rechecked"] = row.get("rechecked", 0) + 1
+                        ok6, why6, seen6 = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"],
+                                                      flat=True, station=prep[:3], agree=False)
+                        row["verify"].append(dict(ok=bool(ok6), why=why6, truth_ok=truth_ok, recheck=True,
+                                                  **{k: v for k, v in seen6.items()}))
+                        rechecked = True
+                        if ok6:
+                            break
+                    elif act == "human":
+                        stage = "human"
+                        break
                 if arm not in ("C", "R") or row["replaced"] >= MAX_REPLACES:
                     stage = "human"
                     break
                 act = "again"
                 if arm == "R":
-                    feats6 = dict(jr.verify_features(seen6), **{f"fit_{k}": v for k, v in fit5.items()})
+                    feats6 = dict(jr.verify_features(seen6, rechecked=rechecked), **{f"fit_{k}": v for k, v in fit5.items()})
                     act = policy.act6(feats6)
                     row["d6"] = act
                     if act == "human":
@@ -400,6 +422,7 @@ def run(job):
                         views=("aside+70", jr.EXTRA_VIEW) if act == "look" else ("aside+70",))
                 force = max(force, f, info["max_force_N"])
                 if not info["released"] or info["failed"]:
+                    stage = "place_failed"      # 다시 놓다가 판을 놓침 (조용한 실패가 아니다 — 놓기가 실패했다)
                     break
         ok, state = truth_done(env, info, target)
         row.update(stage=stage, max_force_N=force, **state, done_ok=bool(ok and stage == "place"))
@@ -429,6 +452,7 @@ def summarise(rows):
             done_ok_under_50N=round(float(np.mean([r["done_ok"] and r["max_force_N"] <= FORCE_LIMIT_N for r in rs])), 3),
             under_50N=round(float(np.mean([r["max_force_N"] <= FORCE_LIMIT_N for r in rs])), 3),
             human=sum(r.get("stage") == "human" for r in rs),
+            place_failed=sum(r.get("stage") == "place_failed" for r in rs),
             station_photos_mean=round(float(np.mean([len(r.get("vision_place", {}).get("views", [])) for r in rs])), 3),
             regrips_mean=round(float(np.mean([r["regrips"] for r in rs])), 3),
             extra_views_mean=round(float(np.mean([r["views"] for r in rs])), 3),
@@ -437,9 +461,12 @@ def summarise(rows):
                                        and not r["in_place"] for r in rs),
             ok_but_failed=accepted_bad,
             verify_false_accept=sum(1 for r in rs for v in r.get("verify", [])[-1:] if v["ok"] and not v["truth_ok"]),
-            verify_false_reject=sum(1 for r in rs for v in r.get("verify", []) if not v["ok"] and v["truth_ok"]),
+            verify_false_reject=sum(1 for r in rs for v in r.get("verify", [])
+                                    if not v["ok"] and v["truth_ok"] and not v.get("unsure")),
+            verify_unsure=sum(1 for r in rs for v in r.get("verify", []) if v.get("unsure")),
             verify_caught=sum(1 for r in rs for v in r.get("verify", []) if not v["ok"] and not v["truth_ok"]),
             replaced=sum(r.get("replaced", 0) for r in rs),
+            rechecked=sum(r.get("rechecked", 0) for r in rs),
             force_median_N=round(float(np.median([r["max_force_N"] for r in rs])), 1),
             done_ok_by_target=by_target)
     return out

@@ -13,6 +13,8 @@
 #              look     옆 +70 + 뒤 8 · 위 8 cm 2 장으로 다시 정합해 다시 놓기
 #              learned  장비는 다시 찍지 않고, 놓은 뒤 사진(기울기 방향 · 높이 · 판 자리)에서 배운 보정을
 #                       지난 놓을 자리에 더해 다시 놓기
+#              recheck  (돌기 없는 받침의 '불확실' 판정만) 옆 +70 위 1 장을 더 찍어 세 장으로 장비를 다시 재고 판정.
+#                       그래도 실패면 다시 한 번 고른다 (recheck 빼고).
 #
 # 보상: 제대로 앉으면 1, 사람 호출 · 실패 0, 장비 사진 1 장마다 PHOTO_COST 를 뺀다 (촬영 최소화).
 #
@@ -38,7 +40,7 @@ OUT = BASE / "rl_runs" / "judgment_rl"
 STATIONS = ("fluent_plate", "incubator_plate", "reader_plate", "sorter_left_plate")
 POCKET = ("fluent_plate", "reader_plate", "sorter_left_plate")
 D5_ACTIONS = ("place", "look")
-D6_ACTIONS = ("human", "again", "look", "learned")
+D6_ACTIONS = ("human", "again", "look", "learned", "recheck")
 EXTRA_VIEW = "back80_up80"
 # 장비 사진 1 장의 비용 (성공 1 대비). 0.02 로 두면 배양기에서 성공 1 % 를 내주고 사진 1 장을 아꼈다 —
 # 성공이 먼저, 촬영 최소화는 그다음이라 0.005.
@@ -81,7 +83,7 @@ class Runner:
             self._prep_key = (seed, target)
         return self._prep
 
-    def episode(self, seed, target, d5="place", d6="again", inject=None, correct=None, strict=False):
+    def episode(self, seed, target, d5="place", d6="again", inject=None, correct=None, strict=False, d6_after="again"):
         """한 이송. d5 / d6 = 행동 이름 또는 feats -> 행동 함수. correct(feats) -> 보정 (learned 행동용).
         strict = 규칙 C 처럼 다시 집은 판이 손 안 NG (보정 범위 밖) 면 사람 호출. 아니면 쥐고 있으면 다시 놓는다
         (옆으로 얹혔던 판은 손 안에서도 1~1.7° 기운 채 잡힌다 — 받침 홈이 바로잡는지는 결과로 배운다).
@@ -140,8 +142,8 @@ class Runner:
             return row
         # 6 단계
         verdict = self._verify(env, camera, prep, placed_at, target)
-        truth_ok = jc.truth_done(env, info, target)[0]
-        row["verify1"] = dict(verdict, truth_ok=bool(truth_ok))
+        truth_ok, truth_state = jc.truth_done(env, info, target)
+        row["verify1"] = dict(verdict, truth_ok=bool(truth_ok), truth_placed=truth_state["placed"])
         if verdict["ok"]:
             row.update(stage="done" if truth_ok else "silent_fail", done_ok=bool(truth_ok),
                        reward=reward(row, truth_ok))
@@ -150,6 +152,20 @@ class Runner:
         act = d6(feats6) if callable(d6) else d6
         row["d6"] = dict(feats=feats6, action=act,
                          label=[-v for v in record["target_error"]])   # 학습용 정답 보정 (시뮬레이터만 안다)
+        if act == "recheck":
+            if not verdict.get("unsure"):
+                row.update(stage="invalid", done_ok=False, reward=0.0)   # 불확실이 아닌데 다시 확인 (짝 측정용)
+                return row
+            verdict = self._recheck(env, camera, prep, placed_at, target, verdict)
+            row["photos"] += 1
+            row["verify1b"] = dict(verdict, truth_ok=bool(truth_ok))
+            if verdict["ok"]:
+                row.update(stage="done" if truth_ok else "silent_fail", done_ok=bool(truth_ok),
+                           reward=reward(row, truth_ok))
+                return row
+            feats6 = dict(verify_features(verdict, rechecked=True), **{f"fit_{k}": v for k, v in row["d5"]["feats"].items()})
+            act = d6_after(feats6) if callable(d6_after) else d6_after
+            row["d6b"] = dict(feats=feats6, action=act)
         if act == "human":
             row.update(stage="human", done_ok=False, reward=reward(row, False))
             return row
@@ -179,8 +195,8 @@ class Runner:
             row.update(stage="place_failed", done_ok=False, reward=reward(row, False))
             return row
         verdict = self._verify(env, camera, prep, placed_at, target)
-        truth_ok = jc.truth_done(env, info, target)[0]
-        row["verify2"] = dict(verdict, truth_ok=bool(truth_ok))
+        truth_ok, truth_state = jc.truth_done(env, info, target)
+        row["verify2"] = dict(verdict, truth_ok=bool(truth_ok), truth_placed=truth_state["placed"])
         ok = bool(verdict["ok"] and truth_ok)
         row.update(stage="done" if ok else ("silent_fail" if verdict["ok"] else "human"), done_ok=ok,
                    reward=reward(row, ok))
@@ -193,7 +209,15 @@ class Runner:
         ref = dict(prep[4], station_dz_mm=placed_at["dz_mm"])
         ok, why, seen = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"], flat=target in jc.FLAT_STATIONS,
                                    station=prep[:3])
-        return dict(seen, ok=bool(ok), why=why, centre=c6, yaw=float(y6))
+        return dict(seen, ok=bool(ok), why=why, centre=c6, yaw=float(y6), _report=rep6, _ref=ref)
+
+    def _recheck(self, env, camera, prep, placed_at, target, v):
+        import judgment_chain_v11 as jc
+        import place_verify_v11 as pv
+        pv.recheck(env, camera, v["_report"])
+        ok, why, seen = pv.verdict(env, v["centre"], v["yaw"], v["_report"], v["_ref"], placed_at["target"],
+                                   flat=target in jc.FLAT_STATIONS, station=prep[:3], agree=False)
+        return dict(seen, ok=bool(ok), why=why, centre=v["centre"], yaw=v["yaw"], _report=v["_report"], _ref=v["_ref"])
 
 
 def reward(row, ok):
@@ -204,20 +228,23 @@ def station_onehot(target):
     return {f"st_{s.split('_')[0]}": float(s == target) for s in STATIONS}
 
 
-def verify_features(v):
+def verify_features(v, rechecked=False):
     """놓은 뒤 1 장에서 로봇이 아는 값."""
     pe = v.get("place_error", [np.nan] * 3)
+    gap = v.get("station_gap", [np.nan] * 3)     # 놓은 뒤 - 놓기 전 장비 자리 (돌기 없는 받침)
     se_ = v.get("station_error", [np.nan] * 3)     # 돌기 없는 받침: 놓은 뒤 다시 잰 장비 기준 판 자리
     sl = v.get("slope_deg", [np.nan] * 2)
     sz = v.get("size_mm", [np.nan] * 2)
     return dict(d_tilt=v["d_tilt_deg"], d_top=v["d_top_mm"], slope_f=sl[0], slope_l=sl[1],
                 pe_f=pe[0], pe_l=pe[1], pe_yaw=pe[2], se_f=se_[0], se_l=se_[1], se_yaw=se_[2],
-                size_f=sz[0], size_l=sz[1], points=v.get("points", 0.0))
+                size_f=sz[0], size_l=sz[1], points=v.get("points", 0.0),
+                gap_f=gap[0], gap_l=gap[1], gap_yaw=gap[2], unsure=float(bool(v.get("unsure"))),
+                rechecked=float(rechecked))
 
 
 def _clean(o):
     if isinstance(o, dict):
-        return {k: _clean(v) for k, v in o.items() if k not in ("centre",)}
+        return {k: _clean(v) for k, v in o.items() if k not in ("centre", "_report", "_ref")}
     if isinstance(o, (list, tuple)):
         return [_clean(v) for v in o]
     if isinstance(o, (np.floating, np.integer)):
@@ -254,16 +281,31 @@ def _job(task):
                 continue        # 사람 호출의 결과는 돌리지 않아도 안다 (보상 0)
             out.append(dict(_RUNNER.episode(seed, target, "place", a, inject=inject, correct=correct),
                             forced6=a, inject=inject.tolist()))
+    elif kind == "collect6n":
+        # 일부러 어긋나게 하지 않은 실제 분포에서 놓은 뒤 판정이 실패한 상황만 (놓은 뒤 정합이 틀린 사례 포함)
+        first = _RUNNER.episode(seed, target, "place", "human")
+        if first.get("d6"):
+            model = extra.get("correct")
+            correct = (lambda f: predict_correction(model, f)) if model else None
+            for a in D6_ACTIONS:
+                if a == "human" or (a == "learned" and correct is None):
+                    continue
+                out.append(dict(_RUNNER.episode(seed, target, "place", a, correct=correct), forced6=a))
     elif kind == "eval":
         policy = extra["policy"]
         inject = np.random.default_rng([seed, 9]).uniform(-INJECT, INJECT) if extra.get("inject") else None
         if policy == "rule":
-            out.append(dict(_RUNNER.episode(seed, target, "place", "again", inject=inject, strict=True), policy=policy))
+            out.append(dict(_RUNNER.episode(seed, target, "place", rule6, inject=inject, strict=True), policy=policy))
         else:
             pol = load_policy()
-            out.append(dict(_RUNNER.episode(seed, target, pol.act5, pol.act6, inject=inject, correct=pol.correct),
+            out.append(dict(_RUNNER.episode(seed, target, pol.act5, pol.act6, inject=inject, correct=pol.correct, d6_after=pol.act6),
                             policy=policy))
     return [_clean(r) for r in out]
+
+
+def rule6(feats):
+    """규칙 C: 불확실이면 다시 확인, 아니면 다시 놓기."""
+    return "recheck" if feats.get("unsure") and not feats.get("rechecked") else "again"
 
 
 def predict_correction(model, feats):
@@ -286,7 +328,7 @@ def load_policy():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=("diag", "collect5", "collect6", "eval"))
+    ap.add_argument("mode", choices=("diag", "collect5", "collect6", "collect6n", "eval"))
     ap.add_argument("--episodes", type=int, default=8)
     ap.add_argument("--targets", default=",".join(STATIONS))
     ap.add_argument("--seed", type=int, default=7100)
@@ -306,6 +348,8 @@ def main():
     if a.mode == "collect6" and a.correct:
         extra["correct"] = a.correct
         extra["only"] = ("learned",)
+    if a.mode == "collect6n" and a.correct:
+        extra["correct"] = a.correct
     tasks = [(a.mode, s, t, extra) for t in targets for s in seeds]
     t0 = time.time()
     rows = []
