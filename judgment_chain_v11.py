@@ -344,11 +344,11 @@ def run(job):
         if vision and info["released"] and not info["failed"]:
             import place_verify_v11 as pv
             while True:
-                c6, y6, rep6, f = pv.look_after_place(env, camera)
+                c6, y6, rep6, f = pv.look_after_place(env, camera, pv.view_for(target in FLAT_STATIONS))
                 force = max(force, f)
                 ref = dict(prep[4], station_dz_mm=placed_at["dz_mm"])
                 ok6, why6, seen6 = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"],
-                                              flat=target in FLAT_STATIONS)
+                                              flat=target in FLAT_STATIONS, station=prep[:3])
                 truth_ok, _ = truth_done(env, info, target)
                 row["verify"].append(dict(ok=bool(ok6), why=why6, truth_ok=truth_ok,
                                           **{k: v for k, v in seen6.items()}))

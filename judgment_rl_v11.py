@@ -187,9 +187,10 @@ class Runner:
     def _verify(self, env, camera, prep, placed_at, target):
         import judgment_chain_v11 as jc
         import place_verify_v11 as pv
-        c6, y6, rep6, _ = pv.look_after_place(env, camera)
+        c6, y6, rep6, _ = pv.look_after_place(env, camera, pv.view_for(target in jc.FLAT_STATIONS))
         ref = dict(prep[4], station_dz_mm=placed_at["dz_mm"])
-        ok, why, seen = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"], flat=target in jc.FLAT_STATIONS)
+        ok, why, seen = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"], flat=target in jc.FLAT_STATIONS,
+                                   station=prep[:3])
         return dict(seen, ok=bool(ok), why=why, centre=c6, yaw=float(y6))
 
 
