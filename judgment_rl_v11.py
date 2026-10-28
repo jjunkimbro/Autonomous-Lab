@@ -40,7 +40,9 @@ POCKET = ("fluent_plate", "reader_plate", "sorter_left_plate")
 D5_ACTIONS = ("place", "look")
 D6_ACTIONS = ("human", "again", "look", "learned")
 EXTRA_VIEW = "back80_up80"
-PHOTO_COST = 0.02
+# 장비 사진 1 장의 비용 (성공 1 대비). 0.02 로 두면 배양기에서 성공 1 % 를 내주고 사진 1 장을 아꼈다 —
+# 성공이 먼저, 촬영 최소화는 그다음이라 0.005.
+PHOTO_COST = 0.005
 # 6 단계 데이터: 첫 놓기 자리를 일부러 어긋나게 해 얹힘을 섞는다 (장비 좌표 앞뒤 · 좌우 [m], 회전 [rad], 균일)
 INJECT = np.array([0.003, 0.003, math.radians(1.0)])
 
@@ -205,10 +207,12 @@ def station_onehot(target):
 def verify_features(v):
     """놓은 뒤 1 장에서 로봇이 아는 값."""
     pe = v.get("place_error", [np.nan] * 3)
+    se_ = v.get("station_error", [np.nan] * 3)     # 돌기 없는 받침: 놓은 뒤 다시 잰 장비 기준 판 자리
     sl = v.get("slope_deg", [np.nan] * 2)
     sz = v.get("size_mm", [np.nan] * 2)
     return dict(d_tilt=v["d_tilt_deg"], d_top=v["d_top_mm"], slope_f=sl[0], slope_l=sl[1],
-                pe_f=pe[0], pe_l=pe[1], pe_yaw=pe[2], size_f=sz[0], size_l=sz[1], points=v.get("points", 0.0))
+                pe_f=pe[0], pe_l=pe[1], pe_yaw=pe[2], se_f=se_[0], se_l=se_[1], se_yaw=se_[2],
+                size_f=sz[0], size_l=sz[1], points=v.get("points", 0.0))
 
 
 def _clean(o):

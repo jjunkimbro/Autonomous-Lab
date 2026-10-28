@@ -6,6 +6,8 @@
 #   A  인지 없음      집기 -> 운반 -> 놓기 (지금 시스템)
 #   B  OK / NG       집은 뒤 인지. OK 면 그대로, 아니면 내려놓고 잰 만큼 고쳐 다시 집기
 #   C  판단 전체      B + 문턱 근처 · 불확실이면 다른 자세에서 다시 보기 + 보정 가능하면 경로를 고쳐 놓기
+#   R  판단 RL        C 와 같이 집고, 5 · 6 단계 뒤 판단을 judgment_rl_v11 에서 배운 정책으로 (rl_runs/judgment_rl/policy.pt)
+#                     5 단계 뒤  그대로 놓기 / 1 장 더 찍기,  6 단계 뒤  다시 놓기 / 2 장으로 / 학습 보정 / 사람 호출
 #   다시 집기는 최대 2 번, 그래도 안 되면 사람 호출로 센다.
 #
 # 판단 규칙 (C):
@@ -48,7 +50,7 @@ from pathlib import Path
 import numpy as np
 
 BASE = Path(__file__).resolve().parent
-ARMS = ("A", "B", "C")
+ARMS = ("A", "B", "C", "R")
 MAX_REGRIPS = 2
 COMPENSATE_Z_MM = 3.0
 COMPENSATE_YAW_DEG = 1.2
@@ -269,7 +271,7 @@ def run(job):
             while True:
                 held = bool(env.gripped and not info["failed"])
                 seen = perception.observe() if held else dict(verdict="NG", reason="집기 단계 실패", gripped=False)
-                if arm == "C" and held and near_threshold(seen):
+                if arm in ("C", "R") and held and near_threshold(seen):
                     views = [seen]
                     for view in ("lift20", "turn+3", "turn-3"):
                         extra, f = ja.observe_from(env, perception, view)
@@ -285,9 +287,9 @@ def run(job):
                                        truth_yaw=None if truth is None else truth["yaw_deg"]))
                 measured = offsets_of(seen)
                 if seen["verdict"] == "OK":
-                    offsets = measured if arm == "C" else None
+                    offsets = measured if arm in ("C", "R") else None
                     break
-                if (arm == "C" and seen.get("gripped") and seen.get("in_hand") and measured is not None
+                if (arm in ("C", "R") and seen.get("gripped") and seen.get("in_hand") and measured is not None
                         and abs(seen["z_mm"]) <= COMPENSATE_Z_MM and abs(seen["yaw_deg"]) <= COMPENSATE_YAW_DEG):
                     offsets = measured
                     break
@@ -327,11 +329,21 @@ def run(job):
             row.update(stage="traverse", done_ok=False, max_force_N=force)
             rows.append(row)
             continue
+        if arm == "R":
+            import judgment_rl_v11 as jr
+            policy = jr.load_policy()
+
+            def decide5(fit, rel):
+                act = policy.act5(dict(fit_features(fit, rel), **jr.station_onehot(target)))
+                row["d5"] = act
+                return (jr.EXTRA_VIEW,) if act == "look" else ()
         if vision:
             info, f, record, placed_at = place_by_vision(env, camera, perception, prep,
-                                                         pick_seen=seen if place_inhand == "pick" else None)
+                                                         pick_seen=seen if place_inhand == "pick" else None,
+                                                         decide=decide5 if arm == "R" else None)
             force = max(force, f)
             row["vision_place"] = record
+            fit5 = dict(record["fit"], **jr.station_onehot(target)) if arm == "R" else None
         else:
             env.begin_place()
             done = False
@@ -354,13 +366,22 @@ def run(job):
                                           **{k: v for k, v in seen6.items()}))
                 if ok6:
                     break
-                if arm != "C" or row["replaced"] >= MAX_REPLACES:
+                if arm not in ("C", "R") or row["replaced"] >= MAX_REPLACES:
                     stage = "human"
                     break
+                act = "again"
+                if arm == "R":
+                    feats6 = dict(jr.verify_features(seen6), **{f"fit_{k}": v for k, v in fit5.items()})
+                    act = policy.act6(feats6)
+                    row["d6"] = act
+                    if act == "human":
+                        stage = "human"
+                        break
                 held, seen2, f = replace_here(env, camera, perception, c6, y6)
                 force = max(force, f)
                 row["replaced"] += 1
-                if not held or seen2.get("verdict") == "NG" and not (
+                # 규칙 C 는 다시 집은 판이 손 안 NG (보정 범위 밖) 면 사람 호출. R 은 쥐고 있으면 다시 놓는다.
+                if not held or arm == "C" and seen2.get("verdict") == "NG" and not (
                         seen2.get("in_hand") and seen2.get("z_mm") is not None
                         and abs(seen2["z_mm"]) <= COMPENSATE_Z_MM and abs(seen2["yaw_deg"]) <= COMPENSATE_YAW_DEG):
                     stage = "human"
@@ -368,8 +389,15 @@ def run(job):
                 q_goal = env.plan_place(target, options)
                 env.traverse(q_goal)
                 force = max(force, env.traverse_force)
-                info, f, record, placed_at = place_by_vision(env, camera, perception, prep,
-                                                             pick_seen=seen2 if place_inhand == "pick" else None)
+                if act == "learned":
+                    fix = policy.correct(feats6)
+                    info, f, record, placed_at = place_by_vision(
+                        env, camera, perception, prep, fixed=placed_at,
+                        correction=(fix[0] / 1000.0, fix[1] / 1000.0, math.radians(fix[2])))
+                else:
+                    info, f, record, placed_at = place_by_vision(
+                        env, camera, perception, prep, pick_seen=seen2 if place_inhand == "pick" else None,
+                        views=("aside+70", jr.EXTRA_VIEW) if act == "look" else ("aside+70",))
                 force = max(force, f, info["max_force_N"])
                 if not info["released"] or info["failed"]:
                     break
@@ -401,6 +429,7 @@ def summarise(rows):
             done_ok_under_50N=round(float(np.mean([r["done_ok"] and r["max_force_N"] <= FORCE_LIMIT_N for r in rs])), 3),
             under_50N=round(float(np.mean([r["max_force_N"] <= FORCE_LIMIT_N for r in rs])), 3),
             human=sum(r.get("stage") == "human" for r in rs),
+            station_photos_mean=round(float(np.mean([len(r.get("vision_place", {}).get("views", [])) for r in rs])), 3),
             regrips_mean=round(float(np.mean([r["regrips"] for r in rs])), 3),
             extra_views_mean=round(float(np.mean([r["views"] for r in rs])), 3),
             compensated=sum(r["compensated"] for r in rs),
