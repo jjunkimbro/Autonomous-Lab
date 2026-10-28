@@ -51,6 +51,13 @@ HELD_AXES = np.column_stack(([1.0, 0.0, 0.0], [0.0, 0.0, -1.0], [0.0, 1.0, 0.0])
 GRIP_CLOSED = PLATE["width"] / 2.0
 GRIP_SQUEEZE = 0.008
 GRIP_OPEN = 0.0475
+# 손가락을 닫는 속도 [m/s] (None 이면 명령을 한 번에 바꾼다 — 예전 방식). 한 번에 바꾸면 위치 제어(최대 30 N) 손가락이
+# 13 mm 를 달려가 판에 부딪혀, 돌기 받침에서 쥐는 순간 한 substep 동안 접촉 합 70~80 N · 손목 46~52 N 이 튀었다
+# (판이 손가락 사이 가운데가 아니면 한쪽 손가락이 먼저 닿고, 돌기가 판을 못 밀려나게 막는다 — grip_force_diag_v11).
+# 실물 RG2 의 닫는 속도는 사양상 약 38~127 mm/s 다. 여는 쪽은 그대로 한 번에.
+# 네 장비 각 20 번 비전 집기: 120 mm/s 접촉 합 최대 25 N, 60 mm/s 13 N (손목 9 N), 40 mm/s 9 N — 모두 집기 1.00,
+# 손 안 어긋남 같음. 40 mm/s 는 13 mm 를 0.33 s 에 닫아 GRIP_SETTLE(0.35 s) 에 빠듯하다.
+GRIP_SPEED = 0.060
 
 CONTROL_HZ = 20
 SLIDE_SPEED = 0.040
@@ -553,6 +560,7 @@ class PlacePlateEnv(gym.Env):
         mujoco.mju_axisAngle2Quat(quat, np.array([0.0, 0.0, 1.0]), yaw)
         d.qpos[self.plate_qpos + 3:self.plate_qpos + 7] = quat
         self.grip = GRIP_CLOSED - GRIP_SQUEEZE
+        self._grip_cmd = None
         mujoco.mj_forward(m, d)
         for _ in range(int(SETTLE_START / m.opt.timestep)):
             self._control(self.q_target)
@@ -690,7 +698,17 @@ class PlacePlateEnv(gym.Env):
         block = self.mass[np.ix_(self.dof_adr, self.dof_adr)]
         d.qfrc_applied[:] = 0.0
         d.qfrc_applied[self.dof_adr] = block @ command + d.qfrc_bias[self.dof_adr]
-        d.ctrl[self.finger_act] = self.grip
+        d.ctrl[self.finger_act] = self._grip_command(m.opt.timestep)
+
+    def _grip_command(self, dt):
+        """손가락 명령. GRIP_SPEED 가 있으면 닫는 쪽만 그 속도로 따라간다 (여는 쪽 · 에피소드 시작은 바로)."""
+        cmd = getattr(self, "_grip_cmd", None)
+        if GRIP_SPEED is None or cmd is None or self.grip >= cmd:
+            cmd = self.grip
+        else:
+            cmd = max(self.grip, cmd - GRIP_SPEED * dt)
+        self._grip_cmd = cmd
+        return cmd
 
     def _contact_force(self):
         total = 0.0

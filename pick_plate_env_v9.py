@@ -269,6 +269,7 @@ class PickPlateEnv(pp.PlacePlateEnv):
         for adr in self.finger_qpos:
             d.qpos[adr] = GRIP_OPEN
         self.grip = GRIP_OPEN
+        self._grip_cmd = None
         mujoco.mj_kinematics(m, d)
 
         # 은행에서 꺼낸 자세는 이미 "쉬고 있던" 상태지만, 장비 마찰이 에피소드마다 달라
