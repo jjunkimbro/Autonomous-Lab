@@ -106,7 +106,9 @@ class TubeInHand:
     # ------------------------------------------------------------------
     def _roi(self, depth, tcp, rot):
         """튜브 · 손가락 끝 근처 화소의 (uv, 카메라 광선 (z = 1), 깊이)."""
-        corners = np.array([[x, y, z] for x in (-0.02, 0.02) for y in (-0.08, 0.02) for z in (FINGER_Z[0], 0.02)])
+        # 위쪽 4.5 cm: 벽 위에 높이 얹힌 튜브를 다시 집으면 위 끝이 손가락 위로 24 mm 더 솟는다 (2 cm 까지만 보면 윗면이 잘려
+        # 높이 어긋남을 8 mm 로 쟀다)
+        corners = np.array([[x, y, z] for x in (-0.02, 0.02) for y in (-0.08, 0.045) for z in (FINGER_Z[0], 0.02)])
         uv_c, _ = self.camera.project(tcp + corners @ rot.T)
         h, w = depth.shape
         u0, v0 = np.clip(np.floor(uv_c.min(axis=0)).astype(int), 0, [w - 1, h - 1])
@@ -189,7 +191,7 @@ class TubeInHand:
     def _fit_top(o, u, t, fit):
         """윗면 화소 (모델 윗면 원판 안쪽) 의 깊이로 윗면 높이 Y (광선과 평면 y = Y, 최소제곱)."""
         Y, n = HALF_LENGTH, 0
-        for _ in range(3):
+        for _ in range(6):
             with np.errstate(divide="ignore", invalid="ignore"):
                 pred = (Y - o[1]) / u[:, 1]
             hit = o + pred[:, None] * u
@@ -238,10 +240,15 @@ SEAT_MIN_SIDE = 300
 COARSE_REACH = 0.010            # 어림값에서 이만큼까지 원 중심을 찾는다
 # 옆면은 꽂힌 위 끝보다 SEAT_SIDE_UP 위까지, 윗면은 SEAT_REACH_UP 위까지 찾는다. 벽 위에 얹힌 튜브는 12~30 mm 위에
 # 서 있는데 윗면을 꽂힌 높이에서부터 찾아 위 끝을 24 mm 낮게 (+6~8 mm) 쟀다 -> 판정은 맞았지만 다시 집기가 튜브 아래를
-# 쥐었다. 이제 윗면을 옆면 점의 가장 높은 곳부터 찾는다. 옆면 범위를 3.5 cm 로 넓히면 준비 때 데모 튜브 위 손가락까지
-# 맞춤에 섞여 (잔차 4.5 mm) 데모 튜브를 못 쟀다 -> 옆면은 2 cm 그대로.
+# 쥐었다 (손 안 사진은 그만큼 솟은 위 끝이 깊이 최소 거리 0.30 m 안으로 들어가 못 고친다). 옆면 범위를 3.5 cm 로 넓히면
+# 준비 때 데모 튜브 위 손가락까지 맞춤에 섞여 (잔차 4.5 mm) 데모 튜브를 못 쟀다 -> 옆면은 2 cm 그대로, 윗면만 격자로 찾는다.
 SEAT_SIDE_UP = 0.02
 SEAT_REACH_UP = 0.035
+TOP_GRID_TOL = 0.003
+TOP_REFINE_TOL = 0.004
+SIDE_END_BAND = 0.0015
+SIDE_END_PCT = 99
+TOP_GRID_MIN = 20                # 격자는 높이만 고른다 (다듬은 뒤 MIN_TOP_POINTS 를 그대로 본다)
 
 
 def _tilted_cylinder_depth(o, u, axis_point, w):
@@ -292,6 +299,16 @@ class TubeInSeat:
                     if n > best_n:
                         best, best_n = c, n
         return best
+
+    @staticmethod
+    def _top_disc(o, u, t, axis_point, wv, H, tol):
+        """잰 깊이의 3D 점 중 높이 H 의 윗면 원판 위 (축 방향 tol 안, 축에서 CORE 안) 에 있는 화소.
+        평면과 광선이 만나는 점으로 고르면 꽂힌 높이 평면이 얹힌 튜브 몸통을 자를 때 옆면 화소까지 원판으로 세어, 얹힌 튜브를
+        꽂혔다고 판정했다 (조용한 실패). 잰 점으로 보면 옆면 점은 축에서 RADIUS 떨어져 빠진다."""
+        d = (o + t[:, None] * u) - (axis_point + H * wv)
+        along = d @ wv
+        radial = np.linalg.norm(d - np.outer(along, wv), axis=1)
+        return (t > 0) & (np.abs(along) < tol) & (radial < CORE)
 
     def measure(self, depth, guess, seat_z, wall_top):
         cam = self.camera.world_from_camera()
@@ -362,6 +379,36 @@ class TubeInSeat:
         if found:
             H, n_top = max(found)
             out.update(top_z=float(zc + H * wv[2]), top_points=n_top)
+        # 다시 집기용 (판정에는 안 쓴다): 꽂힌 높이 -5 mm ~ +SEAT_REACH_UP 를 1 mm 간격으로 보며 그 높이의 윗면 원판 위 잰 점
+        # (_top_disc) 이 가장 많은 높이 -> 평균으로 다듬는다 (top_grid_z). 위 top_z 는 얹힌 튜브의 옆면에 걸려 +6~8 mm 에서
+        # 멈출 수 있다. 이 격자 값을 top_z 로 쓰면 꽂힌 튜브의 위 끝이 0.4 mm 낮게 치우쳐 6 단계 오거부가 새 시드 200 중 3 생겼다.
+        H0 = seat_z + 2 * HALF_LENGTH - zc
+        best, best_n = None, TOP_GRID_MIN - 1
+        for h in np.arange(-0.005, SEAT_REACH_UP + 1e-9, 0.001):
+            n = int(np.count_nonzero(self._top_disc(o, u, t, axis_point, wv, H0 + h, TOP_GRID_TOL)))
+            if n > best_n:
+                best, best_n = H0 + h, n
+        if best is not None:
+            H = best
+            for _ in range(3):
+                sel = self._top_disc(o, u, t, axis_point, wv, H, TOP_REFINE_TOL)
+                if sel.sum() < MIN_TOP_POINTS:
+                    break
+                H = float(np.mean(((o + t[sel, None] * u[sel]) - axis_point) @ wv))
+            else:
+                out["top_grid_z"] = float(zc + H * wv[2])
+        # 옆면이 끝나는 높이: 축에서 RADIUS 근처 잰 점의 축 방향 위치 (상위 SIDE_END_PCT %). 벽 위에 높이 얹힌 튜브는 6 단계
+        # 자세에서 윗면 원판이 안 보이고 (깊이 번짐으로 옆면 점이 축 안쪽에 섞여 높이마다 원판 화소가 ~100 개로 고르다),
+        # 원판으로 잰 위 끝이 실제 +31 mm 보다 10 mm 낮았다 -> 기록만 한다 (side_end_z). 꽂힌 튜브에서 위 끝 대신 쓰면 준비 데모
+        # 튜브 높이가 최대 3.75 mm 틀렸다 (sd 1.5) — 꽂히지 않았다고 판정한 튜브를 다시 집을 때만 쓴다 (tube_judgment_v11).
+        P = o + t[:, None] * u
+        d = P - axis_point
+        along = d @ wv
+        radial = np.linalg.norm(d - np.outer(along, wv), axis=1)
+        cyl = (t > 0) & (np.abs(radial - RADIUS) < SIDE_END_BAND) & (along > wall_top - zc) & (along < H0 + SEAT_REACH_UP + 0.01)
+        if cyl.sum() >= SEAT_MIN_SIDE:
+            end = float(np.percentile(along[cyl], SIDE_END_PCT))
+            out["side_end_z"] = float(zc + end * wv[2])
         return out
 
 
