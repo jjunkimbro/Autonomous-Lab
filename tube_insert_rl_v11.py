@@ -204,12 +204,18 @@ def train(a):
     from stable_baselines3 import PPO
     run = RUN if a.run is None else RUN.parent / a.run
     run.mkdir(parents=True, exist_ok=True)
+    import torch
+    from stable_baselines3.common.callbacks import CheckpointCallback
+    if a.device.startswith("cuda"):
+        print(f"장치 {a.device}: {torch.cuda.get_device_name(0)}", flush=True)
     vec = make_vec(a.envs, a.seed, a.error)
-    model = PPO("MlpPolicy", vec, seed=a.seed, device="cpu", verbose=1, n_steps=256, batch_size=2048,
+    model = PPO("MlpPolicy", vec, seed=a.seed, device=a.device, verbose=1, n_steps=256, batch_size=2048,
                 gae_lambda=0.95, gamma=0.99, learning_rate=3e-4, ent_coef=0.005, n_epochs=10,
                 policy_kwargs=dict(net_arch=[256, 256]))
+    # 중간 저장: 학습이 끊겨도 마지막 저장본으로 평가 · 이어 학습할 수 있게
+    keep = CheckpointCallback(save_freq=max(200_000 // a.envs, 1), save_path=str(run / "checkpoints"), name_prefix="policy")
     t0 = time.time()
-    model.learn(total_timesteps=a.steps, progress_bar=False)
+    model.learn(total_timesteps=a.steps, progress_bar=False, callback=keep)
     model.save(str(run / "policy"))
     vec.close()
     print(f"정책 저장: {run / 'policy'}.zip  ({time.time() - t0:.0f}s)")
@@ -262,7 +268,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("mode", choices=("train", "eval"))
     ap.add_argument("--steps", type=int, default=2_000_000)
-    ap.add_argument("--envs", type=int, default=24)
+    ap.add_argument("--envs", type=int, default=28)
+    ap.add_argument("--device", default="cuda", help="PPO 신경망 장치 (cuda:0 = A5000). 시뮬레이션은 CPU 작업자")
     ap.add_argument("--seed", type=int, default=7100)
     ap.add_argument("--error", type=float, default=ERROR_MM)
     ap.add_argument("--episodes", type=int, default=300)

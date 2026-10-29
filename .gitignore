@@ -2,6 +2,8 @@
 #   rl_runs/ 는 학습된 정책과 평가 기록이라 저장소에 남긴다 (약 38 MB).
 #   _old 는 작업 중 만든 백업 사본이라 뺀다 (옛 지오메트리로 학습돼 못 쓴다).
 rl_runs/place_plate_v9_student_old/
+#   checkpoints 는 학습이 끊겼을 때 이어 하려는 중간 저장본이라 뺀다
+rl_runs/*/checkpoints/
 vision_workflow_frames_v8/
 d405_gripper_backup/
 scale_down_lab/
