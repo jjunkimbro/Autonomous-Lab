@@ -3,11 +3,14 @@
 # 튜브 이송 체인 — 판(judgment_chain_v11) 과 같은 6 단계 순서를 튜브에 맞춘다. 지금 들어 있는 것:
 #   2 단계  집고 출발 장비 밖 안전 자세로 빠진 뒤 손 안 1 장 (Fluent 는 장비 안에서 카메라가 몸체에 가린다)
 #   4 단계  도착 장비 안전 자세에서 손 안 1 장 -> 튜브 바닥이 자리 위에 오게 놓을 자리를 고친다
-#   (1 · 5 · 6 단계 장비 인지는 아직 '정답 + 잡음' (tube_env_v11 measure_sigma 0.1 mm) — 다음 작업)
+#   1 단계  집기 전 자리에 선 튜브 1 장 (tube_perception_v11.TubeInSeat) -> 잰 축으로 집기
+#   6 단계  꽂고 손을 뺀 자세(놓기 PRE) 에서 1 장 -> 위 끝 높이 · 기울기로 꽂힘 판정
+#   (5 단계 놓을 자리는 아직 '정답 + 잡음' (tube_env_v11 measure_sigma 0.1 mm) — 장비 비전 작업 중)
 #
 # 팔:
 #   A  공칭 경로 (손 안 보정 없음, 겨냥점 AIM_Z 만)
 #   V  4 단계 손 안 사진으로 앞뒤 · 높이 · 앞뒤 기울기를 고쳐 놓기
+#   W  V + 1 단계 비전 집기 + 6 단계 판정 (판정 실패면 사람 호출로 센다)
 #
 # 실행:  py tube_chain_v11.py --episodes 20
 # 결과:  tube_chain.json
@@ -24,7 +27,15 @@ import numpy as np
 BASE = Path(__file__).resolve().parent
 PAIRS = (("tube_hotel_1", "fluent_tube"), ("fluent_tube", "sorter_right_tube"), ("tube_hotel_2", "fluent_tube"),
          ("sorter_right_tube", "tube_hotel_1"))
-ARMS = ("A", "V")
+ARMS = ("A", "V", "W")
+# 6 단계 촬영 자세 (자리 위 자세에서 장비 좌표 앞뒤 · 좌우 · 위 [m]). 자리 위 높이 그대로면 Fluent 는 튜브 윗부분이 입구
+# 윗변에 가려 위 끝을 못 쟀다 (4 중 0) — 3 cm 낮추면 세 장비 모두 보이고 위 끝 오차 0.2 mm 안 (시드 4 개씩).
+LOOK_VIEW = (-0.08, 0.07, -0.03)
+SEATED_TOP_MM = 1.0             # 6 단계: 위 끝이 꽂힌 높이에서 이 안 (얹힘은 벽 높이만큼 위, 12~30 mm)
+# 꽂힘은 위 끝 높이로 가르고 (벽이 세우므로 바닥까지 들어가면 곧다), 기울기는 크게 기운 것만 본다: 꽂힌 튜브도 깊이 치우침
+# 때문에 겉보기 1.6~3.6° 로 잡혀 2° 문턱이면 80 중 44 를 오거부했다. 8° 로 두면 호텔에서 7.6° 기운 채 위 끝 높이만 맞은
+# 실패를 놓쳤다 (일부러 어긋나게 놓은 90 중 1) -> 5°.
+SEATED_TILT_DEG = 5.0
 TRAVERSE_SPEED = 0.3            # judgment_chain_v11 과 같다
 # 꽂기 겨냥점 (앞뒤, 손 안 기준 대비 튜브 바닥을 이만큼 뒤로). 정답 손 안 값으로 고친 뒤 일부러 어긋남을 넣어 잰
 # 꽂힘 범위가 세 장비 모두 -1.5 ~ +0.25 mm (+0.5 에서 0.8) 라 가운데를 겨눈다. 장비와 무관하게 같아서 장비 인지가 아니라
@@ -63,6 +74,51 @@ def plan_tube(env, offsets):
     return hover + shift, down + shift
 
 
+def seat_geometry(env, station):
+    """로봇이 아는 자리 높이 · 벽 윗면 높이 · 축 xy (장비 인지 env.measured 로 옮긴 공칭 치수)."""
+    import mujoco
+    it = env.interfaces[station]
+    g = mujoco.mj_name2id(env.model, mujoco.mjtObj.mjOBJ_GEOM, f"fixture_{station}_wall0")
+    base = {geom: pos for geom, pos, _ in env.perturber.base[station]}
+    wall = base[g][2] + env.model.geom_aabb[g][2] + env.model.geom_aabb[g][5] - it["seat_z"]
+    delta = env.measured
+    seat_z = float(it["seat_z"] + delta[2])
+    axis = np.array(it["object_axis_xy"][:2], dtype=float) + delta[:2]
+    return axis, seat_z, seat_z + float(wall)
+
+
+def look_and_pick(env, camera, station):
+    """1 단계: 자리에 선 튜브를 재고 그 축으로 집기 경로를 다시 짠다. (잰 값, 최대 접촉력)."""
+    import tube_perception_v11 as tp
+    from incubator_pick_v11 import replan_pick
+    axis, seat_z, wall_top = seat_geometry(env, station)
+    seen = tp.TubeInSeat(camera).observe(axis, seat_z, wall_top)
+    if "axis_xy" not in seen or "top_z" not in seen:
+        return seen, 0.0
+    centre = np.array([seen["axis_xy"][0], seen["axis_xy"][1], seen["top_z"] - 2 * tp.HALF_LENGTH])
+    return seen, replan_pick(env, centre, float(env.path_delta[3]))
+
+
+def retreat_and_look(env, camera):
+    """6 단계: 손을 벌린 채 놓기 RELEASE_CLEAR 로 빼고 자리 위 높이로 올라, 자리 옆 자세(LOOK_VIEW) 에서 자리에 선 튜브를
+    잰다. (판정, 잰 값, 최대 접촉력). 장비 밖 PRE 자세에서는 Fluent 튜브 윗면이 너무 비스듬히 보여 위 끝을 절반은 못 쟀다."""
+    import judgment_actions_v11 as ja
+    import tube_perception_v11 as tp
+    pts, delta = env.station["points"], env.path_delta
+    j1 = float(env.q_target[1])
+    clear = env._transform(pts["RELEASE_CLEAR"], delta)
+    hover = env._transform(pts["INSERT_HOVER"], delta)
+    force = ja.drive(env, clear, j1)
+    force = max(force, ja.drive(env, np.array([clear[0], clear[1], hover[2]]), j1))
+    f, l, up = LOOK_VIEW
+    force = max(force, ja.drive(env, hover + env.station["rotation"] @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1))
+    axis, seat_z, wall_top = seat_geometry(env, env.station_name)
+    seen = tp.TubeInSeat(camera).observe(axis, seat_z, wall_top)
+    ok = ("top_z" in seen and abs(seen["top_z"] - (seat_z + 2 * tp.HALF_LENGTH)) * 1000 <= SEATED_TOP_MM
+          and seen.get("tilt_deg", 99.0) <= SEATED_TILT_DEG)
+    return bool(ok), seen, force
+
+
 def place(env, offsets=None):
     """자리 위로 가서 (offsets 가 있으면 고친 자리로) 꽂는다. 마지막 info, 최대 접촉력."""
     import judgment_actions_v11 as ja
@@ -99,6 +155,9 @@ def run(job):
             camera.rng = np.random.default_rng([int(seed), 12])
             env.reset(seed=int(seed), options={"station": source, "target": target})
             row = dict(arm=arm, seed=int(seed), source=source, target=target, stage="pick")
+            if arm == "W":
+                seen1, f1 = look_and_pick(env, camera, source)
+                row["stage1"] = {k: seen1.get(k) for k in ("axis_xy", "top_z", "tilt_deg", "side_points")}
             done = False
             while not done:
                 _, _, term, trunc, info = env.step(np.zeros(5))
@@ -108,13 +167,13 @@ def run(job):
                 rows.append(dict(row, seated=False, force=force))
                 continue
             force = max(force, env.withdraw())
-            if arm == "V":
+            if arm in ("V", "W"):
                 seen2 = perception.observe()
                 row["stage2"] = dict({k: seen2.get(k) for k in KEYS}, truth=tp.truth_in_hand(env))
             box = {}
 
             def photo():
-                if arm == "V":
+                if arm in ("V", "W"):
                     box["seen"] = perception.observe()
                     box["truth"] = tp.truth_in_hand(env)
 
@@ -124,16 +183,21 @@ def run(job):
                 rows.append(dict(row, stage="carry", seated=False, force=force))
                 continue
             offsets = np.zeros(3)
-            if arm == "V":
+            if arm in ("V", "W"):
                 row["stage4"] = dict({k: box["seen"].get(k) for k in KEYS}, truth=box["truth"])
                 seen_offsets = hold_offsets(box["seen"])
                 if seen_offsets is not None:
                     offsets = seen_offsets
             info, f = place(env, offsets)
             err = env._plate_vs_holder()
-            rows.append(dict(row, stage="place", seated=bool(env._seated()), force=max(force, f),
-                             z_mm=float(err[2] * 1000), lateral_mm=float(np.hypot(err[0], err[1]) * 1000),
-                             tilt_deg=float(env._tilt())))
+            seated = bool(env._seated())
+            row.update(stage="place", seated=seated, force=max(force, f), z_mm=float(err[2] * 1000),
+                       lateral_mm=float(np.hypot(err[0], err[1]) * 1000), tilt_deg=float(env._tilt()))
+            if arm == "W":
+                verdict, seen6, f6 = retreat_and_look(env, camera)
+                row.update(verdict6=verdict, force=max(row["force"], f6), seated_after=bool(env._seated()),
+                           stage6={k: seen6.get(k) for k in ("axis_xy", "top_z", "tilt_deg", "side_points")})
+            rows.append(row)
     env.close()
     return rows
 
@@ -159,7 +223,11 @@ def main():
         for s, t in PAIRS:
             p = [r for r in rs if r["source"] == s and r["target"] == t]
             print(f"   {s:<18} -> {t:<18} {np.mean([r['seated'] for r in p]):.2f}")
-        if arm == "V":
+        if arm == "W":
+            v = [(r["verdict6"], r["seated_after"]) for r in rs if "verdict6" in r]
+            print(f"   6 단계 판정 vs 실제: 맞음 {np.mean([a == b for a, b in v]):.3f}  오거부 {sum(b and not a for a, b in v)}"
+                  f"  놓침 {sum(a and not b for a, b in v)}  (n {len(v)})")
+        if arm in ("V", "W"):
             for st in ("stage2", "stage4"):
                 e = np.array([[r[st][k] - r[st]["truth"][k] for k in ("z_mm", "height_mm", "pitch_deg")]
                               for r in rs if st in r and r[st]["z_mm"] is not None and r[st]["height_mm"] is not None])

@@ -228,3 +228,124 @@ def truth_in_hand(env):
     return dict(x_mm=float(c[0] * 1000), height_mm=float(c[1] * 1000), z_mm=float(c[2] * 1000),
                 roll_deg=float(math.degrees(math.atan2(axis[0], axis[1]))),
                 pitch_deg=float(math.degrees(math.atan2(axis[2], axis[1]))))
+
+
+# ----------------------------------------------------------------------
+# 자리에 선 튜브 (1 단계 집기 전 · 6 단계 꽂은 뒤): 월드 좌표의 원통 (축 위치 · 기울기 · 위 끝 높이).
+# 손 안과 같은 '광선 위 깊이 잔차' 로 맞춘다. 원통 축은 A = (x0, y0, 자리 바닥) 에서 방향 (a, b, 1).
+SEAT_SIDE_MARGIN = 0.003        # 옆면 화소: 벽 윗면보다 이만큼 위 · 튜브 위 끝보다 이만큼 아래
+SEAT_MIN_SIDE = 300
+COARSE_REACH = 0.010            # 어림값에서 이만큼까지 원 중심을 찾는다
+
+
+def _tilted_cylinder_depth(o, u, axis_point, w):
+    """광선 o + t u 가 축 (axis_point, 단위 방향 w) · 반지름 RADIUS 원통의 카메라 쪽 겉면과 만나는 t (없으면 nan)."""
+    d = u - np.outer(u @ w, w)
+    e = (o - axis_point) - ((o - axis_point) @ w) * w
+    A = np.einsum("ij,ij->i", d, d)
+    B = d @ e
+    C = e @ e - RADIUS ** 2
+    with np.errstate(invalid="ignore"):
+        return (-B - np.sqrt(B ** 2 - A * C)) / A
+
+
+class TubeInSeat:
+    """자리에 꽂혀 (또는 얹혀) 있는 튜브를 한 장으로 잰다.
+
+    observe(guess, seat_z, wall_top) — guess: 축 xy 어림 (장비 인지), seat_z: 자리 바닥 높이, wall_top: 벽 윗면 높이.
+    돌려주는 것: axis_xy (보이는 구간 가운데 높이 axis_z 에서의 축), tilt_deg, top_z (위 끝 높이), side_points, residual_mm.
+    축 기준점을 벽에 가린 자리 바닥에 두면 기울기 오차(깊이 치우침이 만드는 겉보기 2~3°) 가 그대로 위치로 외삽돼
+    시선 방향으로 1~3 mm 틀렸다 -> 보이는 구간 가운데에 둔다 (자리에 선 튜브는 벽이 세워 실제 기울기가 거의 0).
+    """
+
+    def __init__(self, camera):
+        self.camera = camera
+        self.inv_k = np.linalg.inv(camera.K)
+
+    def observe(self, guess, seat_z, wall_top):
+        _, depth = self.camera.capture(noise=True)
+        return self.measure(depth, guess, seat_z, wall_top)
+
+    @staticmethod
+    def _coarse(o, u, t, guess, z_lo, z_hi):
+        """어림값이 반지름보다 크게 틀려도 (장비가 수 mm 밀림) 맞춤이 튜브를 놓치지 않게, 높이 띠 안의 깊이 점을 평면에 내려
+        반지름 RADIUS 원의 중심을 격자로 찾는다 (보이는 반원 위 점이 가장 많이 걸리는 자리)."""
+        pts = o + t[:, None] * u
+        band = pts[(pts[:, 2] > z_lo) & (pts[:, 2] < z_hi)][:, :2]
+        near = band[np.linalg.norm(band - guess, axis=1) < COARSE_REACH + RADIUS + 0.002]
+        if len(near) < SEAT_MIN_SIDE:
+            return np.asarray(guess, dtype=float)
+        best, best_n = np.asarray(guess, dtype=float), -1
+        for step, reach in ((0.001, COARSE_REACH), (0.0002, 0.0015)):
+            grid = np.arange(-reach, reach + 1e-9, step)
+            centre = best.copy()
+            for dx in grid:
+                for dy in grid:
+                    c = centre + np.array([dx, dy])
+                    n = int(np.count_nonzero(np.abs(np.linalg.norm(near - c, axis=1) - RADIUS) < 0.001))
+                    if n > best_n:
+                        best, best_n = c, n
+        return best
+
+    def measure(self, depth, guess, seat_z, wall_top):
+        cam = self.camera.world_from_camera()
+        corners = np.array([[guess[0] + dx, guess[1] + dy, z] for dx in (-0.02, 0.02) for dy in (-0.02, 0.02)
+                            for z in (seat_z, seat_z + 2 * HALF_LENGTH + 0.03)])
+        uv_c, _ = self.camera.project(corners)
+        h, w_ = depth.shape
+        u0, v0 = np.clip(np.floor(uv_c.min(axis=0)).astype(int), 0, [w_ - 1, h - 1])
+        u1, v1 = np.clip(np.ceil(uv_c.max(axis=0)).astype(int), 0, [w_ - 1, h - 1])
+        vs, us = np.mgrid[v0:v1 + 1, u0:u1 + 1]
+        t = depth[vs, us].ravel()
+        ok = t > 0
+        uv = np.column_stack((us.ravel()[ok], vs.ravel()[ok])).astype(float)
+        t = t[ok]
+        u = (np.column_stack((uv, np.ones(len(uv)))) @ self.inv_k.T) @ cam[:3, :3].T
+        o = cam[:3, 3]
+        zc = 0.5 * (wall_top + seat_z + 2 * HALF_LENGTH)
+        guess = self._coarse(o, u, t, guess, wall_top + SEAT_SIDE_MARGIN, seat_z + 2 * HALF_LENGTH - SEAT_SIDE_MARGIN)
+        p = np.array([guess[0], guess[1], 0.0, 0.0])           # x0, y0, a, b (축 기준점 높이 zc)
+        out = dict(side_points=0)
+        eps = 1e-5
+
+        def depth_of(q, rays):
+            wv = np.array([q[2], q[3], 1.0])
+            wv /= np.linalg.norm(wv)
+            return _tilted_cylinder_depth(o, rays, np.array([q[0], q[1], zc]), wv), wv
+
+        for _ in range(8):
+            pred, wv = depth_of(p, u)
+            hit_z = o[2] + pred * u[:, 2]
+            use = (np.isfinite(pred) & (hit_z > wall_top + SEAT_SIDE_MARGIN)
+                   & (hit_z < seat_z + 2 * HALF_LENGTH * wv[2] + 0.02) & (np.abs(t - pred) < _window(pred)))
+            if use.sum() < SEAT_MIN_SIDE:
+                out["side_points"] = int(use.sum())
+                return out
+            uu, pu = u[use], pred[use]
+            J = np.column_stack([(depth_of(p + eps * np.eye(4)[k], uu)[0] - pu) / eps for k in range(4)])
+            ok_j = np.all(np.isfinite(J), axis=1)
+            step = np.linalg.lstsq(J[ok_j], (t[use] - pu)[ok_j], rcond=None)[0]
+            p += step
+            if np.abs(step[:2]).max() < 1e-7:
+                break
+        pred, wv = depth_of(p, u)
+        r = (t - pred)[use]
+        out.update(axis_xy=[float(p[0]), float(p[1])], axis_z=float(zc), tilt_deg=float(math.degrees(math.acos(wv[2]))),
+                   tilt_dir=[float(wv[0]), float(wv[1])], side_points=int(use.sum()),
+                   residual_mm=float(np.nanstd(r) * 1000))
+        # 위 끝: 축에 수직인 윗면 원판 (축 둘레 CORE 안) 화소의 깊이로
+        axis_point = np.array([p[0], p[1], zc])
+        H = seat_z + 2 * HALF_LENGTH - zc
+        for _ in range(3):
+            centre = axis_point + H * wv
+            with np.errstate(divide="ignore", invalid="ignore"):
+                tp_ = ((centre - o) @ wv) / (u @ wv)
+            hit = o + tp_[:, None] * u
+            radial = np.linalg.norm((hit - centre) - np.outer((hit - centre) @ wv, wv), axis=1)
+            sel = (tp_ > 0) & (radial < CORE) & (np.abs(t - tp_) < _window(tp_))
+            if sel.sum() < MIN_TOP_POINTS:
+                break
+            H = float(np.mean(((o + t[sel, None] * u[sel]) - axis_point) @ wv))
+        else:
+            out.update(top_z=float(zc + H * wv[2]), top_points=int(sel.sum()))
+        return out
