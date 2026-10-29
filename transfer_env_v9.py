@@ -46,6 +46,9 @@ class TransferEnv(pk.PickPlateEnv):
     # 움직인다 (레일은 팔이 멈춘 뒤에만 — 라는 의도와 다르다). 판은 손 아래로 거의 안 내려와 걸리지 않았지만,
     # 손 아래 75 mm 로 늘어진 튜브는 지나가는 장비에 걸렸다. 판 결과를 바꾸지 않으려고 판은 아직 False.
     TRAVERSE_FROM_SOURCE = False
+    # 안전 자세를 오갈 때 수평 먼저 / 수직 먼저로 끊을지. 안전 자세가 장비 입구보다 높으면 (튜브: 10 cm 올린 운반 높이)
+    # 관절 직선이 입구 윗변을 지나간다 -> 빠질 때는 수평으로 나온 뒤 올라가고, 들어갈 때는 내려온 뒤 수평으로 들어간다.
+    LEVEL_SAFE_LEGS = False
 
     # ------------------------------------------------------------------
     def _prepare_stations(self):
@@ -172,11 +175,33 @@ class TransferEnv(pk.PickPlateEnv):
             force = max(force, self._contact_force())
         return force
 
-    def traverse(self, q_goal):
+    def _level_point(self, q_level, safe):
+        """안전 자세의 xy, q_level 자세의 높이 (LEVEL_SAFE_LEGS 의 중간 자세)."""
+        z = float(self._fk(q_level)[0][2])
+        return self._ik(q_level.copy(), np.array([safe[0], safe[1], z]))
+
+    def withdraw(self):
+        """집은 자리에서 출발 장비의 안전 자세로 빠진다 (traverse 의 첫 구간만). 최대 접촉력.
+
+        장비 안에서는 카메라가 장비 몸체에 가리는 자리(Fluent 튜브) 가 있어, 집은 직후 손 안 사진을 여기서 찍는다.
+        뒤이은 traverse 의 첫 구간은 길이 0 이 된다.
+        """
+        src = self.source_name if self.TRAVERSE_FROM_SOURCE and getattr(self, "source_name", None) else self.station_name
+        safe = self.pick_data[src]["points"]["PRE_LOADED"]
+        q_safe = self._ik(self.pick_data[src]["q_start"].copy(), safe)
+        q, force = self.q_target.copy(), 0.0
+        if self.LEVEL_SAFE_LEGS:
+            out = self._level_point(q, safe)
+            force = max(force, self._move(q, out)[1], self._settle())
+            q = out
+        return max(force, self._move(q, q_safe)[1], self._settle())
+
+    def traverse(self, q_goal, on_safe=None):
         """집은 자리에서 q_goal (= 보정된 놓기 접근 자세) 까지 규칙 기반으로 끌고 간다.
 
         그리퍼는 계속 쥐고 있고 plate 는 마찰로만 붙어 있으므로, 이 구간의 미끄러짐은
         가정이 아니라 물리로 실제 발생한다.
+        on_safe  도착지 안전 자세에서 부를 함수 (4 단계 손 안 사진).
         """
         _, _, before = self._grip_vector()
         before_yaw = self._grip_vector()[0][3]
@@ -206,11 +231,21 @@ class TransferEnv(pk.PickPlateEnv):
             safe_to = self._ik(target_station["q_start"].copy(),
                                target_station["points"]["PRE_LOADED"])
 
+            if self.LEVEL_SAFE_LEGS:
+                out = self._level_point(q_from, self.pick_data[src]["points"]["PRE_LOADED"])
+                leg(q_from, out)
+                q_from = out
             leg(q_from, safe_from)                       # 1) 출발지에서 안전 자세로 (팔)
             rail_only = safe_from.copy()
             rail_only[0] = safe_to[0]
             leg(safe_from, rail_only)                    # 2) 레일만 이동, 팔 고정
             leg(rail_only, safe_to)                      # 3) 도착지 안전 자세로 (팔)
+            if on_safe is not None:
+                on_safe()                                # 도착지 안전 자세에서 (4 단계 손 안 사진)
+            if self.LEVEL_SAFE_LEGS:
+                low = self._level_point(q_goal, target_station["points"]["PRE_LOADED"])
+                leg(safe_to, low)
+                safe_to = low
             leg(safe_to, q_goal)                         # 4) 접근 자세로 (팔)
         else:
             leg(q_from, q_goal)

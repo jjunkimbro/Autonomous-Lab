@@ -46,6 +46,14 @@ CARRY_LIFT = float(_os.environ.get("TUBE_CARRY_LIFT", "0.10"))
 # 자리 위 높이 · 빼 올리는 높이의 최소 (쥔 높이 대비). 호텔은 장면 정의가 21 mm 라 벽(19 mm) 과 여유가 2 mm 뿐이어서,
 # 손 안에서 1.7 mm 미끄러져 내려온 튜브가 수평으로 들어가다 벽 위에 걸려 넘어졌다. Fluent · 분류기는 45 mm.
 MIN_HOVER = 0.045
+# 단, 자리 위에 장비 몸체가 덮여 있으면 (분류기: 쥔 높이 위 43 mm 에 몸체 아랫면) 손가락 윗면(TCP + 5 mm) 이 그 아래
+# 이만큼은 떨어지게 낮춘다. 분류기 벽 윗면은 자리 바닥 위 29.8 mm 라 35 mm 로 들어 올리면 튜브 바닥이 벽 위 5 mm.
+FINGER_TOP = 0.005
+CEILING_CLEAR = 0.003
+# 안전 자세(PRE_LOADED) 는 판이 다니는 통로 위로 물린다 (다가가는 반대 방향으로, 판 안전 자세의 y 까지: 앞줄
+# fluent_plate 0.537, 뒷줄 sorter_left_plate 1.588). 장면 정의대로면 호텔은 자리에서 5 cm, Fluent 튜브는 23 cm 라,
+# 호텔 안전 자세로 레일을 움직이면 손이 Fluent 몸체(충돌 없는 보이는 모델) 를 지나갔다.
+CORRIDOR_Y = (0.537, 1.588)
 SEATED_TILT_DEG = 2.0
 
 # 장비 묶음 (장비를 밀면 같이 움직이는 geom). 튜브 자리 마커(tube_hole_marker_xx) 는 가장 가까운 장비로.
@@ -67,13 +75,23 @@ DEVICE_GEOMS = {
 }
 
 
-def adapt_tube_interface(interface):
-    """튜브 자리 정의를 판 환경이 쓰는 이름 · 원점으로 바꾼 사본."""
+def adapt_tube_interface(interface, max_lift=np.inf):
+    """튜브 자리 정의를 판 환경이 쓰는 이름 · 원점으로 바꾼 사본. max_lift  쥔 높이 위로 올릴 수 있는 최대 [m]."""
     it = copy.deepcopy(interface)
     pick = {p["name"]: np.array(p["position"], dtype=float) for p in interface["pick"]}
     place = {p["name"]: np.array(p["position"], dtype=float) for p in interface["place"]}
-    lift_z = max(pick["EXTRACT_UP"][2], pick["GRASP"][2] + MIN_HOVER)
-    hover_z = max(place["INSERT_HOVER"][2], place["SET_DOWN"][2] + MIN_HOVER)
+    axis = np.array(interface["object_axis_xy"][:2], dtype=float)
+
+    def retreat(p):
+        back = p[:2] - axis
+        dist = float(np.linalg.norm(back))
+        unit = back / dist
+        line = CORRIDOR_Y[0] if unit[1] > 0 else CORRIDOR_Y[1]
+        xy = axis + unit * max(dist, (line - axis[1]) / unit[1])
+        return np.array([xy[0], xy[1], p[2]])
+    pick["PRE_HOVER"], place["PRE_HOVER"] = retreat(pick["PRE_HOVER"]), retreat(place["PRE_HOVER"])
+    lift_z = pick["GRASP"][2] + min(max(pick["EXTRACT_UP"][2] - pick["GRASP"][2], MIN_HOVER), max_lift)
+    hover_z = place["SET_DOWN"][2] + min(max(place["INSERT_HOVER"][2] - place["SET_DOWN"][2], MIN_HOVER), max_lift)
     pick["EXTRACT_UP"] = np.array([pick["EXTRACT_UP"][0], pick["EXTRACT_UP"][1], lift_z])
     pick["PRE_HOVER"] = np.array([pick["PRE_HOVER"][0], pick["PRE_HOVER"][1], max(pick["PRE_HOVER"][2], lift_z)])
     place["INSERT_HOVER"] = np.array([place["INSERT_HOVER"][0], place["INSERT_HOVER"][1], hover_z])
@@ -87,7 +105,6 @@ def adapt_tube_interface(interface):
     it["place"] = as_list([("PRE_LOADED", place["PRE_HOVER"] + carry), ("APPROACH_LIFTED", approach_lifted),
                            ("INSERT_HOVER", place["INSERT_HOVER"]), ("SET_DOWN", place["SET_DOWN"]),
                            ("RELEASE_CLEAR", place["RELEASE_CLEAR"]), ("PRE", place["PRE"])])
-    axis = interface["object_axis_xy"]
     it["object_center"] = [float(axis[0]), float(axis[1]), float(interface["seat_z"])]
     it["support_z"] = float(interface["seat_z"])
     return it
@@ -135,6 +152,7 @@ class TubeTransferEnv(tr.TransferEnv):
     # 다 안 닫힌 채 손이 올라가 튜브가 손 안에서 6 mm 미끄러졌다.
     GRIP_WIDE = 0.012
     TRAVERSE_FROM_SOURCE = True       # 출발 장비의 안전 자세로 먼저 빠진다 (transfer_env_v9 주석)
+    LEVEL_SAFE_LEGS = True            # 높인 안전 자세와 장비 입구 사이는 수평 · 수직으로 끊는다 (transfer_env_v9 주석)
     # 집기: 다가가기가 끝나고 0.2 s 뒤 쥔다. 튜브는 45 mm 들어 올려(판 9 mm) 4 s 안에 못 끝났다.
     PICK_TIME = 5.0
 
@@ -152,10 +170,32 @@ class TubeTransferEnv(tr.TransferEnv):
         # 위로 민 Fluent · 분류기 튜브 자리를 충돌 검사가 건너뛰어 튜브가 자리를 파고들었다 튕겼다 (평균 8~10 mm 위,
         # 출렁임 5~6 mm). 중간 단계 검사를 끄면 세 자리 모두 0.0 mm. 판 받침은 위아래로 밀어도 영향이 없었다.
         self.model.opt.disableflags |= mujoco.mjtDisableBit.mjDSBL_MIDPHASE
+        mujoco.mj_forward(self.model, self.data)
         for name in s9.TUBE_STATIONS:
-            self.interfaces[name] = adapt_tube_interface(self.interfaces[name])
+            self.interfaces[name] = adapt_tube_interface(self.interfaces[name], self._max_lift(self.interfaces[name]))
         self.perturber = TubePerturber(self.model, self.interfaces)
         super()._prepare_stations()
+
+    def _max_lift(self, interface):
+        """자리 위 (튜브 축 · 다가가는 쪽 12 mm) 를 덮는 장비 몸체 아래까지, 쥔 높이 위로 올릴 수 있는 최대 [m]."""
+        axis = np.array(interface["object_axis_xy"][:2], dtype=float)
+        pts = {p["name"]: np.array(p["position"], dtype=float) for p in interface["pick"]}
+        back = pts["PRE"][:2] - axis
+        back /= np.linalg.norm(back)
+        robot = {mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_BODY, n) for n in (self.WORK_BODY,) + self.OTHER_WORKPIECES}
+        lift = np.inf
+        geom = np.array([-1], dtype=np.int32)
+        for offset in (0.0, 0.012):
+            origin = np.array([*(axis + back * offset), pts["GRASP"][2]])
+            while True:
+                dist = mujoco.mj_ray(self.model, self.data, origin, np.array([0.0, 0.0, 1.0]), None, 1, -1, geom)
+                if dist < 0 or dist > 0.3:
+                    break
+                if self.model.geom_bodyid[geom[0]] not in robot:
+                    lift = min(lift, float(origin[2] + dist - pts["GRASP"][2]) - FINGER_TOP - CEILING_CLEAR)
+                    break
+                origin = origin + np.array([0.0, 0.0, dist + 1e-4])
+        return lift
 
     def _plate_vs_holder(self):
         """튜브 중심이 (밀린) 자리 대비 (앞뒤, 좌우, 바닥 높이) [m] — 축 대칭이라 yaw 는 0."""

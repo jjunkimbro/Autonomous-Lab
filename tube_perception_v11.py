@@ -1,0 +1,230 @@
+# tube_perception_v11.py
+#
+# 손 안 튜브 인지 (2 단계 집은 직후 · 4 단계 놓기 전 손 안 1 장). inhand_perception_v11 의 튜브판.
+#
+# 입력 (실물에서도 얻는 것만): 플랜지 D415 깊이 1 장, TCP 자세 (기구학), RG2 손가락 폭 (관절값), 튜브 · RG2 치수.
+# 출력 (TCP 좌표, 손 안 기준 env.HOLD_CENTER 대비):
+#   height_mm  위아래 (+ = 튜브가 손 안에서 위로)
+#   z_mm       다가가는 방향 (+ = 손가락 끝 쪽).  꽂기 실패의 거의 전부가 이 축 (+0.7 mm 부터 호텔 벽에 걸린다)
+#   pitch_deg  다가가는 방향으로 기운 각
+#   x_mm · roll_deg 는 0 으로 둔다 (두 손가락이 튜브를 가운데로 모아 정답 표준편차 0.14 mm · 0.28°)
+#   verdict    OK / NG / UNSURE 와 이유
+#
+# 방법:
+#   카메라는 손가락 사이 대칭면 위, TCP 뒤 26.5 cm · 위 17.5 cm 에서 30° 숙여 본다. 튜브의 뒷면(카메라 쪽 반원) 과
+#   윗면이 보인다. 다가가는 방향은 카메라 시선과 거의 같아서 깊이로만 잴 수 있다 (영상 위치로는 위아래와 섞인다).
+#   1. 깊이 치우침 빼기: D415 깊이에는 영상 전체에 걸친 저주파 치우침(최대 4 mm) 이 있다. 손가락 끝(RG2 상자) 윗면은
+#      기구학 + 치수로 어디 있는지 알므로, 그 화소의 '보일 깊이' 와 잰 깊이 차를 평면(u, v) 으로 맞춰 뺀다.
+#   2. 옆면: 화소마다 '잰 깊이 - 반지름 6 mm 원통이 예측한 깊이' 를 최소제곱으로 줄여 축의 앞뒤 · 앞뒤 기울기.
+#   3. 윗면: 모델 윗면 원판 안쪽 화소의 깊이로 윗면 높이.
+#   추정은 모두 '광선 위 깊이 잔차' 로 한다 (잡음이 깊이에만 실린다). 처음엔 깊이로 만든 3 차원 점에 원통을 맞추고
+#   점을 좌표로 골랐는데, 모의 D415 깊이의 모서리 번짐이 잡음 · 결손 화소 때문에 튜브 겉면 전체에 ±2 mm (두 갈래) ·
+#   ±9 mm (꼬리) 로 걸려, 좌표로 고르면 한쪽이 잘리고 중앙값은 두 갈래 사이 아무 데나 떨어져 앞뒤를 5 mm 틀렸다.
+#   그래서 쓸 화소는 모델로 고르고 (잰 값과 무관), 넓은 창 안에서 평균(최소제곱) 을 쓴다.
+#
+# 사용:
+#   perception = TubeInHand(env, camera)
+#   seen = perception.observe()
+
+import math
+
+import mujoco
+import numpy as np
+
+RADIUS = 0.006
+HALF_LENGTH = 0.0375
+GRIP_SLACK = 0.002              # 손가락이 튜브 폭보다 이만큼 더 닫혔으면 헛집음
+MIN_SIDE_POINTS = 400
+MIN_TOP_POINTS = 60
+MIN_FINGER_POINTS = 200
+SIDE_X = 0.0045                 # 옆면 화소: 모델 원통과 만나는 자리가 대칭면에서 이 안쪽 (손가락 쪽 가장자리를 피한다)
+SIDE_END = 0.004                # 옆면 화소: 튜브 양 끝에서 이만큼 안쪽
+CORE = RADIUS - 0.0015          # 윗면 화소: 모델 윗면과 만나는 자리가 축에서 이 안쪽
+FINGER_EDGE = 0.001             # 손가락 윗면 화소: 면 가장자리에서 이만큼 안쪽
+FINGER_Z = (-0.09, -0.012)      # 손가락 윗면 화소: TCP z 범위 (앞쪽 끝은 튜브 윗부분이 가린다)
+MIN_FINGER_SPAN_PX = 60         # 손가락 화소의 v 폭이 이보다 좁으면 치우침을 상수로만 맞춘다
+WINDOW = 0.012                  # 잰 깊이 - 모델 깊이 가 이 밖이면 다른 물체 (모의 깊이 번짐 꼬리 ±9 mm 까지 넣는다)
+import os as _os
+FINGER_BIAS = _os.environ.get("TUBE_FINGER_BIAS", "1") == "1"
+# D415 는 30 cm 보다 가까우면 깊이를 못 낸다. 손가락 끝 윗면은 대부분 그보다 가깝고, 30 cm 언저리 화소는 잡음이 가까운
+# 쪽으로 간 것만 지워져 (먼 쪽만 남아) 치우침을 크게 잰다 -> 보일 깊이가 이보다 먼 화소만 쓴다.
+MIN_RANGE = 0.30
+FINGER_MIN_DEPTH = MIN_RANGE + WINDOW
+# 판정 문턱 (z: 호텔 벽에 걸리기 시작하는 +0.67 mm 보다 안쪽, 기울기: 자리 틈 0.5 mm / 튜브 반 길이)
+Z_LIMIT_MM = 0.5
+TILT_LIMIT_DEG = 0.5
+# 앞뒤는 튜브 위쪽 (축 중심에서 TOP_Y 위) 에서 잰 값을 쓴다 (z_top_mm). 튜브 위 끝은 영상 중심 가까이 찍혀 깊이 오차가
+# 가장 작다 — 모의 D415 의 저주파 치우침은 영상 중심에서 0 이고 위아래로 기울어, 중심 · 바닥 쪽은 그만큼 틀어지고
+# 겉보기 앞뒤 기울기(실제는 0) 까지 만들었다 (40 시드: 겉보기 기울기 ±1° 와 중심 앞뒤 오차 ∓1.2 mm 가 같이 나왔다).
+TOP_Y = HALF_LENGTH - 0.008
+RESIDUAL_LIMIT_MM = 4.0         # 옆면 깊이 잔차 표준편차가 이보다 크면 불확실 (모의 깊이 번짐까지 정상 2~3 mm)
+
+
+def _window(pred):
+    """화소마다 대칭인 창 반폭. 30 cm 보다 가까운 깊이는 카메라가 지우므로 (가까운 쪽 잡음만 잘린다), 창을 그만큼 좁혀
+    양쪽을 똑같이 자른다 (튜브 위 끝은 31 cm 언저리)."""
+    with np.errstate(invalid="ignore"):
+        return np.clip(np.minimum(WINDOW, pred - MIN_RANGE), 0.0, None)
+
+
+class TubeInHand:
+    def __init__(self, env, camera):
+        self.env, self.camera = env, camera
+        self.model, self.data = env.model, env.data
+        self.fingers = [mujoco.mj_name2id(self.model, mujoco.mjtObj.mjOBJ_GEOM, f"ur5e_rg2_fingertip_{s}_geom")
+                        for s in ("left", "right")]
+        self.inv_k = np.linalg.inv(camera.K)
+
+    # ------------------------------------------------------------------
+    def observe(self):
+        env, d = self.env, self.data
+        tcp = d.site_xpos[env.site].copy()
+        rot = d.site_xmat[env.site].reshape(3, 3).copy()
+        half_width = float(np.mean([d.qpos[a] for a in env.finger_qpos]))
+        out = dict(gripped=bool(half_width >= env.GRIP_CLOSE - GRIP_SLACK), finger_mm=half_width * 2000.0)
+        _, depth = self.camera.capture(noise=True)
+        uv, rays, values = self._roi(depth, tcp, rot)
+        cam = self.camera.world_from_camera()
+        # 광선 (손 안 기준 좌표: 원점 = 정위치 튜브 중심, 축 = TCP). 깊이 t 에서 점 = o + t u.
+        o = (cam[:3, 3] - tcp) @ rot - env.HOLD_CENTER
+        u = (rays @ cam[:3, :3].T) @ rot
+        bias, n_finger = self._depth_bias(uv, rays, values, tcp, rot)
+        out["finger_points"], out["depth_bias_mm"] = n_finger, float(np.median(bias(uv)) * 1000)
+        t = values - bias(uv)
+        fit = self._fit_side(o, u, t)
+        out.update(side_points=fit["n"], residual_mm=fit["residual_mm"])
+        out["in_hand"] = bool(out["gripped"] and fit["n"] >= MIN_SIDE_POINTS)
+        if out["in_hand"]:
+            out.update(x_mm=0.0, z_mm=fit["z"] * 1000, roll_deg=0.0, pitch_deg=math.degrees(math.atan(fit["b"])),
+                       z_top_mm=(fit["z"] + fit["b"] * TOP_Y) * 1000)
+            top, n_top = self._fit_top(o, u, t, fit)
+            out["top_points"] = n_top
+            if top is not None:
+                out["height_mm"] = (top - HALF_LENGTH) * 1000
+        return self._verdict(out)
+
+    # ------------------------------------------------------------------
+    def _roi(self, depth, tcp, rot):
+        """튜브 · 손가락 끝 근처 화소의 (uv, 카메라 광선 (z = 1), 깊이)."""
+        corners = np.array([[x, y, z] for x in (-0.02, 0.02) for y in (-0.08, 0.02) for z in (FINGER_Z[0], 0.02)])
+        uv_c, _ = self.camera.project(tcp + corners @ rot.T)
+        h, w = depth.shape
+        u0, v0 = np.clip(np.floor(uv_c.min(axis=0)).astype(int), 0, [w - 1, h - 1])
+        u1, v1 = np.clip(np.ceil(uv_c.max(axis=0)).astype(int), 0, [w - 1, h - 1])
+        vs, us = np.mgrid[v0:v1 + 1, u0:u1 + 1]
+        values = depth[vs, us].ravel()
+        ok = values > 0
+        uv = np.column_stack((us.ravel()[ok], vs.ravel()[ok])).astype(float)
+        rays = (self.inv_k @ np.column_stack((uv, np.ones(len(uv)))).T).T
+        return uv, rays, values[ok]
+
+    def _depth_bias(self, uv, rays, values, tcp, rot):
+        """손가락 끝 윗면 화소의 (잰 깊이 - 보일 깊이) 를 평면 (u, v) 으로 맞춘다. 함수 bias(uv) 를 돌려준다."""
+        cam = self.camera.world_from_camera()
+        origin, dirs = cam[:3, 3], rays @ cam[:3, :3].T
+        rows = []
+        for g in self.fingers:
+            centre, mat, size = self.data.geom_xpos[g], self.data.geom_xmat[g].reshape(3, 3), self.model.geom_size[g]
+            o, dv = (origin - centre) @ mat, dirs @ mat                    # 상자 좌표
+            up_axis = mat.T @ rot[:, 1]                                     # TCP y (위) 를 상자 좌표로
+            up = int(np.argmax(np.abs(up_axis)))
+            with np.errstate(divide="ignore", invalid="ignore"):
+                t = (np.sign(up_axis[up]) * size[up] - o[up]) / dv[:, up]   # 윗면과 만나는 깊이
+            hit = o + t[:, None] * dv
+            others = [k for k in range(3) if k != up]
+            along = ((origin + t[:, None] * dirs - tcp) @ rot)[:, 2]
+            behind = (along > FINGER_Z[0]) & (along < FINGER_Z[1])
+            inside = (t > FINGER_MIN_DEPTH) & behind & np.all(np.abs(hit[:, others]) < size[others] - FINGER_EDGE, axis=1)
+            residual = values[inside] - t[inside]
+            near = np.abs(residual) < WINDOW
+            rows.append(np.column_stack((uv[inside][near], residual[near])))
+        rows = np.vstack(rows)
+        if len(rows) < MIN_FINGER_POINTS or not FINGER_BIAS:
+            return (lambda q: np.zeros(len(q))), int(len(rows))
+        # 치우침은 영상 전체에 걸친 평면이라 튜브 근처에서는 거의 v 로만 바뀐다 (손가락은 튜브 바로 옆 · 아래).
+        # u 기울기까지 풀면 손가락 화소의 u 폭(약 60 px) 이 좁아 튜브 자리로 외삽할 때 튀었다.
+        v = rows[:, 1] / 1000.0
+        if np.ptp(rows[:, 1]) < MIN_FINGER_SPAN_PX:
+            c = float(np.mean(rows[:, 2]))
+            return (lambda q: np.full(len(q), c)), int(len(rows))
+        coef = np.polyfit(v, rows[:, 2], 1)
+        return (lambda q: np.polyval(coef, q[:, 1] / 1000.0)), int(len(rows))
+
+    @staticmethod
+    def _cylinder_depth(o, u, z0, b):
+        """광선이 원통 (축 x = 0, z = z0 + b y, 반지름 RADIUS) 의 카메라 쪽 겉면과 만나는 깊이 (안 만나면 nan)."""
+        w = u[:, 2] - b * u[:, 1]
+        c = o[2] - b * o[1] - z0
+        A = u[:, 0] ** 2 + w ** 2
+        B = 2.0 * (o[0] * u[:, 0] + c * w)
+        C = o[0] ** 2 + c ** 2 - RADIUS ** 2
+        with np.errstate(invalid="ignore"):
+            return (-B - np.sqrt(B ** 2 - 4.0 * A * C)) / (2.0 * A)
+
+    def _fit_side(self, o, u, t):
+        """옆면 화소의 깊이로 축의 앞뒤 z0 · 앞뒤 기울기 b (Gauss-Newton)."""
+        p = np.zeros(2)
+        result = dict(n=0, z=np.nan, b=np.nan, residual_mm=np.nan)
+        eps = 1e-5
+        for _ in range(6):
+            pred = self._cylinder_depth(o, u, p[0], p[1])
+            hit = o + pred[:, None] * u
+            use = (np.isfinite(pred) & (np.abs(hit[:, 0]) < SIDE_X) & (np.abs(hit[:, 1]) < HALF_LENGTH - SIDE_END)
+                   & (np.abs(t - pred) < _window(pred)))
+            if use.sum() < MIN_SIDE_POINTS:
+                result["n"] = int(use.sum())
+                return result
+            ou, pu = u[use], pred[use]
+            J = np.column_stack([(self._cylinder_depth(o, ou, p[0] + eps, p[1]) - pu) / eps,
+                                 (self._cylinder_depth(o, ou, p[0], p[1] + eps) - pu) / eps])
+            step = np.linalg.lstsq(J, t[use] - pu, rcond=None)[0]
+            p += step
+            if np.abs(step).max() < 1e-7:
+                break
+        r = t[use] - self._cylinder_depth(o, u[use], p[0], p[1])
+        result.update(n=int(use.sum()), z=float(p[0]), b=float(p[1]), residual_mm=float(np.nanstd(r) * 1000))
+        return result
+
+    @staticmethod
+    def _fit_top(o, u, t, fit):
+        """윗면 화소 (모델 윗면 원판 안쪽) 의 깊이로 윗면 높이 Y (광선과 평면 y = Y, 최소제곱)."""
+        Y, n = HALF_LENGTH, 0
+        for _ in range(3):
+            with np.errstate(divide="ignore", invalid="ignore"):
+                pred = (Y - o[1]) / u[:, 1]
+            hit = o + pred[:, None] * u
+            axis_z = fit["z"] + fit["b"] * Y
+            use = (pred > 0) & (np.hypot(hit[:, 0], hit[:, 2] - axis_z) < CORE) & (np.abs(t - pred) < _window(pred))
+            n = int(use.sum())
+            if n < MIN_TOP_POINTS:
+                return None, n
+            Y = float(np.mean(o[1] + t[use] * u[use, 1]))          # 화소마다 y = o_y + t u_y 의 평균
+        return Y, n
+
+    # ------------------------------------------------------------------
+    @staticmethod
+    def _verdict(out):
+        if not out["gripped"]:
+            out.update(verdict="NG", reason="헛집음 (손가락이 튜브 폭보다 더 닫힘)")
+        elif not out["in_hand"]:
+            out.update(verdict="NG", reason="손 안 기준 자리에 튜브가 안 보임")
+        elif out["residual_mm"] > RESIDUAL_LIMIT_MM or "height_mm" not in out:
+            out.update(verdict="UNSURE", reason=f"원통 맞춤이 나쁨 (잔차 {out['residual_mm']:.2f} mm)")
+        elif abs(out["z_mm"]) > Z_LIMIT_MM:
+            out.update(verdict="NG", reason=f"앞뒤 {out['z_mm']:+.2f} mm")
+        elif abs(out["pitch_deg"]) > TILT_LIMIT_DEG:
+            out.update(verdict="NG", reason=f"앞뒤 기울기 {out['pitch_deg']:+.2f} deg")
+        else:
+            out.update(verdict="OK", reason="")
+        return out
+
+
+def truth_in_hand(env):
+    """시뮬레이터 정답: 손 안 튜브 (x, 높이, 앞뒤) mm, 기울기 (roll, pitch) deg — 채점용."""
+    d = env.data
+    tcp, rot = d.site_xpos[env.site], d.site_xmat[env.site].reshape(3, 3)
+    c = (d.xpos[env.plate_body] - tcp) @ rot - env.HOLD_CENTER
+    axis = rot.T @ d.xmat[env.plate_body].reshape(3, 3)[:, 2]
+    return dict(x_mm=float(c[0] * 1000), height_mm=float(c[1] * 1000), z_mm=float(c[2] * 1000),
+                roll_deg=float(math.degrees(math.atan2(axis[0], axis[1]))),
+                pitch_deg=float(math.degrees(math.atan2(axis[2], axis[1]))))
