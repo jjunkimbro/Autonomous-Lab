@@ -8,7 +8,9 @@
 #   5 단계  (팔 Y · X) 준비 때와 같은 관절값에서 빈 자리 1 장 -> 준비 대비 장비 이동 (tube_perception_v11.SeatShift)
 #   준비    (팔 Y · X, 도착 장비마다 한 번) 데모 튜브를 자리에 바로 꽂아 6 단계 자세에서 재어 놓을 자리,
 #           튜브를 빼고 5 단계 자세에서 빈 자리 1 장 + 그 관절값. 운영 때 장비는 준비 대비 밀려 있다 (판과 같은 폭).
-#   (팔 A · V · W 의 5 단계는 '정답 + 잡음' (tube_env_v11 measure_sigma 0.1 mm) 이다)
+#           출발 장비도 같은 준비를 쓴다: 팔 Y · X 는 1 단계 촬영 자세 · 어림 축 · 자리 높이 · 벽 높이를 준비 때 잰 자리에서만
+#           얻는다 (장비 방향 · 자리 안 튜브 치우침은 모른다 -> 0). 출발 · 도착 장비 모두 같은 시드면 같은 자세다.
+#   (팔 A · V · W 의 1 · 5 단계 장비 자세는 '정답 + 잡음' (tube_env_v11 measure_sigma 0.1 mm) 이다)
 #
 # 팔:
 #   A  공칭 경로 (손 안 보정 없음, 겨냥점 AIM_Z 만)
@@ -287,6 +289,7 @@ def run(job):
     insert_run = job[2] if len(job) > 2 else INSERT_RUN
     import transfer_env_v9 as tr
     import tube_env_v11 as te
+    import pick_plate_env_v9 as pk
     import tube_perception_v11 as tp
     import vision_perception_v8 as vp
     tr.TRAVERSE_JOINT_SPEED = TRAVERSE_SPEED
@@ -307,11 +310,34 @@ def run(job):
         for source, target in PAIRS:
             camera.appear.randomize(np.random.default_rng([int(seed), 11]))
             camera.rng = np.random.default_rng([int(seed), 12])
-            env.reset(seed=int(seed), options={"station": source, "target": target})
+            # 출발 장비도 준비 대비 밀려 있다 (같은 시드에서 도착 장비일 때와 같은 자세). 팔 Y · X 는 장비 자세를 준비 때 잰
+            # 자리로만 안다 (방향은 모른다 -> 0, 자리 안 튜브 치우침도 모른다 -> 0). 1 단계 어림 축 · 자리 높이 · 벽 높이와
+            # 촬영 자세가 모두 여기서 나온다.
+            src_delta = prep_truth(seed) + station_shift(seed, env.place_data[source]["rotation"])
+            rest = np.random.default_rng([int(seed), 24]).uniform(-pk.RESTING_ERROR, pk.RESTING_ERROR)
+            options = {"station": source, "target": target, "delta": src_delta, "rest": rest}
+            if arm in SEAT_VISION_ARMS:
+                if source not in preps:
+                    preps[source] = prepare_seat(prep_env, prep_cam, seed, source)
+                if preps[source]["ok"]:
+                    options.update(measure_noise=seat_delta(env, source, preps[source]["seat"]) - src_delta, rest_noise=-rest,
+                                   perception_failed=False)
+            env.reset(seed=int(seed), options=options)
             row = dict(arm=arm, seed=int(seed), source=source, target=target, stage="pick")
+            if arm in SEAT_VISION_ARMS and not preps[source]["ok"]:
+                rows.append(dict(row, stage="prep", seated=False, force=0.0))
+                continue
+            if arm in SEAT_VISION_ARMS:
+                assert np.allclose(env.path_delta, seat_delta(env, source, preps[source]["seat"]))
             if arm in ("W", "Y", "X"):
+                tube = env.data.xipos[env.plate_body].copy()
                 seen1, f1 = look_and_pick(env, camera, source)
                 row["stage1"] = {k: seen1.get(k) for k in ("axis_xy", "top_z", "tilt_deg", "side_points")}
+                if "axis_xy" in seen1 and "top_z" in seen1:
+                    err = np.array([*(np.array(seen1["axis_xy"]) - tube[:2]), 0.0])
+                    err = env.station["rotation"].T @ err
+                    err[2] = seen1["top_z"] - (tube[2] + tp.HALF_LENGTH)
+                    row["stage1"]["err_mm"] = (err * 1000).tolist()
             done = False
             while not done:
                 _, _, term, trunc, info = env.step(np.zeros(5))
@@ -413,6 +439,12 @@ def main():
                     print(f"   5 단계 {t:<18} 자리 오차 (앞뒤, 좌우, 높이 mm) sd {np.round(e.std(0), 2)}  최대 {np.round(np.abs(e).max(0), 2)}"
                           f"  확실 {np.mean(ok):.2f}  (n {len(e)})")
         if arm in ("W", "Y", "X"):
+            for s in sorted({r["source"] for r in rs}):
+                e = np.array([r["stage1"]["err_mm"] for r in rs if r["source"] == s and "err_mm" in r.get("stage1", {})])
+                n = sum(r["source"] == s and "stage1" in r for r in rs)
+                if len(e):
+                    print(f"   1 단계 {s:<18} 튜브 오차 (앞뒤, 좌우, 위 끝 mm) sd {np.round(e.std(0), 2)}  최대 {np.round(np.abs(e).max(0), 2)}"
+                          f"  잼 {len(e)}/{n}")
             v = [(r["verdict6"], r["seated_after"]) for r in rs if "verdict6" in r]
             print(f"   6 단계 판정 vs 실제: 맞음 {np.mean([a == b for a, b in v]):.3f}  오거부 {sum(b and not a for a, b in v)}"
                   f"  놓침 {sum(a and not b for a, b in v)}  (n {len(v)})")
