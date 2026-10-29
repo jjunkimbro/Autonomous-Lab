@@ -34,7 +34,7 @@ PAIRS = (("tube_hotel_1", "fluent_tube"), ("fluent_tube", "sorter_right_tube"), 
          ("sorter_right_tube", "tube_hotel_1"))
 ARMS = ("A", "V", "W", "Y", "X")
 SEAT_VISION_ARMS = ("Y", "X")
-INSERT_POLICY = BASE / "rl_runs" / "tube_insert_v3" / "policy.zip"
+INSERT_RUN = "tube_insert_v3"            # 놓기 띠 2.5 mm 에서 v3 0.968 · v4 (작은 오차 절반 이어 학습) 0.945 -> v3
 # 5 단계 촬영 자세 (자리 위 자세에서 장비 좌표 앞뒤 · 좌우 · 위 [m]). 여섯 자세를 네 자리에서 비교해 가장 고르게 맞았다
 # (앞뒤 sd 0.5 mm, 최대 1.2 mm). 손에 든 튜브가 6 단계 자세(LOOK_VIEW, 좌우 +) 쪽 자리 화소를 더 가린다.
 STAGE5_VIEW = (-0.08, -0.07, -0.03)
@@ -283,7 +283,8 @@ def place(env, offsets=None):
 
 
 def run(job):
-    arm, seeds = job
+    arm, seeds = job[:2]
+    insert_run = job[2] if len(job) > 2 else INSERT_RUN
     import transfer_env_v9 as tr
     import tube_env_v11 as te
     import tube_perception_v11 as tp
@@ -299,7 +300,7 @@ def run(job):
     policy = None
     if arm == "X":
         from stable_baselines3 import PPO
-        policy = PPO.load(str(INSERT_POLICY), device="cpu")
+        policy = PPO.load(str(BASE / "rl_runs" / insert_run / "policy.zip"), device="cpu")
     rows = []
     for seed in seeds:
         preps = {}
@@ -389,10 +390,11 @@ def main():
     ap.add_argument("--workers", type=int, default=10)
     ap.add_argument("--out", default="tube_chain.json")
     ap.add_argument("--seed-base", type=int, default=4100)
+    ap.add_argument("--insert-run", default=INSERT_RUN, help="팔 X 의 꽂기 정책 (rl_runs/<이름>/policy.zip)")
     a = ap.parse_args()
     seeds = [int(s) for s in np.random.default_rng(a.seed_base).integers(1 << 30, size=a.episodes)]
     chunks = [seeds[i::a.workers] for i in range(a.workers) if seeds[i::a.workers]]
-    jobs = [(arm, c) for arm in a.arms for c in chunks]
+    jobs = [(arm, c, a.insert_run) for arm in a.arms for c in chunks]
     t0 = time.time()
     with mp.Pool(min(len(jobs), 20)) as pool:
         rows = sum(pool.map(run, jobs), [])
