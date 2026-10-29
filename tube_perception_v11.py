@@ -236,6 +236,12 @@ def truth_in_hand(env):
 SEAT_SIDE_MARGIN = 0.003        # 옆면 화소: 벽 윗면보다 이만큼 위 · 튜브 위 끝보다 이만큼 아래
 SEAT_MIN_SIDE = 300
 COARSE_REACH = 0.010            # 어림값에서 이만큼까지 원 중심을 찾는다
+# 옆면은 꽂힌 위 끝보다 SEAT_SIDE_UP 위까지, 윗면은 SEAT_REACH_UP 위까지 찾는다. 벽 위에 얹힌 튜브는 12~30 mm 위에
+# 서 있는데 윗면을 꽂힌 높이에서부터 찾아 위 끝을 24 mm 낮게 (+6~8 mm) 쟀다 -> 판정은 맞았지만 다시 집기가 튜브 아래를
+# 쥐었다. 이제 윗면을 옆면 점의 가장 높은 곳부터 찾는다. 옆면 범위를 3.5 cm 로 넓히면 준비 때 데모 튜브 위 손가락까지
+# 맞춤에 섞여 (잔차 4.5 mm) 데모 튜브를 못 쟀다 -> 옆면은 2 cm 그대로.
+SEAT_SIDE_UP = 0.02
+SEAT_REACH_UP = 0.035
 
 
 def _tilted_cylinder_depth(o, u, axis_point, w):
@@ -290,7 +296,7 @@ class TubeInSeat:
     def measure(self, depth, guess, seat_z, wall_top):
         cam = self.camera.world_from_camera()
         corners = np.array([[guess[0] + dx, guess[1] + dy, z] for dx in (-0.02, 0.02) for dy in (-0.02, 0.02)
-                            for z in (seat_z, seat_z + 2 * HALF_LENGTH + 0.03)])
+                            for z in (seat_z, seat_z + 2 * HALF_LENGTH + SEAT_REACH_UP + 0.01)])
         uv_c, _ = self.camera.project(corners)
         h, w_ = depth.shape
         u0, v0 = np.clip(np.floor(uv_c.min(axis=0)).astype(int), 0, [w_ - 1, h - 1])
@@ -317,7 +323,7 @@ class TubeInSeat:
             pred, wv = depth_of(p, u)
             hit_z = o[2] + pred * u[:, 2]
             use = (np.isfinite(pred) & (hit_z > wall_top + SEAT_SIDE_MARGIN)
-                   & (hit_z < seat_z + 2 * HALF_LENGTH * wv[2] + 0.02) & (np.abs(t - pred) < _window(pred)))
+                   & (hit_z < seat_z + 2 * HALF_LENGTH * wv[2] + SEAT_SIDE_UP) & (np.abs(t - pred) < _window(pred)))
             if use.sum() < SEAT_MIN_SIDE:
                 out["side_points"] = int(use.sum())
                 return out
@@ -335,19 +341,27 @@ class TubeInSeat:
                    residual_mm=float(np.nanstd(r) * 1000))
         # 위 끝: 축에 수직인 윗면 원판 (축 둘레 CORE 안) 화소의 깊이로
         axis_point = np.array([p[0], p[1], zc])
-        H = seat_z + 2 * HALF_LENGTH - zc
-        for _ in range(3):
-            centre = axis_point + H * wv
-            with np.errstate(divide="ignore", invalid="ignore"):
-                tp_ = ((centre - o) @ wv) / (u @ wv)
-            hit = o + tp_[:, None] * u
-            radial = np.linalg.norm((hit - centre) - np.outer((hit - centre) @ wv, wv), axis=1)
-            sel = (tp_ > 0) & (radial < CORE) & (np.abs(t - tp_) < _window(tp_))
-            if sel.sum() < MIN_TOP_POINTS:
-                break
-            H = float(np.mean(((o + t[sel, None] * u[sel]) - axis_point) @ wv))
-        else:
-            out.update(top_z=float(zc + H * wv[2]), top_points=int(sel.sum()))
+        # 윗면 찾기를 두 높이에서 시작한다: 꽂힌 높이, 옆면 점의 가장 높은 곳 (얹힌 튜브의 위 끝 바로 아래).
+        # 둘 다 맞으면 높은 쪽 (꽂힌 높이에서 시작하면 얹힌 튜브의 옆면에 걸려 낮게 멈춘다). 꽂힌 튜브는 옆면 점에 위
+        # 손가락이 섞여 두 번째 시작이 윗면을 못 찾는다 -> 첫 번째 그대로.
+        side_top = float(np.percentile(((o + t[use, None] * u[use]) - axis_point) @ wv, 99))
+        found = []
+        for H in (seat_z + 2 * HALF_LENGTH - zc, side_top):
+            for _ in range(3):
+                centre = axis_point + H * wv
+                with np.errstate(divide="ignore", invalid="ignore"):
+                    tp_ = ((centre - o) @ wv) / (u @ wv)
+                hit = o + tp_[:, None] * u
+                radial = np.linalg.norm((hit - centre) - np.outer((hit - centre) @ wv, wv), axis=1)
+                sel = (tp_ > 0) & (radial < CORE) & (np.abs(t - tp_) < _window(tp_))
+                if sel.sum() < MIN_TOP_POINTS:
+                    break
+                H = float(np.mean(((o + t[sel, None] * u[sel]) - axis_point) @ wv))
+            else:
+                found.append((H, int(sel.sum())))
+        if found:
+            H, n_top = max(found)
+            out.update(top_z=float(zc + H * wv[2]), top_points=n_top)
         return out
 
 
