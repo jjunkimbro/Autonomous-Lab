@@ -50,26 +50,26 @@ FORCE_ABORT = 60.0              # 이 힘을 넘으면 그 자리에서 끝 (실
 # 자리 위 46 mm 부터 맡기면 무작위 정책이 내려가기도 전에 손을 벌려 (에피소드 3~4 걸음) 거기서 못 벗어났다.
 START_ABOVE_WALL = 0.003
 # 손 벌리기는 계획한 꽂은 높이 위 이 안에서만 받는다 (공중에서 놓지 않는다 — 실물에서도 막을 동작).
-RELEASE_BAND = 0.005
+# 꽂히면 TCP 는 계획 높이 위 약 1 mm (EXTRA_DESCENT). v3 는 5 mm 로 배워, 이송 체인에서 호텔 컵 가장자리에 4 mm 높이로
+# 걸린 채 손을 벌린 실패가 나왔다 (200 중 2) -> 2.5 mm (v4 부터).
+RELEASE_BAND = 0.0025
+# 학습 때 겨냥 오차: 절반은 균일 ±ERROR_MM, 절반은 5 단계 비전 정도 (정규 sd SMALL_ERROR_MM). v3 는 균일만 배워 오차가
+# 작을 때 호텔에서 0.968 이었고 (1~2.5 mm 보다 나쁘지 않을 뿐), 이송 체인의 실패도 오차 0.4 mm 에서 1.5 mm 비켜 난 것이었다.
+SMALL_ERROR_SHARE = 0.5
+SMALL_ERROR_MM = 0.6
 
 
-class TubeInsertGym(gym.Env):
-    metadata = {"render_modes": []}
+class Inserter:
+    """꽂기 제어의 몸통 — 학습 환경(TubeInsertGym) 과 이송 체인(tube_chain_v11) 이 같이 쓴다.
 
-    def __init__(self, seed=0, error_mm=ERROR_MM, targets=TARGETS):
-        import transfer_env_v9 as tr
-        import tube_env_v11 as te
-        tr.TRAVERSE_JOINT_SPEED = 0.3
-        self.env = te.TubeTransferEnv(obs_mode="privileged", randomize=True, seed=seed, appearance=False)
-        self.rng = np.random.default_rng(seed)
-        self.error = error_mm / 1000.0
-        self.targets = tuple(targets)
-        self.tool = mujoco.mj_name2id(self.env.model, mujoco.mjtObj.mjOBJ_BODY, "ur5e_onrobot_rg2_body")
-        n = 6 * HISTORY + 1 + 2 + 1 + len(KINDS)
-        self.observation_space = gym.spaces.Box(-10.0, 10.0, (n,), dtype=np.float32)
-        self.action_space = gym.spaces.Box(-1.0, 1.0, (4,), dtype=np.float32)
+    begin(target, hover, down): TCP 가 hover 에 와 있는 상태에서 벽 윗면 위 START_ABOVE_WALL 까지 내려가 멈추고
+    손목 힘 기준값을 잡는다. step(action) -> (관측, 보상, 끝, info). env 는 놓기 단계 (phase "place", 관절 제어)."""
 
-    # ------------------------------------------------------------------
+    def __init__(self, env):
+        self.env = env
+        self.tool = mujoco.mj_name2id(env.model, mujoco.mjtObj.mjOBJ_BODY, "ur5e_onrobot_rg2_body")
+        self.aim_error = np.zeros(2)
+
     def _wrench(self):
         """손목 힘 · 돌림힘 (월드, 돌림힘은 TCP 둘레)."""
         m, d = self.env.model, self.env.data
@@ -86,7 +86,7 @@ class TubeInsertGym(gym.Env):
         self.torque = rot.T @ (tau - self.t0)
         self.history = self.history[1:] + [np.concatenate((self.force / FORCE_SCALE, self.torque / TORQUE_SCALE))]
 
-    def _obs(self):
+    def obs(self):
         tcp = self.env.data.site_xpos[self.env.site]
         lateral = self.rot.T @ (self.p - self.hover)
         kind = np.zeros(len(KINDS))
@@ -113,28 +113,13 @@ class TubeInsertGym(gym.Env):
             force = max(force, env._contact_force())
         return force
 
-    # ------------------------------------------------------------------
-    def reset(self, *, seed=None, options=None):
+    def begin(self, target, hover, down, max_force=0.0):
         import judgment_actions_v11 as ja
-        import place_plate_env_v9 as pp
-        import tube_chain_v11 as tc
-        if seed is not None:
-            self.rng = np.random.default_rng(seed)
-        options = dict(options or {})
         env = self.env
-        self.target = options.get("target") or self.targets[int(self.rng.integers(len(self.targets)))]
-        in_hand = np.array([0.0, self.rng.normal(0, 0.0002), self.rng.normal(0, 0.0006), 0.0])
-        env.phase = "place"
-        env.station_data = env.place_data
-        env.controller = "joint"
-        pp.PlacePlateEnv.reset(env, seed=int(self.rng.integers(1 << 30)), options=dict(station=self.target, in_hand=in_hand))
+        self.target = target
         self.rot = env.station["rotation"]
-        err = np.asarray(options.get("error", self.rng.uniform(-self.error, self.error, 2)), dtype=float)
-        self.aim_error = err
-        hover, down = tc.plan_tube(env, in_hand[:3])
-        shift = self.rot @ np.array([err[0], err[1], 0.0])
-        self.hover, self.down = hover + shift, down + shift
-        self.max_force = ja.drive(env, self.hover, float(env.q_target[1]))
+        self.hover, self.down = np.array(hover, dtype=float), np.array(down, dtype=float)
+        self.max_force = max_force
         start = self.down + np.array([0.0, 0.0, self._wall_above_seat() + START_ABOVE_WALL + 0.001])
         if start[2] < self.hover[2]:
             self.max_force = max(self.max_force, ja.drive(env, start, float(env.q_target[1]), speed=0.02))
@@ -147,7 +132,7 @@ class TubeInsertGym(gym.Env):
         self.p = self.hover.copy()
         self.t = 0.0
         self._sense()
-        return self._obs(), {}
+        return self.obs()
 
     def step(self, action):
         env = self.env
@@ -179,10 +164,75 @@ class TubeInsertGym(gym.Env):
                 seated = bool(env._seated())
             tilt = float(env._tilt())
             reward += 10.0 if seated else (-6.0 if tilt > 30.0 else -3.0)
+            moved = self.rot.T @ (self.p - self.hover)
             info = dict(seated=seated, tilt_deg=tilt, max_force_N=float(self.max_force), aborted=bool(aborted),
-                        time_s=float(self.t), target=self.target, error_mm=[float(v * 1000) for v in self.aim_error])
-            return self._obs(), float(reward), True, False, info
-        return self._obs(), float(reward), False, False, info
+                        time_s=float(self.t), target=self.target, error_mm=[float(v * 1000) for v in self.aim_error],
+                        released=bool(release), moved_mm=[float(moved[0] * 1000), float(moved[1] * 1000)])
+            return self.obs(), float(reward), True, info
+        return self.obs(), float(reward), False, info
+
+    def run(self, policy, target, hover, down, max_force=0.0):
+        """한 번 꽂기를 끝까지 (이송 체인용). 마지막 info."""
+        obs = self.begin(target, hover, down, max_force)
+        done, info = False, {}
+        while not done:
+            action, _ = policy.predict(obs, deterministic=True)
+            obs, _, done, info = self.step(action)
+        return info
+
+
+class TubeInsertGym(gym.Env):
+    metadata = {"render_modes": []}
+
+    def __init__(self, seed=0, error_mm=ERROR_MM, targets=TARGETS, mixture=False):
+        import transfer_env_v9 as tr
+        import tube_env_v11 as te
+        tr.TRAVERSE_JOINT_SPEED = 0.3
+        self.env = te.TubeTransferEnv(obs_mode="privileged", randomize=True, seed=seed, appearance=False)
+        self.rng = np.random.default_rng(seed)
+        self.error = error_mm / 1000.0
+        self.mixture = mixture
+        self.targets = tuple(targets)
+        self.core = Inserter(self.env)
+        n = 6 * HISTORY + 1 + 2 + 1 + len(KINDS)
+        self.observation_space = gym.spaces.Box(-10.0, 10.0, (n,), dtype=np.float32)
+        self.action_space = gym.spaces.Box(-1.0, 1.0, (4,), dtype=np.float32)
+
+    def __getattr__(self, name):
+        """영상 기록(record_tube_v11) 이 읽는 꽂기 상태는 몸통(Inserter) 에서."""
+        if name in ("target", "rot", "hover", "down", "p", "force", "torque", "aim_error", "t"):
+            return getattr(self.__dict__["core"], name)
+        raise AttributeError(name)
+
+    def reset(self, *, seed=None, options=None):
+        import judgment_actions_v11 as ja
+        import place_plate_env_v9 as pp
+        import tube_chain_v11 as tc
+        if seed is not None:
+            self.rng = np.random.default_rng(seed)
+        options = dict(options or {})
+        env = self.env
+        target = options.get("target") or self.targets[int(self.rng.integers(len(self.targets)))]
+        in_hand = np.array([0.0, self.rng.normal(0, 0.0002), self.rng.normal(0, 0.0006), 0.0])
+        env.phase = "place"
+        env.station_data = env.place_data
+        env.controller = "joint"
+        pp.PlacePlateEnv.reset(env, seed=int(self.rng.integers(1 << 30)), options=dict(station=target, in_hand=in_hand))
+        rot = env.station["rotation"]
+        if self.mixture and self.rng.random() < SMALL_ERROR_SHARE:
+            drawn = np.clip(self.rng.normal(0.0, SMALL_ERROR_MM / 1000.0, 2), -self.error, self.error)
+        else:
+            drawn = self.rng.uniform(-self.error, self.error, 2)
+        err = np.asarray(options.get("error", drawn), dtype=float)
+        hover, down = tc.plan_tube(env, in_hand[:3])
+        shift = rot @ np.array([err[0], err[1], 0.0])
+        force = ja.drive(env, hover + shift, float(env.q_target[1]))
+        self.core.aim_error = err
+        return self.core.begin(target, hover + shift, down + shift, force), {}
+
+    def step(self, action):
+        obs, reward, done, info = self.core.step(action)
+        return obs, reward, done, False, info
 
 
 class StraightDown:
@@ -196,7 +246,7 @@ class StraightDown:
 def make_vec(n, seed, error_mm):
     from stable_baselines3.common.monitor import Monitor
     from stable_baselines3.common.vec_env import SubprocVecEnv
-    makers = [lambda i=i: Monitor(TubeInsertGym(seed + 97 * i, error_mm)) for i in range(n)]
+    makers = [lambda i=i: Monitor(TubeInsertGym(seed + 97 * i, error_mm, mixture=True)) for i in range(n)]
     return SubprocVecEnv(makers)
 
 
@@ -209,9 +259,13 @@ def train(a):
     if a.device.startswith("cuda"):
         print(f"장치 {a.device}: {torch.cuda.get_device_name(0)}", flush=True)
     vec = make_vec(a.envs, a.seed, a.error)
-    model = PPO("MlpPolicy", vec, seed=a.seed, device=a.device, verbose=1, n_steps=256, batch_size=2048,
-                gae_lambda=0.95, gamma=0.99, learning_rate=3e-4, ent_coef=0.005, n_epochs=10,
-                policy_kwargs=dict(net_arch=[256, 256]))
+    if a.init:
+        # 이어 배우기: 앞 정책에서 출발 (관측 · 행동 꼴이 같을 때)
+        model = PPO.load(str(RUN.parent / a.init / "policy.zip"), env=vec, device=a.device, seed=a.seed)
+    else:
+        model = PPO("MlpPolicy", vec, seed=a.seed, device=a.device, verbose=1, n_steps=256, batch_size=2048,
+                    gae_lambda=0.95, gamma=0.99, learning_rate=3e-4, ent_coef=0.005, n_epochs=10,
+                    policy_kwargs=dict(net_arch=[256, 256]))
     # 중간 저장: 학습이 끊겨도 마지막 저장본으로 평가 · 이어 학습할 수 있게
     keep = CheckpointCallback(save_freq=max(200_000 // a.envs, 1), save_path=str(run / "checkpoints"), name_prefix="policy")
     t0 = time.time()
@@ -275,6 +329,7 @@ def main():
     ap.add_argument("--episodes", type=int, default=300)
     ap.add_argument("--workers", type=int, default=20)
     ap.add_argument("--run", default=None)
+    ap.add_argument("--init", default=None, help="이어 배울 정책의 실행 이름 (rl_runs/<init>/policy.zip)")
     ap.add_argument("--out", default="tube_insert_eval.json")
     a = ap.parse_args()
     train(a) if a.mode == "train" else evaluate(a)

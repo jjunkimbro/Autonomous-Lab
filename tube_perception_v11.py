@@ -349,3 +349,115 @@ class TubeInSeat:
         else:
             out.update(top_z=float(zc + H * wv[2]), top_points=int(sel.sum()))
         return out
+
+
+# ----------------------------------------------------------------------
+# 5 단계 놓을 자리: 준비 때 같은 자세에서 찍은 빈 자리 사진 대비, 장비가 얼마나 밀렸나 (월드 3 축).
+#
+# 자리는 작다 (호텔 컵 22 mm, 30 cm 밖에서 50 화소). 판처럼 준비 스캔으로 장비 모서리 모델을 만들어 맞추면
+# 모서리 점이 14~20 개뿐이라 1~10 mm 틀렸고, 호텔에 선 기준 튜브 두 개로 위치 · 방향을 잡으면 튜브 사이가 3 cm 라 방향
+# 오차(2°)가 자리까지 6~9 cm 외삽돼 역시 수 mm 였다. 대신:
+#   준비  5 단계 촬영 자세(관절값) 에서 빈 자리를 한 장 찍어 둔다.
+#   운영  같은 관절값으로 돌아가 한 장. 카메라가 그대로이니 영상 차이는 장비가 움직인 것뿐이다.
+#     - 영상: 자리 둘레 창의 붉은 정도 (R - G) 를 ECC 로 맞춰 (평행 이동 + 회전) 자리 점의 화소 이동 2 식
+#     - 깊이: 맞춘 화소끼리 (같은 표면점) 깊이 차 = 장비 이동의 카메라 z 성분 1 식.
+#       탁자 화소는 장비가 움직여도 깊이가 그대로라 섞이면 0 쪽으로 끌린다 -> 준비 사진에서 탁자보다 5 mm 넘게 높은 화소만.
+#   (깊이 저주파 치우침을 탁자 · 배경으로 따로 재서 빼 보았지만 나아지지 않았다 — 자리 화소의 깊이 차를 그대로 쓴다.)
+#   카메라 방향이 J6 고정으로 늘 같아 자리로 가는 시선은 영상 위치로만 정해진다: 영상만으로는 시선 방향 (앞뒤 · 높이가
+#   섞인 방향) 을 못 재고, 높이가 2 mm 바뀌면 앞뒤가 그만큼 틀린다 (높이를 0 으로 두면 앞뒤 sd 1.2 mm) -> 깊이 1 식이 필요.
+# 시드 24 x 네 자리, 장비 밀림 ±5 mm · ±2 mm · ±2°, 자세 a-l: 앞뒤 sd 0.5 mm · 좌우 0.2~0.3 mm, 최대 1.2 mm.
+SHIFT_HALF_PX = 70              # 자리 둘레 창 (반 변, 화소)
+SHIFT_TRACK_UP = 0.006          # 추적점: 자리 축 위 이 높이 (컵 높이 가운데)
+SHIFT_DEVICE_ABOVE = 0.005      # 깊이 식에 쓰는 화소: 탁자보다 이만큼 넘게 높은 점 (준비 사진 기준)
+TABLE_Z = 0.500                 # 탁자 윗면 (셀 상수)
+SHIFT_MIN_DEPTH_PX = 50
+SHIFT_NEAR = 0.03               # 자리보다 이만큼 넘게 가까운 화소 = 손가락 · 손에 든 튜브 (뺀다)
+SHIFT_MIN_ECC = 0.6            # 이보다 낮으면 다른 물체가 가렸거나 창이 엉뚱하다 -> 불확실
+
+
+def _red(rgb):
+    import cv2
+    f = rgb.astype(np.float32)
+    return cv2.GaussianBlur(f[:, :, 0] - f[:, :, 1], (0, 0), 1.0)
+
+
+class SeatShift:
+    """reference(seat) — 준비: 지금 자세에서 빈 자리를 찍어 둔다 (seat: 자리 축 · 바닥 월드 점).
+    measure(ref) — 운영: 같은 관절값에서 한 장 찍어 준비 대비 장비 이동 shift (월드 m) 를 돌려준다."""
+
+    def __init__(self, camera):
+        self.camera = camera
+
+    def _pose(self):
+        return self.camera.K.copy(), self.camera.world_from_camera().copy()
+
+    @staticmethod
+    def _project(K, world_from_camera, p):
+        inv = np.linalg.inv(world_from_camera)
+        local = inv[:3, :3] @ p + inv[:3, 3]
+        uv = K @ local
+        return uv[:2] / uv[2]
+
+    def reference(self, seat):
+        rgb, depth = self.camera.capture(noise=True)
+        K, pose = self._pose()
+        point = np.asarray(seat, dtype=float) + np.array([0.0, 0.0, SHIFT_TRACK_UP])
+        return dict(rgb=rgb, depth=depth, K=K, pose=pose, point=point, uv=self._project(K, pose, point))
+
+    def measure(self, ref):
+        import cv2
+        rgb, depth = self.camera.capture(noise=True)
+        K, pose = self._pose()
+        out = dict(camera_move_mm=float(np.linalg.norm(pose[:3, 3] - ref["pose"][:3, 3]) * 1000))
+        h, w = depth.shape
+        u0, v0 = int(round(ref["uv"][0])), int(round(ref["uv"][1]))
+        n = SHIFT_HALF_PX
+        if not (n <= u0 < w - n and n <= v0 < h - n):
+            return dict(out, verdict="UNSURE", reason="자리가 영상 밖")
+        win = (slice(v0 - n, v0 + n), slice(u0 - n, u0 + n))
+        dp, do = ref["depth"][win].astype(float), depth[win].astype(float)
+        # 손가락 · 손에 든 튜브는 카메라에 붙어 움직이지 않고 (준비 때는 빈손 · 벌린 손가락), 자리보다 훨씬 가깝다.
+        # 섞이면 영상 맞춤은 0 쪽으로, 깊이 차는 손가락 깊이로 끌린다 (호텔에서 13~52 mm 틀렸다) -> 자리보다 3 cm 넘게 가까운 화소는 뺀다.
+        near = float((np.linalg.inv(ref["pose"]) @ np.append(ref["point"], 1.0))[2]) - SHIFT_NEAR
+        mask = ((dp > max(MIN_RANGE, near)) & (do > max(MIN_RANGE, near))).astype(np.uint8)
+        warp = np.eye(2, 3, dtype=np.float32)
+        try:
+            for motion in (cv2.MOTION_TRANSLATION, cv2.MOTION_EUCLIDEAN):
+                ecc, warp = cv2.findTransformECC(_red(ref["rgb"])[win], _red(rgb)[win], warp, motion,
+                                                 (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 200, 1e-6), mask, 5)
+        except cv2.error:
+            return dict(out, verdict="UNSURE", reason="영상 맞춤 실패")
+        c = np.array([ref["uv"][0] - (u0 - n), ref["uv"][1] - (v0 - n), 1.0])
+        du = warp @ c - c[:2]
+        # 맞춘 화소끼리 깊이 차 (장비 화소만, 깊이 모서리 번짐을 피해 기울기 작은 곳만)
+        ys, xs = np.mgrid[0:2 * n, 0:2 * n]
+        moved = warp @ np.stack([xs.ravel(), ys.ravel(), np.ones(xs.size)])
+        xo, yo = np.round(moved[0]).astype(int), np.round(moved[1]).astype(int)
+        inside = (xo >= 0) & (xo < 2 * n) & (yo >= 0) & (yo < 2 * n)
+        zp = dp.ravel()
+        zo = np.zeros_like(zp)
+        zo[inside] = do[yo[inside], xo[inside]]
+        grad = np.hypot(*np.gradient(ref["depth"].astype(float)))[win].ravel()
+        rays = np.column_stack([(xs.ravel() + u0 - n - ref["K"][0, 2]) / ref["K"][0, 0],
+                                (ys.ravel() + v0 - n - ref["K"][1, 2]) / ref["K"][1, 1], np.ones(xs.size)])
+        height = (rays * zp[:, None]) @ ref["pose"][2, :3] + ref["pose"][2, 3]
+        sel = (inside & (zp > max(MIN_RANGE, near)) & (zo > max(MIN_RANGE, near)) & (grad < 0.0015)
+               & (height > TABLE_Z + SHIFT_DEVICE_ABOVE))
+        out.update(ecc=float(ecc), image_shift_px=[float(du[0]), float(du[1])], depth_points=int(sel.sum()))
+        if sel.sum() < SHIFT_MIN_DEPTH_PX:
+            return dict(out, verdict="UNSURE", reason="자리 깊이 화소 부족")
+        diff = zo[sel] - zp[sel]
+        lo, hi = np.percentile(diff, [20, 80])
+        dz_cam = float(diff[(diff >= lo) & (diff <= hi)].mean())
+        # 월드 이동 d: 자리 점의 화소 이동 (자코비안) 2 식 + 카메라 z 성분 1 식
+        J = np.zeros((2, 3))
+        for k in range(3):
+            e = np.zeros(3)
+            e[k] = 1e-4
+            J[:, k] = (self._project(ref["K"], ref["pose"], ref["point"] + e) - ref["uv"]) / 1e-4
+        camera_z = np.linalg.inv(ref["pose"])[2, :3]
+        shift = np.linalg.solve(np.vstack([J, camera_z]), np.concatenate([du, [dz_cam]]))
+        out.update(shift=[float(v) for v in shift], depth_shift_mm=dz_cam * 1000)
+        if ecc < SHIFT_MIN_ECC:
+            return dict(out, verdict="UNSURE", reason=f"영상 맞춤 낮음 {ecc:.2f}")
+        return dict(out, verdict="OK")
