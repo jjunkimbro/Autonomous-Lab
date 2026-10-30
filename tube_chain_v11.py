@@ -37,12 +37,40 @@ PAIRS = (("tube_hotel_1", "fluent_tube"), ("fluent_tube", "sorter_right_tube"), 
 ARMS = ("A", "V", "W", "Y", "X")
 SEAT_VISION_ARMS = ("Y", "X")
 INSERT_RUN = "tube_insert_v3"            # 놓기 띠 2.5 mm 에서 v3 0.968 · v4 (작은 오차 절반 이어 학습) 0.945 -> v3
+# 자리마다 다른 꽂기 정책. v3 는 NGS(벽 45 mm) 를 안 배워 0.010 (곧게 0.480). NGS 를 넣어 처음부터 배운 v5 는 ±2.5 mm 에서
+# NGS 0.864 이지만 Fluent 0.746 · 전체 0.880 (v3 0.968) 이라 NGS 에만 쓴다. 오차 1 mm 안은 v5 다섯 자리 모두 1.000.
+INSERT_RUN_AT = {"ngs_tube": "tube_insert_v5"}
+_POLICIES = {}
+
+
+def insert_policy(station, policy):
+    """station 에 쓸 꽂기 정책 (INSERT_RUN_AT 에 있으면 그 정책, 아니면 넘겨받은 기본 정책)."""
+    run = INSERT_RUN_AT.get(station)
+    if run is None:
+        return policy
+    if run not in _POLICIES:
+        from stable_baselines3 import PPO
+        _POLICIES[run] = PPO.load(str(BASE / "rl_runs" / run / "policy.zip"), device="cpu")
+    return _POLICIES[run]
 # 5 단계 촬영 자세 (자리 위 자세에서 장비 좌표 앞뒤 · 좌우 · 위 [m]). 여섯 자세를 네 자리에서 비교해 가장 고르게 맞았다
 # (앞뒤 sd 0.5 mm, 최대 1.2 mm). 손에 든 튜브가 6 단계 자세(LOOK_VIEW, 좌우 +) 쪽 자리 화소를 더 가린다.
 STAGE5_VIEW = (-0.08, -0.07, -0.03)
 # 6 단계 촬영 자세 (자리 위 자세에서 장비 좌표 앞뒤 · 좌우 · 위 [m]). 자리 위 높이 그대로면 Fluent 는 튜브 윗부분이 입구
 # 윗변에 가려 위 끝을 못 쟀다 (4 중 0) — 3 cm 낮추면 세 장비 모두 보이고 위 끝 오차 0.2 mm 안 (시드 4 개씩).
 LOOK_VIEW = (-0.08, 0.07, -0.03)
+# 장비마다 다른 촬영 자세 (없으면 위 기본값)
+STAGE5_VIEW_AT = {}
+LOOK_VIEW_AT = {}
+
+
+def stage5_view(station):
+    return STAGE5_VIEW_AT.get(station, STAGE5_VIEW)
+
+
+def look_view(station):
+    return LOOK_VIEW_AT.get(station, LOOK_VIEW)
+
+
 # 6 단계: 위 끝이 꽂힌 높이에서 이 안. 놓을 자리 높이를 5 단계 비전으로 알면 그 오차(sd 0.4~0.7 mm) 가 실려 1 mm 문턱은
 # 꽂힌 200 중 8~10 을 오거부했다. 꽂힌 튜브는 -1.5 ~ +1.6 mm, 못 꽂힌 것은 +3.95 mm 부터 (호텔 컵 가장자리에 걸림,
 # 얹힘은 벽 높이만큼 위 12~30 mm) -> 사이 2.7 mm.
@@ -51,6 +79,10 @@ SEATED_TOP_MM = 2.7
 # 때문에 겉보기 1.6~3.6° 로 잡혀 2° 문턱이면 80 중 44 를 오거부했다. 8° 로 두면 호텔에서 7.6° 기운 채 위 끝 높이만 맞은
 # 실패를 놓쳤다 (일부러 어긋나게 놓은 90 중 1) -> 5°.
 SEATED_TILT_DEG = 5.0
+# NGS 는 기울기를 보지 않는다: 벽 위로 보이는 튜브가 3 cm 뿐이라 꽂힌 튜브도 겉보기 5~9° (촬영 자세 6 개 모두, 정답 자리 꽂힘
+# 20 중 19 오거부). 위 끝이 꽂힌 높이 2.7 mm 안이면 바닥이 지름 12.5 mm 구멍 안 42 mm 넘게 들어가 있어 기울 수 있는 것은 1.4° —
+# 얹히거나 걸친 튜브는 위 끝 높이에서 걸린다.
+SEATED_TILT_DEG_AT = {"ngs_tube": None}
 TRAVERSE_SPEED = 0.3            # judgment_chain_v11 과 같다
 # 꽂기 겨냥점 (앞뒤, 손 안 기준 대비 튜브 바닥을 이만큼 뒤로). 정답 손 안 값으로 고친 뒤 일부러 어긋남을 넣어 잰
 # 꽂힘 범위가 세 장비 모두 -1.5 ~ +0.25 mm (+0.5 에서 0.8) 라 가운데를 겨눈다. 장비와 무관하게 같아서 장비 인지가 아니라
@@ -125,12 +157,13 @@ def retreat_and_look(env, camera):
     hover = env._transform(pts["INSERT_HOVER"], delta)
     force = ja.drive(env, clear, j1)
     force = max(force, ja.drive(env, np.array([clear[0], clear[1], hover[2]]), j1))
-    f, l, up = LOOK_VIEW
+    f, l, up = look_view(env.station_name)
     force = max(force, ja.drive(env, hover + env.station["rotation"] @ np.array([f, l, 0.0]) + np.array([0.0, 0.0, up]), j1))
     axis, seat_z, wall_top = seat_geometry(env, env.station_name)
     seen = tp.TubeInSeat(camera).observe(axis, seat_z, wall_top)
     ok = ("top_z" in seen and abs(seen["top_z"] - (seat_z + 2 * tp.HALF_LENGTH)) * 1000 <= SEATED_TOP_MM
-          and seen.get("tilt_deg", 99.0) <= SEATED_TILT_DEG)
+          and (SEATED_TILT_DEG_AT.get(env.station_name, SEATED_TILT_DEG) is None
+               or seen.get("tilt_deg", 99.0) <= SEATED_TILT_DEG_AT.get(env.station_name, SEATED_TILT_DEG)))
     return bool(ok), seen, force
 
 
@@ -165,16 +198,17 @@ def prep_truth(seed):
     return np.random.default_rng([int(seed), 21]).uniform(-pp.STATION_ERROR, pp.STATION_ERROR)
 
 
-def prepare_seat(prep_env, camera, seed, station):
+def prepare_seat(prep_env, camera, seed, station, delta=None):
     """준비 (도착 장비마다 한 번). 데모 튜브를 자리에 바로 꽂아 두고 6 단계 자세에서 재어 놓을 자리 (축 xy, 바닥 높이),
-    튜브를 빼고 5 단계 자세에서 빈 자리 한 장과 그 관절값."""
+    튜브를 빼고 5 단계 자세에서 빈 자리 한 장과 그 관절값. delta  준비 때 장비 자세 (없으면 prep_truth(seed))."""
     import judgment_actions_v11 as ja
     import measure_scan_v11 as ms
     import pick_plate_env_v9 as pk
     import tube_perception_v11 as tp
     camera.appear.randomize(np.random.default_rng([int(seed), 22]))
     camera.rng = np.random.default_rng([int(seed), 23])
-    prep_env.reset(seed=int(seed), options={"station": station, "delta": prep_truth(seed),
+    delta = prep_truth(seed) if delta is None else np.asarray(delta, dtype=float)
+    prep_env.reset(seed=int(seed), options={"station": station, "delta": delta,
                                             "rest": np.zeros_like(pk.RESTING_ERROR)})
     it = prep_env.interfaces[station]
     # 운영 때 놓기와 같은 팔 모양으로: 놓기 시작 관절값에서 접근 자세로 (집기 시작 J1 그대로 가면 카메라가 다른 쪽을 봐
@@ -184,22 +218,24 @@ def prepare_seat(prep_env, camera, seed, station):
     j1 = float(q_start[1])
     approach = np.array(prep_env.place_data[station]["points"]["APPROACH_LIFTED"], dtype=float)
     force = max(force, ja.drive(prep_env, approach, j1))
-    force = max(force, ja.drive(prep_env, view_pose(prep_env, station, LOOK_VIEW), j1))
+    force = max(force, ja.drive(prep_env, view_pose(prep_env, station, look_view(station)), j1))
     nominal_wall = seat_geometry_nominal(prep_env, station)
     demo = tp.TubeInSeat(camera).observe(np.array(it["object_axis_xy"][:2], dtype=float), it["seat_z"], nominal_wall)
-    if "axis_xy" not in demo or "top_z" not in demo:
+    # 데모 튜브는 꽂혀 있는 것을 안다: 위 끝(top_z) 을 못 찾으면 격자로 찾은 윗면 (NGS 12 시드 중 1 — 격자 값 1.3 mm 안)
+    top = demo.get("top_z", demo.get("top_grid_z"))
+    if "axis_xy" not in demo or top is None:
         return dict(ok=False, demo=demo)
-    seat = np.array([demo["axis_xy"][0], demo["axis_xy"][1], demo["top_z"] - 2 * tp.HALF_LENGTH])
+    seat = np.array([demo["axis_xy"][0], demo["axis_xy"][1], top - 2 * tp.HALF_LENGTH])
     ms.empty_hand(prep_env)
     # 손가락은 튜브를 쥔 폭으로 (운영 사진과 같은 자리에 오게). 벌린 손가락은 호텔 컵을 반쯤 가려 영상 맞춤이 0.53~0.60 으로
     # 떨어지고 (불확실 8 %), 그 손가락 화소를 빼도 남은 컵이 적었다.
     prep_env.grip = prep_env.GRIP_CLOSE
-    force = max(force, ja.drive(prep_env, view_pose(prep_env, station, STAGE5_VIEW), j1))
-    ref = tp.SeatShift(camera).reference(seat)
+    force = max(force, ja.drive(prep_env, view_pose(prep_env, station, stage5_view(station)), j1))
+    ref = tp.SeatShift(camera).reference(seat, station)
     # 튜브를 되살린다 (empty_hand 가 바꾼 geom 그룹 · 충돌은 reset 으로 안 돌아와, 다음 준비에서 데모 튜브가 안 보였다)
     for g, (group, contype, conaff) in prep_env._plate_look.items():
         prep_env.model.geom_group[g], prep_env.model.geom_contype[g], prep_env.model.geom_conaffinity[g] = group, contype, conaff
-    truth_seat = np.array([*it["object_axis_xy"][:2], it["seat_z"]]) + prep_truth(seed)[:3]
+    truth_seat = np.array([*it["object_axis_xy"][:2], it["seat_z"]]) + delta[:3]
     return dict(ok=True, seat=seat, joints=prep_env.q_target.copy(), ref=ref, force=force,
                 demo_err_mm=((seat - truth_seat) * 1000).tolist())
 
@@ -243,7 +279,7 @@ def look_seat(env, camera, prep):
     import tube_perception_v11 as tp
     station = env.station_name
     j1 = float(env.q_target[1])
-    force = ja.drive(env, view_pose(env, station, STAGE5_VIEW), j1)
+    force = ja.drive(env, view_pose(env, station, stage5_view(station)), j1)
     force = max(force, to_joints(env, prep["joints"]))
     seen = tp.SeatShift(camera).measure(prep["ref"])
     seat = prep["seat"] + (np.array(seen["shift"]) if seen["verdict"] == "OK" else 0.0)
@@ -262,7 +298,7 @@ def insert_learned(env, policy, offsets):
     env.begin_place()
     hover, down = plan_tube(env, offsets)
     force = ja.drive(env, hover, float(env.q_target[1]))
-    return ti.Inserter(env).run(policy, env.station_name, hover, down, force)
+    return ti.Inserter(env).run(insert_policy(env.station_name, policy), env.station_name, hover, down, force)
 
 
 def place(env, offsets=None):
@@ -287,6 +323,7 @@ def place(env, offsets=None):
 def run(job):
     arm, seeds = job[:2]
     insert_run = job[2] if len(job) > 2 else INSERT_RUN
+    pairs = job[3] if len(job) > 3 else PAIRS
     import transfer_env_v9 as tr
     import tube_env_v11 as te
     import pick_plate_env_v9 as pk
@@ -307,7 +344,7 @@ def run(job):
     rows = []
     for seed in seeds:
         preps = {}
-        for source, target in PAIRS:
+        for source, target in pairs:
             camera.appear.randomize(np.random.default_rng([int(seed), 11]))
             camera.rng = np.random.default_rng([int(seed), 12])
             # 출발 장비도 준비 대비 밀려 있다 (같은 시드에서 도착 장비일 때와 같은 자세). 팔 Y · X 는 장비 자세를 준비 때 잰
@@ -417,10 +454,12 @@ def main():
     ap.add_argument("--out", default="tube_chain.json")
     ap.add_argument("--seed-base", type=int, default=4100)
     ap.add_argument("--insert-run", default=INSERT_RUN, help="팔 X 의 꽂기 정책 (rl_runs/<이름>/policy.zip)")
+    ap.add_argument("--pairs", nargs="*", default=None, help="출발:도착 (없으면 PAIRS, 예: fluent_tube:ngs_tube)")
     a = ap.parse_args()
+    pairs = tuple(tuple(p.split(":")) for p in a.pairs) if a.pairs else PAIRS
     seeds = [int(s) for s in np.random.default_rng(a.seed_base).integers(1 << 30, size=a.episodes)]
     chunks = [seeds[i::a.workers] for i in range(a.workers) if seeds[i::a.workers]]
-    jobs = [(arm, c, a.insert_run) for arm in a.arms for c in chunks]
+    jobs = [(arm, c, a.insert_run, pairs) for arm in a.arms for c in chunks]
     t0 = time.time()
     with mp.Pool(min(len(jobs), 20)) as pool:
         rows = sum(pool.map(run, jobs), [])
@@ -428,7 +467,7 @@ def main():
     for arm in a.arms:
         rs = [r for r in rows if r["arm"] == arm]
         print(f"{arm}  꽂힘 {np.mean([r['seated'] for r in rs]):.3f}  (n {len(rs)})  >50N {np.mean([r['force'] > 50 for r in rs]):.3f}")
-        for s, t in PAIRS:
+        for s, t in pairs:
             p = [r for r in rs if r["source"] == s and r["target"] == t]
             print(f"   {s:<18} -> {t:<18} {np.mean([r['seated'] for r in p]):.2f}")
         if arm in SEAT_VISION_ARMS:

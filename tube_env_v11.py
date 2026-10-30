@@ -33,9 +33,21 @@ import skill_scene_v9 as s9
 import transfer_env_v9 as tr
 import vision_scene_v8 as scene
 
-# NGS 튜브 자리는 장면 정의의 손 방향(+y 로 다가감) 으로는 로봇이 닿는 관절 해가 없다 (±y 0 개, +x 12~19 개).
-# 접근 방향을 다시 정할 때까지 뺀다.
-TUBE_STATIONS = tuple(s for s in s9.TUBE_STATIONS if s != "ngs_tube")
+# NGS 튜브 자리는 장면 정의의 손 방향(+y 로 다가감) 으로는 로봇이 닿는 관절 해가 없다: 레일 끝에서 어깨가 x 0.875 인데
+# 자리는 x 0.967 이고, 손이 +y 를 보면 UR5e 어깨 옆 오프셋(13 cm) 이 -x 로 가서 어깨가 x 1.10 까지 가야 한다.
+# 손 방향을 10° 마다 훑으면 관절 해는 0 ~ 70° 에 있고 (30 ~ 60° 는 후보 30 개 모두), 자리에서 손이 오는 쪽으로 쏜 수평
+# 광선은 30 ~ 90° 에서 막히지 않는다 (0 ~ 15° 는 NGS 카트리지, 105° 넘으면 배양기). 장면 정의의 웨이포인트를 튜브 축을
+# 중심으로 돌린다 (튜브는 축 대칭이라 쥐는 방향만 바뀐다).
+# 자리 -x 쪽 4.3 cm 에 카트리지(0.75 m 까지) 와 그 앞 버튼이 솟아 있어 손이 +y 에 가까울수록 RG2 손가락 링크가 비켜 간다
+# (tube_clearance_v11, 볼록 거리: 버튼과 50° -13.5 · 55° -8.1 · 57.5° -4.7 · 60° -0.5 mm). 60° 는 앵커가 레일 0.695 m 로 바뀌어
+# 운반 중 손 · 튜브가 배양기 몸체를 지나가고, 65° 는 레일 여유를 만족하는 앵커가 없다 -> 57.5°. 버튼과 4.7 mm 겹침이 남는다
+# (충돌 없는 보이는 모델이라 물리에는 안 나온다 — 실물이면 닿는다).
+APPROACH_YAW_DEG = {"ngs_tube": 57.5}
+# NGS 앵커의 J1 은 -135° 로 풀리는데, 운반 마지막 구간(레일을 옮긴 뒤 팔만 도착 안전 자세로, 관절 직선) 에서 다른 장비의
+# J1 (+90°) 과 이으면 0° (+x) 를 지나며 레일 끝 배양기 판 받침을 위팔 · 아래팔이 쓸었다. 한 바퀴 더한 +225° 로 두면
+# 180° (-x, 레일 통로) 쪽으로 돈다 (UR5e J1 범위 ±360°).
+J1_TURN = {"ngs_tube": 2.0 * math.pi}
+TUBE_STATIONS = s9.TUBE_STATIONS
 TUBE = dict(radius=0.006, length=0.075)          # 충돌 원통 (top_z - seat_z 와 같다)
 GRASP_ABOVE_SEAT = 0.067            # GRASP 높이 - seat_z (다섯 자리 모두 같다)
 SEATED_Z_MM = 1.0
@@ -73,6 +85,24 @@ DEVICE_GEOMS = {
     "sorter_right_tube": scene.STATIONS["sorter_left_plate"]["geoms"] + SORTER_TUBE,
     "ngs_tube": _NGS,
 }
+
+
+def reorient_interface(interface, yaw_deg):
+    """웨이포인트를 튜브 축(수평) 을 중심으로 돌려 손 방향을 yaw_deg 로 바꾼 사본."""
+    it = copy.deepcopy(interface)
+    turn = math.radians(yaw_deg - interface["grasp_frame"]["tool_yaw_deg"])
+    c, s = math.cos(turn), math.sin(turn)
+    axis = np.array(interface["object_axis_xy"][:2], dtype=float)
+    for key in ("pick", "place"):
+        for p in it[key]:
+            x, y = np.array(p["position"][:2]) - axis
+            p["position"] = [float(axis[0] + c * x - s * y), float(axis[1] + s * x + c * y), float(p["position"][2])]
+    frame = it["grasp_frame"]
+    frame["tool_yaw_deg"] = float(yaw_deg)
+    for key in ("z_approach", "x_closing"):
+        x, y, z = frame[key]
+        frame[key] = [float(c * x - s * y), float(s * x + c * y), float(z)]
+    return it
 
 
 def adapt_tube_interface(interface, max_lift=np.inf):
@@ -172,9 +202,15 @@ class TubeTransferEnv(tr.TransferEnv):
         self.model.opt.disableflags |= mujoco.mjtDisableBit.mjDSBL_MIDPHASE
         mujoco.mj_forward(self.model, self.data)
         for name in s9.TUBE_STATIONS:
+            if name in APPROACH_YAW_DEG:
+                self.interfaces[name] = reorient_interface(self.interfaces[name], APPROACH_YAW_DEG[name])
             self.interfaces[name] = adapt_tube_interface(self.interfaces[name], self._max_lift(self.interfaces[name]))
         self.perturber = TubePerturber(self.model, self.interfaces)
         super()._prepare_stations()
+        for name, turn in J1_TURN.items():
+            for data in (self.pick_data, self.place_data):
+                if name in data:
+                    data[name]["q_start"][1] += turn
 
     def _max_lift(self, interface):
         """자리 위 (튜브 축 · 다가가는 쪽 12 mm) 를 덮는 장비 몸체 아래까지, 쥔 높이 위로 올릴 수 있는 최대 [m]."""

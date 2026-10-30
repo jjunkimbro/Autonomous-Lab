@@ -429,6 +429,10 @@ class TubeInSeat:
 # 시드 24 x 네 자리, 장비 밀림 ±5 mm · ±2 mm · ±2°, 자세 a-l: 앞뒤 sd 0.5 mm · 좌우 0.2~0.3 mm, 최대 1.2 mm.
 SHIFT_HALF_PX = 70              # 자리 둘레 창 (반 변, 화소)
 SHIFT_TRACK_UP = 0.006          # 추적점: 자리 축 위 이 높이 (컵 높이 가운데)
+# NGS 는 자리 벽(45 mm) 이 받침 윗면과 같은 높이라 영상이 맞추는 것은 받침 윗면의 붉은 구멍 표시들이다. 추적점을 바닥 위 6 mm 에
+# 두면 그 높이 차만큼 시차로 틀렸다 (빈손 11 시드: 앞뒤 · 높이 sd 1.7 · 1.8 mm, 불확실 4) -> 30 mm 에서 0.15 · 0.17 mm, 불확실 0
+# (45 mm 는 0.11 · 0.16 이나 좌우 최대 0.9 mm).
+SHIFT_TRACK_UP_AT = {"ngs_tube": 0.030}
 SHIFT_DEVICE_ABOVE = 0.005      # 깊이 식에 쓰는 화소: 탁자보다 이만큼 넘게 높은 점 (준비 사진 기준)
 TABLE_Z = 0.500                 # 탁자 윗면 (셀 상수)
 SHIFT_MIN_DEPTH_PX = 50
@@ -459,10 +463,10 @@ class SeatShift:
         uv = K @ local
         return uv[:2] / uv[2]
 
-    def reference(self, seat):
+    def reference(self, seat, station=None):
         rgb, depth = self.camera.capture(noise=True)
         K, pose = self._pose()
-        point = np.asarray(seat, dtype=float) + np.array([0.0, 0.0, SHIFT_TRACK_UP])
+        point = np.asarray(seat, dtype=float) + np.array([0.0, 0.0, SHIFT_TRACK_UP_AT.get(station, SHIFT_TRACK_UP)])
         return dict(rgb=rgb, depth=depth, K=K, pose=pose, point=point, uv=self._project(K, pose, point))
 
     def measure(self, ref):

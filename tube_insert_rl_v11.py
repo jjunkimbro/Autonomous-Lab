@@ -30,8 +30,11 @@ import numpy as np
 
 BASE = Path(__file__).resolve().parent
 RUN = BASE / "rl_runs" / "tube_insert"
-TARGETS = ("fluent_tube", "sorter_right_tube", "tube_hotel_1", "tube_hotel_2")
-KINDS = ("fluent_tube", "sorter_right_tube", "tube_hotel")
+# v5 부터 NGS 를 넣었다 (자리 벽 45 mm — 다른 자리 19 · 30 mm). v3 는 NGS 에서 0.010 (곧게 내리기 0.480): 처음 보는 깊은 자리에서
+# 배운 비키기가 통하지 않았다. 관측의 장비 원핫 길이가 달라 정책마다 맞는 목록을 쓴다 (kinds_for).
+TARGETS = ("fluent_tube", "sorter_right_tube", "tube_hotel_1", "tube_hotel_2", "ngs_tube")
+KINDS = ("fluent_tube", "sorter_right_tube", "tube_hotel", "ngs_tube")
+KINDS_V3 = ("fluent_tube", "sorter_right_tube", "tube_hotel")
 ERROR_MM = 2.5
 CONTROL_HZ = 20
 EPISODE_TIME = 6.0
@@ -69,6 +72,7 @@ class Inserter:
         self.env = env
         self.tool = mujoco.mj_name2id(env.model, mujoco.mjtObj.mjOBJ_BODY, "ur5e_onrobot_rg2_body")
         self.aim_error = np.zeros(2)
+        self.kinds = KINDS
 
     def _wrench(self):
         """손목 힘 · 돌림힘 (월드, 돌림힘은 TCP 둘레)."""
@@ -89,8 +93,10 @@ class Inserter:
     def obs(self):
         tcp = self.env.data.site_xpos[self.env.site]
         lateral = self.rot.T @ (self.p - self.hover)
-        kind = np.zeros(len(KINDS))
-        kind[KINDS.index("tube_hotel" if self.target.startswith("tube_hotel") else self.target)] = 1.0
+        kind = np.zeros(len(self.kinds))
+        name = "tube_hotel" if self.target.startswith("tube_hotel") else self.target
+        if name in self.kinds:              # 배우지 않은 자리 (v3 의 NGS) 는 모두 0 — '모르는 장비'
+            kind[self.kinds.index(name)] = 1.0
         parts = self.history + [[(tcp[2] - self.down[2]) * 1000 / 30.0], lateral[:2] / LATERAL_LIMIT,
                                 [self.t / EPISODE_TIME], kind]
         return np.clip(np.concatenate([np.ravel(p) for p in parts]), -10, 10).astype(np.float32)
@@ -173,12 +179,19 @@ class Inserter:
 
     def run(self, policy, target, hover, down, max_force=0.0):
         """한 번 꽂기를 끝까지 (이송 체인용). 마지막 info."""
+        self.kinds = kinds_for(policy)
         obs = self.begin(target, hover, down, max_force)
         done, info = False, {}
         while not done:
             action, _ = policy.predict(obs, deterministic=True)
             obs, _, done, info = self.step(action)
         return info
+
+
+def kinds_for(policy):
+    """정책 관측 길이에 맞는 장비 목록 (v3 = NGS 없음)."""
+    n = int(policy.observation_space.shape[0])
+    return KINDS if n == 6 * HISTORY + 1 + 2 + 1 + len(KINDS) else KINDS_V3
 
 
 class TubeInsertGym(gym.Env):
@@ -276,13 +289,14 @@ def train(a):
 
 
 def _eval_job(job):
-    policy_path, seed, episodes, error_mm, straight = job
-    gym_env = TubeInsertGym(seed, error_mm)
+    policy_path, seed, episodes, error_mm, straight, targets = job
+    gym_env = TubeInsertGym(seed, error_mm, targets=targets)
     if straight:
         policy = StraightDown()
     else:
         from stable_baselines3 import PPO
         policy = PPO.load(policy_path, device="cpu")
+        gym_env.core.kinds = kinds_for(policy)
     rows = []
     for k in range(episodes):
         obs, _ = gym_env.reset(seed=seed * 1000 + k)
@@ -301,14 +315,16 @@ def evaluate(a):
     per = int(math.ceil(a.episodes / a.workers))
     out = {}
     for name, straight in (("straight", True), ("policy", False)):
-        jobs = [(path, 50000 + w, per, a.error, straight) for w in range(a.workers)]
+        jobs = [(path, 50000 + w, per, a.error, straight, tuple(a.targets)) for w in range(a.workers)]
         with mp.Pool(a.workers) as pool:
             rows = sum(pool.map(_eval_job, jobs), [])
         out[name] = rows
         print(f"{name:9s} 꽂힘 {np.mean([r['seated'] for r in rows]):.3f}  넘어짐 {np.mean([r['tilt_deg'] > 30 for r in rows]):.3f}"
               f"  >50N {np.mean([r['max_force_N'] > 50 for r in rows]):.3f}  시간 {np.median([r['time_s'] for r in rows]):.1f}s  (n {len(rows)})")
-        for kind in KINDS:
+        for kind in KINDS + tuple(t for t in a.targets if t not in TARGETS):
             rs = [r for r in rows if r["target"].startswith(kind)]
+            if not rs:
+                continue
             e = np.array([r["error_mm"] for r in rs])
             ok = np.array([r["seated"] for r in rs])
             near = np.all(np.abs(e) <= 1.0, axis=1)
@@ -331,6 +347,7 @@ def main():
     ap.add_argument("--run", default=None)
     ap.add_argument("--init", default=None, help="이어 배울 정책의 실행 이름 (rl_runs/<init>/policy.zip)")
     ap.add_argument("--out", default="tube_insert_eval.json")
+    ap.add_argument("--targets", nargs="+", default=list(TARGETS), help="평가할 자리 (예: ngs_tube)")
     a = ap.parse_args()
     train(a) if a.mode == "train" else evaluate(a)
 
