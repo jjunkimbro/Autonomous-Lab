@@ -86,27 +86,33 @@ class Runner:
         return self._preps[key]
 
     # ------------------------------------------------------------------
-    def episode(self, seed, d2="rule", d6="rule", d2_after="rule", inject_pick=None, inject_place=None, correct=None):
+    def episode(self, seed, d2="rule", d6="rule", d2_after="rule", inject_pick=None, inject_place=None, correct=None,
+                plan=None):
         """한 이송. d2 / d6 = 행동 이름 또는 feats -> 행동 함수 ('rule' = 규칙). correct(feats) -> 보정 (learned 용).
-        6 단계 뒤 다시 꽂은 것도 실패면 사람 호출. 돌려주는 dict 에 판단한 곳의 근거(feats)와 결과를 담는다."""
+        6 단계 뒤 다시 꽂은 것도 실패면 사람 호출. 돌려주는 dict 에 판단한 곳의 근거(feats)와 결과를 담는다.
+
+        plan  공정 평가(process_day_v11) 가 정한 이송: source · target · 장비 자세 src_delta · tgt_delta (공칭 대비) ·
+              준비 결과 prep_s · prep_t · after_reset(env) (reset 뒤 다른 장비 · 물체를 그날 상태로 둔다). 없으면 시드로 정한다."""
         import judgment_actions_v11 as ja
         import pick_plate_env_v9 as pk
         import tube_chain_v11 as tc
         import tube_perception_v11 as tp
         from judgment_chain_v11 import station_shift
         env, camera, perception = self.env, self.camera, self.perception
-        source, target = situation(seed)
+        source, target = (plan["source"], plan["target"]) if plan else situation(seed)
         row = dict(seed=int(seed), source=source, target=target, photos=0, d2=[], d6=None, stage="", regrips=0)
-        prep_s, prep_t = self.prepare(seed, source), self.prepare(seed, target)
+        prep_s, prep_t = (plan["prep_s"], plan["prep_t"]) if plan else (self.prepare(seed, source), self.prepare(seed, target))
         if not (prep_s["ok"] and prep_t["ok"]):
             return dict(row, stage="prep", done_ok=False, reward=0.0)
         camera.appear.randomize(np.random.default_rng([int(seed), 11]))
         camera.rng = np.random.default_rng([int(seed), 12])
-        src_delta = tc.prep_truth(seed) + station_shift(seed, env.place_data[source]["rotation"])
+        src_delta = plan["src_delta"] if plan else tc.prep_truth(seed) + station_shift(seed, env.place_data[source]["rotation"])
         rest = np.random.default_rng([int(seed), 24]).uniform(-pk.RESTING_ERROR, pk.RESTING_ERROR)
         env.reset(seed=int(seed), options={"station": source, "target": target, "delta": src_delta, "rest": rest,
                                            "measure_noise": tc.seat_delta(env, source, prep_s["seat"]) - src_delta,
                                            "rest_noise": -rest, "perception_failed": False})
+        if plan and plan.get("after_reset"):
+            plan["after_reset"](env)
 
         # 1 단계 + 집기 (+ 2 단계 뒤 판단)
         force = self._look_and_pick(inject_pick, row)
@@ -137,7 +143,7 @@ class Runner:
 
         # 운반 (+ 4 단계) -> 5 단계 -> 꽂기 -> 6 단계
         rotation = env.place_data[target]["rotation"]
-        delta = tc.prep_truth(seed) + station_shift(seed, rotation)
+        delta = plan["tgt_delta"] if plan else tc.prep_truth(seed) + station_shift(seed, rotation)
         env.plan_place(target, {"delta": delta})
         q_goal = tc.replan(env, tc.seat_delta(env, target, prep_t["seat"]))
         ok, offsets, f = self._carry(q_goal, row, "stage4")
