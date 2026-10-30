@@ -92,10 +92,11 @@ def station_shift(seed, rotation):
     return np.array([sw[0], sw[1], shift[2], shift[3]])
 
 
-def prepare_station(prep_env, prep_cam, seed, station, scan):
-    """준비 단계. (모델, 놓을 자리 중심, yaw, 준비 때 장비 delta, 데모 판 판정 기준). scan=False 면 장비 delta 만."""
+def prepare_station(prep_env, prep_cam, seed, station, scan, delta=None):
+    """준비 단계. (모델, 놓을 자리 중심, yaw, 준비 때 장비 delta, 데모 판 판정 기준). scan=False 면 장비 delta 만.
+    delta  준비 때 장비 자세 (공칭 대비). 없으면 시드로 뽑는다."""
     import measure_scan_v11 as ms
-    prep_env.reset(seed=int(seed), options={"station": station})
+    prep_env.reset(seed=int(seed), options={"station": station} if delta is None else {"station": station, "delta": delta})
     truth = prep_env.truth.copy()
     if not scan:
         return None, None, None, truth, None
@@ -230,6 +231,220 @@ def replace_here(env, camera, perception, centre, yaw):
     return held, seen, force
 
 
+def transfer_plate(ctx, arm, source, target, seed, plan=None):
+    """판 이송 한 번 (run 의 시드 하나). 행(dict) 을 돌려준다.
+
+    plan  공정 평가(process_day_v11) 가 정한 이송: src_delta · rest (출발 장비 자세 · 받침 위 판 치우침), 또는
+          start_pose (출발 장비 좌표의 판 자세 dict(local, quat_s), 지난 이송이 놓은 그대로), tgt_delta (도착 장비 자세),
+          prep (도착 장비 준비 결과, prepare_station), after_reset(env) (reset 뒤 다른 물체를 그날 상태로).
+          없으면 시드로 정한다 (체인 실험)."""
+    import place_plate_env_v9 as pp
+    import judgment_actions_v11 as ja
+    from inhand_perception_v11 import InHandPerception
+    from measure_inhand_v11 import truth_in_hand
+    env, camera, perception = ctx["env"], ctx["camera"], ctx["perception"]
+    vision, vision_pick, prepared = ctx["vision"], ctx["vision_pick"], ctx["prepared"]
+    prep_env, prep_cam, rotation, place_inhand = ctx["prep_env"], ctx["prep_cam"], ctx["rotation"], ctx["place_inhand"]
+    zero = np.zeros(5)
+    row = dict(arm=arm, source=source, target=target, seed=int(seed), regrips=0, views=0,
+               compensated=False, log=[])
+    if plan:
+        prep = plan["prep"]
+    elif prepared:
+        prep = prepare_station(prep_env, prep_cam, seed, target, scan=vision)
+    force = 0.0
+    options = {"station": source, "target": target}
+    if plan:
+        options.update({k: plan[k] for k in ("src_delta", "rest") if k in plan})
+        options["delta"] = options.pop("src_delta")
+        if plan.get("start_pose") is not None:
+            options["failed_pose"] = plan["start_pose"]
+    env.reset(seed=int(seed), options=options)
+    if plan and plan.get("after_reset"):
+        plan["after_reset"](env)
+    if vision_pick:
+        from incubator_pick_v11 import look_and_replan
+        row["vision_pick"], force = look_and_replan(env, camera, 1)
+    done = False
+    while not done:
+        _, _, term, trunc, info = env.step(zero)
+        done = term or trunc
+    force = max(force, info["max_force_N"])
+    offsets = None
+    human = False
+
+    if arm == "R":
+        # 2 단계 뒤 판단 RL (judgment_rl_v11.stage2 — 운반 / 다시 보기 / 다시 집기 / 사람 호출)
+        import judgment_rl_v11 as jr
+        policy = jr.load_policy()
+        carried, row["d2"], row["regrips"], seen, f = jr.stage2(env, perception, info, source,
+                                                               policy.act2, policy.act2)
+        force = max(force, f)
+        human = not carried
+        offsets = offsets_of(seen) if carried else None
+        info = dict(info, failed=False) if carried else info
+    elif arm != "A":
+        while True:
+            held = bool(env.gripped and not info["failed"])
+            seen = perception.observe() if held else dict(verdict="NG", reason="집기 단계 실패", gripped=False)
+            if arm in ("C", "R") and held and near_threshold(seen):
+                views = [seen]
+                for view in ("lift20", "turn+3", "turn-3"):
+                    extra, f = ja.observe_from(env, perception, view)
+                    force = max(force, f)
+                    views.append(extra)
+                seen = ja.fuse(views)
+                InHandPerception._verdict(seen)
+                row["views"] += len(views) - 1
+            truth = truth_in_hand(env) if held else None
+            row["log"].append(dict(verdict=seen["verdict"], reason=seen.get("reason", ""),
+                                   seen_z=seen.get("z_mm"), seen_yaw=seen.get("yaw_deg"),
+                                   truth_z=None if truth is None else truth["z_mm"],
+                                   truth_yaw=None if truth is None else truth["yaw_deg"]))
+            measured = offsets_of(seen)
+            if seen["verdict"] == "OK":
+                offsets = measured if arm in ("C", "R") else None
+                break
+            if (arm in ("C", "R") and seen.get("gripped") and seen.get("in_hand") and measured is not None
+                    and abs(seen["z_mm"]) <= COMPENSATE_Z_MM and abs(seen["yaw_deg"]) <= COMPENSATE_YAW_DEG):
+                offsets = measured
+                break
+            if row["regrips"] >= MAX_REGRIPS:
+                human = True
+                break
+            force = max(force, ja.put_back(env))
+            fix = measured if (measured is not None and seen.get("gripped")) else [0.0, 0.0, 0.0, 0.0]
+            force = max(force, ja.regrip(env, fix))
+            row["regrips"] += 1
+            info = dict(failed=False)
+
+    if human:
+        row.update(stage="human", done_ok=False, max_force_N=force)
+        return row
+    if not env.gripped or info.get("failed"):
+        row.update(stage="pick", done_ok=False, max_force_N=force)
+        return row
+
+    place_rng = np.random.default_rng(int(seed) + 1_000_003)
+    options = {"delta": place_rng.uniform(-pp.STATION_ERROR, pp.STATION_ERROR)}
+    if plan:
+        options["delta"] = plan["tgt_delta"]
+    elif prepared:
+        options["delta"] = prep[3] + station_shift(seed, rotation)
+    if vision:
+        q_goal = env.plan_place(target, options)
+    elif offsets is not None:
+        q_goal = ja.compensate_place(env, target, offsets, options)
+        row["compensated"] = True
+    else:
+        q_goal = env.plan_place(target, options)
+    carried = bool(env.traverse(q_goal))
+    row.update(slip_mm=float(env.slip_mm), slip_yaw_deg=float(env.slip_yaw_deg))
+    force = max(force, env.traverse_force)
+    if not carried:
+        row.update(stage="traverse", done_ok=False, max_force_N=force)
+        return row
+    if arm == "R":
+        import judgment_rl_v11 as jr
+        policy = jr.load_policy()
+
+        def decide5(fit, rel):
+            act = policy.act5(dict(fit_features(fit, rel), **jr.station_onehot(target)))
+            row["d5"] = act
+            return (jr.EXTRA_VIEW,) if act == "look" else ()
+    if vision:
+        info, f, record, placed_at = place_by_vision(env, camera, perception, prep,
+                                                     pick_seen=seen if place_inhand == "pick" else None,
+                                                     decide=decide5 if arm == "R" else None)
+        force = max(force, f)
+        row["vision_place"] = record
+        fit5 = dict(record["fit"], **jr.station_onehot(target)) if arm == "R" else None
+    else:
+        env.begin_place()
+        done = False
+        while not done:
+            _, _, term, trunc, info = env.step(zero)
+            done = term or trunc
+    force = max(force, info["max_force_N"])
+    stage = "place"
+    row["verify"], row["replaced"] = [], 0
+    if vision and info["released"] and not info["failed"]:
+        import place_verify_v11 as pv
+        while True:
+            c6, y6, rep6, f = pv.look_after_place(env, camera, pv.view_for(target in FLAT_STATIONS))
+            force = max(force, f)
+            ref = dict(prep[4], station_dz_mm=placed_at["dz_mm"])
+            ok6, why6, seen6 = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"],
+                                          flat=target in FLAT_STATIONS, station=prep[:3])
+            truth_ok, _ = truth_done(env, info, target)
+            row["verify"].append(dict(ok=bool(ok6), why=why6, truth_ok=truth_ok,
+                                      **{k: v for k, v in seen6.items()}))
+            if ok6:
+                break
+            rechecked = False
+            if seen6.get("unsure") and arm in ("C", "R"):
+                # 돌기 없는 받침: 놓기 전 · 놓은 뒤 장비 자리가 달라 '불확실'. C 는 늘 다시 확인, R 은 판단이 고른다.
+                act = "recheck"
+                if arm == "R":
+                    feats6 = dict(jr.verify_features(seen6), **{f"fit_{k}": v for k, v in fit5.items()})
+                    act = policy.act6(feats6)
+                    row["d6"] = act
+                if act == "recheck":
+                    force = max(force, pv.recheck(env, camera, rep6))
+                    row["rechecked"] = row.get("rechecked", 0) + 1
+                    ok6, why6, seen6 = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"],
+                                                  flat=True, station=prep[:3], agree=False)
+                    row["verify"].append(dict(ok=bool(ok6), why=why6, truth_ok=truth_ok, recheck=True,
+                                              **{k: v for k, v in seen6.items()}))
+                    rechecked = True
+                    if ok6:
+                        break
+                elif act == "human":
+                    stage = "human"
+                    break
+            if arm not in ("C", "R") or row["replaced"] >= MAX_REPLACES:
+                stage = "human"
+                break
+            act = "again"
+            if arm == "R":
+                feats6 = dict(jr.verify_features(seen6, rechecked=rechecked), **{f"fit_{k}": v for k, v in fit5.items()})
+                act = policy.act6(feats6)
+                row["d6"] = act
+                if act == "human":
+                    stage = "human"
+                    break
+            held, seen2, f = replace_here(env, camera, perception, c6, y6)
+            force = max(force, f)
+            row["replaced"] += 1
+            # 규칙 C 는 다시 집은 판이 손 안 NG (보정 범위 밖) 면 사람 호출. R 은 쥐고 있으면 다시 놓는다.
+            if not held or arm == "C" and seen2.get("verdict") == "NG" and not (
+                    seen2.get("in_hand") and seen2.get("z_mm") is not None
+                    and abs(seen2["z_mm"]) <= COMPENSATE_Z_MM and abs(seen2["yaw_deg"]) <= COMPENSATE_YAW_DEG):
+                stage = "human"
+                break
+            q_goal = env.plan_place(target, options)
+            env.traverse(q_goal)
+            force = max(force, env.traverse_force)
+            base, dropped = (act[:-5], True) if act.endswith("_drop") else (act, False)
+            drop = jr.DROP if dropped else REPLACE_DROP
+            if base == "learned":
+                fix = policy.correct(feats6)
+                info, f, record, placed_at = place_by_vision(
+                    env, camera, perception, prep, fixed=placed_at,
+                    correction=(fix[0] / 1000.0, fix[1] / 1000.0, math.radians(fix[2])), drop=drop)
+            else:
+                info, f, record, placed_at = place_by_vision(
+                    env, camera, perception, prep, pick_seen=seen2 if place_inhand == "pick" else None,
+                    views=("aside+70", "back80_up80") if base == "look" else ("aside+70",), drop=drop)
+            force = max(force, f, info["max_force_N"])
+            if not info["released"] or info["failed"]:
+                stage = "place_failed"      # 다시 놓다가 판을 놓침 (조용한 실패가 아니다 — 놓기가 실패했다)
+                break
+    ok, state = truth_done(env, info, target)
+    row.update(stage=stage, max_force_N=force, **state, done_ok=bool(ok and stage == "place"))
+    return row
+
+
 def run(job):
     arm, source, target, seeds, vision_mode, place_inhand = job
     import transfer_env_v9 as tr
@@ -255,195 +470,10 @@ def run(job):
         assert np.allclose(prep_env.perturber.pivot(target), env.perturber.pivot(target))
     zero = np.zeros(5)
     rows = []
-    for seed in seeds:
-        row = dict(arm=arm, source=source, target=target, seed=int(seed), regrips=0, views=0,
-                   compensated=False, log=[])
-        if prepared:
-            prep = prepare_station(prep_env, prep_cam, seed, target, scan=vision)
-        force = 0.0
-        env.reset(seed=int(seed), options={"station": source, "target": target})
-        if vision_pick:
-            from incubator_pick_v11 import look_and_replan
-            row["vision_pick"], force = look_and_replan(env, camera, 1)
-        done = False
-        while not done:
-            _, _, term, trunc, info = env.step(zero)
-            done = term or trunc
-        force = max(force, info["max_force_N"])
-        offsets = None
-        human = False
-
-        if arm == "R":
-            # 2 단계 뒤 판단 RL (judgment_rl_v11.stage2 — 운반 / 다시 보기 / 다시 집기 / 사람 호출)
-            import judgment_rl_v11 as jr
-            policy = jr.load_policy()
-            carried, row["d2"], row["regrips"], seen, f = jr.stage2(env, perception, info, source,
-                                                                   policy.act2, policy.act2)
-            force = max(force, f)
-            human = not carried
-            offsets = offsets_of(seen) if carried else None
-            info = dict(info, failed=False) if carried else info
-        elif arm != "A":
-            while True:
-                held = bool(env.gripped and not info["failed"])
-                seen = perception.observe() if held else dict(verdict="NG", reason="집기 단계 실패", gripped=False)
-                if arm in ("C", "R") and held and near_threshold(seen):
-                    views = [seen]
-                    for view in ("lift20", "turn+3", "turn-3"):
-                        extra, f = ja.observe_from(env, perception, view)
-                        force = max(force, f)
-                        views.append(extra)
-                    seen = ja.fuse(views)
-                    InHandPerception._verdict(seen)
-                    row["views"] += len(views) - 1
-                truth = truth_in_hand(env) if held else None
-                row["log"].append(dict(verdict=seen["verdict"], reason=seen.get("reason", ""),
-                                       seen_z=seen.get("z_mm"), seen_yaw=seen.get("yaw_deg"),
-                                       truth_z=None if truth is None else truth["z_mm"],
-                                       truth_yaw=None if truth is None else truth["yaw_deg"]))
-                measured = offsets_of(seen)
-                if seen["verdict"] == "OK":
-                    offsets = measured if arm in ("C", "R") else None
-                    break
-                if (arm in ("C", "R") and seen.get("gripped") and seen.get("in_hand") and measured is not None
-                        and abs(seen["z_mm"]) <= COMPENSATE_Z_MM and abs(seen["yaw_deg"]) <= COMPENSATE_YAW_DEG):
-                    offsets = measured
-                    break
-                if row["regrips"] >= MAX_REGRIPS:
-                    human = True
-                    break
-                force = max(force, ja.put_back(env))
-                fix = measured if (measured is not None and seen.get("gripped")) else [0.0, 0.0, 0.0, 0.0]
-                force = max(force, ja.regrip(env, fix))
-                row["regrips"] += 1
-                info = dict(failed=False)
-
-        if human:
-            row.update(stage="human", done_ok=False, max_force_N=force)
-            rows.append(row)
-            continue
-        if not env.gripped or info.get("failed"):
-            row.update(stage="pick", done_ok=False, max_force_N=force)
-            rows.append(row)
-            continue
-
-        place_rng = np.random.default_rng(int(seed) + 1_000_003)
-        options = {"delta": place_rng.uniform(-pp.STATION_ERROR, pp.STATION_ERROR)}
-        if prepared:
-            options["delta"] = prep[3] + station_shift(seed, rotation)
-        if vision:
-            q_goal = env.plan_place(target, options)
-        elif offsets is not None:
-            q_goal = ja.compensate_place(env, target, offsets, options)
-            row["compensated"] = True
-        else:
-            q_goal = env.plan_place(target, options)
-        carried = bool(env.traverse(q_goal))
-        row.update(slip_mm=float(env.slip_mm), slip_yaw_deg=float(env.slip_yaw_deg))
-        force = max(force, env.traverse_force)
-        if not carried:
-            row.update(stage="traverse", done_ok=False, max_force_N=force)
-            rows.append(row)
-            continue
-        if arm == "R":
-            import judgment_rl_v11 as jr
-            policy = jr.load_policy()
-
-            def decide5(fit, rel):
-                act = policy.act5(dict(fit_features(fit, rel), **jr.station_onehot(target)))
-                row["d5"] = act
-                return (jr.EXTRA_VIEW,) if act == "look" else ()
-        if vision:
-            info, f, record, placed_at = place_by_vision(env, camera, perception, prep,
-                                                         pick_seen=seen if place_inhand == "pick" else None,
-                                                         decide=decide5 if arm == "R" else None)
-            force = max(force, f)
-            row["vision_place"] = record
-            fit5 = dict(record["fit"], **jr.station_onehot(target)) if arm == "R" else None
-        else:
-            env.begin_place()
-            done = False
-            while not done:
-                _, _, term, trunc, info = env.step(zero)
-                done = term or trunc
-        force = max(force, info["max_force_N"])
-        stage = "place"
-        row["verify"], row["replaced"] = [], 0
-        if vision and info["released"] and not info["failed"]:
-            import place_verify_v11 as pv
-            while True:
-                c6, y6, rep6, f = pv.look_after_place(env, camera, pv.view_for(target in FLAT_STATIONS))
-                force = max(force, f)
-                ref = dict(prep[4], station_dz_mm=placed_at["dz_mm"])
-                ok6, why6, seen6 = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"],
-                                              flat=target in FLAT_STATIONS, station=prep[:3])
-                truth_ok, _ = truth_done(env, info, target)
-                row["verify"].append(dict(ok=bool(ok6), why=why6, truth_ok=truth_ok,
-                                          **{k: v for k, v in seen6.items()}))
-                if ok6:
-                    break
-                rechecked = False
-                if seen6.get("unsure") and arm in ("C", "R"):
-                    # 돌기 없는 받침: 놓기 전 · 놓은 뒤 장비 자리가 달라 '불확실'. C 는 늘 다시 확인, R 은 판단이 고른다.
-                    act = "recheck"
-                    if arm == "R":
-                        feats6 = dict(jr.verify_features(seen6), **{f"fit_{k}": v for k, v in fit5.items()})
-                        act = policy.act6(feats6)
-                        row["d6"] = act
-                    if act == "recheck":
-                        force = max(force, pv.recheck(env, camera, rep6))
-                        row["rechecked"] = row.get("rechecked", 0) + 1
-                        ok6, why6, seen6 = pv.verdict(env, c6, y6, rep6, ref, placed_at["target"],
-                                                      flat=True, station=prep[:3], agree=False)
-                        row["verify"].append(dict(ok=bool(ok6), why=why6, truth_ok=truth_ok, recheck=True,
-                                                  **{k: v for k, v in seen6.items()}))
-                        rechecked = True
-                        if ok6:
-                            break
-                    elif act == "human":
-                        stage = "human"
-                        break
-                if arm not in ("C", "R") or row["replaced"] >= MAX_REPLACES:
-                    stage = "human"
-                    break
-                act = "again"
-                if arm == "R":
-                    feats6 = dict(jr.verify_features(seen6, rechecked=rechecked), **{f"fit_{k}": v for k, v in fit5.items()})
-                    act = policy.act6(feats6)
-                    row["d6"] = act
-                    if act == "human":
-                        stage = "human"
-                        break
-                held, seen2, f = replace_here(env, camera, perception, c6, y6)
-                force = max(force, f)
-                row["replaced"] += 1
-                # 규칙 C 는 다시 집은 판이 손 안 NG (보정 범위 밖) 면 사람 호출. R 은 쥐고 있으면 다시 놓는다.
-                if not held or arm == "C" and seen2.get("verdict") == "NG" and not (
-                        seen2.get("in_hand") and seen2.get("z_mm") is not None
-                        and abs(seen2["z_mm"]) <= COMPENSATE_Z_MM and abs(seen2["yaw_deg"]) <= COMPENSATE_YAW_DEG):
-                    stage = "human"
-                    break
-                q_goal = env.plan_place(target, options)
-                env.traverse(q_goal)
-                force = max(force, env.traverse_force)
-                base, dropped = (act[:-5], True) if act.endswith("_drop") else (act, False)
-                drop = jr.DROP if dropped else REPLACE_DROP
-                if base == "learned":
-                    fix = policy.correct(feats6)
-                    info, f, record, placed_at = place_by_vision(
-                        env, camera, perception, prep, fixed=placed_at,
-                        correction=(fix[0] / 1000.0, fix[1] / 1000.0, math.radians(fix[2])), drop=drop)
-                else:
-                    info, f, record, placed_at = place_by_vision(
-                        env, camera, perception, prep, pick_seen=seen2 if place_inhand == "pick" else None,
-                        views=("aside+70", "back80_up80") if base == "look" else ("aside+70",), drop=drop)
-                force = max(force, f, info["max_force_N"])
-                if not info["released"] or info["failed"]:
-                    stage = "place_failed"      # 다시 놓다가 판을 놓침 (조용한 실패가 아니다 — 놓기가 실패했다)
-                    break
-        ok, state = truth_done(env, info, target)
-        row.update(stage=stage, max_force_N=force, **state, done_ok=bool(ok and stage == "place"))
-        rows.append(row)
+    ctx = dict(env=env, camera=camera, perception=perception, vision=vision, vision_pick=vision_pick,
+               prepared=prepared, prep_env=prep_env if prepared else None, prep_cam=prep_cam if prepared else None,
+               rotation=rotation if prepared else None, place_inhand=place_inhand)
+    rows = [transfer_plate(ctx, arm, source, target, seed) for seed in seeds]
     env.close()
     if prepared:
         prep_env.close()

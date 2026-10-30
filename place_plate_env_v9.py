@@ -25,6 +25,7 @@
 
 import itertools
 import math
+import os
 import time
 
 import gymnasium as gym
@@ -315,6 +316,12 @@ class PlacePlateEnv(gym.Env):
         self.stations = tuple(stations)
         self.randomize = randomize
         self.model = mujoco.MjModel.from_xml_path(str(s9.OUTPUT_XML))
+        # 장비 밀기는 정적 geom 을 옮기는데, MuJoCo 가 모델을 만들 때 한 번 계산한 몸체 충돌 경계(BVH) 는 그대로라 밀린
+        # 위치 맞춤 블록이 충돌 검사에서 빠졌다 (2026-10-30: 장비를 2 mm 만 밀어도 블록에 4 mm 파고든 판과 접촉 0 개, 끄면 8 개).
+        # 그때까지의 판 결과는 블록 없이 받침판만 있는 물리였다 -> 중간 단계 검사를 끈다 (tube_env_v11 과 같다).
+        # PLATE_MIDPHASE=1 이면 예전 물리 (예전 결과 재현용).
+        if os.environ.get("PLATE_MIDPHASE", "0") != "1":
+            self.model.opt.disableflags |= mujoco.mjtDisableBit.mjDSBL_MIDPHASE
         self.data = mujoco.MjData(self.model)
         self.ik_data = mujoco.MjData(self.model)
         self.substeps = int(round(1.0 / (CONTROL_HZ * self.model.opt.timestep)))
