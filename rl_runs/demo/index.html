@@ -140,6 +140,25 @@
   </header>
 
   <section>
+    <p class="eyebrow">전체 순서 — 하루 공정</p>
+    <h2>학습한 것을 6 단계 순서 그대로, 하루 8 이송</h2>
+    <figure>
+      <video controls muted playsinline preload="metadata">
+        <source src="process_day_6022.webm" type="video/webm">
+      </video>
+      <figcaption>
+        시뮬레이션을 실제로 돌리며 찍었습니다 (process_day_v11 의 작업자 그대로, 6022 일, 282초). 준비(판 3 자리 + 튜브 5 자리,
+        빨리 감기) 뒤 판 Fluent → 배양기 → 리더 → Fluent, 튜브 a 호텔 1 → Fluent → 분류기 오른쪽, 판 b 분류기 왼쪽 → Fluent,
+        튜브 b 호텔 2 → Fluent → NGS. 8 이송 모두 완료 · 사람 호출 0 · 장비 사진 24 장.
+        자막 꼬리표가 그 순간 무엇이 움직이는지 말합니다: <b>[판단 RL]</b> 판 2 · 5 · 6 단계 뒤 판단, <b>[튜브 학습 판단]</b>
+        튜브 2 · 6 단계 뒤 판단, <b>[강화학습 꽂기]</b> 손목 힘을 보는 PPO (v3, NGS 는 v5, 0.8 배속), <b>[비전]</b> 사진으로 재기,
+        <b>[정해진 경로]</b> 학습하지 않은 동작. 이 날은 모든 놓기가 첫 판정에서 OK 라 6 단계 '다시 놓기 · 학습 보정' 장면은 나오지
+        않습니다 — 판단은 매번 '운반 · 그대로 놓기' 를 골랐습니다. 40 일 평가에서는 38 일이 사람 없이 끝났고 320 이송 중 318 이 완료.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="ruled">
     <p class="eyebrow">영상 1 — 제어층</p>
     <h2>같은 교란, 왼쪽은 학습 정책, 오른쪽은 규칙</h2>
     <figure>

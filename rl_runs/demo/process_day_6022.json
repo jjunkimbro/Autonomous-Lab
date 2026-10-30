@@ -1,0 +1,588 @@
+{
+ "day": 6022,
+ "transfers": [
+  {
+   "index": 0,
+   "obj": "plate",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "stage": "place",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 105.7,
+   "force": 10.553020686408132,
+   "d2": [
+    {
+     "feats": {
+      "ok": 1.0,
+      "ng": 0.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": -0.34849575130675714,
+      "yaw_deg": -0.009583166852477365,
+      "x_mm": 0.14308993673963155,
+      "height_mm": 0.30593864739145504,
+      "tilt_h": 0.04780181776895071,
+      "roll_deg": -0.014186894217580591,
+      "far_edges": 77.0,
+      "side_edges": 2.0,
+      "top_points": 3423.0,
+      "regrips": 0.0,
+      "looked": 0.0,
+      "src_fluent": 1.0,
+      "src_incubator": 0.0,
+      "src_reader": 0.0,
+      "src_sorter": 0.0
+     },
+     "action": "carry"
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "verify": [
+     {
+      "ok": true,
+      "why": "",
+      "truth_ok": true,
+      "tilt_deg": 0.03542412278687963,
+      "d_tilt_deg": 0.03084183686271513,
+      "d_top_mm": 0.014712507652138385,
+      "slope_deg": [
+       -0.015868501044465785,
+       0.03167111069111068
+      ],
+      "size_mm": [
+       126.58840526452796,
+       84.40044234557695
+      ],
+      "points": 15450.0,
+      "place_error": [
+       0.05401793024595314,
+       0.21601356028533303,
+       0.04142759263643127
+      ],
+      "unsure": false,
+      "station_error": [
+       0.15136105478497086,
+       0.5687127210765031,
+       -0.011958846886882089
+      ],
+      "station_gap": [
+       -0.09734312453901772,
+       -0.35269916079117003,
+       0.05338643952331336
+      ]
+     }
+    ],
+    "z_mm": -0.0023280049195051333,
+    "tilt_deg": 0.001501006430339179,
+    "placed": [
+     0.264236806838499,
+     0.25556314489516413,
+     0.051315651476799645
+    ],
+    "regrips": 0,
+    "replaced": 0
+   }
+  },
+  {
+   "index": 1,
+   "obj": "plate",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "stage": "place",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 49.5,
+   "force": 12.563711993776831,
+   "d2": [
+    {
+     "feats": {
+      "ok": 1.0,
+      "ng": 0.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": -0.2010312180265733,
+      "yaw_deg": 0.0006814992695388206,
+      "x_mm": -0.0415993321901102,
+      "height_mm": 0.37954288328846936,
+      "tilt_h": 0.05847851452055641,
+      "roll_deg": -0.006734623963322643,
+      "far_edges": 77.0,
+      "side_edges": 2.0,
+      "top_points": 3438.0,
+      "regrips": 0.0,
+      "looked": 0.0,
+      "src_fluent": 0.0,
+      "src_incubator": 1.0,
+      "src_reader": 0.0,
+      "src_sorter": 0.0
+     },
+     "action": "carry"
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "verify": [
+     {
+      "ok": true,
+      "why": "",
+      "truth_ok": true,
+      "tilt_deg": 0.060006298528907674,
+      "d_tilt_deg": 0.03336233067090487,
+      "d_top_mm": -0.06555798346825803,
+      "slope_deg": [
+       0.02722711786786665,
+       0.05347373913145787
+      ],
+      "size_mm": [
+       125.62921340034616,
+       84.1022735245415
+      ],
+      "points": 7777.0,
+      "place_error": [
+       0.2576493504620192,
+       0.1886768957738705,
+       -0.021342032184917474
+      ],
+      "unsure": false
+     }
+    ],
+    "z_mm": -0.001284756371400242,
+    "tilt_deg": 0.0009008618834794029,
+    "placed": [
+     0.30649604246211376,
+     0.003582630898091079,
+     0.12205252780797532
+    ],
+    "regrips": 0,
+    "replaced": 0
+   }
+  },
+  {
+   "index": 2,
+   "obj": "plate",
+   "source": "reader_plate",
+   "target": "fluent_plate",
+   "stage": "place",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 49.9,
+   "force": 16.626782346600542,
+   "d2": [
+    {
+     "feats": {
+      "ok": 1.0,
+      "ng": 0.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": -0.08620808742539066,
+      "yaw_deg": 0.0022840467209449605,
+      "x_mm": -0.0388733861024708,
+      "height_mm": 0.35282828814997214,
+      "tilt_h": 0.0368937547861474,
+      "roll_deg": 0.014339633646266774,
+      "far_edges": 77.0,
+      "side_edges": 2.0,
+      "top_points": 3399.0,
+      "regrips": 0.0,
+      "looked": 0.0,
+      "src_fluent": 0.0,
+      "src_incubator": 0.0,
+      "src_reader": 1.0,
+      "src_sorter": 0.0
+     },
+     "action": "carry"
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "verify": [
+     {
+      "ok": true,
+      "why": "",
+      "truth_ok": true,
+      "tilt_deg": 0.02064449488169034,
+      "d_tilt_deg": -0.020458848490652385,
+      "d_top_mm": -0.14063430257115073,
+      "slope_deg": [
+       0.013898570089636159,
+       -0.015265154328277556
+      ],
+      "size_mm": [
+       125.88220820209273,
+       84.04008951074506
+      ],
+      "points": 7892.0,
+      "place_error": [
+       0.42914357039808276,
+       -0.6098647081483333,
+       -0.10992257962823954
+      ],
+      "unsure": false
+     }
+    ],
+    "z_mm": -0.009692847045550401,
+    "tilt_deg": 0.007532379907384722,
+    "placed": [
+     0.08228069825959873,
+     0.6891645108993513,
+     -0.48827993472162917
+    ],
+    "regrips": 0,
+    "replaced": 0
+   }
+  },
+  {
+   "index": 3,
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube",
+   "stage": "done",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 87.0,
+   "force": 5.735300968167256,
+   "d2": [
+    {
+     "feats": {
+      "ok": 1.0,
+      "ng": 0.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": -0.08266303948525512,
+      "z_top_mm": -0.003968602592458841,
+      "height_mm": -0.004585035282743399,
+      "pitch_deg": 0.15284231898130163,
+      "residual_mm": 3.2148277121617115,
+      "side_points": 3941.0,
+      "top_points": 307.0,
+      "finger_mm": 11.667334001753714,
+      "regrips": 0.0,
+      "src_fluent": 0.0,
+      "src_sorter": 0.0,
+      "src_1": 1.0,
+      "src_2": 0.0
+     },
+     "action": "carry",
+     "reason": ""
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "try1": {
+     "seat_err_mm": [
+      0.5626544334189909,
+      -0.3330462075243346,
+      0.3286497372692043
+     ],
+     "verdict": true,
+     "seated": true,
+     "insert": {
+      "time_s": 3.7999999999999945,
+      "released": true,
+      "aborted": false,
+      "moved_mm": [
+       0.6926786825061648,
+       0.21215732395635228
+      ]
+     }
+    },
+    "regrips": 0
+   }
+  },
+  {
+   "index": 5,
+   "obj": "tube_a",
+   "source": "fluent_tube",
+   "target": "sorter_right_tube",
+   "stage": "done",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 76.0,
+   "force": 6.361875212512859,
+   "d2": [
+    {
+     "feats": {
+      "ok": 1.0,
+      "ng": 0.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": -0.38175192693821997,
+      "z_top_mm": -0.3592660729002136,
+      "height_mm": -0.052410539429351144,
+      "pitch_deg": 0.043672687648015525,
+      "residual_mm": 3.012598380777134,
+      "side_points": 3960.0,
+      "top_points": 316.0,
+      "finger_mm": 11.6672022867972,
+      "regrips": 0.0,
+      "src_fluent": 1.0,
+      "src_sorter": 0.0,
+      "src_1": 0.0,
+      "src_2": 0.0
+     },
+     "action": "carry",
+     "reason": ""
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "try1": {
+     "seat_err_mm": [
+      -0.28237571183220567,
+      -0.2343618050211216,
+      0.4282202406704627
+     ],
+     "verdict": true,
+     "seated": true,
+     "insert": {
+      "time_s": 3.649999999999995,
+      "released": true,
+      "aborted": false,
+      "moved_mm": [
+       1.6042991075668755,
+       -0.19939243001876317
+      ]
+     }
+    },
+    "regrips": 0
+   }
+  },
+  {
+   "index": 7,
+   "obj": "plate",
+   "source": "sorter_left_plate",
+   "target": "fluent_plate",
+   "stage": "place",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 53.3,
+   "force": 17.922623140800564,
+   "d2": [
+    {
+     "feats": {
+      "ok": 1.0,
+      "ng": 0.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": 0.17079021284165108,
+      "yaw_deg": 0.0020286810106384034,
+      "x_mm": 0.08162812212962446,
+      "height_mm": 0.20199792397432825,
+      "tilt_h": -0.002558005661556292,
+      "roll_deg": -0.007068787750712077,
+      "far_edges": 77.0,
+      "side_edges": 2.0,
+      "top_points": 3409.0,
+      "regrips": 0.0,
+      "looked": 0.0,
+      "src_fluent": 0.0,
+      "src_incubator": 0.0,
+      "src_reader": 0.0,
+      "src_sorter": 1.0
+     },
+     "action": "carry"
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "verify": [
+     {
+      "ok": true,
+      "why": "",
+      "truth_ok": true,
+      "tilt_deg": 0.0420407499793476,
+      "d_tilt_deg": 0.0009374066070048717,
+      "d_top_mm": -0.13033923258433688,
+      "slope_deg": [
+       0.005855931617184779,
+       -0.04163091096600883
+      ],
+      "size_mm": [
+       126.10624857389135,
+       84.10213956356515
+      ],
+      "points": 7920.0,
+      "place_error": [
+       0.6258538370891298,
+       -0.43246672057495333,
+       -0.03824014493828358
+      ],
+      "unsure": false
+     }
+    ],
+    "z_mm": -0.0036370211635716743,
+    "tilt_deg": 0.0025066827697330066,
+    "placed": [
+     -0.14977597256313455,
+     0.6248127153369447,
+     -0.3487756216819192
+    ],
+    "regrips": 0,
+    "replaced": 0
+   }
+  },
+  {
+   "index": 9,
+   "obj": "tube_b",
+   "source": "tube_hotel_2",
+   "target": "fluent_tube",
+   "stage": "done",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 71.2,
+   "force": 6.264592407952613,
+   "d2": [
+    {
+     "feats": {
+      "ok": 1.0,
+      "ng": 0.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": -0.08452762527628936,
+      "z_top_mm": -0.21551652224942375,
+      "height_mm": 0.01136291136775991,
+      "pitch_deg": -0.2544088690146703,
+      "residual_mm": 2.5576395806896106,
+      "side_points": 3944.0,
+      "top_points": 307.0,
+      "finger_mm": 11.666433792720104,
+      "regrips": 0.0,
+      "src_fluent": 0.0,
+      "src_sorter": 0.0,
+      "src_1": 0.0,
+      "src_2": 1.0
+     },
+     "action": "carry",
+     "reason": ""
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "try1": {
+     "seat_err_mm": [
+      -0.03414273043608752,
+      -0.21916933774385194,
+      0.33587324813078023
+     ],
+     "verdict": true,
+     "seated": true,
+     "insert": {
+      "time_s": 3.649999999999995,
+      "released": true,
+      "aborted": false,
+      "moved_mm": [
+       1.6136170774698477,
+       -0.4843483762816959
+      ]
+     }
+    },
+    "regrips": 0
+   }
+  },
+  {
+   "index": 10,
+   "obj": "tube_b",
+   "source": "fluent_tube",
+   "target": "ngs_tube",
+   "stage": "done",
+   "done_ok": true,
+   "human": false,
+   "silent": false,
+   "photos": 3,
+   "seconds": 92.1,
+   "force": 2.4916386445541,
+   "d2": [
+    {
+     "feats": {
+      "ok": 0.0,
+      "ng": 1.0,
+      "unsure_h": 0.0,
+      "gripped": 1.0,
+      "in_hand": 1.0,
+      "z_mm": -0.6051850122073185,
+      "z_top_mm": -0.42689093669408273,
+      "height_mm": 0.16794486136111758,
+      "pitch_deg": 0.34628385277290064,
+      "residual_mm": 2.6393474963512844,
+      "side_points": 3866.0,
+      "top_points": 310.0,
+      "finger_mm": 11.666545828023006,
+      "regrips": 0.0,
+      "src_fluent": 1.0,
+      "src_sorter": 0.0,
+      "src_1": 0.0,
+      "src_2": 0.0
+     },
+     "action": "carry",
+     "reason": "앞뒤 -0.61 mm"
+    }
+   ],
+   "d6": null,
+   "error": null,
+   "detail": {
+    "try1": {
+     "seat_err_mm": [
+      0.5944812833915444,
+      -0.13810092919724642,
+      0.29400624272202247
+     ],
+     "verdict": true,
+     "seated": true,
+     "insert": {
+      "time_s": 4.749999999999991,
+      "released": true,
+      "aborted": false,
+      "moved_mm": [
+       -0.36680645914677895,
+       -0.8569817263630901
+      ]
+     }
+    },
+    "regrips": 0
+   }
+  }
+ ],
+ "humans": 0,
+ "silent": 0,
+ "errors": 0,
+ "photos": 24,
+ "tube_prep_ok": {
+  "tube_hotel_1": true,
+  "tube_hotel_2": true,
+  "fluent_tube": true,
+  "sorter_right_tube": true,
+  "ngs_tube": true
+ },
+ "all_done": true,
+ "no_human": true
+}

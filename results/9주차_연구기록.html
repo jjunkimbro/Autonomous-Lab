@@ -1,0 +1,783 @@
+<title>자율 실험실 이송 9주차</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column (~46rem) with wider figure blocks; chapters follow the real order of work. */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --surface-2:#eef1f5;
+  --ink:#16202c; --ink-2:#4a5667; --line:#d6dce4;
+  --accent:#2b56c9; --accent-soft:#e4ebfb;
+  --safe:#1f8a6b; --safe-soft:#dcf1ea;
+  --warn:#b7791f; --warn-soft:#f8ecd6;
+  --bad:#c0453a; --bad-soft:#f8e1de;
+  --muted-bar:#c3cad5;
+  --f-display:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151c; --surface:#171e27; --surface-2:#1e2733;
+  --ink:#e6ebf2; --ink-2:#a3aebd; --line:#2e3946;
+  --accent:#7d9cf0; --accent-soft:#1f2b48;
+  --safe:#4cc59e; --safe-soft:#15332b;
+  --warn:#e3a94b; --warn-soft:#3a2d15;
+  --bad:#ec7d72; --bad-soft:#3d1f1c;
+  --muted-bar:#46525f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151c; --surface:#171e27; --surface-2:#1e2733;
+  --ink:#e6ebf2; --ink-2:#a3aebd; --line:#2e3946;
+  --accent:#7d9cf0; --accent-soft:#1f2b48;
+  --safe:#4cc59e; --safe-soft:#15332b;
+  --warn:#e3a94b; --warn-soft:#3a2d15;
+  --bad:#ec7d72; --bad-soft:#3d1f1c;
+  --muted-bar:#46525f; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px;
+  word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:1040px;margin:0 auto}
+.col{max-width:46rem}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(1.9rem,4.5vw,2.7rem);font-weight:700;letter-spacing:-0.01em}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.18rem;font-weight:600}
+h4{font-size:1rem;font-weight:600}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:14px}
+.stack-lg{display:flex;flex-direction:column;gap:28px}
+.mono,code{font-family:var(--f-mono);font-size:.88em}
+code{background:var(--surface-2);padding:1px 5px;border-radius:4px}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--ink-2)}
+.small{font-size:.88rem}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+header.top{padding-block:48px 28px;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid var(--line)}
+.lede{font-size:1.08rem;color:var(--ink-2);max-width:44rem}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:8px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tile .v{font-family:var(--f-mono);font-size:1.55rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2}
+.tile .k{font-size:.82rem;color:var(--ink-2);line-height:1.45}
+.tile.safe .v{color:var(--safe)} .tile.acc .v{color:var(--accent)}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;padding-block:18px;border-bottom:1px solid var(--line)}
+nav.toc a{font-size:.85rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+nav.toc a:hover{border-color:var(--accent);color:var(--accent)}
+
+section.ch{padding-block:44px 8px;display:flex;flex-direction:column;gap:20px}
+.ch-head{display:flex;gap:14px;align-items:baseline}
+.ch-no{font-family:var(--f-mono);font-size:.95rem;color:var(--accent);font-weight:600;min-width:2.2rem}
+
+/* figure blocks */
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.fig-title{font-weight:600;font-size:.95rem}
+.fig-cap{font-size:.84rem;color:var(--ink-2)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+svg text{font-family:var(--f-body)}
+.s-ink{fill:var(--ink)} .s-ink2{fill:var(--ink-2)} .s-acc{fill:var(--accent)} .s-safe{fill:var(--safe)} .s-warn{fill:var(--warn)} .s-bad{fill:var(--bad)}
+.s-box{fill:var(--surface-2);stroke:var(--line);stroke-width:1.2}
+.s-box-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6}
+.s-box-safe{fill:var(--safe-soft);stroke:var(--safe);stroke-width:1.2}
+.s-box-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.s-line{stroke:var(--ink-2);stroke-width:1.6;fill:none}
+.s-grid{stroke:var(--line);stroke-width:1;fill:none}
+.s-axis{stroke:var(--ink-2);stroke-width:1.2;fill:none}
+
+/* timeline stepper */
+.stepper{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;position:relative}
+.step{display:flex;flex-direction:column;gap:6px;padding:0 8px;position:relative;min-width:0}
+.step .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);position:relative;z-index:1}
+.step.bad .dot{border-color:var(--bad)} .step.warn .dot{border-color:var(--warn)} .step.good .dot{border-color:var(--safe);background:var(--safe)}
+.step::before{content:"";position:absolute;top:6px;left:8px;right:-8px;height:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.step .t{font-weight:600;font-size:.9rem;line-height:1.35}
+.step .d{font-size:.8rem;color:var(--ink-2);line-height:1.45}
+.step .r{font-family:var(--f-mono);font-size:.8rem;font-weight:600}
+@media (max-width:860px){
+  .stepper{grid-template-columns:1fr;gap:14px}
+  .step{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:0 0 0 26px}
+  .step .dot{position:absolute;left:0;top:6px}
+  .step::before{top:20px;left:6px;right:auto;width:2px;height:calc(100% + 0px)}
+  .step .d{flex-basis:100%}
+}
+
+/* glossary */
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.term{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.term b{font-size:.95rem}
+.term span{font-size:.86rem;color:var(--ink-2);line-height:1.6}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--surface-2);font-size:.84rem;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hl td{background:var(--accent-soft)}
+
+/* chips */
+.chip{display:inline-block;font-size:.76rem;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap;line-height:1.6}
+.chip.safe{background:var(--safe-soft);color:var(--safe)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.acc{background:var(--accent-soft);color:var(--accent)}
+
+/* problem → change → result cards */
+.pcr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.pcr>div{padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0;border-right:1px solid var(--line);position:relative}
+.pcr>div:last-child{border-right:none}
+.pcr .lab{font-size:.74rem;font-weight:600;letter-spacing:.06em}
+.pcr .p .lab{color:var(--bad)} .pcr .c .lab{color:var(--accent)} .pcr .r .lab{color:var(--safe)}
+.pcr .p{background:linear-gradient(0deg,var(--surface),var(--surface))}
+.pcr>div:not(:last-child)::after{content:"";position:absolute;right:-7px;top:50%;width:12px;height:12px;background:var(--surface);border-top:1px solid var(--line);border-right:1px solid var(--line);transform:translateY(-50%) rotate(45deg);z-index:1}
+.pcr ul{margin:0;padding-left:18px;font-size:.9rem;line-height:1.6}
+@media (max-width:760px){.pcr{grid-template-columns:1fr}.pcr>div{border-right:none;border-bottom:1px solid var(--line)}.pcr>div:last-child{border-bottom:none}.pcr>div:not(:last-child)::after{right:auto;left:24px;top:auto;bottom:-7px;transform:rotate(135deg)}}
+
+/* stage block */
+.stage{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding-block:20px;border-top:1px solid var(--line)}
+.stage:first-of-type{border-top:none}
+.stage-meta{display:flex;flex-direction:column;gap:6px}
+.stage-meta .sn{font-family:var(--f-mono);color:var(--accent);font-weight:600}
+.stage-meta .when{font-size:.8rem;color:var(--ink-2)}
+.stage-body{display:flex;flex-direction:column;gap:14px;min-width:0}
+@media (max-width:760px){.stage{grid-template-columns:1fr;gap:10px}}
+
+/* bars */
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar-row{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr) 4.2rem;gap:10px;align-items:center}
+.bar-row .lbl{font-size:.85rem;line-height:1.35}
+.bar-row .track{height:16px;background:var(--surface-2);border-radius:4px;position:relative;overflow:hidden}
+.bar-row .fill{height:100%;border-radius:4px;background:var(--accent)}
+.bar-row .fill.safe{background:var(--safe)} .bar-row .fill.bad{background:var(--bad)} .bar-row .fill.muted{background:var(--muted-bar)} .bar-row .fill.warn{background:var(--warn)}
+.bar-row .val{font-family:var(--f-mono);font-size:.85rem;text-align:right;font-variant-numeric:tabular-nums}
+.goal-line{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+@media (max-width:600px){.bar-row{grid-template-columns:1fr 3.6rem}.bar-row .lbl{grid-column:1 / -1}}
+
+/* phase grid */
+.phase{display:grid;grid-template-columns:7.5rem repeat(5,minmax(8.5rem,1fr));min-width:820px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.phase>div{padding:10px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.84rem;line-height:1.5}
+.phase>div:nth-child(6n){border-right:none}
+.phase .h{background:var(--surface-2);font-weight:600;font-size:.86rem}
+.phase .rh{font-weight:600;background:var(--surface-2)}
+.phase .rl{background:var(--accent-soft)}
+.phase .lqr{background:var(--safe-soft)}
+.phase>div.last-row{border-bottom:none}
+
+/* two-up */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.safe{border-top:4px solid var(--safe)} .card.acc{border-top:4px solid var(--accent)} .card.warn{border-top:4px solid var(--warn)}
+.card ul{margin:0;padding-left:18px;font-size:.92rem;line-height:1.65}
+
+/* loop diagram */
+.loop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch}
+.lnode{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:4px;font-size:.86rem;position:relative;min-width:0}
+.lnode b{font-size:.92rem}
+.lnode.acc{background:var(--accent-soft);border-color:var(--accent)}
+.lnode.safe{background:var(--safe-soft);border-color:var(--safe)}
+.lnode.warn{background:var(--warn-soft);border-color:var(--warn)}
+@media (max-width:760px){.loop{grid-template-columns:1fr}}
+
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.92rem}
+.note.acc{border-left-color:var(--accent);background:var(--accent-soft)}
+.note.safe{border-left-color:var(--safe);background:var(--safe-soft)}
+
+
+/* diagram extras */
+.s-line-acc{stroke:var(--accent);stroke-width:1.8;fill:none}
+.s-dash{stroke-dasharray:5 4}
+.s-band{fill:var(--bg);stroke:var(--line);stroke-width:1.2;stroke-dasharray:6 5}
+.s-lab{font-size:11px;fill:var(--ink-2)}
+.phase .rl{background:var(--accent-soft)}
+.phase .off{color:var(--ink-2)}
+.phase .rh .sub{display:block;font-weight:400;font-size:.76rem;color:var(--ink-2)}
+/* range rows */
+.rng-list{display:flex;flex-direction:column}
+.rng{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,1fr) 4.5rem;gap:18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.rng:last-child{border-bottom:none}
+.rng-name{display:flex;flex-direction:column;gap:2px;min-width:0}
+.rng-name b{font-size:.93rem}
+.rng-name span{font-size:.8rem;color:var(--ink-2);line-height:1.45}
+.rng-viz{position:relative;padding-block:20px 22px;min-width:0}
+.rng-track{position:relative;height:10px;background:var(--surface-2);border-radius:5px}
+.rng-span{position:absolute;top:0;bottom:0;background:var(--accent);border-radius:5px}
+.rng-span.disc{background:transparent}
+.rng-dot{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%)}
+.rng-nom{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--ink);transform:translateX(-1px)}
+.rng-ref{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--bad);transform:translateX(-1px)}
+.rng-lab{position:absolute;font-family:var(--f-mono);font-size:.76rem;white-space:nowrap;transform:translateX(-50%);font-variant-numeric:tabular-nums}
+.rng-lab.lo{top:100%;margin-top:4px}
+.rng-lab.up{bottom:100%;margin-bottom:4px;color:var(--ink-2)}
+.rng-lab.l{transform:none} .rng-lab.r{transform:translateX(-100%)}
+.rng-lab.ref{color:var(--bad)}
+.rng-off{font-size:.85rem;color:var(--ink-2);padding-block:6px}
+@media (max-width:640px){.rng{grid-template-columns:1fr auto;gap:6px 12px}.rng-viz{grid-column:1 / -1;grid-row:2}}
+/* noise rows */
+.nz-list{display:flex;flex-direction:column}
+.nz{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.nz:last-child{border-bottom:none}
+.nz-sensor{display:flex;flex-direction:column;gap:2px}
+.nz-sensor b{font-size:.93rem}
+.nz-sensor span{font-size:.78rem;color:var(--ink-2)}
+.nz-items{display:flex;flex-direction:column;gap:6px;min-width:0}
+.nzi{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:.88rem}
+.nzi .pill{min-width:6.2rem;text-align:center}
+@media (max-width:640px){.nz{grid-template-columns:1fr;gap:6px}}
+/* experiment runs */
+.runs{display:flex;flex-direction:column;gap:0;position:relative}
+.run{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:12px;padding:10px 0;position:relative}
+.run::before{content:"";position:absolute;left:calc(1rem - 1px);top:34px;bottom:-10px;width:2px;background:var(--line)}
+.run:last-child::before{display:none}
+.run-no{width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-weight:600;font-size:.85rem;background:var(--surface);border:2px solid var(--accent);color:var(--accent);position:relative;z-index:1}
+.run-no.ok{border-color:var(--safe);color:var(--safe)} .run-no.no{border-color:var(--warn);color:var(--warn)} .run-no.drop{border-color:var(--bad);color:var(--bad)}
+.run-body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.run-body b{font-size:.92rem}
+.run-path{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.run-path .pill{white-space:normal;font-family:var(--f-body);font-size:.8rem}
+.pill.warn{border-color:var(--warn);color:var(--warn)}
+
+/* per-stage term notes */
+.mini{background:var(--surface-2);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,9.5rem) minmax(0,1fr);gap:7px 14px;font-size:.86rem;line-height:1.6;margin:0}
+.mini-h{grid-column:1 / -1;font-size:.74rem;font-weight:600;letter-spacing:.06em;color:var(--ink-2)}
+.mini dt{font-weight:600}
+.mini dd{margin:0;color:var(--ink-2)}
+@media (max-width:600px){.mini{grid-template-columns:1fr;gap:2px}.mini dd{margin-bottom:8px}}
+.cmp{display:flex;flex-direction:column;gap:8px}
+.cmp-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:.86rem}
+.cmp-row .tag{font-weight:600;min-width:5.5rem}
+.pill{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+.pill.acc{border-color:var(--accent);color:var(--accent)}
+.pill.bad{border-color:var(--bad);color:var(--bad)}
+.pill.safe{border-color:var(--safe);color:var(--safe)}
+.arrow{color:var(--ink-2)}
+
+/* checklist */
+.todo{display:flex;flex-direction:column;gap:10px}
+.todo-item{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.todo-item .box{width:22px;height:22px;border:2px solid var(--ink-2);border-radius:5px;margin-top:3px}
+.todo-item .box.p1{border-color:var(--bad)} .todo-item .box.p2{border-color:var(--warn)} .todo-item .box.p3{border-color:var(--accent)}
+.todo-item h4{margin-bottom:4px}
+.todo-item p{font-size:.9rem;color:var(--ink-2)}
+.todo-item .cfg{font-size:.82rem;margin-top:6px}
+
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* 6 단계 표: 머리 열 + 단계 6 개 */
+.phase.six{grid-template-columns:8.5rem repeat(6,minmax(8rem,1fr));min-width:960px}
+.phase.six>div:nth-child(6n){border-right:1px solid var(--line)}
+.phase.six>div:nth-child(7n){border-right:none}
+</style>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">UR5e + RG2 + 손목 D415 · 판과 튜브의 비전 이송</div>
+  <h1>자율 실험실 이송 9주차 기록</h1>
+  <p class="lede">10월 24일부터 30일까지 한 실험을 순서대로 정리했다. 장비 위치를 비전으로만 알아내는 6 단계 이송 순서를 판의 네 장비에 모두 붙였고, 같은 틀을 튜브로 넓혔다. 실패를 고치는 판단은 규칙이 아니라 짝지어 잰 결과에서 학습했다. 주말에는 판과 튜브를 실제 공정 순서대로 하루 단위로 이어서 돌리기 시작했고, 그 과정에서 판 시뮬레이션의 충돌 버그를 찾았다.</p>
+  <div class="tiles">
+    <div class="tile safe"><span class="v">38/40</span><span class="k">공정 하루 (판 · 튜브 이송 8 번)<br>사람 없이 끝낸 날 · 조용한 실패 0</span></div>
+    <div class="tile acc"><span class="v">0.995</span><span class="k">판 이송 1200 상황 · 판단 RL<br>사람 호출 6 · 조용한 실패 0</span></div>
+    <div class="tile safe"><span class="v">200/200</span><span class="k">튜브 이송 새 시드<br>비전 + 학습 꽂기</span></div>
+    <div class="tile"><span class="v">80/80</span><span class="k">NGS 자리 꽂힘 (새로 엶)<br>판정 80/80</span></div>
+  </div>
+  <p class="small muted">수치는 모두 MuJoCo 시뮬레이션 결과다. 장비는 이송마다 준비 때 자세에서 ±5 mm · ±2° 안에서 밀려 있다. 판 1200 상황은 6-3 의 버그가 있던 물리에서 쟀다 (같은 시드 비교로 차이는 240 짝 중 3).</p>
+</header>
+
+<nav class="toc">
+  <a href="#flow">한눈에 보기</a><a href="#seq">6 단계 이송 순서</a><a href="#start">주 시작 때</a><a href="#plate">판 이송</a><a href="#tube">튜브 이송</a><a href="#day">공정 평가 · NGS</a><a href="#result">결과</a><a href="#meaning">의미와 한계</a><a href="#next">다음 단계</a>
+</nav>
+
+<section class="ch" id="flow">
+  <div class="ch-head"><span class="ch-no">01</span><h2>한눈에 보는 흐름</h2></div>
+  <p class="col">이번 주에 문제를 찾아 고친 순서다. 숫자는 그 시점의 대표 결과다.</p>
+  <div class="fig">
+    <div class="stepper">
+      <div class="step warn"><span class="dot"></span><span class="t">포획 범위 · 일반화</span><span class="r">배양기 0.00</span><span class="d">10/24~25. 처음 보는 받침에는 제어 RL 이 전이되지 않음. 실패는 판정이 모두 잡음</span></div>
+      <div class="step warn"><span class="dot"></span><span class="t">복구 RL</span><span class="r">0.50 → 0.69</span><span class="d">10/25~26. 실제 실패를 기록한 실패 상태 은행으로 재학습</span></div>
+      <div class="step"><span class="dot"></span><span class="t">손 안 인지 · CAD 없는 준비</span><span class="r">1199/1200</span><span class="d">10/27. 로봇이 찍은 사진으로 장비 모델, 운영 때 1 장으로 정합</span></div>
+      <div class="step"><span class="dot"></span><span class="t">네 장비 모두 비전 + 판단 RL</span><span class="r">R 0.993</span><span class="d">10/28. 6 단계 모두 사진으로만, 5 · 6 단계 뒤 판단 학습</span></div>
+      <div class="step good"><span class="dot"></span><span class="t">쥐는 힘 · 2 단계 판단</span><span class="r">0.995</span><span class="d">10/28~29. 50 N 초과 27 → 0.2 %, 판단 세 곳 모두 학습</span></div>
+      <div class="step good"><span class="dot"></span><span class="t">튜브 이송</span><span class="r">200/200</span><span class="d">10/29~30. 같은 6 단계, 힘 보고 꽂기 학습, 튜브 판단 RL</span></div>
+      <div class="step warn"><span class="dot"></span><span class="t">공정 하루 · NGS</span><span class="r">38/40 일</span><span class="d">10/30. NGS 를 열고 하루 공정을 이어 돌림. 그 과정에서 판 받침 블록이 충돌에서 빠지는 버그를 찾음</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="seq">
+  <div class="ch-head"><span class="ch-no">02</span><h2>6 단계 이송 순서</h2></div>
+  <p class="col">이송 한 번은 아래 여섯 단계로 돈다. 손목 카메라는 J6 를 돌리지 않고 앞만 본다. 장비 위치는 준비 단계에서 장비마다 한 번 찍어 둔 사진과 비교해서만 알아낸다. 시뮬레이터의 정답은 채점에만 쓴다.</p>
+  <div class="fig">
+    <div class="fig-title">이송 한 번 동안 무엇을 찍고 무엇을 정하는가</div>
+    <div class="scroll">
+      <div class="phase six">
+        <div class="h"></div><div class="h">① 집기 전</div><div class="h">② 집은 뒤</div><div class="h">③ 운반</div><div class="h">④ 놓기 직전 손 안</div><div class="h">⑤ 놓기 직전 장비</div><div class="h">⑥ 놓은 뒤</div>
+        <div class="rh">판<span class="sub">Fluent · 배양기 · 리더 · 분류기</span></div><div>받침 위 판 1 장 → 판 자리로 집기</div><div>손 안 1 장 (앞뒤 0.10 mm, 회전 0.19°)</div><div>안전 자세를 거쳐 레일 이동</div><div>받침 위에서 손 안 1 장 → 미끄러짐까지 보정</div><div>옆 +70 1 장 → 준비 대비 장비 밀림</div><div>판 기울기 · 높이 (배양기는 판 자리도)</div>
+        <div class="rh">튜브<span class="sub">호텔 · Fluent · 분류기 · NGS</span></div><div>자리에 선 튜브 1 장 → 축 · 위 끝</div><div>손 안 깊이 1 장</div><div>판 통로까지 물린 안전 자세로</div><div>도착 안전 자세에서 손 안 1 장</div><div>준비 때 관절값에서 빈 자리 1 장</div><div>위 끝 높이 · 기울기</div>
+        <div class="rh">판단 RL</div><div class="off">없음</div><div class="rl">운반 / 다시 보기 / 다시 집기 / 사람</div><div class="off">없음</div><div class="off">없음</div><div class="rl">그대로 / 1 장 더 (판)</div><div class="rl">다시 놓기 / 다시 보고 / 학습 보정 / 사람</div>
+        <div class="rh last-row">제어</div><div class="last-row lqr">비전으로 고친 경로</div><div class="last-row lqr">관절 공간 제어</div><div class="last-row lqr">레일과 팔을 따로</div><div class="last-row lqr">손 안 어긋남만큼 경로 수정</div><div class="last-row lqr">놓을 자리 수정</div><div class="last-row rl">튜브는 손목 힘으로 비켜 꽂는 PPO</div>
+      </div>
+    </div>
+    <p class="fig-cap">준비 단계는 장비마다 하루 한 번이다. 판은 빈 받침 8 장과 데모 판 3 장으로 CAD 없는 장비 모델과 놓을 자리를 만든다. 튜브는 데모 튜브로 놓을 자리를 재고, 5 단계 자세의 관절값과 빈 자리 사진 1 장을 저장한다.</p>
+  </div>
+  <div class="two">
+    <div class="card safe">
+      <h3>판이 제대로 놓였나 <span class="chip safe">Done 판정</span></h3>
+      <ul>
+        <li>돌기 받침: 판 윗면 기울기(데모 판 +0.15°)와 높이(±1.5 mm)</li>
+        <li>평평한 배양기: 어긋나도 평평하게 앉으므로 놓은 뒤 사진으로 배양기 위치를 다시 재서 판 자리(1 mm · 0.5°)를 비교</li>
+        <li>채점은 시뮬레이터 정답으로 따로 한다. 로봇이 OK 라 했는데 실제로 틀리면 조용한 실패로 센다</li>
+      </ul>
+    </div>
+    <div class="card acc">
+      <h3>튜브가 꽂혔나 <span class="chip acc">Done 판정</span></h3>
+      <ul>
+        <li>위 끝이 꽂힌 높이에서 2.7 mm 안 (꽂힌 튜브 −1.5 ~ +1.6 mm, 못 꽂힌 것 +3.95 mm 부터)</li>
+        <li>기울기 5° 이내. 자리 벽이 깊은 NGS(45 mm)는 기울기를 보지 않는다</li>
+        <li>자리 틈이 0.5 mm 라 판보다 훨씬 좁다. 곧게 내리면 좌우 0.75 mm 폭 안에서만 꽂힌다</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="start">
+  <div class="ch-head"><span class="ch-no">03</span><h2>주 시작 때 상태</h2></div>
+  <div class="two">
+    <div class="card safe">
+      <h3>되던 것 (8주차)</h3>
+      <ul>
+        <li>집기 · 운반 · 놓기를 한 에피소드로 이어서 0.933 (따로 잰 성공률의 곱 0.91, 처음 이었을 때 0.483)</li>
+        <li>기울기 중심 Done 판정: 홀드아웃에서 안착 최대 0.12° · 실패 최소 0.19°, 체인 150 이송 오수락 0 · 오거부 0</li>
+        <li>제어층 RL 이 규칙보다 크게 나음: 놓기 0.860 vs 0.420 (현실 외관 0.880 vs 0.340)</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h3>안 되던 것</h3>
+      <ul>
+        <li>배양기 말고는 장비 위치가 '정답 + 잡음'이었다. 실물에서 쓸 수 없다</li>
+        <li>실패 뒤 판단은 규칙이었다</li>
+        <li>판을 쥐는 순간 접촉력이 50 N(손목 센서 범위)을 자주 넘었다</li>
+        <li>튜브와 NGS 는 아직 없었다</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="plate">
+  <div class="ch-head"><span class="ch-no">04</span><h2>판 이송 단계별 과정</h2></div>
+  <p class="col">각 단계는 문제, 바꾼 것, 결과 순서로 읽으면 된다.</p>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">4-1</span><h3>받침 포획 범위 · 제어 설계 · 장비 일반화</h3><span class="when">10/24 ~ 25</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>판정이 어디까지 실패를 잡는지 몰랐음</li><li>작업공간 임피던스가 더 나은지 확인 안 함</li><li>처음 보는 받침에서 제어 RL 이 되는지 몰랐음</li></ul></div>
+        <div class="c"><span class="lab">잰 것</span><ul><li>판을 옆으로 밀어 가며 판정 맹점 측정</li><li>작업공간 임피던스와 관절 공간 제어 비교</li><li>받침 하나를 빼고 학습한 뒤 그 받침에서 평가</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>판정 맹점은 옆으로 3.72 mm. 넘으면 기울기가 문턱의 8~17 배로 튐</li><li>임피던스 기각: 추종 오차 9.1 mm (관절 2.2 mm), 접촉력 290~2317 N</li><li>전이 안 됨 (배양기 0.00, 분류기 0.40). 실패 101 건은 판정이 모두 잡음</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">4-2</span><h3>복구 RL</h3><span class="when">10/25 ~ 26</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>단순 재시도로는 회복 0.39~0.44</li><li>다시 쥘 때 50 N 초과 57~75 % (최대 263 N)</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>실패 상태를 합성하지 않고, 실제 실패를 기록한 실패 상태 은행에서 시작하게 재학습</li><li>센서 범위를 넘는 힘에 벌점</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>다시 쥐기 0.667 → 0.892</li><li>전체 복구 0.496 → 0.688</li><li>접촉력은 그대로 (65 % 가 50 N 초과)</li></ul></div>
+      </div>
+      <dl class="mini">
+        <span class="mini-h">이 단계의 용어</span>
+        <dt>실패 상태 은행</dt><dd>놓기를 실제로 돌려 실패한 순간의 판 자세와 장비 자세를 기록해 둔 것이다. 손으로 만든 실패 자세는 실제 실패와 분포가 달라 학습이 전이되지 않았다.</dd>
+        <dt>짝 비교</dt><dd>같은 실패 상태 240 개에서 기준선과 재학습 정책을 각각 돌려 비교했다.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">4-3</span><h3>손 안 인지 · CAD 없는 준비 단계</h3><span class="when">10/27</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>손 안 판 어긋남을 깊이로 재면 0.8 mm 오차</li><li>장비 모델을 CAD 에서 가져오면 실물에서 맞지 않을 수 있음</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>플랜지 카메라 영상으로 손 안 판을 잼</li><li>준비 단계에서 로봇이 직접 찍은 사진으로 장비 모델을 만들고, 운영 때 1 장으로 정합</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>손 안 앞뒤 0.10 mm, 회전 0.19°</li><li>밀린 장비 정합 1199/1200</li><li>평평한 배양기 비전 놓기 40/40, 체인 규칙 C 0.940 → 0.975 · 사람 호출 31 → 0</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">4-4</span><h3>네 장비 모두 사진으로만</h3><span class="when">10/28</span></div>
+    <div class="stage-body">
+      <p>배양기 말고는 장비 위치가 '정답 + 잡음'이었던 것을 모두 사진으로 바꿨다. 집기 전 1 장으로 판을 재고 집으니 손 안 OK 가 Fluent · 리더 · 분류기 모두 1.00 이 됐다 (예전 0.95 · 0.82 · 0.77). 5 단계 장비 정합은 세 가지를 고쳤다.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>놓을 자리 1 mm · 0.5° 이내 (밀림 ±5 mm · ±2°)</th><th class="n">고치기 전</th><th class="n">범위 제한 + 깊이 면</th><th class="n">버그 수정 · 마무리 탐색</th></tr></thead>
+        <tbody>
+          <tr><td>Fluent</td><td class="n">0.25</td><td class="n">0.40</td><td class="n">0.75 (1 장) / 0.92 (2 장)</td></tr>
+          <tr><td>리더</td><td class="n">0.82</td><td class="n">1.00</td><td class="n">1.00</td></tr>
+          <tr><td>분류기</td><td class="n">0.93</td><td class="n">0.97</td><td class="n">1.00</td></tr>
+          <tr><td>배양기</td><td class="n">1.00</td><td class="n">1.00</td><td class="n">1.00</td></tr>
+        </tbody>
+      </table></div>
+      <dl class="mini">
+        <span class="mini-h">고친 것</span>
+        <dt>범위 제한</dt><dd>옆 장비의 경계가 모델에 섞여 받침 둘레 범위로 제한했다.</dd>
+        <dt>깊이 면</dt><dd>밝기 경계는 시선 방향(앞뒤)을 못 본다. 여러 사진에서 같은 자리로 보이는 깊이 면 점을 모델에 더했다.</dd>
+        <dt>Fluent 버그</dt><dd>Fluent 위 튜브 자리 부품이 장비와 같이 안 밀리고 있었다. 정합은 정답보다 사진과 덜 맞는 자리에서 멈추고 있어, 사진 전체 점수(모서리 거리 + 깊이)를 직접 줄이는 마무리 탐색을 더했다.</dd>
+      </dl>
+      <div class="fig">
+        <div class="fig-title">평평한 배양기의 놓은 뒤 판정</div>
+        <div class="tbl"><table>
+          <thead><tr><th>판정 방식</th><th class="n">오수락</th><th class="n">오거부</th><th class="n">최종 성공</th></tr></thead>
+          <tbody>
+            <tr><td>예전: 놓으려던 자리와 비교 (일부러 어긋난 228 건)</td><td class="n"><span class="chip bad">228 모두 통과</span></td><td class="n">—</td><td class="n">—</td></tr>
+            <tr><td>1 장 + 판 둘레 제외 (정상 200 건)</td><td class="n">0</td><td class="n">20</td><td class="n">0.985</td></tr>
+            <tr class="hl"><td>2 장 + 판 둘레 제외 (정상 200 건)</td><td class="n">0</td><td class="n">1~2</td><td class="n">0.995</td></tr>
+            <tr><td>2 장 + 판 둘레 제외 (일부러 어긋난 94 건)</td><td class="n">0 (모두 잡음)</td><td class="n">0</td><td class="n">0.99</td></tr>
+          </tbody>
+        </table></div>
+        <p class="fig-cap">예전 판정은 5 단계가 틀리면 그대로 통과시켰다. 놓은 뒤 사진으로 배양기 위치를 다시 재고, 판 발자국 둘레 12 mm 는 빼고 비교한다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">4-5</span><h3>5 · 6 단계 뒤 판단 RL</h3><span class="when">10/28</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>놓기 실패 뒤 규칙(늘 다시 놓기)은 Fluent 에서 0.670</li><li>장비마다 맞는 복구가 다름</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>같은 상황을 행동만 바꿔 다시 돌려 결과를 짝으로 측정</li><li>행동별 성공 확률을 MLP 5 개 앙상블로 학습</li><li>놓은 뒤 사진에서 다시 놓을 때 옮길 양을 학습 (학습 보정)</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>Fluent 0.670 → 0.76~0.81 (상황마다 최선 0.89~0.91)</li><li>학습 보정 뒤 남는 오차 중앙: 앞뒤 1.61 → 0.34 mm, 좌우 1.85 → 0.25 mm, 회전 0.58 → 0.26°</li></ul></div>
+      </div>
+      <dl class="mini">
+        <span class="mini-h">이 단계의 용어</span>
+        <dt>보상</dt><dd>성공 1 에서 장비 사진 1 장마다 0.005 를 뺀다. 모든 행동의 기대 보상이 0 이하면 사람을 부른다.</dd>
+        <dt>행동</dt><dd>놓기 전: 그대로 놓기 / 1 장 더 찍고 다시 정합. 놓은 뒤 실패: 다시 놓기 / 2 장으로 다시 놓기 / 학습 보정으로 다시 놓기 / 사람 호출.</dd>
+        <dt>장비별 차이</dt><dd>리더 · 분류기는 거의 다시 놓기를 골랐다. 장비별 규칙을 쓰지 않고 결과에서 배운 것이다.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">4-6</span><h3>쥐는 순간 접촉력</h3><span class="when">10/28 밤</span></div>
+    <div class="stage-body">
+      <p>쥐기 명령이 벌림에서 닫힘으로 한 번에 바뀌어, 위치 제어 손가락이 13 mm 를 달려가 판에 부딪혔다 (접촉 합 70~80 N, 손목 46~52 N). 닫는 쪽만 속도를 제한했다. 실물 RG2 닫는 속도는 약 38~127 mm/s 다.</p>
+      <div class="fig">
+        <div class="fig-title">손가락 닫는 속도별 손목 최대 힘 (네 장비 각 20 번 비전 집기, 집기는 모두 1.00)</div>
+        <div class="bars">
+          <div class="bar-row"><span class="lbl">한 번에 (예전)</span><span class="track"><span class="fill bad" style="width:86.7%;display:block"></span><span class="goal-line" style="left:83.3%"></span></span><span class="val">52 N</span></div>
+          <div class="bar-row"><span class="lbl">120 mm/s</span><span class="track"><span class="fill warn" style="width:26.7%;display:block"></span><span class="goal-line" style="left:83.3%"></span></span><span class="val">16 N</span></div>
+          <div class="bar-row"><span class="lbl"><b>60 mm/s (채택)</b></span><span class="track"><span class="fill safe" style="width:15%;display:block"></span><span class="goal-line" style="left:83.3%"></span></span><span class="val">9 N</span></div>
+          <div class="bar-row"><span class="lbl">40 mm/s (닫는 시간 빠듯)</span><span class="track"><span class="fill muted" style="width:10%;display:block"></span><span class="goal-line" style="left:83.3%"></span></span><span class="val">6 N</span></div>
+        </div>
+        <p class="fig-cap">막대 끝은 60 N, 세로선은 손목 센서 범위 50 N 이다. 1200 상황에서 50 N 넘은 이송은 27.2 % 에서 0.2 % 로, 힘 p99 는 79 N 에서 44 N 으로 줄었다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">4-7</span><h3>띄워 놓기 · 2 단계 뒤 판단 RL</h3><span class="when">10/29</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>다시 집은 판이 손 안에서 1.3~1.7° 기운 채 잡혀 받침 턱에 다시 걸림</li><li>집은 뒤 판단은 아직 규칙이었음</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>받침 위 4 mm 에서 손을 벌리는 행동 추가 (다시 놓기 + 띄움, 학습 보정 + 띄움)</li><li>집은 뒤 판단도 짝 측정으로 학습. 집을 자리를 일부러 빗나가게 해 480 상황</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>6 단계 뒤 교차검증: Fluent 0.831 → 0.858, 리더 0.837 → 0.955, 분류기 0.888 → 0.989</li><li>2 단계 뒤: 판단 RL 0.991, 규칙 C 0.979. 99 % 운반을 고름</li></ul></div>
+      </div>
+      <div class="note">4 mm 띄워 놓기는 판이 4 mm 떨어지는 것이라 시료가 출렁일 수 있다. 실물에서 액체가 든 판으로 확인해야 한다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="tube">
+  <div class="ch-head"><span class="ch-no">05</span><h2>튜브 이송 단계별 과정</h2></div>
+  <p class="col">5 mL 튜브(지름 12 mm, 길이 75 mm)를 판의 집기 · 운반 · 놓기 환경 위에 올렸다. 예전 튜브 환경을 잇지 않고, 판의 준비 단계 · 판정 · 판단 RL 틀에 튜브용 인지와 꽂기만 새로 만들었다.</p>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">5-1</span><h3>튜브 환경 · 손 안 인지</h3><span class="when">10/29</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>장비를 밀면 튜브 자리 충돌을 건너뛰어 튜브가 자리를 파고듦</li><li>운반 중 손이 Fluent 몸체 · 입구 윗변을 지나감 (보이는 모델이라 물리에 안 나옴)</li><li>손 안 튜브를 깊이 점으로 원통 맞춤하면 앞뒤 5 mm 틀림</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>튜브 환경에서 정적 geom 중간 단계 충돌 검사를 끔</li><li>경로를 광선으로 검사, 안전 자세를 판 통로까지 물림</li><li>광선 위 깊이 잔차를 최소제곱으로, 앞뒤는 튜브 위쪽에서 잼</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>세 자리 모두 높이 0.0 mm 로 앉음</li><li>손 안 위쪽 앞뒤 sd 0.21 mm</li><li>놓기 직전 손 안 보정으로 새 시드 200/200 (공칭 0.975)</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">5-2</span><h3>힘 보고 꽂기 학습</h3><span class="when">10/29 · A5000 3M 걸음</span></div>
+    <div class="stage-body">
+      <p>튜브 자리 틈은 0.5 mm 라 쥔 채 곧게 내리면 좌우 0.75 mm 폭 안에서만 꽂힌다. 그만큼 정확한 장비 비전은 어렵다. 대신 처음 닿을 때 손목 힘과 돌림힘에 어느 쪽에 걸렸는지가 뚜렷이 실려, 그걸 보고 비켜 다시 내리는 동작을 PPO 로 배웠다.</p>
+      <div class="fig">
+        <div class="fig-title">겨냥 오차 ±2.5 mm 에서 꽂힘</div>
+        <div class="bars">
+          <div class="bar-row"><span class="lbl">곧게 내리기</span><span class="track"><span class="fill muted" style="width:42%;display:block"></span></span><span class="val">0.420</span></div>
+          <div class="bar-row"><span class="lbl"><b>학습 꽂기 v3</b></span><span class="track"><span class="fill safe" style="width:95.8%;display:block"></span></span><span class="val">0.958</span></div>
+          <div class="bar-row"><span class="lbl">v3, 놓기 띠 2.5 mm</span><span class="track"><span class="fill safe" style="width:96.8%;display:block"></span></span><span class="val">0.968</span></div>
+        </div>
+        <p class="fig-cap">관측은 실물에서 얻는 것만 쓴다: 손목 힘 · 돌림힘 최근 3 걸음, 계획 높이 대비 TCP 높이, 비킨 양, 시간, 장비 종류. 체인에서 호텔 가장자리에 4 mm 높이로 걸린 채 손을 벌린 실패가 있어 '놓아도 되는 높이'를 5 → 2.5 mm 로 줄였다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">5-3</span><h3>튜브 자리 비전 (1 · 5 · 6 단계)</h3><span class="when">10/29 ~ 30</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>기준 튜브로 장비 방향을 잡으면 수 mm 틀림 (튜브 사이 3 cm 에서 2° 가 6~9 cm 외삽)</li><li>같은 TCP 라도 팔 모양이 달라 카메라가 9.5 mm 다름</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>5 단계: 준비 때 관절값에서 빈 자리 1 장, 운영 때 같은 관절값으로 1 장. 붉은 컵 영상 맞춤 2 식 + 깊이 차 1 식</li><li>1 단계도 준비 사진에서만</li><li>6 단계: 위 끝 높이 문턱 2.7 mm</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>5 단계 sd 앞뒤 0.5~0.8 · 좌우 0.2 · 높이 0.4~0.6 mm</li><li>1 단계 튜브 오차 sd 0.2 mm, 최대 약 1 mm</li><li>튜브 체인 장비 인지에 정답 없음</li></ul></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>꽂힘 (팔마다 이송 200)</th><th class="n">시드</th><th class="n">정답 자리</th><th class="n">비전 + 곧게</th><th class="n">비전 + 학습 꽂기</th></tr></thead>
+        <tbody>
+          <tr><td>맞춘 시드</td><td class="n">5200</td><td class="n">1.000</td><td class="n">0.960</td><td class="n"><b>1.000</b></td></tr>
+          <tr class="hl"><td>새 시드</td><td class="n">9300</td><td class="n">0.990</td><td class="n">0.955</td><td class="n"><b>1.000</b></td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">학습 꽂기의 6 단계 판정은 400 건 모두 맞았다. 이 주부터 카메라 렌더링을 Intel 내장 GPU 에서 NVIDIA A5000 으로 옮겼다 (결과는 같았다).</p>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">5-4</span><h3>튜브 판단 RL (2 · 6 단계 뒤)</h3><span class="when">10/30</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>그대로면 실패가 거의 없어 배울 신호가 없음</li><li>내려놓고 다시 집으면 호텔에서 튜브가 넘어짐 (206 중 78 빈손)</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>집을 자리(±6 · ±4 mm) · 놓을 자리(±5 mm)를 일부러 빗나가게 함</li><li>다시 집기 = 출발 자리에 학습 꽂기로 꽂아 두기</li><li>'쥐었나'를 손 안 사진으로 판단</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>다시 집기 0.69 → 0.995</li><li>학습 판단 0.632 (규칙 0.538, 지금 체인 0.455)</li><li>빗나감 없으면 학습 판단 1.000 (규칙 0.923)</li></ul></div>
+      </div>
+      <div class="fig">
+        <div class="fig-title">새 시드 299 상황, 빗나감 있음</div>
+        <div class="tbl"><table>
+          <thead><tr><th>판단</th><th class="n">꽂힘</th><th class="n">사람 호출</th><th class="n">장비 사진 / 이송</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>학습 판단</td><td class="n"><b>0.632</b></td><td class="n">109</td><td class="n">3.45</td></tr>
+            <tr><td>규칙 (손 안 OK 아니면 다시 집기, 실패면 다시 보기)</td><td class="n">0.538</td><td class="n">138</td><td class="n">4.31</td></tr>
+            <tr><td>지금 체인 (늘 운반, 실패면 사람)</td><td class="n">0.455</td><td class="n">163</td><td class="n">3.00</td></tr>
+          </tbody>
+        </table></div>
+        <p class="fig-cap">학습 판단은 2 단계에서 늘 운반을 골랐다. 규칙은 겉보기 기울기(제대로 잡아도 −0.8° 안팎)로 NG 를 내고 다시 집다 사람을 불렀다. 둘 다 6 단계에서 실패한 137 상황에서 학습 판단은 66 번만 다시 시도해 47 꽂았고, 규칙은 137 번 시도해 44 꽂았다.</p>
+      </div>
+      <div class="note">빗나감을 '사진 찍은 뒤 놓을 자리가 밀림'으로 넣었기 때문에 다시 보기에 유리하다. 실제 비전 오차로 생긴 실패라면 같은 관절값에서 다시 찍어도 같은 오차가 나올 수 있다. 조용한 실패는 1 건(Fluent 다시 꽂기 뒤 판정 OK 인데 덜 들어감)이다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="day">
+  <div class="ch-head"><span class="ch-no">06</span><h2>전체 공정 평가 · NGS</h2></div>
+  <p class="col">지금까지 이송은 하나씩 따로 쟀다. 이송마다 장비 자세를 새로 뽑고, 다른 물체는 치워 뒀다. 이제 실제 공정 순서대로 하루 단위로 이어서 돌린다.</p>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">6-1</span><h3>NGS 튜브 자리 열기</h3><span class="when">10/30</span></div>
+    <div class="stage-body">
+      <div class="pcr">
+        <div class="p"><span class="lab">문제</span><ul><li>장면 정의의 손 방향(+y)으로는 관절 해가 없음</li><li>레일 끝에서 어깨는 x 0.875 m, 자리는 x 0.967 m. 어깨 옆 오프셋 13 cm 때문에 x 1.10 m 가 필요</li></ul></div>
+        <div class="c"><span class="lab">바꾼 것</span><ul><li>손 방향을 바꿔 가며 관절 해 · 레일 여유 · 경로 검사 → 57.5°</li><li>J1 을 반대쪽으로 돌려 운반 중 팔이 배양기 받침을 쓸지 않게 함</li><li>5 단계 추적점을 받침 윗면 높이로, 깊은 자리는 기울기 판정 제외</li><li>NGS 를 넣어 꽂기 정책 v5 학습</li></ul></div>
+        <div class="r"><span class="lab">결과</span><ul><li>비전 + 학습 꽂기 80/80 꽂힘, 6 단계 판정 80/80</li><li>5 단계 NGS sd 앞뒤 0.52 · 좌우 0.24 · 높이 0.33 mm</li><li>RG2 링크가 카트리지 버튼과 4.7 mm 겹침이 남음</li></ul></div>
+      </div>
+      <div class="two">
+        <div class="fig">
+          <div class="fig-title">손 방향별 NGS 카트리지 버튼과 최소 거리 (mm)</div>
+          <div class="tbl"><table>
+            <thead><tr><th>손 방향</th><th class="n">버튼 거리</th><th>그 밖</th></tr></thead>
+            <tbody>
+              <tr><td>50°</td><td class="n">−13.5</td><td><span class="chip bad">겹침</span></td></tr>
+              <tr><td>55°</td><td class="n">−8.1</td><td><span class="chip bad">겹침</span></td></tr>
+              <tr class="hl"><td>57.5° (채택)</td><td class="n">−4.7</td><td><span class="chip warn">겹침 남음</span></td></tr>
+              <tr><td>60°</td><td class="n">−0.5</td><td><span class="chip bad">운반 중 배양기 몸체 통과</span></td></tr>
+              <tr><td>65°</td><td class="n">—</td><td><span class="chip bad">레일 여유 없음</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="fig">
+          <div class="fig-title">NGS 5 단계 추적점 높이 (빈손 11 시드)</div>
+          <div class="bars">
+            <div class="bar-row"><span class="lbl">바닥 위 6 mm (기존)</span><span class="track"><span class="fill bad" style="width:85.5%;display:block"></span></span><span class="val">1.71</span></div>
+            <div class="bar-row"><span class="lbl"><b>30 mm (채택)</b></span><span class="track"><span class="fill safe" style="width:7.5%;display:block"></span></span><span class="val">0.15</span></div>
+            <div class="bar-row"><span class="lbl">45 mm</span><span class="track"><span class="fill" style="width:5.5%;display:block"></span></span><span class="val">0.11</span></div>
+          </div>
+          <p class="fig-cap">앞뒤 오차 sd (mm), 막대 끝 2 mm. 자리 벽이 받침 윗면과 같은 높이라 영상이 맞추는 것은 받침 윗면의 붉은 구멍 표시들이다.</p>
+        </div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>꽂기 정책 (겨냥 오차 ±2.5 mm, 400 회)</th><th class="n">전체</th><th class="n">Fluent</th><th class="n">분류기</th><th class="n">호텔</th><th class="n">NGS</th><th class="n">1 mm 이내</th></tr></thead>
+        <tbody>
+          <tr><td>곧게 내리기</td><td class="n">0.403</td><td class="n">0.463</td><td class="n">0.530</td><td class="n">0.325</td><td class="n">0.383</td><td class="n">0.93~1.00</td></tr>
+          <tr><td>v3 (NGS 안 배움)</td><td class="n">0.968*</td><td class="n" colspan="3">세 장비만</td><td class="n"><span class="chip bad">0.010</span></td><td class="n">—</td></tr>
+          <tr class="hl"><td>v5 (NGS 포함)</td><td class="n">0.880</td><td class="n">0.746</td><td class="n">0.880</td><td class="n">0.941</td><td class="n"><b>0.864</b></td><td class="n">1.000</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">* v3 는 세 장비 평가값. v5 는 기존 자리에서 v3 보다 나빠, NGS 에만 v5 를 쓰고 나머지는 v3 를 쓴다.</p>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">6-2</span><h3>공정 하루 평가</h3><span class="when">10/30 · 40 일</span></div>
+    <div class="stage-body">
+      <p>로봇이 하는 이송 8 번을 실제 공정 순서대로 같은 날 장비 자세로 이어서 돌린다. 판 호텔과 폐기는 장비가 없어 사람이 한 것으로 둔다.</p>
+      <div class="runs">
+        <div class="run"><span class="run-no ok">1</span><div class="run-body"><b>판 a</b><div class="run-path"><span class="pill">Fluent</span><span class="arrow">→</span><span class="pill">배양기</span><span class="arrow">→</span><span class="pill">리더</span><span class="arrow">→</span><span class="pill">Fluent</span></div></div></div>
+        <div class="run"><span class="run-no ok">2</span><div class="run-body"><b>튜브 a (판 a 가 Fluent 에 있는 채)</b><div class="run-path"><span class="pill">호텔 1</span><span class="arrow">→</span><span class="pill">Fluent</span><span class="arrow">→</span><span class="pill">분류기 오른쪽</span><span class="pill warn">그사이 판 a 폐기</span></div></div></div>
+        <div class="run"><span class="run-no ok">3</span><div class="run-body"><b>판 b (튜브 a 가 분류기 오른쪽에 꽂힌 채)</b><div class="run-path"><span class="pill">분류기 왼쪽</span><span class="arrow">→</span><span class="pill">Fluent</span><span class="pill warn">그사이 튜브 a 폐기</span></div></div></div>
+        <div class="run"><span class="run-no ok">4</span><div class="run-body"><b>튜브 b (판 b 가 Fluent 에 있는 채)</b><div class="run-path"><span class="pill">호텔 2</span><span class="arrow">→</span><span class="pill">Fluent</span><span class="arrow">→</span><span class="pill acc">NGS</span></div></div></div>
+      </div>
+      <dl class="mini">
+        <span class="mini-h">체인 실험과 다른 점</span>
+        <dt>장비 한 자세</dt><dd>같은 장비의 두 자리(Fluent 판 · 튜브 자리, 분류기 왼쪽 · 오른쪽, 호텔 1 · 2)가 한 몸으로 움직이고, 준비는 장비 자리마다 하루 한 번이다.</dd>
+        <dt>다른 물체</dt><dd>판이 Fluent 에 있는 채 튜브를 꽂고 빼고, 호텔 1 튜브 옆 3 cm 에 호텔 2 튜브가 서 있다.</dd>
+        <dt>이어지는 자세</dt><dd>판은 지난 이송이 실제로 놓은 자세에서 다시 집는다. 사람 호출이면 사람이 도착 자리에 바로 놓고 잇는다.</dd>
+      </dl>
+      <div class="fig">
+        <div class="fig-title" id="day-result">이송별 성공 (같은 40 일 시드)</div>
+        <div class="tbl"><table>
+          <thead><tr><th>이송</th><th class="n">첫 실행 (38 일 · 예전 판 물리 · NGS v3)</th><th class="n">최종 (40 일 · 바로잡은 물리 · NGS v5)</th></tr></thead>
+          <tbody>
+            <tr><td>판 Fluent → 배양기</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+            <tr><td>판 배양기 → 리더</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+            <tr><td>판 리더 → Fluent</td><td class="n">0.921 (사람 3)</td><td class="n"><span class="chip warn">0.950 (사람 2)</span></td></tr>
+            <tr><td>튜브 호텔 1 → Fluent</td><td class="n">0.974 (준비 실패 1)</td><td class="n">1.000</td></tr>
+            <tr><td>튜브 Fluent → 분류기</td><td class="n">0.974 (준비 실패 1)</td><td class="n">1.000</td></tr>
+            <tr><td>판 분류기 → Fluent</td><td class="n">0.947 (사람 2)</td><td class="n">1.000</td></tr>
+            <tr><td>튜브 호텔 2 → Fluent</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+            <tr><td>튜브 Fluent → NGS</td><td class="n"><span class="chip bad">0.000</span></td><td class="n">1.000</td></tr>
+            <tr class="hl"><td><b>하루 8 번을 사람 없이</b></td><td class="n">0 / 38</td><td class="n"><b>38 / 40</b></td></tr>
+          </tbody>
+        </table></div>
+        <p class="fig-cap">최종 실행은 이송 320 번 중 318 번 성공, 사람 호출 2 번(모두 판 리더 → Fluent), 조용한 실패 0, 하루 장비 사진 24.6 장(이송당 약 3 장)이다. 첫 실행에서 판을 Fluent 에 놓는 이송이 낮았던 것을 따라가다 6-3 의 버그를 찾았다. 첫 실행의 튜브 실패 2 건은 준비 단계에서 데모 튜브 위 끝을 못 찾은 것으로, 격자로 찾은 윗면을 대신 쓰게 고쳤다. 작업자 프로세스가 죽으면 전체가 멈추던 문제(40 일 중 2 일)는 '멈춤'으로 기록하고 잇도록 고쳤다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">6-3</span><h3>판 받침 블록이 충돌에서 빠지는 버그</h3><span class="when">10/30</span></div>
+    <div class="stage-body">
+      <p>판 환경은 이송마다 장비를 밀어 둔다. 그런데 정적 geom 을 옮겨도 MuJoCo 가 모델을 만들 때 계산한 충돌 경계(BVH)는 그대로라, <b>장비를 2 mm 만 밀어도 받침의 위치 맞춤 블록(높이 4 mm)이 판과 충돌하지 않았다.</b> 튜브 환경에서 찾아 고친 것(5-1)과 같은 원인이다.</p>
+      <div class="fig">
+        <div class="fig-title">판을 공칭 자리에 두고 Fluent 만 앞뒤로 민 뒤 판-블록 접촉 수</div>
+        <div class="tbl"><table>
+          <thead><tr><th>장비 밀림</th><th class="n">예전 물리</th><th class="n">바로잡은 물리</th><th class="n">블록에 파고든 깊이</th></tr></thead>
+          <tbody>
+            <tr><td>0 mm</td><td class="n">0</td><td class="n">0</td><td class="n">—</td></tr>
+            <tr><td>−2 mm</td><td class="n"><span class="chip bad">0</span></td><td class="n">8</td><td class="n">1.25 mm</td></tr>
+            <tr><td>−4 mm</td><td class="n"><span class="chip bad">0</span></td><td class="n">8</td><td class="n">3.25 mm</td></tr>
+            <tr><td>−6 mm</td><td class="n"><span class="chip bad">0</span></td><td class="n">8</td><td class="n">4.0 mm</td></tr>
+            <tr><td>+4 mm</td><td class="n"><span class="chip bad">0</span></td><td class="n">4</td><td class="n">3.25 mm</td></tr>
+          </tbody>
+        </table></div>
+        <p class="fig-cap">장비를 밀지 않고 판을 블록 쪽으로 밀면 두 물리 모두 접촉 4 개로 정상이다. 즉 지금까지 판 결과 대부분은 블록 없이 받침판만 있는 물리에서 잰 것이다. 판 환경도 중간 단계 충돌 검사를 끄게 고쳤다.</p>
+      </div>
+      <div class="fig">
+        <div class="fig-title" id="plate-ab">같은 시드로 두 물리 비교 (판단 RL 팔 R)</div>
+        <div class="tbl"><table>
+          <thead><tr><th>비교</th><th class="n">예전 물리</th><th class="n">바로잡은 물리</th><th class="n">결과가 달라진 이송</th></tr></thead>
+          <tbody>
+            <tr><td>12 장비 쌍 × 15 시드 (180 이송)</td><td class="n">180/180</td><td class="n">180/180</td><td class="n">0</td></tr>
+            <tr><td>판 리더 → Fluent, 60 이송</td><td class="n">0.95 · 사람 3</td><td class="n">0.90 · 사람 6</td><td class="n">3</td></tr>
+            <tr><td>50 N 넘은 이송 (180)</td><td class="n">0.6 %</td><td class="n">0 %</td><td class="n">—</td></tr>
+          </tbody>
+        </table></div>
+        <p class="fig-cap">버그는 실제로 있었지만 판 성공률에 준 영향은 작았다 (같은 시드 240 짝 중 3 건, 모두 Fluent 에서 바로잡은 물리 쪽이 실패). 이번 주 판 결과는 대체로 유지되고, Fluent 는 조금 낮아질 수 있다. 바로잡은 물리에서 공정 하루 40 일도 같은 결론이다 (6-2).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-meta"><span class="sn">6-4</span><h3>분류기 경로 간섭 (새로 발견)</h3><span class="when">10/30</span></div>
+    <div class="stage-body">
+      <p>NGS 경로를 검사하려고 만든 광선 검사(팔 · 손 · 튜브 점의 이동 선분이 장비 면을 지나가는지)를 기존 경로에도 돌렸다. 분류기 튜브 자리에서 두 곳이 걸렸다. 둘 다 충돌 없는 보이는 모델이라 지금까지 물리에 나타나지 않았다.</p>
+      <div class="two">
+        <div class="card warn"><h4>선반 아랫면</h4><p class="small">자리 위 쥐는 높이 위 43 mm 에 깊이 3 cm 선반이 있다. 들어 올리는 높이 계산이 손가락 윗면(TCP + 5 mm)만 보고 쥔 튜브의 위 끝(TCP + 8 mm)을 빼먹어, 튜브 위 끝과 선반 사이 여유가 0 mm 다.</p></div>
+        <div class="card warn"><h4>자리 뒤 벽</h4><p class="small">축 뒤 20 mm 에 장비 뒷벽이 있다. 손가락 끝은 튜브 너머 8 mm, 쥐는 점은 축보다 4 mm 앞이라 공칭 경로에서도 손가락 끝이 벽에 닿는다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="result">
+  <div class="ch-head"><span class="ch-no">07</span><h2>결과</h2></div>
+  <div class="fig">
+    <div class="fig-title">공정 하루 평가 (40 일, 바로잡은 물리)</div>
+    <div class="bars">
+      <div class="bar-row"><span class="lbl"><b>하루 8 번을 사람 없이</b></span><span class="track"><span class="fill safe" style="width:95%;display:block"></span></span><span class="val">38/40</span></div>
+      <div class="bar-row"><span class="lbl">이송 성공 (320 번)</span><span class="track"><span class="fill safe" style="width:99.4%;display:block"></span></span><span class="val">318</span></div>
+      <div class="bar-row"><span class="lbl">판 리더 → Fluent</span><span class="track"><span class="fill warn" style="width:95%;display:block"></span></span><span class="val">0.950</span></div>
+      <div class="bar-row"><span class="lbl">튜브 Fluent → NGS</span><span class="track"><span class="fill safe" style="width:100%;display:block"></span></span><span class="val">1.000</span></div>
+    </div>
+    <p class="fig-cap">조용한 실패는 0 이다. 나머지 이송 여섯 가지는 모두 40/40 이다.</p>
+  </div>
+  <div class="fig">
+    <div class="fig-title">판 이송 1200 상황 (12 장비 쌍 × 100) 성공률</div>
+    <div class="bars">
+      <div class="bar-row"><span class="lbl">A 인지 없음</span><span class="track"><span class="fill bad" style="width:55.2%;display:block"></span></span><span class="val">0.552</span></div>
+      <div class="bar-row"><span class="lbl">지난주 C (배양기 말고 정답 + 잡음)</span><span class="track"><span class="fill muted" style="width:97.5%;display:block"></span></span><span class="val">0.975</span></div>
+      <div class="bar-row"><span class="lbl">C 규칙, 전부 사진</span><span class="track"><span class="fill" style="width:98%;display:block"></span></span><span class="val">0.980</span></div>
+      <div class="bar-row"><span class="lbl">R 판단 RL (10/28)</span><span class="track"><span class="fill" style="width:99.3%;display:block"></span></span><span class="val">0.993</span></div>
+      <div class="bar-row"><span class="lbl"><b>R + 띄워 놓기 + 2 단계 판단 (10/29)</b></span><span class="track"><span class="fill safe" style="width:99.5%;display:block"></span></span><span class="val">0.995</span></div>
+    </div>
+    <p class="fig-cap">이 값들은 6-3 의 버그가 있던 물리에서 잰 것이다. 같은 시드 비교에서 바로잡은 물리와 결과가 달라진 것은 240 짝 중 3 건(모두 Fluent)이었다.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>1200 상황 (10/28)</th><th class="n">성공</th><th class="n">사람</th><th class="n">조용한 실패</th><th class="n">Fluent</th><th class="n">배양기</th><th class="n">리더</th><th class="n">분류기</th></tr></thead>
+    <tbody>
+      <tr><td>A 인지 없음</td><td class="n">0.552</td><td class="n">0</td><td class="n">537</td><td class="n">0.747</td><td class="n">0.013</td><td class="n">0.743</td><td class="n">0.707</td></tr>
+      <tr><td>B OK/NG</td><td class="n">0.969</td><td class="n">37</td><td class="n">0</td><td class="n">0.897</td><td class="n">0.980</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+      <tr><td>C 규칙</td><td class="n">0.980</td><td class="n">24</td><td class="n">0</td><td class="n">0.933</td><td class="n">0.987</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+      <tr class="hl"><td>R 판단 RL</td><td class="n">0.993</td><td class="n">7</td><td class="n">1</td><td class="n">0.987</td><td class="n">0.987</td><td class="n">1.000</td><td class="n">1.000</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div><h4>튜브</h4><p class="small">비전 + 학습 꽂기로 새 시드 200/200, NGS 80/80. 6 단계 판정은 모두 맞았다. 빗나감을 넣은 판단 평가에서 학습 판단 0.632, 규칙 0.538.</p></div>
+    <div><h4>힘</h4><p class="small">손가락 닫는 속도 제한 뒤 50 N 넘은 판 이송은 0.08 %. 튜브 이송은 50 N 을 넘은 적이 없다.</p></div>
+  </div>
+</section>
+
+<section class="ch" id="meaning">
+  <div class="ch-head"><span class="ch-no">08</span><h2>이 결과가 의미하는 것과 의미하지 않는 것</h2></div>
+  <div class="two">
+    <div class="card safe">
+      <h3>의미하는 것</h3>
+      <ul>
+        <li>판과 튜브 모두 장비 위치를 사진으로만 알아내도 이송이 된다. 시뮬레이터 정답은 채점에만 쓴다.</li>
+        <li>실패 뒤 판단 세 곳(2 · 5 · 6 단계 뒤)이 모두 짝지어 잰 결과에서 학습한 것이다. 장비별 규칙 없이 장비마다 다른 복구를 골랐다.</li>
+        <li>로봇이 OK 라 하고 실제로 틀린 조용한 실패가 거의 없다 (판 1200 중 0, 튜브 299 중 1).</li>
+      </ul>
+    </div>
+    <div class="card warn">
+      <h3>아직 의미하지 않는 것</h3>
+      <ul>
+        <li>판 결과 대부분은 받침 블록이 충돌에서 빠진 물리에서 쟀다. 같은 시드 비교로는 차이가 작았지만(240 짝 중 3), 판단 RL 짝 데이터는 바로잡은 물리에서 다시 모아야 한다.</li>
+        <li>장비 보이는 모델은 충돌이 없다. 분류기 선반 · 뒷벽, NGS 카트리지 버튼에 실물이면 닿는다.</li>
+        <li>튜브 판단 RL 의 실패는 일부러 넣은 빗나감이다. 실제 비전 오차 실패에서는 확인하지 않았다.</li>
+        <li>띄워 놓기(4 mm)가 액체가 든 판에 괜찮은지는 실물로 봐야 한다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="next">
+  <div class="ch-head"><span class="ch-no">09</span><h2>다음 단계</h2></div>
+  <p class="col">테두리 색은 우선순위다. 빨강은 결과를 바꿀 가능성이 큰 것, 주황은 범위를 확정하는 것, 파랑은 확장이다.</p>
+  <div class="todo">
+    <div class="todo-item"><span class="box p2"></span><div><h4>바로잡은 물리에서 판단 RL 짝 데이터 다시 모으기</h4><p>같은 시드 비교로는 차이가 작았다 (240 짝 중 3, 모두 Fluent). 판단 RL 이 배운 Fluent 다시 놓기 데이터를 바로잡은 물리에서 다시 모으고, 1200 상황을 다시 잰다.</p></div></div>
+    <div class="todo-item"><span class="box p1"></span><div><h4>분류기 · NGS 경로 간섭 해결</h4><p>분류기는 들어 올리는 높이를 튜브 위 끝 기준으로, 쥐는 점을 뒷벽에서 물린다. NGS 는 버튼을 피하는 손 방향 · 높이를 다시 찾는다. 둘 다 꽂힘을 다시 잰다.</p></div></div>
+    <div class="todo-item"><span class="box p1"></span><div><h4>공정 하루의 남은 실패</h4><p>40 일 중 2 일이 판 리더 → Fluent 에서 사람을 불렀다. Fluent 다시 놓기가 약한 것과 같은 원인인지 보고, 날 수를 늘려 다시 잰다.</p></div></div>
+    <div class="todo-item"><span class="box p2"></span><div><h4>배양기 놓은 뒤 판정</h4><p>받침 전용 모델은 기각했다 (오거부 1 → 5). 판과 받침 윗면 사이에 드러나는 띠로 판-받침 상대 위치를 직접 재는 방법을 시험한다.</p></div></div>
+    <div class="todo-item"><span class="box p2"></span><div><h4>쥐는 힘</h4><p>쥐기 시작 순간 판이 받침에 눌리는 원인을 분석한다 (제어). 복구 RL 의 다시 쥐기 접촉력도 여기에 묶인다.</p></div></div>
+    <div class="todo-item"><span class="box p3"></span><div><h4>판단 RL 확장</h4><p>판을 평평한 곳에 내려 다시 쥐는 행동을 더한다 (다시 집은 판이 기운 채 잡히는 Fluent 실패). 튜브는 실제 비전 오차로 생긴 실패에서 6 단계 판단을 확인한다.</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="stack">
+    <p><b>관련 기록</b> — 실험 기록 <code>EXPERIMENTS.md</code> §13, Notion 주간 연구 기록 9주차, 브랜치 <code>perception-judgment-v11</code> (로컬 커밋)</p>
+    <p class="mono small">판: judgment_chain_v11 · judgment_rl_v11 · judgment_learn_v11 · place_verify_v11 · station_edges_v11</p>
+    <p class="mono small">튜브: tube_env_v11 · tube_chain_v11 · tube_perception_v11 · tube_insert_rl_v11 · tube_judgment_v11 · tube_clearance_v11 · 공정: process_day_v11</p>
+  </div>
+</footer>
+</div>
