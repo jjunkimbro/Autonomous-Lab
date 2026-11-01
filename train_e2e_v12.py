@@ -401,6 +401,9 @@ def main():
     parser.add_argument("--trigger-explore", default=None,
                         help="이어서 학습할 때 단계 행동 (4 번) 의 탐색을 다시 연다: '평균 이동,잡음' 예 0.6,0.8. 정책이 '준비' 를 "
                              "한 번도 누르지 않게 굳었을 때 (평균 -1.5, 잡음 0.45 면 누를 확률 1e-4) 쓴다.")
+    parser.add_argument("--explore-std", type=float, default=None,
+                        help="이어서 학습할 때 모든 행동 잡음을 이 값 이상으로 올린다. 다른 단계 정책에서 출발해 잡음이 0.1 대로 "
+                             "작을 때 (pick_grasp 를 pick_enter 에서 출발) 새 동작 (쥔 뒤 들기) 을 찾게 쓴다.")
     parser.add_argument("--run-name", default=None)
     parser.add_argument("--resume", default=None, help="model.pt (다 이어서) 또는 snapshots/actor_*.pt (정책만)")
     parser.add_argument("--resume-steps", type=int, default=0, help="정책만 이어받을 때 그 사본의 걸음")
@@ -454,6 +457,10 @@ def main():
                 actor.head[-1].bias[4] += shift
                 actor.log_std[4] = float(np.log(std))
             print(f"[trigger] 단계 행동 평균 +{shift}, 잡음 {std}", flush=True)
+        if args.explore_std:
+            with torch.no_grad():
+                actor.log_std.clamp_(min=float(np.log(args.explore_std)))
+            print(f"[explore] 행동 잡음 {actor.log_std.exp().cpu().numpy().round(2).tolist()}", flush=True)
     (run / "config.json").write_text(json.dumps(vars(args), indent=1, ensure_ascii=False), encoding="utf-8")
 
     def evaluate_and_save(recent):
