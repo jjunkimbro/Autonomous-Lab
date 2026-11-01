@@ -586,7 +586,7 @@ def main():
                  "difficulty": difficulty}
         save(state, run / "model.pt")
     if streak >= 2:
-        print(f"[done] 평가 성공률 {args.target} 이상 두 번 연속 — {done_steps} 걸음에서 멈춘다", flush=True)
+        print(f"[done] 평가 성공률 {args.target} 이상 두 번 연속 - {done_steps} 걸음에서 멈춘다", flush=True)
     envs.close()
 
 
