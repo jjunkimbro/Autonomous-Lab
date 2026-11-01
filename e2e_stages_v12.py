@@ -741,7 +741,9 @@ class PlaceStagesEnv(StageBase, pp.PlacePlateEnv):
             return bool(np.all(np.abs(e) <= PLACE_READY_TOL))
         seated = abs(e[2]) <= pp.SEATED_Z and self._tilt() <= pp.SEATED_TILT
         if self.stage == "place_down":
-            return bool(seated and self.release_height <= e2e.RELEASE_HIGH)
+            # 끝날 때 손이 누르고 있지 않아야 한다: 이어서 돌리니 내려놓기 정책이 놓은 뒤에도 20 ~ 40 N 눌러 둔 채 끝나,
+            # 물러나기가 첫 걸음부터 힘 범위 (15 N) 를 넘겼다 (11-01, 물러나기 실패 3/7 은 시작 순간의 힘).
+            return bool(seated and self.release_height <= e2e.RELEASE_HIGH and self.step_force <= SOFT_FORCE_OK)
         return bool(seated and self.drag <= DRAG_TOL and self.max_force <= SOFT_FORCE_OK
                     and not self._fingers_touch_plate())
 
@@ -775,6 +777,9 @@ class PlaceStagesEnv(StageBase, pp.PlacePlateEnv):
         if self.stage == "place_down" and self.released and self.stage_steps - 1 == self.trigger_step \
                 and self.release_height > e2e.RELEASE_HIGH:
             return -3.0
+        # 놓은 뒤 누르는 힘 (15 N 넘는 만큼, 35 N 이면 걸음마다 -0.4)
+        if self.stage == "place_down" and self.released:
+            return -0.2 * max(0.0, self.step_force - SOFT_FORCE_OK) / 10.0
         return 0.0
 
     def _precision(self):
