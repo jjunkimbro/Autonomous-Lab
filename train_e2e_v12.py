@@ -460,7 +460,7 @@ def main():
         if args.explore_std:
             with torch.no_grad():
                 actor.log_std.clamp_(min=float(np.log(args.explore_std)))
-            print(f"[explore] 행동 잡음 {actor.log_std.exp().cpu().numpy().round(2).tolist()}", flush=True)
+            print(f"[explore] 행동 잡음 {actor.log_std.exp().detach().cpu().numpy().round(2).tolist()}", flush=True)
     (run / "config.json").write_text(json.dumps(vars(args), indent=1, ensure_ascii=False), encoding="utf-8")
 
     def evaluate_and_save(recent):
