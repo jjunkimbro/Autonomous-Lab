@@ -543,8 +543,10 @@ class PickStagesEnv(StageBase, pk.PickPlateEnv):
             # 쥔 뒤: 쥐던 순간의 퍼텐셜에서 이어 간다. 예전 (2 - 150 x 어긋남) 은 쥐는 순간 어긋남과 상관없이 약 +5 가 뛰어
             # 정책이 첫 걸음에 바로 쥐고 자리를 고치지 않게 굳었다 (11-01, 24 번 모두 0 번째 걸음에 쥠, 성공 0.6 = 시작 오차 운).
             offset = float(np.linalg.norm(self._plate_in_tcp() - self.HOLD_CENTER))
+            # 높이는 0 밑을 자르지 않는다: 잘랐더니 쥔 뒤 아래로 누르는 버릇 (진입 정책에서 이어받음) 이 손해도, 올라오는 이득도 없어
+            # Fluent · 배양기에서 쥔 채 -3 ~ -5 mm 눌러 시간 초과로 끝났다 (11-01).
             return self.grip_phi - 150.0 * (offset - self.grip_offset) \
-                + SHAPE * min(max(self._lift_since_grip(), 0.0), LIFT_END)
+                + SHAPE * min(self._lift_since_grip(), LIFT_END)
         e = self._stage_error()
         return -SHAPE * float(np.sum(np.abs(e[:3]))) - YAW_SHAPE * abs(math.degrees(e[3])) - MOVED_SHAPE * self.moved             - self._fine(e)
 
