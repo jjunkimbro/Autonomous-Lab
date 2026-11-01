@@ -53,6 +53,9 @@ def make_env(task, seed, render=True, station_weights=None, lead=None):
         return e2e.E2EPlacePlateEnv(seed=seed, render=render)
     import e2e_stages_v12 as stages
     kw = {"lead_policy": lead[0], "lead_share": lead[1]} if lead else {}
+    if task.startswith("tube_"):
+        import e2e_tube_stages_v12 as tube
+        return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
     return stages.make(task, seed=seed, render=render, station_weights=station_weights, **kw)
 
 
@@ -342,11 +345,11 @@ def save(obj, path):
 
 # ----------------------------------------------------------------------
 def evaluate(actor, device, episodes, task, seed=777, render=True, lead=None):
-    import e2e_place_plate_v12 as e2e
     env = make_env(task, seed, render, lead=lead)
+    stations = env.stations
     rows = []
     for ep in range(episodes):
-        obs, _ = env.reset(options={"station": e2e.STATION_NAMES[ep % len(e2e.STATION_NAMES)]})
+        obs, _ = env.reset(options={"station": stations[ep % len(stations)]})
         done = False
         while not done:
             batch = {k: v[None] for k, v in obs.items()}
@@ -355,7 +358,7 @@ def evaluate(actor, device, episodes, task, seed=777, render=True, lead=None):
         rows.append(info)
     env.close()
     summary = {"success": float(np.mean([r["success"] for r in rows]))}
-    for st in e2e.STATION_NAMES:
+    for st in stations:
         sub = [r for r in rows if r["station"] == st]
         summary[st] = float(np.mean([r["success"] for r in sub])) if sub else None
     outcomes = {}
@@ -389,7 +392,8 @@ def main():
     parser.add_argument("--eval-episodes", type=int, default=40)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--device", default="cuda")
-    parser.add_argument("--task", default="place_enter", help="e2e_stages_v12.STAGES 중 하나, 또는 place_whole")
+    parser.add_argument("--task", default="place_enter",
+                        help="e2e_stages_v12.STAGES 중 하나, tube_<단계> (e2e_tube_stages_v12), 또는 place_whole")
     parser.add_argument("--actor-input", choices=("images", "priv"), default="images",
                         help="priv = 정답 상태를 보는 점검용 정책 (영상 렌더 없이 빠르다)")
     parser.add_argument("--target", type=float, default=0.95, help="평가 성공률이 이 이상으로 두 번 연속이면 멈춘다")

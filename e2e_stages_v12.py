@@ -105,6 +105,8 @@ class StageBase(e2e.WristRGBD):
     """집기 · 놓기 단계 환경이 같이 쓰는 것: 손끝 속도 제어, 작업 상자, 단계 시작 · 전환, 보상 틀."""
 
     skill = None
+    STAGE_TIME = STAGE_TIME
+    ONEHOT_NAMES = STATION_NAMES   # critic 의 장비 원핫 (튜브 단계 환경은 튜브 자리)
     REF_POINT = None          # 받침 위 손 자리 (GRASP / SET_DOWN)
     START_POINT = None        # 진입 시작 자리 (APPROACH / APPROACH_LIFTED)
 
@@ -330,7 +332,7 @@ class StageBase(e2e.WristRGBD):
             end, outcome = True, "force"
         else:
             end, outcome = self._check_end(trigger)
-            if not end and self.stage_time >= STAGE_TIME[self.stage] - 1e-9:
+            if not end and self.stage_time >= self.STAGE_TIME[self.stage] - 1e-9:
                 end, outcome = True, self._timeout_outcome()
         success = end and outcome in self.NORMAL_END and self._success()
 
@@ -402,9 +404,9 @@ class StageBase(e2e.WristRGBD):
         return FINE_SHAPE * float(np.sum(np.minimum(np.abs(e) / self.READY_TOL, FINE_CAP)))
 
     def _priv(self):
-        onehot = np.zeros(len(STATION_NAMES))
-        if self.station_name in STATION_NAMES:
-            onehot[STATION_NAMES.index(self.station_name)] = 1.0
+        onehot = np.zeros(len(self.ONEHOT_NAMES))
+        if self.station_name in self.ONEHOT_NAMES:
+            onehot[self.ONEHOT_NAMES.index(self.station_name)] = 1.0
         stage_onehot = np.zeros(3)
         stage_onehot[SEQUENCES[self.skill].index(self.stage)] = 1.0
         e = self._stage_error() if hasattr(self, "phi") else np.zeros(4)
@@ -419,7 +421,7 @@ class StageBase(e2e.WristRGBD):
             e[:3] * 100.0, [math.degrees(e[3]) / 2.0], h[:3] * 100.0, [math.degrees(h[3]) / 2.0, tilt / 2.0],
             in_tcp * 200.0, tcp_local * 20.0, [math.degrees(self.yaw_cmd) / 4.0],
             [float(self.gripping), float(self.gripped), float(self.released), back * 25.0, up * 25.0],
-            [self.moved * 200.0, self.slip * 200.0, self.drag * 200.0, self.stage_time / STAGE_TIME[self.stage], width,
+            [self.moved * 200.0, self.slip * 200.0, self.drag * 200.0, self.stage_time / self.STAGE_TIME[self.stage], width,
              self.step_force / 20.0, self.max_force / 50.0],
             onehot, stage_onehot, self.truth[:3] * 200.0, [math.degrees(self.truth[3]) / 2.0],
             self.offset[:3] * 400.0, [math.degrees(self.offset[3])], self.last_action,

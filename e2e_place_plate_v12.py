@@ -134,6 +134,8 @@ def light_scene_xml():
 class WristRGBD:
     """손목 D415 RGB-D 관측 (넓은 창 + 정밀 창) · 카메라 장착 오차 · 렌더러 나눠 쓰기. 판 놓기 · 집기 단계 환경이 같이 쓴다."""
 
+    FINE_BOX = FINE_BOX           # 튜브 단계 환경은 튜브 · 자리가 보이는 창으로 바꾼다
+
     def _wrist_setup(self, render):
         self.substeps = int(round(1.0 / (CONTROL_HZ * self.model.opt.timestep)))
         self.render_images = render
@@ -145,7 +147,7 @@ class WristRGBD:
     def _wrist_spaces(self):
         spaces = {"priv": gym.spaces.Box(-np.inf, np.inf, shape=(len(self._priv()),), dtype=np.float32)}
         if self.render_images:
-            fw, fh = FINE_BOX[2], FINE_BOX[3]
+            fw, fh = self.FINE_BOX[2], self.FINE_BOX[3]
             spaces["wide_rgb"] = gym.spaces.Box(0, 255, shape=(WIDE_H, WIDE_W, 3), dtype=np.uint8)
             spaces["wide_depth"] = gym.spaces.Box(0.0, DEPTH_FAR, shape=(WIDE_H, WIDE_W), dtype=np.float16)
             spaces["fine_rgb"] = gym.spaces.Box(0, 255, shape=(fh, fw, 3), dtype=np.uint8)
@@ -242,7 +244,7 @@ class WristRGBD:
     def _images(self):
         rgb, depth = self._render_once()
         import cv2
-        x, y, w, h = FINE_BOX
+        x, y, w, h = self.FINE_BOX
         views = {"wide": (cv2.resize(rgb, (WIDE_W, WIDE_H), interpolation=cv2.INTER_AREA),
                           # 0 (결측) 이 섞이면 평균이 틀어지므로 가장 가까운 화소를 쓴다
                           cv2.resize(depth, (WIDE_W, WIDE_H), interpolation=cv2.INTER_NEAREST)),
