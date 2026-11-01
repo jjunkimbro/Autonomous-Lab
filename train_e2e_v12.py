@@ -47,17 +47,18 @@ def _shared(spec, n):
     return arrays, blocks
 
 
-def make_env(task, seed, render=True, station_weights=None):
+def make_env(task, seed, render=True, station_weights=None, lead=None):
     if task == "place_whole":
         import e2e_place_plate_v12 as e2e
         return e2e.E2EPlacePlateEnv(seed=seed, render=render)
     import e2e_stages_v12 as stages
-    return stages.make(task, seed=seed, render=render, station_weights=station_weights)
+    kw = {"lead_policy": lead[0], "lead_share": lead[1]} if lead else {}
+    return stages.make(task, seed=seed, render=render, station_weights=station_weights, **kw)
 
 
-def _worker(remote, seeds, spec, n, offset, task, render, station_weights=None):
+def _worker(remote, seeds, spec, n, offset, task, render, station_weights=None, lead=None):
     try:
-        _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights)
+        _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
     except Exception:
         import sys
         import traceback
@@ -67,8 +68,8 @@ def _worker(remote, seeds, spec, n, offset, task, render, station_weights=None):
         raise
 
 
-def _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights=None):
-    envs = [make_env(task, s, render, station_weights) for s in seeds]
+def _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights=None, lead=None):
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
     if render:
         for env in envs[1:]:
             env.share_renderer(envs[0])
@@ -109,7 +110,7 @@ def _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights=N
 
 
 class GroupVecEnv:
-    def __init__(self, processes, per_process, seed, task, render=True, station_weights=None):
+    def __init__(self, processes, per_process, seed, task, render=True, station_weights=None, lead=None):
         import multiprocessing as mp
         from multiprocessing import shared_memory
         probe = make_env(task, 0, render)
@@ -128,7 +129,7 @@ class GroupVecEnv:
         for key, (name, shape, dtype) in spec.items():
             self.arrays[key] = np.ndarray((n,) + tuple(shape), dtype=dtype, buffer=self.blocks[key].buf)
         self.ctx, self.spec, self.n, self.seed = ctx, spec, n, seed
-        self.task, self.render, self.station_weights = task, render, station_weights
+        self.task, self.render, self.station_weights, self.lead = task, render, station_weights, lead
         self.difficulty = 1.0
         self.restarts = 0
         self.remotes, self.procs = [None] * processes, [None] * processes
@@ -139,7 +140,7 @@ class GroupVecEnv:
         parent, child = self.ctx.Pipe()
         seeds = [self.seed + 1000 * (p * self.k + i) + 100_000 * generation for i in range(self.k)]
         proc = self.ctx.Process(target=_worker, args=(child, seeds, self.spec, self.n, p * self.k, self.task, self.render,
-                                                      self.station_weights), daemon=True)
+                                                      self.station_weights, self.lead), daemon=True)
         proc.start()
         child.close()
         self.remotes[p], self.procs[p] = parent, proc
@@ -340,9 +341,9 @@ def save(obj, path):
 
 
 # ----------------------------------------------------------------------
-def evaluate(actor, device, episodes, task, seed=777, render=True):
+def evaluate(actor, device, episodes, task, seed=777, render=True, lead=None):
     import e2e_place_plate_v12 as e2e
-    env = make_env(task, seed, render)
+    env = make_env(task, seed, render, lead=lead)
     rows = []
     for ep in range(episodes):
         obs, _ = env.reset(options={"station": e2e.STATION_NAMES[ep % len(e2e.STATION_NAMES)]})
@@ -404,6 +405,10 @@ def main():
     parser.add_argument("--explore-std", type=float, default=None,
                         help="이어서 학습할 때 모든 행동 잡음을 이 값 이상으로 올린다. 다른 단계 정책에서 출발해 잡음이 0.1 대로 "
                              "작을 때 (pick_grasp 를 pick_enter 에서 출발) 새 동작 (쥔 뒤 들기) 을 찾게 쓴다.")
+    parser.add_argument("--lead-policy", default=None,
+                        help="이 단계 시작 상태 일부를 앞 단계 정책 (actor .pt) 을 실제로 돌려 만든다. 이어서 돌릴 때 앞 단계가 남기는 "
+                             "상태 (예: 내려놓기가 손을 눌러 둔 채 끝남) 를 학습 · 평가 때도 보게 한다.")
+    parser.add_argument("--lead-share", type=float, default=0.5, help="앞 단계 정책으로 시작하는 비율")
     parser.add_argument("--run-name", default=None)
     parser.add_argument("--resume", default=None, help="model.pt (다 이어서) 또는 snapshots/actor_*.pt (정책만)")
     parser.add_argument("--resume-steps", type=int, default=0, help="정책만 이어받을 때 그 사본의 걸음")
@@ -420,7 +425,8 @@ def main():
     weights = None
     if args.station_weights:
         weights = {k: float(v) for k, v in (item.split("=") for item in args.station_weights.split(","))}
-    envs = GroupVecEnv(args.processes, args.per_process, args.seed, args.task, render, weights)
+    lead = (args.lead_policy, args.lead_share) if args.lead_policy else None
+    envs = GroupVecEnv(args.processes, args.per_process, args.seed, args.task, render, weights, lead)
     space = envs.observation_space
     priv_dim = space["priv"].shape[0]
     actor = Actor(priv_dim=None if render else priv_dim).to(device)
@@ -465,7 +471,7 @@ def main():
 
     def evaluate_and_save(recent):
         nonlocal best, streak
-        summary = evaluate(actor, device, args.eval_episodes, args.task, render=render)
+        summary = evaluate(actor, device, args.eval_episodes, args.task, render=render, lead=lead)
         summary["steps"] = done_steps
         summary["minutes"] = round((time.time() - start) / 60.0, 1)
         summary["train_success"] = float(np.mean([r["success"] for r in recent])) if recent else 0.0

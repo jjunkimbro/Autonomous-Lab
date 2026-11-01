@@ -106,9 +106,10 @@ class StageBase(e2e.WristRGBD):
     REF_POINT = None          # 받침 위 손 자리 (GRASP / SET_DOWN)
     START_POINT = None        # 진입 시작 자리 (APPROACH / APPROACH_LIFTED)
 
-    def _stage_setup(self, stage, render):
+    def _stage_setup(self, stage, render, lead_policy=None, lead_share=0.5):
         assert stage in SEQUENCES[self.skill], stage
         self.stage = stage
+        self._load_lead(lead_policy, lead_share)
         self._wrist_setup(render)
         self.difficulty = 1.0
         self.set_grasp_design()
@@ -257,6 +258,42 @@ class StageBase(e2e.WristRGBD):
             self._restore_appearance()
 
     # ------------------------------------------------------------------
+    def _load_lead(self, path, share):
+        """앞 단계 정책 (actor .pt, 영상만 보는 결정적 행동). 이 단계 시작 상태의 share 만큼을 그 정책을 실제로 돌려 만든다."""
+        self.lead, self.lead_share, self._lead_busy = None, share, False
+        if not path:
+            return
+        stages = SEQUENCES[self.skill]
+        assert stages.index(self.stage) > 0, "첫 단계에는 앞 단계가 없다"
+        import torch
+        import train_e2e_v12 as tr
+        torch.set_num_threads(1)
+        actor = tr.Actor()
+        actor.load_state_dict(torch.load(path, map_location="cpu"))
+        actor.eval()
+        cpu = torch.device("cpu")
+        self.lead = lambda obs: actor.act({k: v[None] for k, v in obs.items()}, cpu, deterministic=True)[0]
+
+    def _lead_reset(self, options):
+        """앞 단계를 그 정책으로 끝까지 돌리고, 정상으로 끝나면 (앉음 · 준비 · 들기 …) 그 상태에서 이 단계를 시작한다.
+        네 번 모두 앞 단계가 실패하면 보통 시작 상태로."""
+        target = self.stage
+        stages = SEQUENCES[self.skill]
+        prev = stages[stages.index(target) - 1]
+        self._lead_busy = True
+        try:
+            for _ in range(4):
+                obs, _ = self.reset(options=options, stage=prev)
+                done = False
+                while not done:
+                    obs, _, done, _, info = self.step(self.lead(obs))
+                if info["outcome"] in self.NORMAL_END:
+                    return self.begin_stage(target), self._info_stage(False, "")
+            self.stage = target
+            return self.reset(options=options, stage=target)
+        finally:
+            self._lead_busy = False
+
     def begin_stage(self, stage):
         """지금 상태에서 이 단계를 시작한다 (단계 학습의 reset 끝, 또는 앞 단계에 이어서)."""
         assert stage in SEQUENCES[self.skill], stage
@@ -407,17 +444,19 @@ class PickStagesEnv(StageBase, pk.PickPlateEnv):
     NORMAL_END = ("ready", "ready_late", "lifted", "out")
 
     def __init__(self, stage="pick_enter", seed=None, stations=STATION_NAMES, appearance=True, randomize=True,
-                 station_weights=None, render=True):
+                 station_weights=None, render=True, lead_policy=None, lead_share=0.5):
         with light_model(render):
             pk.PickPlateEnv.__init__(self, obs_mode="privileged", stations=stations, randomize=randomize, seed=seed,
                                      station_weights=station_weights, corrected=False, appearance=appearance)
-        self._stage_setup(stage, render)
+        self._stage_setup(stage, render, lead_policy, lead_share)
 
     def reset(self, seed=None, options=None, stage=None):
         gym.Env.reset(self, seed=seed)
         if seed is not None:
             self.rng = np.random.default_rng(seed)
         stage = stage or (options or {}).get("stage") or self.stage
+        if self.lead is not None and not self._lead_busy and stage == self.stage and self.rng.random() < self.lead_share:
+            return self._lead_reset(options)
         for attempt in range(8):
             options_, r = self._common_reset(options)
             self.rest = np.array(options_.get("rest", self._spread(r, -pk.RESTING_ERROR, pk.RESTING_ERROR)))
@@ -572,17 +611,19 @@ class PlaceStagesEnv(StageBase, pp.PlacePlateEnv):
     NORMAL_END = ("ready", "ready_late", "settled", "settled_late", "out")
 
     def __init__(self, stage="place_enter", seed=None, stations=STATION_NAMES, appearance=True, randomize=True,
-                 station_weights=None, render=True):
+                 station_weights=None, render=True, lead_policy=None, lead_share=0.5):
         with light_model(render):
             pp.PlacePlateEnv.__init__(self, obs_mode="privileged", stations=stations, randomize=randomize, seed=seed,
                                       station_weights=station_weights, corrected=False, appearance=appearance)
-        self._stage_setup(stage, render)
+        self._stage_setup(stage, render, lead_policy, lead_share)
 
     def reset(self, seed=None, options=None, stage=None):
         gym.Env.reset(self, seed=seed)
         if seed is not None:
             self.rng = np.random.default_rng(seed)
         stage = stage or (options or {}).get("stage") or self.stage
+        if self.lead is not None and not self._lead_busy and stage == self.stage and self.rng.random() < self.lead_share:
+            return self._lead_reset(options)
         for attempt in range(8):
             options_, r = self._common_reset(options)
             self.in_hand = np.array(options_.get("in_hand", self._spread(r, -pp.IN_HAND_ERROR, pp.IN_HAND_ERROR)))
@@ -643,6 +684,13 @@ class PlaceStagesEnv(StageBase, pp.PlacePlateEnv):
             if e[2] < 0.0006:
                 break
             self._drive(np.array([0.0, 0.0, np.clip((-0.002 - e[2]) / (SPEED_Z / CONTROL_HZ), -1, 1), 0.0, 0.0]))
+        # 닿은 뒤 0 ~ 3 mm 더 눌러 둔다: 이어서 돌리면 내려놓기 정책이 놓기 전후로 손을 눌러 (높이 행동 -1 에 걸림) 물러나기가
+        # 24 ~ 41 N 눌린 채 시작했고, 닿기까지만 내린 시작 상태로 배운 물러나기는 들지 않고 그대로 긁었다 (11-01).
+        press = float(self.np_random.uniform(0.0, 0.003)) * self.difficulty
+        while press > 1e-6:
+            dz = min(press, SPEED_Z / CONTROL_HZ)
+            self._drive(np.array([0.0, 0.0, -dz / (SPEED_Z / CONTROL_HZ), 0.0, 0.0]))
+            press -= dz
         self.released = True
         self.gripping = self.gripped = False
         self.grip = self.GRIP_WIDE
