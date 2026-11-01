@@ -1,0 +1,32 @@
+{
+ "pick": {
+  "success": 0.9625,
+  "stations": {
+   "fluent_plate": 1.0,
+   "incubator_plate": 1.0,
+   "reader_plate": 0.85,
+   "sorter_left_plate": 1.0
+  },
+  "ends": {
+   "pick_extract:out+ok": 77,
+   "pick_enter:force": 1,
+   "pick_enter:timeout": 2
+  }
+ },
+ "place": {
+  "success": 0.7000000000000001,
+  "stations": {
+   "fluent_plate": 0.8,
+   "incubator_plate": 0.9,
+   "reader_plate": 0.6,
+   "sorter_left_plate": 0.5
+  },
+  "ends": {
+   "place_retreat:out+ok": 56,
+   "place_retreat:out": 20,
+   "place_enter:timeout": 4
+  }
+ },
+ "transfer_estimate": 0.6737500000000001,
+ "episodes_per_station": 20
+}

@@ -43,8 +43,10 @@ STAGES = ("pick_enter", "pick_grasp", "pick_extract", "place_enter", "place_down
 SEQUENCES = {"pick": STAGES[:3], "place": STAGES[3:]}
 LABELS = {"pick_enter": "집기 1/3 · 진입", "pick_grasp": "집기 2/3 · 잡고 들기", "pick_extract": "집기 3/3 · 빼내기",
           "place_enter": "놓기 1/3 · 진입", "place_down": "놓기 2/3 · 내려놓기", "place_retreat": "놓기 3/3 · 물러나기"}
-STAGE_TIME = {"pick_enter": 4.0, "pick_grasp": 3.0, "pick_extract": 3.0,
-              "place_enter": 4.0, "place_down": 3.0, "place_retreat": 3.0}
+# 진입은 6 초 (학습은 4 초로 했다). 정책은 시간을 보지 않아 더 맞춰 갈 수 있다: 이어서 돌리면 4 초에서 놓기 0.775 · 6 초에서 0.94
+# (놓기 진입 시간 초과 7 -> 1, 더 맞춘 뒤 '준비' 라 내려놓기도 좋아짐, 11-02 chain_eval_v12).
+STAGE_TIME = {"pick_enter": 6.0, "pick_grasp": 3.0, "pick_extract": 3.0,
+              "place_enter": 6.0, "place_down": 3.0, "place_retreat": 3.0}
 # 단계를 끝내는 행동 / 이동량
 TRIGGER = 0.5
 LIFT_END = 0.008             # pick_grasp: 쥔 뒤 손 높이가 이만큼 오르면 끝

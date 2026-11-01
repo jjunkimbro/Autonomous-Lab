@@ -1,32 +1,33 @@
 {
  "pick": {
-  "success": 0.9625,
+  "success": 0.975,
   "stations": {
    "fluent_plate": 1.0,
    "incubator_plate": 1.0,
-   "reader_plate": 0.85,
+   "reader_plate": 0.9,
    "sorter_left_plate": 1.0
   },
   "ends": {
-   "pick_extract:out+ok": 77,
+   "pick_extract:out+ok": 78,
    "pick_enter:force": 1,
-   "pick_enter:timeout": 2
+   "pick_enter:timeout": 1
   }
  },
  "place": {
-  "success": 0.7000000000000001,
+  "success": 0.9374999999999999,
   "stations": {
-   "fluent_plate": 0.8,
-   "incubator_plate": 0.9,
-   "reader_plate": 0.6,
-   "sorter_left_plate": 0.5
+   "fluent_plate": 0.9,
+   "incubator_plate": 1.0,
+   "reader_plate": 0.95,
+   "sorter_left_plate": 0.9
   },
   "ends": {
-   "place_retreat:out+ok": 56,
-   "place_retreat:out": 20,
-   "place_enter:timeout": 4
+   "place_retreat:out+ok": 75,
+   "place_retreat:out": 3,
+   "place_down:force": 1,
+   "place_enter:timeout": 1
   }
  },
- "transfer_estimate": 0.6737500000000001,
+ "transfer_estimate": 0.9140624999999999,
  "episodes_per_station": 20
 }
