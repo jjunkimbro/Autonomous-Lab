@@ -69,7 +69,9 @@ PICK_GRASP_START = np.array([0.0025, 0.002, 0.0012, math.radians(0.6)])
 PICK_EXTRACT_START = np.array([0.001, 0.00075, 0.0005, math.radians(0.3)])
 PLACE_ENTER_START = (e2e.START_LOW, e2e.START_HIGH)
 PLACE_DOWN_START = np.array([0.002, 0.0013, 0.0025, math.radians(0.6)])
-PLACE_RETREAT_START = np.array([0.0005, 0.0003, 0.0005, math.radians(0.2)])
+# 물러나기 시작 (판을 내려놓는 자리 어긋남). 0.5 · 0.3 mm · 0.2° 로 좁게 배웠더니 이어서 돌릴 때 내려놓기 정책이 남기는 자리
+# (좌우 -0.65 mm · yaw 1.1 ~ 1.3°, 판이 위치 잡이에 기대 앉음) 에서 손가락이 판을 30 N 넘게 긁어 실패했다 (11-01 chain_eval_v12).
+PLACE_RETREAT_START = np.array([0.0012, 0.0010, 0.0005, math.radians(1.5)])
 
 # 보상
 SHAPE = 100.0                # 1 mm 당 0.1
