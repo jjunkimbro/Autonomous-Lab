@@ -482,6 +482,9 @@ class PickStagesEnv(StageBase, pk.PickPlateEnv):
 
     def _before_drive(self, a, trigger):
         if self.stage == "pick_grasp" and trigger and not self.gripping:
+            # 쥐는 순간 퍼텐셜이 이어지게 쥐기 전 퍼텐셜과 손 안 어긋남을 남긴다 (_potential)
+            self.grip_phi = self._potential()
+            self.grip_offset = float(np.linalg.norm(self._plate_in_tcp() - self.HOLD_CENTER))
             self.gripping = True
             self.trigger_step = self.stage_steps
             self.grip = self.GRIP_CLOSE - self.squeeze
@@ -537,9 +540,11 @@ class PickStagesEnv(StageBase, pk.PickPlateEnv):
             back, up = self._odometry()
             return SHAPE * min(back, EXTRACT_END) - 200.0 * self.slip - SHAPE * max(0.0, -up)
         if self.stage == "pick_grasp" and self.gripping:
+            # 쥔 뒤: 쥐던 순간의 퍼텐셜에서 이어 간다. 예전 (2 - 150 x 어긋남) 은 쥐는 순간 어긋남과 상관없이 약 +5 가 뛰어
+            # 정책이 첫 걸음에 바로 쥐고 자리를 고치지 않게 굳었다 (11-01, 24 번 모두 0 번째 걸음에 쥠, 성공 0.6 = 시작 오차 운).
             offset = float(np.linalg.norm(self._plate_in_tcp() - self.HOLD_CENTER))
-            return 2.0 - 150.0 * offset + SHAPE * min(max(self._lift_since_grip(), 0.0), LIFT_END) \
-                - MOVED_SHAPE * self.moved
+            return self.grip_phi - 150.0 * (offset - self.grip_offset) \
+                + SHAPE * min(max(self._lift_since_grip(), 0.0), LIFT_END)
         e = self._stage_error()
         return -SHAPE * float(np.sum(np.abs(e[:3]))) - YAW_SHAPE * abs(math.degrees(e[3])) - MOVED_SHAPE * self.moved             - self._fine(e)
 
