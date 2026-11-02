@@ -573,7 +573,7 @@ class PickStagesEnv(StageBase, pk.PickPlateEnv):
     def _success(self):
         e = self._stage_error()
         if self.stage == "pick_enter":
-            return bool(np.all(np.abs(e) <= PICK_READY_TOL) and self.moved <= MOVED_TOL)
+            return bool(np.all(np.abs(e) <= self.READY_TOL) and self.moved <= MOVED_TOL)
         if self.stage == "pick_grasp":
             error = float(np.linalg.norm(self._plate_in_tcp() - self.HOLD_CENTER))
             return bool(error <= GRASP_TOL and self._lifted() >= pk.CLEAR_HEIGHT and self._tilt() <= 2.0
@@ -742,7 +742,7 @@ class PlaceStagesEnv(StageBase, pp.PlacePlateEnv):
     def _success(self):
         e = self._stage_error()
         if self.stage == "place_enter":
-            return bool(np.all(np.abs(e) <= PLACE_READY_TOL))
+            return bool(np.all(np.abs(e) <= self.READY_TOL))
         seated = abs(e[2]) <= pp.SEATED_Z and self._tilt() <= pp.SEATED_TILT
         if self.stage == "place_down":
             # 끝날 때 손이 누르고 있지 않아야 한다: 이어서 돌리니 내려놓기 정책이 놓은 뒤에도 20 ~ 40 N 눌러 둔 채 끝나,
