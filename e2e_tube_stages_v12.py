@@ -62,8 +62,9 @@ STAGE_TIME = {"pick_enter": 6.0, "pick_grasp": 3.0, "pick_extract": 4.0,
 PICK_READY_TOL = np.array([0.0030, 0.0010, 0.0030, math.radians(1.5)])
 GRASP_TILT = 1.0              # 잡고 들기 성공: 손 안 튜브 기울기 [deg]
 GRASP_HOLD = 0.001            # 잡고 들기 성공: 쥔 뒤 손 안에서 미끄러진 양 [m]
-# 놓기 진입: 자리 위 높이는 꽂기가 내려가며 맞추므로 넓게
-PLACE_READY_TOL = np.array([0.0015, 0.0010, 0.0030, math.radians(1.5)])
+# 놓기 진입: 자리 위로 대략 옮기기만 한다 — 꽂기가 벽 위까지 내려가며 0.6 mm 로 다시 맞춘다 (자리가 가까워 더 잘 보인다).
+# 1.5 · 1.0 · 3 mm 로 두었더니 87 만 걸음에도 정책이 자리 위 1 ~ 3 mm 에서 일정한 어긋남을 남긴 채 멈춰 0.05 ~ 0.175 (11-02).
+PLACE_READY_TOL = np.array([0.0030, 0.0020, 0.0040, math.radians(1.5)])
 # 꽂기: 이만큼 맞으면 벽 아래로 내려도 된다 (앞뒤, 좌우 [m]). 곧게 내릴 때 꽂히는 폭이 좌우 ±0.75 · 앞뒤 ±1.75 mm
 # (EXPERIMENTS §13.12, 모따기 포함) 라 그 안쪽으로.
 DOWN_ALIGN = np.array([0.0006, 0.0006])
@@ -81,7 +82,7 @@ PICK_GRASP_START = np.array([0.0020, 0.0012, 0.0025, math.radians(1.0)])
 PICK_EXTRACT_START = np.array([0.0010, 0.0005, 0.0015, math.radians(0.5)])
 PLACE_ENTER_START = (np.array([-0.010, -0.004, 0.000, -math.radians(1.0)]),
                      np.array([0.000, 0.004, 0.010, math.radians(1.0)]))
-PLACE_DOWN_START = np.array([0.0020, 0.0013, 0.0035, math.radians(1.0)])
+PLACE_DOWN_START = np.array([0.0030, 0.0020, 0.0040, math.radians(1.0)])     # 놓기 진입 성공 범위만큼
 PLACE_RETREAT_START = np.array([0.0003, 0.0003, 0.0, math.radians(1.5)])   # 꽂힌 튜브 (벽 안이라 좁다)
 
 # 정밀 창 (렌더 픽셀 왼쪽, 위, 폭, 높이) — 판과 같은 크기 (정책 구조를 같이 쓴다). 손끝은 y 210, 튜브는 y 180 ~ 290,
