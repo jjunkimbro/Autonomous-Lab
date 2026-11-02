@@ -416,6 +416,7 @@ def main():
     parser.add_argument("--run-name", default=None)
     parser.add_argument("--resume", default=None, help="model.pt (다 이어서) 또는 snapshots/actor_*.pt (정책만)")
     parser.add_argument("--resume-steps", type=int, default=0, help="정책만 이어받을 때 그 사본의 걸음")
+    parser.add_argument("--encoders-only", action="store_true", help="정책 사본에서 영상 인코더만 이어받는다")
     args = parser.parse_args()
 
     torch.manual_seed(args.seed)
@@ -452,7 +453,13 @@ def main():
             raise SystemExit("이어서 학습할 파일이 없다")
         if "actor" not in state:            # 정책 가중치만 있는 사본 (snapshots/actor_*.pt) — 가치 함수 · 최적화기는 새로
             state = {"actor": state, "steps": args.resume_steps}
-        actor.load_state_dict(state["actor"])
+        if args.encoders_only:
+            # 영상 인코더만 이어받고 행동 출력층은 새로 (다른 물체로 옮길 때 — 판 진입 정책은 '앞으로 끝까지 민다' 가 굳어
+            # 행동 평균 +2 로 작업 상자 앞벽에 붙어, 튜브에서는 잡음을 줘도 늘 잘린 같은 행동이라 고칠 신호가 없었다, 11-02)
+            actor.load_state_dict({k: v for k, v in state["actor"].items() if k.startswith("encoders.")}, strict=False)
+            print("[resume] 영상 인코더만", flush=True)
+        else:
+            actor.load_state_dict(state["actor"])
         if "critic" in state:
             critic.load_state_dict(state["critic"])
             actor_opt.load_state_dict(state["actor_opt"])

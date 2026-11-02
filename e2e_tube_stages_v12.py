@@ -56,8 +56,12 @@ STAGE_TIME = {"pick_enter": 6.0, "pick_grasp": 3.0, "pick_extract": 4.0,
               "place_enter": 6.0, "place_down": 5.0, "place_retreat": 3.0}
 
 # 성공 범위 (f, l, z [m], yaw [rad]). yaw 는 손이 명목 방향에서 돌아간 양.
-# 집기: 닫는 방향 (좌우) 이 1 mm 넘게 어긋나면 먼저 닿는 손가락이 튜브를 벽으로 민다.
-PICK_READY_TOL = np.array([0.0015, 0.0010, 0.0020, math.radians(1.5)])
+# 집기 (11-02 쥐는 순간 어긋남을 바꿔 가며 쥐고 들어 잼, 자리마다): 앞뒤 -3 ~ +6 mm · 높이 ±4 mm 는 미끄러짐 없이 그 어긋남
+# 그대로 쥐인다 (손 안 자리만 달라지고 놓기가 그걸 본다). 좌우 (닫는 방향) 는 먼저 닿는 손가락이 튜브 위를 밀어 손 안에서
+# 기운 채 남는다 — 0.5 mm 0.3° · 1 mm 0.7° · 1.5 mm 1.0° (NGS 뽑기에서 걸려 떨어짐 1/5) · 3 mm 1.8°.
+PICK_READY_TOL = np.array([0.0030, 0.0010, 0.0030, math.radians(1.5)])
+GRASP_TILT = 1.0              # 잡고 들기 성공: 손 안 튜브 기울기 [deg]
+GRASP_HOLD = 0.001            # 잡고 들기 성공: 쥔 뒤 손 안에서 미끄러진 양 [m]
 # 놓기 진입: 자리 위 높이는 꽂기가 내려가며 맞추므로 넓게
 PLACE_READY_TOL = np.array([0.0015, 0.0010, 0.0030, math.radians(1.5)])
 # 꽂기: 이만큼 맞으면 벽 아래로 내려도 된다 (앞뒤, 좌우 [m]). 곧게 내릴 때 꽂히는 폭이 좌우 ±0.75 · 앞뒤 ±1.75 mm
@@ -69,7 +73,8 @@ SEATED_TILT = tb.SEATED_TILT_DEG
 
 # 시작 상태 범위
 TUBE_REST = np.array([0.0003, 0.0003, math.pi])                       # 놓인 튜브 (f, l, 회전)
-TUBE_IN_HAND = np.array([0.0003, 0.0020, 0.0015, 0.0])               # 손 안 (TCP x 닫는 방향, y 튜브 축, z 깊이)
+# 손 안 (TCP x 닫는 방향, y 튜브 축, z 깊이 [m], 닫는 방향으로 기운 각 [rad]) — 집기 성공 범위에서 생기는 만큼
+TUBE_IN_HAND = np.array([0.0003, 0.0030, 0.0030, math.radians(0.8)])
 PICK_ENTER_START = (np.array([-0.010, -0.003, -0.002, -math.radians(1.0)]),
                     np.array([0.000, 0.003, 0.003, math.radians(1.0)]))
 PICK_GRASP_START = np.array([0.0020, 0.0012, 0.0025, math.radians(1.0)])
@@ -128,6 +133,16 @@ class TubeStages:
 
     def _lift_end(self):
         return self.station["lift"]
+
+    def _plate_vs_holder(self):
+        """튜브 바닥 가운데가 (밀린) 자리 바닥 가운데 대비 (앞뒤, 좌우, 높이) [m]. 기운 튜브는 중심보다 바닥이 더 어긋나고
+        꽂히는 것은 바닥이라 바닥으로 잰다 (곧게 선 튜브는 중심으로 잰 것과 같다). 축 대칭이라 yaw 는 0."""
+        rotation = pp.rot_z(self.truth[3]) @ self.station["rotation"]
+        seat = self._transform(self.station["origin"], self.truth)
+        axis = self.data.xmat[self.plate_body].reshape(3, 3)[:, 2]
+        bottom = self.data.xipos[self.plate_body] - axis * (self.WORK_HEIGHT / 2.0)
+        local = rotation.T @ (bottom - seat)
+        return np.array([local[0], local[1], local[2], 0.0])
 
     def _wall(self):
         return self.station["wall"]
@@ -211,6 +226,11 @@ class TubePickStagesEnv(TubeStages, st.PickStagesEnv, tb.TubeTransferEnv):
         return False, ""
 
     def _success(self):
+        if self.stage == "pick_grasp":
+            # 판의 '손 안 기준 자리 2 mm 안' 대신: 쥔 뒤 미끄러지지 않고, 기울지 않고, 들렸다 (어긋난 자리는 놓기가 본다)
+            held = float(np.linalg.norm(self._plate_in_tcp() - self.HOLD_CENTER)) - self.grip_offset if self.gripping else 1.0
+            return bool(self.gripping and held <= GRASP_HOLD and self._lifted() >= 0.003 and self._tilt() <= GRASP_TILT
+                        and self.moved <= 2 * st.MOVED_TOL)
         if self.stage != "pick_extract":
             return st.PickStagesEnv._success(self)
         cleared = self._plate_vs_holder()[2] >= self._wall() + 0.002
@@ -279,6 +299,29 @@ class TubePlaceStagesEnv(TubeStages, st.PlaceStagesEnv, tb.TubeTransferEnv):
         yaw_cmd = float(err[3])
         rot = self._hand_rot(yaw_cmd)
         return target - rot @ (self.HOLD_CENTER + self.in_hand[:3]), yaw_cmd
+
+    def _grab_plate(self):
+        """손을 놓은 자리에서 튜브를 손 안 어긋남 (in_hand[:3]) 과 닫는 방향 기울기 (in_hand[3]) 로 쥐어 준다."""
+        m, d = self.model, self.data
+        for adr in self.finger_qpos:
+            d.qpos[adr] = self.GRIP_CLOSE
+        mujoco.mj_kinematics(m, d)
+        tcp, rot = d.site_xpos[self.site].copy(), d.site_xmat[self.site].reshape(3, 3).copy()
+        tilt_q = np.zeros(4)
+        mujoco.mju_axisAngle2Quat(tilt_q, rot[:, 2], float(self.in_hand[3]))      # 다가가는 축 둘레 = 닫는 방향으로 기움
+        tilt = np.zeros(9)
+        mujoco.mju_quat2Mat(tilt, tilt_q)
+        d.qpos[self.plate_qpos:self.plate_qpos + 3] = tcp + tilt.reshape(3, 3) @ (rot @ (self.HOLD_CENTER + self.in_hand[:3]))
+        plate_rot = rot @ self.HOLD_AXES
+        yaw_q = np.zeros(4)
+        mujoco.mju_axisAngle2Quat(yaw_q, np.array([0.0, 0.0, 1.0]), math.atan2(plate_rot[1, 0], plate_rot[0, 0]))
+        quat = np.zeros(4)
+        mujoco.mju_mulQuat(quat, tilt_q, yaw_q)
+        d.qpos[self.plate_qpos + 3:self.plate_qpos + 7] = quat
+        self.grip = self.GRIP_CLOSE - self.squeeze
+        self._grip_cmd = None
+        mujoco.mj_forward(m, d)
+        self._settle(pp.SETTLE_START)
 
     def _scripted_release(self):
         """place_retreat 시작 상태 만들기 (학습 때만): 구멍에 맞춰 바닥에 닿을 때까지 내리고, 0 ~ 3 mm 더 눌렀다가
