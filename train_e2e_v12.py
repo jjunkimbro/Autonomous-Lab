@@ -273,12 +273,15 @@ class Encoder(nn.Module):
 
 
 class Actor(nn.Module):
-    def __init__(self, action_dim=5, priv_dim=None):
-        """priv_dim 을 주면 영상 대신 정답 상태를 보는 점검용 정책 (보상 · 학습기 확인용, 실물에는 못 쓴다)."""
+    def __init__(self, action_dim=5, priv_dim=None, target_dim=0):
+        """priv_dim 을 주면 영상 대신 정답 상태를 보는 점검용 정책 (보상 · 학습기 확인용, 실물에는 못 쓴다).
+        target_dim > 0 이면 작업 지시 (관측 'target' = 어느 자리에 놓을지 원핫) 를 영상 특징 뒤에 붙인다 — 튜브 호텔처럼
+        빈 자리가 다가가는 방향으로 나란히 있으면 영상만으로는 목표 자리를 알 수 없다."""
         super().__init__()
         self.priv_dim = priv_dim
+        self.target_dim = int(target_dim)
         self.encoders = nn.ModuleDict({} if priv_dim else {k: Encoder() for k in IMAGE_KEYS})
-        dim = priv_dim or sum(e.out_dim for e in self.encoders.values())
+        dim = (priv_dim or sum(e.out_dim for e in self.encoders.values())) + self.target_dim
         self.head = nn.Sequential(nn.Linear(dim, 256), nn.ReLU(), nn.Linear(256, 256), nn.ReLU(),
                                   nn.Linear(256, action_dim))
         self.log_std = nn.Parameter(torch.full((action_dim,), -0.5))
@@ -293,13 +296,28 @@ class Actor(nn.Module):
         out = {k: image_tensor(obs, k, device) for k in IMAGE_KEYS}
         if shifts is not None:
             out = {k: random_shift(v, pad, shifts[k]) for k, v in out.items()}
+        if self.target_dim:
+            out["target"] = torch.as_tensor(obs["target"], device=device).float()
         return out
 
     def forward(self, inputs):
         if self.priv_dim:
             return self.head(inputs["priv"])
-        z = torch.cat([self.encoders[k](inputs[k]) for k in IMAGE_KEYS], dim=1)
+        z = torch.cat([self.encoders[k](inputs[k]) for k in IMAGE_KEYS] + ([inputs["target"]] if self.target_dim else []),
+                      dim=1)
         return self.head(z)
+
+    @classmethod
+    def load(cls, path, device):
+        """저장된 정책 (actor*.pt) 을 읽는다. 작업 지시 입력 크기는 가중치에서 알아낸다."""
+        state = torch.load(path, map_location=device)
+        if "actor" in state and isinstance(state["actor"], dict):
+            state = state["actor"]
+        probe = cls()
+        target_dim = state["head.0.weight"].shape[1] - probe.head[0].weight.shape[1]
+        actor = cls(target_dim=target_dim).to(device)
+        actor.load_state_dict(state)
+        return actor.eval()
 
     def act(self, obs, device, deterministic=False):
         """실행 때 쓰는 함수: 관측 (영상만) -> 행동."""
@@ -434,7 +452,8 @@ def main():
     envs = GroupVecEnv(args.processes, args.per_process, args.seed, args.task, render, weights, lead)
     space = envs.observation_space
     priv_dim = space["priv"].shape[0]
-    actor = Actor(priv_dim=None if render else priv_dim).to(device)
+    target_dim = space["target"].shape[0] if "target" in space.spaces else 0
+    actor = Actor(priv_dim=None if render else priv_dim, target_dim=target_dim).to(device)
     critic = Critic(priv_dim).to(device)
     actor_opt = torch.optim.Adam(actor.parameters(), lr=args.lr, eps=1e-5)
     critic_opt = torch.optim.Adam(critic.parameters(), lr=args.lr, eps=1e-5)
@@ -459,10 +478,20 @@ def main():
             actor.load_state_dict({k: v for k, v in state["actor"].items() if k.startswith("encoders.")}, strict=False)
             print("[resume] 영상 인코더만", flush=True)
         else:
-            actor.load_state_dict(state["actor"])
+            saved = dict(state["actor"])
+            first = actor.head[0].weight
+            if saved["head.0.weight"].shape[1] < first.shape[1]:
+                # 작업 지시 입력을 새로 붙였다: 그 칸의 가중치는 0 으로 두고 나머지는 그대로 (지금까지 배운 동작을 유지)
+                grown = torch.zeros_like(first)
+                grown[:, :saved["head.0.weight"].shape[1]] = saved["head.0.weight"]
+                saved["head.0.weight"] = grown
+                print(f"[resume] 작업 지시 입력 {target_dim} 칸을 0 으로 붙임 (정책 최적화기는 새로)", flush=True)
+                state.pop("actor_opt", None)
+            actor.load_state_dict(saved)
         if "critic" in state:
             critic.load_state_dict(state["critic"])
-            actor_opt.load_state_dict(state["actor_opt"])
+            if "actor_opt" in state:
+                actor_opt.load_state_dict(state["actor_opt"])
             critic_opt.load_state_dict(state["critic_opt"])
         done_steps, best = state.get("steps", 0), state.get("best", -1.0)
         if args.curriculum is not None:

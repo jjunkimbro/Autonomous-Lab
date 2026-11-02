@@ -272,10 +272,8 @@ class StageBase(e2e.WristRGBD):
         import torch
         import train_e2e_v12 as tr
         torch.set_num_threads(1)
-        actor = tr.Actor()
-        actor.load_state_dict(torch.load(path, map_location="cpu"))
-        actor.eval()
         cpu = torch.device("cpu")
+        actor = tr.Actor.load(path, cpu)
         self.lead = lambda obs: actor.act({k: v[None] for k, v in obs.items()}, cpu, deterministic=True)[0]
 
     def _lead_reset(self, options):

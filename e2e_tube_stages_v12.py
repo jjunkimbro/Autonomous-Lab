@@ -131,6 +131,23 @@ class TubeStages:
             data["box_low"] = ref + np.array([-0.045, -0.012, -0.005])
             data["box_high"] = ref + np.array([0.008, 0.012, data["lift"] + 0.012])
 
+    TARGET_INPUT = False
+
+    def _wrist_spaces(self):
+        super()._wrist_spaces()
+        if self.TARGET_INPUT:
+            spaces = dict(self.observation_space.spaces)
+            spaces["target"] = gym.spaces.Box(0.0, 1.0, shape=(len(self.ONEHOT_NAMES),), dtype=np.float32)
+            self.observation_space = gym.spaces.Dict(spaces)
+
+    def _observe(self):
+        obs = super()._observe()
+        if self.TARGET_INPUT:
+            target = np.zeros(len(self.ONEHOT_NAMES), np.float32)
+            target[self.ONEHOT_NAMES.index(self.station_name)] = 1.0
+            obs["target"] = target
+        return obs
+
     def _lift_end(self):
         return self.station["lift"]
 
@@ -250,6 +267,11 @@ class TubePickStagesEnv(TubeStages, st.PickStagesEnv, tb.TubeTransferEnv):
 # ----------------------------------------------------------------------
 class TubePlaceStagesEnv(TubeStages, st.PlaceStagesEnv, tb.TubeTransferEnv):
     READY_TOL = PLACE_READY_TOL
+    # 놓기는 어느 자리에 놓을지 작업 지시를 정책에 준다 (관측 'target', 자리 원핫). 튜브 호텔 1 · 2 는 다가가는 방향으로
+    # 30 mm 간격으로 나란히 있고 둘 다 비어 있어, 호텔 2 로 가는 에피소드가 호텔 1 바로 앞에서 시작한다 — 영상만 보는 정책은
+    # '호텔 1 에 도착' 과 '호텔 2 로 가는 길' 을 가를 수 없어 호텔 두 곳 모두 0 이었다 (호텔 1 에서 9.6 mm 지나치고, 호텔 2 에서
+    # 6 ~ 8 mm 못 미침, 11-02). 집기는 튜브가 꽂힌 자리가 곧 목표라 필요 없다.
+    TARGET_INPUT = True
 
     def __init__(self, stage="place_enter", seed=None, stations=PLACE_STATIONS, appearance=True, randomize=True,
                  station_weights=None, render=True, lead_policy=None, lead_share=0.5):
