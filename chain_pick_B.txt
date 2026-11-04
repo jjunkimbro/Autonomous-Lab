@@ -1,2 +1,0 @@
-teacher 완료. student 시작 - rl_runs/pick_plate_B_teacher/best_model.zip
-student 종료 (exit 0)
