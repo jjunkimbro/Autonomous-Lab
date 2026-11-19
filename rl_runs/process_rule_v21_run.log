@@ -1,0 +1,31 @@
+롤별 카메라 위쪽: {1: 0.87, -1: -0.87} -> 롤 1
+wrist_3 = +3.14 계획 시작
+    1 plate_a 판 보관대 4 pick: G 해 9 -> 사슬 0  0 s
+wrist_3 = +3.14: 사슬 없음: 1. plate_a plate_hotel_4 pick (G 해 9)
+wrist_3 = +0.00 계획 시작
+    1 plate_a 판 보관대 4 pick: G 해 11 -> 사슬 7  1 s
+    1 plate_a Fluent 판 place: G 해 8 -> 사슬 8  1 s
+    2 plate_a Fluent 판 pick: G 해 8 -> 사슬 8  2 s
+    2 plate_a STX44 place: G 해 9 -> 사슬 8  3 s
+    3 plate_a STX44 pick: G 해 9 -> 사슬 8  3 s
+    3 plate_a Reader place: G 해 14 -> 사슬 13  4 s
+    4 plate_a Reader pick: G 해 11 -> 사슬 10  5 s
+    4 plate_a Fluent 판 place: G 해 9 -> 사슬 9  6 s
+    5 tube_a 튜브 보관대 1 pick: G 해 9 -> 사슬 5  7 s
+    5 tube_a Fluent 튜브 place: G 해 7 -> 사슬 7  7 s
+    6 plate_a Fluent 판 pick: G 해 8 -> 사슬 8  8 s
+    6 plate_a 폐기통 drop: G 해 5 -> 사슬 4  9 s
+    7 tube_a Fluent 튜브 pick: G 해 8 -> 사슬 8  9 s
+    7 tube_a SH800 튜브 place: G 해 8 -> 사슬 8  10 s
+    8 plate_b 판 보관대 3 pick: G 해 9 -> 사슬 6  11 s
+    8 plate_b SH800 판 place: G 해 0 -> 사슬 0  11 s
+wrist_3 = +0.00: 사슬 없음: 8. plate_b sorter_left_plate place (G 해 0)
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\process_rule_v21.py", line 896, in <module>
+    main()
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\process_rule_v21.py", line 872, in main
+    plan = Planner(a.seed).plan()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\process_rule_v21.py", line 601, in plan
+    raise RuntimeError("��ȹ ����")
+RuntimeError: ��ȹ ����

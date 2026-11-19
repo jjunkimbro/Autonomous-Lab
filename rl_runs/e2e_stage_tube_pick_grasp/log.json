@@ -1,0 +1,72 @@
+[
+ {
+  "success": 0.75,
+  "tube_hotel_1": 0.875,
+  "tube_hotel_2": 0.875,
+  "fluent_tube": 0.625,
+  "sorter_right_tube": 0.875,
+  "ngs_tube": 0.5,
+  "outcomes": {
+   "lifted+ok": 30,
+   "timeout": 2,
+   "lifted": 8
+  },
+  "max_force_N": 2.4160000000000004,
+  "error_mm": [
+   1.23,
+   0.22,
+   1.11
+  ],
+  "time_s": 1.2675,
+  "steps": 101376,
+  "minutes": 20.5,
+  "train_success": 0.47,
+  "difficulty": 0.4
+ },
+ {
+  "success": 0.95,
+  "tube_hotel_1": 1.0,
+  "tube_hotel_2": 1.0,
+  "fluent_tube": 1.0,
+  "sorter_right_tube": 0.875,
+  "ngs_tube": 0.875,
+  "outcomes": {
+   "lifted+ok": 38,
+   "lifted": 2
+  },
+  "max_force_N": 1.8170000000000002,
+  "error_mm": [
+   0.97,
+   0.13,
+   1.4
+  ],
+  "time_s": 1.0375,
+  "steps": 200448,
+  "minutes": 47.6,
+  "train_success": 0.575,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.975,
+  "tube_hotel_1": 1.0,
+  "tube_hotel_2": 0.875,
+  "fluent_tube": 1.0,
+  "sorter_right_tube": 1.0,
+  "ngs_tube": 1.0,
+  "outcomes": {
+   "lifted+ok": 39,
+   "lifted": 1
+  },
+  "max_force_N": 1.6629999999999998,
+  "error_mm": [
+   0.92,
+   0.15,
+   1.13
+  ],
+  "time_s": 0.775,
+  "steps": 301824,
+  "minutes": 79.1,
+  "train_success": 0.71,
+  "difficulty": 1.0
+ }
+]

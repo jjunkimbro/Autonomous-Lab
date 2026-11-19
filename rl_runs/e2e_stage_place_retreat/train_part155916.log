@@ -1,0 +1,28 @@
+device NVIDIA RTX A5000
+[eval] {"success": 0.0, "fluent_plate": 0.0, "incubator_plate": 0.0, "reader_plate": 0.0, "sorter_left_plate": 0.0, "outcomes": {"timeout": 40}, "max_force_N": 0.8295, "error_mm": [0.21, 0.63, 0.0], "time_s": 3.0, "steps": 0, "minutes": 0.3, "train_success": 0.0, "difficulty": 0.3}
+     3072 steps     0.5 min     95 st/s  train success 0.00  len 3.00s  collect 9s update 5s  vloss 3.774  clip 0.01  diff 0.3  std [0.6100000143051147, 0.6100000143051147, 0.6100000143051147, 0.6100000143051147, 0.6100000143051147]  {'timeout': 96}
+     6144 steps     0.8 min    133 st/s  train success 0.00  len 3.00s  collect 10s update 4s  vloss 0.764  clip 0.12  diff 0.3  std [0.6100000143051147, 0.6100000143051147, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'timeout': 191, 'force': 1}
+     9216 steps     1.0 min    153 st/s  train success 0.00  len 2.99s  collect 10s update 4s  vloss 0.472  clip 0.21  diff 0.3  std [0.6000000238418579, 0.6000000238418579, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'timeout': 197, 'force': 2, 'out': 1}
+    12288 steps     1.3 min    164 st/s  train success 0.02  len 2.95s  collect 10s update 4s  vloss 2.460  clip 0.23  diff 0.3  std [0.6000000238418579, 0.6000000238418579, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'timeout': 181, 'force': 3, 'out': 12, 'out+ok': 4}
+    15360 steps     1.5 min    170 st/s  train success 0.11  len 2.79s  collect 11s update 4s  vloss 10.260  clip 0.15  diff 0.3  std [0.6000000238418579, 0.6000000238418579, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'timeout': 133, 'force': 1, 'out': 44, 'out+ok': 22}
+    18432 steps     1.8 min    172 st/s  train success 0.24  len 2.46s  collect 12s update 5s  vloss 16.040  clip 0.13  diff 0.3  std [0.5899999737739563, 0.6000000238418579, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'timeout': 56, 'out+ok': 48, 'out': 96}
+    21504 steps     2.1 min    173 st/s  train success 0.33  len 2.10s  collect 13s update 4s  vloss 18.259  clip 0.07  diff 0.3  std [0.5899999737739563, 0.6000000238418579, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'out': 125, 'timeout': 8, 'out+ok': 66, 'force': 1}
+    24576 steps     2.4 min    173 st/s  train success 0.40  len 1.94s  collect 13s update 4s  vloss 18.995  clip 0.10  diff 0.3  std [0.5899999737739563, 0.5899999737739563, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'out': 119, 'out+ok': 79, 'timeout': 2}
+[curriculum] 무작위 범위 x0.4
+    27648 steps     2.7 min    174 st/s  train success 0.49  len 1.80s  collect 13s update 4s  vloss 19.660  clip 0.07  diff 0.4  std [0.5899999737739563, 0.5899999737739563, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'out+ok': 99, 'out': 101}
+    30720 steps     2.9 min    175 st/s  train success 0.45  len 1.75s  collect 12s update 4s  vloss 19.371  clip 0.03  diff 0.4  std [0.5799999833106995, 0.5899999737739563, 0.6000000238418579, 0.6100000143051147, 0.6100000143051147]  {'out+ok': 90, 'out': 109, 'force': 1}
+[curriculum] 무작위 범위 x0.5
+    33792 steps     3.2 min    176 st/s  train success 0.52  len 1.73s  collect 12s update 4s  vloss 20.460  clip 0.08  diff 0.5  std [0.5799999833106995, 0.5899999737739563, 0.6000000238418579, 0.6100000143051147, 0.6000000238418579]  {'out': 96, 'out+ok': 104}
+    36864 steps     3.5 min    177 st/s  train success 0.47  len 1.63s  collect 12s update 4s  vloss 20.886  clip 0.09  diff 0.5  std [0.5799999833106995, 0.5799999833106995, 0.6000000238418579, 0.6100000143051147, 0.6000000238418579]  {'out': 106, 'out+ok': 93, 'force': 1}
+[curriculum] 무작위 범위 x0.6
+    39936 steps     3.8 min    177 st/s  train success 0.59  len 1.56s  collect 12s update 4s  vloss 20.965  clip 0.06  diff 0.6  std [0.5699999928474426, 0.5799999833106995, 0.6000000238418579, 0.6100000143051147, 0.6000000238418579]  {'out+ok': 118, 'out': 81, 'force': 1}
+[curriculum] 무작위 범위 x0.7
+    43008 steps     4.1 min    177 st/s  train success 0.58  len 1.47s  collect 13s update 4s  vloss 20.918  clip 0.10  diff 0.7  std [0.5699999928474426, 0.5699999928474426, 0.5899999737739563, 0.6000000238418579, 0.6000000238418579]  {'out+ok': 117, 'out': 83}
+[curriculum] 무작위 범위 x0.8
+    46080 steps     4.3 min    177 st/s  train success 0.54  len 1.48s  collect 13s update 4s  vloss 22.596  clip 0.10  diff 0.8  std [0.5699999928474426, 0.5699999928474426, 0.6000000238418579, 0.6000000238418579, 0.6000000238418579]  {'out+ok': 108, 'out': 92}
+[curriculum] 무작위 범위 x0.9
+    49152 steps     4.6 min    176 st/s  train success 0.60  len 1.47s  collect 13s update 4s  vloss 22.337  clip 0.05  diff 0.9  std [0.5699999928474426, 0.5699999928474426, 0.6000000238418579, 0.6000000238418579, 0.6000000238418579]  {'out+ok': 121, 'force': 1, 'out': 78}
+[curriculum] 무작위 범위 x1.0
+    52224 steps     4.9 min    176 st/s  train success 0.60  len 1.40s  collect 14s update 4s  vloss 21.592  clip 0.08  diff 1.0  std [0.5699999928474426, 0.5600000023841858, 0.5899999737739563, 0.6000000238418579, 0.6000000238418579]  {'out+ok': 121, 'out': 79}
+    55296 steps     5.2 min    176 st/s  train success 0.60  len 1.43s  collect 14s update 4s  vloss 21.604  clip 0.08  diff 1.0  std [0.5699999928474426, 0.5600000023841858, 0.5899999737739563, 0.6000000238418579, 0.6000000238418579]  {'out': 79, 'out+ok': 121}
+    58368 steps     5.5 min    175 st/s  train success 0.53  len 1.35s  collect 14s update 4s  vloss 24.504  clip 0.11  diff 1.0  std [0.5699999928474426, 0.5600000023841858, 0.5899999737739563, 0.6000000238418579, 0.6000000238418579]  {'out+ok': 106, 'out': 91, 'force': 3}

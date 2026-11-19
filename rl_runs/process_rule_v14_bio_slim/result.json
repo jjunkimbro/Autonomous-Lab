@@ -1,0 +1,393 @@
+{
+ "layout": "bio_slim",
+ "plan": {
+  "total_seconds": 364.89,
+  "transfers": [
+   {
+    "index": 1,
+    "obj": "plate_a",
+    "source": "plate_hotel_4",
+    "target": "fluent_plate",
+    "seconds": 21.55,
+    "parts": {
+     "transit": 3.25,
+     "photo": 2.5,
+     "fine": 14.98,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 2,
+    "obj": "plate_a",
+    "source": "fluent_plate",
+    "target": "incubator_plate",
+    "seconds": 20.78,
+    "parts": {
+     "transit": 2.45,
+     "photo": 2.5,
+     "fine": 15.0,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 3,
+    "obj": "plate_a",
+    "source": "incubator_plate",
+    "target": "reader_plate",
+    "seconds": 16.66,
+    "parts": {
+     "transit": 1.63,
+     "photo": 2.5,
+     "fine": 11.7,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 4,
+    "obj": "plate_a",
+    "source": "reader_plate",
+    "target": "fluent_plate",
+    "seconds": 23.37,
+    "parts": {
+     "transit": 4.74,
+     "photo": 2.5,
+     "fine": 15.3,
+     "gripper": 0.84
+    },
+    "carry": "carry"
+   },
+   {
+    "index": 5,
+    "obj": "tube_a",
+    "source": "tube_hotel_1",
+    "target": "fluent_tube",
+    "seconds": 25.91,
+    "parts": {
+     "transit": 3.82,
+     "photo": 2.5,
+     "fine": 18.75,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 6,
+    "obj": "plate_a",
+    "source": "fluent_plate",
+    "target": "waste_plate",
+    "seconds": 38.11,
+    "parts": {
+     "transit": 6.97,
+     "photo": 1.0,
+     "fine": 29.3,
+     "gripper": 0.84
+    },
+    "carry": "carry"
+   },
+   {
+    "index": 7,
+    "obj": "tube_a",
+    "source": "fluent_tube",
+    "target": "sorter_right_tube",
+    "seconds": 32.01,
+    "parts": {
+     "transit": 9.17,
+     "photo": 2.5,
+     "fine": 19.5,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 8,
+    "obj": "plate_b",
+    "source": "plate_hotel_3",
+    "target": "sorter_left_plate",
+    "seconds": 19.42,
+    "parts": {
+     "transit": 2.71,
+     "photo": 2.5,
+     "fine": 13.38,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 9,
+    "obj": "plate_b",
+    "source": "sorter_left_plate",
+    "target": "fluent_plate",
+    "seconds": 23.74,
+    "parts": {
+     "transit": 3.4,
+     "photo": 2.5,
+     "fine": 17.0,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 10,
+    "obj": "tube_a",
+    "source": "sorter_right_tube",
+    "target": "waste_tube",
+    "seconds": 39.34,
+    "parts": {
+     "transit": 12.07,
+     "photo": 1.0,
+     "fine": 25.45,
+     "gripper": 0.84
+    },
+    "carry": "carry"
+   },
+   {
+    "index": 11,
+    "obj": "tube_b",
+    "source": "tube_hotel_2",
+    "target": "fluent_tube",
+    "seconds": 32.05,
+    "parts": {
+     "transit": 9.96,
+     "photo": 2.5,
+     "fine": 18.75,
+     "gripper": 0.84
+    },
+    "carry": "direct"
+   },
+   {
+    "index": 12,
+    "obj": "tube_b",
+    "source": "fluent_tube",
+    "target": "ngs_tube",
+    "seconds": 29.28,
+    "parts": {
+     "transit": 5.29,
+     "photo": 2.5,
+     "fine": 20.65,
+     "gripper": 0.84
+    },
+    "carry": "carry"
+   },
+   {
+    "index": 13,
+    "obj": "plate_b",
+    "source": "fluent_plate",
+    "target": "waste_plate",
+    "seconds": 41.67,
+    "parts": {
+     "transit": 10.53,
+     "photo": 1.0,
+     "fine": 29.3,
+     "gripper": 0.84
+    },
+    "carry": "carry"
+   }
+  ],
+  "issues": []
+ },
+ "results": [
+  {
+   "ok": true,
+   "f_mm": -0.16,
+   "l_mm": -0.17,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 1,
+   "obj": "plate_a",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    0.11,
+    -0.35
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.13,
+   "l_mm": 0.1,
+   "z_mm": -0.01,
+   "tilt_deg": 0.01,
+   "step": 2,
+   "obj": "plate_a",
+   "target": "incubator_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.77,
+    -0.11
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.15,
+   "l_mm": 0.09,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 3,
+   "obj": "plate_a",
+   "target": "reader_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.49,
+    -0.12
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.15,
+   "l_mm": -0.14,
+   "z_mm": -0.01,
+   "tilt_deg": 0.01,
+   "step": 4,
+   "obj": "plate_a",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    0.11,
+    -0.72
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.05,
+   "l_mm": -0.19,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 5,
+   "obj": "tube_a",
+   "target": "fluent_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    0.05,
+    -0.27
+   ]
+  },
+  {
+   "ok": true,
+   "pos": [
+    0.3392,
+    1.7603,
+    0.612
+   ],
+   "step": 6,
+   "obj": "plate_a",
+   "target": "waste_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.0,
+    -0.0
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.06,
+   "l_mm": 0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 7,
+   "obj": "tube_a",
+   "target": "sorter_right_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    0.06,
+    -0.16
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.21,
+   "l_mm": 0.17,
+   "z_mm": -0.01,
+   "tilt_deg": 0.01,
+   "step": 8,
+   "obj": "plate_b",
+   "target": "sorter_left_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    0.14,
+    -0.33
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.16,
+   "l_mm": -0.17,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 9,
+   "obj": "plate_b",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    0.12,
+    -0.15
+   ]
+  },
+  {
+   "ok": true,
+   "pos": [
+    0.3391,
+    1.7604,
+    0.6375
+   ],
+   "step": 10,
+   "obj": "tube_a",
+   "target": "waste_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.0,
+    -0.0
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.04,
+   "l_mm": -0.16,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 11,
+   "obj": "tube_b",
+   "target": "fluent_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    0.07,
+    -0.27
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.08,
+   "l_mm": -0.19,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 12,
+   "obj": "tube_b",
+   "target": "ngs_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.76,
+    0.64
+   ]
+  },
+  {
+   "ok": true,
+   "pos": [
+    0.3392,
+    1.7603,
+    0.612
+   ],
+   "step": 13,
+   "obj": "plate_b",
+   "target": "waste_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.0,
+    -0.0
+   ]
+  }
+ ],
+ "rail_arm_overlap_s": 0.083,
+ "arm_sway_during_rail_rad_s": 0.24
+}

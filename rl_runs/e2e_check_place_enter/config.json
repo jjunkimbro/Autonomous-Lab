@@ -1,0 +1,22 @@
+{
+ "steps": 600000,
+ "processes": 8,
+ "per_process": 8,
+ "n_steps": 64,
+ "epochs": 4,
+ "minibatch": 512,
+ "lr": 0.0003,
+ "gamma": 0.99,
+ "lam": 0.95,
+ "clip": 0.2,
+ "shift": 4,
+ "eval_every": 50000,
+ "eval_episodes": 40,
+ "seed": 0,
+ "device": "cuda",
+ "task": "place_enter",
+ "actor_input": "priv",
+ "target": 1.1,
+ "run_name": "e2e_check_place_enter",
+ "resume": null
+}

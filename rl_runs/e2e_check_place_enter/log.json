@@ -1,0 +1,143 @@
+[
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   46.44,
+   3.08,
+   3.64
+  ],
+  "time_s": 4.0,
+  "steps": 0,
+  "minutes": 0.1,
+  "train_success": 0.0
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   3.27,
+   0.58,
+   0.39
+  ],
+  "time_s": 4.0,
+  "steps": 53248,
+  "minutes": 0.9,
+  "train_success": 0.0
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   0.68,
+   0.48,
+   0.58
+  ],
+  "time_s": 4.0,
+  "steps": 102400,
+  "minutes": 1.7,
+  "train_success": 0.01
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   0.46,
+   0.15,
+   0.42
+  ],
+  "time_s": 4.0,
+  "steps": 151552,
+  "minutes": 2.4,
+  "train_success": 0.025
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   0.32,
+   0.23,
+   0.26
+  ],
+  "time_s": 4.0,
+  "steps": 200704,
+  "minutes": 3.1,
+  "train_success": 0.165
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   0.25,
+   0.1,
+   0.34
+  ],
+  "time_s": 4.0,
+  "steps": 253952,
+  "minutes": 3.9,
+  "train_success": 0.365
+ },
+ {
+  "success": 0.025,
+  "fluent_plate": 0.1,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 39,
+   "ready+ok": 1
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   0.22,
+   0.19,
+   0.74
+  ],
+  "time_s": 4.0,
+  "steps": 303104,
+  "minutes": 4.6,
+  "train_success": 0.645
+ }
+]

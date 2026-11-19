@@ -1,0 +1,25 @@
+[
+ {
+  "success": 0.75,
+  "tube_hotel_1": 1.0,
+  "tube_hotel_2": 1.0,
+  "fluent_tube": 1.0,
+  "sorter_right_tube": 0.375,
+  "ngs_tube": 0.375,
+  "outcomes": {
+   "out+ok": 30,
+   "out": 10
+  },
+  "max_force_N": 3.75525,
+  "error_mm": [
+   3.91,
+   0.37,
+   45.95
+  ],
+  "time_s": 1.94,
+  "steps": 101376,
+  "minutes": 31.2,
+  "train_success": 0.455,
+  "difficulty": 1.0
+ }
+]

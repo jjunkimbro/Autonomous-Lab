@@ -1,0 +1,285 @@
+device NVIDIA RTX A5000
+[resume] rl_runs/e2e_stage_tube_place_enter/model.pt
+[explore] 행동 잡음 [0.5799999833106995, 0.550000011920929, 0.550000011920929, 0.5600000023841858, 0.5699999928474426]
+   202752 steps     1.5 min      0 st/s  train success 0.03  len 5.27s  collect 10s update 78s  vloss 1.106  clip 0.24  diff 0.3  std [0.5799999833106995, 0.550000011920929, 0.550000011920929, 0.5600000023841858, 0.5699999928474426]  {'ready': 7, 'timeout': 21, 'ready_late+ok': 1}
+   205056 steps     2.9 min      0 st/s  train success 0.03  len 5.36s  collect 75s update 9s  vloss 1.431  clip 0.21  diff 0.3  std [0.5799999833106995, 0.550000011920929, 0.550000011920929, 0.5600000023841858, 0.5699999928474426]  {'ready': 20, 'timeout': 56, 'ready_late+ok': 2}
+   207360 steps     3.9 min      0 st/s  train success 0.03  len 5.32s  collect 52s update 9s  vloss 1.849  clip 0.23  diff 0.3  std [0.5799999833106995, 0.550000011920929, 0.550000011920929, 0.5600000023841858, 0.5699999928474426]  {'ready': 31, 'timeout': 81, 'ready_late+ok': 4}
+   209664 steps     5.1 min      0 st/s  train success 0.03  len 5.39s  collect 63s update 9s  vloss 1.591  clip 0.20  diff 0.3  std [0.5799999833106995, 0.550000011920929, 0.5400000214576721, 0.550000011920929, 0.5699999928474426]  {'ready': 38, 'timeout': 115, 'ready_late+ok': 5}
+   211968 steps     5.7 min      0 st/s  train success 0.03  len 5.51s  collect 29s update 9s  vloss 1.530  clip 0.18  diff 0.3  std [0.5699999928474426, 0.550000011920929, 0.5400000214576721, 0.550000011920929, 0.5699999928474426]  {'ready': 42, 'timeout': 152, 'ready_late+ok': 6}
+   214272 steps     6.7 min      0 st/s  train success 0.04  len 5.53s  collect 47s update 11s  vloss 2.348  clip 0.18  diff 0.3  std [0.5699999928474426, 0.5400000214576721, 0.5400000214576721, 0.550000011920929, 0.5699999928474426]  {'timeout': 156, 'ready': 37, 'ready_late+ok': 7}
+[worker 8] 오류로 멈춤:
+[worker 20] 오류로 멈춤:
+[worker 4] 오류로 멈춤:
+[worker 0] 오류로 멈춤:
+[worker 16] 오류로 멈춤:
+[worker 12] 오류로 멈춤:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Process SpawnProcess-3:
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Process SpawnProcess-6:
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+
+During handling of the above exception, another exception occurred:
+
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+
+During handling of the above exception, another exception occurred:
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+Process SpawnProcess-2:
+EOFError
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Traceback (most recent call last):
+Process SpawnProcess-4:
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Process SpawnProcess-5:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError

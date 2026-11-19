@@ -1,0 +1,65 @@
+[
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   0.29,
+   0.38,
+   8.02
+  ],
+  "time_s": 3.0,
+  "steps": 0,
+  "minutes": 0.3,
+  "train_success": 0.0,
+  "difficulty": 0.3
+ },
+ {
+  "success": 1.0,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 1.0,
+  "outcomes": {
+   "out+ok": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   40.8,
+   0.34,
+   33.81
+  ],
+  "time_s": 1.4,
+  "steps": 101376,
+  "minutes": 11.0,
+  "train_success": 1.0,
+  "difficulty": 1.0
+ },
+ {
+  "success": 1.0,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 1.0,
+  "outcomes": {
+   "out+ok": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   40.8,
+   0.5,
+   35.25
+  ],
+  "time_s": 1.4,
+  "steps": 202752,
+  "minutes": 22.0,
+  "train_success": 1.0,
+  "difficulty": 1.0
+ }
+]

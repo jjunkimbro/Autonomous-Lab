@@ -1,0 +1,46 @@
+[
+ {
+  "success": 0.0,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "fluent_tube": 0.0,
+  "sorter_right_tube": 0.0,
+  "ngs_tube": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0835,
+  "error_mm": [
+   7.44,
+   0.67,
+   4.79
+  ],
+  "time_s": 6.0,
+  "steps": 101376,
+  "minutes": 9.6,
+  "train_success": 0.0,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "fluent_tube": 0.0,
+  "sorter_right_tube": 0.0,
+  "ngs_tube": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 1.1859999999999997,
+  "error_mm": [
+   7.74,
+   0.51,
+   4.81
+  ],
+  "time_s": 6.0,
+  "steps": 200448,
+  "minutes": 18.9,
+  "train_success": 0.0,
+  "difficulty": 0.3
+ }
+]

@@ -1,0 +1,247 @@
+[
+ {
+  "success": 0.475,
+  "fluent_plate": 0.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.5,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 21,
+   "settled_late+ok": 19
+  },
+  "max_force_N": 18.66775,
+  "error_mm": [
+   1.55,
+   0.72,
+   0.78
+  ],
+  "time_s": 3.0,
+  "steps": 101376,
+  "minutes": 27.2,
+  "train_success": 0.29,
+  "difficulty": 0.4
+ },
+ {
+  "success": 0.475,
+  "fluent_plate": 0.2,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.4,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 21,
+   "settled_late+ok": 19
+  },
+  "max_force_N": 16.6575,
+  "error_mm": [
+   0.89,
+   0.7,
+   0.39
+  ],
+  "time_s": 3.0,
+  "steps": 200448,
+  "minutes": 54.7,
+  "train_success": 0.285,
+  "difficulty": 0.5
+ },
+ {
+  "success": 0.55,
+  "fluent_plate": 0.3,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 17,
+   "settled_late+ok": 22,
+   "force": 1
+  },
+  "max_force_N": 14.63125,
+  "error_mm": [
+   0.88,
+   0.56,
+   0.0
+  ],
+  "time_s": 2.9850000000000003,
+  "steps": 301824,
+  "minutes": 82.7,
+  "train_success": 0.345,
+  "difficulty": 0.7
+ },
+ {
+  "success": 0.575,
+  "fluent_plate": 0.2,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 16,
+   "settled_late+ok": 23,
+   "force": 1
+  },
+  "max_force_N": 19.054000000000002,
+  "error_mm": [
+   1.64,
+   0.64,
+   0.01
+  ],
+  "time_s": 2.9775,
+  "steps": 400896,
+  "minutes": 109.9,
+  "train_success": 0.37,
+  "difficulty": 0.9
+ },
+ {
+  "success": 0.65,
+  "fluent_plate": 0.4,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled_late": 14,
+   "settled_late+ok": 26
+  },
+  "max_force_N": 16.33625,
+  "error_mm": [
+   0.91,
+   0.64,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 502272,
+  "minutes": 138.0,
+  "train_success": 0.395,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.575,
+  "fluent_plate": 0.3,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.5,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled_late": 17,
+   "settled_late+ok": 23
+  },
+  "max_force_N": 17.297500000000003,
+  "error_mm": [
+   0.96,
+   0.72,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 601344,
+  "minutes": 165.4,
+  "train_success": 0.435,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.55,
+  "fluent_plate": 0.2,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.5,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled_late": 18,
+   "settled_late+ok": 22
+  },
+  "max_force_N": 13.827999999999998,
+  "error_mm": [
+   1.3,
+   0.64,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 700416,
+  "minutes": 193.1,
+  "train_success": 0.405,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.45,
+  "fluent_plate": 0.3,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.1,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 22,
+   "settled_late+ok": 15,
+   "settled+ok": 3
+  },
+  "max_force_N": 16.11825,
+  "error_mm": [
+   1.23,
+   0.72,
+   0.41
+  ],
+  "time_s": 2.8775,
+  "steps": 806400,
+  "minutes": 70.8,
+  "train_success": 0.4,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.875,
+  "fluent_plate": 0.9,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled_late+ok": 35,
+   "settled_late": 5
+  },
+  "max_force_N": 10.563749999999999,
+  "error_mm": [
+   0.38,
+   0.32,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 921600,
+  "minutes": 72.0,
+  "train_success": 0.89,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.875,
+  "fluent_plate": 0.9,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled_late+ok": 35,
+   "settled_late": 5
+  },
+  "max_force_N": 11.037,
+  "error_mm": [
+   0.4,
+   0.32,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 1020672,
+  "minutes": 167.9,
+  "train_success": 0.89,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.875,
+  "fluent_plate": 0.9,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled_late+ok": 35,
+   "settled_late": 5
+  },
+  "max_force_N": 10.6995,
+  "error_mm": [
+   0.4,
+   0.32,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 1122048,
+  "minutes": 238.7,
+  "train_success": 0.87,
+  "difficulty": 1.0
+ }
+]

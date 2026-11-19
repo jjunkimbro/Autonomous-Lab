@@ -1,0 +1,11 @@
+[look] 준비 17 s
+[look] plate fluent_plate       후보 1350 좋은 사진  107  좋음: 뒤 14 옆 -6 위 0 cm 회전 +0.0° | 자리 0.75 물체 1.00 거리 0.37 m 0.60 mm/px 옮길 거리 15.2 cm (82 s)
+[look] plate incubator_plate    후보 1110 좋은 사진  213  좋음: 뒤 6 옆 -8 위 0 cm 회전 +0.0° | 자리 0.75 물체 1.00 거리 0.31 m 0.50 mm/px 옮길 거리 10.0 cm (133 s)
+[look] plate reader_plate       후보 1350 좋은 사진  107  좋음: 뒤 14 옆 -6 위 0 cm 회전 +0.0° | 자리 0.75 물체 1.00 거리 0.37 m 0.60 mm/px 옮길 거리 15.2 cm (193 s)
+[look] plate sorter_left_plate  후보 1277 좋은 사진   89  좋음: 뒤 14 옆 -6 위 0 cm 회전 +0.0° | 자리 0.75 물체 1.00 거리 0.37 m 0.60 mm/px 옮길 거리 15.2 cm (254 s)
+[look] tube  tube_hotel_1       후보 1350 좋은 사진  272  좋음: 뒤 0 옆 -8 위 0 cm 회전 +0.0° | 자리 1.00 물체 0.81 거리 0.29 m 0.47 mm/px 옮길 거리 8.0 cm (314 s)
+[look] tube  tube_hotel_2       후보 1350 좋은 사진  270  좋음: 뒤 0 옆 -8 위 0 cm 회전 +0.0° | 자리 1.00 물체 0.81 거리 0.29 m 0.47 mm/px 옮길 거리 8.0 cm (372 s)
+[look] tube  fluent_tube        후보 1350 좋은 사진  265  좋음: 뒤 6 옆 -6 위 0 cm 회전 +0.0° | 자리 1.00 물체 0.81 거리 0.33 m 0.53 mm/px 옮길 거리 8.5 cm (431 s)
+[look] tube  sorter_right_tube  후보 1350 좋은 사진  432  좋음: 뒤 4 옆 -6 위 0 cm 회전 +0.0° | 자리 0.88 물체 0.81 거리 0.31 m 0.49 mm/px 옮길 거리 7.2 cm (489 s)
+[look] tube  ngs_tube           후보 1350 좋은 사진  346  좋음: 뒤 0 옆 -8 위 0 cm 회전 +0.0° | 자리 1.00 물체 0.81 거리 0.28 m 0.45 mm/px 옮길 거리 8.0 cm (549 s)
+[look] 끝 550 s -> C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\rl_runs\camera_sweep_v12\lookpose.json

@@ -1,0 +1,468 @@
+device NVIDIA RTX A5000
+[resume] rl_runs/e2e_stage_place_down/actor_best.pt
+[explore] «‡µø ¿‚¿Ω [0.30000001192092896, 0.30000001192092896, 0.3100000023841858, 0.30000001192092896, 0.49000000953674316]
+[worker 4] ø¿∑˘∑Œ ∏ÿ√„:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+[worker 8] ø¿∑˘∑Œ ∏ÿ√„:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+[worker 12] ø¿∑˘∑Œ ∏ÿ√„:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+Process SpawnProcess-4:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+[worker 0] ø¿∑˘∑Œ ∏ÿ√„:
+[worker 20] ø¿∑˘∑Œ ∏ÿ√„:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+Process SpawnProcess-1:
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+Process SpawnProcess-6:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+[worker 16] ø¿∑˘∑Œ ∏ÿ√„:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+Process SpawnProcess-5:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in _worker_loop
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 75, in <listcomp>
+    envs = [make_env(task, s, render, station_weights, lead) for s in seeds]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 58, in make_env
+    return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 350, in make
+    return cls(stage=stage, seed=seed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 236, in __init__
+    self._tube_init(stage, "place", seed, stations, appearance, randomize, station_weights, render,
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_tube_stages_v12.py", line 102, in _tube_init
+    self._stage_setup(stage, render, lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 116, in _stage_setup
+    self._load_lead(lead_policy, lead_share)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\e2e_stages_v12.py", line 276, in _load_lead
+    actor.load_state_dict(torch.load(path, map_location="cpu"))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'rl_runs/e2e_stage_tube_place_enter/actor_best.pt'
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] ∆ƒ¿Ã«¡∞° ≥°≥µΩ¿¥œ¥Ÿ
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 618, in <module>
+    main()
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 510, in main
+    envs.set_difficulty(difficulty)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 204, in set_difficulty
+    r.recv()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError

@@ -1,0 +1,7 @@
+device NVIDIA RTX A5000
+[resume] rl_runs/e2e_stage_place_retreat/model.pt
+   230400 steps     0.3 min      0 st/s  train success 0.96  len 1.16s  collect 13s update 5s  vloss 4.303  clip 0.17  diff 1.0  std [0.5099999904632568, 0.4399999976158142, 0.5899999737739563, 0.6000000238418579, 0.6000000238418579]  {'out': 8, 'out+ok': 192}
+   233472 steps     0.6 min      0 st/s  train success 0.94  len 1.15s  collect 13s update 4s  vloss 4.430  clip 0.25  diff 1.0  std [0.5099999904632568, 0.4399999976158142, 0.5899999737739563, 0.6000000238418579, 0.6000000238418579]  {'out+ok': 189, 'out': 11}
+   236544 steps     0.9 min      0 st/s  train success 0.93  len 1.13s  collect 13s update 4s  vloss 5.720  clip 0.34  diff 1.0  std [0.5099999904632568, 0.4399999976158142, 0.5899999737739563, 0.6000000238418579, 0.5899999737739563]  {'out+ok': 186, 'out': 14}
+   239616 steps     1.2 min      0 st/s  train success 0.95  len 1.13s  collect 13s update 4s  vloss 4.854  clip 0.25  diff 1.0  std [0.5099999904632568, 0.4399999976158142, 0.5799999833106995, 0.6000000238418579, 0.5899999737739563]  {'out+ok': 191, 'out': 9}
+   242688 steps     1.4 min      0 st/s  train success 0.96  len 1.11s  collect 13s update 4s  vloss 3.481  clip 0.22  diff 1.0  std [0.5099999904632568, 0.4399999976158142, 0.5799999833106995, 0.6000000238418579, 0.5899999737739563]  {'out+ok': 192, 'out': 8}

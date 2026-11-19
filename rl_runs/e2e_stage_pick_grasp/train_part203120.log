@@ -1,0 +1,9 @@
+device NVIDIA RTX A5000
+[resume] rl_runs/e2e_stage_pick_grasp/model.pt
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 601, in <module>
+    main()
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 463, in main
+    print(f"[explore] 행동 잡음 {actor.log_std.exp().cpu().numpy().round(2).tolist()}", flush=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Can't call numpy() on Tensor that requires grad. Use tensor.detach().numpy() instead.

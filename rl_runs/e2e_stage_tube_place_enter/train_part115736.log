@@ -1,0 +1,371 @@
+device NVIDIA RTX A5000
+[resume] rl_runs/e2e_stage_tube_place_enter/model.pt
+[resume] 작업 지시 입력 5 칸을 0 으로 붙임 (정책 최적화기는 새로)
+[explore] 행동 잡음 [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.46000000834465027, 0.5299999713897705]
+   672768 steps     0.5 min      0 st/s  train success 0.07  len 5.20s  collect 19s update 14s  vloss 2.012  clip 0.42  diff 0.3  std [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.46000000834465027, 0.5299999713897705]  {'ready': 7, 'ready+ok': 1, 'timeout': 20, 'ready_late+ok': 1}
+   675072 steps     1.1 min      0 st/s  train success 0.06  len 5.27s  collect 19s update 14s  vloss 2.774  clip 0.26  diff 0.3  std [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.46000000834465027, 0.5299999713897705]  {'ready': 20, 'ready+ok': 3, 'timeout': 54, 'ready_late+ok': 2}
+   677376 steps     1.6 min      0 st/s  train success 0.08  len 5.23s  collect 19s update 14s  vloss 3.092  clip 0.26  diff 0.3  std [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.46000000834465027, 0.5299999713897705]  {'ready': 29, 'ready+ok': 5, 'timeout': 80, 'ready_late+ok': 4}
+   679680 steps     2.1 min      0 st/s  train success 0.09  len 5.26s  collect 17s update 14s  vloss 3.414  clip 0.21  diff 0.3  std [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.46000000834465027, 0.5299999713897705]  {'ready': 37, 'ready+ok': 7, 'timeout': 111, 'ready_late+ok': 7}
+   681984 steps     2.7 min      0 st/s  train success 0.08  len 5.29s  collect 18s update 14s  vloss 2.747  clip 0.27  diff 0.3  std [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.46000000834465027, 0.5199999809265137]  {'timeout': 142, 'ready_late+ok': 9, 'ready': 42, 'ready+ok': 7}
+   684288 steps     3.2 min      0 st/s  train success 0.10  len 5.21s  collect 18s update 14s  vloss 3.932  clip 0.25  diff 0.3  std [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'ready': 46, 'timeout': 135, 'ready_late+ok': 12, 'ready+ok': 7}
+   686592 steps     3.7 min      0 st/s  train success 0.10  len 5.25s  collect 18s update 13s  vloss 3.190  clip 0.32  diff 0.3  std [0.4699999988079071, 0.4000000059604645, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'timeout': 138, 'ready_late+ok': 13, 'ready+ok': 8, 'ready': 41}
+   688896 steps     4.2 min      0 st/s  train success 0.09  len 5.21s  collect 19s update 14s  vloss 3.437  clip 0.22  diff 0.3  std [0.46000000834465027, 0.4000000059604645, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'ready_late+ok': 10, 'ready': 46, 'timeout': 136, 'ready+ok': 8}
+   691200 steps     4.7 min      0 st/s  train success 0.10  len 5.04s  collect 17s update 14s  vloss 4.551  clip 0.28  diff 0.3  std [0.46000000834465027, 0.4000000059604645, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'timeout': 128, 'ready': 53, 'ready_late+ok': 8, 'ready+ok': 11}
+   693504 steps     5.3 min      0 st/s  train success 0.10  len 5.12s  collect 18s update 14s  vloss 3.299  clip 0.29  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'timeout': 128, 'ready_late+ok': 8, 'ready': 51, 'ready+ok': 13}
+   695808 steps     5.8 min      0 st/s  train success 0.09  len 5.13s  collect 19s update 14s  vloss 3.083  clip 0.20  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'timeout': 131, 'ready': 51, 'ready_late+ok': 6, 'ready+ok': 12}
+   698112 steps     6.4 min      0 st/s  train success 0.08  len 5.05s  collect 18s update 14s  vloss 2.086  clip 0.20  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'timeout': 131, 'ready': 53, 'ready+ok': 11, 'ready_late+ok': 5}
+   700416 steps     6.9 min      0 st/s  train success 0.08  len 5.12s  collect 18s update 14s  vloss 1.821  clip 0.25  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'timeout': 135, 'ready': 49, 'ready+ok': 10, 'ready_late+ok': 6}
+   702720 steps     7.4 min      0 st/s  train success 0.07  len 5.20s  collect 18s update 14s  vloss 3.535  clip 0.30  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.4300000071525574, 0.44999998807907104, 0.5199999809265137]  {'ready+ok': 10, 'timeout': 142, 'ready': 43, 'ready_late+ok': 5}
+   705024 steps     8.0 min      0 st/s  train success 0.09  len 5.17s  collect 19s update 14s  vloss 3.884  clip 0.22  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 142, 'ready+ok': 12, 'ready_late+ok': 6, 'ready': 40}
+   707328 steps     8.5 min      0 st/s  train success 0.09  len 5.22s  collect 18s update 14s  vloss 2.738  clip 0.30  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 143, 'ready': 40, 'ready+ok': 9, 'ready_late+ok': 8}
+   709632 steps     9.0 min      0 st/s  train success 0.12  len 5.34s  collect 19s update 14s  vloss 4.561  clip 0.20  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'ready': 35, 'timeout': 142, 'ready_late+ok': 14, 'ready+ok': 9}
+   711936 steps     9.6 min      0 st/s  train success 0.12  len 5.36s  collect 18s update 14s  vloss 2.283  clip 0.24  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 141, 'ready_late+ok': 16, 'ready': 36, 'ready+ok': 7}
+   714240 steps    10.1 min      0 st/s  train success 0.11  len 5.37s  collect 18s update 14s  vloss 2.344  clip 0.24  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 142, 'ready': 36, 'ready+ok': 5, 'ready_late+ok': 17}
+   716544 steps    10.6 min      0 st/s  train success 0.11  len 5.38s  collect 17s update 14s  vloss 2.977  clip 0.33  diff 0.3  std [0.4699999988079071, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 138, 'ready': 40, 'ready_late+ok': 20, 'ready+ok': 2}
+   718848 steps    11.1 min      0 st/s  train success 0.10  len 5.45s  collect 18s update 14s  vloss 1.313  clip 0.27  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'ready_late+ok': 19, 'timeout': 143, 'ready': 36, 'ready+ok': 2}
+   721152 steps    11.7 min      0 st/s  train success 0.09  len 5.52s  collect 19s update 14s  vloss 2.676  clip 0.23  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 150, 'ready': 32, 'ready+ok': 1, 'ready_late+ok': 17}
+   723456 steps    12.2 min      0 st/s  train success 0.07  len 5.53s  collect 18s update 14s  vloss 1.648  clip 0.25  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 153, 'ready': 32, 'ready_late+ok': 14, 'ready+ok': 1}
+   725760 steps    12.7 min      0 st/s  train success 0.07  len 5.62s  collect 19s update 14s  vloss 2.153  clip 0.29  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'ready': 27, 'timeout': 158, 'ready_late+ok': 13, 'ready+ok': 2}
+   728064 steps    13.3 min      0 st/s  train success 0.07  len 5.62s  collect 18s update 14s  vloss 3.792  clip 0.31  diff 0.3  std [0.46000000834465027, 0.38999998569488525, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 162, 'ready': 23, 'ready_late+ok': 11, 'ready+ok': 4}
+   730368 steps    13.8 min      0 st/s  train success 0.07  len 5.63s  collect 18s update 14s  vloss 1.152  clip 0.29  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 163, 'ready': 23, 'ready_late+ok': 10, 'ready+ok': 4}
+   732672 steps    14.4 min      0 st/s  train success 0.06  len 5.68s  collect 19s update 14s  vloss 1.033  clip 0.22  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 167, 'ready': 21, 'ready+ok': 4, 'ready_late+ok': 8}
+   734976 steps    14.9 min      0 st/s  train success 0.07  len 5.71s  collect 17s update 14s  vloss 2.840  clip 0.25  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 167, 'ready_late+ok': 12, 'ready': 18, 'ready+ok': 3}
+   737280 steps    15.4 min      0 st/s  train success 0.06  len 5.72s  collect 19s update 14s  vloss 0.641  clip 0.30  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.41999998688697815, 0.4399999976158142, 0.5199999809265137]  {'timeout': 171, 'ready+ok': 2, 'ready': 17, 'ready_late+ok': 10}
+   739584 steps    15.9 min      0 st/s  train success 0.05  len 5.75s  collect 18s update 14s  vloss 2.755  clip 0.29  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.4099999964237213, 0.4399999976158142, 0.5199999809265137]  {'ready': 16, 'timeout': 174, 'ready_late+ok': 8, 'ready+ok': 2}
+   741888 steps    16.5 min      0 st/s  train success 0.06  len 5.82s  collect 18s update 14s  vloss 1.491  clip 0.30  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.4099999964237213, 0.4399999976158142, 0.5199999809265137]  {'timeout': 178, 'ready_late+ok': 9, 'ready': 11, 'ready+ok': 2}
+   744192 steps    17.0 min      0 st/s  train success 0.09  len 5.78s  collect 18s update 14s  vloss 4.784  clip 0.29  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 171, 'ready': 12, 'ready_late+ok': 13, 'ready+ok': 4}
+   746496 steps    17.5 min      0 st/s  train success 0.08  len 5.80s  collect 16s update 14s  vloss 1.722  clip 0.26  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 173, 'ready_late+ok': 12, 'ready': 11, 'ready+ok': 4}
+   748800 steps    18.1 min      0 st/s  train success 0.10  len 5.80s  collect 18s update 14s  vloss 1.919  clip 0.30  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 171, 'ready_late+ok': 15, 'ready+ok': 4, 'ready': 10}
+   751104 steps    18.6 min      0 st/s  train success 0.10  len 5.85s  collect 18s update 14s  vloss 3.297  clip 0.25  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'ready': 9, 'timeout': 171, 'ready_late+ok': 17, 'ready+ok': 3}
+   753408 steps    19.1 min      0 st/s  train success 0.10  len 5.83s  collect 18s update 14s  vloss 1.723  clip 0.30  diff 0.3  std [0.46000000834465027, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 170, 'ready_late+ok': 17, 'ready': 10, 'ready+ok': 3}
+   755712 steps    19.7 min      0 st/s  train success 0.09  len 5.80s  collect 19s update 14s  vloss 2.718  clip 0.25  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 169, 'ready': 14, 'ready_late+ok': 15, 'ready+ok': 2}
+   758016 steps    20.2 min      0 st/s  train success 0.07  len 5.80s  collect 16s update 14s  vloss 0.735  clip 0.25  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'ready_late+ok': 13, 'timeout': 169, 'ready': 16, 'ready+ok': 2}
+   760320 steps    20.7 min      0 st/s  train success 0.07  len 5.83s  collect 18s update 14s  vloss 1.863  clip 0.29  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 172, 'ready_late+ok': 11, 'ready': 15, 'ready+ok': 2}
+   762624 steps    21.2 min      0 st/s  train success 0.06  len 5.78s  collect 17s update 14s  vloss 2.155  clip 0.26  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 172, 'ready': 17, 'ready_late+ok': 9, 'ready+ok': 2}
+   764928 steps    21.8 min      0 st/s  train success 0.06  len 5.80s  collect 18s update 14s  vloss 1.453  clip 0.31  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 174, 'ready': 15, 'ready_late+ok': 9, 'ready+ok': 2}
+   767232 steps    22.3 min      0 st/s  train success 0.05  len 5.83s  collect 18s update 14s  vloss 2.077  clip 0.25  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 176, 'ready': 14, 'ready_late+ok': 9, 'ready+ok': 1}
+   769536 steps    22.8 min      0 st/s  train success 0.07  len 5.82s  collect 18s update 14s  vloss 1.884  clip 0.27  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 175, 'ready_late+ok': 12, 'ready': 12, 'ready+ok': 1}
+   771840 steps    23.4 min      0 st/s  train success 0.08  len 5.78s  collect 18s update 14s  vloss 3.520  clip 0.30  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 171, 'ready_late+ok': 14, 'ready': 13, 'ready+ok': 2}
+[eval] {"success": 0.05, "tube_hotel_1": 0.0, "tube_hotel_2": 0.0, "sorter_right_tube": 0.0, "ngs_tube": 0.2, "outcomes": {"timeout": 38, "ready_late+ok": 2}, "max_force_N": 0.0, "error_mm": [4.38, 1.33, 1.81], "time_s": 6.0, "steps": 771840, "minutes": 24.5, "train_success": 0.08, "difficulty": 0.3}
+   774144 steps    25.0 min      0 st/s  train success 0.07  len 5.81s  collect 21s update 13s  vloss 1.957  clip 0.37  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 171, 'ready_late+ok': 13, 'ready': 14, 'ready+ok': 2}
+   776448 steps    25.6 min      0 st/s  train success 0.09  len 5.80s  collect 18s update 14s  vloss 2.045  clip 0.26  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 167, 'ready': 16, 'ready_late+ok': 15, 'ready+ok': 2}
+   778752 steps    26.1 min      0 st/s  train success 0.09  len 5.81s  collect 19s update 14s  vloss 2.022  clip 0.33  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 168, 'ready_late+ok': 15, 'ready': 14, 'ready+ok': 3}
+   781056 steps    26.6 min      0 st/s  train success 0.10  len 5.82s  collect 18s update 13s  vloss 3.269  clip 0.30  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 168, 'ready': 13, 'ready_late+ok': 14, 'ready+ok': 5}
+   783360 steps    27.1 min      0 st/s  train success 0.10  len 5.80s  collect 17s update 14s  vloss 2.471  clip 0.31  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'ready_late+ok': 16, 'timeout': 165, 'ready': 15, 'ready+ok': 4}
+   785664 steps    27.7 min      0 st/s  train success 0.11  len 5.85s  collect 18s update 13s  vloss 3.344  clip 0.31  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 166, 'ready_late+ok': 19, 'ready': 12, 'ready+ok': 3}
+   787968 steps    28.2 min      0 st/s  train success 0.12  len 5.89s  collect 19s update 14s  vloss 2.777  clip 0.27  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 169, 'ready_late+ok': 21, 'ready+ok': 3, 'ready': 7}
+   790272 steps    28.7 min      0 st/s  train success 0.12  len 5.86s  collect 17s update 14s  vloss 2.276  clip 0.30  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 167, 'ready+ok': 4, 'ready': 9, 'ready_late+ok': 20}
+   792576 steps    29.3 min      0 st/s  train success 0.12  len 5.89s  collect 18s update 14s  vloss 3.511  clip 0.30  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.4300000071525574, 0.5199999809265137]  {'timeout': 169, 'ready_late+ok': 22, 'ready': 7, 'ready+ok': 2}
+   794880 steps    29.8 min      0 st/s  train success 0.12  len 5.90s  collect 16s update 14s  vloss 3.933  clip 0.28  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'timeout': 171, 'ready': 5, 'ready_late+ok': 20, 'ready+ok': 4}
+   797184 steps    30.3 min      0 st/s  train success 0.12  len 5.88s  collect 19s update 14s  vloss 2.971  clip 0.29  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'timeout': 170, 'ready_late+ok': 21, 'ready': 5, 'ready+ok': 4}
+   799488 steps    30.9 min      0 st/s  train success 0.11  len 5.88s  collect 18s update 14s  vloss 2.318  clip 0.28  diff 0.3  std [0.44999998807907104, 0.3799999952316284, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'timeout': 172, 'ready_late+ok': 18, 'ready': 6, 'ready+ok': 4}
+   801792 steps    31.4 min      0 st/s  train success 0.12  len 5.86s  collect 18s update 14s  vloss 1.875  clip 0.33  diff 0.3  std [0.44999998807907104, 0.3700000047683716, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'timeout': 171, 'ready+ok': 4, 'ready_late+ok': 19, 'ready': 6}
+   804096 steps    31.9 min      0 st/s  train success 0.10  len 5.87s  collect 19s update 14s  vloss 0.949  clip 0.42  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'ready+ok': 3, 'timeout': 172, 'ready_late+ok': 16, 'ready': 9}
+   806400 steps    32.5 min      0 st/s  train success 0.10  len 5.85s  collect 18s update 14s  vloss 2.966  clip 0.31  diff 0.3  std [0.44999998807907104, 0.3700000047683716, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'timeout': 169, 'ready+ok': 1, 'ready_late+ok': 18, 'ready': 12}
+   808704 steps    33.0 min      0 st/s  train success 0.07  len 5.87s  collect 18s update 14s  vloss 1.199  clip 0.31  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'timeout': 175, 'ready_late+ok': 13, 'ready': 12}
+   811008 steps    33.5 min      0 st/s  train success 0.07  len 5.84s  collect 18s update 13s  vloss 1.266  clip 0.23  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4099999964237213, 0.41999998688697815, 0.5199999809265137]  {'timeout': 174, 'ready_late+ok': 12, 'ready': 13, 'ready+ok': 1}
+   813312 steps    34.0 min      0 st/s  train success 0.04  len 5.82s  collect 17s update 13s  vloss 0.690  clip 0.25  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.41999998688697815, 0.5199999809265137]  {'timeout': 179, 'ready': 13, 'ready_late+ok': 7, 'ready+ok': 1}
+   815616 steps    34.6 min      0 st/s  train success 0.05  len 5.78s  collect 19s update 14s  vloss 1.262  clip 0.28  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.41999998688697815, 0.5199999809265137]  {'timeout': 178, 'ready': 12, 'ready_late+ok': 9, 'ready+ok': 1}
+   817920 steps    35.1 min      0 st/s  train success 0.04  len 5.84s  collect 18s update 14s  vloss 2.237  clip 0.31  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.41999998688697815, 0.5199999809265137]  {'timeout': 182, 'ready': 9, 'ready_late+ok': 8, 'ready+ok': 1}
+   820224 steps    35.6 min      0 st/s  train success 0.06  len 5.87s  collect 18s update 13s  vloss 2.399  clip 0.33  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.41999998688697815, 0.5199999809265137]  {'timeout': 180, 'ready+ok': 1, 'ready': 8, 'ready_late+ok': 11}
+   822528 steps    36.2 min      0 st/s  train success 0.07  len 5.90s  collect 19s update 14s  vloss 2.405  clip 0.27  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.41999998688697815, 0.5199999809265137]  {'timeout': 180, 'ready': 7, 'ready_late+ok': 13}
+   824832 steps    36.7 min      0 st/s  train success 0.10  len 5.88s  collect 17s update 14s  vloss 3.452  clip 0.30  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.41999998688697815, 0.5199999809265137]  {'timeout': 172, 'ready_late+ok': 19, 'ready': 9}
+   827136 steps    37.2 min      0 st/s  train success 0.10  len 5.91s  collect 19s update 14s  vloss 2.767  clip 0.29  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 169, 'ready_late+ok': 21, 'ready': 10}
+   829440 steps    37.8 min      0 st/s  train success 0.11  len 5.89s  collect 18s update 14s  vloss 2.472  clip 0.29  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 167, 'ready_late+ok': 22, 'ready': 11}
+   831744 steps    38.3 min      0 st/s  train success 0.10  len 5.89s  collect 17s update 14s  vloss 2.170  clip 0.27  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 168, 'ready_late+ok': 21, 'ready': 11}
+   834048 steps    38.8 min      0 st/s  train success 0.10  len 5.84s  collect 19s update 14s  vloss 2.940  clip 0.28  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 165, 'ready': 14, 'ready_late+ok': 20, 'ready+ok': 1}
+   836352 steps    39.3 min      0 st/s  train success 0.10  len 5.86s  collect 18s update 14s  vloss 3.873  clip 0.33  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 167, 'ready': 13, 'ready_late+ok': 18, 'ready+ok': 2}
+   838656 steps    39.9 min      0 st/s  train success 0.10  len 5.85s  collect 16s update 14s  vloss 2.979  clip 0.29  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 168, 'ready_late+ok': 18, 'ready': 11, 'ready+ok': 3}
+   840960 steps    40.4 min      0 st/s  train success 0.11  len 5.85s  collect 18s update 14s  vloss 3.856  clip 0.29  diff 0.3  std [0.4399999976158142, 0.3700000047683716, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'ready': 10, 'timeout': 168, 'ready_late+ok': 19, 'ready+ok': 3}
+   843264 steps    40.9 min      0 st/s  train success 0.12  len 5.87s  collect 17s update 14s  vloss 2.349  clip 0.33  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'ready': 10, 'timeout': 167, 'ready+ok': 3, 'ready_late+ok': 20}
+   845568 steps    41.4 min      0 st/s  train success 0.15  len 5.91s  collect 19s update 14s  vloss 4.297  clip 0.34  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 163, 'ready_late+ok': 28, 'ready': 7, 'ready+ok': 2}
+   847872 steps    42.0 min      0 st/s  train success 0.14  len 5.91s  collect 18s update 13s  vloss 3.214  clip 0.32  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 166, 'ready': 6, 'ready_late+ok': 26, 'ready+ok': 2}
+   850176 steps    42.5 min      0 st/s  train success 0.14  len 5.91s  collect 19s update 14s  vloss 2.203  clip 0.28  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'ready+ok': 2, 'timeout': 167, 'ready_late+ok': 26, 'ready': 5}
+   852480 steps    43.0 min      0 st/s  train success 0.12  len 5.91s  collect 18s update 14s  vloss 2.325  clip 0.31  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 171, 'ready_late+ok': 22, 'ready': 5, 'ready+ok': 2}
+   854784 steps    43.5 min      0 st/s  train success 0.10  len 5.91s  collect 17s update 14s  vloss 1.544  clip 0.27  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'ready': 5, 'timeout': 174, 'ready_late+ok': 19, 'ready+ok': 2}
+   857088 steps    44.1 min      0 st/s  train success 0.09  len 5.90s  collect 19s update 14s  vloss 2.849  clip 0.31  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 181, 'ready_late+ok': 13, 'ready+ok': 4, 'ready': 2}
+   859392 steps    44.6 min      0 st/s  train success 0.09  len 5.94s  collect 18s update 14s  vloss 2.530  clip 0.28  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 181, 'ready_late+ok': 14, 'ready': 2, 'ready+ok': 3}
+   861696 steps    45.2 min      0 st/s  train success 0.09  len 5.93s  collect 19s update 14s  vloss 2.457  clip 0.28  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 180, 'ready': 2, 'ready_late+ok': 14, 'ready+ok': 4}
+   864000 steps    45.7 min      0 st/s  train success 0.10  len 5.94s  collect 18s update 14s  vloss 3.556  clip 0.29  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 177, 'ready+ok': 5, 'ready_late+ok': 16, 'ready': 2}
+   866304 steps    46.2 min      0 st/s  train success 0.12  len 5.91s  collect 18s update 14s  vloss 2.491  clip 0.34  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 171, 'ready_late+ok': 19, 'ready+ok': 4, 'ready': 6}
+   868608 steps    46.8 min      0 st/s  train success 0.10  len 5.89s  collect 18s update 13s  vloss 1.890  clip 0.33  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 171, 'ready+ok': 3, 'ready_late+ok': 18, 'ready': 8}
+   870912 steps    47.3 min      0 st/s  train success 0.10  len 5.89s  collect 18s update 13s  vloss 2.801  clip 0.37  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 173, 'ready+ok': 3, 'ready_late+ok': 16, 'ready': 8}
+[eval] {"success": 0.075, "tube_hotel_1": 0.0, "tube_hotel_2": 0.0, "sorter_right_tube": 0.0, "ngs_tube": 0.3, "outcomes": {"timeout": 37, "ready_late+ok": 3}, "max_force_N": 0.18475, "error_mm": [2.46, 1.72, 1.92], "time_s": 6.0, "steps": 870912, "minutes": 48.4, "train_success": 0.095, "difficulty": 0.3}
+   873216 steps    49.0 min      0 st/s  train success 0.10  len 5.89s  collect 21s update 13s  vloss 2.593  clip 0.31  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.4000000059604645, 0.4099999964237213, 0.5199999809265137]  {'timeout': 170, 'ready_late+ok': 19, 'ready+ok': 2, 'ready': 9}
+   875520 steps    49.5 min      0 st/s  train success 0.09  len 5.90s  collect 17s update 14s  vloss 1.532  clip 0.29  diff 0.3  std [0.4399999976158142, 0.36000001430511475, 0.38999998569488525, 0.4099999964237213, 0.5199999809265137]  {'timeout': 175, 'ready': 8, 'ready_late+ok': 16, 'ready+ok': 1}
+[worker 0] 오류로 멈춤:
+[worker 20] 오류로 멈춤:
+[worker 12] 오류로 멈춤:
+[worker 8] 오류로 멈춤:
+[worker 16] 오류로 멈춤:
+[worker 4] 오류로 멈춤:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Process SpawnProcess-6:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Process SpawnProcess-5:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Process SpawnProcess-4:
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+
+During handling of the above exception, another exception occurred:
+
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+EOFError
+Process SpawnProcess-3:
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 328, in _recv_bytes
+    nread, err = ov.GetOverlappedResult(True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [WinError 109] 파이프가 끝났습니다
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+EOFError
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 314, in _bootstrap
+    self.run()
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 64, in _worker
+    _worker_loop(remote, seeds, spec, n, offset, task, render, station_weights, lead)
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 86, in _worker_loop
+    cmd, data = remote.recv()
+                ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 250, in recv
+    buf = self._recv_bytes()
+          ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\AppData\Local\Programs\Python\Python311\Lib\multiprocessing\connection.py", line 337, in _recv_bytes
+    raise EOFError
+EOFError

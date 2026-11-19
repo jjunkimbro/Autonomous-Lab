@@ -1,0 +1,82 @@
+[
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "xy_error_mm": 61.533879403383,
+  "time_s": 7.999999999999988,
+  "steps": 251904,
+  "minutes": 18.3,
+  "train_success": 0.0
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "xy_error_mm": 41.38961360040544,
+  "time_s": 7.999999999999988,
+  "steps": 500736,
+  "minutes": 36.3,
+  "train_success": 0.0
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "xy_error_mm": 25.6272427523243,
+  "time_s": 7.999999999999988,
+  "steps": 752640,
+  "minutes": 54.6,
+  "train_success": 0.0
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "xy_error_mm": 36.08154665363373,
+  "time_s": 7.999999999999988,
+  "steps": 1001472,
+  "minutes": 72.7,
+  "train_success": 0.0
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.13451028138639315,
+  "xy_error_mm": 31.100994699510768,
+  "time_s": 7.999999999999988,
+  "steps": 1250304,
+  "minutes": 90.7,
+  "train_success": 0.0
+ }
+]

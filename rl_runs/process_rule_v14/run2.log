@@ -1,0 +1,36 @@
+  자리 waste_plate          39.7 s  레일 0.31  방향 150°
+  자리 tube_hotel_2         46.1 s  레일 0.50  방향 270°
+  자리 tube_hotel_1         50.3 s  레일 0.51  방향 270°
+  자리 waste_tube           63.1 s  레일 0.23  방향 150°
+  자리 fluent_tube          73.5 s  레일 0.10  방향 270°
+  자리 sorter_right_tube    83.0 s  레일 0.86  방향 270°
+  자리 ngs_tube            913.6 s  레일 0.06  방향 135°
+  1. plate_a plate_hotel_4 -> fluent_plate               21.6 s  운반 direct
+  2. plate_a fluent_plate -> incubator_plate             22.9 s  운반 standoff
+  3. plate_a incubator_plate -> reader_plate             16.9 s  운반 direct
+  4. plate_a reader_plate -> fluent_plate                25.3 s  운반 carry
+  5. tube_a tube_hotel_1 -> fluent_tube                  26.2 s  운반 direct
+  6. plate_a fluent_plate -> waste_plate                 38.9 s  운반 carry
+  7. tube_a fluent_tube -> sorter_right_tube             32.6 s  운반 direct
+  8. plate_b plate_hotel_3 -> sorter_left_plate          19.3 s  운반 direct
+  9. plate_b sorter_left_plate -> fluent_plate           24.0 s  운반 direct
+  10. tube_a sorter_right_tube -> waste_tube             38.8 s  운반 carry
+  11. tube_b tube_hotel_2 -> fluent_tube                 31.9 s  운반 direct
+  12. tube_b fluent_tube -> ngs_tube                     29.1 s  운반 carry
+  13. plate_b fluent_plate -> waste_plate                42.2 s  운반 carry
+계획 1002 s, 공정 370.71 s, 부딪힘 []
+   1. plate_a -> fluent_plate       OK  f_mm=0.26 l_mm=0.21 z_mm=-0.0 tilt_deg=0.0
+   2. plate_a -> incubator_plate    OK  f_mm=0.75 l_mm=0.27 z_mm=-0.0 tilt_deg=0.0
+   3. plate_a -> reader_plate       OK  f_mm=1.06 l_mm=0.26 z_mm=-0.0 tilt_deg=0.0
+   4. plate_a -> fluent_plate       OK  f_mm=1.94 l_mm=0.3 z_mm=-0.0 tilt_deg=0.0
+   5. tube_a  -> fluent_tube        OK  f_mm=0.23 l_mm=-0.18 z_mm=-0.0 tilt_deg=0.0
+   6. plate_a -> waste_plate        OK  
+   7. tube_a  -> sorter_right_tube  OK  f_mm=0.44 l_mm=-0.42 z_mm=-0.0 tilt_deg=0.0
+   8. plate_b -> sorter_left_plate  OK  f_mm=0.18 l_mm=0.26 z_mm=-0.0 tilt_deg=0.0
+   9. plate_b -> fluent_plate       OK  f_mm=0.36 l_mm=0.19 z_mm=-0.0 tilt_deg=0.0
+  10. tube_a  -> waste_tube         OK  
+  11. tube_b  -> fluent_tube        OK  f_mm=0.23 l_mm=-0.29 z_mm=-0.0 tilt_deg=0.0
+  12. tube_b  -> ngs_tube           NO  f_mm=-2.79 l_mm=1.64 z_mm=34.33 tilt_deg=6.75
+  13. plate_b -> waste_plate        OK  
+물리 실행 22 s: 12/13 단계 성공
+exit 0

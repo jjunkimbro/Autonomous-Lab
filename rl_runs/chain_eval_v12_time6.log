@@ -1,0 +1,11 @@
+pick fluent_plate: 1.00
+pick incubator_plate: 1.00
+pick reader_plate: 0.90
+pick sorter_left_plate: 1.00
+pick {"success": 0.975, "stations": {"fluent_plate": 1.0, "incubator_plate": 1.0, "reader_plate": 0.9, "sorter_left_plate": 1.0}, "ends": {"pick_extract:out+ok": 78, "pick_enter:force": 1, "pick_enter:timeout": 1}}
+place fluent_plate: 0.90
+place incubator_plate: 1.00
+place reader_plate: 0.95
+place sorter_left_plate: 0.90
+place {"success": 0.9374999999999999, "stations": {"fluent_plate": 0.9, "incubator_plate": 1.0, "reader_plate": 0.95, "sorter_left_plate": 0.9}, "ends": {"place_retreat:out+ok": 75, "place_retreat:out": 3, "place_down:force": 1, "place_enter:timeout": 1}}
+saved C:\Users\T-LAB_~1\AppData\Local\Temp\claude\c--Users-T-Lab-Public-OneDrive-Desktop-Autonomous-Lab\b3b0b7c8-44b9-433f-b5df-c535c474f36b\scratchpad\results\chain_eval_v12.json transfer estimate 0.914

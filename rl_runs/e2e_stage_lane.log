@@ -1,0 +1,69 @@
+[lane] start pick_enter --resume rl_runs/e2e_stage_pick_enter/model.pt Sat Oct 31 03:45:07     2026
+[lane] start pick_enter --resume rl_runs/e2e_stage_pick_enter/model.pt Sat Oct 31 04:14:48     2026
+[lane] reward change: tolerance-normalised precision + graded ready penalty Sat Oct 31 04:54:44     2026
+[lane] start pick_enter --resume rl_runs/e2e_stage_pick_enter/model.pt Sat Oct 31 04:54:44     2026
+[lane] pick_enter: late-ready success + trigger exploration reopened (+0.6, std 0.8) Sat Oct 31 05:18:58     2026
+[lane] curriculum threshold 0.6 -> 0.4, step cap 3M -> 5M Sat Oct 31 06:53:01     2026
+[lane] start pick_enter --resume rl_runs/e2e_stage_pick_enter/model.pt Sat Oct 31 06:53:01     2026
+[lane] near-miss ready penalty steeper: -5 at 1.5x tolerance (was 3x) Sat Oct 31 07:33:51     2026
+[lane] start pick_enter --resume rl_runs/e2e_stage_pick_enter/model.pt Sat Oct 31 07:33:51     2026
+[lane] Fluent sampled 2x in training (eval unchanged) Sat Oct 31 09:16:22     2026
+[lane] start pick_enter --resume rl_runs/e2e_stage_pick_enter/model.pt Sat Oct 31 09:16:22     2026
+[lane] end pick_enter Sat Oct 31 10:11:16     2026 exit 0
+[lane] start place_enter --resume rl_runs/e2e_stage_place_enter/model.pt Sat Oct 31 10:11:16     2026
+[lane] place_enter: trigger exploration reopened (+0.6, std 0.8) Sat Oct 31 10:51:08     2026
+[lane] place_enter: station weights sorter_left 2, fluent 1.5, incubator 1.5 Sat Oct 31 14:02:52     2026
+[lane] start place_enter --resume rl_runs/e2e_stage_place_enter/model.pt Sat Oct 31 16:42:35     2026
+[lane] end place_enter Sat Oct 31 16:42:46     2026 exit 0
+[lane] start pick_grasp  Sat Oct 31 16:42:46     2026
+[lane] end pick_grasp Sat Oct 31 17:15:25     2026 exit 0
+[lane] start place_down  Sat Oct 31 17:15:25     2026
+[lane] place_down: release exploration reopened (+0.6, std 0.8) Sat Oct 31 17:41:37     2026
+[lane] place_down: release at time limit (settled_late, half bonus) Sat Oct 31 18:09:14     2026
+[lane] start place_down --resume rl_runs/e2e_stage_place_down/model.pt Sat Oct 31 18:09:14     2026
+[lane] place_down: descend alignment 3/1.5 -> 1/0.7 mm + fine alignment reward Sat Oct 31 18:29:55     2026
+[lane] start place_down --resume rl_runs/e2e_stage_place_down/model.pt Sat Oct 31 18:29:55     2026
+[lane] resumed after session end Sun Nov  1 02:24:17     2026
+[lane] start place_down --resume rl_runs/e2e_stage_place_down/model.pt Sun Nov  1 02:24:18     2026
+[lane] end place_down Sun Nov  1 02:24:46     2026 exit 0
+[lane] start pick_extract  Sun Nov  1 02:24:47     2026
+[lane] place_down: PC crashed 10-31 18:31, model.pt zero-filled -> resume policy from snapshots/actor_000943104.pt (new critic) Sun Nov  1 02:26:51     2026
+[lane] start place_down --resume rl_runs/e2e_stage_place_down/model.pt Sun Nov  1 08:17:58     2026
+[lane] end place_down Sun Nov  1 08:18:10     2026 exit 0
+[lane] start pick_extract  Sun Nov  1 08:18:10     2026
+[lane] end pick_extract Sun Nov  1 08:40:24     2026 exit 0
+[lane] start place_retreat  Sun Nov  1 08:40:24     2026
+[lane] PC crashed again ~11-01 08:46 (reboot 14:02); resume Sun Nov  1 15:59:16     2026
+[lane] start place_retreat --resume rl_runs/e2e_stage_place_retreat/model.pt Sun Nov  1 15:59:16     2026
+[lane] PC crashed again 11-01 ~16:15 (bugcheck 0xFC); resume Sun Nov  1 18:28:41     2026
+[lane] start place_retreat --resume rl_runs/e2e_stage_place_retreat/model.pt Sun Nov  1 18:28:41     2026
+[lane] crash test: 6 worker processes (was 8) to lower CPU load Sun Nov  1 18:30:46     2026
+[lane] start place_retreat --resume rl_runs/e2e_stage_place_retreat/model.pt Sun Nov  1 18:30:46     2026
+[lane] end place_retreat Sun Nov  1 18:52:59     2026 exit 0
+[lane] start pick_grasp --resume rl_runs/e2e_stage_pick_grasp/model.pt Sun Nov  1 18:52:59     2026
+[lane] end pick_grasp Sun Nov  1 19:07:00     2026 exit 0
+[lane] pick_grasp reward change: potential continuous at grip (no +5 jump), trigger explore -1.9,0.8 Sun Nov  1 19:07:18     2026
+[lane] start pick_grasp --resume rl_runs/e2e_stage_pick_grasp/model.pt --trigger-explore -1.9,0.8 Sun Nov  1 19:07:19     2026
+[lane] end pick_grasp Sun Nov  1 19:07:20     2026 exit 0
+[lane] start pick_grasp --resume rl_runs/e2e_stage_pick_grasp/model.pt --trigger-explore=-1.9,0.8 Sun Nov  1 19:11:31     2026
+[lane] end pick_grasp Sun Nov  1 19:32:11     2026 exit 0
+[lane] pick_grasp warm start: actor from pick_enter actor_best (corrects pose, then triggers), new critic; old models in before_warmstart/ Sun Nov  1 19:32:25     2026
+[lane] start pick_grasp  --resume rl_runs/e2e_stage_pick_grasp/warmstart_from_pick_enter.pt --resume-steps 718080 Sun Nov  1 19:32:31     2026
+[lane] end pick_grasp Sun Nov  1 20:02:17     2026 exit 0
+[lane] pick_grasp reward change: lift term no longer clipped at 0 (policy pressed down after grip at fluent/incubator) Sun Nov  1 20:02:25     2026
+[lane] start pick_grasp --resume rl_runs/e2e_stage_pick_grasp/model.pt  Sun Nov  1 20:02:25     2026
+[lane] end pick_grasp Sun Nov  1 20:30:24     2026 exit 0
+[lane] pick_grasp: explore std floor 0.3, station weights fluent=2 incubator=2 Sun Nov  1 20:30:35     2026
+[lane] start pick_grasp --resume rl_runs/e2e_stage_pick_grasp/model.pt --explore-std 0.3 --station-weights fluent_plate=2,incubator_plate=2 Sun Nov  1 20:30:35     2026
+[lane] end pick_grasp Sun Nov  1 20:30:40     2026 exit 0
+[lane] start pick_grasp --resume rl_runs/e2e_stage_pick_grasp/model.pt --explore-std 0.3 --station-weights fluent_plate=2,incubator_plate=2 Sun Nov  1 20:31:20     2026
+[lane] end pick_grasp Sun Nov  1 21:47:09     2026 exit 0
+[lane] place_retreat retrain: start spread widened to 1.2/1.0/0.5 mm, 1.5 deg (chain eval: retreat failed at seats left by place_down), warm start from narrow best Sun Nov  1 21:51:14     2026
+[lane] start place_retreat  --resume rl_runs/e2e_stage_place_retreat/warmstart_narrow_best.pt --resume-steps 443136 --explore-std 0.2 Sun Nov  1 21:51:14     2026
+[lane] end place_retreat Sun Nov  1 22:13:19     2026 exit 0
+[lane] place_retreat retrain: half of starts from the place_down policy (--lead-policy), warm start from wide best Sun Nov  1 22:17:34     2026
+[lane] start place_retreat  --resume rl_runs/e2e_stage_place_retreat/warmstart_wide_best.pt --resume-steps 643584 --explore-std 0.2 --curriculum 1.0 --lead-policy rl_runs/e2e_stage_place_down/actor_best.pt --lead-share 0.5 Sun Nov  1 22:17:41     2026
+[lane] end place_retreat Sun Nov  1 23:45:17     2026 exit 0
+[lane] start place_down  --resume rl_runs/e2e_stage_place_down/warmstart_cap_best.pt --resume-steps 4945920 --steps 7000000 --explore-std 0.2 --curriculum 1.0 --station-weights sorter_left_plate=2,fluent_plate=1.5,incubator_plate=1.5 --lead-policy rl_runs/e2e_stage_place_enter/actor_best.pt --lead-share 0.5 Sun Nov  1 23:45:34     2026
+[lane] end place_down Mon Nov  2 02:15:53     2026 exit 0
+[lane] place_down stopped (~5.4M, best 0.95). Enter stages get 6 s at run time; chained 6 s: pick 0.975, place 0.94 Mon Nov  2 02:16:02     2026

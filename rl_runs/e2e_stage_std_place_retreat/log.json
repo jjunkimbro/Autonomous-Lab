@@ -1,0 +1,45 @@
+[
+ {
+  "success": 0.975,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 0.9,
+  "outcomes": {
+   "out+ok": 39,
+   "out": 1
+  },
+  "max_force_N": 1.384,
+  "error_mm": [
+   0.24,
+   0.52,
+   0.0
+  ],
+  "time_s": 1.075,
+  "steps": 101376,
+  "minutes": 76.5,
+  "train_success": 0.845,
+  "difficulty": 1.0
+ },
+ {
+  "success": 1.0,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 1.0,
+  "outcomes": {
+   "out+ok": 40
+  },
+  "max_force_N": 1.12675,
+  "error_mm": [
+   0.38,
+   0.51,
+   0.0
+  ],
+  "time_s": 1.0574999999999999,
+  "steps": 200448,
+  "minutes": 153.9,
+  "train_success": 0.96,
+  "difficulty": 1.0
+ }
+]

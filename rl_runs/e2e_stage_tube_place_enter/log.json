@@ -1,0 +1,297 @@
+[
+ {
+  "success": 0.05,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "sorter_right_tube": 0.0,
+  "ngs_tube": 0.2,
+  "outcomes": {
+   "timeout": 38,
+   "ready_late+ok": 2
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   3.75,
+   1.46,
+   2.18
+  ],
+  "time_s": 6.0,
+  "steps": 101376,
+  "minutes": 24.7,
+  "train_success": 0.01,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "sorter_right_tube": 0.0,
+  "ngs_tube": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.1795,
+  "error_mm": [
+   2.72,
+   1.36,
+   2.54
+  ],
+  "time_s": 6.0,
+  "steps": 200448,
+  "minutes": 48.7,
+  "train_success": 0.025,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.175,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "sorter_right_tube": 0.3,
+  "ngs_tube": 0.4,
+  "outcomes": {
+   "timeout": 33,
+   "ready_late+ok": 7
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   2.44,
+   1.32,
+   2.54
+  ],
+  "time_s": 6.0,
+  "steps": 315648,
+  "minutes": 24.5,
+  "train_success": 0.06,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.175,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "sorter_right_tube": 0.1,
+  "ngs_tube": 0.6,
+  "outcomes": {
+   "timeout": 32,
+   "ready_late+ok": 7,
+   "drop": 1
+  },
+  "max_force_N": 0.366,
+  "error_mm": [
+   2.28,
+   1.4,
+   2.01
+  ],
+  "time_s": 5.8774999999999995,
+  "steps": 414720,
+  "minutes": 48.7,
+  "train_success": 0.09,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.1,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.1,
+  "sorter_right_tube": 0.1,
+  "ngs_tube": 0.2,
+  "outcomes": {
+   "timeout": 36,
+   "ready_late+ok": 4
+  },
+  "max_force_N": 0.15699999999999997,
+  "error_mm": [
+   2.84,
+   1.58,
+   2.07
+  ],
+  "time_s": 6.0,
+  "steps": 562176,
+  "minutes": 24.4,
+  "train_success": 0.06,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.05,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "sorter_right_tube": 0.0,
+  "ngs_tube": 0.2,
+  "outcomes": {
+   "timeout": 38,
+   "ready_late+ok": 2
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   3.56,
+   1.37,
+   2.1
+  ],
+  "time_s": 6.0,
+  "steps": 661248,
+  "minutes": 48.5,
+  "train_success": 0.115,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.05,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "sorter_right_tube": 0.0,
+  "ngs_tube": 0.2,
+  "outcomes": {
+   "timeout": 38,
+   "ready_late+ok": 2
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   4.38,
+   1.33,
+   1.81
+  ],
+  "time_s": 6.0,
+  "steps": 771840,
+  "minutes": 24.5,
+  "train_success": 0.08,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.075,
+  "tube_hotel_1": 0.0,
+  "tube_hotel_2": 0.0,
+  "sorter_right_tube": 0.0,
+  "ngs_tube": 0.3,
+  "outcomes": {
+   "timeout": 37,
+   "ready_late+ok": 3
+  },
+  "max_force_N": 0.18475,
+  "error_mm": [
+   2.46,
+   1.72,
+   1.92
+  ],
+  "time_s": 6.0,
+  "steps": 870912,
+  "minutes": 48.4,
+  "train_success": 0.095,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.425,
+  "tube_hotel_1": 0.5,
+  "tube_hotel_2": 0.1,
+  "sorter_right_tube": 0.6,
+  "ngs_tube": 0.5,
+  "outcomes": {
+   "ready_late+ok": 16,
+   "timeout": 23,
+   "ready+ok": 1
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   2.13,
+   1.27,
+   1.67
+  ],
+  "time_s": 5.9375,
+  "steps": 976896,
+  "minutes": 24.2,
+  "train_success": 0.4,
+  "difficulty": 0.4
+ },
+ {
+  "success": 0.375,
+  "tube_hotel_1": 0.3,
+  "tube_hotel_2": 0.3,
+  "sorter_right_tube": 0.4,
+  "ngs_tube": 0.5,
+  "outcomes": {
+   "ready_late+ok": 10,
+   "timeout": 22,
+   "ready+ok": 5,
+   "ready": 3
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   1.95,
+   1.78,
+   1.6
+  ],
+  "time_s": 5.2125,
+  "steps": 1075968,
+  "minutes": 47.3,
+  "train_success": 0.395,
+  "difficulty": 0.8
+ },
+ {
+  "success": 0.425,
+  "tube_hotel_1": 0.4,
+  "tube_hotel_2": 0.4,
+  "sorter_right_tube": 0.3,
+  "ngs_tube": 0.6,
+  "outcomes": {
+   "ready_late+ok": 8,
+   "ready": 10,
+   "ready+ok": 9,
+   "timeout": 13
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   1.86,
+   1.4,
+   1.46
+  ],
+  "time_s": 4.1125,
+  "steps": 1177344,
+  "minutes": 70.9,
+  "train_success": 0.385,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.45,
+  "tube_hotel_1": 0.4,
+  "tube_hotel_2": 0.2,
+  "sorter_right_tube": 0.5,
+  "ngs_tube": 0.7,
+  "outcomes": {
+   "ready_late+ok": 7,
+   "ready": 11,
+   "ready+ok": 11,
+   "timeout": 11
+  },
+  "max_force_N": 0.03,
+  "error_mm": [
+   2.02,
+   1.21,
+   1.78
+  ],
+  "time_s": 3.5575,
+  "steps": 1276416,
+  "minutes": 94.3,
+  "train_success": 0.375,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.425,
+  "tube_hotel_1": 0.2,
+  "tube_hotel_2": 0.3,
+  "sorter_right_tube": 0.5,
+  "ngs_tube": 0.7,
+  "outcomes": {
+   "timeout": 11,
+   "ready": 12,
+   "ready+ok": 14,
+   "ready_late+ok": 3
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   2.32,
+   1.1,
+   1.87
+  ],
+  "time_s": 3.06,
+  "steps": 1377792,
+  "minutes": 130.9,
+  "train_success": 0.41,
+  "difficulty": 1.0
+ }
+]

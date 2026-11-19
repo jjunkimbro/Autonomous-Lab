@@ -1,0 +1,41 @@
+  자리 plate_hotel_4         8.0 s  레일 0.68  방향 270°
+  자리 incubator_plate       8.9 s  레일 0.48  방향 180°
+  자리 plate_hotel_3         9.3 s  레일 0.68  방향 270°
+  자리 fluent_plate         10.1 s  레일 0.22  방향 270°
+  자리 reader_plate         10.3 s  레일 0.57  방향 180°
+  자리 sorter_left_plate    13.0 s  레일 0.99  방향 270°
+  자리 tube_hotel_2         48.8 s  레일 0.50  방향 270°
+  자리 tube_hotel_1         52.9 s  레일 0.51  방향 270°
+  자리 fluent_tube          75.8 s  레일 0.10  방향 270°
+  자리 sorter_right_tube    86.2 s  레일 0.86  방향 270°
+  자리 waste_plate         139.9 s  레일 0.15  방향 135°
+  자리 waste_tube          168.7 s  레일 0.23  방향 150°
+  자리 ngs_tube            913.6 s  레일 0.06  방향 135°
+  1. plate_a plate_hotel_4 -> fluent_plate               21.6 s  운반 direct
+  2. plate_a fluent_plate -> incubator_plate             22.9 s  운반 standoff
+  3. plate_a incubator_plate -> reader_plate             16.9 s  운반 direct
+  4. plate_a reader_plate -> fluent_plate                25.3 s  운반 carry
+  5. tube_a tube_hotel_1 -> fluent_tube                  33.4 s  운반 direct
+  6. plate_a fluent_plate -> waste_plate                 25.0 s  운반 carry-hit
+  7. tube_a fluent_tube -> sorter_right_tube             36.7 s  운반 direct
+  8. plate_b plate_hotel_3 -> sorter_left_plate          19.3 s  운반 direct
+  9. plate_b sorter_left_plate -> fluent_plate           24.0 s  운반 direct
+  10. tube_a sorter_right_tube -> waste_tube             28.6 s  운반 carry
+  11. tube_b tube_hotel_2 -> fluent_tube                 38.7 s  운반 direct
+  12. tube_b fluent_tube -> ngs_tube                     30.2 s  운반 carry
+  13. plate_b fluent_plate -> waste_plate                28.3 s  운반 carry-hit
+계획 1024 s, 공정 351.69 s, 부딪힘 ["sorter_right_tube: 장비 안 경로점이 부딪힘 ['SH800_body1']", "6. plate_a fluent_plate -> waste_plate 운반: 운반 경로가 부딪힘 ['NGS_body1', 'NGS_library1', 'NGS_libraryfloor2', 'NGS_rack1', 'waste'] (carry-hit)", "7. tube_a fluent_tube -> sorter_right_tube 빈손 이동: 운반 경로가 부딪힘 ['NGS_body1'] (carry-hit)", "7. tube_a fluent_tube -> sorter_right_tube 놓기 INSERT_HOVER: 부딪힘 ['SH800_body1']", "7. tube_a fluent_tube -> sorter_right_tube 놓기 SET_DOWN: 부딪힘 ['SH800_body1']", "10. tube_a sorter_right_tube -> waste_tube 빼기 EXTRACT_UP: 부딪힘 ['SH800_body1']", "10. tube_a sorter_right_tube -> waste_tube 빼기 PRE_HOVER: 부딪힘 ['SH800_body1']", "13. plate_b fluent_plate -> waste_plate 운반: 운반 경로가 부딪힘 ['NGS_body1', 'NGS_library1', 'NGS_libraryfloor2', 'NGS_rack1', 'waste'] (carry-hit)"]
+   1. plate_a -> fluent_plate       OK  f_mm=0.26 l_mm=0.21 z_mm=-0.0 tilt_deg=0.0
+   2. plate_a -> incubator_plate    OK  f_mm=0.75 l_mm=0.27 z_mm=-0.0 tilt_deg=0.0
+   3. plate_a -> reader_plate       OK  f_mm=1.06 l_mm=0.26 z_mm=-0.0 tilt_deg=0.0
+   4. plate_a -> fluent_plate       OK  f_mm=1.94 l_mm=0.3 z_mm=-0.0 tilt_deg=0.0
+   5. tube_a  -> fluent_tube        OK  f_mm=0.22 l_mm=-0.18 z_mm=-0.0 tilt_deg=0.0
+   6. plate_a -> waste_plate        NO  
+   7. tube_a  -> sorter_right_tube  OK  f_mm=0.43 l_mm=-0.36 z_mm=-0.0 tilt_deg=0.0
+   8. plate_b -> sorter_left_plate  OK  f_mm=0.18 l_mm=0.26 z_mm=-0.0 tilt_deg=0.0
+   9. plate_b -> fluent_plate       OK  f_mm=0.36 l_mm=0.19 z_mm=-0.0 tilt_deg=0.0
+  10. tube_a  -> waste_tube         OK  
+  11. tube_b  -> fluent_tube        OK  f_mm=0.22 l_mm=-0.29 z_mm=-0.0 tilt_deg=0.0
+  12. tube_b  -> ngs_tube           NO  f_mm=-12.84 l_mm=6.31 z_mm=38.72 tilt_deg=28.85
+  13. plate_b -> waste_plate        NO  
+물리 실행 22 s: 10/13 단계 성공
