@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 로봇 단독 (lab_robot.urdf.xacro). 손으로 쓰는 부분 (그룹 · 자세 · 끝단). 충돌 무시 쌍은 MODEL=robot scripts/make_srdf.sh 가 config/robot.srdf 를 만든다 -->
+<robot name="ur5e">
+  <!-- 팔: 계획 끝 = RG2 TCP -->
+  <group name="ur_manipulator">
+    <chain base_link="base_link" tip_link="rg2_tcp"/>
+  </group>
+  <group name="gripper">
+    <joint name="rg2_finger_left_joint"/>
+    <joint name="rg2_finger_right_joint"/>
+  </group>
+  <group_state name="lab_home" group="ur_manipulator">
+    <joint name="shoulder_pan_joint" value="-1.570800"/>
+    <joint name="shoulder_lift_joint" value="-1.570800"/>
+    <joint name="elbow_joint" value="1.570800"/>
+    <joint name="wrist_1_joint" value="-1.570800"/>
+    <joint name="wrist_2_joint" value="-1.570800"/>
+    <joint name="wrist_3_joint" value="0.000000"/>
+  </group_state>
+  <group_state name="open" group="gripper">
+    <joint name="rg2_finger_left_joint" value="0.05"/>
+  </group_state>
+  <group_state name="closed" group="gripper">
+    <joint name="rg2_finger_left_joint" value="0.004"/>
+  </group_state>
+  <end_effector name="rg2" parent_link="tool0" group="gripper" parent_group="ur_manipulator"/>
+</robot>

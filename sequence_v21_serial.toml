@@ -1,0 +1,218 @@
+# sequence_v21_serial.toml — v21 배치 공정 순서표 (11-12 이전 기본: 한 줄 순서 · 사진 전부, 비교용) (sequence_runner_v21.py 가 읽는다)
+#
+# 걸음은 위에서 아래로 하나씩 실행한다 (1 단계: 한 줄 순서, 동시 진행 없음).
+#   do = "transfer" : 로봇 이송 (집기 -> 운반 -> 놓기 / 버리기). 이송 순서는 계획 (plan_sh800_*.pkl) 과 같아야 한다.
+#       after   = 이 장비 작업들이 '완료' 여야 시작 (적지 않아도 아래 인터록이 막지만, 읽기 쉽게 적는다)
+#       인터록 (자동): 출발 자리에 그 물체가 있음 · 출발 / 도착 장비가 작동 중이 아님 · 도착 자리가 비었음
+#   do = "run"      : 장비 작업 시작 명령 (문은 늘 열려 있다고 가정 -> 시작 · 완료 신호만)
+#       needs   = 시작 전에 자리에 있어야 할 물체 ("물체@자리")
+#       wait    = true 면 완료까지 기다린 뒤 다음 걸음, false 면 시작만 시키고 넘어간다
+#       duration_s = 가짜 장비가 완료 신호를 보내기까지 시간 (시뮬 초, 실제 시간을 줄인 값 — 실측 받으면 바꿈)
+#       timeout_s  = 시작 뒤 이 시간 안에 완료가 안 오면 멈추고 사람 호출
+#   로봇은 이송을 '물러나기' 까지 마친 뒤에만 장비 시작 명령을 보낸다 (장비 안 팔 · 로봇 겹침 방지).
+#   이송 하나 = (사진0 도착 자리 미리 보기: 사진4 에서 든 물체가 가릴 때만) -> 사진1 -> 집기 -> 사진2 판단
+#              -> 운반 -> 사진4 · 5 -> 놓기 -> 사진6 판단. 이송마다 실행 중에 계획한다 (transfer_planner_v21).
+
+[policy]
+regrasp_max = 1     # 사진2 판단 '다시 집기' (출발 자리에 내려놓고 다시 집기) 최대 횟수, 넘으면 사람 호출
+replace_max = 1     # 사진6 판단 '다시 놓기' (도착 자리에서 다시 집어 다시 놓기) 최대 횟수, 넘으면 사람 호출
+photo_s = 0.5       # 사진 한 장마다 멈추는 시간 (흔들림 가라앉힘 + D455 촬영 + 인지, 가정 — 실측하면 바꿈)
+photos = [1, 2, 4, 5, 6]  # 찍는 사진 — 전부 (0 은 사진4 에서 가릴 때만)
+                    # 0 = 놓기 전 빈손으로 도착 자리 (있으면 모든 놓기, 4 는 같은 자세), 1 = 집기 전 (잰 자리로 집기),
+                    # 2 = 집은 뒤 손 안 (없으면 그리퍼 폭만, 손 안 판단은 사진4), 4 = 놓기 전 든 채, 5 = 4 에서 옆 70 mm,
+                    # 6 = 놓은 뒤 (없으면 판단 없음 — 다음 집기의 사진1 이 다시 잼)
+
+[objects]           # 물체별 처음 자리
+plate_a = "plate_hotel_4"
+plate_b = "plate_hotel_3"
+tube_a = "tube_hotel_1"
+tube_b = "tube_hotel_2"
+
+[devices.Fluent]
+seats = ["fluent_plate", "fluent_tube"]
+
+[devices.STX44]
+seats = ["incubator_plate"]
+
+[devices.Reader]
+seats = ["reader_plate"]
+
+[devices.SH800]
+seats = ["sorter_left_plate", "sorter_right_tube"]
+
+[devices.NGS]
+seats = ["ngs_tube"]
+
+# ---------------------------------------------------------------- 판 a
+[[step]]
+id = "M1"
+do = "transfer"
+object = "plate_a"
+from = "plate_hotel_4"
+to = "fluent_plate"
+
+[[step]]
+id = "R1"
+do = "run"
+device = "Fluent"
+task = "판 a 분주"
+needs = ["plate_a@fluent_plate"]
+wait = false
+duration_s = 8
+timeout_s = 30
+
+[[step]]
+id = "M2"
+do = "transfer"
+object = "plate_a"
+from = "fluent_plate"
+to = "incubator_plate"
+after = ["R1"]
+
+[[step]]
+id = "R2"
+do = "run"
+device = "STX44"
+task = "판 a 배양"
+needs = ["plate_a@incubator_plate"]
+wait = false
+duration_s = 15
+timeout_s = 45
+
+[[step]]
+id = "M3"
+do = "transfer"
+object = "plate_a"
+from = "incubator_plate"
+to = "reader_plate"
+after = ["R2"]
+
+[[step]]
+id = "R3"
+do = "run"
+device = "Reader"
+task = "판 a 측정"
+needs = ["plate_a@reader_plate"]
+wait = false
+duration_s = 6
+timeout_s = 20
+
+[[step]]
+id = "M4"
+do = "transfer"
+object = "plate_a"
+from = "reader_plate"
+to = "fluent_plate"
+after = ["R3"]
+
+# ---------------------------------------------------------------- 판 a -> 튜브 a (Fluent)
+[[step]]
+id = "M5"
+do = "transfer"
+object = "tube_a"
+from = "tube_hotel_1"
+to = "fluent_tube"
+
+[[step]]
+id = "R4"
+do = "run"
+device = "Fluent"
+task = "판 a -> 튜브 a 옮기기"
+needs = ["plate_a@fluent_plate", "tube_a@fluent_tube"]
+wait = false
+duration_s = 10
+timeout_s = 30
+
+[[step]]
+id = "M6"
+do = "transfer"
+object = "plate_a"
+from = "fluent_plate"
+to = "waste_plate"
+after = ["R4"]
+
+# ---------------------------------------------------------------- SH800 (판 b 먼저, 그다음 튜브 a)
+[[step]]
+id = "M7"
+do = "transfer"
+object = "plate_b"
+from = "plate_hotel_3"
+to = "sorter_left_plate"
+
+[[step]]
+id = "M8"
+do = "transfer"
+object = "tube_a"
+from = "fluent_tube"
+to = "sorter_right_tube"
+after = ["R4"]
+
+[[step]]
+id = "R5"
+do = "run"
+device = "SH800"
+task = "튜브 a 분류 -> 판 b"
+needs = ["plate_b@sorter_left_plate", "tube_a@sorter_right_tube"]
+wait = false
+duration_s = 12
+timeout_s = 40
+
+[[step]]
+id = "M9"
+do = "transfer"
+object = "tube_a"
+from = "sorter_right_tube"
+to = "waste_tube"
+after = ["R5"]
+
+[[step]]
+id = "M10"
+do = "transfer"
+object = "plate_b"
+from = "sorter_left_plate"
+to = "fluent_plate"
+after = ["R5"]
+
+# ---------------------------------------------------------------- 판 b -> 튜브 b (Fluent) -> NGS
+[[step]]
+id = "M11"
+do = "transfer"
+object = "tube_b"
+from = "tube_hotel_2"
+to = "fluent_tube"
+
+[[step]]
+id = "R6"
+do = "run"
+device = "Fluent"
+task = "판 b -> 튜브 b 옮기기"
+needs = ["plate_b@fluent_plate", "tube_b@fluent_tube"]
+wait = false
+duration_s = 10
+timeout_s = 30
+
+[[step]]
+id = "M12"
+do = "transfer"
+object = "tube_b"
+from = "fluent_tube"
+to = "ngs_tube"
+after = ["R6"]
+
+[[step]]
+id = "R7"
+do = "run"
+device = "NGS"
+task = "튜브 b 시퀀싱"
+needs = ["tube_b@ngs_tube"]
+wait = false            # 기다리지 않고 판 b 폐기로 넘어간다
+duration_s = 10
+timeout_s = 30
+
+[[step]]
+id = "M13"
+do = "transfer"
+object = "plate_b"
+from = "fluent_plate"
+to = "waste_plate"
+after = ["R6"]

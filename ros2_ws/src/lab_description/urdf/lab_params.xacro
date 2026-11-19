@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- ros2_export_v21.py 가 시뮬 장면에서 만든 값 — 실측하면 이 값을 고친다 (다시 내보내면 덮어씀) -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- 레일 (RCS4) 원점 = 레일 0 일 때 로봇 장착판 (MuJoCo ur5e_mount), 축 = 월드 x -->
+  <xacro:property name="rail_origin_xyz" value="1.050000 0.860000 0.818000"/>
+  <xacro:property name="rail_axis" value="1 0 0"/>
+  <xacro:property name="rail_lower" value="0"/>
+  <xacro:property name="rail_upper" value="0.8"/>
+  <xacro:property name="rail_velocity" value="0.215"/>
+  <!-- 장착판 -> UR base_link (= MuJoCo ur5e_base; 관절 0 점 · 방향이 공식 URDF 와 같음을 확인함) -->
+  <xacro:property name="ur_base_xyz" value="0.000000 0.000000 0.050000"/>
+  <xacro:property name="ur_base_rpy" value="0.000000 0.000000 3.141593"/>
+</robot>

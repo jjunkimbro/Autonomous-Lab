@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>lab_sequence</name>
+  <version>0.1.0</version>
+  <description>Runs the lab cell sequence (cell program exported from the MuJoCo sequence runner) through MoveIt / ros2_control.</description>
+  <maintainer email="isla@example.com">isla</maintainer>
+  <license>Proprietary</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>lab_description</exec_depend>
+  <exec_depend>lab_moveit_config</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>moveit_msgs</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

@@ -1,0 +1,179 @@
+{
+ "scene": "lab_layout_v21\\lab_layout_v21_reorder_land20.xml",
+ "order": "sh800",
+ "process": [
+  {
+   "step": 1,
+   "v14_step": 1,
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate"
+  },
+  {
+   "step": 2,
+   "v14_step": 2,
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate"
+  },
+  {
+   "step": 3,
+   "v14_step": 3,
+   "obj": "plate_a",
+   "source": "incubator_plate",
+   "target": "reader_plate"
+  },
+  {
+   "step": 4,
+   "v14_step": 4,
+   "obj": "plate_a",
+   "source": "reader_plate",
+   "target": "fluent_plate"
+  },
+  {
+   "step": 5,
+   "v14_step": 5,
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube"
+  },
+  {
+   "step": 6,
+   "v14_step": 6,
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "waste_plate"
+  },
+  {
+   "step": 7,
+   "v14_step": 8,
+   "obj": "plate_b",
+   "source": "plate_hotel_3",
+   "target": "sorter_left_plate"
+  },
+  {
+   "step": 8,
+   "v14_step": 7,
+   "obj": "tube_a",
+   "source": "fluent_tube",
+   "target": "sorter_right_tube"
+  },
+  {
+   "step": 9,
+   "v14_step": 10,
+   "obj": "tube_a",
+   "source": "sorter_right_tube",
+   "target": "waste_tube"
+  },
+  {
+   "step": 10,
+   "v14_step": 9,
+   "obj": "plate_b",
+   "source": "sorter_left_plate",
+   "target": "fluent_plate"
+  },
+  {
+   "step": 11,
+   "v14_step": 11,
+   "obj": "tube_b",
+   "source": "tube_hotel_2",
+   "target": "fluent_tube"
+  },
+  {
+   "step": 12,
+   "v14_step": 12,
+   "obj": "tube_b",
+   "source": "fluent_tube",
+   "target": "ngs_tube"
+  },
+  {
+   "step": 13,
+   "v14_step": 13,
+   "obj": "plate_b",
+   "source": "fluent_plate",
+   "target": "waste_plate"
+  }
+ ],
+ "process_seconds": 191.88,
+ "transfer_seconds": [
+  14.92,
+  14.75,
+  12.29,
+  13.71,
+  14.29,
+  14.29,
+  19.58,
+  14.83,
+  12.75,
+  16.04,
+  14.08,
+  13.67,
+  15.67
+ ],
+ "results": [
+  {
+   "ok": true,
+   "f_mm": -0.18,
+   "l_mm": 0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 1,
+   "obj": "plate_a",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.35,
+    -0.12
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.15,
+   "l_mm": 0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 2,
+   "obj": "plate_a",
+   "target": "incubator_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.15,
+    0.24
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.09,
+   "l_mm": -0.22,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 3,
+   "obj": "plate_a",
+   "target": "reader_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.12,
+    0.08
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.1,
+   "l_mm": -0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 4,
+   "obj": "plate_a",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.4,
+    -0.11
+   ]
+  }
+ ],
+ "replay_penetration_mm": {},
+ "plan_warnings": [],
+ "rail_arm_overlap_s": 0.015,
+ "arm_sway_during_rail_rad_s": 0.0999
+}

@@ -1,0 +1,7 @@
+# 시뮬 장면 keyframe 의 팔 자세 (ros2_export_v21.py)
+shoulder_pan_joint: -1.570800
+shoulder_lift_joint: -1.570800
+elbow_joint: 1.570800
+wrist_1_joint: -1.570800
+wrist_2_joint: -1.570800
+wrist_3_joint: 0.000000

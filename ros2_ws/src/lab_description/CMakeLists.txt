@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.16)
+project(lab_description)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY urdf meshes config launch rviz DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/fk_check.py scripts/mock_check.py scripts/rail_gripper_sim.py DESTINATION lib/${PROJECT_NAME})
+ament_package()

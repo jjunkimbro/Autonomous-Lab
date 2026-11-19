@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!-- ros2_export_v21.py 가 시뮬 장면에서 만든 파일 — 손으로 고치지 말 것 -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- RG2 (플랜지 직결) + 사용자 클램프 브라켓 + D455. parent = 플랜지 프레임 (MuJoCo ur5e_onrobot_rg2_model_frame 과 같은 프레임):
+       z = 공구 축 (그리퍼 쪽), y = 카메라 쪽, x = 손가락 벌어지는 방향 -->
+  <xacro:macro name="lab_tool" params="parent prefix:=''">
+  <link name="${prefix}rg2_body">
+    <visual name="ur5e_onrobot_rg2_visual"><origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000"/><geometry><mesh filename="package://lab_description/meshes/tool/ur5e_onrobot_rg2_visual.stl"/></geometry><material name=""><color rgba="0.120 0.120 0.140 1.000"/></material></visual>
+    <collision name="rg2_body_collision"><origin xyz="0.000000 0.000000 0.075000" rpy="0.000000 -0.000000 0.000000"/><geometry><box size="0.070000 0.036000 0.140000"/></geometry></collision>
+    <collision name="rg2_linkage_collision"><origin xyz="0.000000 0.000000 0.150000" rpy="0.000000 -0.000000 0.000000"/><geometry><box size="0.136000 0.028000 0.040000"/></geometry></collision>
+    <visual name="wrist_camera_body_visual"><origin xyz="0.000000 0.124010 -0.013000" rpy="2.879794 -0.000000 3.141593"/><geometry><box size="0.124000 0.029000 0.026000"/></geometry><material name=""><color rgba="0.150 0.150 0.180 1.000"/></material></visual>
+    <collision name="wrist_camera_body_visual"><origin xyz="0.000000 0.124010 -0.013000" rpy="2.879794 -0.000000 3.141593"/><geometry><box size="0.124000 0.029000 0.026000"/></geometry></collision>
+    <collision name="wrist_camera_bracket"><origin xyz="0.000000 0.096360 -0.020200" rpy="0.000000 -0.000000 0.000000"/><geometry><box size="0.050000 0.038160 0.037800"/></geometry></collision>
+    <collision name="wrist_camera_collar"><origin xyz="0.000000 0.000000 -0.013000" rpy="0.000000 -0.000000 0.000000"/><geometry><cylinder radius="0.046200" length="0.024000"/></geometry></collision>
+    <collision name="wrist_camera_clamp_ears"><origin xyz="0.000000 -0.055200 -0.013000" rpy="0.000000 -0.000000 0.000000"/><geometry><box size="0.040000 0.030000 0.024000"/></geometry></collision>
+    <visual name="wrist_camera_mount_visual"><origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000"/><geometry><mesh filename="package://lab_description/meshes/tool/wrist_camera_mount_visual.stl"/></geometry><material name=""><color rgba="0.820 0.830 0.860 1.000"/></material></visual>
+  </link>
+  <joint name="${prefix}rg2_body_joint" type="fixed"><parent link="${parent}"/><child link="${prefix}rg2_body"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
+  <link name="${prefix}rg2_finger_left">
+    <visual name="rg2_finger_left_visual"><origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000"/><geometry><mesh filename="package://lab_description/meshes/tool/rg2_finger_left_visual.stl"/></geometry><material name=""><color rgba="0.120 0.120 0.140 1.000"/></material></visual>
+    <collision name="rg2_finger_left_pad"><origin xyz="-0.005800 0.000000 0.188000" rpy="0.000000 -0.000000 0.000000"/><geometry><box size="0.011600 0.020000 0.036000"/></geometry></collision>
+  </link>
+  <joint name="${prefix}rg2_finger_left_joint" type="prismatic"><parent link="${prefix}rg2_body"/><child link="${prefix}rg2_finger_left"/><origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000"/><axis xyz="-1 0 0"/><limit lower="0.0040" upper="0.0550" effort="40" velocity="0.1"/></joint>
+  <link name="${prefix}rg2_finger_right">
+    <visual name="rg2_finger_right_visual"><origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000"/><geometry><mesh filename="package://lab_description/meshes/tool/rg2_finger_right_visual.stl"/></geometry><material name=""><color rgba="0.120 0.120 0.140 1.000"/></material></visual>
+    <collision name="rg2_finger_right_pad"><origin xyz="0.005800 0.000000 0.188000" rpy="0.000000 -0.000000 0.000000"/><geometry><box size="0.011600 0.020000 0.036000"/></geometry></collision>
+  </link>
+  <joint name="${prefix}rg2_finger_right_joint" type="prismatic"><parent link="${prefix}rg2_body"/><child link="${prefix}rg2_finger_right"/><origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 -0.000000 0.000000"/><axis xyz="1 0 0"/><limit lower="0.0040" upper="0.0550" effort="40" velocity="0.1"/><mimic joint="${prefix}rg2_finger_left_joint" multiplier="1" offset="0"/></joint>
+  <link name="${prefix}rg2_tcp"/>
+  <joint name="${prefix}rg2_tcp_joint" type="fixed"><parent link="${prefix}rg2_body"/><child link="${prefix}rg2_tcp"/><origin xyz="0.000000 0.000000 0.193000" rpy="0.000000 -0.000000 0.000000"/></joint>
+  <link name="${prefix}rg2_grasp_center"/>
+  <joint name="${prefix}rg2_grasp_center_joint" type="fixed"><parent link="${prefix}rg2_body"/><child link="${prefix}rg2_grasp_center"/><origin xyz="0.000000 0.000000 0.185000" rpy="0.000000 -0.000000 0.000000"/></joint>
+  <!-- 손목 카메라: 시뮬 카메라 자리 (렌즈 면 가운데). 실제 광학 원점은 핸드아이 보정으로 정한다 -->
+  <link name="${prefix}wrist_camera_link"/>
+  <joint name="${prefix}wrist_camera_joint" type="fixed"><parent link="${prefix}rg2_body"/><child link="${prefix}wrist_camera_link"/><origin xyz="0.000000 0.120640 -0.000440" rpy="-0.000000 -1.308997 -1.570796"/></joint>
+  <link name="${prefix}wrist_camera_optical_frame"/>
+  <joint name="${prefix}wrist_camera_optical_joint" type="fixed"><parent link="${prefix}wrist_camera_link"/><child link="${prefix}wrist_camera_optical_frame"/><origin xyz="0.000000 0.000000 0.000000" rpy="-1.570796 -0.000000 -1.570796"/></joint>
+  </xacro:macro>
+</robot>

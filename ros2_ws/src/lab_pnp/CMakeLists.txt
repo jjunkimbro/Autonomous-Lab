@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(lab_pnp)
+find_package(ament_cmake REQUIRED)
+install(PROGRAMS scripts/pnp_basic.py scripts/teach_poses.py scripts/pnp_common.py DESTINATION lib/${PROJECT_NAME})
+ament_package()

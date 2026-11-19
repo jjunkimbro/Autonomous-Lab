@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+  로봇 단독 (레일 · 장비 없이): UR5e + RG2 + 클램프 브라켓 + D455 + 테이블 판. 기본 집기 · 놓기 확인용 (lab_pnp).
+  셀 모델 (lab.urdf.xacro) 과 같은 공구 · 같은 UR 인자 -> ur_control.launch.py 에 description_launchfile:=lab_robot_rsp.launch.py
+-->
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+  <xacro:arg name="name" default="ur"/>
+
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+  <xacro:include filename="$(find ur_robot_driver)/urdf/ur.ros2_control.xacro"/>
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur_transmissions.xacro"/>
+  <xacro:include filename="$(find lab_description)/urdf/lab_tool.urdf.xacro"/>
+
+  <xacro:arg name="ur_type" default="ur5e"/>
+  <xacro:arg name="tf_prefix" default=""/>
+  <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
+  <!-- 실물: ur_calibration 으로 뽑은 이 로봇의 보정값 파일로 바꾼다 -->
+  <xacro:arg name="kinematics_params" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
+  <xacro:arg name="physical_params" default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
+  <xacro:arg name="visual_params" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+  <xacro:arg name="transmission_hw_interface" default=""/>
+  <xacro:arg name="safety_limits" default="false"/>
+  <xacro:arg name="safety_pos_margin" default="0.15"/>
+  <xacro:arg name="safety_k_position" default="20"/>
+  <xacro:arg name="headless_mode" default="false"/>
+  <xacro:arg name="robot_ip" default="0.0.0.0"/>
+  <xacro:arg name="script_filename" default=""/>
+  <xacro:arg name="output_recipe_filename" default=""/>
+  <xacro:arg name="input_recipe_filename" default=""/>
+  <xacro:arg name="reverse_ip" default="0.0.0.0"/>
+  <xacro:arg name="script_command_port" default="50004"/>
+  <xacro:arg name="reverse_port" default="50001"/>
+  <xacro:arg name="script_sender_port" default="50002"/>
+  <xacro:arg name="trajectory_port" default="50003"/>
+  <xacro:arg name="verify_robot_model" default="false"/>
+  <xacro:arg name="use_currents_as_efforts" default="true"/>
+  <xacro:arg name="blocking_read" default="false"/>
+  <xacro:arg name="use_tool_communication" default="false"/>
+  <xacro:arg name="tool_voltage" default="0"/>
+  <xacro:arg name="tool_parity" default="0"/>
+  <xacro:arg name="tool_baud_rate" default="115200"/>
+  <xacro:arg name="tool_stop_bits" default="1"/>
+  <xacro:arg name="tool_rx_idle_chars" default="1.5"/>
+  <xacro:arg name="tool_tx_idle_chars" default="3.5"/>
+  <xacro:arg name="tool_device_name" default="/tmp/ttyUR"/>
+  <xacro:arg name="tool_tcp_port" default="54321"/>
+  <xacro:arg name="use_mock_hardware" default="false"/>
+  <xacro:arg name="mock_sensor_commands" default="false"/>
+  <xacro:arg name="simulation_controllers" default=""/>
+  <xacro:arg name="initial_positions_file" default="$(find lab_description)/config/initial_positions.yaml"/>
+  <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
+  <xacro:property name="blocking_read" default="$(arg blocking_read)"/>
+
+  <!-- 테이블 (로봇을 올린 판): base_link 바닥 = 테이블 윗면이라고 보고, 판 윗면을 1 mm 아래에 둔다 (늘 닿음 방지).
+       기본 1.6 x 1.6 m (로봇 바닥 아래로는 안 내려가게 하는 판) — 실제 테이블을 재서 바꾼다. 다른 장애물은 아직 없음 -> 첫 시험은 저속 + 단계 확인 모드 -->
+  <xacro:arg name="table_size_x" default="1.6"/>
+  <xacro:arg name="table_size_y" default="1.6"/>
+  <xacro:arg name="table_center_x" default="0.0"/>
+  <xacro:arg name="table_center_y" default="0.0"/>
+  <xacro:property name="tsx" value="$(arg table_size_x)"/>
+  <xacro:property name="tsy" value="$(arg table_size_y)"/>
+
+  <link name="world"/>
+
+  <!-- UR5e: base_link = world (테이블 위에 고정) -->
+  <xacro:ur_robot
+    name="$(arg name)"
+    tf_prefix="$(arg tf_prefix)"
+    parent="world"
+    joint_limits_parameters_file="$(arg joint_limit_params)"
+    kinematics_parameters_file="$(arg kinematics_params)"
+    physical_parameters_file="$(arg physical_params)"
+    visual_parameters_file="$(arg visual_params)"
+    safety_limits="$(arg safety_limits)"
+    safety_pos_margin="$(arg safety_pos_margin)"
+    safety_k_position="$(arg safety_k_position)">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:ur_robot>
+
+  <!-- RG2 + 클램프 브라켓 + D455 (셀 모델과 같은 공구) -->
+  <xacro:lab_tool parent="$(arg tf_prefix)tool0"/>
+
+  <link name="robot_table">
+    <visual><origin xyz="0 0 -0.011"/><geometry><box size="${tsx} ${tsy} 0.02"/></geometry>
+      <material name="table_gray"><color rgba="0.75 0.75 0.72 1"/></material></visual>
+    <collision><origin xyz="0 0 -0.011"/><geometry><box size="${tsx} ${tsy} 0.02"/></geometry></collision>
+  </link>
+  <joint name="robot_table_joint" type="fixed">
+    <parent link="world"/><child link="robot_table"/>
+    <origin xyz="$(arg table_center_x) $(arg table_center_y) 0" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:ur_ros2_control
+    name="$(arg name)"
+    tf_prefix="$(arg tf_prefix)"
+    kinematics_parameters_file="$(arg kinematics_params)"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    mock_sensor_commands="$(arg mock_sensor_commands)"
+    headless_mode="$(arg headless_mode)"
+    initial_positions="${xacro.load_yaml(initial_positions_file)}"
+    use_tool_communication="$(arg use_tool_communication)"
+    tool_voltage="$(arg tool_voltage)"
+    tool_parity="$(arg tool_parity)"
+    tool_baud_rate="$(arg tool_baud_rate)"
+    tool_stop_bits="$(arg tool_stop_bits)"
+    tool_rx_idle_chars="$(arg tool_rx_idle_chars)"
+    tool_tx_idle_chars="$(arg tool_tx_idle_chars)"
+    tool_device_name="$(arg tool_device_name)"
+    tool_tcp_port="$(arg tool_tcp_port)"
+    robot_ip="$(arg robot_ip)"
+    script_filename="$(arg script_filename)"
+    output_recipe_filename="$(arg output_recipe_filename)"
+    input_recipe_filename="$(arg input_recipe_filename)"
+    reverse_ip="$(arg reverse_ip)"
+    script_command_port="$(arg script_command_port)"
+    reverse_port="$(arg reverse_port)"
+    script_sender_port="$(arg script_sender_port)"
+    trajectory_port="$(arg trajectory_port)"
+    ur_type="$(arg ur_type)"
+    verify_robot_model="$(arg verify_robot_model)"
+    use_currents_as_efforts="$(arg use_currents_as_efforts)"
+    non_blocking_read="${not blocking_read}"
+  />
+
+</robot>

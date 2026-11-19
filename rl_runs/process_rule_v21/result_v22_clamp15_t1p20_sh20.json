@@ -1,0 +1,341 @@
+{
+ "scene": "lab_layout_v21\\lab_layout_v21_reorder_t1p20_sh20_clamp15.xml",
+ "order": "v22",
+ "process": [
+  {
+   "step": 1,
+   "v14_step": 1,
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate"
+  },
+  {
+   "step": 2,
+   "v14_step": 2,
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate"
+  },
+  {
+   "step": 3,
+   "v14_step": 5,
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube"
+  },
+  {
+   "step": 4,
+   "v14_step": 3,
+   "obj": "plate_a",
+   "source": "incubator_plate",
+   "target": "reader_plate"
+  },
+  {
+   "step": 5,
+   "v14_step": 4,
+   "obj": "plate_a",
+   "source": "reader_plate",
+   "target": "fluent_plate"
+  },
+  {
+   "step": 6,
+   "v14_step": 8,
+   "obj": "plate_b",
+   "source": "plate_hotel_3",
+   "target": "sorter_left_plate"
+  },
+  {
+   "step": 7,
+   "v14_step": 7,
+   "obj": "tube_a",
+   "source": "fluent_tube",
+   "target": "sorter_right_tube"
+  },
+  {
+   "step": 8,
+   "v14_step": 6,
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "waste_plate"
+  },
+  {
+   "step": 9,
+   "v14_step": 11,
+   "obj": "tube_b",
+   "source": "tube_hotel_2",
+   "target": "fluent_tube"
+  },
+  {
+   "step": 10,
+   "v14_step": 10,
+   "obj": "tube_a",
+   "source": "sorter_right_tube",
+   "target": "waste_tube"
+  },
+  {
+   "step": 11,
+   "v14_step": 9,
+   "obj": "plate_b",
+   "source": "sorter_left_plate",
+   "target": "fluent_plate"
+  },
+  {
+   "step": 12,
+   "v14_step": 12,
+   "obj": "tube_b",
+   "source": "fluent_tube",
+   "target": "ngs_tube"
+  },
+  {
+   "step": 13,
+   "v14_step": 13,
+   "obj": "plate_b",
+   "source": "fluent_plate",
+   "target": "waste_plate"
+  },
+  {
+   "step": 14,
+   "v14_step": null,
+   "obj": "tube_b",
+   "source": "ngs_tube",
+   "target": "waste_tube"
+  }
+ ],
+ "process_seconds": 208.25,
+ "transfer_seconds": [
+  14.08,
+  14.71,
+  15.58,
+  14.88,
+  13.79,
+  16.54,
+  14.62,
+  14.96,
+  16.0,
+  14.04,
+  15.58,
+  14.0,
+  15.42,
+  13.04
+ ],
+ "results": [
+  {
+   "ok": true,
+   "f_mm": -0.17,
+   "l_mm": 0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 1,
+   "obj": "plate_a",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.45,
+    -0.12
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.14,
+   "l_mm": 0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 2,
+   "obj": "plate_a",
+   "target": "incubator_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.13,
+    0.36
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": 0.0,
+   "l_mm": -0.17,
+   "z_mm": 0.0,
+   "tilt_deg": 0.06,
+   "step": 3,
+   "obj": "tube_a",
+   "target": "fluent_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.05,
+    -0.08
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.08,
+   "l_mm": -0.19,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 4,
+   "obj": "plate_a",
+   "target": "reader_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.11,
+    0.04
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.07,
+   "l_mm": -0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 5,
+   "obj": "plate_a",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.4,
+    -0.11
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.1,
+   "l_mm": 0.16,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 6,
+   "obj": "plate_b",
+   "target": "sorter_left_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.1,
+    0.76
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": 0.01,
+   "l_mm": 0.37,
+   "z_mm": -0.0,
+   "tilt_deg": 0.01,
+   "step": 7,
+   "obj": "tube_a",
+   "target": "sorter_right_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.01,
+    0.51
+   ]
+  },
+  {
+   "ok": true,
+   "pos": [
+    2.101,
+    1.798,
+    0.862
+   ],
+   "step": 8,
+   "obj": "plate_a",
+   "target": "waste_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.0,
+    -0.0
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.05,
+   "l_mm": 0.13,
+   "z_mm": 0.01,
+   "tilt_deg": 0.21,
+   "step": 9,
+   "obj": "tube_b",
+   "target": "fluent_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.31,
+    -0.09
+   ]
+  },
+  {
+   "ok": true,
+   "pos": [
+    2.1046,
+    1.793,
+    0.89
+   ],
+   "step": 10,
+   "obj": "tube_a",
+   "target": "waste_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.0,
+    -0.0
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": -0.17,
+   "l_mm": 0.09,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0,
+   "step": 11,
+   "obj": "plate_b",
+   "target": "fluent_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.69,
+    -0.1
+   ]
+  },
+  {
+   "ok": true,
+   "f_mm": 0.1,
+   "l_mm": 0.07,
+   "z_mm": 0.0,
+   "tilt_deg": 0.06,
+   "step": 12,
+   "obj": "tube_b",
+   "target": "ngs_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.06,
+    0.55
+   ]
+  },
+  {
+   "ok": true,
+   "pos": [
+    2.104,
+    1.7971,
+    0.862
+   ],
+   "step": 13,
+   "obj": "plate_b",
+   "target": "waste_plate",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.0,
+    -0.0
+   ]
+  },
+  {
+   "ok": true,
+   "pos": [
+    2.1003,
+    1.7936,
+    0.89
+   ],
+   "step": 14,
+   "obj": "tube_b",
+   "target": "waste_tube",
+   "lost_in_carry": false,
+   "inhand_mm": [
+    -0.0,
+    -0.0
+   ]
+  }
+ ],
+ "replay_penetration_mm": {},
+ "plan_warnings": [],
+ "rail_arm_overlap_s": 0.024,
+ "arm_sway_during_rail_rad_s": 0.1106
+}

@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!--
+  자율실험실 셀: 레일 (RCS4) + UR5e + RG2 (플랜지 직결) + 사용자 클램프 브라켓 + D455 + 환경 (테이블 · 장비 목업 · 받침)
+  ur_robot_driver/urdf/ur.urdf.xacro 와 같은 인자를 받는다 -> ur_control.launch.py 에 description_launchfile:=lab_rsp.launch.py 로 넘긴다.
+
+  프레임: world = 시뮬 (MuJoCo) 월드. world -> rail_base -(rail_joint, 직선)-> rail_carriage -> UR base_link -> ... -> tool0 -> rg2_body
+  환경 · 공구 형상과 레일 · 받침 값은 ros2_export_v21.py 가 시뮬 장면에서 만든다 (lab_cell / lab_tool / lab_params.xacro).
+-->
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+  <xacro:arg name="name" default="ur"/>
+
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+  <xacro:include filename="$(find ur_robot_driver)/urdf/ur.ros2_control.xacro"/>
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur_transmissions.xacro"/>
+  <xacro:include filename="$(find lab_description)/urdf/lab_params.xacro"/>
+  <xacro:include filename="$(find lab_description)/urdf/lab_cell.urdf.xacro"/>
+  <xacro:include filename="$(find lab_description)/urdf/lab_tool.urdf.xacro"/>
+
+  <xacro:arg name="ur_type" default="ur5e"/>
+  <xacro:arg name="tf_prefix" default=""/>
+  <xacro:arg name="joint_limit_params" default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml"/>
+  <!-- 실물: ur_calibration 으로 뽑은 이 로봇의 보정값 파일로 바꾼다 -->
+  <xacro:arg name="kinematics_params" default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml"/>
+  <xacro:arg name="physical_params" default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml"/>
+  <xacro:arg name="visual_params" default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml"/>
+  <xacro:arg name="transmission_hw_interface" default=""/>
+  <xacro:arg name="safety_limits" default="false"/>
+  <xacro:arg name="safety_pos_margin" default="0.15"/>
+  <xacro:arg name="safety_k_position" default="20"/>
+  <xacro:arg name="headless_mode" default="false"/>
+  <xacro:arg name="robot_ip" default="0.0.0.0"/>
+  <xacro:arg name="script_filename" default=""/>
+  <xacro:arg name="output_recipe_filename" default=""/>
+  <xacro:arg name="input_recipe_filename" default=""/>
+  <xacro:arg name="reverse_ip" default="0.0.0.0"/>
+  <xacro:arg name="script_command_port" default="50004"/>
+  <xacro:arg name="reverse_port" default="50001"/>
+  <xacro:arg name="script_sender_port" default="50002"/>
+  <xacro:arg name="trajectory_port" default="50003"/>
+  <xacro:arg name="verify_robot_model" default="false"/>
+  <xacro:arg name="use_currents_as_efforts" default="true"/>
+  <xacro:arg name="blocking_read" default="false"/>
+  <xacro:arg name="use_tool_communication" default="false"/>
+  <xacro:arg name="tool_voltage" default="0"/>
+  <xacro:arg name="tool_parity" default="0"/>
+  <xacro:arg name="tool_baud_rate" default="115200"/>
+  <xacro:arg name="tool_stop_bits" default="1"/>
+  <xacro:arg name="tool_rx_idle_chars" default="1.5"/>
+  <xacro:arg name="tool_tx_idle_chars" default="3.5"/>
+  <xacro:arg name="tool_device_name" default="/tmp/ttyUR"/>
+  <xacro:arg name="tool_tcp_port" default="54321"/>
+  <xacro:arg name="use_mock_hardware" default="false"/>
+  <xacro:arg name="mock_sensor_commands" default="false"/>
+  <xacro:arg name="simulation_controllers" default=""/>
+  <!-- 레일 · 그리퍼는 ros2_control 밖 노드 (rail_gripper_sim.py, 나중에 실물 드라이버) 가 맡는다.
+       true = 예전처럼 UR ros2_control 에 가상 시스템으로 넣기 (가상 하드웨어 전용 — 실물 / URSim 에선 controller_stopper 가 내려 버림) -->
+  <xacro:arg name="mock_rail_gripper" default="false"/>
+  <xacro:arg name="rail_initial" default="0.4"/>
+  <xacro:arg name="finger_initial" default="0.05"/>
+  <xacro:arg name="initial_positions_file" default="$(find lab_description)/config/initial_positions.yaml"/>
+  <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>
+  <xacro:property name="blocking_read" default="$(arg blocking_read)"/>
+
+  <link name="world"/>
+
+  <!-- 레일 -->
+  <link name="rail_base"/>
+  <joint name="rail_base_joint" type="fixed">
+    <parent link="world"/><child link="rail_base"/>
+    <origin xyz="${rail_origin_xyz}" rpy="0 0 0"/>
+  </joint>
+  <link name="rail_carriage"/>
+  <joint name="rail_joint" type="prismatic">
+    <parent link="rail_base"/><child link="rail_carriage"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="${rail_axis}"/>
+    <limit lower="${rail_lower}" upper="${rail_upper}" effort="1000" velocity="${rail_velocity}"/>
+  </joint>
+
+  <!-- UR5e -->
+  <xacro:ur_robot
+    name="$(arg name)"
+    tf_prefix="$(arg tf_prefix)"
+    parent="rail_carriage"
+    joint_limits_parameters_file="$(arg joint_limit_params)"
+    kinematics_parameters_file="$(arg kinematics_params)"
+    physical_parameters_file="$(arg physical_params)"
+    visual_parameters_file="$(arg visual_params)"
+    safety_limits="$(arg safety_limits)"
+    safety_pos_margin="$(arg safety_pos_margin)"
+    safety_k_position="$(arg safety_k_position)">
+    <origin xyz="${ur_base_xyz}" rpy="${ur_base_rpy}"/>
+  </xacro:ur_robot>
+
+  <!-- RG2 + 브라켓 + D455 (tool0 = 시뮬 플랜지 프레임과 같음을 확인함) -->
+  <xacro:lab_tool parent="$(arg tf_prefix)tool0"/>
+
+  <!-- 환경 -->
+  <xacro:lab_cell parent="world"/>
+
+  <xacro:ur_ros2_control
+    name="$(arg name)"
+    tf_prefix="$(arg tf_prefix)"
+    kinematics_parameters_file="$(arg kinematics_params)"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    use_mock_hardware="$(arg use_mock_hardware)"
+    mock_sensor_commands="$(arg mock_sensor_commands)"
+    headless_mode="$(arg headless_mode)"
+    initial_positions="${xacro.load_yaml(initial_positions_file)}"
+    use_tool_communication="$(arg use_tool_communication)"
+    tool_voltage="$(arg tool_voltage)"
+    tool_parity="$(arg tool_parity)"
+    tool_baud_rate="$(arg tool_baud_rate)"
+    tool_stop_bits="$(arg tool_stop_bits)"
+    tool_rx_idle_chars="$(arg tool_rx_idle_chars)"
+    tool_tx_idle_chars="$(arg tool_tx_idle_chars)"
+    tool_device_name="$(arg tool_device_name)"
+    tool_tcp_port="$(arg tool_tcp_port)"
+    robot_ip="$(arg robot_ip)"
+    script_filename="$(arg script_filename)"
+    output_recipe_filename="$(arg output_recipe_filename)"
+    input_recipe_filename="$(arg input_recipe_filename)"
+    reverse_ip="$(arg reverse_ip)"
+    script_command_port="$(arg script_command_port)"
+    reverse_port="$(arg reverse_port)"
+    script_sender_port="$(arg script_sender_port)"
+    trajectory_port="$(arg trajectory_port)"
+    ur_type="$(arg ur_type)"
+    verify_robot_model="$(arg verify_robot_model)"
+    use_currents_as_efforts="$(arg use_currents_as_efforts)"
+    non_blocking_read="${not blocking_read}"
+  />
+
+  <xacro:if value="$(arg mock_rail_gripper)">
+    <ros2_control name="lab_rail_gripper" type="system">
+      <hardware>
+        <plugin>mock_components/GenericSystem</plugin>
+        <param name="calculate_dynamics">false</param>
+      </hardware>
+      <joint name="rail_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"><param name="initial_value">$(arg rail_initial)</param></state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="rg2_finger_left_joint">
+        <command_interface name="position"/>
+        <state_interface name="position"><param name="initial_value">$(arg finger_initial)</param></state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+    </ros2_control>
+  </xacro:if>
+</robot>
