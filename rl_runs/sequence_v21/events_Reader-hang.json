@@ -1,0 +1,137 @@
+{
+ "sequence": "sequence_v21.toml",
+ "camera": "land20",
+ "layout": "t1p20",
+ "prelook": "auto",
+ "faults": [
+  "Reader:hang"
+ ],
+ "stop": "M4 시간 초과: Reader '판 a 측정' 완료 기다림",
+ "sim_s": 89.33,
+ "plan_wall_s": 8.1,
+ "robot_transfer_s": 46.23,
+ "robot_retry_s": 0,
+ "robot_wait_s": 43.1,
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 17.9,
+   "f_mm": -0.15,
+   "l_mm": 0.08,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M2",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.4,
+   "f_mm": -0.16,
+   "l_mm": 0.08,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M3",
+   "obj": "plate_a",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 13.9,
+   "f_mm": -0.09,
+   "l_mm": -0.23,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  }
+ ],
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 1.89,
+   "t1": 1.89,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 0.0,
+   "t1": 17.93,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 17.93,
+   "t1": 25.96,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 17.93,
+   "t1": 25.96,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 25.96,
+   "t1": 40.4,
+   "label": "M2"
+  },
+  {
+   "lane": "STX44",
+   "kind": "run",
+   "t0": 40.4,
+   "t1": 55.44,
+   "label": "R2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 40.4,
+   "t1": 55.44,
+   "label": "M3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 55.44,
+   "t1": 69.3,
+   "label": "M3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 69.3,
+   "t1": 89.33,
+   "label": "M4"
+  },
+  {
+   "lane": "Reader",
+   "kind": "run_open",
+   "t0": 69.3,
+   "t1": 89.33,
+   "label": "R3"
+  }
+ ]
+}

@@ -1,0 +1,307 @@
+{
+ "layout": "v2",
+ "total_seconds": 202.46,
+ "transfers": [
+  {
+   "index": 1,
+   "obj": "plate",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "seconds": 20.22,
+   "parts": {
+    "photo": 2.5,
+    "fine": 15.0,
+    "gripper": 0.84,
+    "transit": 1.89
+   },
+   "carry": "direct",
+   "rail": [
+    0.18,
+    0.0
+   ]
+  },
+  {
+   "index": 2,
+   "obj": "plate",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "seconds": 20.12,
+   "parts": {
+    "transit": 5.09,
+    "photo": 2.5,
+    "fine": 11.7,
+    "gripper": 0.84
+   },
+   "carry": "carry",
+   "rail": [
+    0.0,
+    0.127
+   ]
+  },
+  {
+   "index": 3,
+   "obj": "plate",
+   "source": "reader_plate",
+   "target": "fluent_plate",
+   "seconds": 23.13,
+   "parts": {
+    "transit": 4.49,
+    "photo": 2.5,
+    "fine": 15.3,
+    "gripper": 0.84
+   },
+   "carry": "carry",
+   "rail": [
+    0.127,
+    0.18
+   ]
+  },
+  {
+   "index": 4,
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube",
+   "seconds": 25.39,
+   "parts": {
+    "transit": 4.47,
+    "photo": 2.5,
+    "fine": 17.58,
+    "gripper": 0.84
+   },
+   "carry": "standoff",
+   "rail": [
+    0.451,
+    0.016
+   ]
+  },
+  {
+   "index": 5,
+   "obj": "tube_a",
+   "source": "fluent_tube",
+   "target": "sorter_right_tube",
+   "seconds": 29.71,
+   "parts": {
+    "transit": 6.87,
+    "photo": 2.5,
+    "fine": 19.5,
+    "gripper": 0.84
+   },
+   "carry": "carry",
+   "rail": [
+    0.016,
+    0.518
+   ]
+  },
+  {
+   "index": 6,
+   "obj": "plate",
+   "source": "sorter_left_plate",
+   "target": "fluent_plate",
+   "seconds": 26.34,
+   "parts": {
+    "transit": 6.01,
+    "photo": 2.5,
+    "fine": 17.0,
+    "gripper": 0.84
+   },
+   "carry": "carry",
+   "rail": [
+    0.371,
+    0.18
+   ]
+  },
+  {
+   "index": 7,
+   "obj": "tube_b",
+   "source": "tube_hotel_2",
+   "target": "fluent_tube",
+   "seconds": 26.8,
+   "parts": {
+    "transit": 5.89,
+    "photo": 2.5,
+    "fine": 17.58,
+    "gripper": 0.84
+   },
+   "carry": "carry",
+   "rail": [
+    0.455,
+    0.016
+   ]
+  },
+  {
+   "index": 8,
+   "obj": "tube_b",
+   "source": "fluent_tube",
+   "target": "ngs_tube",
+   "seconds": 30.75,
+   "parts": {
+    "transit": 6.76,
+    "photo": 2.5,
+    "fine": 20.65,
+    "gripper": 0.84
+   },
+   "carry": "carry-hit",
+   "rail": [
+    0.016,
+    0.711
+   ]
+  }
+ ],
+ "stations": {
+  "fluent_plate": {
+   "rail": 0.18,
+   "yaw_deg": 270,
+   "grasp": [
+    0.445,
+    0.3075,
+    0.582
+   ],
+   "ignore": [
+    "780_plateholder1"
+   ],
+   "mesh": null
+  },
+  "incubator_plate": {
+   "rail": 0.0,
+   "yaw_deg": 0,
+   "grasp": [
+    1.0205,
+    0.9915,
+    0.707
+   ],
+   "ignore": [
+    "stx44_plateholder"
+   ],
+   "mesh": null
+  },
+  "reader_plate": {
+   "rail": 0.127,
+   "yaw_deg": 90,
+   "grasp": [
+    0.124,
+    1.6115,
+    0.567
+   ],
+   "ignore": [
+    "reader_body1",
+    "reader_plateholder"
+   ],
+   "mesh": null
+  },
+  "sorter_left_plate": {
+   "rail": 0.371,
+   "yaw_deg": 90,
+   "grasp": [
+    0.3658,
+    1.7855,
+    0.571
+   ],
+   "ignore": [
+    "SH800_body2",
+    "tube1"
+   ],
+   "mesh": null
+  },
+  "tube_hotel_1": {
+   "rail": 0.451,
+   "yaw_deg": 270,
+   "grasp": [
+    0.7,
+    0.166,
+    0.577
+   ],
+   "ignore": [
+    "tube1",
+    "tubehotel"
+   ],
+   "mesh": null
+  },
+  "tube_hotel_2": {
+   "rail": 0.455,
+   "yaw_deg": 270,
+   "grasp": [
+    0.7,
+    0.136,
+    0.577
+   ],
+   "ignore": [
+    "tube1",
+    "tube2",
+    "tubehotel"
+   ],
+   "mesh": null
+  },
+  "fluent_tube": {
+   "rail": 0.016,
+   "yaw_deg": 270,
+   "grasp": [
+    0.28,
+    0.204,
+    0.633
+   ],
+   "ignore": [],
+   "mesh": null
+  },
+  "sorter_right_tube": {
+   "rail": 0.518,
+   "yaw_deg": 90,
+   "grasp": [
+    0.5008,
+    1.749,
+    0.631
+   ],
+   "ignore": [
+    "tube1"
+   ],
+   "mesh": null
+  },
+  "ngs_tube": {
+   "rail": 0.711,
+   "yaw_deg": 60,
+   "grasp": [
+    0.969,
+    1.5095,
+    0.672
+   ],
+   "ignore": [
+    "NGS_library1",
+    "NGS_rack1",
+    "tube1",
+    "tube2"
+   ],
+   "mesh": null
+  }
+ },
+ "issues": [
+  "sorter_left_plate: 장비 안 경로점이 부딪힘 ['SH800_body1']",
+  "fluent_tube: 장비 안 경로점이 부딪힘 ['780_body1', '780_body2', 'Cylinder']",
+  "sorter_right_tube: 장비 안 경로점이 부딪힘 ['SH800_body1']",
+  "ngs_tube: 장비 안 경로점이 부딪힘 ['NGS_cartridge1', 'NGS_cartridge_button1']",
+  "4. tube_a tube_hotel_1 -> fluent_tube 놓기 INSERT_HOVER: 부딪힘 ['780_body1', '780_body2', 'Cylinder']",
+  "4. tube_a tube_hotel_1 -> fluent_tube 놓기 SET_DOWN: 부딪힘 ['780_body1']",
+  "5. tube_a fluent_tube -> sorter_right_tube 빼기 EXTRACT_UP: 부딪힘 ['780_body1', '780_body2', 'Cylinder']",
+  "5. tube_a fluent_tube -> sorter_right_tube 빼기 PRE_HOVER: 부딪힘 ['780_body1']",
+  "5. tube_a fluent_tube -> sorter_right_tube 놓기 INSERT_HOVER: 부딪힘 ['SH800_body1']",
+  "5. tube_a fluent_tube -> sorter_right_tube 놓기 SET_DOWN: 부딪힘 ['SH800_body1']",
+  "6. plate sorter_left_plate -> fluent_plate 집기 GRASP: 부딪힘 ['SH800_body1']",
+  "6. plate sorter_left_plate -> fluent_plate 빼기 LIFT_OFF: 부딪힘 ['SH800_body1']",
+  "6. plate sorter_left_plate -> fluent_plate 빼기 EXTRACT: 부딪힘 ['SH800_body1']",
+  "7. tube_b tube_hotel_2 -> fluent_tube 놓기 INSERT_HOVER: 부딪힘 ['780_body1', '780_body2', 'Cylinder']",
+  "7. tube_b tube_hotel_2 -> fluent_tube 놓기 SET_DOWN: 부딪힘 ['780_body1']",
+  "8. tube_b fluent_tube -> ngs_tube 빼기 EXTRACT_UP: 부딪힘 ['780_body1', '780_body2', 'Cylinder']",
+  "8. tube_b fluent_tube -> ngs_tube 빼기 PRE_HOVER: 부딪힘 ['780_body1']",
+  "8. tube_b fluent_tube -> ngs_tube 운반: 운반 경로가 부딪힘 ['stx44_plateholder', 'table'] (carry-hit)",
+  "8. tube_b fluent_tube -> ngs_tube 놓기 INSERT_HOVER: 부딪힘 ['NGS_cartridge1', 'NGS_cartridge_button1']",
+  "8. tube_b fluent_tube -> ngs_tube 놓기 SET_DOWN: 부딪힘 ['NGS_cartridge1', 'NGS_cartridge_button1']",
+  "8. tube_b fluent_tube -> ngs_tube 물러나기 RELEASE_CLEAR: 부딪힘 ['NGS_cartridge1']"
+ ],
+ "rules": {
+  "slide_mps": 0.04,
+  "descent_mps": 0.02,
+  "joint_radps": 1.2,
+  "rail_mps": 0.3,
+  "leg_settle_s": 0.25,
+  "photo_s": 0.5,
+  "photos_per_transfer": 5
+ }
+}

@@ -1,0 +1,299 @@
+{
+ "sequence": "sequence_v21.toml",
+ "camera": "land20",
+ "layout": "t1p20",
+ "prelook": "auto",
+ "faults": [
+  "M5:short=3"
+ ],
+ "resume": null,
+ "stop": {
+  "msg": "M5 사진6: tube_a 가 Fluent 튜브 에서 크게 벗어남 / 떨어짐 (f_mm=41.73 l_mm=1.11 z_mm=-21.18 tilt_deg=57.13)",
+  "kind": "transfer",
+  "sid": "M5",
+  "run": null,
+  "seat": null
+ },
+ "sim_s": 110.29,
+ "plan_wall_s": 4.3,
+ "robot_transfer_s": 80.3,
+ "robot_retry_s": 0,
+ "robot_wait_s": 29.07,
+ "prefetch": true,
+ "plan_idle_s": 0.92,
+ "steps": {
+  "M1": {
+   "state": "완료",
+   "t0": 0.92,
+   "plan_s": 0.92,
+   "plan_idle_s": 0.92,
+   "plan_how": "지금 계획 (미리 한 계획 없음)",
+   "t1": 19.82,
+   "retries": 0,
+   "prelook": true
+  },
+  "R1": {
+   "state": "완료",
+   "t0": 19.82,
+   "t1": 27.85
+  },
+  "M2": {
+   "state": "완료",
+   "t0": 27.85,
+   "plan_s": 0.41,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 42.46,
+   "retries": 0,
+   "prelook": false
+  },
+  "R2": {
+   "state": "완료",
+   "t0": 42.46,
+   "t1": 57.5
+  },
+  "M3": {
+   "state": "완료",
+   "t0": 57.5,
+   "plan_s": 0.01,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 70.1,
+   "retries": 0,
+   "prelook": false
+  },
+  "R3": {
+   "state": "완료",
+   "t0": 70.1,
+   "t1": 76.1
+  },
+  "M4": {
+   "state": "완료",
+   "t0": 76.1,
+   "plan_s": 0.67,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 94.71,
+   "retries": 0,
+   "prelook": true
+  },
+  "M5": {
+   "state": "실패",
+   "t0": 94.71,
+   "plan_s": 1.46,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 110.29,
+   "note": "M5 사진6: tube_a 가 Fluent 튜브 에서 크게 벗어남 / 떨어짐 (f_mm=41.73 l_mm=1.11 z_mm=-21.18 tilt_deg=57.13)"
+  },
+  "R4": {
+   "state": "대기"
+  },
+  "M6": {
+   "state": "대기"
+  },
+  "M7": {
+   "state": "대기"
+  },
+  "M8": {
+   "state": "대기"
+  },
+  "R5": {
+   "state": "대기"
+  },
+  "M9": {
+   "state": "대기"
+  },
+  "M10": {
+   "state": "대기"
+  },
+  "M11": {
+   "state": "대기"
+  },
+  "R6": {
+   "state": "대기"
+  },
+  "M12": {
+   "state": "대기"
+  },
+  "R7": {
+   "state": "대기"
+  },
+  "M13": {
+   "state": "대기"
+  }
+ },
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 18.9,
+   "f_mm": -0.15,
+   "l_mm": 0.08,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M2",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.6,
+   "f_mm": -0.15,
+   "l_mm": 0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M3",
+   "obj": "plate_a",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 12.6,
+   "f_mm": -0.09,
+   "l_mm": -0.21,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M4",
+   "obj": "plate_a",
+   "source": "reader_plate",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 18.6,
+   "f_mm": -0.09,
+   "l_mm": -0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  }
+ ],
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 0.0,
+   "t1": 0.92,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 2.9,
+   "t1": 2.9,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 0.92,
+   "t1": 19.82,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 19.82,
+   "t1": 27.85,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 19.82,
+   "t1": 27.85,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 27.85,
+   "t1": 42.46,
+   "label": "M2"
+  },
+  {
+   "lane": "STX44",
+   "kind": "run",
+   "t0": 42.46,
+   "t1": 57.5,
+   "label": "R2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 42.46,
+   "t1": 57.5,
+   "label": "M3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 57.5,
+   "t1": 70.1,
+   "label": "M3"
+  },
+  {
+   "lane": "Reader",
+   "kind": "run",
+   "t0": 70.1,
+   "t1": 76.1,
+   "label": "R3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 70.1,
+   "t1": 76.1,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 78.92,
+   "t1": 78.92,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 76.1,
+   "t1": 94.71,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 96.39,
+   "t1": 96.39,
+   "label": "M5"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 94.71,
+   "t1": 110.29,
+   "label": "M5"
+  }
+ ]
+}

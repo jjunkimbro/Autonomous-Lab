@@ -1,0 +1,3732 @@
+[
+ {
+  "tilt": 25.0,
+  "rot": 0.0,
+  "ear_out": 0.065,
+  "feasible": true,
+  "j6": 0.0,
+  "roll": 1,
+  "camera_up": 1.0,
+  "s": 14.9,
+  "사진1": {
+   "passed": 8,
+   "n": 10,
+   "vis": 0.79,
+   "dist": [
+    0.413,
+    0.562
+   ],
+   "v_off": 0.14
+  },
+  "사진0": {
+   "passed": 6,
+   "n": 7,
+   "vis": 0.86,
+   "dist": [
+    0.388,
+    0.525
+   ],
+   "v_off": 0.22
+  },
+  "사진4": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.85,
+   "dist": [
+    0.223,
+    0.263
+   ],
+   "v_off": 0.16
+  },
+  "사진4자리": {
+   "passed": 3,
+   "n": 7,
+   "vis": 0.43,
+   "dist": [
+    0.388,
+    0.525
+   ],
+   "v_off": 0.22
+  },
+  "사진6": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.9,
+   "dist": [
+    0.377,
+    0.519
+   ],
+   "v_off": 0.2
+  },
+  "rows": [
+   {
+    "seat": "plate_hotel_4",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.547,
+    "v_off": 0.17,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 70.5
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.8,
+    "dist": 0.525,
+    "v_off": 0.23,
+    "passed": true,
+    "depth": {
+     "424x240": 0.64,
+     "640x360": 0.64,
+     "848x480": 0.64
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 58.0
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.263,
+    "v_off": 0.1,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.3
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.525,
+    "v_off": 0.23,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 58.0
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.519,
+    "v_off": 0.19,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 59.2
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.519,
+    "v_off": 0.19,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 59.2
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.464,
+    "v_off": 0.26,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.1
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.263,
+    "v_off": 0.1,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.3
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.464,
+    "v_off": 0.26,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.1
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.458,
+    "v_off": 0.3,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.6
+   },
+   {
+    "seat": "tube_hotel_1",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.516,
+    "v_off": 0.03,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.2
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.23,
+    "dist": 0.457,
+    "v_off": 0.33,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.0
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.65,
+    "dist": 0.223,
+    "v_off": 0.23,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.27,
+    "inc": 58.8
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.457,
+    "v_off": 0.33,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.0
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.44,
+    "v_off": 0.18,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.3
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.458,
+    "v_off": 0.3,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.6
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.464,
+    "v_off": 0.26,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.1
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.263,
+    "v_off": 0.1,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.3
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.464,
+    "v_off": 0.26,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.1
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.458,
+    "v_off": 0.3,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.6
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.458,
+    "v_off": 0.3,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.6
+   },
+   {
+    "seat": "plate_hotel_3",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.562,
+    "v_off": 0.07,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 67.2
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.495,
+    "v_off": 0.06,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.8
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.263,
+    "v_off": 0.1,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.3
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.495,
+    "v_off": 0.06,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.8
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.49,
+    "v_off": 0.06,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.2
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.44,
+    "v_off": 0.18,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.3
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.43,
+    "v_off": 0.19,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.1
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.65,
+    "dist": 0.223,
+    "v_off": 0.23,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.27,
+    "inc": 58.8
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.43,
+    "v_off": 0.19,
+    "passed": false,
+    "depth": {
+     "424x240": 0.85,
+     "640x360": 0.85,
+     "848x480": 0.85
+    },
+    "band": 0.0,
+    "shadow": 0.15,
+    "inc": 59.1
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.413,
+    "v_off": 0.04,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 63.9
+   },
+   {
+    "seat": "tube_hotel_2",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.544,
+    "v_off": 0.02,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.6
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.413,
+    "v_off": 0.04,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 63.9
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.49,
+    "v_off": 0.06,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.2
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.388,
+    "v_off": 0.21,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 71.7
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.65,
+    "dist": 0.223,
+    "v_off": 0.23,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.27,
+    "inc": 58.8
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.388,
+    "v_off": 0.21,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 71.7
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.377,
+    "v_off": 0.33,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.5
+   }
+  ]
+ },
+ {
+  "tilt": 30.0,
+  "rot": 0.0,
+  "ear_out": 0.065,
+  "feasible": true,
+  "j6": 0.0,
+  "roll": 1,
+  "camera_up": 1.0,
+  "s": 15.0,
+  "사진1": {
+   "passed": 8,
+   "n": 10,
+   "vis": 0.79,
+   "dist": [
+    0.413,
+    0.557
+   ],
+   "v_off": 0.22
+  },
+  "사진0": {
+   "passed": 6,
+   "n": 7,
+   "vis": 0.83,
+   "dist": [
+    0.382,
+    0.528
+   ],
+   "v_off": 0.23
+  },
+  "사진4": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.85,
+   "dist": [
+    0.224,
+    0.261
+   ],
+   "v_off": 0.12
+  },
+  "사진4자리": {
+   "passed": 3,
+   "n": 7,
+   "vis": 0.43,
+   "dist": [
+    0.382,
+    0.528
+   ],
+   "v_off": 0.23
+  },
+  "사진6": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.9,
+   "dist": [
+    0.37,
+    0.522
+   ],
+   "v_off": 0.27
+  },
+  "rows": [
+   {
+    "seat": "plate_hotel_4",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.54,
+    "v_off": 0.34,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 70.7
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.8,
+    "dist": 0.528,
+    "v_off": 0.06,
+    "passed": true,
+    "depth": {
+     "424x240": 0.64,
+     "640x360": 0.64,
+     "848x480": 0.64
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 58.2
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.261,
+    "v_off": 0.17,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.6
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.528,
+    "v_off": 0.06,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 58.2
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.522,
+    "v_off": 0.07,
+    "passed": true,
+    "depth": {
+     "424x240": 0.72,
+     "640x360": 0.72,
+     "848x480": 0.72
+    },
+    "band": 0.0,
+    "shadow": 0.24,
+    "inc": 59.4
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.522,
+    "v_off": 0.07,
+    "passed": true,
+    "depth": {
+     "424x240": 0.72,
+     "640x360": 0.72,
+     "848x480": 0.72
+    },
+    "band": 0.0,
+    "shadow": 0.24,
+    "inc": 59.4
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.456,
+    "v_off": 0.42,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.3
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.261,
+    "v_off": 0.17,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.6
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.456,
+    "v_off": 0.42,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.3
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.449,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.8
+   },
+   {
+    "seat": "tube_hotel_1",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.515,
+    "v_off": 0.13,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.4
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.462,
+    "v_off": 0.16,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.2
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.65,
+    "dist": 0.224,
+    "v_off": 0.06,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.22,
+    "inc": 59.2
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.462,
+    "v_off": 0.16,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.2
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.442,
+    "v_off": 0.03,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.5
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.449,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.8
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.456,
+    "v_off": 0.42,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.3
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.261,
+    "v_off": 0.17,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.6
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.456,
+    "v_off": 0.42,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.3
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.449,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.8
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.449,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.8
+   },
+   {
+    "seat": "plate_hotel_3",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.557,
+    "v_off": 0.23,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 67.4
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.493,
+    "v_off": 0.16,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.0
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.261,
+    "v_off": 0.17,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.6
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.493,
+    "v_off": 0.16,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.0
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.487,
+    "v_off": 0.2,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.4
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.442,
+    "v_off": 0.03,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.5
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.432,
+    "v_off": 0.03,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.3
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.65,
+    "dist": 0.224,
+    "v_off": 0.06,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.22,
+    "inc": 59.2
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.432,
+    "v_off": 0.03,
+    "passed": false,
+    "depth": {
+     "424x240": 0.85,
+     "640x360": 0.85,
+     "848x480": 0.85
+    },
+    "band": 0.0,
+    "shadow": 0.15,
+    "inc": 59.3
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.413,
+    "v_off": 0.12,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.2
+   },
+   {
+    "seat": "tube_hotel_2",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.541,
+    "v_off": 0.17,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.8
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.413,
+    "v_off": 0.12,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.2
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.487,
+    "v_off": 0.2,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.4
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.382,
+    "v_off": 0.38,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 71.9
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.65,
+    "dist": 0.224,
+    "v_off": 0.06,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.22,
+    "inc": 59.2
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.382,
+    "v_off": 0.38,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 71.9
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.37,
+    "v_off": 0.51,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.8
+   }
+  ]
+ },
+ {
+  "tilt": 35.0,
+  "rot": 0.0,
+  "ear_out": 0.065,
+  "feasible": true,
+  "j6": 0.0,
+  "roll": 1,
+  "camera_up": 1.0,
+  "s": 15.0,
+  "사진1": {
+   "passed": 8,
+   "n": 10,
+   "vis": 0.77,
+   "dist": [
+    0.408,
+    0.549
+   ],
+   "v_off": 0.38
+  },
+  "사진0": {
+   "passed": 6,
+   "n": 7,
+   "vis": 0.83,
+   "dist": [
+    0.373,
+    0.527
+   ],
+   "v_off": 0.33
+  },
+  "사진4": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.82,
+   "dist": [
+    0.224,
+    0.258
+   ],
+   "v_off": 0.24
+  },
+  "사진4자리": {
+   "passed": 3,
+   "n": 7,
+   "vis": 0.43,
+   "dist": [
+    0.373,
+    0.527
+   ],
+   "v_off": 0.33
+  },
+  "사진6": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.87,
+   "dist": [
+    0.359,
+    0.52
+   ],
+   "v_off": 0.42
+  },
+  "rows": [
+   {
+    "seat": "plate_hotel_4",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.529,
+    "v_off": 0.51,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 70.9
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.8,
+    "dist": 0.527,
+    "v_off": 0.1,
+    "passed": true,
+    "depth": {
+     "424x240": 0.6,
+     "640x360": 0.6,
+     "848x480": 0.6
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 58.3
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.258,
+    "v_off": 0.33,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.0
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.527,
+    "v_off": 0.1,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 58.3
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.52,
+    "v_off": 0.14,
+    "passed": true,
+    "depth": {
+     "424x240": 0.72,
+     "640x360": 0.72,
+     "848x480": 0.72
+    },
+    "band": 0.0,
+    "shadow": 0.24,
+    "inc": 59.6
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.52,
+    "v_off": 0.14,
+    "passed": true,
+    "depth": {
+     "424x240": 0.72,
+     "640x360": 0.72,
+     "848x480": 0.72
+    },
+    "band": 0.0,
+    "shadow": 0.24,
+    "inc": 59.6
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.444,
+    "v_off": 0.6,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.5
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.258,
+    "v_off": 0.33,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.0
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.444,
+    "v_off": 0.6,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.5
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.437,
+    "v_off": 0.66,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.1
+   },
+   {
+    "seat": "tube_hotel_1",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.51,
+    "v_off": 0.3,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.6
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.463,
+    "v_off": 0.01,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.4
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.224,
+    "v_off": 0.12,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 59.6
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.463,
+    "v_off": 0.01,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.4
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.44,
+    "v_off": 0.14,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.7
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.437,
+    "v_off": 0.66,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.1
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.444,
+    "v_off": 0.6,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.5
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.258,
+    "v_off": 0.33,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.0
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.444,
+    "v_off": 0.6,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.5
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.437,
+    "v_off": 0.66,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.1
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.437,
+    "v_off": 0.66,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.1
+   },
+   {
+    "seat": "plate_hotel_3",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.549,
+    "v_off": 0.4,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 67.5
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.487,
+    "v_off": 0.33,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.2
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.258,
+    "v_off": 0.33,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.0
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.487,
+    "v_off": 0.33,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.2
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.48,
+    "v_off": 0.37,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.6
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.44,
+    "v_off": 0.14,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.7
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.431,
+    "v_off": 0.13,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.5
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.224,
+    "v_off": 0.12,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 59.6
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.431,
+    "v_off": 0.13,
+    "passed": false,
+    "depth": {
+     "424x240": 0.85,
+     "640x360": 0.85,
+     "848x480": 0.85
+    },
+    "band": 0.0,
+    "shadow": 0.15,
+    "inc": 59.5
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.408,
+    "v_off": 0.29,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.4
+   },
+   {
+    "seat": "tube_hotel_2",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.534,
+    "v_off": 0.34,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.9
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.408,
+    "v_off": 0.29,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.4
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.48,
+    "v_off": 0.37,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.6
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.373,
+    "v_off": 0.55,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 72.2
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.224,
+    "v_off": 0.12,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 59.6
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.373,
+    "v_off": 0.55,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 72.2
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.359,
+    "v_off": 0.69,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 76.1
+   }
+  ]
+ },
+ {
+  "tilt": 40.0,
+  "rot": 0.0,
+  "ear_out": 0.065,
+  "feasible": true,
+  "j6": 0.0,
+  "roll": 1,
+  "camera_up": 1.0,
+  "s": 15.1,
+  "사진1": {
+   "passed": 8,
+   "n": 10,
+   "vis": 0.77,
+   "dist": [
+    0.4,
+    0.535
+   ],
+   "v_off": 0.56
+  },
+  "사진0": {
+   "passed": 5,
+   "n": 7,
+   "vis": 0.81,
+   "dist": [
+    0.361,
+    0.522
+   ],
+   "v_off": 0.51
+  },
+  "사진4": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.82,
+   "dist": [
+    0.221,
+    0.252
+   ],
+   "v_off": 0.42
+  },
+  "사진4자리": {
+   "passed": 3,
+   "n": 7,
+   "vis": 0.43,
+   "dist": [
+    0.361,
+    0.522
+   ],
+   "v_off": 0.51
+  },
+  "사진6": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.87,
+   "dist": [
+    0.345,
+    0.514
+   ],
+   "v_off": 0.6
+  },
+  "rows": [
+   {
+    "seat": "plate_hotel_4",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.513,
+    "v_off": 0.69,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 71.1
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.68,
+    "dist": 0.522,
+    "v_off": 0.27,
+    "passed": false,
+    "depth": {
+     "424x240": 0.52,
+     "640x360": 0.52,
+     "848x480": 0.52
+    },
+    "band": 0.0,
+    "shadow": 0.24,
+    "inc": 58.5
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.252,
+    "v_off": 0.52,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.4
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.522,
+    "v_off": 0.27,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 58.5
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.514,
+    "v_off": 0.31,
+    "passed": true,
+    "depth": {
+     "424x240": 0.64,
+     "640x360": 0.64,
+     "848x480": 0.64
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 59.8
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.514,
+    "v_off": 0.31,
+    "passed": true,
+    "depth": {
+     "424x240": 0.64,
+     "640x360": 0.64,
+     "848x480": 0.64
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 59.8
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.429,
+    "v_off": 0.79,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.8
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.252,
+    "v_off": 0.52,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.4
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.429,
+    "v_off": 0.79,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.8
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.421,
+    "v_off": 0.85,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.3
+   },
+   {
+    "seat": "tube_hotel_1",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.499,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.8
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.461,
+    "v_off": 0.17,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.6
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.221,
+    "v_off": 0.29,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.1
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.461,
+    "v_off": 0.17,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.6
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.435,
+    "v_off": 0.31,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 60.0
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.421,
+    "v_off": 0.85,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.3
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.429,
+    "v_off": 0.79,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.8
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.252,
+    "v_off": 0.52,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.4
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.429,
+    "v_off": 0.79,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 73.8
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.421,
+    "v_off": 0.85,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.3
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.88,
+    "dist": 0.421,
+    "v_off": 0.85,
+    "passed": true,
+    "depth": {
+     "424x240": 0.88,
+     "640x360": 0.88,
+     "848x480": 0.88
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.3
+   },
+   {
+    "seat": "plate_hotel_3",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.535,
+    "v_off": 0.57,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 67.7
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.477,
+    "v_off": 0.49,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.4
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.252,
+    "v_off": 0.52,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.6,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.4
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.477,
+    "v_off": 0.49,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.4
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.469,
+    "v_off": 0.54,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.8
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.435,
+    "v_off": 0.31,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 60.0
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.426,
+    "v_off": 0.3,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 59.7
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.221,
+    "v_off": 0.29,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.1
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.426,
+    "v_off": 0.3,
+    "passed": false,
+    "depth": {
+     "424x240": 0.85,
+     "640x360": 0.85,
+     "848x480": 0.85
+    },
+    "band": 0.0,
+    "shadow": 0.15,
+    "inc": 59.7
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.4,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.7
+   },
+   {
+    "seat": "tube_hotel_2",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.522,
+    "v_off": 0.52,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.1
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.4,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.7
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.469,
+    "v_off": 0.54,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.8
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.361,
+    "v_off": 0.74,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 72.4
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.221,
+    "v_off": 0.29,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.1
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.361,
+    "v_off": 0.74,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 72.4
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.345,
+    "v_off": 0.89,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.68
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 76.3
+   }
+  ]
+ },
+ {
+  "tilt": 45.0,
+  "rot": 0.0,
+  "ear_out": 0.065,
+  "feasible": true,
+  "j6": 0.0,
+  "roll": 1,
+  "camera_up": 1.0,
+  "s": 15.0,
+  "사진1": {
+   "passed": 6,
+   "n": 10,
+   "vis": 0.62,
+   "dist": [
+    0.389,
+    0.518
+   ],
+   "v_off": 0.74
+  },
+  "사진0": {
+   "passed": 3,
+   "n": 7,
+   "vis": 0.63,
+   "dist": [
+    0.346,
+    0.513
+   ],
+   "v_off": 0.69
+  },
+  "사진4": {
+   "passed": 7,
+   "n": 7,
+   "vis": 0.82,
+   "dist": [
+    0.216,
+    0.244
+   ],
+   "v_off": 0.61
+  },
+  "사진4자리": {
+   "passed": 1,
+   "n": 7,
+   "vis": 0.26,
+   "dist": [
+    0.346,
+    0.513
+   ],
+   "v_off": 0.69
+  },
+  "사진6": {
+   "passed": 4,
+   "n": 7,
+   "vis": 0.54,
+   "dist": [
+    0.329,
+    0.504
+   ],
+   "v_off": 0.79
+  },
+  "rows": [
+   {
+    "seat": "plate_hotel_4",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.493,
+    "v_off": 0.89,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 71.3
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.6,
+    "dist": 0.513,
+    "v_off": 0.43,
+    "passed": false,
+    "depth": {
+     "424x240": 0.52,
+     "640x360": 0.52,
+     "848x480": 0.52
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 58.7
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.244,
+    "v_off": 0.71,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.4,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.8
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.513,
+    "v_off": 0.43,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 58.7
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.504,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.64,
+     "640x360": 0.64,
+     "848x480": 0.64
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.0
+   },
+   {
+    "seat": "fluent_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.504,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.64,
+     "640x360": 0.64,
+     "848x480": 0.64
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.0
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.4,
+    "dist": 0.41,
+    "v_off": 0.99,
+    "passed": false,
+    "depth": {
+     "424x240": 0.6,
+     "640x360": 0.6,
+     "848x480": 0.6
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.0
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.244,
+    "v_off": 0.71,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.4,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.8
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.4,
+    "dist": 0.41,
+    "v_off": 0.99,
+    "passed": false,
+    "depth": {
+     "424x240": 0.6,
+     "640x360": 0.6,
+     "848x480": 0.6
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.0
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.2,
+    "dist": 0.401,
+    "v_off": 1.06,
+    "passed": false,
+    "depth": {
+     "424x240": 0.2,
+     "640x360": 0.2,
+     "848x480": 0.2
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.5
+   },
+   {
+    "seat": "tube_hotel_1",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.486,
+    "v_off": 0.65,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.0
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.455,
+    "v_off": 0.34,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.9
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.216,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.5
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.455,
+    "v_off": 0.34,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 55.9
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.427,
+    "v_off": 0.48,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 60.2
+   },
+   {
+    "seat": "incubator_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.2,
+    "dist": 0.401,
+    "v_off": 1.06,
+    "passed": false,
+    "depth": {
+     "424x240": 0.2,
+     "640x360": 0.2,
+     "848x480": 0.2
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.5
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 0.4,
+    "dist": 0.41,
+    "v_off": 0.99,
+    "passed": false,
+    "depth": {
+     "424x240": 0.6,
+     "640x360": 0.6,
+     "848x480": 0.6
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.0
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.244,
+    "v_off": 0.71,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.4,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.8
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.4,
+    "dist": 0.41,
+    "v_off": 0.99,
+    "passed": false,
+    "depth": {
+     "424x240": 0.6,
+     "640x360": 0.6,
+     "848x480": 0.6
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 74.0
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.2,
+    "dist": 0.401,
+    "v_off": 1.06,
+    "passed": false,
+    "depth": {
+     "424x240": 0.2,
+     "640x360": 0.2,
+     "848x480": 0.2
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.5
+   },
+   {
+    "seat": "reader_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.2,
+    "dist": 0.401,
+    "v_off": 1.06,
+    "passed": false,
+    "depth": {
+     "424x240": 0.2,
+     "640x360": 0.2,
+     "848x480": 0.2
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 75.5
+   },
+   {
+    "seat": "plate_hotel_3",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.4,
+    "dist": 0.518,
+    "v_off": 0.76,
+    "passed": false,
+    "depth": {
+     "424x240": 0.4,
+     "640x360": 0.4,
+     "848x480": 0.4
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 67.9
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.463,
+    "v_off": 0.68,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.6
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 1.0,
+    "dist": 0.244,
+    "v_off": 0.71,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 0.4,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.8
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.463,
+    "v_off": 0.68,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 65.6
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.454,
+    "v_off": 0.72,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 67.0
+   },
+   {
+    "seat": "fluent_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.427,
+    "v_off": 0.48,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 60.2
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.417,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 60.0
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.216,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.5
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 0.0,
+    "dist": 0.417,
+    "v_off": 0.47,
+    "passed": false,
+    "depth": {
+     "424x240": 0.85,
+     "640x360": 0.85,
+     "848x480": 0.85
+    },
+    "band": 0.0,
+    "shadow": 0.15,
+    "inc": 60.0
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.389,
+    "v_off": 0.65,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.9
+   },
+   {
+    "seat": "tube_hotel_2",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.507,
+    "v_off": 0.7,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 66.3
+   },
+   {
+    "seat": "sorter_right_tube",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 0.8,
+    "dist": 0.389,
+    "v_off": 0.65,
+    "passed": true,
+    "depth": {
+     "424x240": 0.8,
+     "640x360": 0.8,
+     "848x480": 0.8
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 64.9
+   },
+   {
+    "seat": "sorter_left_plate",
+    "verb": "pick",
+    "photo": "사진1",
+    "look": "object",
+    "vis": 1.0,
+    "dist": 0.454,
+    "v_off": 0.72,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 67.0
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진0",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.346,
+    "v_off": 0.94,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 72.7
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4",
+    "look": "held",
+    "vis": 0.59,
+    "dist": 0.216,
+    "v_off": 0.47,
+    "passed": true,
+    "depth": {
+     "424x240": 0.43,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.16,
+    "inc": 60.5
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진4자리",
+    "look": "seat",
+    "vis": 1.0,
+    "dist": 0.346,
+    "v_off": 0.94,
+    "passed": true,
+    "depth": {
+     "424x240": 1.0,
+     "640x360": 1.0,
+     "848x480": 1.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 72.7
+   },
+   {
+    "seat": "ngs_tube",
+    "verb": "place",
+    "photo": "사진6",
+    "look": "object",
+    "vis": 0.0,
+    "dist": 0.329,
+    "v_off": 1.11,
+    "passed": false,
+    "depth": {
+     "424x240": 0.0,
+     "640x360": 0.0,
+     "848x480": 0.0
+    },
+    "band": 0.0,
+    "shadow": 0.0,
+    "inc": 76.6
+   }
+  ]
+ }
+]

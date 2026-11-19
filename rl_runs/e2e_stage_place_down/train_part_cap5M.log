@@ -1,0 +1,2 @@
+device NVIDIA RTX A5000
+[resume] rl_runs/e2e_stage_place_down/model.pt

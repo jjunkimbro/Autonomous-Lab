@@ -1,0 +1,648 @@
+{
+ "camera": "d455",
+ "fovy": 58.0,
+ "depth": "424x240",
+ "near_m": 0.17,
+ "summary": {
+  "object": {
+   "passed": 21,
+   "total": 23,
+   "dist_m": [
+    0.341,
+    0.531
+   ]
+  },
+  "held": {
+   "passed": 13,
+   "total": 13,
+   "dist_m": [
+    0.216,
+    0.248
+   ]
+  },
+  "seat": {
+   "passed": 3,
+   "total": 10,
+   "dist_m": [
+    0.357,
+    0.518
+   ]
+  },
+  "all": {
+   "passed": 37,
+   "total": 46
+  }
+ },
+ "photos": [
+  {
+   "transfer": 1,
+   "obj": "plate_a",
+   "station": "plate_hotel_4",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.4,
+   "passed": false,
+   "dist_m": 0.508,
+   "mm_px": 0.81,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 1,
+   "obj": "plate_a",
+   "station": "plate_hotel_4",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  },
+  {
+   "transfer": 1,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 0.0,
+   "passed": false,
+   "dist_m": 0.518,
+   "mm_px": 0.82,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 1,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.509,
+   "mm_px": 0.81,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 2,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.509,
+   "mm_px": 0.81,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 2,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  },
+  {
+   "transfer": 2,
+   "obj": "plate_a",
+   "station": "incubator_plate",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.425,
+   "mm_px": 0.68,
+   "why": []
+  },
+  {
+   "transfer": 2,
+   "obj": "plate_a",
+   "station": "incubator_plate",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.416,
+   "mm_px": 0.66,
+   "why": []
+  },
+  {
+   "transfer": 3,
+   "obj": "plate_a",
+   "station": "incubator_plate",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.416,
+   "mm_px": 0.66,
+   "why": []
+  },
+  {
+   "transfer": 3,
+   "obj": "plate_a",
+   "station": "incubator_plate",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  },
+  {
+   "transfer": 3,
+   "obj": "plate_a",
+   "station": "reader_plate",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.425,
+   "mm_px": 0.68,
+   "why": []
+  },
+  {
+   "transfer": 3,
+   "obj": "plate_a",
+   "station": "reader_plate",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.416,
+   "mm_px": 0.66,
+   "why": []
+  },
+  {
+   "transfer": 4,
+   "obj": "plate_a",
+   "station": "reader_plate",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.416,
+   "mm_px": 0.66,
+   "why": []
+  },
+  {
+   "transfer": 4,
+   "obj": "plate_a",
+   "station": "reader_plate",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  },
+  {
+   "transfer": 4,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 0.0,
+   "passed": false,
+   "dist_m": 0.518,
+   "mm_px": 0.82,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 4,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.509,
+   "mm_px": 0.81,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 5,
+   "obj": "tube_a",
+   "station": "tube_hotel_1",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.495,
+   "mm_px": 0.79,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 5,
+   "obj": "tube_a",
+   "station": "tube_hotel_1",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 0.59,
+   "passed": true,
+   "dist_m": 0.216,
+   "mm_px": 0.34,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 5,
+   "obj": "tube_a",
+   "station": "fluent_tube",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 0.0,
+   "passed": false,
+   "dist_m": 0.456,
+   "mm_px": 0.73,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 5,
+   "obj": "tube_a",
+   "station": "fluent_tube",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.43,
+   "mm_px": 0.69,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 6,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.509,
+   "mm_px": 0.81,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 6,
+   "obj": "plate_a",
+   "station": "fluent_plate",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  },
+  {
+   "transfer": 7,
+   "obj": "plate_b",
+   "station": "plate_hotel_3",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.4,
+   "passed": false,
+   "dist_m": 0.531,
+   "mm_px": 0.85,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 7,
+   "obj": "plate_b",
+   "station": "plate_hotel_3",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  },
+  {
+   "transfer": 7,
+   "obj": "plate_b",
+   "station": "sorter_left_plate",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 0.0,
+   "passed": false,
+   "dist_m": 0.473,
+   "mm_px": 0.75,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 7,
+   "obj": "plate_b",
+   "station": "sorter_left_plate",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.464,
+   "mm_px": 0.74,
+   "why": []
+  },
+  {
+   "transfer": 8,
+   "obj": "tube_a",
+   "station": "fluent_tube",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.43,
+   "mm_px": 0.69,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 8,
+   "obj": "tube_a",
+   "station": "fluent_tube",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 0.59,
+   "passed": true,
+   "dist_m": 0.216,
+   "mm_px": 0.34,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 8,
+   "obj": "tube_a",
+   "station": "sorter_right_tube",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 0.0,
+   "passed": false,
+   "dist_m": 0.421,
+   "mm_px": 0.67,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 8,
+   "obj": "tube_a",
+   "station": "sorter_right_tube",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.395,
+   "mm_px": 0.63,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 9,
+   "obj": "tube_a",
+   "station": "sorter_right_tube",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.395,
+   "mm_px": 0.63,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 9,
+   "obj": "tube_a",
+   "station": "sorter_right_tube",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 0.59,
+   "passed": true,
+   "dist_m": 0.216,
+   "mm_px": 0.34,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 10,
+   "obj": "plate_b",
+   "station": "sorter_left_plate",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.464,
+   "mm_px": 0.74,
+   "why": []
+  },
+  {
+   "transfer": 10,
+   "obj": "plate_b",
+   "station": "sorter_left_plate",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  },
+  {
+   "transfer": 10,
+   "obj": "plate_b",
+   "station": "fluent_plate",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 0.0,
+   "passed": false,
+   "dist_m": 0.518,
+   "mm_px": 0.82,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 10,
+   "obj": "plate_b",
+   "station": "fluent_plate",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.509,
+   "mm_px": 0.81,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 11,
+   "obj": "tube_b",
+   "station": "tube_hotel_2",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.518,
+   "mm_px": 0.82,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 11,
+   "obj": "tube_b",
+   "station": "tube_hotel_2",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 0.59,
+   "passed": true,
+   "dist_m": 0.216,
+   "mm_px": 0.34,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 11,
+   "obj": "tube_b",
+   "station": "fluent_tube",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 0.0,
+   "passed": false,
+   "dist_m": 0.456,
+   "mm_px": 0.73,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 11,
+   "obj": "tube_b",
+   "station": "fluent_tube",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.43,
+   "mm_px": 0.69,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 12,
+   "obj": "tube_b",
+   "station": "fluent_tube",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.43,
+   "mm_px": 0.69,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 12,
+   "obj": "tube_b",
+   "station": "fluent_tube",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 0.59,
+   "passed": true,
+   "dist_m": 0.216,
+   "mm_px": 0.34,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 12,
+   "obj": "tube_b",
+   "station": "ngs_tube",
+   "photo": "사진4",
+   "look": "seat",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.357,
+   "mm_px": 0.57,
+   "why": []
+  },
+  {
+   "transfer": 12,
+   "obj": "tube_b",
+   "station": "ngs_tube",
+   "photo": "사진6",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.341,
+   "mm_px": 0.54,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 13,
+   "obj": "plate_b",
+   "station": "fluent_plate",
+   "photo": "사진1",
+   "look": "object",
+   "visible": 0.8,
+   "passed": true,
+   "dist_m": 0.509,
+   "mm_px": 0.81,
+   "why": [
+    "가림"
+   ]
+  },
+  {
+   "transfer": 13,
+   "obj": "plate_b",
+   "station": "fluent_plate",
+   "photo": "사진2",
+   "look": "held",
+   "visible": 1.0,
+   "passed": true,
+   "dist_m": 0.248,
+   "mm_px": 0.39,
+   "why": []
+  }
+ ]
+}

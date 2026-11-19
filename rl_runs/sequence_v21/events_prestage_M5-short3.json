@@ -1,0 +1,209 @@
+{
+ "sequence": "sequence_v21_prestage.toml",
+ "camera": "land20",
+ "layout": "t1p20",
+ "prelook": "auto",
+ "faults": [
+  "M5:short=3"
+ ],
+ "resume": null,
+ "stop": {
+  "msg": "M5 사진6: tube_a 가 Fluent 튜브 에서 크게 벗어남 / 떨어짐 (f_mm=40.47 l_mm=-0.98 z_mm=-20.85 tilt_deg=56.45)",
+  "kind": "transfer",
+  "sid": "M5",
+  "run": null,
+  "seat": null
+ },
+ "sim_s": 59.22,
+ "plan_wall_s": 2.1,
+ "robot_transfer_s": 50.18,
+ "robot_retry_s": 0,
+ "robot_wait_s": 8.03,
+ "prefetch": true,
+ "plan_idle_s": 1.01,
+ "steps": {
+  "M1": {
+   "state": "완료",
+   "t0": 1.01,
+   "plan_s": 1.01,
+   "plan_idle_s": 1.01,
+   "plan_how": "지금 계획 (미리 한 계획 없음)",
+   "t1": 18.14,
+   "retries": 0,
+   "prelook": true
+  },
+  "R1": {
+   "state": "완료",
+   "t0": 18.14,
+   "t1": 26.17
+  },
+  "M2": {
+   "state": "완료",
+   "t0": 26.17,
+   "plan_s": 0.42,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 41.08,
+   "retries": 0,
+   "prelook": false
+  },
+  "R2": {
+   "state": "완료",
+   "t0": 41.08,
+   "t1": 56.11
+  },
+  "M5": {
+   "state": "실패",
+   "t0": 41.08,
+   "plan_s": 0.59,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 59.22,
+   "note": "M5 사진6: tube_a 가 Fluent 튜브 에서 크게 벗어남 / 떨어짐 (f_mm=40.47 l_mm=-0.98 z_mm=-20.85 tilt_deg=56.45)"
+  },
+  "M3": {
+   "state": "대기"
+  },
+  "R3": {
+   "state": "대기"
+  },
+  "M4": {
+   "state": "대기"
+  },
+  "R4": {
+   "state": "대기"
+  },
+  "M7": {
+   "state": "대기"
+  },
+  "M6": {
+   "state": "대기"
+  },
+  "M8": {
+   "state": "대기"
+  },
+  "R5": {
+   "state": "대기"
+  },
+  "M11": {
+   "state": "대기"
+  },
+  "M9": {
+   "state": "대기"
+  },
+  "M10": {
+   "state": "대기"
+  },
+  "R6": {
+   "state": "대기"
+  },
+  "M12": {
+   "state": "대기"
+  },
+  "R7": {
+   "state": "대기"
+  },
+  "M13": {
+   "state": "대기"
+  }
+ },
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 17.1,
+   "f_mm": -0.23,
+   "l_mm": 0.11,
+   "z_mm": -0.01,
+   "tilt_deg": 0.01
+  },
+  {
+   "id": "M2",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.9,
+   "f_mm": -0.13,
+   "l_mm": 0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  }
+ ],
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 0.0,
+   "t1": 1.01,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 2.98,
+   "t1": 2.98,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 1.01,
+   "t1": 18.14,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 18.14,
+   "t1": 26.17,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 18.14,
+   "t1": 26.17,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 26.17,
+   "t1": 41.08,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 44.35,
+   "t1": 44.35,
+   "label": "M5"
+  },
+  {
+   "lane": "STX44",
+   "kind": "run",
+   "t0": 41.08,
+   "t1": 56.11,
+   "label": "R2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 41.08,
+   "t1": 59.22,
+   "label": "M5"
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "bio": {
+  "total_seconds": 202.54,
+  "per_transfer": [
+   22.36,
+   18.04,
+   25.63,
+   29.17,
+   25.56,
+   23.22,
+   29.2,
+   29.35
+  ],
+  "parts": {
+   "fine": 136.6,
+   "gripper": 6.7,
+   "photo": 20.0,
+   "transit": 39.2
+  },
+  "issues": 4
+ },
+ "bio_opt": {
+  "total_seconds": 196.2,
+  "per_transfer": [
+   22.36,
+   16.86,
+   25.26,
+   26.17,
+   26.14,
+   23.87,
+   26.18,
+   29.35
+  ],
+  "parts": {
+   "fine": 136.6,
+   "gripper": 6.7,
+   "photo": 20.0,
+   "transit": 32.9
+  },
+  "issues": 0
+ },
+ "v2": {
+  "total_seconds": 202.46,
+  "per_transfer": [
+   20.22,
+   20.12,
+   23.13,
+   25.39,
+   29.71,
+   26.34,
+   26.8,
+   30.75
+  ],
+  "parts": {
+   "fine": 134.3,
+   "gripper": 6.7,
+   "photo": 20.0,
+   "transit": 41.5
+  },
+  "issues": 21
+ }
+}

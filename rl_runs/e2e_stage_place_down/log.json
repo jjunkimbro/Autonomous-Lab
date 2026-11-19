@@ -1,0 +1,1274 @@
+[
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 0.0,
+  "error_mm": [
+   1.02,
+   0.88,
+   8.02
+  ],
+  "time_s": 3.0,
+  "steps": 0,
+  "minutes": 0.3,
+  "train_success": 0.0,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 10.4145,
+  "error_mm": [
+   0.69,
+   0.69,
+   0.72
+  ],
+  "time_s": 3.0,
+  "steps": 101376,
+  "minutes": 8.7,
+  "train_success": 0.145,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 10.7015,
+  "error_mm": [
+   0.77,
+   0.62,
+   0.77
+  ],
+  "time_s": 3.0,
+  "steps": 202752,
+  "minutes": 17.3,
+  "train_success": 0.205,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 15.3505,
+  "error_mm": [
+   1.6,
+   0.62,
+   0.78
+  ],
+  "time_s": 3.0,
+  "steps": 301056,
+  "minutes": 25.6,
+  "train_success": 0.225,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 18.85275,
+  "error_mm": [
+   1.84,
+   0.65,
+   0.86
+  ],
+  "time_s": 3.0,
+  "steps": 402432,
+  "minutes": 8.7,
+  "train_success": 0.225,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 10.29425,
+  "error_mm": [
+   0.76,
+   0.6,
+   0.8
+  ],
+  "time_s": 3.0,
+  "steps": 503808,
+  "minutes": 17.3,
+  "train_success": 0.28,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.0,
+  "fluent_plate": 0.0,
+  "incubator_plate": 0.0,
+  "reader_plate": 0.0,
+  "sorter_left_plate": 0.0,
+  "outcomes": {
+   "timeout": 40
+  },
+  "max_force_N": 11.266250000000001,
+  "error_mm": [
+   0.7,
+   0.69,
+   0.69
+  ],
+  "time_s": 3.0,
+  "steps": 602112,
+  "minutes": 25.7,
+  "train_success": 0.285,
+  "difficulty": 0.3
+ },
+ {
+  "success": 0.65,
+  "fluent_plate": 0.5,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 14,
+   "settled_late+ok": 26
+  },
+  "max_force_N": 11.1965,
+  "error_mm": [
+   0.6,
+   0.54,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 721920,
+  "minutes": 9.1,
+  "train_success": 0.36,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.55,
+  "fluent_plate": 0.6,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.2,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 18,
+   "settled_late+ok": 22
+  },
+  "max_force_N": 11.708249999999998,
+  "error_mm": [
+   0.64,
+   0.66,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 823296,
+  "minutes": 18.5,
+  "train_success": 0.425,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.6,
+  "fluent_plate": 0.5,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.2,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled_late": 16,
+   "settled_late+ok": 24
+  },
+  "max_force_N": 10.091,
+  "error_mm": [
+   0.7,
+   0.67,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 943104,
+  "minutes": 8.8,
+  "train_success": 0.475,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.5,
+  "fluent_plate": 0.4,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.2,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 20,
+   "settled_late+ok": 20
+  },
+  "max_force_N": 9.123750000000001,
+  "error_mm": [
+   0.78,
+   0.64,
+   0.01
+  ],
+  "time_s": 3.0,
+  "steps": 1044480,
+  "minutes": 10.0,
+  "train_success": 0.43,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.55,
+  "fluent_plate": 0.5,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.3,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 18,
+   "settled_late+ok": 22
+  },
+  "max_force_N": 10.2075,
+  "error_mm": [
+   0.9,
+   0.64,
+   0.01
+  ],
+  "time_s": 3.0,
+  "steps": 1145856,
+  "minutes": 18.9,
+  "train_success": 0.49,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.575,
+  "fluent_plate": 0.6,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.3,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 17,
+   "settled_late+ok": 23
+  },
+  "max_force_N": 10.07075,
+  "error_mm": [
+   0.99,
+   0.64,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 1244160,
+  "minutes": 27.5,
+  "train_success": 0.445,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.55,
+  "fluent_plate": 0.1,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 18,
+   "settled_late+ok": 21,
+   "settled+ok": 1
+  },
+  "max_force_N": 9.43375,
+  "error_mm": [
+   0.69,
+   0.71,
+   0.0
+  ],
+  "time_s": 2.9875,
+  "steps": 1345536,
+  "minutes": 36.4,
+  "train_success": 0.46,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.525,
+  "fluent_plate": 0.5,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.4,
+  "sorter_left_plate": 0.2,
+  "outcomes": {
+   "settled_late": 19,
+   "settled_late+ok": 21
+  },
+  "max_force_N": 12.38925,
+  "error_mm": [
+   1.2,
+   0.6,
+   0.01
+  ],
+  "time_s": 3.0,
+  "steps": 1443840,
+  "minutes": 45.6,
+  "train_success": 0.57,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.675,
+  "fluent_plate": 0.8,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.5,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled_late": 13,
+   "settled_late+ok": 26,
+   "settled+ok": 1
+  },
+  "max_force_N": 11.315,
+  "error_mm": [
+   0.68,
+   0.57,
+   0.0
+  ],
+  "time_s": 2.96,
+  "steps": 1545216,
+  "minutes": 55.2,
+  "train_success": 0.545,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.575,
+  "fluent_plate": 0.4,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.3,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled_late": 17,
+   "settled_late+ok": 23
+  },
+  "max_force_N": 11.86275,
+  "error_mm": [
+   0.7,
+   0.62,
+   0.0
+  ],
+  "time_s": 3.0,
+  "steps": 1643520,
+  "minutes": 64.4,
+  "train_success": 0.505,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.65,
+  "fluent_plate": 0.2,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled_late": 14,
+   "settled+ok": 10,
+   "settled_late+ok": 16
+  },
+  "max_force_N": 13.2125,
+  "error_mm": [
+   0.73,
+   0.62,
+   0.0
+  ],
+  "time_s": 2.4899999999999998,
+  "steps": 1744896,
+  "minutes": 73.8,
+  "train_success": 0.505,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.575,
+  "fluent_plate": 0.3,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.2,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled_late": 17,
+   "settled+ok": 5,
+   "settled_late+ok": 18
+  },
+  "max_force_N": 13.870249999999999,
+  "error_mm": [
+   0.7,
+   0.6,
+   0.0
+  ],
+  "time_s": 2.77,
+  "steps": 1843200,
+  "minutes": 82.7,
+  "train_success": 0.505,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.65,
+  "fluent_plate": 0.6,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled_late": 13,
+   "settled": 1,
+   "settled_late+ok": 18,
+   "settled+ok": 8
+  },
+  "max_force_N": 14.51225,
+  "error_mm": [
+   0.62,
+   0.66,
+   0.0
+  ],
+  "time_s": 2.5725000000000002,
+  "steps": 1944576,
+  "minutes": 91.5,
+  "train_success": 0.61,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.575,
+  "fluent_plate": 0.4,
+  "incubator_plate": 0.7,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled_late": 14,
+   "settled": 3,
+   "settled_late+ok": 16,
+   "settled+ok": 7
+  },
+  "max_force_N": 15.384750000000002,
+  "error_mm": [
+   0.65,
+   0.64,
+   0.0
+  ],
+  "time_s": 2.4725,
+  "steps": 2045952,
+  "minutes": 100.3,
+  "train_success": 0.57,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.75,
+  "fluent_plate": 0.7,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled": 1,
+   "settled+ok": 12,
+   "settled_late": 8,
+   "settled_late+ok": 18,
+   "timeout": 1
+  },
+  "max_force_N": 16.84175,
+  "error_mm": [
+   0.74,
+   0.44,
+   0.0
+  ],
+  "time_s": 2.4274999999999998,
+  "steps": 2144256,
+  "minutes": 108.7,
+  "train_success": 0.58,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.625,
+  "fluent_plate": 0.6,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.4,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled": 2,
+   "settled+ok": 13,
+   "settled_late": 13,
+   "settled_late+ok": 12
+  },
+  "max_force_N": 16.26125,
+  "error_mm": [
+   0.66,
+   0.42,
+   0.0
+  ],
+  "time_s": 2.5,
+  "steps": 2245632,
+  "minutes": 117.5,
+  "train_success": 0.665,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.625,
+  "fluent_plate": 0.7,
+  "incubator_plate": 0.8,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled": 4,
+   "settled_late": 11,
+   "settled_late+ok": 11,
+   "settled+ok": 14
+  },
+  "max_force_N": 19.035,
+  "error_mm": [
+   0.8,
+   0.56,
+   0.0
+  ],
+  "time_s": 2.1975000000000002,
+  "steps": 2343936,
+  "minutes": 125.9,
+  "train_success": 0.635,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.625,
+  "fluent_plate": 0.5,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled": 6,
+   "settled_late": 8,
+   "settled_late+ok": 10,
+   "settled+ok": 15,
+   "force": 1
+  },
+  "max_force_N": 20.526,
+  "error_mm": [
+   1.01,
+   0.55,
+   0.0
+  ],
+  "time_s": 1.9675,
+  "steps": 2445312,
+  "minutes": 134.6,
+  "train_success": 0.685,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.8,
+  "fluent_plate": 0.9,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled": 2,
+   "settled+ok": 17,
+   "settled_late+ok": 15,
+   "settled_late": 6
+  },
+  "max_force_N": 21.208499999999997,
+  "error_mm": [
+   0.65,
+   0.41,
+   0.0
+  ],
+  "time_s": 2.245,
+  "steps": 2543616,
+  "minutes": 143.0,
+  "train_success": 0.635,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.65,
+  "fluent_plate": 0.9,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.4,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled": 4,
+   "settled_late": 8,
+   "settled+ok": 16,
+   "settled_late+ok": 10,
+   "timeout": 1,
+   "drop": 1
+  },
+  "max_force_N": 18.133499999999998,
+  "error_mm": [
+   0.74,
+   0.46,
+   0.0
+  ],
+  "time_s": 2.04,
+  "steps": 2644992,
+  "minutes": 151.6,
+  "train_success": 0.655,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.675,
+  "fluent_plate": 0.5,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled": 5,
+   "settled+ok": 16,
+   "settled_late+ok": 11,
+   "settled_late": 7,
+   "force": 1
+  },
+  "max_force_N": 19.3405,
+  "error_mm": [
+   0.72,
+   0.48,
+   0.0
+  ],
+  "time_s": 1.9975,
+  "steps": 2743296,
+  "minutes": 160.0,
+  "train_success": 0.655,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.7,
+  "fluent_plate": 0.6,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled": 5,
+   "settled_late": 5,
+   "settled_late+ok": 10,
+   "settled+ok": 18,
+   "timeout": 2
+  },
+  "max_force_N": 20.15675,
+  "error_mm": [
+   0.68,
+   0.48,
+   0.0
+  ],
+  "time_s": 2.0875,
+  "steps": 2844672,
+  "minutes": 168.6,
+  "train_success": 0.66,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.825,
+  "fluent_plate": 0.7,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled": 5,
+   "settled+ok": 20,
+   "settled_late+ok": 13,
+   "settled_late": 2
+  },
+  "max_force_N": 16.83175,
+  "error_mm": [
+   0.65,
+   0.57,
+   0.0
+  ],
+  "time_s": 2.02,
+  "steps": 2946048,
+  "minutes": 177.2,
+  "train_success": 0.645,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.725,
+  "fluent_plate": 0.5,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled": 3,
+   "settled+ok": 20,
+   "settled_late": 7,
+   "settled_late+ok": 9,
+   "timeout": 1
+  },
+  "max_force_N": 20.573,
+  "error_mm": [
+   0.64,
+   0.49,
+   0.0
+  ],
+  "time_s": 2.115,
+  "steps": 3044352,
+  "minutes": 185.6,
+  "train_success": 0.74,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.75,
+  "fluent_plate": 0.6,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled": 7,
+   "settled+ok": 17,
+   "settled_late": 3,
+   "settled_late+ok": 13
+  },
+  "max_force_N": 18.53575,
+  "error_mm": [
+   0.68,
+   0.56,
+   0.0
+  ],
+  "time_s": 1.9649999999999999,
+  "steps": 3145728,
+  "minutes": 194.2,
+  "train_success": 0.725,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.725,
+  "fluent_plate": 0.9,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.3,
+  "outcomes": {
+   "settled": 4,
+   "settled+ok": 22,
+   "settled_late": 7,
+   "settled_late+ok": 7
+  },
+  "max_force_N": 20.91025,
+  "error_mm": [
+   0.61,
+   0.64,
+   0.0
+  ],
+  "time_s": 2.0324999999999998,
+  "steps": 3244032,
+  "minutes": 202.5,
+  "train_success": 0.72,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.65,
+  "fluent_plate": 0.7,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.3,
+  "outcomes": {
+   "settled": 3,
+   "settled_late": 9,
+   "settled_late+ok": 11,
+   "settled+ok": 15,
+   "timeout": 1,
+   "drop": 1
+  },
+  "max_force_N": 18.409,
+  "error_mm": [
+   0.66,
+   0.68,
+   0.0
+  ],
+  "time_s": 2.2025,
+  "steps": 3345408,
+  "minutes": 211.1,
+  "train_success": 0.7,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.6,
+  "fluent_plate": 0.6,
+  "incubator_plate": 0.8,
+  "reader_plate": 0.5,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled": 5,
+   "settled_late": 10,
+   "settled_late+ok": 10,
+   "settled+ok": 14,
+   "force": 1
+  },
+  "max_force_N": 18.99175,
+  "error_mm": [
+   0.74,
+   0.6,
+   0.0
+  ],
+  "time_s": 2.18,
+  "steps": 3443712,
+  "minutes": 219.5,
+  "train_success": 0.695,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.75,
+  "fluent_plate": 0.8,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.9,
+  "sorter_left_plate": 0.4,
+  "outcomes": {
+   "settled": 3,
+   "settled_late": 6,
+   "settled+ok": 24,
+   "settled_late+ok": 6,
+   "force": 1
+  },
+  "max_force_N": 21.225749999999998,
+  "error_mm": [
+   0.66,
+   0.58,
+   0.0
+  ],
+  "time_s": 1.83,
+  "steps": 3545088,
+  "minutes": 228.1,
+  "train_success": 0.725,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.65,
+  "fluent_plate": 0.9,
+  "incubator_plate": 0.8,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.2,
+  "outcomes": {
+   "settled": 6,
+   "settled_late": 6,
+   "settled+ok": 21,
+   "force": 2,
+   "settled_late+ok": 5
+  },
+  "max_force_N": 21.10525,
+  "error_mm": [
+   0.68,
+   0.69,
+   0.0
+  ],
+  "time_s": 1.8074999999999999,
+  "steps": 3643392,
+  "minutes": 236.4,
+  "train_success": 0.72,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.8,
+  "fluent_plate": 0.8,
+  "incubator_plate": 0.8,
+  "reader_plate": 0.9,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled": 5,
+   "settled_late+ok": 8,
+   "settled_late": 3,
+   "settled+ok": 24
+  },
+  "max_force_N": 21.45375,
+  "error_mm": [
+   0.55,
+   0.46,
+   0.0
+  ],
+  "time_s": 1.81,
+  "steps": 3744768,
+  "minutes": 245.0,
+  "train_success": 0.735,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.725,
+  "fluent_plate": 0.8,
+  "incubator_plate": 0.8,
+  "reader_plate": 0.6,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled": 6,
+   "settled_late+ok": 6,
+   "settled_late": 3,
+   "settled+ok": 23,
+   "timeout": 1,
+   "force": 1
+  },
+  "max_force_N": 22.73525,
+  "error_mm": [
+   0.55,
+   0.66,
+   0.0
+  ],
+  "time_s": 1.8975000000000002,
+  "steps": 3846144,
+  "minutes": 253.6,
+  "train_success": 0.735,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.875,
+  "fluent_plate": 0.8,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled+ok": 30,
+   "settled_late+ok": 5,
+   "settled": 3,
+   "settled_late": 2
+  },
+  "max_force_N": 21.076,
+  "error_mm": [
+   0.44,
+   0.62,
+   0.0
+  ],
+  "time_s": 1.8325,
+  "steps": 3944448,
+  "minutes": 261.8,
+  "train_success": 0.765,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.775,
+  "fluent_plate": 1.0,
+  "incubator_plate": 0.7,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled+ok": 26,
+   "settled_late": 2,
+   "settled": 7,
+   "settled_late+ok": 5
+  },
+  "max_force_N": 18.3005,
+  "error_mm": [
+   0.43,
+   0.44,
+   0.0
+  ],
+  "time_s": 1.4899999999999998,
+  "steps": 4045824,
+  "minutes": 270.4,
+  "train_success": 0.76,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.85,
+  "fluent_plate": 0.9,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.9,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled+ok": 26,
+   "settled_late+ok": 8,
+   "settled": 4,
+   "settled_late": 2
+  },
+  "max_force_N": 21.42775,
+  "error_mm": [
+   0.43,
+   0.62,
+   0.0
+  ],
+  "time_s": 1.7375,
+  "steps": 4144128,
+  "minutes": 278.7,
+  "train_success": 0.81,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.8,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.9,
+  "sorter_left_plate": 0.3,
+  "outcomes": {
+   "settled+ok": 28,
+   "settled_late": 6,
+   "settled_late+ok": 4,
+   "settled": 2
+  },
+  "max_force_N": 18.9375,
+  "error_mm": [
+   0.4,
+   0.64,
+   0.0
+  ],
+  "time_s": 1.6575,
+  "steps": 4245504,
+  "minutes": 287.2,
+  "train_success": 0.785,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.875,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.7,
+  "outcomes": {
+   "settled+ok": 32,
+   "settled_late": 2,
+   "settled": 2,
+   "timeout": 1,
+   "settled_late+ok": 3
+  },
+  "max_force_N": 21.643250000000002,
+  "error_mm": [
+   0.44,
+   0.63,
+   0.0
+  ],
+  "time_s": 1.525,
+  "steps": 4343808,
+  "minutes": 295.5,
+  "train_success": 0.825,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.825,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.6,
+  "outcomes": {
+   "settled+ok": 28,
+   "settled": 4,
+   "settled_late": 3,
+   "settled_late+ok": 5
+  },
+  "max_force_N": 16.7365,
+  "error_mm": [
+   0.54,
+   0.46,
+   0.0
+  ],
+  "time_s": 1.3925,
+  "steps": 4445184,
+  "minutes": 304.0,
+  "train_success": 0.79,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.775,
+  "fluent_plate": 0.9,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.9,
+  "sorter_left_plate": 0.3,
+  "outcomes": {
+   "settled+ok": 31,
+   "settled_late": 4,
+   "settled": 3,
+   "timeout": 2
+  },
+  "max_force_N": 19.27475,
+  "error_mm": [
+   0.55,
+   0.6,
+   0.0
+  ],
+  "time_s": 1.3175000000000001,
+  "steps": 4543488,
+  "minutes": 312.2,
+  "train_success": 0.84,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.875,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled+ok": 32,
+   "settled_late": 1,
+   "settled": 3,
+   "settled_late+ok": 3,
+   "force": 1
+  },
+  "max_force_N": 20.6155,
+  "error_mm": [
+   0.4,
+   0.64,
+   0.0
+  ],
+  "time_s": 1.455,
+  "steps": 4644864,
+  "minutes": 320.7,
+  "train_success": 0.78,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.825,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled+ok": 31,
+   "settled": 6,
+   "settled_late+ok": 2,
+   "timeout": 1
+  },
+  "max_force_N": 17.683249999999997,
+  "error_mm": [
+   0.39,
+   0.63,
+   0.0
+  ],
+  "time_s": 1.1075,
+  "steps": 4743168,
+  "minutes": 328.9,
+  "train_success": 0.79,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.85,
+  "fluent_plate": 1.0,
+  "incubator_plate": 0.8,
+  "reader_plate": 0.8,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled+ok": 33,
+   "settled": 5,
+   "force": 1,
+   "settled_late+ok": 1
+  },
+  "max_force_N": 18.7545,
+  "error_mm": [
+   0.42,
+   0.64,
+   0.0
+  ],
+  "time_s": 1.2625,
+  "steps": 4844544,
+  "minutes": 337.3,
+  "train_success": 0.78,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.8,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 0.7,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled+ok": 31,
+   "settled": 6,
+   "settled_late": 2,
+   "settled_late+ok": 1
+  },
+  "max_force_N": 16.604750000000003,
+  "error_mm": [
+   0.55,
+   0.46,
+   0.0
+  ],
+  "time_s": 1.1075,
+  "steps": 4945920,
+  "minutes": 345.7,
+  "train_success": 0.835,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.85,
+  "fluent_plate": 0.9,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 0.5,
+  "outcomes": {
+   "settled+ok": 27,
+   "settled_late+ok": 7,
+   "settled_late": 3,
+   "settled": 2,
+   "timeout": 1
+  },
+  "max_force_N": 18.869,
+  "error_mm": [
+   0.56,
+   0.6,
+   0.0
+  ],
+  "time_s": 1.8375,
+  "steps": 5047296,
+  "minutes": 35.7,
+  "train_success": 0.695,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.9,
+  "fluent_plate": 0.9,
+  "incubator_plate": 0.9,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled+ok": 32,
+   "settled_late+ok": 4,
+   "settled": 1,
+   "timeout": 2,
+   "settled_late": 1
+  },
+  "max_force_N": 18.87375,
+  "error_mm": [
+   0.46,
+   0.34,
+   0.0
+  ],
+  "time_s": 1.425,
+  "steps": 5146368,
+  "minutes": 70.7,
+  "train_success": 0.795,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.95,
+  "fluent_plate": 1.0,
+  "incubator_plate": 1.0,
+  "reader_plate": 1.0,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled+ok": 34,
+   "settled_late+ok": 4,
+   "settled": 2
+  },
+  "max_force_N": 20.61225,
+  "error_mm": [
+   0.56,
+   0.34,
+   0.0
+  ],
+  "time_s": 1.2625,
+  "steps": 5247744,
+  "minutes": 108.1,
+  "train_success": 0.72,
+  "difficulty": 1.0
+ },
+ {
+  "success": 0.85,
+  "fluent_plate": 0.8,
+  "incubator_plate": 0.9,
+  "reader_plate": 0.9,
+  "sorter_left_plate": 0.8,
+  "outcomes": {
+   "settled+ok": 32,
+   "settled_late+ok": 2,
+   "force": 2,
+   "settled": 4
+  },
+  "max_force_N": 23.07975,
+  "error_mm": [
+   0.64,
+   0.37,
+   0.0
+  ],
+  "time_s": 1.28,
+  "steps": 5346816,
+  "minutes": 145.1,
+  "train_success": 0.775,
+  "difficulty": 1.0
+ }
+]

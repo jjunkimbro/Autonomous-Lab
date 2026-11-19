@@ -1,0 +1,36 @@
+{
+ "d455_mount_A_top": {
+  "watertight": true,
+  "volume_cm3": 89.0,
+  "mass_g_petg": 113.0,
+  "bbox_mm": [
+   130.0,
+   113.0,
+   42.2
+  ]
+ },
+ "d455_mount_B_bottom": {
+  "watertight": true,
+  "volume_cm3": 16.8,
+  "mass_g_petg": 21.4,
+  "bbox_mm": [
+   109.0,
+   44.0,
+   18.0
+  ]
+ },
+ "camera_overlap_mm3": -0.0,
+ "params_mm": {
+  "wrist_d": 75.0,
+  "liner": 1.0,
+  "collar_in_d": 77.0,
+  "collar_out_d": 89.0,
+  "collar_width": 18.0,
+  "tilt_deg": 20.0,
+  "camera_from_axis": 110.0,
+  "camera_ahead_of_flange": 15.0,
+  "gap": 21.0,
+  "m4_hole": 4.4,
+  "quarter20_hole": 6.8
+ }
+}

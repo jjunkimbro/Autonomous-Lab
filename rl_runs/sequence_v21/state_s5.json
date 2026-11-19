@@ -1,0 +1,293 @@
+{
+ "sequence": "sequence_v21.toml",
+ "next_i": 4,
+ "next_step": "M5",
+ "stop": {
+  "msg": "M5 사진6: tube_a 가 Fluent 튜브 에서 크게 벗어남 / 떨어짐 (f_mm=40.85 l_mm=-1.02 z_mm=-20.95 tilt_deg=56.66)",
+  "kind": "transfer",
+  "sid": "M5",
+  "run": null,
+  "seat": null
+ },
+ "t_sim": 61.613999999947104,
+ "loc": {
+  "plate_a": "incubator_plate",
+  "plate_b": "plate_hotel_3",
+  "tube_a": "손",
+  "tube_b": "tube_hotel_2"
+ },
+ "occ": {
+  "plate_hotel_3": "plate_b",
+  "tube_hotel_2": "tube_b",
+  "incubator_plate": "plate_a"
+ },
+ "devices": {
+  "Fluent": {
+   "state": "대기",
+   "run_id": "R1",
+   "task": "판 a 분주",
+   "t_start": 17.345999999998217,
+   "t_done": 25.345999999998217
+  },
+  "STX44": {
+   "state": "완료",
+   "run_id": "R2",
+   "task": "판 a 배양",
+   "t_start": 44.43599999998714,
+   "t_done": 59.43599999998714
+  },
+  "Reader": {
+   "state": "대기",
+   "run_id": null,
+   "task": null,
+   "t_start": null,
+   "t_done": null
+  },
+  "SH800": {
+   "state": "대기",
+   "run_id": null,
+   "task": null,
+   "t_start": null,
+   "t_done": null
+  },
+  "NGS": {
+   "state": "대기",
+   "run_id": null,
+   "task": null,
+   "t_start": null,
+   "t_done": null
+  }
+ },
+ "status": {
+  "M1": {
+   "state": "완료",
+   "t0": 1.22,
+   "plan_s": 1.19,
+   "plan_idle_s": 1.22,
+   "plan_how": "지금 계획 (미리 한 계획 없음)",
+   "t1": 17.35,
+   "retries": 0,
+   "prelook": true
+  },
+  "R1": {
+   "state": "완료",
+   "t0": 17.35,
+   "t1": 25.37
+  },
+  "M2": {
+   "state": "완료",
+   "t0": 25.37,
+   "plan_s": 1.36,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 44.44,
+   "retries": 0,
+   "prelook": true
+  },
+  "R2": {
+   "state": "완료",
+   "t0": 44.44,
+   "t1": 59.47
+  },
+  "M5": {
+   "state": "실패",
+   "t0": 44.44,
+   "plan_s": 0.68,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 61.61,
+   "note": "M5 사진6: tube_a 가 Fluent 튜브 에서 크게 벗어남 / 떨어짐 (f_mm=40.85 l_mm=-1.02 z_mm=-20.95 tilt_deg=56.66)"
+  },
+  "M3": {
+   "state": "대기"
+  },
+  "R3": {
+   "state": "대기"
+  },
+  "M4": {
+   "state": "대기"
+  },
+  "R4": {
+   "state": "대기"
+  },
+  "M7": {
+   "state": "대기"
+  },
+  "M6": {
+   "state": "대기"
+  },
+  "M8": {
+   "state": "대기"
+  },
+  "R5": {
+   "state": "대기"
+  },
+  "M11": {
+   "state": "대기"
+  },
+  "M9": {
+   "state": "대기"
+  },
+  "M10": {
+   "state": "대기"
+  },
+  "R6": {
+   "state": "대기"
+  },
+  "M12": {
+   "state": "대기"
+  },
+  "R7": {
+   "state": "대기"
+  },
+  "M13": {
+   "state": "대기"
+  }
+ },
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 0.0,
+   "t1": 1.22,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 3.19,
+   "t1": 3.19,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 1.22,
+   "t1": 17.35,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 17.35,
+   "t1": 25.37,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 17.35,
+   "t1": 25.37,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 28.77,
+   "t1": 28.77,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 25.37,
+   "t1": 44.44,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 47.84,
+   "t1": 47.84,
+   "label": "M5"
+  },
+  {
+   "lane": "STX44",
+   "kind": "run",
+   "t0": 44.44,
+   "t1": 59.47,
+   "label": "R2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 44.44,
+   "t1": 61.61,
+   "label": "M5"
+  }
+ ],
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 16.1,
+   "f_mm": -0.23,
+   "l_mm": 0.11,
+   "z_mm": -0.01,
+   "tilt_deg": 0.01
+  },
+  {
+   "id": "M2",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": 1.0,
+   "ok": true,
+   "seconds": 19.1,
+   "f_mm": -0.12,
+   "l_mm": 0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  }
+ ],
+ "plan_wall": 3.5597734451293945,
+ "qpos": [
+  0.19615185114319952,
+  -1.572607379914155,
+  -1.0345173028095693,
+  1.8916237739438677,
+  -0.857036012659634,
+  -0.001575426956503489,
+  -1.1713226437534796e-06,
+  0.0200000000000772,
+  0.020000012348336326,
+  0.9698765661559409,
+  1.7598769805185308,
+  0.9869994250546679,
+  0.0001934834143339772,
+  2.3529909768391247e-06,
+  2.241044570332655e-06,
+  -0.9999999812768039,
+  0.4965,
+  0.84423,
+  0.891999426015864,
+  0.7071067811865475,
+  1.4408572475055096e-15,
+  -1.4408572475055096e-15,
+  -0.7071067811865475,
+  0.5941534983579807,
+  1.3350171679515175,
+  0.8356216208267938,
+  0.4732970435831809,
+  0.03467799403894177,
+  -0.8795562019105366,
+  -0.034179422838409655,
+  0.52,
+  1.01,
+  0.8574994650593734,
+  1.0,
+  2.7421312290701185e-16,
+  0.0,
+  0.0
+ ]
+}

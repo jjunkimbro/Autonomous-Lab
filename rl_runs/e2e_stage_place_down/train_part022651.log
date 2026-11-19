@@ -1,0 +1,16 @@
+device NVIDIA RTX A5000
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 578, in <module>
+    main()
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\train_e2e_v12.py", line 426, in main
+    state = torch.load(args.resume, map_location=device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1632, in load
+    return _legacy_load(
+           ^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1894, in _legacy_load
+    return legacy_load(f)
+           ^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\.venv\Lib\site-packages\torch\serialization.py", line 1758, in legacy_load
+    raise RuntimeError(
+RuntimeError: Cannot use ``weights_only=True`` with files saved in the legacy .tar format. In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.

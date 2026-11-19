@@ -1,0 +1,1070 @@
+{
+ "sequence": "sequence_v21_serial.toml",
+ "camera": "land20",
+ "layout": "t1p20",
+ "prelook": "auto",
+ "faults": [
+  "M7:grasp=3.5"
+ ],
+ "resume": null,
+ "stop": null,
+ "sim_s": 298.96,
+ "plan_wall_s": 12.2,
+ "robot_transfer_s": 208.87,
+ "robot_retry_s": 25.36,
+ "robot_wait_s": 61.16,
+ "prefetch": true,
+ "plan_idle_s": 2.56,
+ "photo_s": 0.5,
+ "photo6_at": "all",
+ "photos": [
+  {
+   "t": 3.07,
+   "sid": "M1",
+   "photo": "사진0",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 5.67,
+   "sid": "M1",
+   "photo": "사진1",
+   "seat": "plate_hotel_4"
+  },
+  {
+   "t": 11.84,
+   "sid": "M1",
+   "photo": "사진2",
+   "seat": "plate_hotel_4"
+  },
+  {
+   "t": 14.32,
+   "sid": "M1",
+   "photo": "사진4",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 14.99,
+   "sid": "M1",
+   "photo": "사진5",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 20.33,
+   "sid": "M1",
+   "photo": "사진6",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 29.48,
+   "sid": "M2",
+   "photo": "사진1",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 34.57,
+   "sid": "M2",
+   "photo": "사진2",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 38.22,
+   "sid": "M2",
+   "photo": "사진4",
+   "seat": "incubator_plate"
+  },
+  {
+   "t": 38.89,
+   "sid": "M2",
+   "photo": "사진5",
+   "seat": "incubator_plate"
+  },
+  {
+   "t": 43.3,
+   "sid": "M2",
+   "photo": "사진6",
+   "seat": "incubator_plate"
+  },
+  {
+   "t": 59.64,
+   "sid": "M3",
+   "photo": "사진1",
+   "seat": "incubator_plate"
+  },
+  {
+   "t": 63.88,
+   "sid": "M3",
+   "photo": "사진2",
+   "seat": "incubator_plate"
+  },
+  {
+   "t": 66.02,
+   "sid": "M3",
+   "photo": "사진4",
+   "seat": "reader_plate"
+  },
+  {
+   "t": 66.74,
+   "sid": "M3",
+   "photo": "사진5",
+   "seat": "reader_plate"
+  },
+  {
+   "t": 71.36,
+   "sid": "M3",
+   "photo": "사진6",
+   "seat": "reader_plate"
+  },
+  {
+   "t": 80.18,
+   "sid": "M4",
+   "photo": "사진0",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 83.41,
+   "sid": "M4",
+   "photo": "사진1",
+   "seat": "reader_plate"
+  },
+  {
+   "t": 87.65,
+   "sid": "M4",
+   "photo": "사진2",
+   "seat": "reader_plate"
+  },
+  {
+   "t": 90.3,
+   "sid": "M4",
+   "photo": "사진4",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 90.97,
+   "sid": "M4",
+   "photo": "사진5",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 96.31,
+   "sid": "M4",
+   "photo": "사진6",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 97.99,
+   "sid": "M5",
+   "photo": "사진0",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 99.88,
+   "sid": "M5",
+   "photo": "사진1",
+   "seat": "tube_hotel_1"
+  },
+  {
+   "t": 105.25,
+   "sid": "M5",
+   "photo": "사진2",
+   "seat": "tube_hotel_1"
+  },
+  {
+   "t": 107.23,
+   "sid": "M5",
+   "photo": "사진4",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 107.94,
+   "sid": "M5",
+   "photo": "사진5",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 112.31,
+   "sid": "M5",
+   "photo": "사진6",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 124.24,
+   "sid": "M6",
+   "photo": "사진1",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 129.32,
+   "sid": "M6",
+   "photo": "사진2",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 139.86,
+   "sid": "M7",
+   "photo": "사진0",
+   "seat": "sorter_left_plate"
+  },
+  {
+   "t": 142.76,
+   "sid": "M7",
+   "photo": "사진1",
+   "seat": "plate_hotel_3"
+  },
+  {
+   "t": 149.44,
+   "sid": "M7",
+   "photo": "사진2",
+   "seat": "plate_hotel_3"
+  },
+  {
+   "t": 152.25,
+   "sid": "M7 다시 집기",
+   "photo": "사진4",
+   "seat": "plate_hotel_3"
+  },
+  {
+   "t": 152.92,
+   "sid": "M7 다시 집기",
+   "photo": "사진5",
+   "seat": "plate_hotel_3"
+  },
+  {
+   "t": 159.52,
+   "sid": "M7 다시 집기",
+   "photo": "사진6",
+   "seat": "plate_hotel_3"
+  },
+  {
+   "t": 160.86,
+   "sid": "M7 다시 집기",
+   "photo": "사진1",
+   "seat": "plate_hotel_3"
+  },
+  {
+   "t": 167.54,
+   "sid": "M7 다시 집기",
+   "photo": "사진2",
+   "seat": "plate_hotel_3"
+  },
+  {
+   "t": 170.14,
+   "sid": "M7 다시 집기",
+   "photo": "사진4",
+   "seat": "sorter_left_plate"
+  },
+  {
+   "t": 170.86,
+   "sid": "M7 다시 집기",
+   "photo": "사진5",
+   "seat": "sorter_left_plate"
+  },
+  {
+   "t": 176.27,
+   "sid": "M7 다시 집기",
+   "photo": "사진6",
+   "seat": "sorter_left_plate"
+  },
+  {
+   "t": 177.53,
+   "sid": "M8",
+   "photo": "사진0",
+   "seat": "sorter_right_tube"
+  },
+  {
+   "t": 181.99,
+   "sid": "M8",
+   "photo": "사진1",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 185.98,
+   "sid": "M8",
+   "photo": "사진2",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 188.16,
+   "sid": "M8",
+   "photo": "사진4",
+   "seat": "sorter_right_tube"
+  },
+  {
+   "t": 188.79,
+   "sid": "M8",
+   "photo": "사진5",
+   "seat": "sorter_right_tube"
+  },
+  {
+   "t": 193.49,
+   "sid": "M8",
+   "photo": "사진6",
+   "seat": "sorter_right_tube"
+  },
+  {
+   "t": 206.98,
+   "sid": "M9",
+   "photo": "사진1",
+   "seat": "sorter_right_tube"
+  },
+  {
+   "t": 211.47,
+   "sid": "M9",
+   "photo": "사진2",
+   "seat": "sorter_right_tube"
+  },
+  {
+   "t": 223.73,
+   "sid": "M10",
+   "photo": "사진0",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 225.83,
+   "sid": "M10",
+   "photo": "사진1",
+   "seat": "sorter_left_plate"
+  },
+  {
+   "t": 230.96,
+   "sid": "M10",
+   "photo": "사진2",
+   "seat": "sorter_left_plate"
+  },
+  {
+   "t": 233.06,
+   "sid": "M10",
+   "photo": "사진4",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 233.73,
+   "sid": "M10",
+   "photo": "사진5",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 239.06,
+   "sid": "M10",
+   "photo": "사진6",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 240.74,
+   "sid": "M11",
+   "photo": "사진0",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 242.8,
+   "sid": "M11",
+   "photo": "사진1",
+   "seat": "tube_hotel_2"
+  },
+  {
+   "t": 248.64,
+   "sid": "M11",
+   "photo": "사진2",
+   "seat": "tube_hotel_2"
+  },
+  {
+   "t": 250.49,
+   "sid": "M11",
+   "photo": "사진4",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 251.2,
+   "sid": "M11",
+   "photo": "사진5",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 256.07,
+   "sid": "M11",
+   "photo": "사진6",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 268.8,
+   "sid": "M12",
+   "photo": "사진1",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 272.79,
+   "sid": "M12",
+   "photo": "사진2",
+   "seat": "fluent_tube"
+  },
+  {
+   "t": 275.65,
+   "sid": "M12",
+   "photo": "사진4",
+   "seat": "ngs_tube"
+  },
+  {
+   "t": 276.36,
+   "sid": "M12",
+   "photo": "사진5",
+   "seat": "ngs_tube"
+  },
+  {
+   "t": 281.74,
+   "sid": "M12",
+   "photo": "사진6",
+   "seat": "ngs_tube"
+  },
+  {
+   "t": 284.97,
+   "sid": "M13",
+   "photo": "사진1",
+   "seat": "fluent_plate"
+  },
+  {
+   "t": 290.05,
+   "sid": "M13",
+   "photo": "사진2",
+   "seat": "fluent_plate"
+  }
+ ],
+ "steps": {
+  "M1": {
+   "state": "완료",
+   "t0": 1.09,
+   "plan_s": 1.07,
+   "plan_idle_s": 1.09,
+   "plan_how": "지금 계획 (미리 한 계획 없음)",
+   "t1": 20.33,
+   "retries": 0,
+   "prelook": true
+  },
+  "R1": {
+   "state": "완료",
+   "t0": 20.33,
+   "t1": 28.35
+  },
+  "M2": {
+   "state": "완료",
+   "t0": 28.35,
+   "plan_s": 0.44,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 43.3,
+   "retries": 0,
+   "prelook": false
+  },
+  "R2": {
+   "state": "완료",
+   "t0": 43.3,
+   "t1": 58.34
+  },
+  "M3": {
+   "state": "완료",
+   "t0": 58.34,
+   "plan_s": 0.03,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 71.36,
+   "retries": 0,
+   "prelook": false
+  },
+  "R3": {
+   "state": "완료",
+   "t0": 71.36,
+   "t1": 77.36
+  },
+  "M4": {
+   "state": "완료",
+   "t0": 77.36,
+   "plan_s": 0.83,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 96.31,
+   "retries": 0,
+   "prelook": true
+  },
+  "M5": {
+   "state": "완료",
+   "t0": 96.31,
+   "plan_s": 1.76,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 112.31,
+   "retries": 0,
+   "prelook": true
+  },
+  "R4": {
+   "state": "완료",
+   "t0": 112.31,
+   "t1": 122.35
+  },
+  "M6": {
+   "state": "완료",
+   "t0": 122.35,
+   "plan_s": 1.02,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 137.21,
+   "retries": 0,
+   "prelook": false
+  },
+  "M7": {
+   "state": "완료",
+   "t0": 137.21,
+   "plan_s": 1.06,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 176.27,
+   "retries": 1,
+   "prelook": true
+  },
+  "M8": {
+   "state": "완료",
+   "t0": 176.27,
+   "plan_s": 1.27,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 193.49,
+   "retries": 0,
+   "prelook": true
+  },
+  "R5": {
+   "state": "완료",
+   "t0": 193.49,
+   "t1": 205.51
+  },
+  "M9": {
+   "state": "완료",
+   "t0": 205.51,
+   "plan_s": 0.56,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 219.83,
+   "retries": 0,
+   "prelook": false
+  },
+  "M10": {
+   "state": "완료",
+   "t0": 219.83,
+   "plan_s": 1.03,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 239.06,
+   "retries": 0,
+   "prelook": true
+  },
+  "M11": {
+   "state": "완료",
+   "t0": 239.06,
+   "plan_s": 0.92,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 256.07,
+   "retries": 0,
+   "prelook": true
+  },
+  "R6": {
+   "state": "완료",
+   "t0": 256.07,
+   "t1": 266.11
+  },
+  "M12": {
+   "state": "완료",
+   "t0": 266.11,
+   "plan_s": 0.22,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 281.74,
+   "retries": 0,
+   "prelook": false
+  },
+  "R7": {
+   "state": "완료",
+   "t0": 281.74,
+   "t1": 291.77
+  },
+  "M13": {
+   "state": "완료",
+   "t0": 281.74,
+   "plan_s": 0.51,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 297.95,
+   "retries": 0,
+   "prelook": false
+  }
+ },
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 19.2,
+   "f_mm": -0.12,
+   "l_mm": 0.07,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M2",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 15.0,
+   "f_mm": -0.11,
+   "l_mm": 0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M3",
+   "obj": "plate_a",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 13.0,
+   "f_mm": -0.06,
+   "l_mm": -0.21,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M4",
+   "obj": "plate_a",
+   "source": "reader_plate",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 18.9,
+   "f_mm": -0.06,
+   "l_mm": -0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M5",
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.77,
+   "ok": true,
+   "seconds": 16.0,
+   "f_mm": -0.05,
+   "l_mm": 0.0,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M6",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "waste_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": null,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.9,
+   "pos": [
+    2.0966,
+    1.7978,
+    0.862
+   ]
+  },
+  {
+   "id": "M7",
+   "obj": "plate_b",
+   "source": "plate_hotel_3",
+   "target": "sorter_left_plate",
+   "retries": [
+    {
+     "kind": "다시 집기",
+     "mm": 3.72,
+     "tilt": 0.1
+    }
+   ],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 1.0,
+   "ok": true,
+   "seconds": 39.1,
+   "f_mm": -0.03,
+   "l_mm": -0.24,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M8",
+   "obj": "tube_a",
+   "source": "fluent_tube",
+   "target": "sorter_right_tube",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 1.0,
+   "ok": true,
+   "seconds": 17.2,
+   "f_mm": -0.04,
+   "l_mm": -0.18,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M9",
+   "obj": "tube_a",
+   "source": "sorter_right_tube",
+   "target": "waste_tube",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": null,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.3,
+   "pos": [
+    2.0927,
+    1.7944,
+    0.893
+   ]
+  },
+  {
+   "id": "M10",
+   "obj": "plate_b",
+   "source": "sorter_left_plate",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 19.2,
+   "f_mm": -0.08,
+   "l_mm": -0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M11",
+   "obj": "tube_b",
+   "source": "tube_hotel_2",
+   "target": "fluent_tube",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.77,
+   "ok": true,
+   "seconds": 17.0,
+   "f_mm": 0.01,
+   "l_mm": 0.03,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M12",
+   "obj": "tube_b",
+   "source": "fluent_tube",
+   "target": "ngs_tube",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 15.6,
+   "f_mm": -0.08,
+   "l_mm": -0.23,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M13",
+   "obj": "plate_b",
+   "source": "fluent_plate",
+   "target": "waste_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": null,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 16.2,
+   "pos": [
+    2.1014,
+    1.7779,
+    0.862
+   ]
+  }
+ ],
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 0.0,
+   "t1": 1.09,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 3.07,
+   "t1": 3.07,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 1.09,
+   "t1": 20.33,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 20.33,
+   "t1": 28.35,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 20.33,
+   "t1": 28.35,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 28.35,
+   "t1": 43.3,
+   "label": "M2"
+  },
+  {
+   "lane": "STX44",
+   "kind": "run",
+   "t0": 43.3,
+   "t1": 58.34,
+   "label": "R2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 43.3,
+   "t1": 58.34,
+   "label": "M3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 58.34,
+   "t1": 71.36,
+   "label": "M3"
+  },
+  {
+   "lane": "Reader",
+   "kind": "run",
+   "t0": 71.36,
+   "t1": 77.36,
+   "label": "R3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 71.36,
+   "t1": 77.36,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 80.18,
+   "t1": 80.18,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 77.36,
+   "t1": 96.31,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 97.99,
+   "t1": 97.99,
+   "label": "M5"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 96.31,
+   "t1": 112.31,
+   "label": "M5"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 112.31,
+   "t1": 122.35,
+   "label": "R4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 112.31,
+   "t1": 122.35,
+   "label": "M6"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 122.35,
+   "t1": 137.21,
+   "label": "M6"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 139.86,
+   "t1": 139.86,
+   "label": "M7"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 137.21,
+   "t1": 149.44,
+   "label": "M7"
+  },
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 149.44,
+   "t1": 150.91,
+   "label": "M7 다시 집기"
+  },
+  {
+   "lane": "로봇",
+   "kind": "retry",
+   "t0": 150.91,
+   "t1": 176.27,
+   "label": "M7 다시 집기"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 177.53,
+   "t1": 177.53,
+   "label": "M8"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 176.27,
+   "t1": 193.49,
+   "label": "M8"
+  },
+  {
+   "lane": "SH800",
+   "kind": "run",
+   "t0": 193.49,
+   "t1": 205.51,
+   "label": "R5"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 193.49,
+   "t1": 205.51,
+   "label": "M9"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 205.51,
+   "t1": 219.83,
+   "label": "M9"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 223.73,
+   "t1": 223.73,
+   "label": "M10"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 219.83,
+   "t1": 239.06,
+   "label": "M10"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 240.74,
+   "t1": 240.74,
+   "label": "M11"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 239.06,
+   "t1": 256.07,
+   "label": "M11"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 256.07,
+   "t1": 266.11,
+   "label": "R6"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 256.07,
+   "t1": 266.11,
+   "label": "M12"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 266.11,
+   "t1": 281.74,
+   "label": "M12"
+  },
+  {
+   "lane": "NGS",
+   "kind": "run",
+   "t0": 281.74,
+   "t1": 291.77,
+   "label": "R7"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 281.74,
+   "t1": 297.95,
+   "label": "M13"
+  }
+ ]
+}

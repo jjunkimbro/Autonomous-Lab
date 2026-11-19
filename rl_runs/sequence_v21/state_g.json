@@ -1,0 +1,733 @@
+{
+ "sequence": "sequence_v21.toml",
+ "next_i": 20,
+ "next_step": null,
+ "stop": null,
+ "t_sim": 294.37799999995076,
+ "loc": {
+  "plate_a": "waste_plate",
+  "plate_b": "waste_plate",
+  "tube_a": "waste_tube",
+  "tube_b": "ngs_tube"
+ },
+ "occ": {
+  "ngs_tube": "tube_b"
+ },
+ "devices": {
+  "Fluent": {
+   "state": "대기",
+   "run_id": "R6",
+   "task": "판 b -> 튜브 b 옮기기",
+   "t_start": 251.9160000008388,
+   "t_done": 261.91600000083884
+  },
+  "STX44": {
+   "state": "대기",
+   "run_id": "R2",
+   "task": "판 a 배양",
+   "t_start": 42.46199999999174,
+   "t_done": 57.46199999999174
+  },
+  "Reader": {
+   "state": "대기",
+   "run_id": "R3",
+   "task": "판 a 측정",
+   "t_start": 70.09799999997065,
+   "t_done": 76.09799999997065
+  },
+  "SH800": {
+   "state": "대기",
+   "run_id": "R5",
+   "task": "튜브 a 분류 -> 판 b",
+   "t_start": 190.0920000005436,
+   "t_done": 202.0920000005436
+  },
+  "NGS": {
+   "state": "완료",
+   "run_id": "R7",
+   "task": "튜브 b 시퀀싱",
+   "t_start": 277.15800000035796,
+   "t_done": 287.15800000035796
+  }
+ },
+ "status": {
+  "M1": {
+   "state": "완료",
+   "t0": 0.92,
+   "plan_s": 0.9,
+   "plan_idle_s": 0.92,
+   "plan_how": "지금 계획 (미리 한 계획 없음)",
+   "t1": 19.82,
+   "retries": 0,
+   "prelook": true
+  },
+  "R1": {
+   "state": "완료",
+   "t0": 19.82,
+   "t1": 27.85
+  },
+  "M2": {
+   "state": "완료",
+   "t0": 27.85,
+   "plan_s": 0.4,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 42.46,
+   "retries": 0,
+   "prelook": false
+  },
+  "R2": {
+   "state": "완료",
+   "t0": 42.46,
+   "t1": 57.5
+  },
+  "M3": {
+   "state": "완료",
+   "t0": 57.5,
+   "plan_s": 0.01,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 70.1,
+   "retries": 0,
+   "prelook": false
+  },
+  "R3": {
+   "state": "완료",
+   "t0": 70.1,
+   "t1": 76.1
+  },
+  "M4": {
+   "state": "완료",
+   "t0": 76.1,
+   "plan_s": 0.69,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 94.71,
+   "retries": 0,
+   "prelook": true
+  },
+  "M5": {
+   "state": "완료",
+   "t0": 94.71,
+   "plan_s": 1.46,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 110.29,
+   "retries": 0,
+   "prelook": true
+  },
+  "R4": {
+   "state": "완료",
+   "t0": 110.29,
+   "t1": 120.33
+  },
+  "M6": {
+   "state": "완료",
+   "t0": 120.33,
+   "plan_s": 0.82,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 135.2,
+   "retries": 0,
+   "prelook": false
+  },
+  "M7": {
+   "state": "완료",
+   "t0": 135.2,
+   "plan_s": 0.61,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 173.12,
+   "retries": 1,
+   "prelook": true
+  },
+  "M8": {
+   "state": "완료",
+   "t0": 173.12,
+   "plan_s": 1.12,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 190.09,
+   "retries": 0,
+   "prelook": true
+  },
+  "R5": {
+   "state": "완료",
+   "t0": 190.09,
+   "t1": 202.1
+  },
+  "M9": {
+   "state": "완료",
+   "t0": 202.1,
+   "plan_s": 0.47,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 216.43,
+   "retries": 0,
+   "prelook": false
+  },
+  "M10": {
+   "state": "완료",
+   "t0": 216.43,
+   "plan_s": 0.71,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 235.33,
+   "retries": 0,
+   "prelook": true
+  },
+  "M11": {
+   "state": "완료",
+   "t0": 235.33,
+   "plan_s": 0.67,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 251.92,
+   "retries": 0,
+   "prelook": true
+  },
+  "R6": {
+   "state": "완료",
+   "t0": 251.92,
+   "t1": 261.95
+  },
+  "M12": {
+   "state": "완료",
+   "t0": 261.95,
+   "plan_s": 0.18,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 277.16,
+   "retries": 0,
+   "prelook": false
+  },
+  "R7": {
+   "state": "완료",
+   "t0": 277.16,
+   "t1": 287.2
+  },
+  "M13": {
+   "state": "완료",
+   "t0": 277.16,
+   "plan_s": 0.46,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 293.37,
+   "retries": 0,
+   "prelook": false
+  }
+ },
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 0.0,
+   "t1": 0.92,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 2.9,
+   "t1": 2.9,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 0.92,
+   "t1": 19.82,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 19.82,
+   "t1": 27.85,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 19.82,
+   "t1": 27.85,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 27.85,
+   "t1": 42.46,
+   "label": "M2"
+  },
+  {
+   "lane": "STX44",
+   "kind": "run",
+   "t0": 42.46,
+   "t1": 57.5,
+   "label": "R2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 42.46,
+   "t1": 57.5,
+   "label": "M3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 57.5,
+   "t1": 70.1,
+   "label": "M3"
+  },
+  {
+   "lane": "Reader",
+   "kind": "run",
+   "t0": 70.1,
+   "t1": 76.1,
+   "label": "R3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 70.1,
+   "t1": 76.1,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 78.92,
+   "t1": 78.92,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 76.1,
+   "t1": 94.71,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 96.39,
+   "t1": 96.39,
+   "label": "M5"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 94.71,
+   "t1": 110.29,
+   "label": "M5"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 110.29,
+   "t1": 120.33,
+   "label": "R4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 110.29,
+   "t1": 120.33,
+   "label": "M6"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 120.33,
+   "t1": 135.2,
+   "label": "M6"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 137.84,
+   "t1": 137.84,
+   "label": "M7"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 135.2,
+   "t1": 147.42,
+   "label": "M7"
+  },
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 147.42,
+   "t1": 148.51,
+   "label": "M7 다시 집기"
+  },
+  {
+   "lane": "로봇",
+   "kind": "retry",
+   "t0": 148.51,
+   "t1": 173.12,
+   "label": "M7 다시 집기"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 174.38,
+   "t1": 174.38,
+   "label": "M8"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 173.12,
+   "t1": 190.09,
+   "label": "M8"
+  },
+  {
+   "lane": "SH800",
+   "kind": "run",
+   "t0": 190.09,
+   "t1": 202.1,
+   "label": "R5"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 190.09,
+   "t1": 202.1,
+   "label": "M9"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 202.1,
+   "t1": 216.43,
+   "label": "M9"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 220.33,
+   "t1": 220.33,
+   "label": "M10"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 216.43,
+   "t1": 235.33,
+   "label": "M10"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 237.01,
+   "t1": 237.01,
+   "label": "M11"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 235.33,
+   "t1": 251.92,
+   "label": "M11"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 251.92,
+   "t1": 261.95,
+   "label": "R6"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 251.92,
+   "t1": 261.95,
+   "label": "M12"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 261.95,
+   "t1": 277.16,
+   "label": "M12"
+  },
+  {
+   "lane": "NGS",
+   "kind": "run",
+   "t0": 277.16,
+   "t1": 287.2,
+   "label": "R7"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 277.16,
+   "t1": 293.37,
+   "label": "M13"
+  }
+ ],
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 18.9,
+   "f_mm": -0.15,
+   "l_mm": 0.08,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M2",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.6,
+   "f_mm": -0.15,
+   "l_mm": 0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M3",
+   "obj": "plate_a",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 12.6,
+   "f_mm": -0.09,
+   "l_mm": -0.21,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M4",
+   "obj": "plate_a",
+   "source": "reader_plate",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 18.6,
+   "f_mm": -0.09,
+   "l_mm": -0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M5",
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.77,
+   "ok": true,
+   "seconds": 15.6,
+   "f_mm": -0.06,
+   "l_mm": 0.0,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M6",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "waste_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": null,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.9,
+   "pos": [
+    2.1005,
+    1.7982,
+    0.862
+   ]
+  },
+  {
+   "id": "M7",
+   "obj": "plate_b",
+   "source": "plate_hotel_3",
+   "target": "sorter_left_plate",
+   "retries": [
+    {
+     "kind": "다시 집기",
+     "mm": 3.72,
+     "tilt": 0.1
+    }
+   ],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 1.0,
+   "ok": true,
+   "seconds": 37.9,
+   "f_mm": -0.06,
+   "l_mm": -0.24,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M8",
+   "obj": "tube_a",
+   "source": "fluent_tube",
+   "target": "sorter_right_tube",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 1.0,
+   "ok": true,
+   "seconds": 17.0,
+   "f_mm": -0.07,
+   "l_mm": -0.18,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M9",
+   "obj": "tube_a",
+   "source": "sorter_right_tube",
+   "target": "waste_tube",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": null,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.3,
+   "pos": [
+    2.0935,
+    1.7944,
+    0.8929
+   ]
+  },
+  {
+   "id": "M10",
+   "obj": "plate_b",
+   "source": "sorter_left_plate",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 18.9,
+   "f_mm": -0.1,
+   "l_mm": -0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M11",
+   "obj": "tube_b",
+   "source": "tube_hotel_2",
+   "target": "fluent_tube",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.77,
+   "ok": true,
+   "seconds": 16.6,
+   "f_mm": -0.01,
+   "l_mm": 0.03,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M12",
+   "obj": "tube_b",
+   "source": "fluent_tube",
+   "target": "ngs_tube",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 15.2,
+   "f_mm": -0.1,
+   "l_mm": -0.22,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M13",
+   "obj": "plate_b",
+   "source": "fluent_plate",
+   "target": "waste_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": null,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 16.2,
+   "pos": [
+    2.0979,
+    1.7989,
+    0.862
+   ]
+  }
+ ],
+ "plan_wall": 9.576082706451416,
+ "qpos": [
+  0.7615322196987787,
+  -2.481760382648654,
+  -1.0419483098521016,
+  1.9055078985808467,
+  -0.8636744172260512,
+  0.6602355151308305,
+  1.577512706972475e-06,
+  0.04550000000000007,
+  0.04550002783470974,
+  2.1004688840315366,
+  1.7981544735581014,
+  0.861997897297092,
+  -0.029328193276554396,
+  1.7393933844892664e-05,
+  -5.103657711326761e-07,
+  -0.9995698358675708,
+  2.097881514630484,
+  1.7989143109248513,
+  0.8619990599998955,
+  0.017983431284088778,
+  9.13842293943223e-06,
+  1.177467490161788e-06,
+  -0.9998382849813029,
+  2.09352035683109,
+  1.794400749119505,
+  0.892944123510039,
+  0.7050029078653152,
+  0.04081234725671772,
+  -0.04289294619059836,
+  -0.7067286943233149,
+  1.794474067172023,
+  1.7399003060584475,
+  0.9854994564691328,
+  0.7069316468238391,
+  -1.7079712014955164e-05,
+  2.724649925630784e-05,
+  -0.7072818714521434
+ ]
+}

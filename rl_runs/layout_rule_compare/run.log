@@ -1,0 +1,87 @@
+scene C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\autonomous_lab_environment_biobracket_ur5e_rail_rg2_std_d455_v13.xml
+  v2  1. plate fluent_plate -> incubator_plate               20.2 s  {'photo': 2.5, 'fine': np.float64(15.0), 'gripper': 0.84, 'transit': np.float64(1.89)}  운반 direct
+  v2  2. plate incubator_plate -> reader_plate               20.1 s  {'transit': np.float64(5.09), 'photo': 2.5, 'fine': np.float64(11.7), 'gripper': 0.84}  운반 carry
+  v2  3. plate reader_plate -> fluent_plate                  23.1 s  {'transit': np.float64(4.49), 'photo': 2.5, 'fine': np.float64(15.3), 'gripper': 0.84}  운반 carry
+  v2  4. tube_a tube_hotel_1 -> fluent_tube                  25.4 s  {'transit': np.float64(4.47), 'photo': 2.5, 'fine': np.float64(17.58), 'gripper': 0.84}  운반 standoff
+  v2  5. tube_a fluent_tube -> sorter_right_tube             29.7 s  {'transit': np.float64(6.87), 'photo': 2.5, 'fine': np.float64(19.5), 'gripper': 0.84}  운반 carry
+  v2  6. plate sorter_left_plate -> fluent_plate             26.3 s  {'transit': np.float64(6.01), 'photo': 2.5, 'fine': np.float64(17.0), 'gripper': 0.84}  운반 carry
+  v2  7. tube_b tube_hotel_2 -> fluent_tube                  26.8 s  {'transit': np.float64(5.89), 'photo': 2.5, 'fine': np.float64(17.58), 'gripper': 0.84}  운반 carry
+  v2  8. tube_b fluent_tube -> ngs_tube                      30.7 s  {'transit': np.float64(6.76), 'photo': 2.5, 'fine': np.float64(20.65), 'gripper': 0.84}  운반 carry-hit
+v2: 202.5 s, 문제 21
+   ! sorter_left_plate: 장비 안 경로점이 부딪힘 ['SH800_body1']
+   ! fluent_tube: 장비 안 경로점이 부딪힘 ['780_body1', '780_body2', 'Cylinder']
+   ! sorter_right_tube: 장비 안 경로점이 부딪힘 ['SH800_body1']
+   ! ngs_tube: 장비 안 경로점이 부딪힘 ['NGS_cartridge1', 'NGS_cartridge_button1']
+   ! 4. tube_a tube_hotel_1 -> fluent_tube 놓기 INSERT_HOVER: 부딪힘 ['780_body1', '780_body2', 'Cylinder']
+   ! 4. tube_a tube_hotel_1 -> fluent_tube 놓기 SET_DOWN: 부딪힘 ['780_body1']
+   ! 5. tube_a fluent_tube -> sorter_right_tube 빼기 EXTRACT_UP: 부딪힘 ['780_body1', '780_body2', 'Cylinder']
+   ! 5. tube_a fluent_tube -> sorter_right_tube 빼기 PRE_HOVER: 부딪힘 ['780_body1']
+   ! 5. tube_a fluent_tube -> sorter_right_tube 놓기 INSERT_HOVER: 부딪힘 ['SH800_body1']
+   ! 5. tube_a fluent_tube -> sorter_right_tube 놓기 SET_DOWN: 부딪힘 ['SH800_body1']
+   ! 6. plate sorter_left_plate -> fluent_plate 집기 GRASP: 부딪힘 ['SH800_body1']
+   ! 6. plate sorter_left_plate -> fluent_plate 빼기 LIFT_OFF: 부딪힘 ['SH800_body1']
+   ! 6. plate sorter_left_plate -> fluent_plate 빼기 EXTRACT: 부딪힘 ['SH800_body1']
+   ! 7. tube_b tube_hotel_2 -> fluent_tube 놓기 INSERT_HOVER: 부딪힘 ['780_body1', '780_body2', 'Cylinder']
+   ! 7. tube_b tube_hotel_2 -> fluent_tube 놓기 SET_DOWN: 부딪힘 ['780_body1']
+   ! 8. tube_b fluent_tube -> ngs_tube 빼기 EXTRACT_UP: 부딪힘 ['780_body1', '780_body2', 'Cylinder']
+   ! 8. tube_b fluent_tube -> ngs_tube 빼기 PRE_HOVER: 부딪힘 ['780_body1']
+   ! 8. tube_b fluent_tube -> ngs_tube 운반: 운반 경로가 부딪힘 ['stx44_plateholder', 'table'] (carry-hit)
+   ! 8. tube_b fluent_tube -> ngs_tube 놓기 INSERT_HOVER: 부딪힘 ['NGS_cartridge1', 'NGS_cartridge_button1']
+   ! 8. tube_b fluent_tube -> ngs_tube 놓기 SET_DOWN: 부딪힘 ['NGS_cartridge1', 'NGS_cartridge_button1']
+   ! 8. tube_b fluent_tube -> ngs_tube 물러나기 RELEASE_CLEAR: 부딪힘 ['NGS_cartridge1']
+  bio 1. plate fluent_plate -> incubator_plate               22.4 s  {'photo': 2.5, 'fine': np.float64(15.0), 'gripper': 0.84, 'transit': np.float64(4.03)}  운반 standoff
+  bio 2. plate incubator_plate -> reader_plate               18.0 s  {'transit': np.float64(3.0), 'photo': 2.5, 'fine': np.float64(11.7), 'gripper': 0.84}  운반 standoff
+  bio 3. plate reader_plate -> fluent_plate                  25.6 s  {'transit': np.float64(6.99), 'photo': 2.5, 'fine': np.float64(15.3), 'gripper': 0.84}  운반 carry
+  bio 4. tube_a tube_hotel_1 -> fluent_tube                  28.0 s  {'transit': np.float64(7.09), 'photo': 2.5, 'fine': np.float64(17.58), 'gripper': 0.84}  운반 direct
+  bio 5. tube_a fluent_tube -> sorter_right_tube             25.6 s  {'transit': np.float64(2.73), 'photo': 2.5, 'fine': np.float64(19.5), 'gripper': 0.84}  운반 direct
+  bio 6. plate sorter_left_plate -> fluent_plate             23.2 s  {'transit': np.float64(2.89), 'photo': 2.5, 'fine': np.float64(17.0), 'gripper': 0.84}  운반 direct
+  bio 7. tube_b tube_hotel_2 -> fluent_tube                  28.0 s  {'transit': np.float64(7.11), 'photo': 2.5, 'fine': np.float64(17.58), 'gripper': 0.84}  운반 direct
+  bio 8. tube_b fluent_tube -> ngs_tube                      29.4 s  {'transit': np.float64(5.37), 'photo': 2.5, 'fine': np.float64(20.65), 'gripper': 0.84}  운반 carry
+bio: 200.2 s, 문제 4
+   ! tube_hotel_2: 장비 안 경로점이 부딪힘 ['platehotel']
+   ! 7. tube_b tube_hotel_2 -> fluent_tube 집기 GRASP: 부딪힘 ['platehotel']
+   ! 7. tube_b tube_hotel_2 -> fluent_tube 빼기 EXTRACT_UP: 부딪힘 ['platehotel']
+   ! 7. tube_b tube_hotel_2 -> fluent_tube 빼기 PRE_HOVER: 부딪힘 ['platehotel', 'tubehotelbody1']
+{
+ "v2": {
+  "total_seconds": 202.46,
+  "per_transfer": [
+   20.22,
+   20.12,
+   23.13,
+   25.39,
+   29.71,
+   26.34,
+   26.8,
+   30.75
+  ],
+  "parts": {
+   "fine": 134.3,
+   "gripper": 6.7,
+   "photo": 20.0,
+   "transit": 41.5
+  },
+  "issues": 21
+ },
+ "bio": {
+  "total_seconds": 200.2,
+  "per_transfer": [
+   22.36,
+   18.04,
+   25.63,
+   28.0,
+   25.56,
+   23.22,
+   28.03,
+   29.35
+  ],
+  "parts": {
+   "fine": 134.3,
+   "gripper": 6.7,
+   "photo": 20.0,
+   "transit": 39.2
+  },
+  "issues": 4
+ }
+}
+video C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\rl_runs\layout_rule_compare\layout_rule_compare.mp4

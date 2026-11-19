@@ -1,0 +1,29 @@
+[   0.0 s] 1. plate_a 판 보관대 4 -> Fluent 판
+   1. plate_a -> fluent_plate       OK  f_mm=-0.18 l_mm=0.1 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.35, -0.12]
+[  15.1 s] 2. plate_a Fluent 판 -> STX44
+   2. plate_a -> incubator_plate    OK  f_mm=-0.15 l_mm=0.12 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.15, 0.24]
+[  29.9 s] 3. plate_a STX44 -> Reader
+   3. plate_a -> reader_plate       OK  f_mm=-0.09 l_mm=-0.22 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.12, 0.08]
+[  42.3 s] 4. plate_a Reader -> Fluent 판
+   4. plate_a -> fluent_plate       OK  f_mm=-0.1 l_mm=-0.12 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.4, -0.11]
+[  56.2 s] 5. tube_a 튜브 보관대 1 -> Fluent 튜브
+   5. tube_a  -> fluent_tube        OK  f_mm=-0.02 l_mm=0.03 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.19, -0.08]
+[  70.6 s] 6. plate_a Fluent 판 -> 폐기통
+   6. plate_a -> waste_plate        OK  inhand_mm=[-0.0, -0.0]
+[  85.0 s] 7. plate_b 판 보관대 3 -> SH800 판
+   7. plate_b -> sorter_left_plate  OK  f_mm=-0.06 l_mm=0.24 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.12, 0.9]
+[ 104.7 s] 8. tube_a Fluent 튜브 -> SH800 튜브
+   8. tube_a  -> sorter_right_tube  OK  f_mm=0.02 l_mm=-0.23 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.08, 0.4]
+[ 119.7 s] 9. tube_a SH800 튜브 -> 폐기통
+   9. tube_a  -> waste_tube         OK  inhand_mm=[-0.0, -0.0]
+[ 132.5 s] 10. plate_b SH800 판 -> Fluent 판
+  10. plate_b -> fluent_plate       OK  f_mm=-0.14 l_mm=-0.12 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.74, -0.12]
+[ 148.7 s] 11. tube_b 튜브 보관대 2 -> Fluent 튜브
+  11. tube_b  -> fluent_tube        OK  f_mm=0.07 l_mm=-0.17 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.19, -0.09]
+[ 162.9 s] 12. tube_b Fluent 튜브 -> NGS
+  12. tube_b  -> ngs_tube           OK  f_mm=-0.05 l_mm=-0.16 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.07, 0.6]
+[ 176.7 s] 13. plate_b Fluent 판 -> 폐기통
+  13. plate_b -> waste_plate        OK  inhand_mm=[-0.0, -0.0]
+[ 192.4 s] 끝
+공정 끝 — 창을 닫으면 종료
+물리 실행 4238 s (시뮬 193.4 s): 13/13 단계 성공, 레일 · 팔 동시 움직임 0.04 s (레일 이동 중 팔 최대 0.123 rad/s)

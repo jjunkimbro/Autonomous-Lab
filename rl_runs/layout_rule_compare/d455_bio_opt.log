@@ -1,0 +1,47 @@
+  bio_opt 1. plate fluent_plate -> incubator_plate               22.4 s  {'photo': 2.5, 'fine': np.float64(15.0), 'gripper': 0.84, 'transit': np.float64(4.03)}  운반 standoff
+  bio_opt 2. plate incubator_plate -> reader_plate               16.9 s  {'transit': np.float64(1.82), 'photo': 2.5, 'fine': np.float64(11.7), 'gripper': 0.84}  운반 direct
+  bio_opt 3. plate reader_plate -> fluent_plate                  25.3 s  {'transit': np.float64(6.62), 'photo': 2.5, 'fine': np.float64(15.3), 'gripper': 0.84}  운반 carry
+  bio_opt 4. tube_a tube_hotel_1 -> fluent_tube                  26.2 s  {'transit': np.float64(4.09), 'photo': 2.5, 'fine': np.float64(18.75), 'gripper': 0.84}  운반 direct
+  bio_opt 5. tube_a fluent_tube -> sorter_right_tube             26.1 s  {'transit': np.float64(3.31), 'photo': 2.5, 'fine': np.float64(19.5), 'gripper': 0.84}  운반 direct
+  bio_opt 6. plate sorter_left_plate -> fluent_plate             23.9 s  {'transit': np.float64(3.53), 'photo': 2.5, 'fine': np.float64(17.0), 'gripper': 0.84}  운반 direct
+  bio_opt 7. tube_b tube_hotel_2 -> fluent_tube                  26.2 s  {'transit': np.float64(4.11), 'photo': 2.5, 'fine': np.float64(18.75), 'gripper': 0.84}  운반 direct
+  bio_opt 8. tube_b fluent_tube -> ngs_tube                      29.4 s  {'transit': np.float64(5.37), 'photo': 2.5, 'fine': np.float64(20.65), 'gripper': 0.84}  운반 carry
+  bio_opt  1. plate fluent_plate -> incubator_plate 사진1               object 보임 1.00 통과  거리 0.36 m  0.57 mm/px  
+  bio_opt  1. plate fluent_plate -> incubator_plate 사진2               held   보임 0.80 통과  거리 0.26 m  0.41 mm/px  가림
+  bio_opt  1. plate fluent_plate -> incubator_plate 사진4               seat   보임 0.80 통과  거리 0.39 m  0.62 mm/px  가림
+  bio_opt  1. plate fluent_plate -> incubator_plate 사진6               object 보임 1.00 통과  거리 0.31 m  0.49 mm/px  
+  bio_opt  2. plate incubator_plate -> reader_plate 사진1               object 보임 1.00 통과  거리 0.31 m  0.49 mm/px  
+  bio_opt  2. plate incubator_plate -> reader_plate 사진2               held   보임 0.80 통과  거리 0.26 m  0.41 mm/px  가림
+  bio_opt  2. plate incubator_plate -> reader_plate 사진4               seat   보임 0.80 통과  거리 0.40 m  0.63 mm/px  가림
+  bio_opt  2. plate incubator_plate -> reader_plate 사진6               object 보임 1.00 통과  거리 0.31 m  0.49 mm/px  
+  bio_opt  3. plate reader_plate -> fluent_plate 사진1                  object 보임 1.00 통과  거리 0.31 m  0.49 mm/px  
+  bio_opt  3. plate reader_plate -> fluent_plate 사진2                  held   보임 0.80 통과  거리 0.26 m  0.41 mm/px  가림
+  bio_opt  3. plate reader_plate -> fluent_plate 사진4                  seat   보임 1.00 통과  거리 0.45 m  0.71 mm/px  
+  bio_opt  3. plate reader_plate -> fluent_plate 사진6                  object 보임 1.00 통과  거리 0.36 m  0.57 mm/px  
+  bio_opt  4. tube_a tube_hotel_1 -> fluent_tube 사진1                  object 보임 0.68 실패  거리 0.26 m  0.41 mm/px  가림
+  bio_opt  4. tube_a tube_hotel_1 -> fluent_tube 사진2                  held   보임 0.00 실패  거리 0.22 m  0.34 mm/px  가림
+  bio_opt  4. tube_a tube_hotel_1 -> fluent_tube 사진4                  seat   보임 0.62 실패  거리 0.46 m  0.73 mm/px  가림
+  bio_opt  4. tube_a tube_hotel_1 -> fluent_tube 사진6                  object 보임 1.00 통과  거리 0.40 m  0.64 mm/px  
+  bio_opt  5. tube_a fluent_tube -> sorter_right_tube 사진1             object 보임 1.00 통과  거리 0.40 m  0.64 mm/px  
+  bio_opt  5. tube_a fluent_tube -> sorter_right_tube 사진2             held   보임 0.00 실패  거리 0.22 m  0.34 mm/px  가림
+  bio_opt  5. tube_a fluent_tube -> sorter_right_tube 사진4             seat   보임 0.00 실패  거리 0.32 m  0.50 mm/px  가림
+  bio_opt  5. tube_a fluent_tube -> sorter_right_tube 사진6             object 보임 1.00 통과  거리 0.27 m  0.43 mm/px  
+  bio_opt  6. plate sorter_left_plate -> fluent_plate 사진1             object 보임 1.00 통과  거리 0.34 m  0.54 mm/px  
+  bio_opt  6. plate sorter_left_plate -> fluent_plate 사진2             held   보임 0.80 통과  거리 0.26 m  0.41 mm/px  가림
+  bio_opt  6. plate sorter_left_plate -> fluent_plate 사진4             seat   보임 1.00 통과  거리 0.45 m  0.71 mm/px  
+  bio_opt  6. plate sorter_left_plate -> fluent_plate 사진6             object 보임 1.00 통과  거리 0.36 m  0.57 mm/px  
+  bio_opt  7. tube_b tube_hotel_2 -> fluent_tube 사진1                  object 보임 0.68 실패  거리 0.26 m  0.41 mm/px  가림
+  bio_opt  7. tube_b tube_hotel_2 -> fluent_tube 사진2                  held   보임 0.00 실패  거리 0.22 m  0.34 mm/px  가림
+  bio_opt  7. tube_b tube_hotel_2 -> fluent_tube 사진4                  seat   보임 0.62 실패  거리 0.46 m  0.73 mm/px  가림
+  bio_opt  7. tube_b tube_hotel_2 -> fluent_tube 사진6                  object 보임 1.00 통과  거리 0.40 m  0.64 mm/px  
+  bio_opt  8. tube_b fluent_tube -> ngs_tube 사진1                      object 보임 1.00 통과  거리 0.40 m  0.64 mm/px  
+  bio_opt  8. tube_b fluent_tube -> ngs_tube 사진2                      held   보임 0.00 실패  거리 0.22 m  0.34 mm/px  가림
+  bio_opt  8. tube_b fluent_tube -> ngs_tube 사진4                      seat   보임 0.00 실패  거리 0.33 m  0.52 mm/px  가림
+  bio_opt  8. tube_b fluent_tube -> ngs_tube 사진6                      object 보임 1.00 통과  거리 0.27 m  0.44 mm/px  
+  [보는 자세] bio_opt  incubator_plate    후보 30 닿음 30 좋음 14  기준 자세 됨  걸리는 것 []  가장 가까운 좋은 자세: 뒤 10 옆 +6 위 0 cm 보임 0.76
+  [보는 자세] bio_opt  reader_plate       후보 30 닿음 30 좋음 14  기준 자세 됨  걸리는 것 []  가장 가까운 좋은 자세: 뒤 10 옆 +6 위 0 cm 보임 0.76
+  [보는 자세] bio_opt  fluent_plate       후보 30 닿음 30 좋음 14  기준 자세 됨  걸리는 것 []  가장 가까운 좋은 자세: 뒤 10 옆 +6 위 0 cm 보임 0.76
+  [보는 자세] bio_opt  fluent_tube        후보 30 닿음 30 좋음 4  기준 자세 안 됨  걸리는 것 []  가장 가까운 좋은 자세: 뒤 6 옆 +4 위 0 cm 보임 0.77
+  [보는 자세] bio_opt  sorter_right_tube  후보 30 닿음 30 좋음 13  기준 자세 됨  걸리는 것 []  가장 가까운 좋은 자세: 뒤 4 옆 +4 위 0 cm 보임 1.00
+  [보는 자세] bio_opt  ngs_tube           후보 30 닿음 30 좋음 14  기준 자세 됨  걸리는 것 []  가장 가까운 좋은 자세: 뒤 4 옆 +4 위 0 cm 보임 1.00
+bio_opt {"object": {"passed": 14, "total": 16, "mean_visible": 0.96, "median_dist_m": 0.323}, "held": {"passed": 4, "total": 8, "mean_visible": 0.4, "median_dist_m": 0.237}, "seat": {"passed": 4, "total": 8, "mean_visible": 0.6, "median_dist_m": 0.421}, "all": {"passed": 22, "total": 32}, "look_pose": {"stations_ok": 6, "nominal_ok": 5, "total": 6, "good_candidates": 73}}

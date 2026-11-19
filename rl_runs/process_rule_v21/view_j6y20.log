@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\camera_view_v21.py", line 203, in <module>
+    main()
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\camera_view_v21.py", line 129, in main
+    plan = pickle.load(open(P.OUT_DIR / f"plan{tag}.pkl", "rb"))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\T-Lab_Public\\OneDrive\\Desktop\\Autonomous-Lab\\rl_runs\\process_rule_v21\\plan_sh800_j6y20.pkl'

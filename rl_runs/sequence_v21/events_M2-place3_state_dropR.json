@@ -1,0 +1,163 @@
+{
+ "sequence": "sequence_v21.toml",
+ "camera": "land20",
+ "layout": "t1p20",
+ "prelook": "auto",
+ "faults": [
+  "M2:place=3"
+ ],
+ "resume": null,
+ "stop": {
+  "msg": "M2 사진6: plate_a 가 STX44 에서 크게 벗어남 / 떨어짐 (f_mm=-263.57 l_mm=-5.19 z_mm=31.94 tilt_deg=16.04)",
+  "kind": "transfer",
+  "sid": "M2",
+  "run": null,
+  "seat": null
+ },
+ "sim_s": 42.46,
+ "plan_wall_s": 1.3,
+ "robot_transfer_s": 33.51,
+ "robot_retry_s": 0,
+ "robot_wait_s": 8.03,
+ "prefetch": true,
+ "plan_idle_s": 0.92,
+ "steps": {
+  "M1": {
+   "state": "완료",
+   "t0": 0.92,
+   "plan_s": 0.91,
+   "plan_idle_s": 0.92,
+   "plan_how": "지금 계획 (미리 한 계획 없음)",
+   "t1": 19.82,
+   "retries": 0,
+   "prelook": true
+  },
+  "R1": {
+   "state": "완료",
+   "t0": 19.82,
+   "t1": 27.85
+  },
+  "M2": {
+   "state": "실패",
+   "t0": 27.85,
+   "plan_s": 0.41,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 42.46,
+   "note": "M2 사진6: plate_a 가 STX44 에서 크게 벗어남 / 떨어짐 (f_mm=-263.57 l_mm=-5.19 z_mm=31.94 tilt_deg=16.04)"
+  },
+  "R2": {
+   "state": "대기"
+  },
+  "M3": {
+   "state": "대기"
+  },
+  "R3": {
+   "state": "대기"
+  },
+  "M4": {
+   "state": "대기"
+  },
+  "M5": {
+   "state": "대기"
+  },
+  "R4": {
+   "state": "대기"
+  },
+  "M6": {
+   "state": "대기"
+  },
+  "M7": {
+   "state": "대기"
+  },
+  "M8": {
+   "state": "대기"
+  },
+  "R5": {
+   "state": "대기"
+  },
+  "M9": {
+   "state": "대기"
+  },
+  "M10": {
+   "state": "대기"
+  },
+  "M11": {
+   "state": "대기"
+  },
+  "R6": {
+   "state": "대기"
+  },
+  "M12": {
+   "state": "대기"
+  },
+  "R7": {
+   "state": "대기"
+  },
+  "M13": {
+   "state": "대기"
+  }
+ },
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 18.9,
+   "f_mm": -0.15,
+   "l_mm": 0.08,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  }
+ ],
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 0.0,
+   "t1": 0.92,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 2.9,
+   "t1": 2.9,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 0.92,
+   "t1": 19.82,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 19.82,
+   "t1": 27.85,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 19.82,
+   "t1": 27.85,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 27.85,
+   "t1": 42.46,
+   "label": "M2"
+  }
+ ]
+}

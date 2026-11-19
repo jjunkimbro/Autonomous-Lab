@@ -1,0 +1,18 @@
+순서표 검사 sequence_v21.toml: 걸음 20, 오류 0, 경고 0
+  끝 상태: plate_a=폐기, plate_b=폐기, tube_a=폐기, tube_b=ngs_tube
+순서표 sequence_v21.toml: 걸음 20 (이송 13 · 장비 작업 7), 장면 lab_layout_v21_reorder_t1p20_clamp15_seq.xml, 미리 보기 auto
+손목 자세 고르기:
+  손목 J6 +3.14 롤 +1 (카메라 위쪽 +1.00): 사슬 없음 plate_a plate_hotel_4 pick
+  손목 J6 +0.00 롤 +1 (카메라 위쪽 +1.00): 사슬 없음 plate_b sorter_left_plate place
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\sequence_runner_v21.py", line 1135, in <module>
+    main()
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\sequence_runner_v21.py", line 1089, in main
+    seq = Sequencer(cfg, faults, TP.OnlinePlanner(a.seed), prelook=a.prelook, video=a.video, wrist_video=a.wrist_video, speed=a.speed,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\sequence_runner_v21.py", line 284, in __init__
+    self.c, _, _ = planner.choose_wrist(transfers, self.objs_now())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\transfer_planner_v21.py", line 77, in choose_wrist
+    raise RuntimeError("모든 자리에서 사슬이 있는 손목 자세 없음")
+RuntimeError: 모든 자리에서 사슬이 있는 손목 자세 없음

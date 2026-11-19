@@ -1,0 +1,70 @@
+{
+ "sequence": "sequence_v21.toml",
+ "camera": "land20",
+ "layout": "t1p20",
+ "prelook": "auto",
+ "faults": [
+  "M2:place=3"
+ ],
+ "stop": "M2 사진6: plate_a 가 STX44 에서 크게 벗어남 / 떨어짐 (f_mm=-194.87 l_mm=-53.84 z_mm=-130.0 tilt_deg=0.0)",
+ "sim_s": 40.4,
+ "plan_wall_s": 6.7,
+ "robot_transfer_s": 32.37,
+ "robot_retry_s": 0,
+ "robot_wait_s": 8.03,
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 17.9,
+   "f_mm": -0.15,
+   "l_mm": 0.08,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  }
+ ],
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 1.89,
+   "t1": 1.89,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 0.0,
+   "t1": 17.93,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 17.93,
+   "t1": 25.96,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 17.93,
+   "t1": 25.96,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 25.96,
+   "t1": 40.4,
+   "label": "M2"
+  }
+ ]
+}

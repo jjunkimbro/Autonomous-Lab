@@ -1,0 +1,301 @@
+{
+ "layout": "bio",
+ "total_seconds": 202.54,
+ "transfers": [
+  {
+   "index": 1,
+   "obj": "plate",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "seconds": 22.36,
+   "parts": {
+    "photo": 2.5,
+    "fine": 15.0,
+    "gripper": 0.84,
+    "transit": 4.03
+   },
+   "carry": "standoff",
+   "rail": [
+    0.219,
+    0.48
+   ]
+  },
+  {
+   "index": 2,
+   "obj": "plate",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "seconds": 18.04,
+   "parts": {
+    "transit": 3.0,
+    "photo": 2.5,
+    "fine": 11.7,
+    "gripper": 0.84
+   },
+   "carry": "standoff",
+   "rail": [
+    0.48,
+    0.473
+   ]
+  },
+  {
+   "index": 3,
+   "obj": "plate",
+   "source": "reader_plate",
+   "target": "fluent_plate",
+   "seconds": 25.63,
+   "parts": {
+    "transit": 6.99,
+    "photo": 2.5,
+    "fine": 15.3,
+    "gripper": 0.84
+   },
+   "carry": "carry",
+   "rail": [
+    0.473,
+    0.219
+   ]
+  },
+  {
+   "index": 4,
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube",
+   "seconds": 29.17,
+   "parts": {
+    "transit": 7.08,
+    "photo": 2.5,
+    "fine": 18.75,
+    "gripper": 0.84
+   },
+   "carry": "direct",
+   "rail": [
+    0.962,
+    0.095
+   ]
+  },
+  {
+   "index": 5,
+   "obj": "tube_a",
+   "source": "fluent_tube",
+   "target": "sorter_right_tube",
+   "seconds": 25.56,
+   "parts": {
+    "transit": 2.73,
+    "photo": 2.5,
+    "fine": 19.5,
+    "gripper": 0.84
+   },
+   "carry": "direct",
+   "rail": [
+    0.095,
+    0.482
+   ]
+  },
+  {
+   "index": 6,
+   "obj": "plate",
+   "source": "sorter_left_plate",
+   "target": "fluent_plate",
+   "seconds": 23.22,
+   "parts": {
+    "transit": 2.89,
+    "photo": 2.5,
+    "fine": 17.0,
+    "gripper": 0.84
+   },
+   "carry": "direct",
+   "rail": [
+    0.621,
+    0.219
+   ]
+  },
+  {
+   "index": 7,
+   "obj": "tube_b",
+   "source": "tube_hotel_2",
+   "target": "fluent_tube",
+   "seconds": 29.2,
+   "parts": {
+    "transit": 7.12,
+    "photo": 2.5,
+    "fine": 18.75,
+    "gripper": 0.84
+   },
+   "carry": "direct",
+   "rail": [
+    0.954,
+    0.095
+   ]
+  },
+  {
+   "index": 8,
+   "obj": "tube_b",
+   "source": "fluent_tube",
+   "target": "ngs_tube",
+   "seconds": 29.35,
+   "parts": {
+    "transit": 5.37,
+    "photo": 2.5,
+    "fine": 20.65,
+    "gripper": 0.84
+   },
+   "carry": "carry",
+   "rail": [
+    0.095,
+    0.164
+   ]
+  }
+ ],
+ "stations": {
+  "fluent_plate": {
+   "rail": 0.219,
+   "yaw_deg": 270,
+   "grasp": [
+    1.245,
+    0.3575,
+    0.682
+   ],
+   "ignore": [
+    "780_plateholder1"
+   ],
+   "mesh": "780_plateholder1"
+  },
+  "incubator_plate": {
+   "rail": 0.48,
+   "yaw_deg": 180,
+   "grasp": [
+    0.7015,
+    0.6585,
+    0.807
+   ],
+   "ignore": [
+    "stx44_plateholder",
+    "stx44_plateholderfloor"
+   ],
+   "mesh": "stx44_plateholderfloor"
+  },
+  "reader_plate": {
+   "rail": 0.473,
+   "yaw_deg": 195,
+   "grasp": [
+    0.3591,
+    1.1485,
+    0.667
+   ],
+   "ignore": [
+    "reader_body1",
+    "reader_plateholder"
+   ],
+   "mesh": "reader_plateholder"
+  },
+  "sorter_left_plate": {
+   "rail": 0.621,
+   "yaw_deg": 270,
+   "grasp": [
+    1.635,
+    0.3385,
+    0.671
+   ],
+   "ignore": [
+    "SH800_body2",
+    "tube1"
+   ],
+   "mesh": "SH800_body2"
+  },
+  "tube_hotel_1": {
+   "rail": 0.962,
+   "yaw_deg": 270,
+   "grasp": [
+    1.97,
+    0.386,
+    0.653
+   ],
+   "ignore": [
+    "tube1",
+    "tubefloor1",
+    "tubehotel",
+    "tubehotelbody1"
+   ],
+   "mesh": "tube1"
+  },
+  "tube_hotel_2": {
+   "rail": 0.954,
+   "yaw_deg": 270,
+   "grasp": [
+    1.97,
+    0.356,
+    0.653
+   ],
+   "ignore": [
+    "tube1",
+    "tube2",
+    "tubefloor2",
+    "tubehotel",
+    "tubehotelbody2"
+   ],
+   "mesh": "tube2"
+  },
+  "fluent_tube": {
+   "rail": 0.095,
+   "yaw_deg": 270,
+   "grasp": [
+    1.12,
+    0.356,
+    0.752
+   ],
+   "ignore": [
+    "780_tubehotel",
+    "780_tubehotelbody1"
+   ],
+   "mesh": "780_tubehotelbody1"
+  },
+  "sorter_right_tube": {
+   "rail": 0.482,
+   "yaw_deg": 270,
+   "grasp": [
+    1.5,
+    0.376,
+    0.712
+   ],
+   "ignore": [
+    "SH800_body3",
+    "SH800_body4",
+    "tube1"
+   ],
+   "mesh": "SH800_body4"
+  },
+  "ngs_tube": {
+   "rail": 0.164,
+   "yaw_deg": 135,
+   "grasp": [
+    0.4912,
+    1.6118,
+    0.773
+   ],
+   "ignore": [
+    "NGS_library1",
+    "NGS_libraryfloor1",
+    "NGS_rack1",
+    "tube1",
+    "tube2"
+   ],
+   "mesh": "NGS_libraryfloor1"
+  }
+ },
+ "issues": [
+  "tube_hotel_2: 장비 안 경로점이 부딪힘 ['platehotel']",
+  "7. tube_b tube_hotel_2 -> fluent_tube 집기 GRASP: 부딪힘 ['platehotel']",
+  "7. tube_b tube_hotel_2 -> fluent_tube 빼기 EXTRACT_UP: 부딪힘 ['platehotel']",
+  "7. tube_b tube_hotel_2 -> fluent_tube 빼기 PRE_HOVER: 부딪힘 ['platehotel']"
+ ],
+ "rules": {
+  "slide_mps": 0.04,
+  "descent_mps": 0.02,
+  "joint_radps": 1.2,
+  "rail_mps": 0.3,
+  "leg_settle_s": 0.25,
+  "photo_s": 0.5,
+  "photos_per_transfer": 5
+ }
+}

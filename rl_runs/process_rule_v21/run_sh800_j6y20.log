@@ -1,0 +1,16 @@
+J6 · 롤별 카메라 위쪽: [('+3.14', 1, 1.0), ('+3.14', -1, -1.0), ('+0.00', 1, -1.0), ('+0.00', -1, 1.0), ('+1.57', 1, -1.0), ('+1.57', -1, -1.0), ('-1.57', 1, -1.0), ('-1.57', -1, -1.0)]
+wrist_3 = +3.14, 롤 1 계획 시작
+    1 plate_a 판 보관대 4 pick: G 해 6 -> 사슬 0  0 s
+wrist_3 = +3.14: 사슬 없음: 1. plate_a plate_hotel_4 pick (G 해 6)
+wrist_3 = +0.00, 롤 -1 계획 시작
+    1 plate_a 판 보관대 4 pick: G 해 9 -> 사슬 0  0 s
+wrist_3 = +0.00: 사슬 없음: 1. plate_a plate_hotel_4 pick (G 해 9)
+Traceback (most recent call last):
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\process_rule_v21.py", line 1103, in <module>
+    main()
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\process_rule_v21.py", line 1077, in main
+    plan = Planner(a.seed).plan(PROCESS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab\process_rule_v21.py", line 772, in plan
+    raise RuntimeError("계획 실패")
+RuntimeError: 계획 실패

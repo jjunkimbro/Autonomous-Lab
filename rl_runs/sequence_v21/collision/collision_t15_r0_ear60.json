@@ -1,0 +1,250 @@
+{
+ "tilt": 15.0,
+ "rot": 0.0,
+ "ear_out": 0.06,
+ "j6": 0.0,
+ "roll": 1,
+ "rows": [
+  {
+   "seat": "plate_hotel_4",
+   "verb": "pick",
+   "chains": 6,
+   "mount_mm": 62.8,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T2",
+   "where": "집기 14/14",
+   "robot_mm": 17.1
+  },
+  {
+   "seat": "fluent_plate",
+   "verb": "place",
+   "chains": 6,
+   "mount_mm": 36.2,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T1",
+   "where": "놓기 12/15",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "fluent_plate",
+   "verb": "pick",
+   "chains": 10,
+   "mount_mm": 36.2,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T1",
+   "where": "집기 8/15",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "incubator_plate",
+   "verb": "place",
+   "chains": 2,
+   "mount_mm": 82.7,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "놓기 10/10",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "tube_hotel_1",
+   "verb": "pick",
+   "chains": 6,
+   "mount_mm": 34.5,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T2",
+   "where": "집기 17/17",
+   "robot_mm": 5.7
+  },
+  {
+   "seat": "fluent_tube",
+   "verb": "place",
+   "chains": 4,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 22.6
+  },
+  {
+   "seat": "incubator_plate",
+   "verb": "pick",
+   "chains": 3,
+   "mount_mm": 82.7,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "집기 10/10",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "reader_plate",
+   "verb": "place",
+   "chains": 8,
+   "mount_mm": 82.7,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "놓기 10/10",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "reader_plate",
+   "verb": "pick",
+   "chains": 6,
+   "mount_mm": 82.7,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "집기 10/10",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "plate_hotel_3",
+   "verb": "pick",
+   "chains": 4,
+   "mount_mm": 33.2,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T2",
+   "where": "집기 15/15",
+   "robot_mm": 17.0
+  },
+  {
+   "seat": "sorter_left_plate",
+   "verb": "place",
+   "chains": 7,
+   "mount_mm": 3.0,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "놓기 12/12",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "waste_plate",
+   "verb": "drop",
+   "chains": 8,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 21.4
+  },
+  {
+   "seat": "fluent_tube",
+   "verb": "pick",
+   "chains": 6,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 22.3
+  },
+  {
+   "seat": "sorter_right_tube",
+   "verb": "place",
+   "chains": 8,
+   "mount_mm": 20.0,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "놓기 14/14",
+   "robot_mm": 18.4
+  },
+  {
+   "seat": "tube_hotel_2",
+   "verb": "pick",
+   "chains": 6,
+   "mount_mm": 17.0,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T2",
+   "where": "집기 18/18",
+   "robot_mm": 5.3
+  },
+  {
+   "seat": "fluent_tube",
+   "verb": "place",
+   "chains": 8,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 22.3
+  },
+  {
+   "seat": "sorter_right_tube",
+   "verb": "pick",
+   "chains": 11,
+   "mount_mm": 20.0,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "집기 14/14",
+   "robot_mm": 20.2
+  },
+  {
+   "seat": "waste_tube",
+   "verb": "drop",
+   "chains": 3,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 20.9
+  },
+  {
+   "seat": "sorter_left_plate",
+   "verb": "pick",
+   "chains": 9,
+   "mount_mm": 3.0,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T3",
+   "where": "집기 12/12",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "fluent_plate",
+   "verb": "place",
+   "chains": 7,
+   "mount_mm": 36.2,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T1",
+   "where": "놓기 12/15",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "fluent_tube",
+   "verb": "pick",
+   "chains": 5,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 22.7
+  },
+  {
+   "seat": "ngs_tube",
+   "verb": "place",
+   "chains": 5,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 21.3
+  },
+  {
+   "seat": "fluent_plate",
+   "verb": "pick",
+   "chains": 6,
+   "mount_mm": 36.2,
+   "part": "wrist_camera_clamp_ears",
+   "against": "proxy_table_T1",
+   "where": "집기 12/15",
+   "robot_mm": 2.7
+  },
+  {
+   "seat": "waste_plate",
+   "verb": "drop",
+   "chains": 5,
+   "mount_mm": 100.0,
+   "part": null,
+   "against": null,
+   "where": null,
+   "robot_mm": 21.4
+  }
+ ],
+ "s": 17.7
+}

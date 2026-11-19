@@ -1,0 +1,47 @@
+J6 · 롤별 카메라 위쪽: [('+3.14', 1, 1.0), ('+3.14', -1, -1.0), ('+0.00', 1, 1.0), ('+0.00', -1, -1.0), ('+1.57', 1, -1.0), ('+1.57', -1, -1.0), ('-1.57', 1, -1.0), ('-1.57', -1, -1.0)]
+wrist_3 = +3.14, 롤 1 계획 시작
+    1 plate_a 판 보관대 4 pick: G 해 6 -> 사슬 0  0 s
+wrist_3 = +3.14: 사슬 없음: 1. plate_a plate_hotel_4 pick (G 해 6)
+wrist_3 = +0.00, 롤 1 계획 시작
+    1 plate_a 판 보관대 4 pick: G 해 5 -> 사슬 3  0 s
+    1 plate_a Fluent 판 place: G 해 6 -> 사슬 6  1 s
+    2 plate_a Fluent 판 pick: G 해 7 -> 사슬 7  2 s
+    2 plate_a STX44 place: G 해 11 -> 사슬 6  2 s
+    3 plate_a STX44 pick: G 해 7 -> 사슬 5  3 s
+    3 plate_a Reader place: G 해 10 -> 사슬 5  3 s
+    4 plate_a Reader pick: G 해 10 -> 사슬 6  4 s
+    4 plate_a Fluent 판 place: G 해 11 -> 사슬 11  5 s
+    5 tube_a 튜브 보관대 1 pick: G 해 8 -> 사슬 6  6 s
+    5 tube_a Fluent 튜브 place: G 해 7 -> 사슬 7  7 s
+    6 plate_a Fluent 판 pick: G 해 8 -> 사슬 8  7 s
+    6 plate_a 폐기통 drop: G 해 6 -> 사슬 5  8 s
+    7 plate_b 판 보관대 3 pick: G 해 8 -> 사슬 5  9 s
+    7 plate_b SH800 판 place: G 해 11 -> 사슬 11  10 s
+    8 tube_a Fluent 튜브 pick: G 해 7 -> 사슬 7  10 s
+    8 tube_a SH800 튜브 place: G 해 9 -> 사슬 9  11 s
+    9 tube_a SH800 튜브 pick: G 해 9 -> 사슬 9  12 s
+    9 tube_a 폐기통 drop: G 해 4 -> 사슬 2  12 s
+   10 plate_b SH800 판 pick: G 해 10 -> 사슬 10  13 s
+   10 plate_b Fluent 판 place: G 해 7 -> 사슬 7  14 s
+   11 tube_b 튜브 보관대 2 pick: G 해 4 -> 사슬 2  15 s
+   11 tube_b Fluent 튜브 place: G 해 8 -> 사슬 8  15 s
+   12 tube_b Fluent 튜브 pick: G 해 6 -> 사슬 6  16 s
+   12 tube_b NGS place: G 해 7 -> 사슬 6  17 s
+   13 plate_b Fluent 판 pick: G 해 9 -> 사슬 9  18 s
+   13 plate_b 폐기통 drop: G 해 6 -> 사슬 5  18 s
+wrist_3 = +0.00: 비용 171.3, 34 s, 카메라 위쪽 +1.00
+계획 38 s, 공정 196.0 s, 재생 파고듦 없음, 경고 0
+   1. plate_a -> fluent_plate       OK  f_mm=-0.17 l_mm=0.1 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.32, -0.12]
+   2. plate_a -> incubator_plate    OK  f_mm=-0.15 l_mm=0.11 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.13, 0.34]
+   3. plate_a -> reader_plate       OK  f_mm=-0.09 l_mm=-0.21 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.11, 0.09]
+   4. plate_a -> fluent_plate       OK  f_mm=-0.17 l_mm=0.1 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.38, -0.11]
+   5. tube_a  -> fluent_tube        OK  f_mm=0.11 l_mm=0.03 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.25, -0.08]
+   6. plate_a -> waste_plate        OK  inhand_mm=[-0.0, -0.0]
+   7. plate_b -> sorter_left_plate  OK  f_mm=-0.08 l_mm=0.18 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.12, 0.92]
+   8. tube_a  -> sorter_right_tube  OK  f_mm=0.01 l_mm=-0.23 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.08, 0.59]
+   9. tube_a  -> waste_tube         OK  inhand_mm=[-0.0, -0.0]
+  10. plate_b -> fluent_plate       OK  f_mm=-0.18 l_mm=0.09 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.54, -0.12]
+  11. tube_b  -> fluent_tube        OK  f_mm=-0.02 l_mm=0.02 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.12, -0.08]
+  12. tube_b  -> ngs_tube           OK  f_mm=0.08 l_mm=0.11 z_mm=-0.0 tilt_deg=0.0 inhand_mm=[-0.09, 0.58]
+  13. plate_b -> waste_plate        OK  inhand_mm=[-0.0, -0.0]
+물리 실행 14 s (시뮬 197.6 s): 13/13 단계 성공, 레일 · 팔 동시 움직임 0.01 s (레일 이동 중 팔 최대 0.080 rad/s)

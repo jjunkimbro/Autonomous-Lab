@@ -1,0 +1,47 @@
+  1. plate_a 판 보관대 4 사진1               object 보임 0.20 실패  거리 0.54 m  0.86 mm/px  가림
+  1. plate_a 판 보관대 4 사진2               held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+  1. plate_a Fluent 판 사진4              seat   보임 0.00 실패  거리 0.53 m  0.85 mm/px  가림
+  1. plate_a Fluent 판 사진6              object 보임 1.00 통과  거리 0.52 m  0.84 mm/px  
+  2. plate_a Fluent 판 사진1              object 보임 1.00 통과  거리 0.52 m  0.84 mm/px  
+  2. plate_a Fluent 판 사진2              held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+  2. plate_a STX44 사진4                 seat   보임 1.00 통과  거리 0.46 m  0.73 mm/px  
+  2. plate_a STX44 사진6                 object 보임 1.00 통과  거리 0.45 m  0.72 mm/px  
+  3. plate_a STX44 사진1                 object 보임 1.00 통과  거리 0.45 m  0.72 mm/px  
+  3. plate_a STX44 사진2                 held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+  3. plate_a Reader 사진4                seat   보임 1.00 통과  거리 0.46 m  0.73 mm/px  
+  3. plate_a Reader 사진6                object 보임 0.88 통과  거리 0.45 m  0.72 mm/px  가림
+  4. plate_a Reader 사진1                object 보임 0.88 통과  거리 0.45 m  0.72 mm/px  가림
+  4. plate_a Reader 사진2                held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+  4. plate_a Fluent 판 사진4              seat   보임 0.00 실패  거리 0.53 m  0.85 mm/px  가림
+  4. plate_a Fluent 판 사진6              object 보임 1.00 통과  거리 0.52 m  0.84 mm/px  
+  5. tube_a 튜브 보관대 1 사진1               object 보임 0.80 통과  거리 0.52 m  0.83 mm/px  가림
+  5. tube_a 튜브 보관대 1 사진2               held   보임 0.73 통과  거리 0.23 m  0.36 mm/px  가림
+  5. tube_a Fluent 튜브 사진4              seat   보임 0.62 실패  거리 0.47 m  0.74 mm/px  가림
+  5. tube_a Fluent 튜브 사진6              object 보임 0.80 통과  거리 0.45 m  0.71 mm/px  가림
+  6. plate_a Fluent 판 사진1              object 보임 1.00 통과  거리 0.52 m  0.84 mm/px  
+  6. plate_a Fluent 판 사진2              held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+  7. plate_b 판 보관대 3 사진1               object 보임 0.20 실패  거리 0.56 m  0.89 mm/px  가림
+  7. plate_b 판 보관대 3 사진2               held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+  7. plate_b SH800 판 사진4               seat   보임 0.20 실패  거리 0.50 m  0.79 mm/px  가림
+  7. plate_b SH800 판 사진6               object 보임 1.00 통과  거리 0.49 m  0.78 mm/px  
+  8. tube_a Fluent 튜브 사진1              object 보임 0.80 통과  거리 0.45 m  0.71 mm/px  가림
+  8. tube_a Fluent 튜브 사진2              held   보임 0.73 통과  거리 0.23 m  0.36 mm/px  가림
+  8. tube_a SH800 튜브 사진4               seat   보임 1.00 통과  거리 0.44 m  0.69 mm/px  
+  8. tube_a SH800 튜브 사진6               object 보임 0.80 통과  거리 0.42 m  0.66 mm/px  가림
+  9. tube_a SH800 튜브 사진1               object 보임 0.80 통과  거리 0.42 m  0.66 mm/px  가림
+  9. tube_a SH800 튜브 사진2               held   보임 0.73 통과  거리 0.23 m  0.36 mm/px  가림
+  10. plate_b SH800 판 사진1              object 보임 1.00 통과  거리 0.49 m  0.78 mm/px  
+  10. plate_b SH800 판 사진2              held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+  10. plate_b Fluent 판 사진4             seat   보임 0.00 실패  거리 0.53 m  0.85 mm/px  가림
+  10. plate_b Fluent 판 사진6             object 보임 1.00 통과  거리 0.52 m  0.84 mm/px  
+  11. tube_b 튜브 보관대 2 사진1              object 보임 0.80 통과  거리 0.54 m  0.87 mm/px  가림
+  11. tube_b 튜브 보관대 2 사진2              held   보임 0.73 통과  거리 0.23 m  0.36 mm/px  가림
+  11. tube_b Fluent 튜브 사진4             seat   보임 0.62 실패  거리 0.47 m  0.74 mm/px  가림
+  11. tube_b Fluent 튜브 사진6             object 보임 0.80 통과  거리 0.45 m  0.71 mm/px  가림
+  12. tube_b Fluent 튜브 사진1             object 보임 0.80 통과  거리 0.45 m  0.71 mm/px  가림
+  12. tube_b Fluent 튜브 사진2             held   보임 0.73 통과  거리 0.23 m  0.36 mm/px  가림
+  12. tube_b NGS 사진4                   seat   보임 1.00 통과  거리 0.39 m  0.61 mm/px  
+  12. tube_b NGS 사진6                   object 보임 0.80 통과  거리 0.37 m  0.59 mm/px  가림
+  13. plate_b Fluent 판 사진1             object 보임 1.00 통과  거리 0.52 m  0.84 mm/px  
+  13. plate_b Fluent 판 사진2             held   보임 1.00 통과  거리 0.26 m  0.42 mm/px  
+{"object": {"passed": 21, "total": 23, "dist_m": [0.373, 0.56]}, "held": {"passed": 13, "total": 13, "dist_m": [0.227, 0.264]}, "seat": {"passed": 4, "total": 10, "dist_m": [0.385, 0.531]}, "all": {"passed": 38, "total": 46}}

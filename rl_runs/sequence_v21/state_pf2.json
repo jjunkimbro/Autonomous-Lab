@@ -1,0 +1,415 @@
+{
+ "sequence": "sequence_v21_prestage.toml",
+ "next_i": 9,
+ "next_step": "M7",
+ "stop": {
+  "msg": "M7 다시 집기 계획 실패: 사슬 없음: plate_b plate_hotel_3 place (G 해 2)",
+  "kind": "transfer",
+  "sid": "M7",
+  "run": null,
+  "seat": null
+ },
+ "t_sim": 108.57000000015435,
+ "loc": {
+  "plate_a": "fluent_plate",
+  "plate_b": "손",
+  "tube_a": "fluent_tube",
+  "tube_b": "tube_hotel_2"
+ },
+ "occ": {
+  "tube_hotel_2": "tube_b",
+  "fluent_tube": "tube_a",
+  "fluent_plate": "plate_a"
+ },
+ "devices": {
+  "Fluent": {
+   "state": "완료",
+   "run_id": "R4",
+   "task": "판 a -> 튜브 a 옮기기",
+   "t_start": 97.1880000001,
+   "t_done": 107.1880000001
+  },
+  "STX44": {
+   "state": "대기",
+   "run_id": "R2",
+   "task": "판 a 배양",
+   "t_start": 41.07599999999497,
+   "t_done": 56.07599999999497
+  },
+  "Reader": {
+   "state": "대기",
+   "run_id": "R3",
+   "task": "판 a 측정",
+   "t_start": 73.7099999999879,
+   "t_done": 79.7099999999879
+  },
+  "SH800": {
+   "state": "대기",
+   "run_id": null,
+   "task": null,
+   "t_start": null,
+   "t_done": null
+  },
+  "NGS": {
+   "state": "대기",
+   "run_id": null,
+   "task": null,
+   "t_start": null,
+   "t_done": null
+  }
+ },
+ "status": {
+  "M1": {
+   "state": "완료",
+   "t0": 1.01,
+   "plan_s": 1.0,
+   "plan_idle_s": 1.01,
+   "plan_how": "지금 계획 (미리 한 계획 없음)",
+   "t1": 18.14,
+   "retries": 0,
+   "prelook": true
+  },
+  "R1": {
+   "state": "완료",
+   "t0": 18.14,
+   "t1": 26.17
+  },
+  "M2": {
+   "state": "완료",
+   "t0": 26.17,
+   "plan_s": 0.41,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 41.08,
+   "retries": 0,
+   "prelook": false
+  },
+  "R2": {
+   "state": "완료",
+   "t0": 41.08,
+   "t1": 56.11
+  },
+  "M5": {
+   "state": "완료",
+   "t0": 41.08,
+   "plan_s": 0.59,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 59.22,
+   "retries": 0,
+   "prelook": true
+  },
+  "M3": {
+   "state": "완료",
+   "t0": 59.22,
+   "plan_s": 0.04,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 73.71,
+   "retries": 0,
+   "prelook": false
+  },
+  "R3": {
+   "state": "완료",
+   "t0": 73.71,
+   "t1": 79.72
+  },
+  "M4": {
+   "state": "완료",
+   "t0": 79.72,
+   "plan_s": 0.89,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 97.19,
+   "retries": 0,
+   "prelook": true
+  },
+  "R4": {
+   "state": "완료",
+   "t0": 97.19,
+   "t1": 107.23
+  },
+  "M7": {
+   "state": "실패",
+   "t0": 97.19,
+   "plan_s": 0.75,
+   "plan_idle_s": 0.0,
+   "plan_how": "앞 이송 중 미리 계획",
+   "t1": 108.57,
+   "note": "M7 다시 집기 계획 실패: 사슬 없음: plate_b plate_hotel_3 place (G 해 2)"
+  },
+  "M6": {
+   "state": "대기"
+  },
+  "M8": {
+   "state": "대기"
+  },
+  "R5": {
+   "state": "대기"
+  },
+  "M11": {
+   "state": "대기"
+  },
+  "M9": {
+   "state": "대기"
+  },
+  "M10": {
+   "state": "대기"
+  },
+  "R6": {
+   "state": "대기"
+  },
+  "M12": {
+   "state": "대기"
+  },
+  "R7": {
+   "state": "대기"
+  },
+  "M13": {
+   "state": "대기"
+  }
+ },
+ "events": [
+  {
+   "lane": "로봇",
+   "kind": "plan",
+   "t0": 0.0,
+   "t1": 1.01,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 2.98,
+   "t1": 2.98,
+   "label": "M1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 1.01,
+   "t1": 18.14,
+   "label": "M1"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 18.14,
+   "t1": 26.17,
+   "label": "R1"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 18.14,
+   "t1": 26.17,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 26.17,
+   "t1": 41.08,
+   "label": "M2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 44.35,
+   "t1": 44.35,
+   "label": "M5"
+  },
+  {
+   "lane": "STX44",
+   "kind": "run",
+   "t0": 41.08,
+   "t1": 56.11,
+   "label": "R2"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 41.08,
+   "t1": 59.22,
+   "label": "M5"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 59.22,
+   "t1": 73.71,
+   "label": "M3"
+  },
+  {
+   "lane": "Reader",
+   "kind": "run",
+   "t0": 73.71,
+   "t1": 79.72,
+   "label": "R3"
+  },
+  {
+   "lane": "로봇",
+   "kind": "wait",
+   "t0": 73.71,
+   "t1": 79.72,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 82.24,
+   "t1": 82.24,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 79.72,
+   "t1": 97.19,
+   "label": "M4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "prelook",
+   "t0": 99.92,
+   "t1": 99.92,
+   "label": "M7"
+  },
+  {
+   "lane": "Fluent",
+   "kind": "run",
+   "t0": 97.19,
+   "t1": 107.23,
+   "label": "R4"
+  },
+  {
+   "lane": "로봇",
+   "kind": "transfer",
+   "t0": 97.19,
+   "t1": 108.57,
+   "label": "M7"
+  }
+ ],
+ "results": [
+  {
+   "id": "M1",
+   "obj": "plate_a",
+   "source": "plate_hotel_4",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 17.1,
+   "f_mm": -0.23,
+   "l_mm": 0.11,
+   "z_mm": -0.01,
+   "tilt_deg": 0.01
+  },
+  {
+   "id": "M2",
+   "obj": "plate_a",
+   "source": "fluent_plate",
+   "target": "incubator_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.9,
+   "f_mm": -0.13,
+   "l_mm": 0.12,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M5",
+   "obj": "tube_a",
+   "source": "tube_hotel_1",
+   "target": "fluent_tube",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.77,
+   "ok": true,
+   "seconds": 18.1,
+   "f_mm": -0.11,
+   "l_mm": -0.24,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M3",
+   "obj": "plate_a",
+   "source": "incubator_plate",
+   "target": "reader_plate",
+   "retries": [],
+   "prelook": false,
+   "seat_visible_photo4": 1.0,
+   "seat_visible_photo0": null,
+   "ok": true,
+   "seconds": 14.5,
+   "f_mm": -0.09,
+   "l_mm": -0.22,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  },
+  {
+   "id": "M4",
+   "obj": "plate_a",
+   "source": "reader_plate",
+   "target": "fluent_plate",
+   "retries": [],
+   "prelook": true,
+   "seat_visible_photo4": 0.0,
+   "seat_visible_photo0": 0.8,
+   "ok": true,
+   "seconds": 17.5,
+   "f_mm": -0.2,
+   "l_mm": 0.1,
+   "z_mm": -0.0,
+   "tilt_deg": 0.0
+  }
+ ],
+ "plan_wall": 5.30181622505188,
+ "qpos": [
+  0.4506480204850265,
+  -0.31221959620550915,
+  -1.209098258577138,
+  2.2034824189599127,
+  -0.9931027291809169,
+  1.2585126677076273,
+  -7.524147033597267e-06,
+  0.04237090963480497,
+  0.04259900770795259,
+  0.5851971910799493,
+  1.2138962294090125,
+  0.8421954247607046,
+  0.7073308088788846,
+  -7.652606209736664e-07,
+  2.8303925674723444e-06,
+  -0.7068826824885056,
+  0.7729916758645559,
+  0.8441230794587049,
+  0.9981019323082848,
+  0.707144132396213,
+  0.000522659586737292,
+  -0.0007367297391968599,
+  -0.7070688510137147,
+  0.6351148734831477,
+  1.3342405971257434,
+  0.8565734609546268,
+  0.9999998546103779,
+  -9.061966290388606e-06,
+  3.0311610412934553e-06,
+  0.0005391548157583732,
+  0.52,
+  1.01,
+  0.8574994627814557,
+  1.0,
+  4.898515854233829e-16,
+  0.0,
+  0.0
+ ]
+}
