@@ -10,6 +10,7 @@
 #
 # 실행:  py record_learning_v12.py                     -> rl_runs/demo/learning_v12.webm
 #        py record_learning_v12.py --stages place_enter --snapshots 4 --no-chain
+#        py record_learning_v12.py --speed 2 --snapshots 4      한 번에 빠르게 보는 판 (모든 학습이 끝난 뒤)
 
 import argparse
 import json
@@ -29,7 +30,8 @@ BASE = Path(__file__).resolve().parent
 OUT = BASE / "rl_runs" / "demo"
 FOURCC = cv2.VideoWriter_fourcc(*"VP90")
 FPS = 20
-FRAME_DT = 1.0 / FPS                  # 실제 속도
+FRAME_DT = 1.0 / FPS                  # 실제 속도 (--speed 로 빨리 감기)
+PACE = 1.0                            # 글 화면 · 멈춤 길이 배수 (--speed 와 같이 줄인다)
 W, H = 1280, 720
 TOP = 50
 SCENE = (820, 560)
@@ -175,6 +177,7 @@ class Recorder:
         canvas[:] = np.asarray(image)
 
     def card(self, lines, seconds):
+        seconds = max(1.5, seconds * PACE)
         image = Image.new("RGB", (W, H), DARK)
         draw = ImageDraw.Draw(image)
         y = 120
@@ -185,6 +188,7 @@ class Recorder:
         self.write(cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR), int(seconds * FPS))
 
     def hold(self, seconds):
+        seconds = seconds * PACE
         self.write(self.compose(), int(seconds * FPS))
 
     def close(self):
@@ -251,6 +255,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--stages", default=",".join(st.STAGES))
     parser.add_argument("--snapshots", type=int, default=5)
+    parser.add_argument("--speed", type=float, default=1.0, help="재생 배속 (2 = 시뮬레이션 2 배 빠르게, 글 화면 · 멈춤도 줄인다)")
     parser.add_argument("--station", default="reader_plate")
     parser.add_argument("--seed", type=int, default=4242)
     parser.add_argument("--no-chain", action="store_true")
@@ -262,6 +267,8 @@ def main():
         status(args)
         return
     args.out = args.out or str(OUT / "learning_v12.webm")
+    global FRAME_DT, PACE
+    FRAME_DT, PACE = args.speed / FPS, 1.0 / args.speed
     device = torch.device("cuda")
     stages = [s for s in args.stages.split(",") if (run_dir(s) / "log.json").exists()]
 

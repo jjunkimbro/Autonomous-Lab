@@ -83,7 +83,8 @@ def find_events(stage):
     return events
 
 
-def record(stage, kind, steps, weights, diff, success, envs, device):
+def keep(stage, kind, steps, weights, diff):
+    """성과가 난 순간의 정책 가중치를 바로 남긴다 (가볍다). 영상은 render() 가 나중에."""
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "weights").mkdir(exist_ok=True)
     name = f"{stage}_{steps:09d}_{kind if kind != 'curriculum' else f'curriculum_x{diff:.1f}'}"
@@ -95,7 +96,36 @@ def record(stage, kind, steps, weights, diff, success, envs, device):
             break
         except OSError:
             time.sleep(1.0)
-    state = torch.load(kept, map_location=device)
+    return name
+
+
+def training_running():
+    """train_e2e_v12 가 돌고 있나 (돌면 영상을 미룬다)."""
+    import subprocess
+    out = subprocess.run(["powershell", "-NoProfile", "-Command",
+                          "(Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" | "
+                          "Where-Object { $_.CommandLine -like '*train_e2e_v12*' } | Measure-Object).Count"],
+                         capture_output=True, text=True)
+    try:
+        return int(out.stdout.strip() or 0) > 0
+    except ValueError:
+        return True
+
+
+def low_priority():
+    """영상 만드는 동안 CPU 를 덜 쓰게: 프로세스 우선순위 낮춤 + OpenCV 한 스레드."""
+    import ctypes
+    import cv2
+    cv2.setNumThreads(1)
+    try:
+        ctypes.windll.kernel32.SetPriorityClass(ctypes.windll.kernel32.GetCurrentProcess(), 0x4000)  # BELOW_NORMAL
+    except Exception:
+        pass
+
+
+def render(name, stage, kind, steps, diff, success, envs, device):
+    kept = OUT / "weights" / f"{name}.pt"
+    state = torch.load(kept, map_location=device, weights_only=False)
     actor = rl.tr.Actor().to(device)
     actor.load_state_dict(state["actor"] if "actor" in state else state)
     actor.eval()
@@ -137,8 +167,10 @@ def update_index(entries):
     for e in entries.values():
         ok = sum(1 for r in e["results"] if r[2])
         success = "" if e["success"] is None else f"{e['success']:.2f}"
+        video = f"[{e['video']}]({e['video']})" if e.get("video") else "영상 대기 (학습이 쉴 때 만든다)"
+        result = f"성공 {ok}/4" if e.get("video") else "-"
         lines.append(f"| {e['time']} | {st.LABELS[e['stage']]} | {NAMES[e['kind']]} | {e['steps'] / 1e6:.2f} M | "
-                     f"x{e['difficulty']:.1f} | {success} | 성공 {ok}/4 | [{e['video']}]({e['video']}) |")
+                     f"x{e['difficulty']:.1f} | {success} | {result} | {video} |")
     (OUT / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -146,6 +178,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--once", action="store_true")
     parser.add_argument("--every", type=float, default=60.0)
+    parser.add_argument("--now", action="store_true",
+                        help="학습 중에도 바로 영상을 만든다. 기본은 가중치만 바로 남기고 영상은 학습이 안 돌 때 만든다 — "
+                             "2026-10-31 · 11-01 PC 가 세 번 모두 영상을 연달아 만들던 직후에 꺼졌다 (pc-crash 조사)")
     args = parser.parse_args()
     device = torch.device("cuda")
     rl.ACTIVE = None
@@ -160,17 +195,29 @@ def main():
             rl.ACTIVE.tick(model, data)
     mujoco.mj_step = patched
     envs = {}
+    low_priority()
     while True:
         for stage in st.STAGES:
             for key, kind, steps, weights, diff, success in find_events(stage):
                 if key in entries:
                     continue
-                name, results = record(stage, kind, steps, weights, diff, success, envs, device)
+                name = keep(stage, kind, steps, weights, diff)
                 entries[key] = {"time": datetime.now().strftime("%m-%d %H:%M"), "stage": stage, "kind": kind,
-                                "steps": steps, "difficulty": diff, "success": success, "results": results,
-                                "video": f"{name}.webm"}
+                                "steps": steps, "difficulty": diff, "success": success, "results": [],
+                                "video": None, "name": name}
+                update_index(entries)
+                print(f"[milestone] {key} -> 가중치 저장 ({name}), 영상 대기", flush=True)
+        pending = [k for k, e in entries.items() if not e.get("video")]
+        if pending and (args.now or not training_running()):
+            for key in pending:
+                e = entries[key]
+                name = e.get("name") or f"{e['stage']}_{e['steps']:09d}_{e['kind']}"
+                _, results = render(name, e["stage"], e["kind"], e["steps"], e["difficulty"], e["success"], envs, device)
+                e.update(results=results, video=f"{name}.webm")
                 update_index(entries)
                 print(f"[milestone] {key} -> {name}.webm {results}", flush=True)
+                if not args.now and training_running():
+                    break
         if args.once:
             break
         time.sleep(args.every)

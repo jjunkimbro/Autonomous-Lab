@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="autonomous_lab_environment_v2">
+  <compiler angle="degree" meshdir="environment_biobracket_export" autolimits="true" />
+  <option timestep="0.002" gravity="0 0 -9.81" />
+  <statistic center="0.75 1.0 0.65" extent="1.35" />
+  <visual>
+    <global azimuth="-125" elevation="-27" />
+    <headlight ambient="0.32 0.32 0.32" diffuse="0.72 0.72 0.72" specular="0.18 0.18 0.18" />
+    <rgba haze="0.12 0.15 0.19 1" />
+  </visual>
+  <default>
+    <geom group="1" contype="0" conaffinity="0" density="0" />
+    <default class="reference_site">
+      <site type="sphere" size="0.006" rgba="1 0.15 0.10 0.95" group="3" />
+    </default>
+  </default>
+  <asset>
+    <mesh name="mesh_780_body1" file="meshes/780_body1.obj" />
+    <mesh name="mesh_780_body2" file="meshes/780_body2.obj" />
+    <mesh name="mesh_780_plateholder1" file="meshes/780_plateholder1.obj" />
+    <mesh name="mesh_780_plateholder2" file="meshes/780_plateholder2.obj" />
+    <mesh name="mesh_780_tubehotel" file="meshes/780_tubehotel.obj" />
+    <mesh name="mesh_780_tubehotelbody1" file="meshes/780_tubehotelbody1.obj" />
+    <mesh name="mesh_780_tubehotelbody2" file="meshes/780_tubehotelbody2.obj" />
+    <mesh name="mesh_780_tubehotelbody3" file="meshes/780_tubehotelbody3.obj" />
+    <mesh name="mesh_cad" file="meshes/cad.obj" />
+    <mesh name="mesh_cad2" file="meshes/cad2.obj" />
+    <mesh name="mesh_NGS_body1" file="meshes/NGS_body1.obj" />
+    <mesh name="mesh_NGS_body2" file="meshes/NGS_body2.obj" />
+    <mesh name="mesh_NGS_library1" file="meshes/NGS_library1.obj" />
+    <mesh name="mesh_NGS_libraryfloor1" file="meshes/NGS_libraryfloor1.obj" />
+    <mesh name="mesh_NGS_libraryfloor2" file="meshes/NGS_libraryfloor2.obj" />
+    <mesh name="mesh_NGS_libraryfloor3" file="meshes/NGS_libraryfloor3.obj" />
+    <mesh name="mesh_NGS_libraryfloor4" file="meshes/NGS_libraryfloor4.obj" />
+    <mesh name="mesh_NGS_rack1" file="meshes/NGS_rack1.obj" />
+    <mesh name="mesh_NGS_rack2" file="meshes/NGS_rack2.obj" />
+    <mesh name="mesh_NGS_rack3" file="meshes/NGS_rack3.obj" />
+    <mesh name="mesh_NGS_rack4" file="meshes/NGS_rack4.obj" />
+    <mesh name="mesh_platehotel" file="meshes/platehotel.obj" />
+    <mesh name="mesh_platewell1" file="meshes/platewell1.obj" />
+    <mesh name="mesh_platewell2" file="meshes/platewell2.obj" />
+    <mesh name="mesh_platewell3" file="meshes/platewell3.obj" />
+    <mesh name="mesh_platewell4" file="meshes/platewell4.obj" />
+    <mesh name="mesh_reader_body1" file="meshes/reader_body1.obj" />
+    <mesh name="mesh_reader_body2" file="meshes/reader_body2.obj" />
+    <mesh name="mesh_reader_plateholder" file="meshes/reader_plateholder.obj" />
+    <mesh name="mesh_SH800_body1" file="meshes/SH800_body1.obj" />
+    <mesh name="mesh_SH800_body2" file="meshes/SH800_body2.obj" />
+    <mesh name="mesh_SH800_body3" file="meshes/SH800_body3.obj" />
+    <mesh name="mesh_SH800_body4" file="meshes/SH800_body4.obj" />
+    <mesh name="mesh_slide" file="meshes/slide.obj" />
+    <mesh name="mesh_sliderail" file="meshes/sliderail.obj" />
+    <mesh name="mesh_stx44_body1" file="meshes/stx44_body1.obj" />
+    <mesh name="mesh_stx44_plateholder" file="meshes/stx44_plateholder.obj" />
+    <mesh name="mesh_stx44_plateholderfloor" file="meshes/stx44_plateholderfloor.obj" />
+    <mesh name="mesh_table" file="meshes/table.obj" />
+    <mesh name="mesh_table.001" file="meshes/table.001.obj" />
+    <mesh name="mesh_table.002" file="meshes/table.002.obj" />
+    <mesh name="mesh_table.003" file="meshes/table.003.obj" />
+    <mesh name="mesh_tube1" file="meshes/tube1.obj" />
+    <mesh name="mesh_tube2" file="meshes/tube2.obj" />
+    <mesh name="mesh_tube3" file="meshes/tube3.obj" />
+    <mesh name="mesh_tube4" file="meshes/tube4.obj" />
+    <mesh name="mesh_tubefloor1" file="meshes/tubefloor1.obj" />
+    <mesh name="mesh_tubefloor2" file="meshes/tubefloor2.obj" />
+    <mesh name="mesh_tubefloor3" file="meshes/tubefloor3.obj" />
+    <mesh name="mesh_tubefloor4" file="meshes/tubefloor4.obj" />
+    <mesh name="mesh_tubehotel" file="meshes/tubehotel.obj" />
+    <mesh name="mesh_tubehotelbody1" file="meshes/tubehotelbody1.obj" />
+    <mesh name="mesh_tubehotelbody2" file="meshes/tubehotelbody2.obj" />
+    <mesh name="mesh_tubehotelbody3" file="meshes/tubehotelbody3.obj" />
+    <mesh name="mesh_tubehotelbody4" file="meshes/tubehotelbody4.obj" />
+    <mesh name="mesh_waste" file="meshes/waste.obj" />
+  </asset>
+  <worldbody>
+    <light name="key_light" pos="0.4 0.6 2.6" dir="0.1 0.2 -1" directional="true" />
+    <light name="fill_light" pos="1.6 1.8 1.8" dir="-0.5 -0.5 -1" directional="true" diffuse="0.45 0.45 0.45" />
+    <camera name="cell_overview" pos="2.45 -1.15 2.35" xyaxes="0.72 0.69 0 -0.40 0.42 0.81" />
+    <camera name="cell_top" pos="0.75 1.0 3.1" quat="1 0 0 0" />
+    <body name="environment_visuals">
+      <geom name="visual_780_body1" type="mesh" mesh="mesh_780_body1" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_body2" type="mesh" mesh="mesh_780_body2" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_plateholder1" type="mesh" mesh="mesh_780_plateholder1" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_plateholder2" type="mesh" mesh="mesh_780_plateholder2" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_tubehotel" type="mesh" mesh="mesh_780_tubehotel" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_tubehotelbody1" type="mesh" mesh="mesh_780_tubehotelbody1" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_tubehotelbody2" type="mesh" mesh="mesh_780_tubehotelbody2" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_780_tubehotelbody3" type="mesh" mesh="mesh_780_tubehotelbody3" rgba="0.22 0.55 0.88 1" />
+      <geom name="visual_cad" type="mesh" mesh="mesh_cad" rgba="0.58 0.60 0.64 1" />
+      <geom name="visual_cad2" type="mesh" mesh="mesh_cad2" rgba="0.58 0.60 0.64 1" />
+      <geom name="visual_NGS_body1" type="mesh" mesh="mesh_NGS_body1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_body2" type="mesh" mesh="mesh_NGS_body2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_library1" type="mesh" mesh="mesh_NGS_library1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_libraryfloor1" type="mesh" mesh="mesh_NGS_libraryfloor1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_libraryfloor2" type="mesh" mesh="mesh_NGS_libraryfloor2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_libraryfloor3" type="mesh" mesh="mesh_NGS_libraryfloor3" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_libraryfloor4" type="mesh" mesh="mesh_NGS_libraryfloor4" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack1" type="mesh" mesh="mesh_NGS_rack1" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack2" type="mesh" mesh="mesh_NGS_rack2" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack3" type="mesh" mesh="mesh_NGS_rack3" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_NGS_rack4" type="mesh" mesh="mesh_NGS_rack4" rgba="0.40 0.65 0.34 1" />
+      <geom name="visual_platehotel" type="mesh" mesh="mesh_platehotel" rgba="0.18 0.67 0.52 1" />
+      <geom name="visual_platewell1" type="mesh" mesh="mesh_platewell1" rgba="0.75 0.86 0.96 0.92" />
+      <geom name="visual_platewell2" type="mesh" mesh="mesh_platewell2" rgba="0.75 0.86 0.96 0.92" />
+      <geom name="visual_platewell3" type="mesh" mesh="mesh_platewell3" rgba="0.75 0.86 0.96 0.92" />
+      <geom name="visual_platewell4" type="mesh" mesh="mesh_platewell4" rgba="0.75 0.86 0.96 0.92" />
+      <geom name="visual_reader_body1" type="mesh" mesh="mesh_reader_body1" rgba="0.54 0.34 0.82 1" />
+      <geom name="visual_reader_body2" type="mesh" mesh="mesh_reader_body2" rgba="0.54 0.34 0.82 1" />
+      <geom name="visual_reader_plateholder" type="mesh" mesh="mesh_reader_plateholder" rgba="0.54 0.34 0.82 1" />
+      <geom name="visual_SH800_body1" type="mesh" mesh="mesh_SH800_body1" rgba="0.25 0.70 0.78 1" />
+      <geom name="visual_SH800_body2" type="mesh" mesh="mesh_SH800_body2" rgba="0.25 0.70 0.78 1" />
+      <geom name="visual_SH800_body3" type="mesh" mesh="mesh_SH800_body3" rgba="0.25 0.70 0.78 1" />
+      <geom name="visual_SH800_body4" type="mesh" mesh="mesh_SH800_body4" rgba="0.25 0.70 0.78 1" />
+      <geom name="visual_slide" type="mesh" mesh="mesh_slide" rgba="0.58 0.60 0.64 1" />
+      <geom name="visual_sliderail" type="mesh" mesh="mesh_sliderail" rgba="0.18 0.20 0.24 1" />
+      <geom name="visual_stx44_body1" type="mesh" mesh="mesh_stx44_body1" rgba="0.92 0.48 0.18 1" />
+      <geom name="visual_stx44_plateholder" type="mesh" mesh="mesh_stx44_plateholder" rgba="0.92 0.48 0.18 1" />
+      <geom name="visual_stx44_plateholderfloor" type="mesh" mesh="mesh_stx44_plateholderfloor" rgba="0.92 0.48 0.18 1" />
+      <geom name="visual_table" type="mesh" mesh="mesh_table" rgba="0.34 0.37 0.42 1" />
+      <geom name="visual_table.001" type="mesh" mesh="mesh_table.001" rgba="0.34 0.37 0.42 1" />
+      <geom name="visual_table.002" type="mesh" mesh="mesh_table.002" rgba="0.34 0.37 0.42 1" />
+      <geom name="visual_table.003" type="mesh" mesh="mesh_table.003" rgba="0.34 0.37 0.42 1" />
+      <geom name="visual_tube1" type="mesh" mesh="mesh_tube1" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tube2" type="mesh" mesh="mesh_tube2" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tube3" type="mesh" mesh="mesh_tube3" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tube4" type="mesh" mesh="mesh_tube4" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubefloor1" type="mesh" mesh="mesh_tubefloor1" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubefloor2" type="mesh" mesh="mesh_tubefloor2" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubefloor3" type="mesh" mesh="mesh_tubefloor3" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubefloor4" type="mesh" mesh="mesh_tubefloor4" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubehotel" type="mesh" mesh="mesh_tubehotel" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubehotelbody1" type="mesh" mesh="mesh_tubehotelbody1" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubehotelbody2" type="mesh" mesh="mesh_tubehotelbody2" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubehotelbody3" type="mesh" mesh="mesh_tubehotelbody3" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_tubehotelbody4" type="mesh" mesh="mesh_tubehotelbody4" rgba="0.93 0.78 0.22 1" />
+      <geom name="visual_waste" type="mesh" mesh="mesh_waste" rgba="0.78 0.20 0.20 1" />
+    </body>
+    <body name="process_references">
+      <site name="ref_780_plateholder1" pos="1.245 0.31400001 0.665000021" class="reference_site" />
+      <site name="ref_780_plateholder2" pos="0.994999975 0.314000048 0.665000141" class="reference_site" />
+      <site name="ref_platehotel" pos="1.82749999 0.325000033 0.790000081" class="reference_site" />
+      <site name="ref_platewell1" pos="1.82577276 0.336499959 0.621499956" class="reference_site" />
+      <site name="ref_platewell2" pos="1.82577276 0.3364999 0.666499913" class="reference_site" />
+      <site name="ref_platewell3" pos="1.82577276 0.33649984 0.71149987" class="reference_site" />
+      <site name="ref_platewell4" pos="1.82577276 0.3364999 0.756499767" class="reference_site" />
+      <site name="ref_reader_plateholder" pos="0.30850023 1.13500017 0.650000095" class="reference_site" />
+      <site name="ref_stx44_plateholder" pos="0.536999747 0.658499777 0.780000091" class="reference_site" />
+      <site name="ref_tube1" pos="1.97000021 0.389999986 0.660999894" class="reference_site" />
+      <site name="ref_tube2" pos="1.97000021 0.360000014 0.660999894" class="reference_site" />
+      <site name="ref_tube3" pos="1.97000021 0.330000013 0.660999894" class="reference_site" />
+      <site name="ref_tube4" pos="1.97000021 0.300000042 0.660999894" class="reference_site" />
+      <site name="ref_tubehotel" pos="1.97000003 0.280000031 0.605000138" class="reference_site" />
+      <site name="ref_waste" pos="2.13999999 0.299999915 0.800000012" class="reference_site" />
+    </body>
+  </worldbody>
+</mujoco>

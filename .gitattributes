@@ -1,0 +1,3 @@
+# ROS2 패키지는 WSL (리눅스) 에서 돈다 — CRLF 면 스크립트 첫 줄 (shebang) 이 깨지므로 LF 고정
+ros2_ws/** text=auto eol=lf
+*.sh text eol=lf

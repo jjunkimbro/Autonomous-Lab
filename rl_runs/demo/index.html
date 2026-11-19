@@ -159,6 +159,42 @@
   </section>
 
   <section class="ruled">
+    <p class="eyebrow">같은 날, 학습을 켜고 끄기 — 6011 일</p>
+    <h2>학습한 쪽은 8 이송 모두 끝, 끈 쪽은 사람을 세 번 부른다</h2>
+    <p class="prose">
+      같은 날짜 · 같은 장비 자세 · 같은 사진 (판 · 튜브 모두 사진 5 장 + 준비 스캔). 다른 것은 2 · 5 · 6 단계 뒤 판단과 튜브 꽂기뿐입니다.
+      이송 1 ~ 3 과 7 ~ 8 은 두 영상이 같고, 아래 세 곳에서 갈립니다.
+    </p>
+    <div class="scroll">
+      <table>
+        <caption>6011 일, 갈린 이송 세 곳 (두 영상 모두 시뮬레이션을 실제로 돌리며 찍음)</caption>
+        <thead><tr><th>이송</th><th>학습한 쪽</th><th>학습 끈 쪽</th></tr></thead>
+        <tbody>
+          <tr><td>4 · 튜브 a 호텔 1 → Fluent</td><td>2 단계 판단 '운반' → 학습 꽂기 → 완료</td>
+              <td>2 단계 규칙 '내려놓고 다시 집기' 두 번 → 사람 호출</td></tr>
+          <tr><td>5 · 튜브 a Fluent → 분류기 오른쪽</td><td>자리 오차 앞뒤 −1.6 mm 에서 학습 꽂기가 비켜 꽂음 → 완료</td>
+              <td>같은 오차에서 곧게 내리기가 걸림 → 6 단계 NG → 규칙 '다시 보기' → 다시 집기 실패 → 사람 호출</td></tr>
+          <tr><td>6 · 판 분류기 왼쪽 → Fluent</td><td>6 단계 NG (기울기 1.08°) → 판단 RL '학습 보정으로 다시 놓기' → 완료</td>
+              <td>같은 NG → 규칙 다시 놓기 한 번 → 또 NG → 사람 호출</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figure>
+      <video controls muted playsinline preload="metadata">
+        <source src="process_day_6011_learned.webm" type="video/webm">
+      </video>
+      <figcaption>학습한 쪽 (300초). 판단 RL · 튜브 학습 판단 · 강화학습 꽂기 (v3, NGS v5). 사람 호출 0.</figcaption>
+    </figure>
+    <figure>
+      <video controls muted playsinline preload="metadata">
+        <source src="process_day_6011_norl.webm" type="video/webm">
+      </video>
+      <figcaption>학습 끈 쪽 (291초). 규칙 판단 (판 팔 C · 튜브 rule) + 곧게 꽂기. 사람 호출 3 (진행 막대의 빨간 칸).
+        40 일 전체로는 학습한 쪽 38 일 · 318/320, 끈 쪽 22 일 · 286/320, 조용한 실패는 둘 다 0.</figcaption>
+    </figure>
+  </section>
+
+  <section class="ruled">
     <p class="eyebrow">영상 1 — 제어층</p>
     <h2>같은 교란, 왼쪽은 학습 정책, 오른쪽은 규칙</h2>
     <figure>

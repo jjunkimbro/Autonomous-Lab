@@ -56,6 +56,9 @@ def make_env(task, seed, render=True, station_weights=None, lead=None):
     if task.startswith("tube_"):
         import e2e_tube_stages_v12 as tube
         return tube.make(task[len("tube_"):], seed=seed, render=render, station_weights=station_weights, **kw)
+    if task.startswith("std_"):
+        import e2e_std_stages_v13 as std
+        return std.make(task[len("std_"):], seed=seed, render=render, station_weights=station_weights, **kw)
     return stages.make(task, seed=seed, render=render, station_weights=station_weights, **kw)
 
 
@@ -300,12 +303,14 @@ class Actor(nn.Module):
             out["target"] = torch.as_tensor(obs["target"], device=device).float()
         return out
 
-    def forward(self, inputs):
+    def features(self, inputs):
         if self.priv_dim:
-            return self.head(inputs["priv"])
-        z = torch.cat([self.encoders[k](inputs[k]) for k in IMAGE_KEYS] + ([inputs["target"]] if self.target_dim else []),
-                      dim=1)
-        return self.head(z)
+            return inputs["priv"]
+        return torch.cat([self.encoders[k](inputs[k]) for k in IMAGE_KEYS] + ([inputs["target"]] if self.target_dim else []),
+                         dim=1)
+
+    def forward(self, inputs):
+        return self.head(self.features(inputs))
 
     @classmethod
     def load(cls, path, device):
@@ -435,6 +440,8 @@ def main():
     parser.add_argument("--resume", default=None, help="model.pt (다 이어서) 또는 snapshots/actor_*.pt (정책만)")
     parser.add_argument("--resume-steps", type=int, default=0, help="정책만 이어받을 때 그 사본의 걸음")
     parser.add_argument("--encoders-only", action="store_true", help="정책 사본에서 영상 인코더만 이어받는다")
+    parser.add_argument("--aux-error", type=float, default=0.0,
+                        help="> 0 이면 학습 때만 영상 특징으로 단계 오차 (priv 앞 4 칸: f l z mm, yaw) 를 맞히는 보조 손실을 이 무게로")
     args = parser.parse_args()
 
     torch.manual_seed(args.seed)
@@ -457,6 +464,12 @@ def main():
     critic = Critic(priv_dim).to(device)
     actor_opt = torch.optim.Adam(actor.parameters(), lr=args.lr, eps=1e-5)
     critic_opt = torch.optim.Adam(critic.parameters(), lr=args.lr, eps=1e-5)
+    # 보조 손실 (학습 때만, 실물 정책에는 없다): 영상 특징 -> 단계 오차. 보는 자세 정책이 1 ~ 2 s 에 다가간 뒤 오차 1 ~ 4 mm 를
+    # 남긴 채 멈췄다 (11-03, 성공 보상만으로는 남은 mm 를 영상에서 읽는 법을 못 배웠다).
+    aux = aux_opt = None
+    if args.aux_error > 0 and render:
+        aux = nn.Sequential(nn.Linear(actor.head[0].in_features, 128), nn.ReLU(), nn.Linear(128, 4)).to(device)
+        aux_opt = torch.optim.Adam(aux.parameters(), lr=args.lr, eps=1e-5)
     done_steps, log, best, streak = 0, [], -1.0, 0
     difficulty = 1.0 if args.curriculum is None else args.curriculum
     if args.resume:
@@ -494,6 +507,9 @@ def main():
                 actor_opt.load_state_dict(state["actor_opt"])
             critic_opt.load_state_dict(state["critic_opt"])
         done_steps, best = state.get("steps", 0), state.get("best", -1.0)
+        if aux is not None and "aux" in state:
+            aux.load_state_dict(state["aux"])
+            aux_opt.load_state_dict(state["aux_opt"])
         if args.curriculum is not None:
             difficulty = state.get("difficulty", difficulty)
         log = json.loads((run / "log.json").read_text()) if (run / "log.json").exists() else []
@@ -589,14 +605,20 @@ def main():
         f_adv = torch.as_tensor(advantages.reshape(-1), device=device)
         f_ret = torch.as_tensor(returns.reshape(-1), device=device)
         actor.train()
-        stats = []
+        stats, aux_stats = [], []
         for _ in range(args.epochs):
             order = torch.randperm(T * N, device=device)
             for s in range(0, T * N, args.minibatch):
                 idx = order[s:s + args.minibatch]
                 batch = {k: v[idx] for k, v in flat.items()}
                 shift = {k: v[idx] for k, v in f_shifts.items()} if render and pad else None
-                mean = actor(actor.inputs(batch, device, shift, pad))
+                z = actor.features(actor.inputs(batch, device, shift, pad))
+                mean = actor.head(z)
+                aux_loss = torch.zeros((), device=device)
+                if aux is not None:
+                    # priv 앞 4 칸 = 단계 오차 (f l z 를 cm 로, yaw 를 ° / 2 로) -> mm · ° 로 맞힌다
+                    truth = torch.as_tensor(batch["priv"][:, :4], device=device) * torch.tensor([10.0, 10.0, 10.0, 2.0], device=device)
+                    aux_loss = F.smooth_l1_loss(aux(z), truth)
                 new_logp = log_prob(mean, actor.log_std, f_actions[idx])
                 adv = f_adv[idx]
                 adv = (adv - adv.mean()) / (adv.std() + 1e-8)
@@ -606,11 +628,17 @@ def main():
                 value_loss = F.mse_loss(value, f_ret[idx])
                 actor_opt.zero_grad()
                 critic_opt.zero_grad()
-                (policy_loss + 0.5 * value_loss).backward()
+                if aux is not None:
+                    aux_opt.zero_grad()
+                (policy_loss + 0.5 * value_loss + args.aux_error * aux_loss).backward()
                 nn.utils.clip_grad_norm_(actor.parameters(), 0.5)
                 nn.utils.clip_grad_norm_(critic.parameters(), 0.5)
                 actor_opt.step()
                 critic_opt.step()
+                if aux is not None:
+                    nn.utils.clip_grad_norm_(aux.parameters(), 0.5)
+                    aux_opt.step()
+                    aux_stats.append(aux_loss.item())
                 stats.append((policy_loss.item(), value_loss.item(), ((ratio - 1).abs() > args.clip).float().mean().item()))
 
         t_update = time.time() - t_update
@@ -630,6 +658,7 @@ def main():
                   f"train success {np.mean([r['success'] for r in recent]):.2f}  "
                   f"len {np.mean([r['time_s'] for r in recent]):.2f}s  collect {t_collect:.0f}s update {t_update:.0f}s  "
                   f"vloss {np.mean([s[1] for s in stats]):.3f}  clip {np.mean([s[2] for s in stats]):.2f}  "
+                  + (f"aux {np.mean(aux_stats):.3f}  " if aux_stats else "") +
                   f"diff {difficulty:.1f}  std {actor.log_std.exp().detach().cpu().numpy().round(2).tolist()}  {outcome}", flush=True)
         if done_steps >= next_eval:
             next_eval += args.eval_every
@@ -637,6 +666,8 @@ def main():
         state = {"actor": actor.state_dict(), "critic": critic.state_dict(), "actor_opt": actor_opt.state_dict(),
                  "critic_opt": critic_opt.state_dict(), "steps": done_steps, "best": best,
                  "difficulty": difficulty}
+        if aux is not None:
+            state["aux"], state["aux_opt"] = aux.state_dict(), aux_opt.state_dict()
         save(state, run / "model.pt")
     if streak >= 2:
         print(f"[done] 평가 성공률 {args.target} 이상 두 번 연속 - {done_steps} 걸음에서 멈춘다", flush=True)

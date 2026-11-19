@@ -1,0 +1,227 @@
+<mujoco model="autonomous_lab_environment_v2">
+  <compiler angle="radian" meshdir="environment_biobracket_export/" />
+
+  <option timestep="0.001" impratio="10" integrator="implicitfast" cone="elliptic" noslip_iterations="4" />
+
+  <size nkey="1" />
+
+  <statistic extent="1.35" center="0.75 1 0.65" />
+
+  <visual>
+    <global azimuth="-125" elevation="-27" offwidth="1280" offheight="960" />
+    <headlight ambient="0.32 0.32 0.32" diffuse="0.72 0.72 0.72" specular="0.18 0.18 0.18" />
+    <rgba haze="0.12 0.15 0.19 1" />
+  </visual>
+
+  <default>
+    <geom contype="0" conaffinity="0" group="1" density="0" />
+    <default class="reference_site">
+      <site size="0.006 0.005 0.005" group="3" rgba="1 0.15 0.1 0.95" />
+    </default>
+    <default class="ur5e_main">
+      <geom contype="1" conaffinity="1" group="0" density="1000" />
+      <default class="ur5e_ur5e">
+        <material shininess="0.25" />
+        <joint range="-6.28319 6.28319" armature="0.1" axis="0 1 0" />
+        <site size="0.001 0.005 0.005" group="4" rgba="0.5 0.5 0.5 0.3" />
+        <general ctrlrange="-6.2831 6.2831" forcerange="-150 150" biastype="affine" gainprm="2000" biasprm="0 -2000 -400" />
+        <default class="ur5e_size3">
+          <default class="ur5e_size3_limited">
+            <joint range="-3.1415 3.1415" />
+            <general ctrlrange="-3.1415 3.1415" />
+          </default>
+        </default>
+        <default class="ur5e_size1">
+          <general forcerange="-28 28" gainprm="500" biasprm="0 -500 -100" />
+        </default>
+        <default class="ur5e_visual">
+          <geom type="mesh" contype="0" conaffinity="0" group="2" />
+        </default>
+        <default class="ur5e_collision">
+          <geom type="capsule" group="3" />
+          <default class="ur5e_eef_collision">
+            <geom type="cylinder" />
+          </default>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <material name="ur5e_black" class="ur5e_ur5e" rgba="0.033 0.033 0.033 1" />
+    <material name="ur5e_jointgray" class="ur5e_ur5e" rgba="0.278 0.278 0.278 1" />
+    <material name="ur5e_linkgray" class="ur5e_ur5e" rgba="0.82 0.82 0.82 1" />
+    <material name="ur5e_urblue" class="ur5e_ur5e" rgba="0.49 0.678 0.8 1" />
+    <mesh name="mesh_780_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_body1.obj" />
+    <mesh name="mesh_780_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_body2.obj" />
+    <mesh name="mesh_780_plateholder1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder1.obj" />
+    <mesh name="mesh_780_plateholder2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder2.obj" />
+    <mesh name="mesh_780_plateholder3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder3.obj" />
+    <mesh name="mesh_780_plateholder4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/780_plateholder4.obj" />
+    <mesh name="mesh_Cylinder" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/Cylinder.obj" />
+    <mesh name="mesh_NGS_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_body1.obj" />
+    <mesh name="mesh_NGS_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_body2.obj" />
+    <mesh name="mesh_NGS_body3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_body3.obj" />
+    <mesh name="mesh_NGS_cartridge1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge1.obj" />
+    <mesh name="mesh_NGS_cartridge2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge2.obj" />
+    <mesh name="mesh_NGS_cartridge_button1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge_button1.obj" />
+    <mesh name="mesh_NGS_cartridge_button2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_cartridge_button2.obj" />
+    <mesh name="mesh_NGS_display1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_display1.obj" />
+    <mesh name="mesh_NGS_display2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_display2.obj" />
+    <mesh name="mesh_NGS_library1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_library1.obj" />
+    <mesh name="mesh_NGS_library2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_library2.obj" />
+    <mesh name="mesh_NGS_rack1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack1.obj" />
+    <mesh name="mesh_NGS_rack2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack2.obj" />
+    <mesh name="mesh_NGS_rack3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack3.obj" />
+    <mesh name="mesh_NGS_rack4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/NGS_rack4.obj" />
+    <mesh name="mesh_platehotel" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platehotel.obj" />
+    <mesh name="mesh_platewell1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell1.obj" />
+    <mesh name="mesh_platewell2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell2.obj" />
+    <mesh name="mesh_platewell3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell3.obj" />
+    <mesh name="mesh_platewell4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/platewell4.obj" />
+    <mesh name="mesh_rail" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/rail.obj" />
+    <mesh name="mesh_reader_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/reader_body1.obj" />
+    <mesh name="mesh_reader_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/reader_body2.obj" />
+    <mesh name="mesh_reader_plateholder" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/reader_plateholder.obj" />
+    <mesh name="mesh_SH800_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/SH800_body1.obj" />
+    <mesh name="mesh_SH800_body2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/SH800_body2.obj" />
+    <mesh name="mesh_SH800_body3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/SH800_body3.obj" />
+    <mesh name="mesh_slide" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/slide.obj" />
+    <mesh name="mesh_stx44_body1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/stx44_body1.obj" />
+    <mesh name="mesh_stx44_plateholder" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/stx44_plateholder.obj" />
+    <mesh name="mesh_table" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/table.obj" />
+    <mesh name="mesh_tube1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube1.obj" />
+    <mesh name="mesh_tube2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube2.obj" />
+    <mesh name="mesh_tube3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube3.obj" />
+    <mesh name="mesh_tube4" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tube4.obj" />
+    <mesh name="mesh_tubehotel" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/tubehotel.obj" />
+    <mesh name="mesh_waste" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/environment_v2_export/meshes/waste.obj" />
+    <mesh name="ur5e_base_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/base_0.obj" />
+    <mesh name="ur5e_base_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/base_1.obj" />
+    <mesh name="ur5e_shoulder_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/shoulder_0.obj" />
+    <mesh name="ur5e_shoulder_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/shoulder_1.obj" />
+    <mesh name="ur5e_shoulder_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/shoulder_2.obj" />
+    <mesh name="ur5e_upperarm_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_0.obj" />
+    <mesh name="ur5e_upperarm_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_1.obj" />
+    <mesh name="ur5e_upperarm_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_2.obj" />
+    <mesh name="ur5e_upperarm_3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/upperarm_3.obj" />
+    <mesh name="ur5e_forearm_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_0.obj" />
+    <mesh name="ur5e_forearm_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_1.obj" />
+    <mesh name="ur5e_forearm_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_2.obj" />
+    <mesh name="ur5e_forearm_3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/forearm_3.obj" />
+    <mesh name="ur5e_wrist1_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist1_0.obj" />
+    <mesh name="ur5e_wrist1_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist1_1.obj" />
+    <mesh name="ur5e_wrist1_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist1_2.obj" />
+    <mesh name="ur5e_wrist2_0" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist2_0.obj" />
+    <mesh name="ur5e_wrist2_1" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist2_1.obj" />
+    <mesh name="ur5e_wrist2_2" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist2_2.obj" />
+    <mesh name="ur5e_wrist3" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/mujoco_menagerie/universal_robots_ur5e/assets/wrist3.obj" />
+    <mesh name="ur5e_onrobot_rg2_official_mesh" content_type="model/obj" file="C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab/rg2_official_assets/onrobot_rg2_body_only.obj" />
+    <mesh name="env_780_body1" file="meshes/780_body1.obj" /><mesh name="env_780_body2" file="meshes/780_body2.obj" /><mesh name="env_780_plateholder1" file="meshes/780_plateholder1.obj" /><mesh name="env_780_plateholder2" file="meshes/780_plateholder2.obj" /><mesh name="env_780_tubehotel" file="meshes/780_tubehotel.obj" /><mesh name="env_780_tubehotelbody1" file="meshes/780_tubehotelbody1.obj" /><mesh name="env_780_tubehotelbody2" file="meshes/780_tubehotelbody2.obj" /><mesh name="env_780_tubehotelbody3" file="meshes/780_tubehotelbody3.obj" /><mesh name="env_cad" file="meshes/cad.obj" /><mesh name="env_cad2" file="meshes/cad2.obj" /><mesh name="env_NGS_body1" file="meshes/NGS_body1.obj" /><mesh name="env_NGS_body2" file="meshes/NGS_body2.obj" /><mesh name="env_NGS_library1" file="meshes/NGS_library1.obj" /><mesh name="env_NGS_libraryfloor1" file="meshes/NGS_libraryfloor1.obj" /><mesh name="env_NGS_libraryfloor2" file="meshes/NGS_libraryfloor2.obj" /><mesh name="env_NGS_libraryfloor3" file="meshes/NGS_libraryfloor3.obj" /><mesh name="env_NGS_libraryfloor4" file="meshes/NGS_libraryfloor4.obj" /><mesh name="env_NGS_rack1" file="meshes/NGS_rack1.obj" /><mesh name="env_NGS_rack2" file="meshes/NGS_rack2.obj" /><mesh name="env_NGS_rack3" file="meshes/NGS_rack3.obj" /><mesh name="env_NGS_rack4" file="meshes/NGS_rack4.obj" /><mesh name="env_platehotel" file="meshes/platehotel.obj" /><mesh name="env_platewell1" file="meshes/platewell1.obj" /><mesh name="env_platewell2" file="meshes/platewell2.obj" /><mesh name="env_platewell3" file="meshes/platewell3.obj" /><mesh name="env_platewell4" file="meshes/platewell4.obj" /><mesh name="env_reader_body1" file="meshes/reader_body1.obj" /><mesh name="env_reader_body2" file="meshes/reader_body2.obj" /><mesh name="env_reader_plateholder" file="meshes/reader_plateholder.obj" /><mesh name="env_SH800_body1" file="meshes/SH800_body1.obj" /><mesh name="env_SH800_body2" file="meshes/SH800_body2.obj" /><mesh name="env_SH800_body3" file="meshes/SH800_body3.obj" /><mesh name="env_SH800_body4" file="meshes/SH800_body4.obj" /><mesh name="env_slide" file="meshes/slide.obj" /><mesh name="env_sliderail" file="meshes/sliderail.obj" /><mesh name="env_stx44_body1" file="meshes/stx44_body1.obj" /><mesh name="env_stx44_plateholder" file="meshes/stx44_plateholder.obj" /><mesh name="env_stx44_plateholderfloor" file="meshes/stx44_plateholderfloor.obj" /><mesh name="env_table" file="meshes/table.obj" /><mesh name="env_table.001" file="meshes/table.001.obj" /><mesh name="env_table.002" file="meshes/table.002.obj" /><mesh name="env_table.003" file="meshes/table.003.obj" /><mesh name="env_tube1" file="meshes/tube1.obj" /><mesh name="env_tube2" file="meshes/tube2.obj" /><mesh name="env_tube3" file="meshes/tube3.obj" /><mesh name="env_tube4" file="meshes/tube4.obj" /><mesh name="env_tubefloor1" file="meshes/tubefloor1.obj" /><mesh name="env_tubefloor2" file="meshes/tubefloor2.obj" /><mesh name="env_tubefloor3" file="meshes/tubefloor3.obj" /><mesh name="env_tubefloor4" file="meshes/tubefloor4.obj" /><mesh name="env_tubehotel" file="meshes/tubehotel.obj" /><mesh name="env_tubehotelbody1" file="meshes/tubehotelbody1.obj" /><mesh name="env_tubehotelbody2" file="meshes/tubehotelbody2.obj" /><mesh name="env_tubehotelbody3" file="meshes/tubehotelbody3.obj" /><mesh name="env_tubehotelbody4" file="meshes/tubehotelbody4.obj" /><mesh name="env_waste" file="meshes/waste.obj" /></asset>
+
+  <worldbody>
+    <camera name="cell_overview" quat="0.825304 0.424108 0.170409 0.331612" pos="2.45 -1.15 2.35" />
+    <camera name="cell_top" pos="0.75 1 3.1" />
+    <light name="key_light" pos="0.4 0.6 2.6" dir="0.09759 0.19518 -0.9759" type="directional" />
+    <light name="fill_light" pos="1.6 1.8 1.8" dir="-0.408248 -0.408248 -0.816497" diffuse="0.45 0.45 0.45" type="directional" />
+    <body name="ur5e_mount" pos="0.881 1.25 0.3795">
+      <joint name="rail_joint" type="slide" range="0 1.034" armature="0.1" damping="100" frictionloss="5" axis="1 0 0" limited="true" />
+      <site name="ur5e_mount_reference" size="0.0745 0.002" type="cylinder" group="3" rgba="0.1 1 0.1 0.45" />
+      <body name="ur5e_base" childclass="ur5e_ur5e" quat="0 0 0 -1">
+        <inertial pos="0 0 0" mass="4" diaginertia="0.00443333 0.00443333 0.0072" />
+        <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_base_0" />
+        <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_base_1" />
+        <body name="ur5e_shoulder_link" pos="0 0 0.163">
+          <inertial pos="0 0 0" mass="3.7" diaginertia="0.0102675 0.0102675 0.00666" />
+          <joint name="ur5e_shoulder_pan_joint" class="ur5e_size3" axis="0 0 1" />
+          <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_shoulder_0" />
+          <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_shoulder_1" />
+          <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_shoulder_2" />
+          <geom class="ur5e_collision" size="0.06 0.06" pos="0 0 -0.04" contype="0" conaffinity="0" />
+          <body name="ur5e_upper_arm_link" pos="0 0.138 0" quat="0.707107 0 0.707107 0">
+            <inertial pos="0 0 0.2125" mass="8.393" diaginertia="0.133886 0.133886 0.0151074" />
+            <joint name="ur5e_shoulder_lift_joint" class="ur5e_size3" />
+            <geom class="ur5e_visual" material="ur5e_linkgray" mesh="ur5e_upperarm_0" />
+            <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_upperarm_1" />
+            <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_upperarm_2" />
+            <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_upperarm_3" />
+            <geom class="ur5e_collision" size="0.06 0.06" pos="0 -0.04 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0" />
+            <geom class="ur5e_collision" size="0.05 0.2" pos="0 0 0.2" contype="0" conaffinity="0" />
+            <body name="ur5e_forearm_link" pos="0 -0.131 0.425">
+              <inertial pos="0 0 0.196" mass="2.275" diaginertia="0.0311796 0.0311796 0.004095" />
+              <joint name="ur5e_elbow_joint" class="ur5e_size3_limited" />
+              <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_forearm_0" />
+              <geom class="ur5e_visual" material="ur5e_linkgray" mesh="ur5e_forearm_1" />
+              <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_forearm_2" />
+              <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_forearm_3" />
+              <geom class="ur5e_collision" size="0.055 0.06" pos="0 0.08 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0" />
+              <geom class="ur5e_collision" size="0.038 0.19" pos="0 0 0.2" contype="0" conaffinity="0" />
+              <body name="ur5e_wrist_1_link" pos="0 0 0.392" quat="0.707107 0 0.707107 0">
+                <inertial pos="0 0.127 0" mass="1.219" diaginertia="0.0025599 0.0025599 0.0021942" />
+                <joint name="ur5e_wrist_1_joint" class="ur5e_size1" />
+                <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_wrist1_0" />
+                <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_wrist1_1" />
+                <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_wrist1_2" />
+                <geom class="ur5e_collision" size="0.04 0.07" pos="0 0.05 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0" />
+                <body name="ur5e_wrist_2_link" pos="0 0.127 0">
+                  <inertial pos="0 0 0.1" mass="1.219" diaginertia="0.0025599 0.0025599 0.0021942" />
+                  <joint name="ur5e_wrist_2_joint" class="ur5e_size1" axis="0 0 1" />
+                  <geom class="ur5e_visual" material="ur5e_black" mesh="ur5e_wrist2_0" />
+                  <geom class="ur5e_visual" material="ur5e_urblue" mesh="ur5e_wrist2_1" />
+                  <geom class="ur5e_visual" material="ur5e_jointgray" mesh="ur5e_wrist2_2" />
+                  <geom class="ur5e_collision" size="0.04 0.06" pos="0 0 0.04" contype="0" conaffinity="0" />
+                  <geom class="ur5e_collision" size="0.04 0.04" pos="0 0.02 0.1" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0" />
+                  <body name="ur5e_wrist_3_link" pos="0 0 0.1">
+                    <inertial pos="0 0.0771683 0" quat="0.707107 0 0 0.707107" mass="0.1889" diaginertia="0.000132134 9.90863e-05 9.90863e-05" />
+                    <joint name="ur5e_wrist_3_joint" class="ur5e_size1" />
+                    <geom class="ur5e_visual" material="ur5e_linkgray" mesh="ur5e_wrist3" />
+                    <geom class="ur5e_eef_collision" size="0.04 0.02" pos="0 0.08 0" quat="0.707107 0.707107 0 0" contype="0" conaffinity="0" />
+                    <site name="ur5e_attachment_site" pos="0 0.1 0" quat="-0.707107 0.707107 0 0" />
+                    <body name="ur5e_onrobot_rg2_body" pos="0 0.1 0" quat="-0.707107 0.707107 0 0">
+                      <body name="ur5e_onrobot_rg2_model_frame">
+                        <inertial pos="0 0 0.07" mass="0.78" diaginertia="0.00303 0.00439 0.00153" />
+                        <geom name="ur5e_onrobot_rg2_visual" type="mesh" contype="0" conaffinity="0" group="2" rgba="0.12 0.12 0.14 1" mass="0" mesh="ur5e_onrobot_rg2_official_mesh" /><geom name="std_l_link_u" type="box" size="0.0045 0.011 0.02675" pos="-0.04065 0 0.135858" quat="0.901798 -0 -0.432159 -0" group="2" contype="0" conaffinity="0" mass="0" rgba="0.75 0.77 0.8 1" /><geom name="std_l_link_l" type="box" size="0.0045 0.011 0.02675" pos="-0.03145 0 0.152058" quat="0.901798 -0 -0.432159 -0" group="2" contype="0" conaffinity="0" mass="0" rgba="0.75 0.77 0.8 1" /><geom name="std_r_link_u" type="box" size="0.0045 0.011 0.02675" pos="0.04065 0 0.135858" quat="0.901798 0 0.432159 0" group="2" contype="0" conaffinity="0" mass="0" rgba="0.75 0.77 0.8 1" /><geom name="std_r_link_l" type="box" size="0.0045 0.011 0.02675" pos="0.03145 0 0.152058" quat="0.901798 0 0.432159 0" group="2" contype="0" conaffinity="0" mass="0" rgba="0.75 0.77 0.8 1" /><geom name="d455_body_collision" type="box" size="0.062 0.013 0.0145" pos="0 0.1093 0" quat="0 0 0.939693 0.34202" group="5" contype="8" conaffinity="3" mass="0" />
+                        <geom name="rg2_body_collision" size="0.035 0.018 0.07" pos="0 0 0.075" type="box" contype="8" conaffinity="3" group="5" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.9 0.2 0.9 0.25" mass="0" />
+                        <geom name="rg2_linkage_collision" size="0.068 0.014 0.025" pos="0 0 0.14" type="box" contype="8" conaffinity="3" group="5" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.9 0.2 0.9 0.25" mass="0" />
+                        <geom name="wrist_camera_body_visual" size="0.0495 0.0115 0.01" pos="0 0.165 0.0113397" quat="0 0 0.965926 0.258819" type="box" contype="0" conaffinity="0" group="3" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.15 0.15 0.18 1" mass="0" />
+                        <geom name="wrist_camera_bracket" size="0.02 0.05675 0.004" pos="0 0.09675 0.012" type="box" contype="0" conaffinity="0" group="3" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.55 0.57 0.6 1" mass="0" />
+                        <site name="ur5e_rg2_tcp" size="0.005" pos="0 0 0.213" group="3" rgba="1 0.2 0.2 1" />
+                        <site name="ur5e_rg2_grasp_center" size="0.004" pos="0 0 0.185" group="3" rgba="0.2 1 0.2 1" />
+                        <site name="ur5e_rg2_fingertip_center" size="0.004" pos="0 -0.0031 0.198417" group="3" rgba="1 1 0.2 1" />
+                        <camera name="wrist_camera" quat="0 0 0.939693 0.34202" pos="0 0.1093 0" fovy="58" />
+                        <body name="ur5e_rg2_fingertip_left">
+                          <joint name="ur5e_rg2_fingertip_left_joint" type="slide" range="0.004 0.055" armature="0.2" damping="20" axis="-1 0 0" limited="true" />
+                          <geom name="ur5e_rg2_fingertip_left_geom" size="0.002225 0.0101 0.0149" pos="-0.002225 0 0.193317" type="box" contype="4" conaffinity="2" condim="6" group="2" friction="1.2 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.1 0.1 0.1 1" mass="0.02" /><geom name="std_finger_left" type="box" size="0.0035 0.01 0.0273" pos="-0.00795 0 0.173917" contype="4" conaffinity="2" group="2" mass="0.01" rgba="0.8 0.82 0.85 1" />
+                        </body>
+                        <body name="ur5e_rg2_fingertip_right">
+                          <joint name="ur5e_rg2_fingertip_right_joint" type="slide" range="0.004 0.055" armature="0.2" damping="20" axis="1 0 0" limited="true" />
+                          <geom name="ur5e_rg2_fingertip_right_geom" size="0.002225 0.0101 0.0149" pos="0.002225 0 0.193317" type="box" contype="4" conaffinity="2" condim="6" group="2" friction="1.2 0.02 0.002" solref="0.002" solimp="0.95 0.99 0.0005" rgba="0.1 0.1 0.1 1" mass="0.02" /><geom name="std_finger_right" type="box" size="0.0035 0.01 0.0273" pos="0.00795 0 0.173917" contype="4" conaffinity="2" group="2" mass="0.01" rgba="0.8 0.82 0.85 1" />
+                        </body>
+                      <geom name="held_plate" type="box" pos="0.0 -0.013100000000000002 0.241917" size="0.0425 0.007 0.0635" rgba="0.95 0.95 0.95 0" contype="0" conaffinity="0" group="1" mass="0" /><geom name="held_tube" type="box" pos="0.0 -0.027599969005584715 0.194417" size="0.006 0.03249996900558472 0.006" rgba="0.2 0.7 0.55 0" contype="0" conaffinity="0" group="1" mass="0" /></body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    <geom name="env_cad" type="mesh" mesh="env_cad" pos="-1.1149994134902954 -1.25 -0.3795" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_cad2" type="mesh" mesh="env_cad2" pos="-1.1149994134902954 -1.25 -0.3795" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_slide" type="mesh" mesh="env_slide" pos="-1.1149994134902954 -1.25 -0.3795" rgba="0.6 0.65 0.7 1" group="1" /></body>
+    <body name="environment"><geom name="env_780_body1" type="mesh" mesh="env_780_body1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_780_body2" type="mesh" mesh="env_780_body2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_780_plateholder1" type="mesh" mesh="env_780_plateholder1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_780_plateholder2" type="mesh" mesh="env_780_plateholder2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_780_tubehotel" type="mesh" mesh="env_780_tubehotel" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_780_tubehotelbody1" type="mesh" mesh="env_780_tubehotelbody1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_780_tubehotelbody2" type="mesh" mesh="env_780_tubehotelbody2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_780_tubehotelbody3" type="mesh" mesh="env_780_tubehotelbody3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_body1" type="mesh" mesh="env_NGS_body1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_body2" type="mesh" mesh="env_NGS_body2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_library1" type="mesh" mesh="env_NGS_library1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_libraryfloor1" type="mesh" mesh="env_NGS_libraryfloor1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_libraryfloor2" type="mesh" mesh="env_NGS_libraryfloor2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_libraryfloor3" type="mesh" mesh="env_NGS_libraryfloor3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_libraryfloor4" type="mesh" mesh="env_NGS_libraryfloor4" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_rack1" type="mesh" mesh="env_NGS_rack1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_rack2" type="mesh" mesh="env_NGS_rack2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_rack3" type="mesh" mesh="env_NGS_rack3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_NGS_rack4" type="mesh" mesh="env_NGS_rack4" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_platehotel" type="mesh" mesh="env_platehotel" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_platewell1" type="mesh" mesh="env_platewell1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_platewell2" type="mesh" mesh="env_platewell2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_platewell3" type="mesh" mesh="env_platewell3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_platewell4" type="mesh" mesh="env_platewell4" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_reader_body1" type="mesh" mesh="env_reader_body1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_reader_body2" type="mesh" mesh="env_reader_body2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_reader_plateholder" type="mesh" mesh="env_reader_plateholder" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_SH800_body1" type="mesh" mesh="env_SH800_body1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_SH800_body2" type="mesh" mesh="env_SH800_body2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_SH800_body3" type="mesh" mesh="env_SH800_body3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_SH800_body4" type="mesh" mesh="env_SH800_body4" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_sliderail" type="mesh" mesh="env_sliderail" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_stx44_body1" type="mesh" mesh="env_stx44_body1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_stx44_plateholder" type="mesh" mesh="env_stx44_plateholder" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_stx44_plateholderfloor" type="mesh" mesh="env_stx44_plateholderfloor" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_table" type="mesh" mesh="env_table" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_table.001" type="mesh" mesh="env_table.001" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_table.002" type="mesh" mesh="env_table.002" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_table.003" type="mesh" mesh="env_table.003" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tube1" type="mesh" mesh="env_tube1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tube2" type="mesh" mesh="env_tube2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tube3" type="mesh" mesh="env_tube3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tube4" type="mesh" mesh="env_tube4" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubefloor1" type="mesh" mesh="env_tubefloor1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubefloor2" type="mesh" mesh="env_tubefloor2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubefloor3" type="mesh" mesh="env_tubefloor3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubefloor4" type="mesh" mesh="env_tubefloor4" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubehotel" type="mesh" mesh="env_tubehotel" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubehotelbody1" type="mesh" mesh="env_tubehotelbody1" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubehotelbody2" type="mesh" mesh="env_tubehotelbody2" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubehotelbody3" type="mesh" mesh="env_tubehotelbody3" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_tubehotelbody4" type="mesh" mesh="env_tubehotelbody4" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /><geom name="env_waste" type="mesh" mesh="env_waste" pos="0.0 0.0 0.0" rgba="0.6 0.65 0.7 1" group="1" /></body></worldbody>
+
+  <equality>
+    <joint name="rg2_fingertip_coupling" joint1="ur5e_rg2_fingertip_right_joint" joint2="ur5e_rg2_fingertip_left_joint" solref="0.004" />
+  </equality>
+
+  <actuator>
+    <general name="rail_actuator" joint="rail_joint" ctrlrange="0 1.034" ctrllimited="true" forcelimited="true" forcerange="-2000 2000" biastype="affine" gainprm="0" />
+    <general name="ur5e_shoulder_pan" class="ur5e_size3" joint="ur5e_shoulder_pan_joint" gainprm="0" biasprm="0 0 0" />
+    <general name="ur5e_shoulder_lift" class="ur5e_size3" joint="ur5e_shoulder_lift_joint" gainprm="0" biasprm="0 0 0" />
+    <general name="ur5e_elbow" class="ur5e_size3_limited" joint="ur5e_elbow_joint" gainprm="0" biasprm="0 0 0" />
+    <general name="ur5e_wrist_1" class="ur5e_size1" joint="ur5e_wrist_1_joint" gainprm="0" biasprm="0 0 0" />
+    <general name="ur5e_wrist_2" class="ur5e_size1" joint="ur5e_wrist_2_joint" gainprm="0" biasprm="0 0 0" />
+    <general name="ur5e_wrist_3" class="ur5e_size1" joint="ur5e_wrist_3_joint" gainprm="0" biasprm="0 0 0" />
+    <general name="rg2_fingertip_actuator" joint="ur5e_rg2_fingertip_left_joint" ctrlrange="0 0.055" ctrllimited="true" forcelimited="true" forcerange="-30 30" biastype="affine" gainprm="6000" biasprm="0 -6000 -100" />
+  </actuator>
+
+  </mujoco>

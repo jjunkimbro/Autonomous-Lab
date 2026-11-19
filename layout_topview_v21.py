@@ -20,7 +20,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import process_rule_v21 as P
 
-SRC = Path(r"C:\Users\T-Lab_Public\Downloads\lab_layout_v21_reorder (1)\table_layout_v21_reorder_topview.png")
+SRC = Path(__file__).resolve().parent / "lab_layout_v21" / "table_layout_v21_reorder_topview.png"   # 받은 배치 패키지의 윗면 그림
 PPM = 391.3                                   # px / m
 X0, Y0 = 153.1, 82.0                          # x = 0 의 열, y = 2.50 의 행
 

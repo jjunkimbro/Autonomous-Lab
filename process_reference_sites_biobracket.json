@@ -1,0 +1,190 @@
+{
+  "schema": "autonomous_lab_process_references_v2",
+  "source_manifest": "environment_biobracket_export/scene_manifest_v2.json",
+  "source_blend": "biobracket_new.blend",
+  "source_sha256": "ccbcf89b0689b15b61eeeeffd001599080d2c06c2412c20c12250227cf05e231",
+  "coordinate_system": "Blender/MuJoCo world XYZ, Z-up, meters",
+  "warning": "Sites are geometric references, not calibrated TCP, grasp, approach, or insertion poses.",
+  "references": [
+    {
+      "site": "ref_780_plateholder1",
+      "source_object": "780_plateholder1",
+      "category": "fluent",
+      "position_xyz_m": [
+        1.2450000047683716,
+        0.3140000104904175,
+        0.6650000214576721
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_780_plateholder2",
+      "source_object": "780_plateholder2",
+      "category": "fluent",
+      "position_xyz_m": [
+        0.9949999749660492,
+        0.31400004774332047,
+        0.6650001406669617
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platehotel",
+      "source_object": "platehotel",
+      "category": "plate_hotel",
+      "position_xyz_m": [
+        1.8274999856948853,
+        0.3250000327825546,
+        0.7900000810623169
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell1",
+      "source_object": "platewell1",
+      "category": "plate",
+      "position_xyz_m": [
+        1.825772762298584,
+        0.336499959230423,
+        0.6214999556541443
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell2",
+      "source_object": "platewell2",
+      "category": "plate",
+      "position_xyz_m": [
+        1.825772762298584,
+        0.3364998996257782,
+        0.6664999127388
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell3",
+      "source_object": "platewell3",
+      "category": "plate",
+      "position_xyz_m": [
+        1.825772762298584,
+        0.3364998400211334,
+        0.7114998698234558
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_platewell4",
+      "source_object": "platewell4",
+      "category": "plate",
+      "position_xyz_m": [
+        1.825772762298584,
+        0.3364998996257782,
+        0.7564997673034668
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_reader_plateholder",
+      "source_object": "reader_plateholder",
+      "category": "reader",
+      "position_xyz_m": [
+        0.3085002303123474,
+        1.1350001692771912,
+        0.6500000953674316
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_stx44_plateholder",
+      "source_object": "stx44_plateholder",
+      "category": "stx44",
+      "position_xyz_m": [
+        0.5369997471570969,
+        0.6584997773170471,
+        0.7800000905990601
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube1",
+      "source_object": "tube1",
+      "category": "tube",
+      "position_xyz_m": [
+        1.9700002074241638,
+        0.38999998569488525,
+        0.6609998941421509
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube2",
+      "source_object": "tube2",
+      "category": "tube",
+      "position_xyz_m": [
+        1.9700002074241638,
+        0.36000001430511475,
+        0.6609998941421509
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube3",
+      "source_object": "tube3",
+      "category": "tube",
+      "position_xyz_m": [
+        1.9700002074241638,
+        0.33000001311302185,
+        0.6609998941421509
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tube4",
+      "source_object": "tube4",
+      "category": "tube",
+      "position_xyz_m": [
+        1.9700002074241638,
+        0.30000004172325134,
+        0.6609998941421509
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_tubehotel",
+      "source_object": "tubehotel",
+      "category": "tube",
+      "position_xyz_m": [
+        1.9700000286102295,
+        0.2800000309944153,
+        0.6050001382827759
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    },
+    {
+      "site": "ref_waste",
+      "source_object": "waste",
+      "category": "waste",
+      "position_xyz_m": [
+        2.1399999856948853,
+        0.2999999150633812,
+        0.800000011920929
+      ],
+      "derivation": "bbox_top_center",
+      "status": "geometric_reference_only"
+    }
+  ]
+}

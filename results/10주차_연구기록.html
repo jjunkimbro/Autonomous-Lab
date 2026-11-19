@@ -1,0 +1,447 @@
+<title>10주차 배치 확정</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column (~46rem) with wider figure blocks; chapters follow the real order of work. */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --surface-2:#eef1f5;
+  --ink:#16202c; --ink-2:#4a5667; --line:#d6dce4;
+  --accent:#2b56c9; --accent-soft:#e4ebfb;
+  --safe:#1f8a6b; --safe-soft:#dcf1ea;
+  --warn:#b7791f; --warn-soft:#f8ecd6;
+  --bad:#c0453a; --bad-soft:#f8e1de;
+  --muted-bar:#c3cad5;
+  --f-display:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151c; --surface:#171e27; --surface-2:#1e2733;
+  --ink:#e6ebf2; --ink-2:#a3aebd; --line:#2e3946;
+  --accent:#7d9cf0; --accent-soft:#1f2b48;
+  --safe:#4cc59e; --safe-soft:#15332b;
+  --warn:#e3a94b; --warn-soft:#3a2d15;
+  --bad:#ec7d72; --bad-soft:#3d1f1c;
+  --muted-bar:#46525f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151c; --surface:#171e27; --surface-2:#1e2733;
+  --ink:#e6ebf2; --ink-2:#a3aebd; --line:#2e3946;
+  --accent:#7d9cf0; --accent-soft:#1f2b48;
+  --safe:#4cc59e; --safe-soft:#15332b;
+  --warn:#e3a94b; --warn-soft:#3a2d15;
+  --bad:#ec7d72; --bad-soft:#3d1f1c;
+  --muted-bar:#46525f; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px;
+  word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:1040px;margin:0 auto}
+.col{max-width:46rem}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+h1{font-size:clamp(1.9rem,4.5vw,2.7rem);font-weight:700;letter-spacing:-0.01em}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.18rem;font-weight:600}
+h4{font-size:1rem;font-weight:600}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:14px}
+.stack-lg{display:flex;flex-direction:column;gap:28px}
+.mono,code{font-family:var(--f-mono);font-size:.88em}
+code{background:var(--surface-2);padding:1px 5px;border-radius:4px}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--ink-2)}
+.small{font-size:.88rem}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+header.top{padding-block:48px 28px;display:flex;flex-direction:column;gap:16px;border-bottom:1px solid var(--line)}
+.lede{font-size:1.08rem;color:var(--ink-2);max-width:44rem}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:8px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tile .v{font-family:var(--f-mono);font-size:1.55rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2}
+.tile .k{font-size:.82rem;color:var(--ink-2);line-height:1.45}
+.tile.safe .v{color:var(--safe)} .tile.acc .v{color:var(--accent)}
+@media (max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;padding-block:18px;border-bottom:1px solid var(--line)}
+nav.toc a{font-size:.85rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+nav.toc a:hover{border-color:var(--accent);color:var(--accent)}
+
+section.ch{padding-block:44px 8px;display:flex;flex-direction:column;gap:20px}
+.ch-head{display:flex;gap:14px;align-items:baseline}
+.ch-no{font-family:var(--f-mono);font-size:.95rem;color:var(--accent);font-weight:600;min-width:2.2rem}
+
+/* figure blocks */
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.fig-title{font-weight:600;font-size:.95rem}
+.fig-cap{font-size:.84rem;color:var(--ink-2)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+svg text{font-family:var(--f-body)}
+.s-ink{fill:var(--ink)} .s-ink2{fill:var(--ink-2)} .s-acc{fill:var(--accent)} .s-safe{fill:var(--safe)} .s-warn{fill:var(--warn)} .s-bad{fill:var(--bad)}
+.s-box{fill:var(--surface-2);stroke:var(--line);stroke-width:1.2}
+.s-box-acc{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6}
+.s-box-safe{fill:var(--safe-soft);stroke:var(--safe);stroke-width:1.2}
+.s-box-warn{fill:var(--warn-soft);stroke:var(--warn);stroke-width:1.2}
+.s-line{stroke:var(--ink-2);stroke-width:1.6;fill:none}
+.s-grid{stroke:var(--line);stroke-width:1;fill:none}
+.s-axis{stroke:var(--ink-2);stroke-width:1.2;fill:none}
+
+/* timeline stepper */
+.stepper{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;position:relative}
+.step{display:flex;flex-direction:column;gap:6px;padding:0 8px;position:relative;min-width:0}
+.step .dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--accent);position:relative;z-index:1}
+.step.bad .dot{border-color:var(--bad)} .step.warn .dot{border-color:var(--warn)} .step.good .dot{border-color:var(--safe);background:var(--safe)}
+.step::before{content:"";position:absolute;top:6px;left:8px;right:-8px;height:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.step .t{font-weight:600;font-size:.9rem;line-height:1.35}
+.step .d{font-size:.8rem;color:var(--ink-2);line-height:1.45}
+.step .r{font-family:var(--f-mono);font-size:.8rem;font-weight:600}
+@media (max-width:860px){
+  .stepper{grid-template-columns:1fr;gap:14px}
+  .step{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:0 0 0 26px}
+  .step .dot{position:absolute;left:0;top:6px}
+  .step::before{top:20px;left:6px;right:auto;width:2px;height:calc(100% + 0px)}
+  .step .d{flex-basis:100%}
+}
+
+/* glossary */
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.term{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.term b{font-size:.95rem}
+.term span{font-size:.86rem;color:var(--ink-2);line-height:1.6}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;background:var(--surface-2);font-size:.84rem;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hl td{background:var(--accent-soft)}
+
+/* chips */
+.chip{display:inline-block;font-size:.76rem;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap;line-height:1.6}
+.chip.safe{background:var(--safe-soft);color:var(--safe)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.acc{background:var(--accent-soft);color:var(--accent)}
+
+/* problem → change → result cards */
+.pcr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.pcr>div{padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0;border-right:1px solid var(--line);position:relative}
+.pcr>div:last-child{border-right:none}
+.pcr .lab{font-size:.74rem;font-weight:600;letter-spacing:.06em}
+.pcr .p .lab{color:var(--bad)} .pcr .c .lab{color:var(--accent)} .pcr .r .lab{color:var(--safe)}
+.pcr .p{background:linear-gradient(0deg,var(--surface),var(--surface))}
+.pcr>div:not(:last-child)::after{content:"";position:absolute;right:-7px;top:50%;width:12px;height:12px;background:var(--surface);border-top:1px solid var(--line);border-right:1px solid var(--line);transform:translateY(-50%) rotate(45deg);z-index:1}
+.pcr ul{margin:0;padding-left:18px;font-size:.9rem;line-height:1.6}
+@media (max-width:760px){.pcr{grid-template-columns:1fr}.pcr>div{border-right:none;border-bottom:1px solid var(--line)}.pcr>div:last-child{border-bottom:none}.pcr>div:not(:last-child)::after{right:auto;left:24px;top:auto;bottom:-7px;transform:rotate(135deg)}}
+
+/* stage block */
+.stage{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding-block:20px;border-top:1px solid var(--line)}
+.stage:first-of-type{border-top:none}
+.stage-meta{display:flex;flex-direction:column;gap:6px}
+.stage-meta .sn{font-family:var(--f-mono);color:var(--accent);font-weight:600}
+.stage-meta .when{font-size:.8rem;color:var(--ink-2)}
+.stage-body{display:flex;flex-direction:column;gap:14px;min-width:0}
+@media (max-width:760px){.stage{grid-template-columns:1fr;gap:10px}}
+
+/* bars */
+.bars{display:flex;flex-direction:column;gap:9px}
+.bar-row{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr) 4.2rem;gap:10px;align-items:center}
+.bar-row .lbl{font-size:.85rem;line-height:1.35}
+.bar-row .track{height:16px;background:var(--surface-2);border-radius:4px;position:relative;overflow:hidden}
+.bar-row .fill{height:100%;border-radius:4px;background:var(--accent)}
+.bar-row .fill.safe{background:var(--safe)} .bar-row .fill.bad{background:var(--bad)} .bar-row .fill.muted{background:var(--muted-bar)} .bar-row .fill.warn{background:var(--warn)}
+.bar-row .val{font-family:var(--f-mono);font-size:.85rem;text-align:right;font-variant-numeric:tabular-nums}
+.goal-line{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+@media (max-width:600px){.bar-row{grid-template-columns:1fr 3.6rem}.bar-row .lbl{grid-column:1 / -1}}
+
+/* phase grid */
+.phase{display:grid;grid-template-columns:7.5rem repeat(5,minmax(8.5rem,1fr));min-width:820px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.phase>div{padding:10px 12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:.84rem;line-height:1.5}
+.phase>div:nth-child(6n){border-right:none}
+.phase .h{background:var(--surface-2);font-weight:600;font-size:.86rem}
+.phase .rh{font-weight:600;background:var(--surface-2)}
+.phase .rl{background:var(--accent-soft)}
+.phase .lqr{background:var(--safe-soft)}
+.phase>div.last-row{border-bottom:none}
+
+/* two-up */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.safe{border-top:4px solid var(--safe)} .card.acc{border-top:4px solid var(--accent)} .card.warn{border-top:4px solid var(--warn)}
+.card ul{margin:0;padding-left:18px;font-size:.92rem;line-height:1.65}
+
+/* loop diagram */
+.loop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:stretch}
+.lnode{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:4px;font-size:.86rem;position:relative;min-width:0}
+.lnode b{font-size:.92rem}
+.lnode.acc{background:var(--accent-soft);border-color:var(--accent)}
+.lnode.safe{background:var(--safe-soft);border-color:var(--safe)}
+.lnode.warn{background:var(--warn-soft);border-color:var(--warn)}
+@media (max-width:760px){.loop{grid-template-columns:1fr}}
+
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.92rem}
+.note.acc{border-left-color:var(--accent);background:var(--accent-soft)}
+.note.safe{border-left-color:var(--safe);background:var(--safe-soft)}
+
+
+/* diagram extras */
+.s-line-acc{stroke:var(--accent);stroke-width:1.8;fill:none}
+.s-dash{stroke-dasharray:5 4}
+.s-band{fill:var(--bg);stroke:var(--line);stroke-width:1.2;stroke-dasharray:6 5}
+.s-lab{font-size:11px;fill:var(--ink-2)}
+.phase .rl{background:var(--accent-soft)}
+.phase .off{color:var(--ink-2)}
+.phase .rh .sub{display:block;font-weight:400;font-size:.76rem;color:var(--ink-2)}
+/* range rows */
+.rng-list{display:flex;flex-direction:column}
+.rng{display:grid;grid-template-columns:minmax(0,13rem) minmax(0,1fr) 4.5rem;gap:18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.rng:last-child{border-bottom:none}
+.rng-name{display:flex;flex-direction:column;gap:2px;min-width:0}
+.rng-name b{font-size:.93rem}
+.rng-name span{font-size:.8rem;color:var(--ink-2);line-height:1.45}
+.rng-viz{position:relative;padding-block:20px 22px;min-width:0}
+.rng-track{position:relative;height:10px;background:var(--surface-2);border-radius:5px}
+.rng-span{position:absolute;top:0;bottom:0;background:var(--accent);border-radius:5px}
+.rng-span.disc{background:transparent}
+.rng-dot{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%)}
+.rng-nom{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--ink);transform:translateX(-1px)}
+.rng-ref{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--bad);transform:translateX(-1px)}
+.rng-lab{position:absolute;font-family:var(--f-mono);font-size:.76rem;white-space:nowrap;transform:translateX(-50%);font-variant-numeric:tabular-nums}
+.rng-lab.lo{top:100%;margin-top:4px}
+.rng-lab.up{bottom:100%;margin-bottom:4px;color:var(--ink-2)}
+.rng-lab.l{transform:none} .rng-lab.r{transform:translateX(-100%)}
+.rng-lab.ref{color:var(--bad)}
+.rng-off{font-size:.85rem;color:var(--ink-2);padding-block:6px}
+@media (max-width:640px){.rng{grid-template-columns:1fr auto;gap:6px 12px}.rng-viz{grid-column:1 / -1;grid-row:2}}
+/* noise rows */
+.nz-list{display:flex;flex-direction:column}
+.nz{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.nz:last-child{border-bottom:none}
+.nz-sensor{display:flex;flex-direction:column;gap:2px}
+.nz-sensor b{font-size:.93rem}
+.nz-sensor span{font-size:.78rem;color:var(--ink-2)}
+.nz-items{display:flex;flex-direction:column;gap:6px;min-width:0}
+.nzi{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:.88rem}
+.nzi .pill{min-width:6.2rem;text-align:center}
+@media (max-width:640px){.nz{grid-template-columns:1fr;gap:6px}}
+/* experiment runs */
+.runs{display:flex;flex-direction:column;gap:0;position:relative}
+.run{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:12px;padding:10px 0;position:relative}
+.run::before{content:"";position:absolute;left:calc(1rem - 1px);top:34px;bottom:-10px;width:2px;background:var(--line)}
+.run:last-child::before{display:none}
+.run-no{width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-weight:600;font-size:.85rem;background:var(--surface);border:2px solid var(--accent);color:var(--accent);position:relative;z-index:1}
+.run-no.ok{border-color:var(--safe);color:var(--safe)} .run-no.no{border-color:var(--warn);color:var(--warn)} .run-no.drop{border-color:var(--bad);color:var(--bad)}
+.run-body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.run-body b{font-size:.92rem}
+.run-path{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.run-path .pill{white-space:normal;font-family:var(--f-body);font-size:.8rem}
+.pill.warn{border-color:var(--warn);color:var(--warn)}
+
+/* per-stage term notes */
+.mini{background:var(--surface-2);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,9.5rem) minmax(0,1fr);gap:7px 14px;font-size:.86rem;line-height:1.6;margin:0}
+.mini-h{grid-column:1 / -1;font-size:.74rem;font-weight:600;letter-spacing:.06em;color:var(--ink-2)}
+.mini dt{font-weight:600}
+.mini dd{margin:0;color:var(--ink-2)}
+@media (max-width:600px){.mini{grid-template-columns:1fr;gap:2px}.mini dd{margin-bottom:8px}}
+.cmp{display:flex;flex-direction:column;gap:8px}
+.cmp-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:.86rem}
+.cmp-row .tag{font-weight:600;min-width:5.5rem}
+.pill{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-family:var(--f-mono);font-size:.8rem;white-space:nowrap}
+.pill.acc{border-color:var(--accent);color:var(--accent)}
+.pill.bad{border-color:var(--bad);color:var(--bad)}
+.pill.safe{border-color:var(--safe);color:var(--safe)}
+.arrow{color:var(--ink-2)}
+
+/* checklist */
+.todo{display:flex;flex-direction:column;gap:10px}
+.todo-item{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.todo-item .box{width:22px;height:22px;border:2px solid var(--ink-2);border-radius:5px;margin-top:3px}
+.todo-item .box.p1{border-color:var(--bad)} .todo-item .box.p2{border-color:var(--warn)} .todo-item .box.p3{border-color:var(--accent)}
+.todo-item h4{margin-bottom:4px}
+.todo-item p{font-size:.9rem;color:var(--ink-2)}
+.todo-item .cfg{font-size:.82rem;margin-top:6px}
+
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* 6 단계 표: 머리 열 + 단계 6 개 */
+.phase.six{grid-template-columns:8.5rem repeat(6,minmax(8rem,1fr));min-width:960px}
+.phase.six>div:nth-child(6n){border-right:1px solid var(--line)}
+
+/* week 10 additions: photos and stacked time bars */
+.photo{display:flex;flex-direction:column;gap:8px;min-width:0}
+.photo img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);background:var(--surface-2)}
+.stack-bar{display:flex;flex-direction:column;gap:10px}
+.sb-row{display:grid;grid-template-columns:minmax(0,9.5rem) minmax(0,1fr) 4.6rem;gap:10px;align-items:center}
+.sb-row .lbl{font-size:.86rem;line-height:1.35}
+.sb-track{display:flex;height:20px;border-radius:4px;overflow:hidden;background:var(--surface-2)}
+.sb-track span{display:block;height:100%}
+.seg-fine{background:var(--muted-bar)} .seg-photo{background:var(--warn)} .seg-grip{background:var(--ink-2)} .seg-transit{background:var(--accent)}
+.sb-row .val{font-family:var(--f-mono);font-size:.86rem;text-align:right;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--ink-2)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+@media (max-width:600px){.sb-row{grid-template-columns:1fr 4rem}.sb-row .lbl{grid-column:1 / -1}}
+.reasons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.reasons{grid-template-columns:1fr}}
+.reason{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.reason b{font-size:.98rem}
+.reason p{font-size:.9rem;color:var(--ink-2);line-height:1.65}
+td.why{font-size:.86rem;color:var(--ink-2)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">10주차 연구 중간 보고 · 10/31 ~ 11/06</div>
+  <h1>새 작업대 배치 확정</h1>
+  <p class="lede">새 ㄱ자 작업대 (biobracket) 에서 장비 배치를 확정했다. 기존 라인형 배치 (V2) 와 같은 로봇 · 같은 공정 · 같은 규칙으로 공정 시간을 재서 비교하고, 수정안 여러 개를 같은 방법으로 비교해 최종안을 골랐다. 최종안에서 13 단계 공정을 물리로 끝까지 실행해 확인했다.</p>
+  <p class="small muted">한동대학교 기계제어공학부 · 산업지능화 연구실</p>
+  <div class="tiles">
+    <div class="tile acc"><span class="v">197.2 s</span><span class="k">최종안 규칙 공정 8 이송<br>(라인형 202.5 s)</span></div>
+    <div class="tile safe"><span class="v">0 건</span><span class="k">장비에 걸림<br>(라인형 21 건)</span></div>
+    <div class="tile safe"><span class="v">닿음</span><span class="k">판 든 채 폐기통 가운데<br>(ㄱ자 수정안은 안 닿음)</span></div>
+    <div class="tile safe"><span class="v">13/13</span><span class="k">최종안 13 단계 공정 물리 실행<br>(정답 위치, 364.9 s)</span></div>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#method">1. 비교 방법</a>
+  <a href="#compare">2. 라인형 vs ㄱ자</a>
+  <a href="#variants">3. 수정안 비교</a>
+  <a href="#final">4. 최종안과 근거</a>
+  <a href="#process">5. 최종안 공정 확인</a>
+  <a href="#next">6. 다음 계획</a>
+</nav>
+
+<section class="ch" id="method">
+  <div class="ch-head"><span class="ch-no">01</span><h2>비교 방법</h2></div>
+  <div class="col stack">
+    <p>두 배치에 같은 로봇과 같은 공정을 넣고, 장비 안 동작과 장비 사이 운반을 규칙으로 계획해 걸리는 시간을 쟀다. 장비 사이 운반 시간만 배치에 따라 달라지고, 장비 안 동작 (집기 · 꽂기 · 빼기) 은 거의 같다.</p>
+  </div>
+  <div class="tbl col"><table>
+    <tr><th>항목</th><th>값</th></tr>
+    <tr><td>로봇</td><td>UR5e + 레일 + 표준 RG2 (플랜지 직결) + 손목 D455</td></tr>
+    <tr><td>공정</td><td>process_day_v11 의 로봇 이송 8 번 (판 4 · 튜브 4, 폐기는 제외)</td></tr>
+    <tr><td>속도</td><td>레일 0.3 m/s, 관절 1.2 rad/s, 장비 안 수평 4 cm/s · 수직 2 cm/s, 사진 0.5 s × 이송당 5 장</td></tr>
+    <tr><td>실물 관절 요건</td><td>J1 이 케이블 쪽을 지나지 않음, 팔꿈치 위, J5 90 ± 75°, J6 고정, 90° 넘게 돌 때는 팔을 당긴 운반 자세에서</td></tr>
+    <tr><td>충돌</td><td>장비 메시 (복셀) 와 로봇 · 든 물체, 경로 전체를 IK 로 따라가며 검사</td></tr>
+    <tr><td>레일</td><td>라인형 이동 0.75 m, ㄱ자 이동 1.03 m (레일 1.22 m)</td></tr>
+  </table></div>
+  <p class="note col">처음 비교 (11/03) 는 관절 요건 없이 해서 라인형 226.7 s, ㄱ자 239.1 s 가 나왔지만, 로봇이 한 바퀴 도는 등 실물에서 못 하는 동작이 섞여 있었다. 위 요건을 넣고 다시 비교한 값을 아래에 쓴다.</p>
+</section>
+
+<section class="ch" id="compare">
+  <div class="ch-head"><span class="ch-no">02</span><h2>기존 라인형 vs ㄱ자 원안</h2></div>
+  <div class="two">
+    <figure class="photo"><img src="week10_figs/layout_v2.png" alt="기존 라인형 배치 V2: 레일 양옆과 끝에 장비"><figcaption class="fig-cap">기존 라인형 (V2). 레일 양옆과 끝에 장비가 있다.</figcaption></figure>
+    <figure class="photo"><img src="week10_figs/layout_bio.png" alt="ㄱ자 원안: 서쪽 줄과 남쪽 줄에 장비"><figcaption class="fig-cap">ㄱ자 원안 (biobracket). 장비가 서쪽 줄과 남쪽 줄에만 있다.</figcaption></figure>
+  </div>
+
+  <div class="fig">
+    <div class="fig-title">8 이송 공정 시간 (초)</div>
+    <div class="stack-bar">
+      <div class="sb-row"><span class="lbl">라인형 (V2)</span><div class="sb-track"><span class="seg-fine" style="width:63.95%"></span><span class="seg-photo" style="width:9.52%"></span><span class="seg-grip" style="width:3.19%"></span><span class="seg-transit" style="width:19.76%"></span></div><span class="val">202.5</span></div>
+      <div class="sb-row"><span class="lbl">ㄱ자 원안</span><div class="sb-track"><span class="seg-fine" style="width:65.05%"></span><span class="seg-photo" style="width:9.52%"></span><span class="seg-grip" style="width:3.19%"></span><span class="seg-transit" style="width:18.67%"></span></div><span class="val">202.5</span></div>
+      <div class="sb-row"><span class="lbl"><b>최종안</b></span><div class="sb-track"><span class="seg-fine" style="width:65.07%"></span><span class="seg-photo" style="width:9.52%"></span><span class="seg-grip" style="width:3.2%"></span><span class="seg-transit" style="width:16.12%"></span></div><span class="val">197.2</span></div>
+    </div>
+    <div class="legend"><span><i class="seg-fine"></i>장비 안 동작</span><span><i class="seg-photo"></i>사진</span><span><i class="seg-grip"></i>쥐기 · 펴기</span><span><i class="seg-transit"></i>장비 사이 운반</span><span>막대 전체 = 210 s</span></div>
+    <div class="fig-cap">장비 안 동작은 세 배치 모두 134~137 s 로 같다. 배치로 줄일 수 있는 것은 운반 (라인형 41.5 s, ㄱ자 원안 39.2 s, 최종안 33.9 s) 뿐이다.</div>
+  </div>
+
+  <div class="tbl"><table>
+    <tr><th>#</th><th>이송</th><th class="n">라인형</th><th class="n">ㄱ자 원안</th><th class="n">최종안</th></tr>
+    <tr><td>1</td><td>판 Fluent → 배양기</td><td class="n">20.2</td><td class="n">22.4</td><td class="n">22.4</td></tr>
+    <tr><td>2</td><td>판 배양기 → 리더기</td><td class="n">20.1</td><td class="n">18.0</td><td class="n">16.9</td></tr>
+    <tr><td>3</td><td>판 리더기 → Fluent</td><td class="n">23.1</td><td class="n">25.6</td><td class="n">25.3</td></tr>
+    <tr><td>4</td><td>튜브 보관대 1 → Fluent</td><td class="n">25.4</td><td class="n">29.2</td><td class="n">26.2</td></tr>
+    <tr><td>5</td><td>튜브 Fluent → SH800 오른쪽</td><td class="n">29.7</td><td class="n">25.6</td><td class="n">26.8</td></tr>
+    <tr><td>6</td><td>판 SH800 왼쪽 → Fluent</td><td class="n">26.3</td><td class="n">23.2</td><td class="n">24.4</td></tr>
+    <tr><td>7</td><td>튜브 보관대 2 → Fluent</td><td class="n">26.8</td><td class="n">29.2</td><td class="n">26.2</td></tr>
+    <tr><td>8</td><td>튜브 Fluent → NGS</td><td class="n">30.8</td><td class="n">29.4</td><td class="n">29.1</td></tr>
+    <tr class="hl"><td></td><td><b>합계</b></td><td class="n"><b>202.5</b></td><td class="n"><b>202.5</b></td><td class="n"><b>197.2</b></td></tr>
+    <tr><td></td><td>장비에 걸림</td><td class="n">21 건</td><td class="n">4 건</td><td class="n">0 건</td></tr>
+  </table></div>
+
+  <div class="two">
+    <div class="card warn"><h3>라인형 (V2)</h3><ul>
+      <li>걸림 21 건은 Fluent 튜브 자리 (덮개), SH800 판 · 튜브 자리, NGS 카트리지에서 났다.</li>
+      <li>V2 경로점은 예전 연장 손가락에 맞춘 것이라 표준 RG2 로는 장비 안에서 손이 닿는다. 배치보다 장비 쪽 문제다.</li>
+      <li>NGS 튜브 자리는 레일 끝 (0.71 m / 0.75 m) 에서 겨우 닿는다.</li>
+    </ul></div>
+    <div class="card warn"><h3>ㄱ자 원안</h3><ul>
+      <li>시간은 라인형과 같다 (202.5 s).</li>
+      <li>튜브 보관대가 판 보관대 (6.5 cm) 와 폐기통 (7 cm) 사이에 끼어, 튜브 보관대 2 번 칸을 집을 때 판 보관대에 걸린다 (걸림 4 건).</li>
+      <li>튜브 보관대가 레일 끝 쪽이라 튜브 운반이 길다 (이송 4 · 7).</li>
+    </ul></div>
+  </div>
+  <p class="col">두 배치의 시간은 같았다. 그래서 장비가 한쪽 (서 · 남) 에만 있어 고치기 쉬운 ㄱ자를 기준으로 배치를 고쳐 나갔다. 라인형은 장비를 레일 양옆으로 모아 봤지만 오히려 느렸다 (3 장).</p>
+</section>
+
+<section class="ch" id="variants">
+  <div class="ch-head"><span class="ch-no">03</span><h2>수정안 비교</h2></div>
+  <div class="tbl"><table>
+    <tr><th>안</th><th>바꾼 것</th><th class="n">8 이송</th><th class="n">걸림</th><th>폐기통 가운데</th><th>결과</th></tr>
+    <tr><td>ㄱ자 원안</td><td>—</td><td class="n">202.5</td><td class="n">4</td><td>—</td><td class="why">튜브 보관대 2 번 칸 막힘</td></tr>
+    <tr><td>ㄱ자 수정안</td><td>튜브 보관대를 Fluent–SH800 사이로, SH800 · 판 보관대 +17 cm, 폐기통 +20 cm, 리더기 −90° 회전</td><td class="n">196.2</td><td class="n">0</td><td><span class="chip bad">안 닿음</span></td><td class="why">가장 빠르지만 폐기통이 레일 끝에서도 3 cm 모자람 (11/04 확정 → 11/05 변경)</td></tr>
+    <tr><td>수정안 + 레일 서쪽 10 / 20 / 30 cm</td><td>레일 · 로봇을 서쪽으로</td><td class="n">195.7 / 197.5 / 196.2</td><td class="n">0 / 있음 / 있음</td><td>—</td><td class="why">20 · 30 cm 는 Fluent → NGS 운반이 NGS 에 걸림. 효과 없음</td></tr>
+    <tr><td>라인형 양옆</td><td>배양기를 남쪽 줄로, 판 보관대 · 폐기통 +31 cm, NGS −18 cm</td><td class="n">205.7</td><td class="n">—</td><td>—</td><td class="why">배양기 → 리더기에서 180° 돌아 오히려 느림</td></tr>
+    <tr><td>SH800 서쪽 줄</td><td>NGS 를 리더기 옆, SH800 을 NGS 옆으로</td><td class="n">204.2</td><td class="n">2</td><td><span class="chip safe">닿음</span></td><td class="why">Fluent 와 SH800 이 반대편이 되어 +8 s, SH800 튜브 놓기 · NGS 운반 걸림</td></tr>
+    <tr><td>A: 폐기통만 서쪽</td><td>ㄱ자 수정안에서 폐기통을 서쪽 선반 NGS 북쪽으로</td><td class="n">196.2</td><td class="n">0</td><td><span class="chip safe">닿음</span></td><td class="why">판 보관대가 Fluent 옆이 아님</td></tr>
+    <tr><td>B: 남쪽 줄 재배치</td><td>A + 남쪽 줄을 Fluent · 튜브 보관대 · 판 보관대 · SH800 순으로, 리더기 −90°</td><td class="n">197.4</td><td class="n">0</td><td><span class="chip safe">닿음</span></td><td class="why">보관대 둘 다 Fluent 옆</td></tr>
+    <tr class="hl"><td><b>B + 10 cm (최종)</b></td><td>리더기 · NGS · 폐기통을 10 cm 붙임 (리더기–NGS 틈 19 → 9 cm)</td><td class="n"><b>197.2</b></td><td class="n"><b>0</b></td><td><span class="chip safe">닿음</span></td><td class="why">채택</td></tr>
+    <tr><td>B + 17 cm</td><td>바짝 붙임 (틈 2.4 cm)</td><td class="n">196.9</td><td class="n">1</td><td><span class="chip safe">닿음</span></td><td class="why">Fluent → NGS 운반이 NGS 랙에 걸림</td></tr>
+  </table></div>
+  <figure class="photo"><img src="week10_figs/layout_bio_opt.png" alt="ㄱ자 원안과 수정안 비교: 튜브 보관대 위치와 리더기 방향"><figcaption class="fig-cap">ㄱ자 원안 (왼쪽) 과 ㄱ자 수정안 (오른쪽). 튜브 보관대를 Fluent 와 SH800 사이로 옮기고 리더기를 돌렸다. 폐기통은 남쪽 줄 동쪽 끝에 남아 판을 든 채로는 통 가운데까지 닿지 않는다.</figcaption></figure>
+  <p class="note col">레일을 옮기는 것도 효과가 없었다. 남은 운반 시간은 큰 회전 두 번 (리더기 → Fluent, Fluent → NGS) 에서 나오고, 장비 안 동작 136 s 는 배치와 상관없이 고정이라 배치로 줄일 수 있는 양은 몇 초뿐이다.</p>
+</section>
+
+<section class="ch" id="final">
+  <div class="ch-head"><span class="ch-no">04</span><h2>최종안과 고른 근거</h2></div>
+  <figure class="photo"><img src="week10_figs/layout_bio_fluent_row_n10.png" alt="최종 배치: 서쪽 줄 배양기 리더기 NGS 폐기통, 남쪽 줄 Fluent 튜브 보관대 판 보관대 SH800"><figcaption class="fig-cap">최종안 (bio_fluent_row_n10). 서쪽 줄 (남 → 북): 배양기 · 리더기 (−90°) · NGS · 폐기통. 남쪽 줄 (서 → 동): Fluent · 튜브 보관대 · 판 보관대 · SH800.</figcaption></figure>
+  <figure class="photo"><img src="week10_figs/layout_final_detail.png" alt="최종 배치 이름표와 서쪽 줄을 레일 쪽에서 본 모습"><figcaption class="fig-cap">최종안 위에서 (왼쪽) 와 서쪽 줄을 레일 쪽에서 본 모습 (오른쪽). Blender 파일 biobracket_final_layout.blend 로 만들었다 (내보낸 장면과 위치 차이 0.0002 mm).</figcaption></figure>
+
+  <div class="reasons">
+    <div class="reason"><b>1. 공정 시간</b><p>8 이송 197.2 s 로 라인형 (202.5 s) 보다 5.3 s 빠르다. 가장 빠른 ㄱ자 수정안 (196.2 s) 과는 1 s 차이다.</p></div>
+    <div class="reason"><b>2. 걸림 없음</b><p>실물 관절 요건과 장비 메시 충돌을 넣은 계획에서 걸림 0 건. 라인형 21 건, ㄱ자 원안 4 건.</p></div>
+    <div class="reason"><b>3. 폐기통에 닿음</b><p>폐기통을 서쪽 선반 NGS 북쪽으로 옮겨, 레일 시작 근처 (0.06~0.10 m) 에서 판을 든 채 통 가운데 위까지 부딪히지 않고 들어간다. 남쪽 줄 끝에 있을 때는 레일 끝까지 뻗어도 3 cm 모자랐다.</p></div>
+    <div class="reason"><b>4. 보관대가 Fluent 옆</b><p>튜브 보관대와 판 보관대가 둘 다 Fluent 바로 옆이다. 공정 대부분이 보관대 ↔ Fluent 이송이라 짧은 운반이 많아진다. 대신 SH800 이 동쪽으로 37 cm 가서 Fluent ↔ SH800 이송이 0.5~0.7 s 늘었다.</p></div>
+    <div class="reason"><b>5. 10 cm 만 붙임</b><p>리더기 · NGS · 폐기통을 10 cm 붙여 서쪽 줄을 모았다 (197.4 → 197.2 s). 17 cm 붙이면 NGS 가 레일에 너무 가까워져 Fluent → NGS 운반이 NGS 랙에 걸린다.</p></div>
+    <div class="reason"><b>6. 리더기 −90° 회전</b><p>원안에서는 리더기 받침이 NGS 와 리더기 몸체 사이에 끼어 15° 비스듬히만 들어갔다. 돌려서 받침이 레일 쪽을 보게 하니 곧게 들어간다.</p></div>
+  </div>
+  <p class="note acc col">손목 D455 로 보는 자세도 확인했다 (ㄱ자 수정안 기준). 공정 사진 자세는 손 기준 상대 위치가 같아 라인형과 결과가 같았고 (32 장 중 22 장), 장비를 보는 자세는 ㄱ자 6/6 자리, 라인형 4/6 자리에서 찾았다. 자세 후보를 넓히면 라인형도 모두 찾아져 카메라 쪽 차이는 작다.</p>
+</section>
+
+<section class="ch" id="process">
+  <div class="ch-head"><span class="ch-no">05</span><h2>최종안에서 13 단계 공정 확인</h2></div>
+  <div class="col stack">
+    <p>최종안에서 이송 10 번과 폐기 3 번을 합친 13 단계 공정을 규칙 기반으로 계획하고 물리 시뮬레이션으로 끝까지 실행했다. 이번 단계는 장비 · 물체 위치를 정답으로 쓴다.</p>
+  </div>
+  <div class="tbl col"><table>
+    <tr><th>항목</th><th>결과</th></tr>
+    <tr><td>13 단계 성공</td><td><span class="chip safe">13/13</span></td></tr>
+    <tr><td>놓인 위치 오차</td><td>0.3 mm 이하, 기울기 0°</td></tr>
+    <tr><td>공정 시간</td><td>364.9 s (폐기 3 번 포함)</td></tr>
+    <tr><td>레일과 팔</td><td>레일이 다 움직여 선 뒤 팔이 움직인다. 장비 안 동작과 놓기 전 손 보정은 팔만 쓴다.</td></tr>
+    <tr><td>폐기</td><td>통 위 20 cm 에서 내려가 3 cm 위에서 놓기. 판 · 튜브 모두 통 안에 들어감</td></tr>
+  </table></div>
+  <p class="col small muted">이 과정에서 고친 것: 운반 중 든 튜브가 선반 모서리를 0.8 mm 파고드는 경로를 충돌 판정이 통과시켜, 운반 경로에 든 물체와 선반 사이 여유 1 cm 를 넣었다.</p>
+</section>
+
+<section class="ch" id="next">
+  <div class="ch-head"><span class="ch-no">06</span><h2>다음 계획</h2></div>
+  <div class="col stack">
+    <ul>
+      <li>정답 위치 대신 기존 v11 비전 인지 (장비 정합 · 손 안 · 튜브 자리 · 놓은 뒤 확인) 로 위치를 보정해 놓는다. 강화학습 없이 규칙으로 판단한다.</li>
+      <li>v11 인지를 새 배치 · 표준 RG2 · D455 에 맞게 옮긴다.</li>
+      <li>실제처럼 장비가 조금씩 밀려 있는 상황을 넣어 13 단계를 다시 확인한다.</li>
+    </ul>
+  </div>
+</section>
+</div>
