@@ -1,0 +1,16 @@
+pick_enter done 358
+pick_grasp done 559
+pick_extract done 732
+place_enter done 1023
+place_down done 1304
+place_retreat done 1541
+chain fluent_plate pick True [('pick_enter', 'ready', True), ('pick_grasp', 'lifted', True), ('pick_extract', 'out', True)]
+chain fluent_plate place True [('place_enter', 'ready', True), ('place_down', 'settled', True), ('place_retreat', 'out', True)]
+chain incubator_plate pick True [('pick_enter', 'ready', True), ('pick_grasp', 'lifted', True), ('pick_extract', 'out', True)]
+chain incubator_plate place True [('place_enter', 'ready', True), ('place_down', 'settled', True), ('place_retreat', 'out', True)]
+chain reader_plate pick True [('pick_enter', 'ready', True), ('pick_grasp', 'lifted', True), ('pick_extract', 'out', True)]
+chain reader_plate place True [('place_enter', 'ready', True), ('place_down', 'settled', True), ('place_retreat', 'out', True)]
+chain sorter_left_plate pick True [('pick_enter', 'ready', True), ('pick_grasp', 'lifted', True), ('pick_extract', 'out', True)]
+chain sorter_left_plate place False [('place_enter', 'ready', False), ('place_down', 'settled_late', False), ('place_retreat', 'out', False)]
+saved rl_runs/demo/learning_plate_v12.webm 2073 frames
+OpenCV: FFMPEG: tag 0x30395056/'VP90' is not supported with codec id 167 and format 'webm / WebM'

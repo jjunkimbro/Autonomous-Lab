@@ -1,0 +1,2110 @@
+{
+ "pick_enter:train_first": {
+  "time": "10-31 05:21",
+  "stage": "pick_enter",
+  "kind": "train_first",
+  "steps": 1253376,
+  "difficulty": 0.3,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready_late",
+    true
+   ]
+  ],
+  "video": "pick_enter_001253376_train_first.webm"
+ },
+ "pick_enter:eval_first": {
+  "time": "10-31 05:29",
+  "stage": "pick_enter",
+  "kind": "eval_first",
+  "steps": 1351680,
+  "difficulty": 1.0,
+  "success": 0.1,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "pick_enter_001351680_eval_first.webm"
+ },
+ "pick_enter:eval_25": {
+  "time": "10-31 06:23",
+  "stage": "pick_enter",
+  "kind": "eval_25",
+  "steps": 2052096,
+  "difficulty": 1.0,
+  "success": 0.25,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "pick_enter_002052096_eval_25.webm"
+ },
+ "pick_enter:curriculum_0.4": {
+  "time": "10-31 06:55",
+  "stage": "pick_enter",
+  "kind": "curriculum",
+  "steps": 2457600,
+  "difficulty": 0.4,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "pick_enter_002457600_curriculum_x0.4.webm"
+ },
+ "pick_enter:curriculum_0.5": {
+  "time": "10-31 06:56",
+  "stage": "pick_enter",
+  "kind": "curriculum",
+  "steps": 2463744,
+  "difficulty": 0.5,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    false
+   ]
+  ],
+  "video": "pick_enter_002463744_curriculum_x0.5.webm"
+ },
+ "pick_enter:curriculum_0.6": {
+  "time": "10-31 06:58",
+  "stage": "pick_enter",
+  "kind": "curriculum",
+  "steps": 2476032,
+  "difficulty": 0.6,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    true
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "pick_enter_002476032_curriculum_x0.6.webm"
+ },
+ "pick_enter:curriculum_0.7": {
+  "time": "10-31 06:59",
+  "stage": "pick_enter",
+  "kind": "curriculum",
+  "steps": 2500608,
+  "difficulty": 0.7,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    false
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "pick_enter_002500608_curriculum_x0.7.webm"
+ },
+ "pick_enter:curriculum_0.8": {
+  "time": "10-31 07:03",
+  "stage": "pick_enter",
+  "kind": "curriculum",
+  "steps": 2552832,
+  "difficulty": 0.8,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    true
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready_late",
+    true
+   ]
+  ],
+  "video": "pick_enter_002552832_curriculum_x0.8.webm"
+ },
+ "pick_enter:curriculum_0.9": {
+  "time": "10-31 07:06",
+  "stage": "pick_enter",
+  "kind": "curriculum",
+  "steps": 2595840,
+  "difficulty": 0.9,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    false
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    false
+   ]
+  ],
+  "video": "pick_enter_002595840_curriculum_x0.9.webm"
+ },
+ "pick_enter:curriculum_1.0": {
+  "time": "10-31 07:14",
+  "stage": "pick_enter",
+  "kind": "curriculum",
+  "steps": 2700288,
+  "difficulty": 1.0,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    true
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "pick_enter_002700288_curriculum_x1.0.webm"
+ },
+ "pick_enter:eval_50": {
+  "time": "10-31 08:06",
+  "stage": "pick_enter",
+  "kind": "eval_50",
+  "steps": 3373056,
+  "difficulty": 1.0,
+  "success": 0.5,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    false
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "pick_enter_003373056_eval_50.webm"
+ },
+ "pick_enter:eval_75": {
+  "time": "10-31 09:08",
+  "stage": "pick_enter",
+  "kind": "eval_75",
+  "steps": 4171776,
+  "difficulty": 1.0,
+  "success": 0.775,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    true
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "pick_enter_004171776_eval_75.webm"
+ },
+ "place_enter:train_first": {
+  "time": "10-31 10:17",
+  "stage": "place_enter",
+  "kind": "train_first",
+  "steps": 80896,
+  "difficulty": 0.3,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "place_enter_000080896_train_first.webm"
+ },
+ "place_enter:eval_first": {
+  "time": "10-31 10:45",
+  "stage": "place_enter",
+  "kind": "eval_first",
+  "steps": 424960,
+  "difficulty": 1.0,
+  "success": 0.075,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "place_enter_000424960_eval_first.webm"
+ },
+ "place_enter:curriculum_0.4": {
+  "time": "10-31 12:30",
+  "stage": "place_enter",
+  "kind": "curriculum",
+  "steps": 1752064,
+  "difficulty": 0.4,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready_late",
+    true
+   ]
+  ],
+  "video": "place_enter_001752064_curriculum_x0.4.webm"
+ },
+ "place_enter:curriculum_0.5": {
+  "time": "10-31 12:38",
+  "stage": "place_enter",
+  "kind": "curriculum",
+  "steps": 1862656,
+  "difficulty": 0.5,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready_late",
+    true
+   ]
+  ],
+  "video": "place_enter_001862656_curriculum_x0.5.webm"
+ },
+ "place_enter:eval_25": {
+  "time": "10-31 12:44",
+  "stage": "place_enter",
+  "kind": "eval_25",
+  "steps": 1927168,
+  "difficulty": 1.0,
+  "success": 0.25,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    true
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready_late",
+    true
+   ]
+  ],
+  "video": "place_enter_001927168_eval_25.webm"
+ },
+ "place_enter:curriculum_0.6": {
+  "time": "10-31 12:46",
+  "stage": "place_enter",
+  "kind": "curriculum",
+  "steps": 1942528,
+  "difficulty": 0.6,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "ready",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "place_enter_001942528_curriculum_x0.6.webm"
+ },
+ "place_enter:curriculum_0.7": {
+  "time": "10-31 12:52",
+  "stage": "place_enter",
+  "kind": "curriculum",
+  "steps": 2028544,
+  "difficulty": 0.7,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "ready_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "place_enter_002028544_curriculum_x0.7.webm"
+ },
+ "place_enter:curriculum_0.8": {
+  "time": "10-31 12:54",
+  "stage": "place_enter",
+  "kind": "curriculum",
+  "steps": 2043904,
+  "difficulty": 0.8,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "ready_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "ready",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "place_enter_002043904_curriculum_x0.8.webm"
+ },
+ "place_enter:curriculum_0.9": {
+  "time": "10-31 12:57",
+  "stage": "place_enter",
+  "kind": "curriculum",
+  "steps": 2077696,
+  "difficulty": 0.9,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "ready_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "ready",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    false
+   ]
+  ],
+  "video": "place_enter_002077696_curriculum_x0.9.webm"
+ },
+ "place_enter:curriculum_1.0": {
+  "time": "10-31 12:58",
+  "stage": "place_enter",
+  "kind": "curriculum",
+  "steps": 2083840,
+  "difficulty": 1.0,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "ready",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "ready_late",
+    true
+   ]
+  ],
+  "video": "place_enter_002083840_curriculum_x1.0.webm"
+ },
+ "place_enter:eval_50": {
+  "time": "10-31 13:16",
+  "stage": "place_enter",
+  "kind": "eval_50",
+  "steps": 2326528,
+  "difficulty": 1.0,
+  "success": 0.55,
+  "results": [
+   [
+    "fluent_plate",
+    "ready_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "ready_late",
+    true
+   ]
+  ],
+  "video": "place_enter_002326528_eval_50.webm"
+ },
+ "place_enter:eval_75": {
+  "time": "10-31 14:20",
+  "stage": "place_enter",
+  "kind": "eval_75",
+  "steps": 3149824,
+  "difficulty": 1.0,
+  "success": 0.85,
+  "results": [
+   [
+    "fluent_plate",
+    "ready",
+    true
+   ],
+   [
+    "incubator_plate",
+    "ready",
+    false
+   ],
+   [
+    "reader_plate",
+    "ready",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "ready",
+    true
+   ]
+  ],
+  "video": "place_enter_003149824_eval_75.webm"
+ },
+ "pick_grasp:train_first": {
+  "time": "10-31 16:47",
+  "stage": "pick_grasp",
+  "kind": "train_first",
+  "steps": 24576,
+  "difficulty": 0.3,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "pick_grasp_000024576_train_first.webm"
+ },
+ "pick_grasp:eval_first": {
+  "time": "10-31 16:53",
+  "stage": "pick_grasp",
+  "kind": "eval_first",
+  "steps": 101376,
+  "difficulty": 1.0,
+  "success": 0.05,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    false
+   ]
+  ],
+  "video": "pick_grasp_000101376_eval_first.webm"
+ },
+ "pick_grasp:curriculum_0.4": {
+  "time": "10-31 16:55",
+  "stage": "pick_grasp",
+  "kind": "curriculum",
+  "steps": 110592,
+  "difficulty": 0.4,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    true
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    true
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    true
+   ]
+  ],
+  "video": "pick_grasp_000110592_curriculum_x0.4.webm"
+ },
+ "pick_grasp:curriculum_0.5": {
+  "time": "10-31 16:56",
+  "stage": "pick_grasp",
+  "kind": "curriculum",
+  "steps": 129024,
+  "difficulty": 0.5,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    true
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    true
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    true
+   ]
+  ],
+  "video": "pick_grasp_000129024_curriculum_x0.5.webm"
+ },
+ "pick_grasp:curriculum_0.6": {
+  "time": "10-31 16:57",
+  "stage": "pick_grasp",
+  "kind": "curriculum",
+  "steps": 135168,
+  "difficulty": 0.6,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    true
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    true
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    true
+   ]
+  ],
+  "video": "pick_grasp_000135168_curriculum_x0.6.webm"
+ },
+ "pick_grasp:curriculum_0.7": {
+  "time": "10-31 16:58",
+  "stage": "pick_grasp",
+  "kind": "curriculum",
+  "steps": 147456,
+  "difficulty": 0.7,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    true
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    true
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    true
+   ]
+  ],
+  "video": "pick_grasp_000147456_curriculum_x0.7.webm"
+ },
+ "pick_grasp:curriculum_0.8": {
+  "time": "10-31 17:00",
+  "stage": "pick_grasp",
+  "kind": "curriculum",
+  "steps": 175104,
+  "difficulty": 0.8,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    true
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    false
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    true
+   ]
+  ],
+  "video": "pick_grasp_000175104_curriculum_x0.8.webm"
+ },
+ "pick_grasp:curriculum_0.9": {
+  "time": "10-31 17:02",
+  "stage": "pick_grasp",
+  "kind": "curriculum",
+  "steps": 205824,
+  "difficulty": 0.9,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    true
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    true
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    false
+   ]
+  ],
+  "video": "pick_grasp_000205824_curriculum_x0.9.webm"
+ },
+ "pick_grasp:eval_25": {
+  "time": "10-31 17:03",
+  "stage": "pick_grasp",
+  "kind": "eval_25",
+  "steps": 202752,
+  "difficulty": 1.0,
+  "success": 0.575,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    false
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    true
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    false
+   ]
+  ],
+  "video": "pick_grasp_000202752_eval_25.webm"
+ },
+ "pick_grasp:eval_50": {
+  "time": "10-31 17:03",
+  "stage": "pick_grasp",
+  "kind": "eval_50",
+  "steps": 202752,
+  "difficulty": 1.0,
+  "success": 0.575,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    false
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    true
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    false
+   ]
+  ],
+  "video": "pick_grasp_000202752_eval_50.webm"
+ },
+ "pick_grasp:curriculum_1.0": {
+  "time": "10-31 17:05",
+  "stage": "pick_grasp",
+  "kind": "curriculum",
+  "steps": 218112,
+  "difficulty": 1.0,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "lifted",
+    false
+   ],
+   [
+    "incubator_plate",
+    "lifted",
+    false
+   ],
+   [
+    "reader_plate",
+    "lifted",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "lifted",
+    true
+   ]
+  ],
+  "video": "pick_grasp_000218112_curriculum_x1.0.webm"
+ },
+ "place_down:train_first": {
+  "time": "10-31 17:18",
+  "stage": "place_down",
+  "kind": "train_first",
+  "steps": 9216,
+  "difficulty": 0.3,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "timeout",
+    false
+   ],
+   [
+    "incubator_plate",
+    "timeout",
+    false
+   ],
+   [
+    "reader_plate",
+    "timeout",
+    false
+   ],
+   [
+    "sorter_left_plate",
+    "timeout",
+    false
+   ]
+  ],
+  "video": "place_down_000009216_train_first.webm"
+ },
+ "place_down:curriculum_0.4": {
+  "time": "10-31 18:13",
+  "stage": "place_down",
+  "kind": "curriculum",
+  "steps": 648192,
+  "difficulty": 0.4,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000648192_curriculum_x0.4.webm"
+ },
+ "place_down:curriculum_0.5": {
+  "time": "10-31 18:16",
+  "stage": "place_down",
+  "kind": "curriculum",
+  "steps": 654336,
+  "difficulty": 0.5,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000654336_curriculum_x0.5.webm"
+ },
+ "place_down:curriculum_0.6": {
+  "time": "10-31 18:17",
+  "stage": "place_down",
+  "kind": "curriculum",
+  "steps": 660480,
+  "difficulty": 0.6,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000660480_curriculum_x0.6.webm"
+ },
+ "place_down:curriculum_0.7": {
+  "time": "10-31 18:19",
+  "stage": "place_down",
+  "kind": "curriculum",
+  "steps": 666624,
+  "difficulty": 0.7,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000666624_curriculum_x0.7.webm"
+ },
+ "place_down:curriculum_0.8": {
+  "time": "10-31 18:20",
+  "stage": "place_down",
+  "kind": "curriculum",
+  "steps": 675840,
+  "difficulty": 0.8,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000675840_curriculum_x0.8.webm"
+ },
+ "place_down:curriculum_0.9": {
+  "time": "10-31 18:22",
+  "stage": "place_down",
+  "kind": "curriculum",
+  "steps": 694272,
+  "difficulty": 0.9,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    false
+   ]
+  ],
+  "video": "place_down_000694272_curriculum_x0.9.webm"
+ },
+ "place_down:curriculum_1.0": {
+  "time": "10-31 18:24",
+  "stage": "place_down",
+  "kind": "curriculum",
+  "steps": 706560,
+  "difficulty": 1.0,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    false
+   ]
+  ],
+  "video": "place_down_000706560_curriculum_x1.0.webm"
+ },
+ "place_down:eval_first": {
+  "time": "10-31 18:25",
+  "stage": "place_down",
+  "kind": "eval_first",
+  "steps": 721920,
+  "difficulty": 1.0,
+  "success": 0.65,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000721920_eval_first.webm"
+ },
+ "place_down:eval_25": {
+  "time": "10-31 18:27",
+  "stage": "place_down",
+  "kind": "eval_25",
+  "steps": 721920,
+  "difficulty": 1.0,
+  "success": 0.65,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000721920_eval_25.webm"
+ },
+ "place_down:eval_50": {
+  "time": "10-31 18:28",
+  "stage": "place_down",
+  "kind": "eval_50",
+  "steps": 721920,
+  "difficulty": 1.0,
+  "success": 0.65,
+  "results": [
+   [
+    "fluent_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_000721920_eval_50.webm"
+ },
+ "place_down:eval_75": {
+  "time": "11-01 04:17",
+  "stage": "place_down",
+  "kind": "eval_75",
+  "steps": 2144256,
+  "difficulty": 1.0,
+  "success": 0.75,
+  "results": [
+   [
+    "fluent_plate",
+    "settled",
+    false
+   ],
+   [
+    "incubator_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "reader_plate",
+    "settled_late",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "settled_late",
+    true
+   ]
+  ],
+  "video": "place_down_002144256_eval_75.webm"
+ },
+ "pick_extract:train_first": {
+  "time": "11-01 08:21",
+  "stage": "pick_extract",
+  "kind": "train_first",
+  "steps": 12288,
+  "difficulty": 0.3,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000012288_train_first.webm"
+ },
+ "pick_extract:curriculum_0.4": {
+  "time": "11-01 08:23",
+  "stage": "pick_extract",
+  "kind": "curriculum",
+  "steps": 18432,
+  "difficulty": 0.4,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000018432_curriculum_x0.4.webm"
+ },
+ "pick_extract:curriculum_0.5": {
+  "time": "11-01 08:24",
+  "stage": "pick_extract",
+  "kind": "curriculum",
+  "steps": 24576,
+  "difficulty": 0.5,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000024576_curriculum_x0.5.webm"
+ },
+ "pick_extract:curriculum_0.6": {
+  "time": "11-01 08:25",
+  "stage": "pick_extract",
+  "kind": "curriculum",
+  "steps": 30720,
+  "difficulty": 0.6,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000030720_curriculum_x0.6.webm"
+ },
+ "pick_extract:curriculum_0.7": {
+  "time": "11-01 08:26",
+  "stage": "pick_extract",
+  "kind": "curriculum",
+  "steps": 36864,
+  "difficulty": 0.7,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000036864_curriculum_x0.7.webm"
+ },
+ "pick_extract:curriculum_0.8": {
+  "time": "11-01 08:28",
+  "stage": "pick_extract",
+  "kind": "curriculum",
+  "steps": 43008,
+  "difficulty": 0.8,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000043008_curriculum_x0.8.webm"
+ },
+ "pick_extract:curriculum_0.9": {
+  "time": "11-01 08:29",
+  "stage": "pick_extract",
+  "kind": "curriculum",
+  "steps": 49152,
+  "difficulty": 0.9,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000049152_curriculum_x0.9.webm"
+ },
+ "pick_extract:curriculum_1.0": {
+  "time": "11-01 08:30",
+  "stage": "pick_extract",
+  "kind": "curriculum",
+  "steps": 52224,
+  "difficulty": 1.0,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000052224_curriculum_x1.0.webm"
+ },
+ "pick_extract:eval_first": {
+  "time": "11-01 08:32",
+  "stage": "pick_extract",
+  "kind": "eval_first",
+  "steps": 101376,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000101376_eval_first.webm"
+ },
+ "pick_extract:eval_25": {
+  "time": "11-01 08:33",
+  "stage": "pick_extract",
+  "kind": "eval_25",
+  "steps": 101376,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000101376_eval_25.webm"
+ },
+ "pick_extract:eval_50": {
+  "time": "11-01 08:34",
+  "stage": "pick_extract",
+  "kind": "eval_50",
+  "steps": 101376,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000101376_eval_50.webm"
+ },
+ "pick_extract:eval_75": {
+  "time": "11-01 08:35",
+  "stage": "pick_extract",
+  "kind": "eval_75",
+  "steps": 101376,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000101376_eval_75.webm"
+ },
+ "pick_extract:eval_95": {
+  "time": "11-01 08:36",
+  "stage": "pick_extract",
+  "kind": "eval_95",
+  "steps": 101376,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "pick_extract_000101376_eval_95.webm"
+ },
+ "place_retreat:train_first": {
+  "time": "11-01 08:43",
+  "stage": "place_retreat",
+  "kind": "train_first",
+  "steps": 12288,
+  "difficulty": 0.3,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000012288_train_first.webm"
+ },
+ "place_retreat:curriculum_0.4": {
+  "time": "11-01 08:45",
+  "stage": "place_retreat",
+  "kind": "curriculum",
+  "steps": 24576,
+  "difficulty": 0.4,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000024576_curriculum_x0.4.webm"
+ },
+ "place_retreat:curriculum_0.5": {
+  "time": "11-01 08:46",
+  "stage": "place_retreat",
+  "kind": "curriculum",
+  "steps": 30720,
+  "difficulty": 0.5,
+  "success": null,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000030720_curriculum_x0.5.webm"
+ },
+ "place_retreat:eval_first": {
+  "time": "11-01 16:10",
+  "stage": "place_retreat",
+  "kind": "eval_first",
+  "steps": 159744,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000159744_eval_first.webm"
+ },
+ "place_retreat:eval_25": {
+  "time": "11-01 16:11",
+  "stage": "place_retreat",
+  "kind": "eval_25",
+  "steps": 159744,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000159744_eval_25.webm"
+ },
+ "place_retreat:eval_50": {
+  "time": "11-01 16:11",
+  "stage": "place_retreat",
+  "kind": "eval_50",
+  "steps": 159744,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000159744_eval_50.webm"
+ },
+ "place_retreat:eval_75": {
+  "time": "11-01 16:12",
+  "stage": "place_retreat",
+  "kind": "eval_75",
+  "steps": 159744,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000159744_eval_75.webm"
+ },
+ "place_retreat:eval_95": {
+  "time": "11-01 16:13",
+  "stage": "place_retreat",
+  "kind": "eval_95",
+  "steps": 159744,
+  "difficulty": 1.0,
+  "success": 1.0,
+  "results": [
+   [
+    "fluent_plate",
+    "out",
+    true
+   ],
+   [
+    "incubator_plate",
+    "out",
+    true
+   ],
+   [
+    "reader_plate",
+    "out",
+    true
+   ],
+   [
+    "sorter_left_plate",
+    "out",
+    true
+   ]
+  ],
+  "video": "place_retreat_000159744_eval_95.webm"
+ }
+}
