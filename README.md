@@ -49,9 +49,19 @@ py train_place_plate_v9.py --steps 400000 --envs 4                              
 py eval_place_plate_v9.py --episodes 50                                            # 정책 없음 / teacher / student 비교
 ```
 
+## Ubuntu + ROS 2
+
+`ros2/INSTALL_UBUNTU_DUALBOOT.md` (이 노트북에 듀얼부팅 설치), `ros2/setup_ubuntu_ros2.sh` (Ubuntu 24.04 에 ROS 2 Jazzy + 프로젝트 환경 한 번에).
+ROS 2 패키지 `ros2/ws/src/autonomous_lab_ros`: MuJoCo 시뮬레이션을 UR 드라이버와 같은 인터페이스로 내보내는 `mujoco_sim_node`,
+공정 이송 데모 `transfer_demo_node`, 실제 UR5e · RealSense 실행 `real.launch.py`.
+
+```bash
+ros2 launch autonomous_lab_ros sim.launch.py demo:=true
+```
+
 ## 저장소에 없는 것
 
-- `rl_runs/` (학습 모델 · 데이터셋, 약 1.4 GB) — 필요한 모델만 따로 옮긴다.
+- `rl_runs/place_plate_v9_student_old/` (옛 지오메트리 백업). 나머지 `rl_runs/` 학습 정책은 저장소에 있다.
 - `vision_workflow_frames_v8/` (녹화 프레임) — `--record` 로 다시 만든다.
 - `onrobot-isaacsim/` — 코드에서 쓰지 않는 외부 자료.
 

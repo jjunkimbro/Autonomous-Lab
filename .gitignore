@@ -24,3 +24,8 @@ mujoco_menagerie/*
 
 # 파이썬 가상환경
 .venv/
+
+# ROS 2 작업공간 빌드 결과
+ros2/ws/build/
+ros2/ws/install/
+ros2/ws/log/

@@ -1,0 +1,9 @@
+# Ubuntu 24.04 + ROS 2 Jazzy 가상환경용 (Python 3.12, 시스템 패키지 공유).
+# torch 는 setup 스크립트가 CPU 버전으로 먼저 설치한다.
+# numpy 는 ROS 패키지(python3-numpy 1.26)와 충돌하지 않도록 고정하지 않는다.
+mujoco==3.13.0
+scipy
+opencv-python
+gymnasium
+stable-baselines3
+matplotlib
