@@ -1,6 +1,6 @@
 #!/bin/sh
 # 3축 IN_HAND_ERROR 로 놓기 B teacher -> student 를 이어서 재학습한다.
-cd "C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab" || exit 1
+cd "$(dirname "$0")" || exit 1
 D="rl_runs/place_plate_B2_teacher"
 
 PYTHONIOENCODING=utf-8 python -u train_place_plate_v9.py --end-to-end \

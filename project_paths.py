@@ -16,7 +16,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-OLD_ROOTS = [r"C:\Users\jkim1\autonomous_lab", "C:/Users/jkim1/autonomous_lab"]
+OLD_ROOTS = [r"C:\Users\jkim1\autonomous_lab", "C:/Users/jkim1/autonomous_lab",
+             r"C:\Users\T-Lab_Public\OneDrive\Desktop\Autonomous-Lab",
+             "C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab"]
 
 
 def fix_python(path):

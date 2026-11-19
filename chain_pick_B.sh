@@ -1,6 +1,6 @@
 #!/bin/sh
 # pick teacher 가 final_model.zip 을 남기면 이어서 student DAgger 를 돌린다.
-cd "C:/Users/T-Lab_Public/OneDrive/Desktop/Autonomous-Lab" || exit 1
+cd "$(dirname "$0")" || exit 1
 TEACHER_DIR="rl_runs/pick_plate_B_teacher"
 
 for i in $(seq 1 120); do
